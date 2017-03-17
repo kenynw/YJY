@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--文本颜色，添加text前缀-->
+    <color name="text_black_disable">#96000000</color>
+    <color name="text_black_secondary">#8a000000</color><!-- 54% black -->
+    <color name="text_black_primary">#de000000</color><!-- 87% black -->
+    <color name="text_hint">#bdbdbd</color>
+
+</resources>

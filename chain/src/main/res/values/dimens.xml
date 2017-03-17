@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_size_title_material">18sp</dimen>
+    <dimen name="text_size_subhead_material">16sp</dimen>
+    <dimen name="text_size_body_material">14sp</dimen>
+    <dimen name="text_size_caption_material">12sp</dimen>
+
+</resources>

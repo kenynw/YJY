@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release' //bintray
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:recyclerview-v7:25.3.0'
+
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.jude:easyrecyclerview:4.0.2'
+    testCompile 'junit:junit:4.12'
+}
+
+// jcenter
+//publish {
+//    userOrg = 'kenynw'//bintray.com用户名
+//    groupId = 'com.dsk'//jcenter上的路径
+//    artifactId = 'chain'//项目名称
+//    publishVersion = '1.0.0'//版本号
+//    desc = '基于MVP模式封装了部分框架。定义了一套开发规范。并提供了基于这套规范的Activity，Fragment，Presenter等父类及控件和API等，完成APP开发过程中大量繁琐工作'//描述，不重要
+//    website = 'https://github.com/kenynw/Chain'//网站
+//}
