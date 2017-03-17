@@ -27,7 +27,7 @@ public class ModelManager {
         try {
             ApplicationInfo appInfo = context.getPackageManager()
                     .getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            if (null != appInfo && !TextUtils.isEmpty(appInfo.metaData.getString("MODEL"))) {
+            if (null != appInfo && null != appInfo.metaData && !TextUtils.isEmpty(appInfo.metaData.getString("MODEL"))) {
                 String modelName = appInfo.metaData.getString("MODEL").trim();
                 String[] modelStrs = modelName.split(",");
                 models = new Class[modelStrs.length];

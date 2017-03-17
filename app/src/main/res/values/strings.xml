@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">颜究院</string>
-    <string name="title_activity_launcher">LauncherActivity</string>
+
+    <string name="btn_main_module">功能模板</string>
+    <string name="btn_main_test">肤质测试</string>
+    <string name="btn_main_me">我的</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.miguan.yjy;
+package com.miguan.yjy.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -52,4 +52,5 @@ public class MainTabPagerAdapter extends FragmentPagerAdapter {
 
         return resId > 0 ? mContext.getText(resId) : "";
     }
+
 }

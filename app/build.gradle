@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda' // lambda插件
+apply plugin: 'com.jakewharton.butterknife'
 
 Properties properties = new Properties();
 properties.load(new FileInputStream(file("../config/signing.properties")))
@@ -13,9 +15,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
     }
     buildTypes {
         release {
@@ -44,13 +43,17 @@ dependencies {
     })
     compile project(':chain')
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.0'
+    testCompile 'junit:junit:4.12'
+
     final RETROFIT_VERSION = '2.1.0'
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.jakewharton:butterknife:7.0.1'
+
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
     compile 'com.jude:imageprovider:2.1.1'
-    compile 'com.android.support:design:25.3.0'
-    testCompile 'junit:junit:4.12'
 }
