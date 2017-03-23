@@ -4,4 +4,32 @@
     <string name="btn_main_module">功能模板</string>
     <string name="btn_main_test">肤质测试</string>
     <string name="btn_main_me">我的</string>
+    <!--产品搜索相关-->
+    <string name="tv_product_allsearch">大家都在搜</string>
+    <string name="tv_product_historysearch">历史搜索</string>
+    <string name="tv_product_clearhistory">清空历史记录</string>
+    <string name="tv_product_recommend">为你推荐</string>
+    <string name="tv_product_all">全部</string>
+    <string name="tv_product_sort">分类</string>
+    <string name="tv_product_function">功效</string>
+    <string name="tv_product_no_find">找不到商品哎~\n换个关键字试试?</string>
+    <string name="tv_product_no_find_think">找不到想要的？</string>
+    <string name="tv_product_feedback">点我反馈</string>
+    <string name="tv_product_detail_match">肤质匹配程度</string>
+    <string name="tv_product_detail_info">备案、安全及功效信息</string>
+    <string name="tv_product_detail_compare_price">去比价</string>
+    <string name="tv_product_detail_user_evaluate">用户评价</string>
+    <string name="tv_product_detail_sort">肤质排序</string>
+    <string name="tv_product_detail_read">颜究院官方解读</string>
+    <string name="tv_product_detail_record_inf0">备案信息:  </string>
+    <string name="tv_product_detail_record_document_number">备案文号:  </string>
+    <string name="tv_product_detail_country">生 产 国:  </string>
+    <string name="tv_product_detail_company">生产企业:  </string>
+    <string name="tv_product_detail_grade">安全信息:  安全等级</string>
+    <string name="tv_product_detail_effect_info">功效信息:</string>
+    <string name="tv_product_detail_lock_all_component">查看全成分</string>
+
+    <!--通用的string-->
+    <string name="tv_cancel">取消</string>
+
 </resources>
