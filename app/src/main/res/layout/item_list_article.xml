@@ -7,14 +7,15 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:paddingLeft="@dimen/margin_activity"
-    android:paddingRight="@dimen/margin_activity"
+    android:paddingLeft="@dimen/activity_margin"
+    android:paddingRight="@dimen/activity_margin"
     android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/iv_article_thumb"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:background="@drawable/bg_radius_white"
         android:scaleType="centerCrop"
         android:src="@mipmap/def_image_loading"
         />
@@ -23,7 +24,7 @@
         android:id="@+id/tv_article_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_activity"
+        android:layout_marginTop="@dimen/activity_margin"
         android:textAppearance="@style/TextSubhead"
         tools:text="答疑解惑|面膜到底要不要每天敷"
         />

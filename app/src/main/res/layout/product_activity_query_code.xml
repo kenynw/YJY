@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/include_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_query_code_brand"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_medium"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_round_stroke_window"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_brand_name"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:textAppearance="@style/TextSubhead"
+            />
+
+        <EditText
+            android:id="@+id/et_query_code_product"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_medium"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:background="@drawable/bg_round_stroke_window"
+            android:hint="@string/hint_product_code"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:textAppearance="@style/TextSubhead"/>
+
+        <TextView
+            android:id="@+id/tv_query_code_instruction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/text_query_instruction"
+            />
+
+        <Button
+            android:id="@+id/btn_query_code_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_medium"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:background="@drawable/btn_round_primary_selector"
+            android:text="@string/btn_query_now"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

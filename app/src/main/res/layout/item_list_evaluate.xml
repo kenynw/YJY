@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/img_evaluate_avatar"
         android:layout_marginLeft="15dp"
-        android:layout_marginStart="@dimen/margin_activity"
+        android:layout_marginStart="@dimen/activity_margin"
         android:layout_toEndOf="@+id/img_evaluate_avatar"
         android:layout_toRightOf="@+id/img_evaluate_avatar"
         android:orientation="horizontal">

@@ -1,7 +1,5 @@
 package com.miguan.yjy.adapter.viewholder;
 
-import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -10,7 +8,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.module.product.ProductDetailActivity;
+import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,16 +37,9 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
 
     @Override
     public void setData(Product data) {
-        super.setData(data);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ProductDetailActivity.class);
-                getContext().startActivity(intent);
-            }
-        });
-        tvProductName.setText(data.getName());
+        tvProductName.setText(data.getProduct_name());
         ratbarProduct.setRating(3);
         tvProductMoney.setText("产品价格");
+        itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
 }

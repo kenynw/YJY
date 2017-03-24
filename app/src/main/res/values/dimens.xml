@@ -1,6 +1,6 @@
 <resources>
 
-    <dimen name="margin_activity">16dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
     <dimen name="margin_widget">20dp</dimen>
 
     <dimen name="widget_tiny">24dp</dimen>

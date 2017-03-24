@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
  * @日期 2017/3/22 10:11
  * @描述 产品详情页
  */
-
+@RequiresPresenter(ProductDetailPresenter.class)
 public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> {
     @BindView(R.id.img_product_detail)
     ImageView img;
@@ -73,7 +74,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_activity_detail);
         ButterKnife.bind(this);
+
     }
 
+    @Override
+    public void setData(Product product) {
+        tvDate.setOnClickListener(v -> QueryCodePresenter.start(this, product));
+        tvName.setText(product.getProduct_name());
+    }
 
 }

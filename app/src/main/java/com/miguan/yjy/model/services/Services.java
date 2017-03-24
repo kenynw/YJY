@@ -5,6 +5,7 @@ import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Feedback;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.bean.Message;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 
@@ -190,6 +191,20 @@ public interface Services {
             @Field("img") String img,
             @Field("source") int source
     );
+
+    ////////////////////产品//////////////////////
+    /**
+     * 批号查询
+     * //TODO
+     * @param articleId 文章ID
+     * @return
+     */
+    @GET("?action=queryCode")
+    Observable<Product> queryCode(
+            @Query("brand") String brand,
+            @Query("name") String name
+    );
+
 
     ////////////////////文章//////////////////////
     /**

@@ -2,6 +2,8 @@ package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.services.DefaultTransform;
+import com.miguan.yjy.model.services.ServicesClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +25,21 @@ public class ProductModel extends AbsModel {
         List<Product> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setName("sss");
+            product.setProduct_name("sss");
             list.add(product);
         }
         return Observable.just(list);
     }
 
+    public Observable<Product> getProductDetail() {
+        Product product = new Product();
+        product.setProduct_name("hahaha");
+        product.setBrand("理肤泉");
+        return Observable.just(product).compose(new DefaultTransform<>());
+   }
+
+    public Observable<Product> queryCode(String brand, String name) {
+        return ServicesClient.getServices().queryCode(brand, name).compose(new DefaultTransform<>());
+    }
 
 }

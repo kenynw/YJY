@@ -29,7 +29,7 @@ public class RecommedViewholder extends BaseViewHolder<Product> {
     @Override
     public void setData(Product data) {
         super.setData(data);
-        tvProductThink.setText(data.getName());
+        tvProductThink.setText(data.getProduct_name());
         tvProductThink.setOnClickListener(v -> gotoSearchResult());
     }
 

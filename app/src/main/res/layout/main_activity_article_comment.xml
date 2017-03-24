@@ -15,7 +15,7 @@
         android:background="@color/white"
         android:hint="@string/hint_add_comment"
         android:inputType="textMultiLine"
-        android:padding="@dimen/margin_activity"
+        android:padding="@dimen/activity_margin"
         android:textColor="@color/textPrimary"
         android:textColorHint="@color/text_hint"
         android:textSize="@dimen/text_size_subhead_material"

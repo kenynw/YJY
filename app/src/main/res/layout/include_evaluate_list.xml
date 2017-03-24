@@ -11,8 +11,8 @@
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="20dp"
-        android:paddingLeft="@dimen/margin_activity"
-        android:paddingRight="@dimen/margin_activity"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
         android:paddingTop="20dp"
         >
 
