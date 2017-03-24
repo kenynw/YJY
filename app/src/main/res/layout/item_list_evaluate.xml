@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/margin_widget"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="@dimen/margin_widget"
+    >
+
+    <ImageView
+        android:id="@+id/img_evaluate_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_evaluate_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img_evaluate_avatar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="@dimen/margin_activity"
+        android:layout_toEndOf="@+id/img_evaluate_avatar"
+        android:layout_toRightOf="@+id/img_evaluate_avatar"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_evaluate_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_15"
+            tools:text="name"/>
+
+        <TextView
+            android:id="@+id/tv_evaluate_user_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextCaption"
+            tools:text="年龄"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluate_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_like_normal"
+            android:drawablePadding="5dp"
+            android:drawableStart="@mipmap/ic_like_normal"
+            android:textAppearance="@style/TextCaption"
+            tools:text="赞"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_evaluate_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ll_evaluate_user_info"
+        android:layout_alignStart="@id/ll_evaluate_user_info"
+        android:layout_below="@+id/ll_evaluate_user_info"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        tools:text="清干 | 重敏 | 非色素 | 紧致"
+        />
+
+    <TextView
+        android:id="@+id/tv_evaluate_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ll_evaluate_user_info"
+        android:layout_alignStart="@id/ll_evaluate_user_info"
+        android:layout_below="@+id/tv_evaluate_label"
+        android:layout_marginTop="15dp"
+        android:textAppearance="@style/TextBody"
+        tools:text="sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰"/>
+
+</RelativeLayout>

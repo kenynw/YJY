@@ -3,6 +3,8 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Copyright (c) 2015. LiaoPeiKun Inc. All rights reserved.
  */
@@ -18,6 +20,8 @@ public class Article implements Parcelable {
     private int like_num;
 
     private String created_at;
+
+    private List<Evaluate> evaluates;
 
     private int pageTotal;
 
@@ -35,6 +39,7 @@ public class Article implements Parcelable {
         dest.writeString(this.article_img);
         dest.writeInt(this.like_num);
         dest.writeString(this.created_at);
+        dest.writeTypedList(this.evaluates);
         dest.writeInt(this.pageTotal);
         dest.writeInt(this.pageSize);
     }
@@ -48,6 +53,7 @@ public class Article implements Parcelable {
         this.article_img = in.readString();
         this.like_num = in.readInt();
         this.created_at = in.readString();
+        this.evaluates = in.createTypedArrayList(Evaluate.CREATOR);
         this.pageTotal = in.readInt();
         this.pageSize = in.readInt();
     }
@@ -102,6 +108,14 @@ public class Article implements Parcelable {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public List<Evaluate> getEvaluates() {
+        return evaluates;
+    }
+
+    public void setEvaluates(List<Evaluate> evaluates) {
+        this.evaluates = evaluates;
     }
 
     public int getPageTotal() {

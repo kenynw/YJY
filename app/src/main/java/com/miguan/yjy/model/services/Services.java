@@ -191,9 +191,9 @@ public interface Services {
             @Field("source") int source
     );
 
-    ////////////////////其他//////////////////////
+    ////////////////////文章//////////////////////
     /**
-     * 资讯列表
+     * 文章列表
      *
      * @param page 当前页数
      * @return
@@ -203,6 +203,18 @@ public interface Services {
             @Query("page") int page
     );
 
+    /**
+     * 收藏文章
+     * //TODO
+     * @param articleId 文章ID
+     * @return
+     */
+    @GET("?action=articleStar")
+    Observable<Article> articleStar(
+            @Query("article_id") int articleId
+    );
+
+    ////////////////////其他//////////////////////
     /**
      * 检测更新
      *

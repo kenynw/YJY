@@ -48,9 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:drawableLeft="@mipmap/ic_like"
+            android:drawableLeft="@mipmap/ic_like_normal"
             android:drawablePadding="4dp"
-            android:drawableStart="@mipmap/ic_like"
+            android:drawableStart="@mipmap/ic_like_normal"
             android:textAppearance="@style/TextCaption"
             tools:text="3"
             />

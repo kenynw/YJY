@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/main_activity_article_detail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingLeft="@dimen/margin_activity"
+        android:paddingRight="@dimen/margin_activity"
+        android:paddingTop="20dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_product_user_evalute_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tv_product_detail_user_evaluate"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_15"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@mipmap/ic_product_detail_sort"
+            android:drawablePadding="7dp"
+            android:drawableRight="@mipmap/ic_product_detail_sort"
+            android:text="@string/tv_product_detail_sort"
+            android:textColor="@color/f6"
+            android:textSize="@dimen/text_size_small_14"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_product_high_evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/shape_product_all_search"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="4dp"
+            android:text="好评"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <TextView
+            android:id="@+id/tv_product_medium_evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_product_all_search"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="4dp"
+            android:text="中评"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <TextView
+            android:id="@+id/tv_product_bad_evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_product_all_search"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="4dp"
+            android:text="差评"
+            android:textAppearance="@style/TextBody"
+            />
+
+    </LinearLayout>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_empty="@layout/empty_evaluate_list"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        />
+
+</merge>
