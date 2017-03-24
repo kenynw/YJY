@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        >
+
+        <FrameLayout
+            android:id="@+id/fl_article_detail_star"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:drawableLeft="@mipmap/ic_star"
+                android:drawablePadding="4dp"
+                android:drawableStart="@mipmap/ic_star"
+                android:gravity="center"
+                android:text="@string/btn_star"
+                android:textColor="@color/textSecondary"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_article_detail_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:drawableLeft="@mipmap/ic_star"
+                android:drawablePadding="4dp"
+                android:drawableStart="@mipmap/ic_star"
+                android:gravity="center"
+                android:text="@string/btn_comment"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_body_material"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

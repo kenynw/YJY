@@ -3,6 +3,7 @@ package com.miguan.yjy.model.services;
 
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Feedback;
+import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
@@ -24,7 +25,14 @@ import rx.Observable;
 
 public interface Services {
 
-    String BASE_URL = "http://api.beta.otkpk.com/v1/";
+    String BASE_URL = "http://api.yjyapp.com/api/index/";
+
+    /**
+     * 首页
+     * @return
+     */
+    @GET("?action=index")
+    Observable<Home> home();
 
     //////////////////用户相关/////////////////////
     /**
@@ -187,13 +195,11 @@ public interface Services {
     /**
      * 资讯列表
      *
-     * @param type 文章类型 '1'=>'新闻','2'=>'行业','3'=>'攻略','4'=>'评测','5'=>'活动',
      * @param page 当前页数
      * @return
      */
-    @GET("article/article/article-list")
+    @GET("?action=articleList")
     Observable<List<Article>> articleList(
-            @Query("type") int type,
             @Query("page") int page
     );
 

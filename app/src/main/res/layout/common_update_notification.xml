@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@android:drawable/stat_sys_download"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size_subhead_material"
         tools:text="正在下载"/>
 
@@ -38,7 +38,7 @@
             android:id="@+id/tv_note_percent"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_body_material"
             tools:text="60%"/>
 

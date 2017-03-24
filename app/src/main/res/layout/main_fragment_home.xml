@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/TitleToolbar"
+        >
+
+        <FrameLayout
+            android:id="@+id/fl_home_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_small"
+            android:layout_marginLeft="@dimen/margin_widget"
+            android:layout_marginRight="@dimen/margin_widget"
+            android:background="@drawable/bg_round_windowcolor"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:drawableLeft="@mipmap/ic_home_search"
+                android:drawablePadding="8dp"
+                android:drawableStart="@mipmap/ic_home_search"
+                android:gravity="center"
+                android:hint="查询235425种护肤品的成分和功效"
+                android:textAppearance="@style/TextCaption"
+                />
+
+        </FrameLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+</RelativeLayout>

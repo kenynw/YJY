@@ -20,9 +20,12 @@ public class WrapperResponseBodyConverter<T> implements Converter<ResponseBody, 
 
     private static final String TAG = "WrapperResponseBodyConverter";
 
+    private final Gson mGson;
+
     private final Type mType;
 
-    WrapperResponseBodyConverter(Type type) {
+    WrapperResponseBodyConverter(Gson gson, Type type) {
+        this.mGson = gson;
         this.mType = type;
     }
 
@@ -43,7 +46,7 @@ public class WrapperResponseBodyConverter<T> implements Converter<ResponseBody, 
                 if (!data.isNull("data")) result = data.opt("data").toString();
                 else return null;
             } else {
-                return new Gson().fromJson(data.toString(), mType);
+                return mGson.fromJson(data.toString(), mType);
             }
 
             return new Gson().fromJson(result, mType);

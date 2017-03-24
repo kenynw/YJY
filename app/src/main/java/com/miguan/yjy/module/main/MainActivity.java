@@ -2,16 +2,20 @@ package com.miguan.yjy.module.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
 
+import com.dsk.chain.bijection.RequiresPresenter;
+import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MainTabPagerAdapter;
+import com.miguan.yjy.model.bean.Version;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+@RequiresPresenter(MainActivityPresenter.class)
+public class MainActivity extends BaseDataActivity<MainActivityPresenter, Version> {
 
     @BindView(R.id.container_main)
     FrameLayout mContainer;
@@ -25,6 +29,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
 
-        mTab.setTabsFromPagerAdapter(new MainTabPagerAdapter(getSupportFragmentManager(), this));
+        initTab();
     }
+
+    private void initTab() {
+        MainTabPagerAdapter adapter = new MainTabPagerAdapter(getSupportFragmentManager(), this);
+        mTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Fragment fragment = (Fragment) adapter.instantiateItem(mContainer, tab.getPosition());
+                adapter.setPrimaryItem(mContainer, tab.getPosition(), fragment);
+                adapter.finishUpdate(mContainer);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        for (int i=0; i<adapter.getCount(); i++) {
+            TabLayout.Tab tab = mTab.newTab();
+            mTab.addTab(tab);
+            tab.setIcon(adapter.getIconRes(i))
+                    .setText(adapter.getPageTitle(i));
+        }
+    }
+
 }

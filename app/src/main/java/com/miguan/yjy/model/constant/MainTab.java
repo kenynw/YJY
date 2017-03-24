@@ -9,10 +9,10 @@ import com.miguan.yjy.module.main.HomeFragment;
 
 public enum MainTab {
 
-    HOME(0, R.mipmap.ic_launcher, R.string.app_name, HomeFragment.class),
-    MODULE(1, R.mipmap.ic_launcher, R.string.btn_main_module, HomeFragment.class),
-    TEST(2, R.mipmap.ic_launcher, R.string.btn_main_test, HomeFragment.class),
-    ME(3, R.mipmap.ic_launcher, R.string.btn_main_me, HomeFragment.class);
+    HOME(0, R.drawable.tab_main_home_selector, R.string.app_name, HomeFragment.class),
+    MODULE(1, R.drawable.tab_main_module_selector, R.string.btn_main_module, HomeFragment.class),
+    TEST(2, R.drawable.tab_main_test_selector, R.string.btn_main_test, HomeFragment.class),
+    ME(3, R.drawable.tab_main_me_selector, R.string.btn_main_me, HomeFragment.class);
 
     public final int mTabIndex;
 

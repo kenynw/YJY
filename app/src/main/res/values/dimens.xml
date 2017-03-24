@@ -1,3 +1,12 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_activity">16dp</dimen>
+    <dimen name="margin_widget">20dp</dimen>
+
+    <dimen name="widget_tiny">24dp</dimen>
+    <dimen name="widget_small">36dp</dimen>
+    <dimen name="widget_medium">48dp</dimen>
+    <dimen name="widget_max">56dp</dimen>
+
+    <dimen name="text_size_tiny">9sp</dimen>
+
 </resources>

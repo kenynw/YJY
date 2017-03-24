@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="@dimen/margin_activity"
+    android:paddingRight="@dimen/margin_activity"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_article_thumb"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/def_image_loading"
+        />
+
+    <TextView
+        android:id="@+id/tv_article_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_activity"
+        android:textAppearance="@style/TextSubhead"
+        tools:text="答疑解惑|面膜到底要不要每天敷"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_article_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextCaption"
+            tools:text="2天前"
+            />
+
+        <TextView
+            android:id="@+id/tv_article_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawableLeft="@mipmap/ic_like"
+            android:drawablePadding="4dp"
+            android:drawableStart="@mipmap/ic_like"
+            android:textAppearance="@style/TextCaption"
+            tools:text="3"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

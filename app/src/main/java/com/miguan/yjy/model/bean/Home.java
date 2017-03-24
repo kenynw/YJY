@@ -11,7 +11,11 @@ import java.util.List;
 
 public class Home implements Parcelable {
 
-    private List<Banner> banners;
+    private List<Banner> banner;
+
+    private List<Category> category;
+
+    private List<Article> article;
 
     @Override
     public int describeContents() {
@@ -20,14 +24,18 @@ public class Home implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.banners);
+        dest.writeTypedList(this.banner);
+        dest.writeTypedList(this.category);
+        dest.writeTypedList(this.article);
     }
 
     public Home() {
     }
 
     protected Home(Parcel in) {
-        this.banners = in.createTypedArrayList(Banner.CREATOR);
+        this.banner = in.createTypedArrayList(Banner.CREATOR);
+        this.category = in.createTypedArrayList(Category.CREATOR);
+        this.article = in.createTypedArrayList(Article.CREATOR);
     }
 
     public static final Creator<Home> CREATOR = new Creator<Home>() {
@@ -42,12 +50,27 @@ public class Home implements Parcelable {
         }
     };
 
-    public List<Banner> getBanners() {
-        return banners;
+    public List<Banner> getBanner() {
+        return banner;
     }
 
-    public void setBanners(List<Banner> banners) {
-        this.banners = banners;
+    public void setBanner(List<Banner> banner) {
+        this.banner = banner;
     }
 
+    public List<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.category = category;
+    }
+
+    public List<Article> getArticle() {
+        return article;
+    }
+
+    public void setArticle(List<Article> article) {
+        this.article = article;
+    }
 }

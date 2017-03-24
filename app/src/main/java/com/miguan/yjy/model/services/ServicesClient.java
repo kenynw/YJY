@@ -21,8 +21,9 @@ public class ServicesClient {
 
     private static OkHttpClient createClient() {
         if (okHttpClient == null) {
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            okHttpClient = builder.build();
+            okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(new EncryptInterceptor())
+                    .build();
         }
         return okHttpClient;
     }

@@ -53,4 +53,10 @@ public class MainTabPagerAdapter extends FragmentPagerAdapter {
         return resId > 0 ? mContext.getText(resId) : "";
     }
 
+    public int getIconRes(int position) {
+        MainTab mainTab = MainTab.tabFromIndex(position);
+
+        return mainTab == null ? 0 : mainTab.mIconRes;
+    }
+
 }

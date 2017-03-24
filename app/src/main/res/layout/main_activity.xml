@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.miguan.yjy.module.main.MainActivity">
 
     <FrameLayout
@@ -19,12 +19,13 @@
         android:id="@+id/tab_main"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@android:color/white"
+        android:background="@color/white"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
         app:tabPaddingBottom="2dp"
         app:tabPaddingTop="6dp"
-        app:tabTextColor="@color/text_black_disable"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextAppearance="@style/TextCaption"
         />
 
 </LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="206dp"
+            android:gravity="bottom">
+
+            <com.miguan.yjy.widget.HeadViewPager
+                android:id="@+id/hv_home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                />
+
+            <com.miguan.yjy.widget.CirclePageIndicator
+                android:id="@+id/indicator_main_home"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="8dp"
+                />
+
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recy_home_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
+            android:paddingEnd="@dimen/margin_activity"
+            android:paddingLeft="@dimen/margin_activity"
+            android:paddingRight="@dimen/margin_activity"
+            android:paddingStart="@dimen/margin_activity"
+            android:paddingTop="@dimen/margin_activity"
+            android:scaleType="fitStart"
+            android:src="@mipmap/ic_article_label_home"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

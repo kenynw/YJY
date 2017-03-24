@@ -10,7 +10,8 @@ public class PresenterBuilder {
         RequiresPresenter annotation = viewClass.getAnnotation(RequiresPresenter.class);
         //noinspection unchecked
         if (annotation == null){
-            throw new RuntimeException("You must declaration @RequiresPresenter for your Activity");
+//            throw new RuntimeException("You must declaration @RequiresPresenter for your Activity");
+            return null;
         }
 
         Class<PresenterType> presenterClass =  (Class<PresenterType>)annotation.value();
