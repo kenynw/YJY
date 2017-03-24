@@ -17,12 +17,15 @@
         <item name="android:textColorSecondary">@color/textSecondary</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="LaunchTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_launch</item>
+    </style>
+    <style name="BaseTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/f5</item>
     </style>
 
     <style name="ToolbarTheme">
@@ -40,5 +43,11 @@
     <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead"/>
     <style name="TextBody" parent="TextAppearance.AppCompat.Body1"/>
     <style name="TextCaption" parent="TextAppearance.AppCompat.Caption" />
+
+    <style name="ItemLineHeight">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/f5</item>
+    </style>
 
 </resources>

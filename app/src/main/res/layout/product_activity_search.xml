@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_product_f7"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_product_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@mipmap/ic_product_search"
+                android:drawablePadding="8dp"
+                android:hint="查询xxxx种护肤品的安全和功效"
+                android:paddingLeft="15dp"
+                android:textColorHint="@color/fcd"
+                android:textSize="@dimen/text_size_small_15" />
+
+            <ImageView
+                android:id="@+id/img_product_search_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:background="@mipmap/ic_product_search_del" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:text="@string/tv_cancel"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_product_search_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/tv_product_allsearch"
+            android:textSize="@dimen/text_size_small_15" />
+
+        <com.miguan.yjy.widget.FlowTagLayout
+            android:id="@+id/flowtag_product_all_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"></com.miguan.yjy.widget.FlowTagLayout>
+
+        <View
+            style="@style/ItemLineHeight"
+            android:layout_height="10dp"></View>
+
+        <LinearLayout
+            android:id="@+id/ll_product_his_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/tv_product_historysearch"
+                android:textSize="@dimen/text_size_small_15" />
+
+            <com.jude.easyrecyclerview.EasyRecyclerView
+                android:id="@+id/recy_product_history_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"></com.jude.easyrecyclerview.EasyRecyclerView>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_product_clear_his"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:drawableLeft="@mipmap/ic_product_clean_history"
+            android:drawablePadding="8dp"
+            android:text="@string/tv_product_clearhistory"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_13" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_product_search_sencond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/tv_product_recommend"
+            android:textSize="@dimen/text_size_small_15" />
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/f5"></View>
+
+</LinearLayout>

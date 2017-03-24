@@ -1,4 +1,5 @@
 <resources>
+
     <dimen name="margin_activity">16dp</dimen>
     <dimen name="margin_widget">20dp</dimen>
 
@@ -9,4 +10,20 @@
 
     <dimen name="text_size_tiny">9sp</dimen>
 
+    <!-- 超小号 -->
+    <dimen name="text_size_micro_11">11sp</dimen>
+    <dimen name="text_size_micro_12">12sp</dimen>
+    <!-- 小号 -->
+    <dimen name="text_size_small_13">13sp</dimen>
+    <dimen name="text_size_small_14">14sp</dimen>
+    <dimen name="text_size_small_15">15sp</dimen>
+    <!-- 中间 -->
+    <dimen name="text_size_medium">18sp</dimen>
+    <!-- 大号 -->
+    <dimen name="text_size_large_20">20sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+    <!-- 大一号 -->
+    <dimen name="text_size_large_xh">26sp</dimen>
+    <!-- 标题栏高度 -->
+    <dimen name="title_height">45dp</dimen>
 </resources>

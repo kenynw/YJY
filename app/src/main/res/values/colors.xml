@@ -4,6 +4,40 @@
     <color name="colorPrimaryDark">#32DAC3</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--查询产品相关-->
+    <color name="color_sencond_title">#222222</color>
+    <color name="fcd">#cdcdcd</color>
+    <color name="f5">#f5f5f5</color>
+    <color name="f7">#f7f7f7</color>
+    <color name="f3">#333333</color>
+    <color name="f6">#666666</color>
+    <color name="f9">#999999</color>
+    <color name="fe">#EEEEEE</color>
+    <color name="fa">#AAAAAA</color>
+    <color name="f32d">#32dac3</color>
+
+    <!-- 常用色值 -->
+    <!--透明-->
+    <color name="transparent">#00000000</color>
+    <!--半透明-->
+    <color name="half_transparent">#60000000</color>
+    <color name="four_transparent">#33000000</color>
+
+    <!--蓝色-->
+    <color name="blue">#0000FF</color>
+    <!--灰色-->
+    <color name="gray">#808080</color>
+    <!--红色-->
+    <color name="red">#FF0000</color>
+    <!--黄色-->
+    <color name="yello">#FFFF00</color>
+    <!--橘色-->
+    <!--<color name="orange">#f88600</color>-->
+    <!--绿色-->
+    <color name="green">#008000</color>
+    <!--紫色-->
+    <color name="purple">#B54D70</color>
+
     <!--通用颜色-->
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>

@@ -13,6 +13,7 @@ import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -66,6 +67,7 @@ public class LUtils {
         } else {
             toast.setText(text);
         }
+        toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
     }
 

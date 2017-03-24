@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
 import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.module.product.SearchActivity;
 import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
@@ -41,6 +43,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
         View view = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        mflSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), SearchActivity.class)));
         getListView().getSwipeToRefresh().setProgressViewOffset(true, 100, 200);
         getListView().setOnScrollListener(new RecyclerView.OnScrollListener() {
             int y = 0;
