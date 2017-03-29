@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_brand"
+            android:textAppearance="@style/TextBody"/>
+
+        <TextView
+            android:id="@+id/tv_add_repository_brand"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_brand_name"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:text="@string/text_brand"
+            android:textAppearance="@style/TextBody"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_product"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <EditText
+            android:id="@+id/et_add_repository_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@color/white"
+            android:hint="@string/hint_product_name"
+            android:inputType="text"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:textAppearance="@style/TextBody"
+            android:textColorHint="@color/textSecondary"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_expiration_date"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <TextView
+            android:id="@+id/tv_add_repository_expiration"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:textColor="@color/textSecondary"
+            tools:text="2019年1月"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_is_open"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <ImageView
+            android:id="@+id/iv_add_repository_is_open"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:background="@color/white"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:scaleType="fitStart"
+            android:src="@mipmap/ic_swc_on"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_open_time"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <TextView
+            android:id="@+id/tv_add_repository_open_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="2019年1月"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_expiration_opened"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <TextView
+            android:id="@+id/tv_add_repository_expiration_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:text="12个月"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

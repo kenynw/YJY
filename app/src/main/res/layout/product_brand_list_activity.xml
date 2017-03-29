@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_normal"
+        >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="@dimen/widget_small"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round_window"
+            android:hint="@string/hint_brand_name"
+            android:inputType="text"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:text="@string/tv_cancel"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_empty="@layout/empty_brand_list"
+            />
+
+        <com.miguan.yjy.widget.ScrollIndexer
+            android:id="@+id/indexer_brand_list"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            />
+
+        <TextView
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:id="@+id/tv_brand_list_index"
+            tools:text="A"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

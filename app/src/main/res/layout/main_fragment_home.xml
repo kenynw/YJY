@@ -8,7 +8,7 @@
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         />
 
     <android.support.v7.widget.Toolbar
@@ -20,12 +20,13 @@
             android:id="@+id/fl_home_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_small"
-            android:layout_marginLeft="@dimen/margin_widget"
-            android:layout_marginRight="@dimen/margin_widget"
-            android:background="@drawable/bg_round_windowcolor"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="@drawable/bg_round_white"
             >
 
             <TextView
+                android:id="@+id/tv_home_search"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -33,7 +34,7 @@
                 android:drawablePadding="8dp"
                 android:drawableStart="@mipmap/ic_home_search"
                 android:gravity="center"
-                android:hint="查询235425种护肤品的成分和功效"
+                android:hint="@string/hint_brand_name"
                 android:textAppearance="@style/TextCaption"
                 />
 

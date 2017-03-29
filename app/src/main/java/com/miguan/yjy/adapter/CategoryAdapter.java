@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
@@ -50,7 +51,13 @@ public class CategoryAdapter extends RecyclerArrayAdapter<Category> {
 
         @Override
         public void setData(Category data) {
-            mIvThumb.setImageResource(R.mipmap.def_image_loading);
+            Glide.with(getContext())
+                    .load("http://oss.yjyapp.com/uploads/" + data.getCate_img())
+                    .placeholder(R.mipmap.def_image_loading)
+                    .error(R.mipmap.def_image_loading)
+                    .centerCrop()
+                    .into(mIvThumb);
+
             mTvName.setText(data.getCate_name());
         }
     }

@@ -27,7 +27,7 @@ public class WrapperConverterFactory extends Converter.Factory {
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-        return new WrapperResponseBodyConverter<>(this.gson, type);
+        return new WrapperResponseBodyConverter<>(type);
     }
 
 }

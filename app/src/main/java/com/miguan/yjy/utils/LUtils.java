@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -221,22 +222,29 @@ public class LUtils {
      * @return
      */
     public static String md5(String s) {
+        String result = "";
         try {
             // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+            MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0; i<messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-            return hexString.toString();
-
+            BigInteger hash = new BigInteger(1, digest.digest());
+            result = hash.toString(16);
+            while(result.length() < 32) { //40 for SHA-1
+                result = "0" + result;
+            }
+//
+//            byte messageDigest[] = digest.digest();
+//
+//            // Create Hex String
+//            StringBuffer hexString = new StringBuffer();
+//            for (int i=0; i<messageDigest.length; i++)
+//                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+//
+//            return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return "";
+        return result;
     }
 
 }

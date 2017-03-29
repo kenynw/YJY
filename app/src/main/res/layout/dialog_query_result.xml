@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_white"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/iv_query_dialog_close"
+        android:layout_width="@dimen/widget_medium"
+        android:layout_height="@dimen/widget_medium"
+        android:layout_gravity="end"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_dialog_close"
+        />
+
+    <TextView
+        android:id="@+id/tv_query_dialog_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextTitle"
+        tools:text="Biotherm 碧欧泉"
+        />
+
+    <TextView
+        android:id="@+id/tv_query_dialog_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        tools:text="批号：00n100"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="@string/label_mfg_date"
+            />
+
+        <TextView
+            android:id="@+id/tv_query_dialog_mfg_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textAppearance="@style/TextBody"
+            tools:text="2016年01月01日"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="@string/label_expiration_date"
+            />
+
+        <TextView
+            android:id="@+id/tv_query_dialog_expiration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textAppearance="@style/TextBody"
+            tools:text="2019年01月01日"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_query_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="@dimen/spacing_huge"
+        android:layout_marginRight="@dimen/spacing_huge"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:background="@drawable/bg_round_stroke_primary"
+        android:text="@string/btn_add_expiration"
+        android:textColor="@color/colorPrimary"
+        />
+
+</LinearLayout>

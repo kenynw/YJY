@@ -2,9 +2,11 @@ package com.miguan.yjy.module.product;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
@@ -58,7 +60,32 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
             LUtils.toast(R.string.hint_product_code);
             return;
         }
-        getPresenter().query(mEtBrand.getText().toString().trim(), mEtProduct.getText().toString().trim());
+        Product product = getPresenter().getProduct();
+        product.setBrand(mEtBrand.getText().toString().trim());
+        product.setProduct_name(mEtProduct.getText().toString().trim());
+        showQueryDialog(product);
+    }
+
+    private void showQueryDialog(Product product) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(R.layout.dialog_query_result)
+                .show();
+
+        ImageView ivClose = ButterKnife.findById(dialog, R.id.iv_query_dialog_close);
+        TextView tvName = ButterKnife.findById(dialog, R.id.tv_query_dialog_name);
+        TextView tvCode = ButterKnife.findById(dialog, R.id.tv_query_dialog_code);
+        TextView tvMfgDate = ButterKnife.findById(dialog, R.id.tv_query_dialog_mfg_date);
+        TextView tvExpiration = ButterKnife.findById(dialog, R.id.tv_query_dialog_expiration);
+        Button btnSave = ButterKnife.findById(dialog, R.id.btn_query_save);
+        ivClose.setOnClickListener(v -> dialog.dismiss());
+        tvName.setText("Biotherm 碧欧泉");
+        tvCode.setText(String.format(getString(R.string.label_batch_no), "00n100"));
+        tvMfgDate.setText("2016年01月01日");
+        tvExpiration.setText("2019年01月01日");
+        btnSave.setOnClickListener(v -> {
+            dialog.dismiss();
+            AddRepositoryPresenter.start(QueryCodeActivity.this, product);
+        });
     }
 
 }

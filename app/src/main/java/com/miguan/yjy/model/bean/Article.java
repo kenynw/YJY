@@ -133,4 +133,18 @@ public class Article implements Parcelable {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", article_img='" + article_img + '\'' +
+                ", like_num=" + like_num +
+                ", created_at='" + created_at + '\'' +
+                ", evaluates=" + evaluates +
+                ", pageTotal=" + pageTotal +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }

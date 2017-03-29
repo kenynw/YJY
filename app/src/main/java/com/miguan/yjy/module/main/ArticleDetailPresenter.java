@@ -49,7 +49,7 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     }
 
     public void star() {
-        ArticleModel.getInstance().star(mArticle.getId()).unsafeSubscribe(new ServicesResponse<Article>() {
+        ArticleModel.getInstance().star(0).unsafeSubscribe(new ServicesResponse<Article>() {
             @Override
             public void onNext(Article article) {
                 super.onNext(article);

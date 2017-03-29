@@ -17,38 +17,7 @@ public class Home implements Parcelable {
 
     private List<Article> article;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.banner);
-        dest.writeTypedList(this.category);
-        dest.writeTypedList(this.article);
-    }
-
-    public Home() {
-    }
-
-    protected Home(Parcel in) {
-        this.banner = in.createTypedArrayList(Banner.CREATOR);
-        this.category = in.createTypedArrayList(Category.CREATOR);
-        this.article = in.createTypedArrayList(Article.CREATOR);
-    }
-
-    public static final Creator<Home> CREATOR = new Creator<Home>() {
-        @Override
-        public Home createFromParcel(Parcel source) {
-            return new Home(source);
-        }
-
-        @Override
-        public Home[] newArray(int size) {
-            return new Home[size];
-        }
-    };
+    private int num;
 
     public List<Banner> getBanner() {
         return banner;
@@ -73,4 +42,47 @@ public class Home implements Parcelable {
     public void setArticle(List<Article> article) {
         this.article = article;
     }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(this.banner);
+        dest.writeTypedList(this.category);
+        dest.writeTypedList(this.article);
+        dest.writeInt(this.num);
+    }
+
+    public Home() {
+    }
+
+    protected Home(Parcel in) {
+        this.banner = in.createTypedArrayList(Banner.CREATOR);
+        this.category = in.createTypedArrayList(Category.CREATOR);
+        this.article = in.createTypedArrayList(Article.CREATOR);
+        this.num = in.readInt();
+    }
+
+    public static final Creator<Home> CREATOR = new Creator<Home>() {
+        @Override
+        public Home createFromParcel(Parcel source) {
+            return new Home(source);
+        }
+
+        @Override
+        public Home[] newArray(int size) {
+            return new Home[size];
+        }
+    };
 }

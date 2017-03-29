@@ -27,7 +27,7 @@ public class EncryptInterceptor implements Interceptor {
         RequestBody body = request.body(); //获取请求body
         if (methodStr.equals("GET")) {
             HttpUrl requestUrl = request.url().newBuilder()
-                    .addQueryParameter("time", "123")
+                    .addQueryParameter("time", String.valueOf(System.currentTimeMillis() / 1000))
                     .addQueryParameter("from","android")
                     .build(); //获取请求url地址
 
@@ -38,51 +38,35 @@ public class EncryptInterceptor implements Interceptor {
                     .addQueryParameter("token", passportEncrypt(requestUrl.query()))
                     .build();
 
-//            LUtils.log("url: " + newUrl.toString() + ", \nquery: " + requestUrl.toString());
-
             request = request.newBuilder().method(methodStr, request.body()).url(newUrl).build();
         }
-
-//        if (body != null && body instanceof FormBody) {
-//            FormBody formBody = (FormBody) body;
-//            for (int i=0; i<formBody.size(); i++) {
-//                LUtils.log("name: " + formBody.encodedName(i) + ", value: " + formBody.encodedValue(i));
-//            }
-//        }
-//
-//        String bodyStr = (body==null?"":body.toString());
 
         return chain.proceed(request);
     }
 
-    // 直接抄服务端的加密方式，我也不理解是怎么回事
     private String passportEncrypt(String params) {
-        String encryptKey = LUtils.md5("123");
+        char[] encryptKey = LUtils.md5(String.valueOf(Math.random() * 32000)).toCharArray();
+
         int ctr = 0;
         String tmp = "";
         for (int i=0; i<params.length(); i++) {
-            ctr = (ctr == encryptKey.length() - 1 ? 0 : ctr);
-            char xor = (char) (params.charAt(i) ^ encryptKey.charAt(ctr++));
-            String entryptStr = String.valueOf(encryptKey.charAt(ctr));
-            LUtils.log(entryptStr + String.valueOf(xor));
+            ctr = (ctr == encryptKey.length ? 0 : ctr);
+            String entryptStr = String.valueOf(encryptKey[ctr]);
+            char xor = (char) (params.charAt(i) ^ encryptKey[ctr++]);
             tmp += entryptStr + String.valueOf(xor);
         }
 
-        LUtils.log("tmp: " + tmp);
-        String passportKey = passportKey(tmp, encryptKey);
-//        LUtils.log("passport key: " + passportKey);
-        String base64 = new String(Base64.encode(passportKey.getBytes(), Base64.DEFAULT));
-//        LUtils.log("base64 passport key: " + base64);
-        return base64;
+        String passportKey = passportKey(tmp, "lspps0tewZEHZ5whWcwe8jVOgdUMKJvk");
+        return new String(Base64.encode(passportKey.getBytes(), Base64.DEFAULT));
     }
 
-    private String passportKey(String text, String encryptKey) {
-        encryptKey = LUtils.md5(encryptKey);
+    private String passportKey(String text, String key) {
+        char[] encryptKey = LUtils.md5(key).toCharArray();
         int ctr = 0;
         String tmp = "";
         for (int i=0; i<text.length(); i++) {
-            ctr = ctr == encryptKey.length() ? 0 : ctr;
-            tmp += text.charAt(i) ^ encryptKey.charAt(ctr++);
+            ctr = (ctr == encryptKey.length ? 0 : ctr);
+            tmp += String.valueOf((char) (text.charAt(i) ^ encryptKey[ctr++]));
         }
 
         return tmp;

@@ -53,5 +53,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
     compile 'com.jude:imageprovider:2.1.1'
+    compile 'com.contrarywind:Android-PickerView:3.2.2' // 时间选择器、省市区三级联动
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_brand_header_hot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:text="热门品牌"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy_brand_header_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_normal"/>
+
+    <TextView
+        android:id="@+id/tv_brand_header_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/spacing_normal"
+        android:text="其他品牌"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+</LinearLayout>

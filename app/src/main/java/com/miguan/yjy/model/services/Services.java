@@ -215,7 +215,8 @@ public interface Services {
      */
     @GET("?action=articleList")
     Observable<List<Article>> articleList(
-            @Query("page") int page
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
     );
 
     /**

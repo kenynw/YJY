@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
@@ -37,6 +38,9 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
     @BindView(R.id.fl_home_search)
     FrameLayout mflSearch;
 
+    @BindView(R.id.tv_home_search)
+    TextView mTvSearch;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 y += dy;
-                float ratio = y * 1.0f / LUtils.dp2px(200)  > 1 ? 1 : y * 1.0f / LUtils.dp2px(200);
+                float ratio = y * 1.0f / LUtils.dp2px(200) > 1 ? 1 : y * 1.0f / LUtils.dp2px(200);
 
                 int white = changeAlpha(getResources().getColor(R.color.white), ratio);
                 mToolbar.setBackgroundColor(white);
@@ -66,9 +70,16 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
         return view;
     }
 
+    public void setSearchHint(int count) {
+        mTvSearch.setText(String.format(getString(R.string.hint_home_search), count));
+    }
+
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setContainerLayoutRes(R.layout.main_fragment_home).hasItemDecoration(false);
+        return super.getListConfig()
+                .hasItemDecoration(false)
+                .setContainerLayoutRes(R.layout.main_fragment_home)
+                .setFooterNoMoreRes(R.layout.empty_article_list);
     }
 
     @Override

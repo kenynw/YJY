@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Banner;
-import com.miguan.yjy.utils.LUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +35,15 @@ public class BannerPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView iv = new ImageView(mContext);
-        int height = LUtils.getScreenWidth() * 8 / 15;
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         iv.setLayoutParams(lp);
-        iv.setImageResource(R.mipmap.bg_launch);
-        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        Glide.with(mContext)
+                .load("http://oss.yjyapp.com/cs/static/h5/images/banner.jpg")
+                .placeholder(R.mipmap.def_image_loading)
+                .error(R.mipmap.def_image_loading)
+                .centerCrop()
+                .into(iv);
 
         container.addView(iv);
         mViewList.add(iv);

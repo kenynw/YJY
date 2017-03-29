@@ -25,8 +25,8 @@
             android:background="@drawable/bg_round_stroke_window"
             android:gravity="center_vertical"
             android:hint="@string/hint_brand_name"
-            android:paddingLeft="@dimen/activity_margin"
-            android:paddingRight="@dimen/activity_margin"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
             android:textAppearance="@style/TextSubhead"
             />
 
@@ -34,11 +34,11 @@
             android:id="@+id/et_query_code_product"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_medium"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:background="@drawable/bg_round_stroke_window"
             android:hint="@string/hint_product_code"
-            android:paddingLeft="@dimen/activity_margin"
-            android:paddingRight="@dimen/activity_margin"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
             android:textAppearance="@style/TextSubhead"/>
 
         <TextView
@@ -47,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginBottom="30dp"
-            android:layout_marginEnd="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
             android:layout_marginTop="10dp"
             android:text="@string/text_query_instruction"
             />
@@ -57,8 +57,8 @@
             android:id="@+id/btn_query_code_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/widget_medium"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="45dp"
+            android:layout_marginLeft="@dimen/spacing_huge"
+            android:layout_marginRight="@dimen/spacing_huge"
             android:background="@drawable/btn_round_primary_selector"
             android:text="@string/btn_query_now"
             android:textColor="@color/white"
