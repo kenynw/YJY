@@ -3,6 +3,8 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Copyright (c) 2015. LiaoPeiKun Inc. All rights reserved.
  */
@@ -11,38 +13,12 @@ public class User implements Parcelable {
 
     private String token;
 
+    @SerializedName("userId")
     private int user_id;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+    private String usernName;
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.token);
-        dest.writeInt(this.user_id);
-    }
-
-    public User() {
-    }
-
-    protected User(Parcel in) {
-        this.token = in.readString();
-        this.user_id = in.readInt();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
+    private String userImg;
 
     public String getToken() {
         return token;
@@ -60,4 +36,54 @@ public class User implements Parcelable {
         this.user_id = user_id;
     }
 
+    public String getUsernName() {
+        return usernName;
+    }
+
+    public void setUsernName(String usernName) {
+        this.usernName = usernName;
+    }
+
+    public String getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(String userImg) {
+        this.userImg = userImg;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.token);
+        dest.writeInt(this.user_id);
+        dest.writeString(this.usernName);
+        dest.writeString(this.userImg);
+    }
+
+    public User() {
+    }
+
+    protected User(Parcel in) {
+        this.token = in.readString();
+        this.user_id = in.readInt();
+        this.usernName = in.readString();
+        this.userImg = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

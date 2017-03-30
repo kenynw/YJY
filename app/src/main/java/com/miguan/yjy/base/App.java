@@ -2,6 +2,7 @@ package com.miguan.yjy.base;
 
 import android.app.Application;
 
+import com.dsk.chain.Chain;
 import com.dsk.chain.model.ModelManager;
 import com.miguan.yjy.utils.LUtils;
 
@@ -16,7 +17,8 @@ public class App extends Application {
         super.onCreate();
         LUtils.initialize(this);
         ModelManager.init(this);
-//        Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
+        Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
+
         initShare();
     }
 

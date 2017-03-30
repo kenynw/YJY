@@ -2,6 +2,7 @@ package com.miguan.yjy.model.constant;
 
 import com.miguan.yjy.R;
 import com.miguan.yjy.module.main.HomeFragment;
+import com.miguan.yjy.module.main.MeFragment;
 
 /**
  * Copyright (c) 2017/3/17. LiaoPeiKun Inc. All rights reserved.
@@ -12,7 +13,7 @@ public enum MainTab {
     HOME(0, R.drawable.tab_main_home_selector, R.string.app_name, HomeFragment.class),
     MODULE(1, R.drawable.tab_main_module_selector, R.string.btn_main_module, HomeFragment.class),
     TEST(2, R.drawable.tab_main_test_selector, R.string.btn_main_test, HomeFragment.class),
-    ME(3, R.drawable.tab_main_me_selector, R.string.btn_main_me, HomeFragment.class);
+    ME(3, R.drawable.tab_main_me_selector, R.string.btn_main_me, MeFragment.class);
 
     public final int mTabIndex;
 

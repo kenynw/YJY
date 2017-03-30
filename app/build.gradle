@@ -56,4 +56,6 @@ dependencies {
 
     compile 'com.jude:imageprovider:2.1.1'
     compile 'com.contrarywind:Android-PickerView:3.2.2' // 时间选择器、省市区三级联动
+
+    compile 'com.umeng.analytics:analytics:latest.integration' // 友盟统计
 }

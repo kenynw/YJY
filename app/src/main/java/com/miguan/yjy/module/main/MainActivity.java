@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MainTabPagerAdapter;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.module.account.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,8 +40,14 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         mTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Fragment fragment = (Fragment) adapter.instantiateItem(mContainer, tab.getPosition());
-                adapter.setPrimaryItem(mContainer, tab.getPosition(), fragment);
+                int position = tab.getPosition();
+                if (tab.getPosition() == 3 && UserPreferences.getUserID() <= 0) {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    mTab.getTabAt(0).select();
+                    position = 0;
+                }
+                Fragment fragment = (Fragment) adapter.instantiateItem(mContainer, position);
+                adapter.setPrimaryItem(mContainer, position, fragment);
                 adapter.finishUpdate(mContainer);
             }
 

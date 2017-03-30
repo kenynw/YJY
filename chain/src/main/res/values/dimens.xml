@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="text_size_large_material">20sp</dimen>
     <dimen name="text_size_title_material">18sp</dimen>
     <dimen name="text_size_subhead_material">16sp</dimen>
     <dimen name="text_size_body_material">14sp</dimen>

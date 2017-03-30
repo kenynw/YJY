@@ -15,8 +15,8 @@ public class UserPreferences {
 
     private static final String KEY_USER_NIM_TOKEN = "auth_key";
 
-    public static String getUserID() {
-        return getString(KEY_USER_ID);
+    public static int getUserID() {
+        return LUtils.getPreferences().getInt(KEY_USER_ID, 0);
     }
 
     public static String getToken() {
@@ -27,8 +27,8 @@ public class UserPreferences {
         return getString(KEY_USER_NIM_TOKEN);
     }
 
-    public static void setUserID(String value) {
-        setString(KEY_USER_ID, value);
+    public static void setUserID(int value) {
+        LUtils.getPreferences().edit().putInt(KEY_USER_ID, value).apply();
     }
 
     public static void setToken(String value) {

@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.miguan.yjy">
 
+    <uses-sdk android:minSdkVersion="8"></uses-sdk>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -10,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:value="58db9d8ba40fa3429000013a" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="test" android:name="UMENG_CHANNEL"/>
+
         <activity
             android:name=".module.main.LauncherActivity"
             android:theme="@style/LaunchTheme">
@@ -83,6 +93,36 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity
+            android:name=".module.user.UsedListActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity
+            android:name=".module.user.StarListActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity
+            android:name=".module.account.LoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible">
+        </activity>
+        <activity
+            android:name=".module.account.RegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible">
+        </activity>
+        <activity
+            android:name=".module.account.ForgotActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible">
         </activity>
 
     </application>

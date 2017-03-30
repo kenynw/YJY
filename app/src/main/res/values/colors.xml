@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#32DAC3</color>
-    <color name="colorPrimaryDark">#32DAC3</color>
+    <color name="colorPrimaryDark">#2DC4AF</color>
     <color name="colorPrimaryLight">#78E0D4</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FCFF00</color>
 
     <!--查询产品相关-->
     <color name="color_sencond_title">#222222</color>
@@ -43,12 +43,14 @@
     <color name="black">#ff000000</color>
 
     <!--背景颜色，添加bg前缀-->
-    <color name="bgWindow">#f5f5f5</color>
-    <color name="bgActionBar">#fff</color>
+    <color name="bgWindow">#F5F5F5</color>
+    <color name="bgActionBar">#FFFFFF</color>
+    <color name="bgDisable">#D8D8D8</color>
 
     <!--文本颜色，添加text前缀-->
     <color name="textPrimary">#222</color>
     <color name="textSecondary">#999</color>
+    <color name="textTertiary">#666</color>
     <color name="textHint">#ccc</color>
 
     <!--分割线颜色，添加div前缀-->

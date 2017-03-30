@@ -22,8 +22,11 @@
             >
 
             <WebView
+                android:id="@+id/wv_article_detail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:minHeight="128dp"
+                />
 
             <include layout="@layout/include_evaluate_list"/>
 

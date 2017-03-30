@@ -19,27 +19,22 @@
 
         <TextView
             android:id="@+id/tv_query_code_brand"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_medium"
-            android:layout_gravity="center"
+            style="@style/BaseInputLarge"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:background="@drawable/bg_round_stroke_window"
-            android:gravity="center_vertical"
             android:hint="@string/hint_brand_name"
-            android:paddingLeft="@dimen/spacing_normal"
-            android:paddingRight="@dimen/spacing_normal"
-            android:textAppearance="@style/TextSubhead"
             />
 
         <EditText
             android:id="@+id/et_query_code_product"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_medium"
+            style="@style/BaseInputLarge"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:layout_marginTop="@dimen/spacing_normal"
             android:background="@drawable/bg_round_stroke_window"
             android:hint="@string/hint_product_code"
-            android:paddingLeft="@dimen/spacing_normal"
-            android:paddingRight="@dimen/spacing_normal"
-            android:textAppearance="@style/TextSubhead"/>
+            />
 
         <TextView
             android:id="@+id/tv_query_code_instruction"
@@ -55,14 +50,9 @@
 
         <Button
             android:id="@+id/btn_query_code_submit"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_medium"
-            android:layout_marginLeft="@dimen/spacing_huge"
-            android:layout_marginRight="@dimen/spacing_huge"
+            style="@style/BaseButtonLarge"
             android:background="@drawable/btn_round_primary_selector"
             android:text="@string/btn_query_now"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_subhead_material"
             />
 
     </LinearLayout>

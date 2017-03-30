@@ -67,7 +67,7 @@ public abstract class BaseListActivity<P extends BaseListActivityPresenter> exte
         }
         if (mListConfig.mHasItemDecoration) {
             if (mListConfig.mItemDecoration != null) {
-                mListView.addItemDecoration(mListConfig.mItemDecoration, mListConfig.mDecorationOrientation);
+                mListView.addItemDecoration(mListConfig.mItemDecoration);
             } else {
                 mListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
             }

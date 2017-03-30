@@ -1,9 +1,10 @@
 package com.miguan.yjy.base;
 
 import android.app.Activity;
-import android.os.Bundle;
 
 import com.dsk.chain.bijection.ActivityLifeCycleDelegate;
+import com.miguan.yjy.utils.LUtils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 生命周期代理类，友盟统计可以在此实现
@@ -17,7 +18,16 @@ public class ActivityDelegate extends ActivityLifeCycleDelegate {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(getActivity());
+        LUtils.log("onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(getActivity());
+        LUtils.log("onPause");
     }
 }

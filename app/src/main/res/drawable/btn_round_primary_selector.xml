@@ -7,6 +7,8 @@
 
     <item android:state_focused="true" android:drawable="@drawable/bg_round_primary_light" />
 
+    <item android:state_enabled="false" android:drawable="@drawable/bg_round_disable" />
+
     <item android:drawable="@drawable/bg_round_primary" />
 
 </selector>

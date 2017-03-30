@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:showIn="@layout/account_activity_register"
+    >
+
+    <EditText
+        android:id="@+id/et_account_username"
+        style="@style/BaseInputLarge"
+        android:background="@drawable/bg_round_stroke_div"
+        android:hint="@string/hint_username_mobile"
+        android:textColor="@color/textPrimary"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_huge"
+        android:layout_marginRight="@dimen/spacing_huge"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@drawable/bg_round_stroke_div"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/et_account_captcha"
+            style="@style/BaseInputLarge"
+            android:layout_width="0dp"
+            android:layout_margin="2dp"
+            android:layout_weight="2"
+            android:background="@color/transparent"
+            android:hint="@string/hint_captcha"
+            android:textColor="@color/textPrimary"
+            />
+
+        <Button
+            android:id="@+id/btn_account_captcha"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_round_right_primary_selector"
+            android:text="@string/btn_get_captcha"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_account_password"
+        style="@style/BaseInputLarge"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:background="@drawable/bg_round_stroke_div"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:textColor="@color/textPrimary"
+        />
+
+</merge>

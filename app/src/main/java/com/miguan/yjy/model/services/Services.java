@@ -38,67 +38,41 @@ public interface Services {
     //////////////////用户相关/////////////////////
     /**
      * 用户登录
-     * @param username 用户名
+     * @param mobile 用户名
      * @param password 密码
      * @return 是否成功
      */
-    @FormUrlEncoded
-    @POST("user/user/login")
+    @GET("?action=login")
     Observable<User> login(
-            @Field("username") CharSequence username,
-            @Field("password") CharSequence password
+            @Query("mobile") CharSequence mobile,
+            @Query("password") CharSequence password,
+            @Query("type") int type
     );
 
     /**
      * 用户注册
      *
-     * @param username 用户名
      * @param password 密码
-     * @param mobile 手机
      * @param captcha 验证码
      * @return 结果
      */
-    @FormUrlEncoded
-    @POST("user/user/sign-up")
+    @GET("?action=register")
     Observable<User> register(
-            @Field("username") CharSequence username,
-            @Field("mobile") CharSequence mobile,
-            @Field("captcha") CharSequence captcha,
-            @Field("password") CharSequence password
+            @Query("mobile") CharSequence mobile,
+            @Query("captcha") CharSequence captcha,
+            @Query("password") CharSequence password
     );
 
     /**
      * 发送注册验证码
      * @param mobile 手机号
+     * @param type 0注册1找回2登录
      * @return 是否成功
      */
-    @FormUrlEncoded
-    @POST("user/user/captcha-register")
-    Observable<Boolean> sendCaptchaRegister(
-            @Field("mobile") CharSequence mobile
-    );
-
-    /**
-     * 发送重置密码验证码
-     * @param mobile 手机号
-     * @return 是否成功
-     */
-    @FormUrlEncoded
-    @POST("user/user/captcha-reset")
-    Observable<Boolean> sendCaptchaReset(
-            @Field("mobile") CharSequence mobile
-    );
-
-    /**
-     * 其他验证码
-     * @param mobile 手机号
-     * @return 是否成功
-     */
-    @FormUrlEncoded
-    @POST("user/user/captcha-update")
-    Observable<Boolean> sendCaptchaUpdate(
-            @Field("mobile") CharSequence mobile,
-            @Field("token") CharSequence token
+    @GET("?action=message")
+    Observable<Boolean> sendCaptcha(
+            @Query("mobile") CharSequence mobile,
+            @Query("type") int type
     );
 
     /**
@@ -109,12 +83,11 @@ public interface Services {
      * @param captcha 验证码
      * @return
      */
-    @FormUrlEncoded
-    @POST("user/user/reset-password")
+    @GET("user/user/reset-password")
     Observable<Boolean> modifyPwd(
-            @Field("mobile") CharSequence mobile,
-            @Field("captcha") CharSequence captcha,
-            @Field("password") CharSequence newPwd
+            @Query("mobile") CharSequence mobile,
+            @Query("captcha") CharSequence captcha,
+            @Query("password") CharSequence newPwd
     );
 
     /**
@@ -127,6 +100,19 @@ public interface Services {
     @POST("user/center/index")
     Observable<User> userInfo(
             @Field("token") CharSequence token
+    );
+
+    /**
+     * 用户收藏、长草列表
+     * @param userId 用户ID
+     * @param type 类型(1产品 2文章)
+     * @return
+     */
+    @GET("?action=collect")
+    Observable<List<Article>> starList(
+            @Query("userId") int userId,
+            @Query("productId") int productId,
+            @Query("type") int type
     );
 
     /**
@@ -196,7 +182,6 @@ public interface Services {
     /**
      * 批号查询
      * //TODO
-     * @param articleId 文章ID
      * @return
      */
     @GET("?action=queryCode")

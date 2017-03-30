@@ -24,45 +24,6 @@ public class UserModel extends AbsModel {
         return getInstance(UserModel.class);
     }
 
-    /**
-     * 注册验证码
-     * @param mobile 手机号
-     * @return 发送结果
-     */
-    public Observable<Boolean> registerCaptcha(String mobile) {
-        return ServicesClient.getServices().sendCaptchaRegister(mobile).compose(new DefaultTransform<>());
-    }
-
-    /**
-     * 忘记密码验证码
-     * @param mobile 手机号
-     * @return 发送结果
-     */
-    public Observable<Boolean> forgotCaptcha(String mobile) {
-        return ServicesClient.getServices().sendCaptchaReset(mobile).compose(new DefaultTransform<>());
-    }
-
-    /**
-     * 忘记密码验证码
-     * @param mobile 手机号
-     * @return 发送结果
-     */
-    public Observable<Boolean> updateCaptcha(String mobile) {
-        return ServicesClient.getServices().sendCaptchaUpdate(mobile, UserPreferences.getToken()).compose(new DefaultTransform<>());
-    }
-
-    public Observable<User> login(String mobile, String password) {
-        return ServicesClient.getServices().login(mobile, password)
-                .doOnNext(this::saveAccount)
-                .compose(new DefaultTransform<>());
-    }
-
-    public Observable<User> register(String username, String mobile, String code, String password) {
-        return ServicesClient.getServices().register(username, mobile, code, password)
-                .doOnNext(this::saveAccount)
-                .compose(new DefaultTransform<>());
-    }
-
     public Observable<User> userInfo() {
         return ServicesClient.getServices().userInfo(UserPreferences.getToken())
                 .compose(new DefaultTransform<>());
@@ -104,15 +65,6 @@ public class UserModel extends AbsModel {
         return ServicesClient.getServices()
                 .feedback(UserPreferences.getToken(), type, contact, content, img, 0)
                 .compose(new DefaultTransform<>());
-    }
-
-    /**
-     * 账号相关本地存储
-     * @param user
-     */
-    private void saveAccount(User user) {
-        UserPreferences.setUserID(user.getUser_id() + "");
-        UserPreferences.setToken(user.getToken());
     }
 
 }

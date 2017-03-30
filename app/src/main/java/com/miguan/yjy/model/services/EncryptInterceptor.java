@@ -19,6 +19,8 @@ import okhttp3.Response;
 
 public class EncryptInterceptor implements Interceptor {
 
+    private static final String TAG = EncryptInterceptor.class.getSimpleName();
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
@@ -31,6 +33,8 @@ public class EncryptInterceptor implements Interceptor {
                     .addQueryParameter("from","android")
                     .build(); //获取请求url地址
 
+            LUtils.log(TAG, requestUrl.query());
+
             HttpUrl newUrl = new HttpUrl.Builder()
                     .scheme(requestUrl.scheme())
                     .host(requestUrl.host())
@@ -40,6 +44,8 @@ public class EncryptInterceptor implements Interceptor {
 
             request = request.newBuilder().method(methodStr, request.body()).url(newUrl).build();
         }
+
+        LUtils.log(TAG, request.url().toString());
 
         return chain.proceed(request);
     }
