@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"></include>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <ImageView
+            android:id="@+id/img_proudct"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/img_proudct"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/img_proudct"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="sss"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_15" />
+
+        <TextView
+            android:id="@+id/tv_product_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_product_name"
+            android:layout_below="@+id/tv_product_name"
+            android:text="sss"
+            android:textColor="@color/f6"
+            android:textSize="@dimen/text_size_small_14" />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            android:text="@string/tv_product_remark"
+            android:textColor="@color/f6"
+            android:textSize="@dimen/text_size_small_15" />
+
+        <!--style="?android:attr/ratingBarStyleSmall"-->
+        <RatingBar
+            android:id="@+id/ratbar_product"
+            style="@style/MySmallRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:layout_gravity="center"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:stepSize="1" />
+
+        <TextView
+            android:id="@+id/tv_product_remark_evaluate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="15dp"
+            android:text="好评"
+            android:textColor="@color/f9"
+            android:textSize="@dimen/text_size_micro_12" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/tv_product_remark_lack_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15dp"
+            android:text="还需要输入20个字~"
+            android:textColor="@color/f6"
+            android:textSize="@dimen/text_size_micro_12" />
+
+        <EditText
+            android:id="@+id/et_product_remark"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_product_remark_lack_num"
+            android:background="@null"
+            android:gravity="left"
+            android:hint="@string/tv_product_remark_hint"
+            android:paddingTop="20dp"
+            android:textColor="@color/f6"
+            android:textColorHint="@color/fcd"
+            android:textSize="@dimen/text_size_small_15" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

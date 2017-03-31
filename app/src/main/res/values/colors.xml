@@ -15,6 +15,16 @@
     <color name="f9">#999999</color>
     <color name="fa">#AAAAAA</color>
     <color name="f32d">#32dac3</color>
+    <color name="fe2">#e2e2e2</color>
+    <color name="fed">#ededed</color>
+
+    <!--测试相关-->
+    <color name="fa3e">#a3e8d5</color>
+    <color name="fa9d">#a9d7f1</color>
+    <color name="f589">#5890b1</color>
+    <color name="f4ba">#4ba089</color>
+    <color name="f63c">#63cbfc</color>
+    <color name="fb7">#fb7c94</color>
 
     <!-- 常用色值 -->
     <!--透明-->

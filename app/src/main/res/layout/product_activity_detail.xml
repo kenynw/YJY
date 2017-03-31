@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/white">
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -153,6 +156,7 @@
                         android:textSize="@dimen/text_size_small_15"/>
 
                     <ImageView
+                        android:id="@+id/iv_product_down"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -162,7 +166,7 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/include_product_record_info" />
+                <include layout="@layout/include_product_record_info"/>
 
                 <View
                     style="@style/ItemLineHeight"
@@ -258,7 +262,7 @@
                     style="@style/ItemLineHeight"
                     android:layout_height="10dp"/>
 
-                <include layout="@layout/include_evaluate_list" />
+                <include layout="@layout/include_evaluate_list"/>
 
             </LinearLayout>
 

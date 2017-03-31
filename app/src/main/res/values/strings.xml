@@ -92,6 +92,36 @@
     <string name="tv_product_detail_grade">安全信息:  安全等级</string>
     <string name="tv_product_detail_effect_info">功效信息:</string>
     <string name="tv_product_detail_lock_all_component">查看全成分</string>
+    <string name="tv_product_remark">商品点评</string>
+    <string name="tv_product_remark_hint">说说您使用后的感受吧!不少于20字哦~</string>
+    <string name="tv_menu_submit">提交</string>
+    <string name="tv_title_read">颜究院官方解读</string>
+    <string name="tv_product_component_name">成分名称</string>
+    <string name="tv_product_component_safe">安全\n风险</string>
+    <string name="tv_product_component_active">活性\n成分</string>
+    <string name="tv_product_component_pox">致痘\n风险</string>
+    <string name="tv_product_component_goal">使用\n目的</string>
+    <string name="tv_product_compare">肤质匹配</string>
+    <string name="tv_product_no_compare">肤质不匹配</string>
+    <string name="tv_product_safe">安全信息</string>
+    <string name="tv_product_fuction_info">功效信息</string>
+    <string name="tv_product_component_describe">本成分列表数据来自国家食品药品监督管理局标签排序\n按添加量从多到少排序</string>
+    <string name="tv_menu_read_list">解读表</string>
+    <string name="tv_product_component_img">生成成分表图片</string>
+
+    <!--测试相关-->
+    <string name="tv_test_wrinkele">皱纹/紧致测试</string>
+    <string name="tv_test_oily">干性/油性测试</string>
+    <string name="tv_test_sensitive">敏感/耐受测试</string>
+    <string name="tv_test_pigment">色素/非色素测试</string>
+    <string name="text_test_info">基础信息</string>
+    <string name="text_test_front_info">开始测试前,请先填写您的基础信息</string>
+    <string name="text_test_birthday">点击选择出生日期</string>
+    <string name="text_test_into">进入测试</string>
 
     <string name="tv_cancel">取消</string>
+    <string name="tv_share_content">分享内容到</string>
+    <string name="tv_share_wxfriend">微信好友</string>
+    <string name="tv_share_wxcircle">朋友圈</string>
+    <string name="tv_share_weibo">微博</string>
 </resources>

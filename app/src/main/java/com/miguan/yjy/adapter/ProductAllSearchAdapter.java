@@ -10,6 +10,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @作者 cjh
@@ -28,7 +29,7 @@ public class ProductAllSearchAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return  12;
+        return datas.size();
     }
 
     @Override
@@ -45,7 +46,11 @@ public class ProductAllSearchAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = View.inflate(context, R.layout.item_product_all_search, null);
         TextView textView = (TextView) convertView.findViewById(R.id.item_label_tv);
-        textView.setText("测试");
+//        textView.setText("测试");
         return convertView;
+    }
+    public void onlyAddAll(List<Product> datas) {
+        datas.addAll(datas);
+        notifyDataSetChanged();
     }
 }

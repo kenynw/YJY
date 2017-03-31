@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <com.miguan.yjy.widget.CustomNestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:id="@+id/tv_product_compare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableBottom="@drawable/tab_product_read"
+                    android:drawablePadding="9dp"
+                    android:gravity="center"
+                    android:text="@string/tv_product_compare"
+                    android:textColor="@color/f6"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+                <TextView
+                    android:id="@+id/tv_product_no_compare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableBottom="@drawable/tab_product_read"
+                    android:drawablePadding="9dp"
+                    android:gravity="center"
+                    android:text="@string/tv_product_no_compare"
+                    android:textColor="@color/f6"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+                <TextView
+                    android:id="@+id/tv_product_safe"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableBottom="@drawable/tab_product_read"
+                    android:drawablePadding="9dp"
+                    android:gravity="center"
+                    android:text="@string/tv_product_safe"
+                    android:textColor="@color/f6"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+                <TextView
+                    android:id="@+id/tv_product_function_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableBottom="@drawable/tab_product_read"
+                    android:drawablePadding="9dp"
+                    android:gravity="center"
+                    android:text="@string/tv_product_fuction_info"
+                    android:textColor="@color/f6"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+
+            </LinearLayout>
+
+            <include layout="@layout/include_component"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recy_product_read"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+    </com.miguan.yjy.widget.CustomNestedScrollView>
+
+
+</LinearLayout>

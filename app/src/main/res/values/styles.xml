@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -10,7 +10,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionBar" tools:targetApi="honeycomb">false</item>
         <item name="android:windowBackground">@color/bgWindow</item>
         <item name="android:textColorHint">@color/textHint</item>
         <item name="android:textColorPrimary">@color/textPrimary</item>
@@ -31,7 +31,7 @@
     </style>
 
     <style name="ToolbarTheme">
-        <item name="actionMenuTextColor">@color/colorPrimaryDark</item>
+        <item name="actionMenuTextColor">@color/toolbar_right_selector</item>
     </style>
 
     <style name="TitleToolbar" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
@@ -41,9 +41,12 @@
         <item name="com.miguan.yjy:theme">@style/ToolbarTheme</item>
     </style>
 
-    <style name="TextTitle" parent="TextAppearance.AppCompat.Title"/>
-    <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead"/>
-    <style name="TextBody" parent="TextAppearance.AppCompat.Body1"/>
+    <style name="TextTitle" parent="TextAppearance.AppCompat.Title" />
+
+    <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead" />
+
+    <style name="TextBody" parent="TextAppearance.AppCompat.Body1" />
+
     <style name="TextCaption" parent="TextAppearance.AppCompat.Caption" />
 
     <style name="ItemLineHeight">
@@ -55,5 +58,13 @@
     <style name="QueryTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_query</item>
     </style>
+
+    <style name="MySmallRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/my_evaluate_ratingbar_color</item>
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+        <item name="android:minWidth">20dip</item>
+    </style>
+
 
 </resources>

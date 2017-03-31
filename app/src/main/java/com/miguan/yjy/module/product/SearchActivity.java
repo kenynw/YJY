@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.product;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,10 +18,10 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
+import com.miguan.yjy.adapter.HistorySearchAdpter;
 import com.miguan.yjy.adapter.ProductAllSearchAdapter;
 import com.miguan.yjy.adapter.viewholder.RecommedViewholder;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         ButterKnife.bind(this);
         initListener();
 
+        recyHistorySearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -81,7 +83,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LUtils.toast("关闭页面");
+             finish();
             }
         });
 
@@ -114,6 +116,13 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         ProductAllSearchAdapter productAllSearchAdapter = new ProductAllSearchAdapter(SearchActivity.this, datas);
         flowtagAllSearch.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagAllSearch.setAdapter(productAllSearchAdapter);
+//        Product product = new Product();
+//        product.setName("测试");
+//        datas.add(product);
+//        productAllSearchAdapter.onlyAddAll(datas);
+
+        recyHistorySearch.setAdapter(new HistorySearchAdpter(SearchActivity.this,datas));
+
 
     }
 

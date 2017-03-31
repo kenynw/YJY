@@ -2,6 +2,7 @@ package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -42,6 +43,25 @@ public class ProductModel extends AbsModel {
     public Observable<Product> queryCode(String brand, String name) {
         return ServicesClient.getServices().queryCode(brand, name).compose(new DefaultTransform<>());
     }
+    public Observable<List<Component>> getReadList() {
+        List<Component> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Component component = new Component();
+            component.setName("成分名");
+            list.add(component);
+        }
+        return Observable.just(list);
+    }
+    public List<Component> getReadListData() {
+        List<Component> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Component component = new Component();
+            component.setName("成分名");
+            list.add(component);
+        }
+        return list;
+    }
+
 
     public Observable<Brand> getBrandList() {
         List<Brand> hot = new ArrayList<>();
