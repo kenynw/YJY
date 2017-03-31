@@ -4,6 +4,7 @@ import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 
@@ -33,16 +34,18 @@ public class ProductModel extends AbsModel {
         return Observable.just(list);
     }
 
-    public Observable<Product> getProductDetail() {
-        Product product = new Product();
-        product.setProduct_name("hahaha");
-        product.setBrand("理肤泉");
-        return Observable.just(product).compose(new DefaultTransform<>());
+    public Observable<Product> getProductDetail(int productId) {
+//        Product product = new Product();
+//        product.setProduct_name("hahaha");
+//        product.setBrand("理肤泉");
+//        return Observable.just(product).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().productDetail(productId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
    }
 
     public Observable<Product> queryCode(String brand, String name) {
         return ServicesClient.getServices().queryCode(brand, name).compose(new DefaultTransform<>());
     }
+
     public Observable<List<Component>> getReadList() {
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -52,6 +55,7 @@ public class ProductModel extends AbsModel {
         }
         return Observable.just(list);
     }
+
     public List<Component> getReadListData() {
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -61,7 +65,6 @@ public class ProductModel extends AbsModel {
         }
         return list;
     }
-
 
     public Observable<Brand> getBrandList() {
         List<Brand> hot = new ArrayList<>();
@@ -86,6 +89,10 @@ public class ProductModel extends AbsModel {
         brand.setHot(hot);
         brand.setOther(other);
         return Observable.just(brand).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Product> like(int productId) {
+        return ServicesClient.getServices().productLike(productId, UserPreferences.getUserID(), 1).compose(new DefaultTransform<>());
     }
 
 }

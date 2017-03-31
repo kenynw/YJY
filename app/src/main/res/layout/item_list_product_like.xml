@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/spacing_normal">
+
+
+    <ImageView
+        android:id="@+id/iv_product_thumb"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/def_image_loading"
+        />
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:textAppearance="@style/TextBody"
+        tools:text="女生脸上长白头粉刺能挤吗"
+        />
+
+</LinearLayout>

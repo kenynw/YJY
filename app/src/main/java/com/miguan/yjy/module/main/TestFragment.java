@@ -63,4 +63,12 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
         return view;
     }
 
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        if (getView() != null) {
+            getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
+
 }

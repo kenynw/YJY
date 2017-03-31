@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/white"
@@ -23,53 +24,55 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginTop="15dp">
+                    android:padding="@dimen/spacing_normal"
+                    >
 
                     <ImageView
-                        android:id="@+id/img_product_detail"
+                        android:id="@+id/iv_product_detail"
                         android:layout_width="98dp"
                         android:layout_height="98dp"
-                        android:layout_marginBottom="25dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="25dp"
-                        android:background="@color/f5"/>
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:src="@mipmap/def_image_loading"
+                        />
 
                     <TextView
-                        android:id="@+id/tv_product_name_detail"
+                        android:id="@+id/tv_product_detail_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/img_product_detail"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@+id/img_product_detail"
+                        android:layout_alignTop="@+id/iv_product_detail"
+                        android:layout_marginLeft="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_toRightOf="@+id/iv_product_detail"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="name"
                         android:textColor="@color/color_sencond_title"
-                        android:textSize="@dimen/text_size_small_15"/>
+                        android:textSize="@dimen/text_size_small_15"
+                        tools:text="理肤泉特安舒缓修护乳"
+                        />
 
                     <TextView
-                        android:id="@+id/tv_product_money_detail"
+                        android:id="@+id/tv_product_detail_spec"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_product_name_detail"
-                        android:layout_below="@+id/tv_product_name_detail"
+                        android:layout_alignLeft="@+id/tv_product_detail_name"
+                        android:layout_below="@+id/tv_product_detail_name"
                         android:layout_marginTop="10dp"
-                        android:text="money"
-                        android:textColor="@color/f6"
-                        android:textSize="@dimen/text_size_small_14"/>
+                        android:textColor="@color/textSecondary"
+                        android:textSize="@dimen/text_size_body_material"
+                        tools:text="￥320/180ML"
+                        />
 
                     <TextView
                         android:id="@+id/tv_product_date_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_product_money_detail"
-                        android:layout_below="@+id/tv_product_money_detail"
+                        android:layout_alignLeft="@+id/tv_product_detail_spec"
+                        android:layout_below="@+id/tv_product_detail_spec"
                         android:layout_marginTop="15dp"
-                        android:text="@string/tv_product_allsearch"
+                        android:text="@string/text_production_date"
                         android:textColor="@color/f32d"
                         android:textSize="@dimen/text_size_small_14"/>
 
@@ -85,8 +88,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/tv_product_detail_match"
-                    android:textColor="@color/color_sencond_title"
-                    android:textSize="@dimen/text_size_small_15"/>
+                    android:textAppearance="@style/TextSubhead"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -184,77 +187,44 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginLeft="@dimen/spacing_normal"
+                        android:drawablePadding="@dimen/spacing_normal"
+                        android:drawableTop="@mipmap/ic_taobao"
+                        android:gravity="center"
+                        android:text="@string/text_taobao"
+                        android:textColor="@color/f3"
+                        android:textSize="@dimen/text_size_small_13"
+                        />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="13dp"
-                            android:background="@mipmap/ic_taobao"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
-                            android:text="淘宝网"
-                            android:textColor="@color/f3"
-                            android:textSize="@dimen/text_size_small_13"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
+                        android:layout_marginLeft="@dimen/spacing_normal"
+                        android:drawablePadding="@dimen/spacing_normal"
+                        android:drawableTop="@mipmap/ic_jingdong"
+                        android:gravity="center"
+                        android:text="@string/text_jingdong"
+                        android:textColor="@color/f3"
+                        android:textSize="@dimen/text_size_small_13"/>
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="13dp"
-                            android:background="@mipmap/ic_jingdong"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
-                            android:text="京东"
-                            android:textColor="@color/f3"
-                            android:textSize="@dimen/text_size_small_13"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="13dp"
-                            android:background="@mipmap/ic_amazon"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="15dp"
-                            android:text="亚马逊"
-                            android:textColor="@color/f3"
-                            android:textSize="@dimen/text_size_small_13"/>
-
-                    </LinearLayout>
-
+                        android:layout_marginLeft="@dimen/spacing_normal"
+                        android:drawablePadding="@dimen/spacing_normal"
+                        android:drawableTop="@mipmap/ic_amazon"
+                        android:gravity="center"
+                        android:text="@string/text_amazon"
+                        android:textColor="@color/f3"
+                        android:textSize="@dimen/text_size_small_13"
+                        />
 
                 </LinearLayout>
 
@@ -285,7 +255,7 @@
                 <View style="@style/ItemLineHeight"/>
 
                 <TextView
-                    android:id="@+id/tv_product_detail_rough"
+                    android:id="@+id/tv_product_detail_like"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
@@ -294,8 +264,9 @@
                     android:drawableStart="@mipmap/ic_product_detail_rough"
                     android:gravity="center"
                     android:text="长草"
-                    android:textColor="@color/f9"
-                    android:textSize="@dimen/text_size_small_15"/>
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_size_body_material"
+                    />
 
             </RelativeLayout>
 

@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.user;
+package com.miguan.yjy.adapter.viewholder;
 
 import android.view.ViewGroup;
 import android.widget.ImageView;

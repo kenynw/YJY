@@ -9,6 +9,7 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
+import com.miguan.yjy.adapter.viewholder.StarViewHolder;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.

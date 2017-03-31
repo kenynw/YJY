@@ -52,7 +52,7 @@ public class CategoryAdapter extends RecyclerArrayAdapter<Category> {
         @Override
         public void setData(Category data) {
             Glide.with(getContext())
-                    .load("http://oss.yjyapp.com/uploads/" + data.getCate_img())
+                    .load(data.getCate_img())
                     .placeholder(R.mipmap.def_image_loading)
                     .error(R.mipmap.def_image_loading)
                     .centerCrop()

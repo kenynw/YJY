@@ -40,7 +40,7 @@ public class ArticleViewHolder extends BaseViewHolder<Article> {
     @Override
     public void setData(Article data) {
         Glide.with(getContext())
-                .load("http://oss.yjyapp.com/uploads/" + data.getArticle_img())
+                .load(data.getArticle_img())
                 .placeholder(R.mipmap.def_image_loading)
                 .error(R.mipmap.def_image_loading)
                 .transform(new GlideRoundTransform(getContext(), 8))

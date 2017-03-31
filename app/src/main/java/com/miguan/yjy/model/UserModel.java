@@ -4,6 +4,7 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Feedback;
 import com.miguan.yjy.model.bean.Message;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
@@ -24,17 +25,33 @@ public class UserModel extends AbsModel {
         return getInstance(UserModel.class);
     }
 
-    public Observable<User> userInfo() {
-        return ServicesClient.getServices().userInfo(UserPreferences.getToken())
+    /**
+     * 获取用户资料/个人中心
+     * @return
+     */
+    public Observable<User> getUserInfo() {
+        return ServicesClient.getServices().userInfo(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 我在用的列表
+     * @return
+     */
+    public Observable<List<Product>> getUsedProductList() {
+        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 我长草的列表
+     * @return
+     */
+    public Observable<List<Product>> getLikeProductList() {
+        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID())
                 .compose(new DefaultTransform<>());
     }
 
     public Observable<Boolean> modifyPwd(String mobile, String code, String newPwd) {
         return ServicesClient.getServices().modifyPwd(mobile, code, newPwd).compose(new DefaultTransform<>());
-    }
-
-    public Observable<User> getProfile() {
-        return ServicesClient.getServices().userProfile(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     public Observable<Boolean> setProfile(Map<String, String> map) {

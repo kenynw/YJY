@@ -12,12 +12,10 @@ import com.miguan.yjy.model.bean.Version;
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -91,18 +89,6 @@ public interface Services {
     );
 
     /**
-     * 个人中心
-     *
-     * @param token 登录令牌
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("user/center/index")
-    Observable<User> userInfo(
-            @Field("token") CharSequence token
-    );
-
-    /**
      * 用户收藏、长草列表
      * @param userId 用户ID
      * @param type 类型(1产品 2文章)
@@ -116,15 +102,34 @@ public interface Services {
     );
 
     /**
-     * 个人资料
-     *
-     * @param token 登录令牌
+     * 我在用的列表
+     * //TODO
      * @return
      */
-    @FormUrlEncoded
-    @POST("user/message/index")
-    Observable<User> userProfile(
-            @Field("token") CharSequence token
+    @GET("?action=userProduct")
+    Observable<List<Product>> usedProduct(
+            @Query("userId") int userId
+    );
+
+    /**
+     * 我长草的列表
+     * //TODO
+     * @return
+     */
+    @GET("?action=userProduct")
+    Observable<List<Product>> likeProduct(
+            @Query("userId") int userId
+    );
+
+    /**
+     * 个人中心/个人资料
+     *
+     * @param user_id 用户ID
+     * @return
+     */
+    @GET("?action=userInfo")
+    Observable<User> userInfo(
+            @Query("user_id") int user_id
     );
 
     /**
@@ -141,20 +146,20 @@ public interface Services {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/message/edit")
+    @GET("user/message/edit")
     Observable<Boolean> modifyProfile(
-            @FieldMap Map<String, String> request
+            @QueryMap Map<String, String> request
     );
 
     /**
      * 消息列表
      */
     @FormUrlEncoded
-    @POST("user/systemmessage/system-message")
+    @GET("user/systemmessage/system-message")
     Observable<List<Message>> getMessageList(
-            @Field("token") String token,
-            @Field("type") Integer type,
-            @Field("page") Integer page
+            @Query("token") String token,
+            @Query("type") Integer type,
+            @Query("page") Integer page
     );
 
     /**
@@ -168,14 +173,14 @@ public interface Services {
      * @return
      */
     @FormUrlEncoded
-    @POST("user/feedback/feedback")
+    @GET("user/feedback/feedback")
     Observable<Feedback> feedback(
-            @Field("token") String token,
-            @Field("type") Integer type,
-            @Field("contact") String contact,
-            @Field("content") String content,
-            @Field("img") String img,
-            @Field("source") int source
+            @Query("token") String token,
+            @Query("type") Integer type,
+            @Query("contact") String contact,
+            @Query("content") String content,
+            @Query("img") String img,
+            @Query("source") int source
     );
 
     ////////////////////产品//////////////////////
@@ -190,6 +195,28 @@ public interface Services {
             @Query("name") String name
     );
 
+    /**
+     * 产品详情
+     *
+     * @return
+     */
+    @GET("?action=productInfo")
+    Observable<Product> productDetail(
+            @Query("id") int id,
+            @Query("uid") int uid
+    );
+
+    /**
+     * 产品长草
+     * @param type － 类型(1产品 2文章)
+     * @return
+     */
+    @GET("?action=productInfo")
+    Observable<Product> productLike(
+            @Query("id") int productId,
+            @Query("userId") int uid,
+            @Query("type") int type
+    );
 
     ////////////////////文章//////////////////////
     /**

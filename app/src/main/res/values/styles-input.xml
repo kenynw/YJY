@@ -8,8 +8,7 @@
         <item name="android:layout_marginRight">@dimen/spacing_huge</item>
         <item name="android:paddingLeft">@dimen/spacing_normal</item>
         <item name="android:paddingRight">@dimen/spacing_normal</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_size_subhead_material</item>
+        <item name="android:textAppearance">@style/TextSubhead</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:inputType">text</item>

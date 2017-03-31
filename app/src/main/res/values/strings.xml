@@ -5,6 +5,7 @@
     <string name="text_brand">品牌</string>
     <string name="text_brand_list">品牌列表</string>
     <string name="text_product">产品</string>
+    <string name="text_product_spec">￥%1$s/%2$s</string>
     <string name="text_expiration_date">过期时间</string>
     <string name="text_is_open">是否开封</string>
     <string name="text_open_time">开封日期</string>
@@ -14,6 +15,7 @@
     <string name="text_me_star">我收藏的</string>
     <string name="text_skin_test">肤质测试</string>
     <string name="text_query_production_date">生产日期查询</string>
+    <string name="text_production_date">生产日期查询></string>
     <string name="text_query_instructions">查询说明</string>
     <string name="text_query_title_1">什么是批号？</string>
     <string name="text_query_content_1">护肤品批号是生产商/品牌商用于记录产品生产日期、产地、生产批次等信息的重要手段，我们也可以通过查询批号信息获取最准确的生产信息~</string>
@@ -30,10 +32,21 @@
     <string name="text_empty_brand_list">没有查询到结果，请联系颜究院公众号</string>
     <string name="text_other_way">其他方式</string>
     <string name="text_forgot_password">忘记密码</string>
+    <string name="text_taobao">淘宝网</string>
+    <string name="text_jingdong">京东</string>
+    <string name="text_amazon">亚马逊</string>
+    <string name="text_profile">个人资料</string>
+    <string name="text_avatar">头像</string>
+    <string name="text_username">用户名</string>
+    <string name="text_mobile">手机号码</string>
+    <string name="text_birthday">生日</string>
+    <string name="text_area">地区</string>
+    <string name="text_logout">退出登录</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
     <string name="label_expiration_date">过期日期：</string>
+    <string name="label_looking_value">颜值：%s&#160;分</string>
 
     <string name="btn_main_module">功能模板</string>
     <string name="btn_main_test">肤质测试</string>

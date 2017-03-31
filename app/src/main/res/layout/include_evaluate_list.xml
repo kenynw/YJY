@@ -10,10 +10,10 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:paddingBottom="20dp"
+        android:paddingBottom="@dimen/spacing_large"
         android:paddingLeft="@dimen/spacing_normal"
         android:paddingRight="@dimen/spacing_normal"
-        android:paddingTop="20dp"
+        android:paddingTop="@dimen/spacing_large"
         >
 
         <TextView
@@ -66,8 +66,9 @@
             android:id="@+id/tv_product_medium_evaluate"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginLeft="@dimen/spacing_small"
             android:background="@drawable/shape_product_all_search"
             android:gravity="center"
             android:paddingBottom="4dp"

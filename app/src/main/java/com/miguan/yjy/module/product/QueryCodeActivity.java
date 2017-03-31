@@ -48,7 +48,7 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
     }
 
     public void setData(Product product) {
-        mEtBrand.setText(product.getBrand());
+        mEtBrand.setText(product.getProduct_name());
     }
 
     private void checkInput() {
