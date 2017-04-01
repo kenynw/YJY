@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseImage">
+        <item name="com.miguan.yjy:failureImage">@mipmap/def_image_loading</item>
+        <item name="com.miguan.yjy:failureImageScaleType">centerCrop</item>
+        <item name="com.miguan.yjy:placeholderImage">@mipmap/def_image_loading</item>
+        <item name="com.miguan.yjy:placeholderImageScaleType">centerCrop</item>
+        <item name="com.miguan.yjy:actualImageScaleType">centerCrop</item>
+    </style>
+
+
+
+</resources>

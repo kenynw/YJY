@@ -9,6 +9,15 @@ import android.os.Parcelable;
 
 public class Message implements Parcelable {
 
+    private String id;
+
+    private String message;
+
+    private String create_id;
+
+    public Message() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -16,12 +25,15 @@ public class Message implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-    }
-
-    public Message() {
+        dest.writeString(this.id);
+        dest.writeString(this.message);
+        dest.writeString(this.create_id);
     }
 
     protected Message(Parcel in) {
+        this.id = in.readString();
+        this.message = in.readString();
+        this.create_id = in.readString();
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {
@@ -36,4 +48,27 @@ public class Message implements Parcelable {
         }
     };
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCreate_id() {
+        return create_id;
+    }
+
+    public void setCreate_id(String create_id) {
+        this.create_id = create_id;
+    }
 }

@@ -55,7 +55,7 @@ public interface Services {
      * @return 结果
      */
     @GET("?action=register")
-    Observable<User> register(
+    Observable<Integer> register(
             @Query("mobile") CharSequence mobile,
             @Query("captcha") CharSequence captcha,
             @Query("password") CharSequence password

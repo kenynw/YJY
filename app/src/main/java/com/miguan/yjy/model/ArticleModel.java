@@ -51,16 +51,16 @@ public class ArticleModel extends AbsModel {
     }
 
     public Observable<List<Article>> getStarList() {
-//        List<Article> list = new ArrayList<>();
-//        for (int i = 0; i < 5; i++) {
-//            Article article = new Article();
-//            article.setTitle("倩碧VC修护精华新品详细评测");
-//            article.setArticle_img("http://oss.yjyapp.com/uploads/article/20170329/1490790291872102.jpg");
-//            list.add(article);
-//        }
-//        return Observable.just(list);
+        List<Article> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Article article = new Article();
+            article.setTitle("倩碧VC修护精华新品详细评测");
+            article.setArticle_img("http://oss.yjyapp.com/uploads/article/20170329/1490790291872102.jpg");
+            list.add(article);
+        }
+        return Observable.just(list);
 
-        return ServicesClient.getServices().starList(1, 1, 2).compose(new DefaultTransform<>());
+//        return ServicesClient.getServices().starList(1, 1, 2).compose(new DefaultTransform<>());
     }
 
 }

@@ -8,7 +8,7 @@
     <include layout="@layout/include_toolbar" />
 
     <EditText
-        android:id="@+id/et_article_comment_content"
+        android:id="@+id/et_input_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="start"

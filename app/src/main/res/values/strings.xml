@@ -42,6 +42,9 @@
     <string name="text_birthday">生日</string>
     <string name="text_area">地区</string>
     <string name="text_logout">退出登录</string>
+    <string name="text_delete">删除</string>
+    <string name="text_open">开封</string>
+    <string name="text_face_score">颜值</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -59,7 +62,7 @@
     <string name="btn_query_now">立即查询</string>
     <string name="btn_me_used">我在用的</string>
     <string name="btn_me_like">我长草的</string>
-    <string name="btn_me_comment">我点评的</string>
+    <string name="btn_me_evaluate">我点评的</string>
     <string name="btn_me_star">我收藏的</string>
     <string name="btn_me_message">我的消息</string>
     <string name="btn_query_batch_no">查询护肤品批号</string>
@@ -71,6 +74,7 @@
     <string name="btn_to_register">新用户注册</string>
     <string name="btn_forgot_password">忘记密码？</string>
     <string name="btn_get_captcha">获取验证码</string>
+    <string name="btn_add">添加</string>
 
     <string name="hint_add_comment">写评论…</string>
     <string name="hint_home_search">查询%d种护肤品的成分和功效</string>

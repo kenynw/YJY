@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.user;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
+import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Product;
 
 /**
@@ -17,6 +18,6 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
 
     @Override
     public void onRefresh() {
-//        ProductModel.getInstantce().getReadList()
+        UserModel.getInstance().getLikeProductList().unsafeSubscribe(getRefreshSubscriber());
     }
 }

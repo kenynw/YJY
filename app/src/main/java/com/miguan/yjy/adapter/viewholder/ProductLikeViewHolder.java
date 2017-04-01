@@ -30,6 +30,6 @@ public class ProductLikeViewHolder extends BaseViewHolder<Product> {
 
     @Override
     public void setData(Product data) {
-
+        mTvName.setText(data.getProduct_name());
     }
 }

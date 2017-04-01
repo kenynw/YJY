@@ -60,6 +60,14 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
         if (tvTitle != null) tvTitle.setText(title);
     }
 
+    public TextView getTitleView() {
+        if (mToolbar == null) return null;
+
+        TextView tvTitle = (TextView) findViewById(R.id.toolbar_title);
+        if (tvTitle != null) return tvTitle;
+        return null;
+    }
+
     public FrameLayout getContent() {
         return mContentParent;
     }

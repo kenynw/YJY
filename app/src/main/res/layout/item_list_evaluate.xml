@@ -76,15 +76,36 @@
         tools:text="清干 | 重敏 | 非色素 | 紧致"
         />
 
-    <TextView
-        android:id="@+id/tv_evaluate_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ll_evaluate_user_info"
         android:layout_alignStart="@id/ll_evaluate_user_info"
         android:layout_below="@+id/tv_evaluate_label"
         android:layout_marginTop="15dp"
-        android:textAppearance="@style/TextBody"
-        tools:text="sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰"/>
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_evaluate_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.2"
+            android:textAppearance="@style/TextBody"
+            tools:text="sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluate_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="查看全文"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>

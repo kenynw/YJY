@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!--透明状态栏-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--透明导航栏-->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <!--导航可绘制-->
+        <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+
+        <!--<item name="android:statusBarColor">@android:color/transparent</item>-->
+        <!--<item name="colorPrimaryDark">@android:color/transparent</item>-->
+    </style>
+
+</resources>

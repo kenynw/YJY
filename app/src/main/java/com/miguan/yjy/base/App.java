@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.dsk.chain.Chain;
 import com.dsk.chain.model.ModelManager;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.miguan.yjy.utils.LUtils;
 
 /**
@@ -16,6 +17,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         LUtils.initialize(this);
+        Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
 

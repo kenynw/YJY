@@ -60,6 +60,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     }
 
     public void setData(Product product) {
+        if (product == null) return;
         mTvBrand.setText(product.getBrand());
         mEtOpenDate.setText(DateUtils.getCurrentFormatDate());
     }

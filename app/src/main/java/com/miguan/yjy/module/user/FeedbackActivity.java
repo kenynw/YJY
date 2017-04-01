@@ -1,7 +1,8 @@
-package com.miguan.yjy.module.main;
+package com.miguan.yjy.module.user;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
@@ -12,10 +13,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
+ * Copyright (c) 2017/4/1. LiaoPeiKun Inc. All rights reserved.
  */
-@RequiresPresenter(ArticleCommentPresenter.class)
-public class ArticleCommentActivity extends ChainBaseActivity<ArticleCommentPresenter> {
+@RequiresPresenter(FeedbackPresenter.class)
+public class FeedbackActivity extends ChainBaseActivity<FeedbackPresenter> {
 
     @BindView(R.id.et_input_content)
     EditText mEtContent;
@@ -24,13 +25,19 @@ public class ArticleCommentActivity extends ChainBaseActivity<ArticleCommentPres
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_activity_input);
-        setToolbarTitle(R.string.text_add_comment);
+        setToolbarTitle(R.string.btn_feedback);
         ButterKnife.bind(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_publish, menu);
+        getMenuInflater().inflate(R.menu.menu_save, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
     }
 }

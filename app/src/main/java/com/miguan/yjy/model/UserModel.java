@@ -2,6 +2,7 @@ package com.miguan.yjy.model;
 
 
 import com.dsk.chain.model.AbsModel;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Feedback;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
@@ -10,6 +11,7 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,15 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<List<Product>> getUsedProductList() {
-        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        List<Product> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product();
+            product.setProduct_name("adfasdf");
+            product.setProduct_date("2033-2-2");
+            list.add(product);
+        }
+        return Observable.just(list);
+//        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
     /**
@@ -46,8 +56,46 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<List<Product>> getLikeProductList() {
-        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID())
-                .compose(new DefaultTransform<>());
+        List<Product> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product();
+            product.setProduct_name("adfasdf");
+            product.setProduct_date("2033-2-2");
+            list.add(product);
+        }
+        return Observable.just(list);
+//        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID())
+//                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 消息列表
+     */
+    public Observable<List<Message>> getMessageList(Integer page) {
+        List<Message> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Message message = new Message();
+            message.setMessage("如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克");
+            list.add(message);
+        }
+        return Observable.just(list);
+//        return ServicesClient.getServices().getMessageList(UserPreferences.getToken(), type, page).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 我点评的
+     * @return
+     */
+    public Observable<List<Evaluate>> getEvaluateList() {
+        List<Evaluate> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Evaluate evaluate = new Evaluate();
+            evaluate.setComment("如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克如虹槈曼斯里加蔓巧克力饮品井架撒飞机离开的撒娇弗兰克的撒娇弗兰克");
+            list.add(evaluate);
+        }
+        return Observable.just(list);
+//        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID())
+//                .compose(new DefaultTransform<>());
     }
 
     public Observable<Boolean> modifyPwd(String mobile, String code, String newPwd) {
@@ -64,13 +112,6 @@ public class UserModel extends AbsModel {
         map.put("token", UserPreferences.getToken());
         map.put(key, value);
         return ServicesClient.getServices().modifyProfile(map).compose(new DefaultTransform<>());
-    }
-
-    /**
-     * 消息列表
-     */
-    public Observable<List<Message>> getMessageList(Integer type, Integer page) {
-        return ServicesClient.getServices().getMessageList(UserPreferences.getToken(), type, page).compose(new DefaultTransform<>());
     }
 
     /**

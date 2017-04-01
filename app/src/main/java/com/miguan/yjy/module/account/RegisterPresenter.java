@@ -1,7 +1,6 @@
 package com.miguan.yjy.module.account;
 
 import com.dsk.chain.bijection.Presenter;
-import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.services.AccountModel;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.LUtils;
@@ -22,10 +21,10 @@ public class RegisterPresenter extends Presenter<RegisterActivity> {
     }
 
     public void register(String mobile, String captcha, String password) {
-        AccountModel.getInstance().register(mobile, captcha, password).unsafeSubscribe(new ServicesResponse<User>() {
+        AccountModel.getInstance().register(mobile, captcha, password).unsafeSubscribe(new ServicesResponse<Integer>() {
             @Override
-            public void onNext(User user) {
-
+            public void onNext(Integer integer) {
+                getView().finish();
             }
         });
     }

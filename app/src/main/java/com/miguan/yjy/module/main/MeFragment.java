@@ -21,6 +21,10 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.User;
+import com.miguan.yjy.module.user.EvaluateListActivity;
+import com.miguan.yjy.module.user.FaceScoreActivity;
+import com.miguan.yjy.module.user.FeedbackActivity;
+import com.miguan.yjy.module.user.MsgListActivity;
 import com.miguan.yjy.module.user.ProductLikeListActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.module.user.StarListActivity;
@@ -44,8 +48,8 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
     @BindView(R.id.tv_me_skin_test)
     TextView mTvSkinTest;
 
-    @BindView(R.id.tv_me_looking)
-    TextView mTvLooking;
+    @BindView(R.id.tv_me_face_score)
+    TextView mTvFaceScore;
 
     @BindView(R.id.iv_me_avatar)
     ImageView mIvAvatar;
@@ -89,9 +93,13 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         mBind = ButterKnife.bind(this, view);
 
 //        mTvSkinTest.setOnClickListener(v -> startActivity(null));
+        mTvFaceScore.setOnClickListener(v -> startActivity(new Intent(getActivity(), FaceScoreActivity.class)));
         mBtnUsed.setOnClickListener(v -> startActivity(new Intent(getActivity(), UsedListActivity.class)));
         mBtnLike.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProductLikeListActivity.class)));
+        mBtnComment.setOnClickListener(v -> startActivity(new Intent(getActivity(), EvaluateListActivity.class)));
         mBtnStar.setOnClickListener(v -> startActivity(new Intent(getActivity(), StarListActivity.class)));
+        mBtnMessage.setOnClickListener(v -> startActivity(new Intent(getActivity(), MsgListActivity.class)));
+        mBtnFeedback.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeedbackActivity.class)));
 
         return view;
     }
@@ -110,7 +118,7 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
 
         SpannableString spannableString = new SpannableString(String.format(getString(R.string.label_looking_value), user.getRank_points()));
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 3, 3 + user.getRank_points().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        mTvLooking.setText(spannableString);
+        mTvFaceScore.setText(spannableString);
     }
 
     @Override
