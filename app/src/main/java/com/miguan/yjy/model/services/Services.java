@@ -24,7 +24,7 @@ import rx.Observable;
 
 public interface Services {
 
-    String BASE_URL = "http://api.yjyapp.com/api/index/";
+    String BASE_URL = "https://api.yjyapp.com/api/index/";
 
     /**
      * 首页

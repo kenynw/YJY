@@ -52,7 +52,7 @@ public class BannerPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mBannerList.size();
+        return mBannerList.size() + 2;
     }
 
     @Override

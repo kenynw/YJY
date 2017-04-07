@@ -89,10 +89,10 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
 
         @Override
         public void onBindView(View headerView) {
-            if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {
+//            if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {
                 mHvBanner.setAdapter(new BannerPagerAdapter(getView().getActivity(), mHome.getBanner()));
                 mIndicator.setViewPager(mHvBanner);
-            }
+//            }
 
             mCategory.setAdapter(new CategoryAdapter(getView().getActivity(), mHome.getCategory()));
         }

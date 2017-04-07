@@ -33,4 +33,7 @@ public class ArticleCommentActivity extends ChainBaseActivity<ArticleCommentPres
         getMenuInflater().inflate(R.menu.menu_publish, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
+
 }

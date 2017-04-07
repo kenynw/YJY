@@ -78,17 +78,8 @@ public abstract class BaseListFragment<P extends BaseListFragmentPresenter, M> e
         final BaseListFragmentPresenter.DataAdapter adapter = getPresenter().getAdapter();
         mListView.setAdapter(adapter);
         if (mListConfig.mFooterErrorAble) {
-            View errorView = null;
-            if (mListConfig.mFooterErrorView != null) errorView = adapter.setError(mListConfig.mFooterErrorView);
-            else if (mListConfig.mFooterErrorRes > 0) errorView = adapter.setError(mListConfig.mFooterErrorRes);
-            if (mListConfig.mErrorTouchToResumeAble && errorView != null) {
-                errorView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adapter.resumeMore();
-                    }
-                });
-            }
+            if (mListConfig.mFooterErrorView != null) adapter.setError(mListConfig.mFooterErrorView);
+            else if (mListConfig.mFooterErrorRes > 0) adapter.setError(mListConfig.mFooterErrorRes);
         }
         if (mListConfig.mLoadMoreAble) {
             if (mListConfig.mFooterMoreView != null) adapter.setMore(mListConfig.mFooterMoreView, getPresenter());

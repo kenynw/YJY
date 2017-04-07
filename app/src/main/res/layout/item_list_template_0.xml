@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@mipmap/bg_template_0_decoration_1"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/bg_template_0_decoration_2"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:src="@mipmap/bg_template_0_decoration_3"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="-10dp"
+        android:layout_marginStart="-10dp"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/bg_template_0_decoration_4"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_huge"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_huge"
+            android:layout_marginRight="@dimen/spacing_huge"
+            android:layout_marginTop="@dimen/spacing_huge"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/bg_template_1_header"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="text"
+                android:text="眼霜合集"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_size_large_material"
+                >
+
+                <requestFocus/>
+            </EditText>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/spacing_normal"
+            >
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/spacing_small"
+                fresco:placeholderImage="@mipmap/image_instruction_1"
+                fresco:placeholderImageScaleType="centerCrop"
+                fresco:roundAsCircle="true"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@mipmap/bg_image_template_1"
+                />
+
+        </FrameLayout>
+
+        <TextView
+            style="@style/BaseButtonLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/widget_small"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="@drawable/bg_round_accent"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:text="美丽芳丝保湿修复柔润化妆水"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:text="参考价格：1000RMb/15g"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+        <View
+            android:layout_width="@dimen/widget_small"
+            android:layout_height="4dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@color/textTertiary"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:background="@color/white"
+            android:lineSpacingMultiplier="1.2"
+            android:padding="@dimen/spacing_normal"
+            android:text="很多品牌的化妆水都同时含有去角质功能，所以即使没有去角质，角质层也会越来越薄。所以，在使用化妆水前，一定要先看清说明上有没有去角质的作用，可以尝试在洁面后用化妆棉沾化妆水轻轻擦拭皮肤，擦拭后化妆棉上有黄或黑色的脏污，表面这款化妆水已经具有去角质功能，不再需要其他去角质产品了。"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            >
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_1_avatar"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                fresco:placeholderImage="@mipmap/def_image_loading"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:roundAsCircle="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_template_1_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/spacing_normal"
+                android:layout_toLeftOf="@id/dv_template_1_avatar"
+                android:text="Felton"
+                android:textAppearance="@style/TextBody"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/dv_template_1_avatar"
+                android:layout_alignRight="@id/tv_template_1_username"
+                android:layout_below="@id/tv_template_1_username"
+                android:gravity="bottom"
+                android:text="2017年3月30日"
+                android:textAppearance="@style/TextCaption"
+                />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            style="@style/ItemLineHeight"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_max"
+            >
+
+            <TextView
+                android:id="@+id/tv_template_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@mipmap/ic_clean"
+                android:drawablePadding="@dimen/spacing_tiny"
+                android:drawableStart="@mipmap/ic_clean"
+                android:gravity="center"
+                android:text="@string/text_delete"
+                android:textColor="@color/textSecondary"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

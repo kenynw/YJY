@@ -3,7 +3,7 @@
     <color name="colorPrimary">#32DAC3</color>
     <color name="colorPrimaryDark">#2DC4AF</color>
     <color name="colorPrimaryLight">#78E0D4</color>
-    <color name="colorAccent">#FCFF00</color>
+    <color name="colorAccent">#FF5E87</color>
 
     <!--查询产品相关-->
     <color name="color_sencond_title">#222222</color>
@@ -62,13 +62,9 @@
     <color name="textSecondary">#999</color>
     <color name="textTertiary">#666</color>
     <color name="textHint">#ccc</color>
+    <color name="textYellow">#ccc</color>
 
     <!--分割线颜色，添加div前缀-->
     <color name="divPrimary">#EEEEEE</color>
-
-    <!--区分状态时，默认状态的颜色，添加normal后缀-->
-    <!--区分状态时，按下时的颜色，添加pressed后缀-->
-    <!--区分状态时，选中时的颜色，添加selected后缀-->
-    <!--区分状态时，不可用时的颜色，添加disable后缀-->
 
 </resources>

@@ -58,10 +58,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
-    compile 'com.jude:imageprovider:2.1.1'
+    compile 'com.dsk:imageprovider:2.1.2'
     compile 'com.contrarywind:Android-PickerView:3.2.2' // 时间选择器、省市区三级联动
 
     compile 'com.umeng.analytics:analytics:latest.integration' // 友盟统计
 
-    compile "com.daimajia.swipelayout:library:1.2.0@aar" //侧滑菜单
+    compile "com.daimajia.swipelayout:library:1.2.0@aar" //侧滑删除
 }

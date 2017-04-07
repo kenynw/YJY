@@ -2,7 +2,6 @@ package com.dsk.chain.expansion.list;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -78,17 +77,8 @@ public abstract class BaseListActivity<P extends BaseListActivityPresenter> exte
         final BaseListActivityPresenter.DataAdapter adapter = getPresenter().getAdapter();
         mListView.setAdapterWithProgress(adapter);
         if (mListConfig.mFooterErrorAble) {
-            View errorView = null;
-            if (mListConfig.mFooterErrorView != null) errorView = adapter.setError(mListConfig.mFooterErrorView);
-            else if (mListConfig.mFooterErrorRes > 0) errorView = adapter.setError(mListConfig.mFooterErrorRes);
-            if (mListConfig.mErrorTouchToResumeAble && errorView != null) {
-                errorView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adapter.resumeMore();
-                    }
-                });
-            }
+            if (mListConfig.mFooterErrorView != null) adapter.setError(mListConfig.mFooterErrorView);
+            else if (mListConfig.mFooterErrorRes > 0) adapter.setError(mListConfig.mFooterErrorRes);
         }
         if (mListConfig.mLoadMoreAble) {
             if (mListConfig.mFooterMoreView != null) adapter.setMore(mListConfig.mFooterMoreView, getPresenter());

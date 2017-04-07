@@ -3,8 +3,8 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:icon="@mipmap/ic_add"
-        android:title="@string/btn_add"
+        android:id="@+id/item_menu_gen"
+        android:title="@string/btn_gen"
         app:showAsAction="always"
         />
 

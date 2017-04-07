@@ -2,18 +2,20 @@ package com.miguan.yjy.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewConfigurationCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
+import com.miguan.yjy.R;
 
 /**
  * Copyright (c) 2015. LiaoPeiKun Inc. All rights reserved.
@@ -25,7 +27,7 @@ public class CirclePageIndicator extends View implements ViewPager.OnPageChangeL
     // ===================Config===================
     // ============================================
     // 线条粗细,单位dp
-    private static final int STROKE_WIDTH = 2;
+    private static final int STROKE_WIDTH = 1;
     // 半径,单位dp
     private static final int CIRCLE_RADIUS = 3;
     // 线条间隔,单位dp
@@ -36,6 +38,9 @@ public class CirclePageIndicator extends View implements ViewPager.OnPageChangeL
 
     // 没有选中的时候的画笔
     private final Paint mPaintUnselected = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    private final Paint mPaintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+
     // 选中的时候的画笔
     private final Paint mPaintSelected = new Paint(Paint.ANTI_ALIAS_FLAG);
     private ViewPager mViewPager;
@@ -75,15 +80,24 @@ public class CirclePageIndicator extends View implements ViewPager.OnPageChangeL
         if (isInEditMode())
             return;
 
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CirclePageIndicator);
+
         final Resources res = getResources();
         mRadius = dpToPx(res, CIRCLE_RADIUS);
         mGapWidth = dpToPx(res, GAP_WIDTH);
-        setStrokeWidth(dpToPx(res, STROKE_WIDTH));
-        mPaintUnselected.setColor(0x8affffff);
-        mPaintSelected.setColor(0xfaffffff);
 
-        final ViewConfiguration configuration = ViewConfiguration.get(context);
-        mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
+        mPaintSelected.setStyle(Paint.Style.FILL);
+        mPaintSelected.setColor(ta.getColor(R.styleable.CirclePageIndicator_selected_color, 0xfaffffff));
+
+        mPaintUnselected.setStyle(Paint.Style.FILL);
+        mPaintUnselected.setColor(ta.getColor(R.styleable.CirclePageIndicator_unselected_color, 0x8affffff));
+
+        mPaintStroke.setStyle(Paint.Style.STROKE);
+        mPaintStroke.setStrokeWidth(ta.getDimension(R.styleable.CirclePageIndicator_strokeWidth, dpToPx(res, STROKE_WIDTH)));
+        mPaintStroke.setColor(ta.getColor(R.styleable.CirclePageIndicator_strokeColor, 0x00000000));
+        ta.recycle();
+
+        mTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
     }
 
     public void setCentered(boolean centered) {
@@ -123,8 +137,7 @@ public class CirclePageIndicator extends View implements ViewPager.OnPageChangeL
     }
 
     public void setStrokeWidth(float lineHeight) {
-        mPaintSelected.setStrokeWidth(lineHeight);
-        mPaintUnselected.setStrokeWidth(lineHeight);
+
         invalidate();
     }
 
@@ -174,6 +187,7 @@ public class CirclePageIndicator extends View implements ViewPager.OnPageChangeL
         for (int i = 0; i < count; i++) {
             float dx1 = horizontalOffset + (i * lineWidthAndGap);
             canvas.drawCircle(dx1, verticalOffset, mRadius, (i == mCurrentPage) ? mPaintSelected : mPaintUnselected);
+            canvas.drawCircle(dx1, verticalOffset, mRadius, mPaintStroke);
         }
     }
 

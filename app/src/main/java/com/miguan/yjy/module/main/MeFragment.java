@@ -117,7 +117,7 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         mTvSkin.setText(user.getSkin_name());
 
         SpannableString spannableString = new SpannableString(String.format(getString(R.string.label_looking_value), user.getRank_points()));
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 3, 3 + user.getRank_points().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textYellow)), 3, 3 + user.getRank_points().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         mTvFaceScore.setText(spannableString);
     }
 

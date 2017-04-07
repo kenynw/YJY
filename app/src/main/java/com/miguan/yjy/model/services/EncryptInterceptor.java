@@ -33,16 +33,16 @@ public class EncryptInterceptor implements Interceptor {
                     .addQueryParameter("from","android")
                     .build(); //获取请求url地址
 
-            LUtils.log(TAG, requestUrl.query());
+//            LUtils.log(TAG, requestUrl.query());
+//
+//            HttpUrl newUrl = new HttpUrl.Builder()
+//                    .scheme(requestUrl.scheme())
+//                    .host(requestUrl.host())
+//                    .encodedPath(requestUrl.encodedPath())
+//                    .addQueryParameter("token", passportEncrypt(requestUrl.query()))
+//                    .build();
 
-            HttpUrl newUrl = new HttpUrl.Builder()
-                    .scheme(requestUrl.scheme())
-                    .host(requestUrl.host())
-                    .encodedPath(requestUrl.encodedPath())
-                    .addQueryParameter("token", passportEncrypt(requestUrl.query()))
-                    .build();
-
-            request = request.newBuilder().method(methodStr, request.body()).url(newUrl).build();
+            request = request.newBuilder().method(methodStr, request.body()).url(requestUrl).build();
         }
 
         LUtils.log(TAG, request.url().toString());

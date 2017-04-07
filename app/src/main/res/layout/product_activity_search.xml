@@ -112,7 +112,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
-            android:drawableLeft="@mipmap/ic_product_clean_history"
+            android:drawableLeft="@mipmap/ic_clean"
             android:drawablePadding="8dp"
             android:text="@string/tv_product_clearhistory"
             android:textColor="@color/color_sencond_title"

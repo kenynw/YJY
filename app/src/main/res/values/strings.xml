@@ -45,6 +45,7 @@
     <string name="text_delete">删除</string>
     <string name="text_open">开封</string>
     <string name="text_face_score">颜值</string>
+    <string name="text_title_template">功课模板</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -75,6 +76,7 @@
     <string name="btn_forgot_password">忘记密码？</string>
     <string name="btn_get_captcha">获取验证码</string>
     <string name="btn_add">添加</string>
+    <string name="btn_gen">生成</string>
 
     <string name="hint_add_comment">写评论…</string>
     <string name="hint_home_search">查询%d种护肤品的成分和功效</string>

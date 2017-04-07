@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scrollbars="none"
+        />
+
+    <FrameLayout
+        android:id="@+id/fl_template_gen_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_medium"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@mipmap/ic_add"
+            android:drawablePadding="@dimen/spacing_small"
+            android:drawableStart="@mipmap/ic_add"
+            android:text="@string/btn_add"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

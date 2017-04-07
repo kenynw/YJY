@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CirclePageIndicator">
+
+        <attr name="selected_color" format="color" />
+        <attr name="unselected_color" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+
+    </declare-styleable>
+
+</resources>
