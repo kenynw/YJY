@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -60,6 +61,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_product_sort_all"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_gravity="center"
@@ -77,6 +79,7 @@
                 android:textColor="@color/color_sencond_title" />
 
             <LinearLayout
+                android:id="@+id/ll_product_sort"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,6 +96,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_product_function"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

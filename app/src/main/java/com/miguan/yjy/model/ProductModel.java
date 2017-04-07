@@ -24,6 +24,14 @@ public class ProductModel extends AbsModel {
         return getInstance(ProductModel.class);
     }
 
+
+    /**
+     * 大家都在搜
+     */
+    public Observable<List<Product>> searchHot() {
+        return ServicesClient.getServices().searchHot().compose(new DefaultTransform<>());
+    }
+
     public Observable<List<Product>> getSearchList() {
         List<Product> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {

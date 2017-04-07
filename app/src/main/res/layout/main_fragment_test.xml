@@ -1,226 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scr_main_test"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/TitleToolbar"
+        android:background="@color/white"
+        >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@color/f32d"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@id/toolbar_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp">
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="@string/text_test"
+            android:textAppearance="@style/TextSubhead"
+            android:textColor="@color/f32d"
+            />
 
-            <LinearLayout
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/scr_main_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/f32d"/>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/ll_test_wrinkle"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_shape_white"
-                        android:gravity="center"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         >
 
-                        <ImageView
-                            android:id="@+id/iv_test_wrinkle"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ll_test_wrinkle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:background="@mipmap/ic_test_wrinkle"/>
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_shape_white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                            <ImageView
+                                android:id="@+id/iv_test_wrinkle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:background="@mipmap/ic_test_wrinkle"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/tv_test_wrinkele"
+                                android:textColor="@color/color_sencond_title"
+                                android:textSize="@dimen/text_size_small_15"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_test_wrinkle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="30dp"
+                                android:layout_marginTop="10dp"
+                                android:text="未测试"
+                                android:textColor="@color/f9"
+                                android:textSize="@dimen/text_size_small_13"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_test_oily"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/tv_test_wrinkele"
-                            android:textColor="@color/color_sencond_title"
-                            android:textSize="@dimen/text_size_small_15"
-                            />
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_shape_white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
 
-                        <TextView
-                            android:id="@+id/tv_test_wrinkle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="30dp"
-                            android:layout_marginTop="10dp"
-                            android:text="未测试"
-                            android:textColor="@color/f9"
-                            android:textSize="@dimen/text_size_small_13"
-                            />
+                            <ImageView
+                                android:id="@+id/iv_test_oily"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:background="@mipmap/ic_test_oily"/>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/tv_test_oily"
+                                android:textColor="@color/color_sencond_title"
+                                android:textSize="@dimen/text_size_small_15"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_test_oily"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="30dp"
+                                android:layout_marginTop="10dp"
+                                android:text="未测试"
+                                android:textColor="@color/f9"
+                                android:textSize="@dimen/text_size_small_13"
+                                />
+
+                        </LinearLayout>
                     </LinearLayout>
+
 
                     <LinearLayout
-                        android:id="@+id/ll_test_oily"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_shape_white"
-                        android:gravity="center"
-                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
                         >
 
-                        <ImageView
-                            android:id="@+id/iv_test_oily"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ll_test_sensitive"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:background="@mipmap/ic_test_oily"/>
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_shape_white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                            <ImageView
+                                android:id="@+id/iv_test_sensitive"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:background="@mipmap/ic_test_sensitive"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/tv_test_sensitive"
+                                android:textColor="@color/color_sencond_title"
+                                android:textSize="@dimen/text_size_small_15"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_test_sensitive"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="30dp"
+                                android:layout_marginTop="10dp"
+                                android:text="未测试"
+                                android:textColor="@color/f9"
+                                android:textSize="@dimen/text_size_small_13"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_test_pigment"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/tv_test_oily"
-                            android:textColor="@color/color_sencond_title"
-                            android:textSize="@dimen/text_size_small_15"
-                            />
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_shape_white"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            >
 
-                        <TextView
-                            android:id="@+id/tv_test_oily"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="30dp"
-                            android:layout_marginTop="10dp"
-                            android:text="未测试"
-                            android:textColor="@color/f9"
-                            android:textSize="@dimen/text_size_small_13"
-                            />
+                            <ImageView
+                                android:id="@+id/iv_test_pigment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:background="@mipmap/ic_test_pigment"/>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/tv_test_pigment"
+                                android:textColor="@color/color_sencond_title"
+                                android:textSize="@dimen/text_size_small_15"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_test_pigment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="30dp"
+                                android:layout_marginTop="10dp"
+                                android:text="未测试"
+                                android:textColor="@color/f9"
+                                android:textSize="@dimen/text_size_small_13"
+                                />
+
+                        </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_test_result"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bg_shape_round_gray_white"
+                    android:gravity="center"
+                    android:text="完成度\n0/4"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <LinearLayout
-                        android:id="@+id/ll_test_sensitive"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_shape_white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        >
-
-                        <ImageView
-                            android:id="@+id/iv_test_sensitive"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:background="@mipmap/ic_test_sensitive"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/tv_test_sensitive"
-                            android:textColor="@color/color_sencond_title"
-                            android:textSize="@dimen/text_size_small_15"
-                            />
-
-                        <TextView
-                            android:id="@+id/tv_test_sensitive"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="30dp"
-                            android:layout_marginTop="10dp"
-                            android:text="未测试"
-                            android:textColor="@color/f9"
-                            android:textSize="@dimen/text_size_small_13"
-                            />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_test_pigment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_shape_white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        >
-
-                        <ImageView
-                            android:id="@+id/iv_test_pigment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:background="@mipmap/ic_test_pigment"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="@string/tv_test_pigment"
-                            android:textColor="@color/color_sencond_title"
-                            android:textSize="@dimen/text_size_small_15"
-                            />
-
-                        <TextView
-                            android:id="@+id/tv_test_pigment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="30dp"
-                            android:layout_marginTop="10dp"
-                            android:text="未测试"
-                            android:textColor="@color/f9"
-                            android:textSize="@dimen/text_size_small_13"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_test_result"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/bg_shape_round_gray_white"
-                android:gravity="center"
-                android:text="完成度\n0/4"/>
-
-        </RelativeLayout>
+            </RelativeLayout>
 
 
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

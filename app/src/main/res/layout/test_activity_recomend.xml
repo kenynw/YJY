@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <View style="@style/ItemLineHeight"/>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recy_test_recommend"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/white"/>-->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/f32d"
+        app:tabIndicatorHeight="4dp"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        >
+
+
+    </android.support.design.widget.TabLayout>
+
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_test_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:text="描述"
+        android:paddingLeft="25dp"
+        android:paddingRight="15dp"
+        android:paddingTop="38dp"
+        android:textColor="@color/f9"
+        android:textSize="@dimen/text_size_small_13"/>
+
+    <View
+        style="@style/ItemLineHeight"
+        android:layout_height="10dp"/>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"></com.jude.easyrecyclerview.EasyRecyclerView>
+
+    <TextView
+        android:id="@+id/tv_test_recommend_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@mipmap/ic_test_recommend_change"
+        android:drawablePadding="7dp"
+        android:paddingTop="15dp"
+        android:text="@string/text_test_recommend_change"
+        android:textColor="@color/f9"
+        android:textSize="@dimen/text_size_small_14"/>
+
+</LinearLayout>

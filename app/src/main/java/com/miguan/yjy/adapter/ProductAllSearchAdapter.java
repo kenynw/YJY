@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +19,9 @@ import java.util.List;
 
 public class ProductAllSearchAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Product> datas;
+    private List<Product> datas;
 
-    public ProductAllSearchAdapter(Context context, ArrayList<Product> datas) {
+    public ProductAllSearchAdapter(Context context, List<Product> datas) {
         this.context = context;
         this.datas = datas;
     }
@@ -46,7 +45,7 @@ public class ProductAllSearchAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = View.inflate(context, R.layout.item_product_all_search, null);
         TextView textView = (TextView) convertView.findViewById(R.id.item_label_tv);
-//        textView.setText("测试");
+        textView.setText(datas.get(position).getProduct_name());
         return convertView;
     }
     public void onlyAddAll(List<Product> datas) {

@@ -242,6 +242,14 @@ public interface Services {
             @Query("article_id") int articleId
     );
 
+    /**================ 产品相关======================== * */
+
+    /**
+     * 大家都在搜
+     */
+    @GET("?action=searchHot")
+    Observable<List<Product>> searchHot();
+
     ////////////////////其他//////////////////////
     /**
      * 检测更新
