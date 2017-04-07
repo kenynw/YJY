@@ -24,7 +24,7 @@ import com.miguan.yjy.adapter.viewholder.RecommedViewholder;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.widget.FlowTagLayout;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +63,6 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initListener();
-
         recyHistorySearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
@@ -111,15 +110,12 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         });
     }
 
-    public void setData() {
-        ArrayList<Product> datas = new ArrayList<>();
+    public void setData(List<Product> datas) {
+
         ProductAllSearchAdapter productAllSearchAdapter = new ProductAllSearchAdapter(SearchActivity.this, datas);
         flowtagAllSearch.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagAllSearch.setAdapter(productAllSearchAdapter);
-//        Product product = new Product();
-//        product.setName("测试");
-//        datas.add(product);
-//        productAllSearchAdapter.onlyAddAll(datas);
+        productAllSearchAdapter.onlyAddAll(datas);
 
         recyHistorySearch.setAdapter(new HistorySearchAdpter(SearchActivity.this,datas));
 

@@ -30,4 +30,17 @@ public class DateUtils {
         return String.format("%1$2d:%2$2d:%3$2d:%4$2d", days, hours, minutes, seconds);
     }
 
+    /**
+     * 日期转换成字符串
+     *
+     * @param date
+     * @return str
+     */
+    public static String DateToStr(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String str = format.format(date);
+        return str;
+    }
+
+
 }

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.services.ServicesResponse;
+
+import java.util.List;
 
 /**
  * @作者 cjh
@@ -23,11 +26,18 @@ public class SearchActivityPresenter extends BaseListActivityPresenter<SearchAct
     protected void onCreateView(SearchActivity view) {
         super.onCreateView(view);
         onRefresh();
+        ProductModel.getInstantce().getSearchList().subscribe(new ServicesResponse<List<Product>>() {
+            @Override
+            public void onNext(List<Product> products) {
+                getView().setData(products);
+            }
+        });
+
     }
 
     @Override
     public void onRefresh() {
-        getView().setData();
+
         ProductModel.getInstantce().getSearchList().unsafeSubscribe(getRefreshSubscriber());
     }
 }
