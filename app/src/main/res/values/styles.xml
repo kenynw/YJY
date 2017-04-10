@@ -67,5 +67,13 @@
         <item name="android:minWidth">20dip</item>
     </style>
 
+    <style name="text_editStyle" >
+        <item name="android:layout_height">47dp</item>
+        <item name="android:layout_width">47dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/f32d</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 
 </resources>

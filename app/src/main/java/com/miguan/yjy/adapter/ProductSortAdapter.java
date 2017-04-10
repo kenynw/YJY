@@ -22,18 +22,33 @@ import butterknife.ButterKnife;
 
 public class ProductSortAdapter extends RecyclerArrayAdapter<Product> {
 
-    public ProductSortAdapter(Context context, List<Product> objects) {
+    int type = 1;
+    List<String> effects;
+    public ProductSortAdapter(Context context, List<Product> objects,List<String>effects,int type) {
         super(context, objects);
+        this.type = type;
+        this.effects = effects;
     }
 
     @Override
     public void OnBindViewHolder(BaseViewHolder holder, int position) {
-        holder.setData(mObjects.get(position));
+        if (type == 1) {
+            holder.setData(mObjects.get(position));
+        } else {
+
+
+        }
+
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(parent);
+    }
+
+    @Override
+    public int getViewType(int position) {
+        return type;
     }
 
     class MyViewHolder extends BaseViewHolder<Product> {
@@ -48,7 +63,12 @@ public class ProductSortAdapter extends RecyclerArrayAdapter<Product> {
         @Override
         public void setData(Product data) {
             super.setData(data);
-            mTvProductSortName.setText(data.getProduct_name());
+            if (type == 1) {
+//                mTvProductSortName.setText();
+            } else {
+                mTvProductSortName.setText(data.getProduct_name());
+            }
+
         }
     }
 

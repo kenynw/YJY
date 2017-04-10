@@ -325,13 +325,12 @@ public interface Services {
      * pageSize(string) － （非必填）每页多少条
      */
     @GET("?action=searchQuery")
-    Observable<List<Product>> searchQuery(
+    Observable<Product> searchQuery(
             @Query("keywords") String keywords,
-            @Query("type") String type,
-            @Query("cate_id") String cate_id,
+            @Query("type") int type,
+            @Query("cate_id") int cate_id,
             @Query("effect") String effect,
-            @Query("page") String page,
-            @Query("pageSize") String pageSize
+            @Query("page") int page
 
     );
 

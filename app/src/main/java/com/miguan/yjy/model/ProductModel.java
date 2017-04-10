@@ -32,11 +32,19 @@ public class ProductModel extends AbsModel {
     public Observable<List<Product>> searchHot() {
         return ServicesClient.getServices().searchHot().compose(new DefaultTransform<>());
     }
+
     /**
      * 搜索联想
      */
     public Observable<List<Product>> searchAssociate(String keywords) {
         return ServicesClient.getServices().searchAssociate(keywords).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 搜索结果接口
+     */
+    public Observable<Product> searchQuery(String keywords, int type, int cate_id, String effect, int page) {
+        return ServicesClient.getServices().searchQuery(keywords, type, cate_id, effect, page).compose(new DefaultTransform<>());
     }
 
     public Observable<List<Product>> getSearchList() {
@@ -83,13 +91,13 @@ public class ProductModel extends AbsModel {
 
     public Observable<Brand> getBrandList() {
         List<Brand> hot = new ArrayList<>();
-        for (int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             Brand brand = new Brand();
             brand.setName("Biotherm 碧欧泉");
             brand.setLetter("B");
             hot.add(brand);
         }
-        String[] letters = new String[] {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+        String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
                 "T", "U", "V", "W", "X", "Y", "Z"};
         List<Brand> other = new ArrayList<>();
         for (String letter : letters) {
@@ -109,6 +117,7 @@ public class ProductModel extends AbsModel {
 
     /**
      * 添加收藏（长草）
+     *
      * @param productId
      * @return
      */
@@ -118,6 +127,7 @@ public class ProductModel extends AbsModel {
 
     /**
      * 添加到我的产品库
+     *
      * @return
      */
     public Observable<String> addRepository(int brandId, String brandName, String product, int isSeal, String sealTime, int qualityTime, String overdueTime) {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="15dp"
+              android:layout_marginRight="15dp"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,9 +14,9 @@
             android:id="@+id/img_proudct"
             android:layout_width="98dp"
             android:layout_height="98dp"
-
+            android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
-            android:background="@color/gray" />
+            android:background="@color/gray"/>
 
         <TextView
             android:id="@+id/tv_product_name"
@@ -28,17 +28,19 @@
             android:layout_toRightOf="@+id/img_proudct"
             android:text="sss"
             android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15" />
+            android:textSize="@dimen/text_size_small_15"/>
 
         <RatingBar
             android:id="@+id/ratbar_product"
-            style="?android:attr/ratingBarStyleSmall"
+            style="@style/MySmallRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tv_product_name"
             android:layout_below="@+id/tv_product_name"
+            android:layout_marginTop="10dp"
+            android:isIndicator="true"
             android:numStars="5"
-            android:stepSize="1" />
+            android:stepSize="1"/>
 
         <TextView
             android:id="@+id/tv_product_money"
@@ -46,9 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/ratbar_product"
             android:layout_below="@+id/ratbar_product"
+            android:layout_marginTop="15dp"
             android:text="sss"
             android:textColor="@color/f6"
-            android:textSize="@dimen/text_size_small_14" />
+            android:textSize="@dimen/text_size_small_14"/>
 
     </RelativeLayout>
 

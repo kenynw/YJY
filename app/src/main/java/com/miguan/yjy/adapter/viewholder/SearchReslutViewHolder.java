@@ -5,9 +5,10 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.ProductInfo;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import butterknife.BindView;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
  * @描述 搜索结果（产品列表）
  */
 
-public class SearchReslutViewHolder extends BaseViewHolder<Product> {
+public class SearchReslutViewHolder extends BaseViewHolder<ProductInfo> {
 
     @BindView(R.id.img_proudct)
     ImageView imgProudct;
@@ -36,10 +37,11 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
     }
 
     @Override
-    public void setData(Product data) {
+    public void setData(ProductInfo data) {
         tvProductName.setText(data.getProduct_name());
-        ratbarProduct.setRating(3);
-        tvProductMoney.setText("产品价格");
+        ratbarProduct.setRating(data.getStar());
+        tvProductMoney.setText(data.getPrice()+"/"+data.getForm());
+        Glide.with(getContext()).load(data.getProduct_img()).error(R.mipmap.def_image_loading).placeholder(R.mipmap.def_image_loading).into(imgProudct);
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
 }

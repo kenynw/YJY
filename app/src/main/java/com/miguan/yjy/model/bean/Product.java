@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @作者 cjh
@@ -27,7 +28,7 @@ public class Product implements Parcelable {
 //    pageTotal(int) － 总数
 //    pageSize(int) － 当前页数
 //
-    private ArrayList<ProductInfo> list;
+    private List<ProductInfo> list;
 
     private ArrayList<Sort> categories;
 
@@ -51,7 +52,7 @@ public class Product implements Parcelable {
 
     private String alias;
 
-    private String star;
+    private int star;
 
     private String standard_number;
 
@@ -73,40 +74,9 @@ public class Product implements Parcelable {
 
     private String endDay;
 
-    static class Sort implements Parcelable {
-        private int id;
-        private String cate_name;
 
-        protected Sort(Parcel in) {
-            id = in.readInt();
-            cate_name = in.readString();
-        }
 
-        public static final Creator<Sort> CREATOR = new Creator<Sort>() {
-            @Override
-            public Sort createFromParcel(Parcel in) {
-                return new Sort(in);
-            }
-
-            @Override
-            public Sort[] newArray(int size) {
-                return new Sort[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(id);
-            dest.writeString(cate_name);
-        }
-    }
-
-    public ArrayList<ProductInfo> getList() {
+    public List<ProductInfo> getList() {
         return list;
     }
 
@@ -202,11 +172,11 @@ public class Product implements Parcelable {
         this.alias = alias;
     }
 
-    public String getStar() {
+    public int getStar() {
         return star;
     }
 
-    public void setStar(String star) {
+    public void setStar(int star) {
         this.star = star;
     }
 
@@ -309,7 +279,7 @@ public class Product implements Parcelable {
         dest.writeString(this.price);
         dest.writeString(this.form);
         dest.writeString(this.alias);
-        dest.writeString(this.star);
+        dest.writeInt(this.star);
         dest.writeString(this.standard_number);
         dest.writeString(this.product_country);
         dest.writeString(this.product_date);
@@ -338,7 +308,7 @@ public class Product implements Parcelable {
         this.price = in.readString();
         this.form = in.readString();
         this.alias = in.readString();
-        this.star = in.readString();
+        this.star = in.readInt();
         this.standard_number = in.readString();
         this.product_country = in.readString();
         this.product_date = in.readString();

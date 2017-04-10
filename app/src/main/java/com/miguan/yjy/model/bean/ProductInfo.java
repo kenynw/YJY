@@ -15,6 +15,8 @@ public class ProductInfo implements Parcelable{
     private String product_img;
     private String price;
     private String form;
+    private int star;
+
 
     public int getId() {
         return id;
@@ -56,15 +58,13 @@ public class ProductInfo implements Parcelable{
         this.form = form;
     }
 
-    public String getStar() {
+    public int getStar() {
         return star;
     }
 
-    public void setStar(String star) {
+    public void setStar(int star) {
         this.star = star;
     }
-
-    private String star;
 
     protected ProductInfo(Parcel in) {
         id = in.readInt();
@@ -72,7 +72,7 @@ public class ProductInfo implements Parcelable{
         product_img = in.readString();
         price = in.readString();
         form = in.readString();
-        star = in.readString();
+        star = in.readInt();
     }
 
     public static final Creator<ProductInfo> CREATOR = new Creator<ProductInfo>() {
@@ -99,6 +99,6 @@ public class ProductInfo implements Parcelable{
         dest.writeString(product_img);
         dest.writeString(price);
         dest.writeString(form);
-        dest.writeString(star);
+        dest.writeInt(star);
     }
 }
