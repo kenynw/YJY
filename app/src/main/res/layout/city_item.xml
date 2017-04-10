@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/sectionTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="3dip"
+        android:background="#eeeeeeee"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:text="热门城市"
+        android:textColor="@color/ff_8b"
+        android:textSize="@dimen/text_size_small_13"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/infoRowContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:paddingLeft="14dp">
+
+        <TextView
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="广州"
+            android:textColor="#393939"
+            android:textSize="@dimen/text_size_small_16"
+            android:textStyle="bold" />
+
+        <View
+            style="@style/ItemLineHeight"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"></View>
+    </RelativeLayout>
+
+</LinearLayout>

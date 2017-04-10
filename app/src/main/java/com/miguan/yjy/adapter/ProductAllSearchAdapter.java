@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.product.SearchResultActivity;
 
 import java.util.List;
 
@@ -45,7 +47,15 @@ public class ProductAllSearchAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = View.inflate(context, R.layout.item_product_all_search, null);
         TextView textView = (TextView) convertView.findViewById(R.id.item_label_tv);
-        textView.setText(datas.get(position).getProduct_name());
+        textView.setText(datas.get(position).getName());
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SearchResultActivity.class);
+                intent.putExtra("name", datas.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
     public void onlyAddAll(List<Product> datas) {

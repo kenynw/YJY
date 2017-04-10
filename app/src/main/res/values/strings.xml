@@ -156,6 +156,15 @@
     <string name="text_test_recommend_product">推荐产品</string>
     <string name="text_test_recommend_change">换一批</string>
 
+    <!--用户相关-->
+    <string name="text_user_bind_mobile">绑定手机号</string>
+    <string name="text_user_get_code">验证码</string>
+    <string name="text_user_next">下一步</string>
+    <string name="text_user_previous">上一步</string>
+    <string name="btn_user_again">重发</string>
+    <string name="btn_user_sure">确定</string>
+    <string name="btn_user_bined_content">如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。</string>
+
     <string name="tv_cancel">取消</string>
     <string name="tv_share_content">分享内容到</string>
     <string name="tv_share_wxfriend">微信好友</string>

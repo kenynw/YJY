@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,14 +43,17 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> {
     @BindView(R.id.tv_profile_logout)
     TextView mTvLogout;
 
+    private String cityName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_activity_profile);
         setToolbarTitle(R.string.text_profile);
         ButterKnife.bind(this);
-
         mTvLogout.setOnClickListener(v -> getPresenter().logout());
+        mTvMobile.setOnClickListener(v -> getPresenter().bindMobile());
+        mTvArea.setOnClickListener(v -> CityListActivity.star(ProfileActivity.this));
     }
 
     @Override
@@ -65,4 +69,14 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> {
         mTvArea.setText(user.getCity());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CityListActivity.EXTRA_CODE_CITY_NAME) {
+                cityName= data.getStringExtra("city");
+                mTvArea.setText(cityName);
+            }
+        }
+    }
 }

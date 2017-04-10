@@ -26,7 +26,7 @@ public class SearchActivityPresenter extends BaseListActivityPresenter<SearchAct
     protected void onCreateView(SearchActivity view) {
         super.onCreateView(view);
         onRefresh();
-        ProductModel.getInstantce().getSearchList().subscribe(new ServicesResponse<List<Product>>() {
+        ProductModel.getInstantce().searchHot().subscribe(new ServicesResponse<List<Product>>() {
             @Override
             public void onNext(List<Product> products) {
                 getView().setData(products);
@@ -37,7 +37,6 @@ public class SearchActivityPresenter extends BaseListActivityPresenter<SearchAct
 
     @Override
     public void onRefresh() {
-
-        ProductModel.getInstantce().getSearchList().unsafeSubscribe(getRefreshSubscriber());
+        ProductModel.getInstantce().searchAssociate(getView().edtSearch.getText().toString()).unsafeSubscribe(getRefreshSubscriber());
     }
 }

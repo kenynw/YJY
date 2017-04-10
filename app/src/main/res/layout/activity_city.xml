@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include_city_toolbar"
+        layout="@layout/include_toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/searchBarContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/include_city_toolbar"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/input_search_query"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_gray_f5"
+            android:drawableLeft="@mipmap/sousuo"
+            android:focusableInTouchMode="true"
+            android:hint="请输入城市名称或拼音"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:paddingBottom="2dp"
+            android:paddingLeft="20dip"
+            android:paddingRight="25dip"
+            android:paddingTop="2dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#8d8d8d"
+            android:textSize="14sp"/>
+
+        <ImageButton
+            android:id="@+id/button_search"
+            style="@android:style/Widget.Button.Inset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dip"
+            android:background="@mipmap/sousuo"
+            android:contentDescription="Search..."
+            android:scaleType="fitCenter"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/searchBarContainer">
+
+        <com.miguan.yjy.module.user.widget.ContactListViewImpl
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/f5"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="true"
+            android:headerDividersEnabled="true"
+            android:listSelector="#00000000"
+            android:smoothScrollbar="true"/>
+    </LinearLayout>
+
+</RelativeLayout>

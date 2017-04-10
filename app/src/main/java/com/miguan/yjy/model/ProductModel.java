@@ -31,6 +31,12 @@ public class ProductModel extends AbsModel {
     public Observable<List<Product>> searchHot() {
         return ServicesClient.getServices().searchHot().compose(new DefaultTransform<>());
     }
+    /**
+     * 搜索联想
+     */
+    public Observable<List<Product>> searchAssociate(String keywords) {
+        return ServicesClient.getServices().searchAssociate(keywords).compose(new DefaultTransform<>());
+    }
 
     public Observable<List<Product>> getSearchList() {
         List<Product> list = new ArrayList<>();

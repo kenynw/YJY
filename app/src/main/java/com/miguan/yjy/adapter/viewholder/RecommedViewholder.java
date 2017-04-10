@@ -29,12 +29,13 @@ public class RecommedViewholder extends BaseViewHolder<Product> {
     @Override
     public void setData(Product data) {
         super.setData(data);
-        tvProductThink.setText(data.getProduct_name());
-        tvProductThink.setOnClickListener(v -> gotoSearchResult());
+        tvProductThink.setText(data.getName());
+        tvProductThink.setOnClickListener(v -> gotoSearchResult(data.getName()));
     }
 
-    private void gotoSearchResult() {
+    private void gotoSearchResult(String name) {
         Intent intent = new Intent(getContext(), SearchResultActivity.class);
+        intent.putExtra("name", name);
         getContext().startActivity(intent);
     }
 

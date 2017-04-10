@@ -105,6 +105,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
                 } else {
                     llSearchFirst.setVisibility(View.GONE);
                     llSearchSencond.setVisibility(View.VISIBLE);
+                    getPresenter().onRefresh();
                 }
             }
         });
@@ -133,7 +134,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setRefreshAble(false);
+        return super.getListConfig().setRefreshAble(false).setLoadMoreAble(false);
     }
 
 }

@@ -3,6 +3,8 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * @作者 cjh
  * @日期 2017/3/21 9:38
@@ -11,8 +13,28 @@ import android.os.Parcelable;
 
 public class Product implements Parcelable {
 
-    private int id;
+    //  list(array) － 产品列表详情
+//    id(int) － 文章ID
+//    product_name(string) － 标题
+//    product_img(string) － 配图
+//    price(int) － 价格
+//    form(string) － 规格
+//    star(int) － 星级
+//  categories(array) － 产品分类列表
+//    id(int) － 分类ID
+//    cate_name(string) － 分类名称
+//    effects(array) － 功效列表（一维数组）
+//    pageTotal(int) － 总数
+//    pageSize(int) － 当前页数
+//
+    private ArrayList<ProductInfo> list;
+    private ArrayList<Sort> categories;
+    private ArrayList<String> effects;
+    private int pageTotal;
+    private int pageSize;
 
+    private int id;
+    private String name;
     private int cate_id;
 
     private String product_name;
@@ -40,6 +62,15 @@ public class Product implements Parcelable {
     private String brand;
 
     private String en_product_company;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -161,6 +192,43 @@ public class Product implements Parcelable {
         this.en_product_company = en_product_company;
     }
 
+    public Product() {
+    }
+
+
+    static class Sort implements Parcelable {
+        private int id;
+        private String cate_name;
+
+        protected Sort(Parcel in) {
+            id = in.readInt();
+            cate_name = in.readString();
+        }
+
+        public static final Creator<Sort> CREATOR = new Creator<Sort>() {
+            @Override
+            public Sort createFromParcel(Parcel in) {
+                return new Sort(in);
+            }
+
+            @Override
+            public Sort[] newArray(int size) {
+                return new Sort[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(id);
+            dest.writeString(cate_name);
+        }
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -168,7 +236,13 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(this.list);
+        dest.writeTypedList(this.categories);
+        dest.writeStringList(this.effects);
+        dest.writeInt(this.pageTotal);
+        dest.writeInt(this.pageSize);
         dest.writeInt(this.id);
+        dest.writeString(this.name);
         dest.writeInt(this.cate_id);
         dest.writeString(this.product_name);
         dest.writeString(this.price);
@@ -185,11 +259,14 @@ public class Product implements Parcelable {
         dest.writeString(this.en_product_company);
     }
 
-    public Product() {
-    }
-
     protected Product(Parcel in) {
+        this.list = in.createTypedArrayList(ProductInfo.CREATOR);
+        this.categories = in.createTypedArrayList(Sort.CREATOR);
+        this.effects = in.createStringArrayList();
+        this.pageTotal = in.readInt();
+        this.pageSize = in.readInt();
         this.id = in.readInt();
+        this.name = in.readString();
         this.cate_id = in.readInt();
         this.product_name = in.readString();
         this.price = in.readString();

@@ -28,15 +28,18 @@ public interface Services {
 
     /**
      * 首页
+     *
      * @return
      */
     @GET("?action=index")
     Observable<Home> home();
 
     //////////////////用户相关/////////////////////
+
     /**
      * 用户登录
-     * @param mobile 用户名
+     *
+     * @param mobile   用户名
      * @param password 密码
      * @return 是否成功
      */
@@ -51,7 +54,7 @@ public interface Services {
      * 用户注册
      *
      * @param password 密码
-     * @param captcha 验证码
+     * @param captcha  验证码
      * @return 结果
      */
     @GET("?action=register")
@@ -63,8 +66,9 @@ public interface Services {
 
     /**
      * 发送注册验证码
+     *
      * @param mobile 手机号
-     * @param type 0注册1找回2登录
+     * @param type   0注册1找回2登录
      * @return 是否成功
      */
     @GET("?action=message")
@@ -76,8 +80,8 @@ public interface Services {
     /**
      * 忘记密码
      *
-     * @param newPwd 新密码
-     * @param mobile 手机
+     * @param newPwd  新密码
+     * @param mobile  手机
      * @param captcha 验证码
      * @return
      */
@@ -90,8 +94,9 @@ public interface Services {
 
     /**
      * 用户收藏、长草列表
+     *
      * @param userId 用户ID
-     * @param type 类型(1产品 2文章)
+     * @param type   类型(1产品 2文章)
      * @return
      */
     @GET("?action=collect")
@@ -104,6 +109,7 @@ public interface Services {
     /**
      * 我在用的列表
      * //TODO
+     *
      * @return
      */
     @GET("?action=userProduct")
@@ -114,6 +120,7 @@ public interface Services {
     /**
      * 我长草的列表
      * //TODO
+     *
      * @return
      */
     @GET("?action=userProduct")
@@ -143,6 +150,7 @@ public interface Services {
      * province
      * city
      * sign
+     *
      * @return
      */
     @FormUrlEncoded
@@ -164,12 +172,13 @@ public interface Services {
 
     /**
      * 吐槽一下
-     * @param token 登录令牌
-     * @param type  类型（0:产品建议、1:发现BUG、2:举报作弊、3:其他）
+     *
+     * @param token   登录令牌
+     * @param type    类型（0:产品建议、1:发现BUG、2:举报作弊、3:其他）
      * @param contact 联系方式
      * @param content 吐槽内容
-     * @param img 上传照片
-     * @param source 信息来源（来源 0:安卓 1：IOS）
+     * @param img     上传照片
+     * @param source  信息来源（来源 0:安卓 1：IOS）
      * @return
      */
     @FormUrlEncoded
@@ -184,9 +193,11 @@ public interface Services {
     );
 
     ////////////////////产品//////////////////////
+
     /**
      * 批号查询
      * //TODO
+     *
      * @return
      */
     @GET("?action=queryCode")
@@ -208,6 +219,7 @@ public interface Services {
 
     /**
      * 产品长草
+     *
      * @param type － 类型(1产品 2文章)
      * @return
      */
@@ -218,7 +230,44 @@ public interface Services {
             @Query("type") int type
     );
 
+    /**
+     * 大家都在搜
+     */
+    @GET("?action=searchHot")
+    Observable<List<Product>> searchHot();
+
+    /**
+     * 搜索联想接口
+     */
+    @GET("?action=searchAssociate")
+    Observable<List<Product>> searchAssociate(
+            @Query("keywords") String keywords
+    );
+
+    /**
+     * 搜索结果接口
+     * action(string) － 固定值searchQuery
+     * keywords(string) － （非必填）关键词
+     * type(int) － （非必填）类型 ：不传或者传1为默认搜索产品
+     * cate_id(int) － （非必填）分类id
+     * effect(string) － （非必填）功效关键字
+     * page(int) － （非必填）当前页数
+     * pageSize(string) － （非必填）每页多少条
+     */
+    @GET("?action=searchQuery")
+    Observable<List<Product>> searchQuery(
+            @Query("keywords") String keywords,
+            @Query("type") String type,
+            @Query("cate_id") String cate_id,
+            @Query("effect") String effect,
+            @Query("page") String page,
+            @Query("pageSize") String pageSize
+
+    );
+
+
     ////////////////////文章//////////////////////
+
     /**
      * 文章列表
      *
@@ -234,6 +283,7 @@ public interface Services {
     /**
      * 收藏文章
      * //TODO
+     *
      * @param articleId 文章ID
      * @return
      */
@@ -242,15 +292,8 @@ public interface Services {
             @Query("article_id") int articleId
     );
 
-    /**================ 产品相关======================== * */
-
-    /**
-     * 大家都在搜
-     */
-    @GET("?action=searchHot")
-    Observable<List<Product>> searchHot();
-
     ////////////////////其他//////////////////////
+
     /**
      * 检测更新
      *

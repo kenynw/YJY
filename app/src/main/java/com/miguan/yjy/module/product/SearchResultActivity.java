@@ -65,6 +65,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     @BindView(R.id.ll_product_sort_all)
     LinearLayout mLlProductSortAll;
 
+    private String name;//产品名称
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
@@ -75,6 +76,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        name=getIntent().getStringExtra("name");
         ButterKnife.bind(this);
     }
 
@@ -90,6 +92,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mLlProductSort.setOnClickListener(v -> sortData(list));
         tvFunction.setOnClickListener(v -> fuctionData());
         ivBack.setOnClickListener(v -> finish());
+        edtSearch.setText(name);
 
     }
 
