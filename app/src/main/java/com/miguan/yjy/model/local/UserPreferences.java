@@ -11,32 +11,22 @@ public class UserPreferences {
 
     private static final String KEY_USER_ID = "user_id";
 
-    private static final String KEY_TOKEN ="token";
-
-    private static final String KEY_USER_NIM_TOKEN = "auth_key";
+    private static final String KEY_USERNAME ="username";
 
     public static int getUserID() {
         return LUtils.getPreferences().getInt(KEY_USER_ID, 0);
     }
 
-    public static String getToken() {
-        return getString(KEY_TOKEN);
-    }
-
-    public static String getNIMToken() {
-        return getString(KEY_USER_NIM_TOKEN);
+    public static String getUsername() {
+        return getString(KEY_USERNAME);
     }
 
     public static void setUserID(int value) {
         LUtils.getPreferences().edit().putInt(KEY_USER_ID, value).apply();
     }
 
-    public static void setToken(String value) {
-        setString(KEY_TOKEN, value);
-    }
-
-    public static void setNIMToken(String value) {
-        setString(KEY_USER_NIM_TOKEN, value);
+    public static void setUsername(String value) {
+        setString(KEY_USERNAME, value);
     }
 
     private static String getString(String key) {

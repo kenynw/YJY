@@ -37,11 +37,16 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
         getView().setData(mProduct);
     }
 
-    public void query(String brand, String name) {
-        ProductModel.getInstantce().queryCode(brand, name).subscribe(new ServicesResponse<Product>() {
+    public void query(int brandId, String number) {
+        getView().getExpansionDelegate().showProgressBar();
+        ProductModel.getInstance().queryCode(brandId, number)
+                .doAfterTerminate(() -> getView().getExpansionDelegate().hideProgressBar())
+                .subscribe(new ServicesResponse<Product>() {
             @Override
             public void onNext(Product product) {
-
+                mProduct.setStartDay(product.getStartDay());
+                mProduct.setEndDay(product.getEndDay());
+                getView().showQueryDialog(mProduct);
             }
         });
     }

@@ -17,6 +17,7 @@ import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SendValidateButton;
 
@@ -53,7 +54,9 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     public void logout() {
         UserPreferences.setUserID(0);
         if (UserPreferences.getUserID() <= 0) {
-            getView().finish();
+            Intent intent = new Intent(getView(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            getView().startActivity(intent);
         }
     }
 

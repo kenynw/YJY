@@ -30,11 +30,11 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (mToolbar != null) onSetToolbar();
+        if (mToolbar != null) onSetToolbar(mToolbar);
     }
 
-    private void onSetToolbar() {
-        setSupportActionBar(mToolbar);
+    public void onSetToolbar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

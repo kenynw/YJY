@@ -78,17 +78,20 @@ public class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
                     break;
             }
         }
-        mTvCollapse.setOnClickListener(v -> {
-            switch (mTextStateList.get(getAdapterPosition())) {
-                case STATE_COLLAPSED :
-                    mTextStateList.put(getAdapterPosition(), STATE_EXPANDED);
-                    mTvCollapse.setText("收起全文");
-                    mTvContent.setMaxLines(Integer.MAX_VALUE);
-                    break;
-                case STATE_EXPANDED :
-                    mTextStateList.put(getAdapterPosition(), STATE_COLLAPSED);
-                    mTvCollapse.setText("查看全文");
-                    mTvContent.setMaxLines(MAX_LINE_COUNT);
+        mTvCollapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (mTextStateList.get(getAdapterPosition())) {
+                    case STATE_COLLAPSED :
+                        mTextStateList.put(getAdapterPosition(), STATE_EXPANDED);
+                        mTvCollapse.setText("收起全文");
+                        mTvContent.setMaxLines(Integer.MAX_VALUE);
+                        break;
+                    case STATE_EXPANDED :
+                        mTextStateList.put(getAdapterPosition(), STATE_COLLAPSED);
+                        mTvCollapse.setText("查看全文");
+                        mTvContent.setMaxLines(MAX_LINE_COUNT);
+                }
             }
         });
     }

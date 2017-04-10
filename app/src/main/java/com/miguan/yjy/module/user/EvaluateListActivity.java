@@ -22,12 +22,18 @@ public class EvaluateListActivity extends BaseListActivity<EvaluateListPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.btn_me_evaluate);
+        getListView().showProgress();
     }
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
         return new EvaluateMeViewHolder(parent);
     }
+
+//    @Override
+//    public int getViewType(int position) {
+//        return getPresenter().getAdapter().getItem(position).getDetail()
+//    }
 
     @Override
     public ListConfig getListConfig() {

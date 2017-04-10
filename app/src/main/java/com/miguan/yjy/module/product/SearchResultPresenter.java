@@ -22,7 +22,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     protected void onCreateView(SearchResultActivity view) {
         super.onCreateView(view);
         onRefresh();
-        ProductModel.getInstantce().getSearchList().subscribe(new ServicesResponse<List<Product>>(){
+        ProductModel.getInstance().getSearchList().subscribe(new ServicesResponse<List<Product>>(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onNext(List<Product> list) {
@@ -33,7 +33,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstantce().getSearchList().unsafeSubscribe(getRefreshSubscriber());
+        ProductModel.getInstance().getSearchList().unsafeSubscribe(getRefreshSubscriber());
     }
 
 }

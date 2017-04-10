@@ -19,12 +19,8 @@ import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.functions.Func1;
 
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
@@ -41,14 +37,11 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     @Override
     public void onRefresh() {
         ArticleModel.getInstance().getHomeList()
-                .flatMap(new Func1<Home, Observable<List<Article>>>() {
-                    @Override
-                    public Observable<List<Article>> call(Home home) {
-                        getView().setSearchHint(home.getNum());
-                        getAdapter().removeAllHeader();
-                        getAdapter().addHeader(new HomeHeader(home));
-                        return ArticleModel.getInstance().getArticleList(1);
-                    }
+                .map(home -> {
+                    getView().setSearchHint(home.getNum());
+                    getAdapter().removeAllHeader();
+                    getAdapter().addHeader(new HomeHeader(home));
+                    return home.getArticle();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
     }

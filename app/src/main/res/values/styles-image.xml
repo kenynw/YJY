@@ -10,5 +10,10 @@
     </style>
 
 
+    <style name="AvatarMedium" parent="BaseImage">
+        <item name="android:layout_width">@dimen/widget_medium</item>
+        <item name="android:layout_height">@dimen/widget_medium</item>
+        <item name="com.miguan.yjy:roundAsCircle">true</item>
+    </style>
 
 </resources>

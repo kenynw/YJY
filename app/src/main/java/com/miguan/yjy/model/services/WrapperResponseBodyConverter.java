@@ -41,6 +41,7 @@ public class WrapperResponseBodyConverter<T> implements Converter<ResponseBody, 
             String result = "";
             if (data.has("msg")) {
                 if (!data.isNull("msg")) result = data.opt("msg").toString();
+                else if (!data.isNull("data")) result = data.opt("data").toString();
                 else return null;
             } else {
                 return new Gson().fromJson(data.toString(), mType);

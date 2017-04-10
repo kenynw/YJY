@@ -14,7 +14,7 @@
     <string name="text_me">我的</string>
     <string name="text_me_star">我收藏的</string>
     <string name="text_skin_test">肤质测试</string>
-    <string name="text_query_production_date">生产日期查询</string>
+    <string name="text_query_production_date">批号查询</string>
     <string name="text_production_date">生产日期查询></string>
     <string name="text_query_instructions">查询说明</string>
     <string name="text_query_title_1">什么是批号？</string>
@@ -101,7 +101,7 @@
     <string name="tv_product_detail_match">肤质匹配程度</string>
     <string name="tv_product_detail_info">备案、安全及功效信息</string>
     <string name="tv_product_detail_compare_price">去比价</string>
-    <string name="tv_product_detail_user_evaluate">用户评价</string>
+    <string name="tv_product_detail_user_evaluate">用户评价(%d)</string>
     <string name="tv_product_detail_sort">肤质排序</string>
     <string name="tv_product_detail_read">颜究院官方解读</string>
     <string name="tv_product_detail_record_inf0">备案信息:  </string>

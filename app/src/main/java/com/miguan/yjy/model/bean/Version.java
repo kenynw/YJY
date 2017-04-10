@@ -9,6 +9,59 @@ import android.os.Parcelable;
 
 public class Version implements Parcelable {
 
+    private int id;
+
+    private int type;
+
+    private String content[];
+
+    private String number;
+
+    private String downloadUrl;
+
+    public Version() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String[] getContent() {
+        return content;
+    }
+
+    public void setContent(String[] content) {
+        this.content = content;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -16,12 +69,19 @@ public class Version implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-    }
-
-    public Version() {
+        dest.writeInt(this.id);
+        dest.writeInt(this.type);
+        dest.writeStringArray(this.content);
+        dest.writeString(this.number);
+        dest.writeString(this.downloadUrl);
     }
 
     protected Version(Parcel in) {
+        this.id = in.readInt();
+        this.type = in.readInt();
+        this.content = in.createStringArray();
+        this.number = in.readString();
+        this.downloadUrl = in.readString();
     }
 
     public static final Creator<Version> CREATOR = new Creator<Version>() {
@@ -35,5 +95,4 @@ public class Version implements Parcelable {
             return new Version[size];
         }
     };
-
 }

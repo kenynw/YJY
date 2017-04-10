@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/shape_product_all_search"
+        android:background="@drawable/shape_round_divider"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:layout_marginLeft="5dp"

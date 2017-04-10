@@ -1,10 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.miguan.yjy.widget.CustomNestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-    <include layout="@layout/include_toolbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-</LinearLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@id/toolbar"
+            style="@style/TitleToolbar"
+            android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true"
+            app:navigationIcon="@mipmap/ic_back_white"
+            >
+
+            <TextView
+                android:id="@id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:textAppearance="@style/TextSubhead"
+                android:textColor="@color/white"
+                tools:text="这是标题"
+                />
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:paddingBottom="36dp"
+            android:paddingTop="@dimen/spacing_normal"
+            android:text="您的颜值部分为：999"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large_material"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/bg_face_score"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingTop="35dp"
+            android:text="获取记录"
+            android:textColor="@color/textSecondary"
+            />
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+</com.miguan.yjy.widget.CustomNestedScrollView>

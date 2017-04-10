@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/main_activity_article_detail">
+    tools:showIn="@layout/product_activity_detail">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +17,17 @@
         >
 
         <TextView
-            android:id="@+id/tv_product_user_evalute_num"
-            android:layout_width="0dp"
+            android:id="@+id/tv_product_user_evaluate_num"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/tv_product_detail_user_evaluate"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15"/>
+            android:textAppearance="@style/TextBody"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +42,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -46,63 +50,71 @@
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:id="@+id/rgrp_evaluate_list_rank"
         >
 
-        <TextView
-            android:id="@+id/tv_product_high_evaluate"
+        <RadioButton
+            android:id="@+id/rbtn_product_high_evaluate"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:background="@drawable/shape_product_all_search"
+            android:background="@drawable/btn_round_evaluate_selector"
+            android:button="@null"
+            android:checked="true"
             android:gravity="center"
             android:paddingBottom="4dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="好评"
-            android:textAppearance="@style/TextBody"
+            android:textSize="@dimen/text_size_body_material"
+            android:textColor="@color/text_primary_to_primary"
             />
 
-        <TextView
-            android:id="@+id/tv_product_medium_evaluate"
+        <RadioButton
+            android:id="@+id/rbtn_product_medium_evaluate"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
             android:layout_marginLeft="@dimen/spacing_small"
-            android:background="@drawable/shape_product_all_search"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:background="@drawable/btn_round_evaluate_selector"
+            android:button="@null"
             android:gravity="center"
             android:paddingBottom="4dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="中评"
-            android:textAppearance="@style/TextBody"
+            android:textSize="@dimen/text_size_body_material"
+            android:textColor="@color/text_primary_to_primary"
             />
 
-        <TextView
-            android:id="@+id/tv_product_bad_evaluate"
+        <RadioButton
+            android:id="@+id/rbtn_product_bad_evaluate"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shape_product_all_search"
+            android:background="@drawable/btn_round_evaluate_selector"
+            android:button="@null"
             android:gravity="center"
             android:paddingBottom="4dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="差评"
-            android:textAppearance="@style/TextBody"
+            android:textSize="@dimen/text_size_body_material"
+            android:textColor="@color/text_primary_to_primary"
             />
 
-    </LinearLayout>
+    </RadioGroup>
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_empty="@layout/empty_evaluate_list"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        app:layout_empty="@layout/empty_evaluate_list"
         />
 
 </merge>

@@ -18,12 +18,11 @@
         android:orientation="vertical"
         >
 
-        <ImageView
-            android:id="@+id/iv_star_thumb"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_star_thumb"
             android:layout_width="match_parent"
             android:layout_height="128dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/def_image_loading"
+            style="@style/BaseImage"
             />
 
         <TextView

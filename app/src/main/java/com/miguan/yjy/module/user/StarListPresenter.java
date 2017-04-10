@@ -18,7 +18,12 @@ public class StarListPresenter extends BaseListActivityPresenter<StarListActivit
 
     @Override
     public void onRefresh() {
-        ArticleModel.getInstance().getStarList().unsafeSubscribe(getRefreshSubscriber());
+        ArticleModel.getInstance().getStarList(1).unsafeSubscribe(getRefreshSubscriber());
+    }
+
+    @Override
+    public void onLoadMore() {
+        ArticleModel.getInstance().getStarList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
 }

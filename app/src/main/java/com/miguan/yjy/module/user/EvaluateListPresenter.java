@@ -18,6 +18,11 @@ public class EvaluateListPresenter extends BaseListActivityPresenter<EvaluateLis
 
     @Override
     public void onRefresh() {
-        UserModel.getInstance().getEvaluateList().unsafeSubscribe(getRefreshSubscriber());
+        UserModel.getInstance().getEvaluateList(1).unsafeSubscribe(getRefreshSubscriber());
+    }
+
+    @Override
+    public void onLoadMore() {
+        UserModel.getInstance().getEvaluateList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 }

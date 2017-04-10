@@ -1,6 +1,5 @@
 package com.dsk.chain.expansion.overlay;
 
-import android.app.Activity;
 import android.widget.FrameLayout;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
@@ -11,7 +10,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
  * 可通过重写Activity的createViewExpansionDelegate提供扩展类
  */
 public abstract class ViewExpansionDelegate {
-    private Activity mActivity;
+    private ChainBaseActivity mActivity;
 
     private FrameLayout mContainer;
 
@@ -20,7 +19,7 @@ public abstract class ViewExpansionDelegate {
         mContainer = activity.getContent();
     }
 
-    public Activity getActivity() {
+    public ChainBaseActivity getActivity() {
         return mActivity;
     }
 
@@ -31,6 +30,10 @@ public abstract class ViewExpansionDelegate {
     public void showProgressBar() {}
 
     public void showProgressBar(String msg) {}
+
+    public void showLoadingView() {}
+
+    public void hideLoadingView() {}
 
     public void hideProgressBar() {}
 

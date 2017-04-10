@@ -34,11 +34,17 @@ public class BrandListPresenter extends BaseListActivityPresenter<BrandListActiv
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstantce().getBrandList()
-                .map(brand -> {
-                    getAdapter().addHeader(new BrandHotHeader(brand.getHot()));
-                    return brand.getOther();
+        ProductModel.getInstance().getBrandList()
+                .map(brandList -> {
+                    getAdapter().addHeader(new BrandHotHeader(brandList.getHotCosmetics()));
+
+                    return brandList.getOtherCosmetics();
                 })
+//                .doOnNext(list -> {
+//                    StickyHeaderDecoration decoration = new StickyHeaderDecoration(new StickHeaderAdapter(list));
+//                    decoration.setIncludeHeader(false);
+//                    getView().getListView().addItemDecoration(decoration);
+//                })
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 
@@ -71,16 +77,12 @@ public class BrandListPresenter extends BaseListActivityPresenter<BrandListActiv
 
         @Override
         public void onBindView(View headerView) {
-            DataAdapter hotAdapter = new DataAdapter(getView()) {
+            mRecyList.setAdapter(new RecyclerArrayAdapter<Brand>(getView(), mHotList) {
                 @Override
                 public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
                     return new BrandViewHolder(parent);
                 }
-            };
-            hotAdapter.addAll(mHotList);
-
-            mRecyList.setAdapter(hotAdapter);
-
+            });
         }
 
     }

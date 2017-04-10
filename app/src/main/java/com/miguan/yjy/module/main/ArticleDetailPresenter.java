@@ -9,6 +9,7 @@ import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.utils.LUtils;
 
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
@@ -40,19 +41,21 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
 
     @Override
     public void onRefresh() {
-        ArticleModel.getInstance().getEvaluateList(0).unsafeSubscribe(getRefreshSubscriber());
+        getView().setData(mArticle);
+        ArticleModel.getInstance().getEvaluateList(mArticle.getId(), 1, "", "desc").unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        ArticleModel.getInstance().getEvaluateList(2).unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getEvaluateList(mArticle.getId(), getCurPage(), "", "desc").unsafeSubscribe(getMoreSubscriber());
     }
 
     public void star() {
-        ArticleModel.getInstance().star(0).unsafeSubscribe(new ServicesResponse<Article>() {
+        ArticleModel.getInstance().star(mArticle.getId()).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
-            public void onNext(Article article) {
-                super.onNext(article);
+            public void onNext(String result) {
+                getView().setStar(true);
+                LUtils.toast("收藏成功");
             }
         });
     }

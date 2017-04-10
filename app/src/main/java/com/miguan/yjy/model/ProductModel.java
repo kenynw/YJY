@@ -20,7 +20,8 @@ import rx.Observable;
  */
 
 public class ProductModel extends AbsModel {
-    public static ProductModel getInstantce() {
+
+    public static ProductModel getInstance() {
         return getInstance(ProductModel.class);
     }
 
@@ -54,10 +55,10 @@ public class ProductModel extends AbsModel {
 //        product.setBrand("理肤泉");
 //        return Observable.just(product).compose(new DefaultTransform<>());
         return ServicesClient.getServices().productDetail(productId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
-   }
+    }
 
-    public Observable<Product> queryCode(String brand, String name) {
-        return ServicesClient.getServices().queryCode(brand, name).compose(new DefaultTransform<>());
+    public Observable<Product> queryCode(int brandId, String number) {
+        return ServicesClient.getServices().queryCode(brandId, number).compose(new DefaultTransform<>());
     }
 
     public Observable<List<Component>> getReadList() {
@@ -94,19 +95,34 @@ public class ProductModel extends AbsModel {
         for (String letter : letters) {
             for (int i = 0; i < 5; i++) {
                 Brand brand = new Brand();
-                brand.setName("安娜苏");
+                brand.setName("安娜苏" + letter);
                 brand.setLetter(letter);
                 other.add(brand);
             }
         }
         Brand brand = new Brand();
-        brand.setHot(hot);
-        brand.setOther(other);
+        brand.setHotCosmetics(hot);
+        brand.setOtherCosmetics(other);
         return Observable.just(brand).compose(new DefaultTransform<>());
+//        return ServicesClient.getServices().brandList().compose(new DefaultTransform<>());
     }
 
-    public Observable<Product> like(int productId) {
-        return ServicesClient.getServices().productLike(productId, UserPreferences.getUserID(), 1).compose(new DefaultTransform<>());
+    /**
+     * 添加收藏（长草）
+     * @param productId
+     * @return
+     */
+    public Observable<String> addLike(int productId) {
+        return ServicesClient.getServices().addStar(productId, UserPreferences.getUserID(), 1).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 添加到我的产品库
+     * @return
+     */
+    public Observable<String> addRepository(int brandId, String brandName, String product, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+        return ServicesClient.getServices().addRepository(
+                UserPreferences.getUserID(), brandId, brandName, product, isSeal, sealTime, qualityTime, overdueTime
+        ).compose(new DefaultTransform<>());
+    }
 }

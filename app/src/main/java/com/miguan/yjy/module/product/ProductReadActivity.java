@@ -50,7 +50,7 @@ public class ProductReadActivity extends BaseDataActivity<ProductReadPresenter, 
     private void initData() {
         mRecyProductRead.setFocusable(false);
         mRecyProductRead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductReadActivity.this, ProductModel.getInstantce().getReadListData());
+        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductReadActivity.this, ProductModel.getInstance().getReadListData());
         mRecyProductRead.setAdapter(productReadAdapter);
     }
 

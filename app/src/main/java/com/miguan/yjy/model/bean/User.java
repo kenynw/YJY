@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class User implements Parcelable {
 
-    @SerializedName(value = "user_id", alternate = "userId")
+    @SerializedName(value = "user_id", alternate = {"userId", "id"})
     private int user_id;
 
     @SerializedName(value = "img", alternate = {"userImg"})

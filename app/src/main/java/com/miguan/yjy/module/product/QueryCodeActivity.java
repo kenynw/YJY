@@ -13,6 +13,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.account.UserTextWatcher;
 import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
@@ -43,12 +44,17 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         setToolbarTitle(R.string.text_query_production_date);
         ButterKnife.bind(this);
 
+        UserTextWatcher watcher = new UserTextWatcher(mBtnSubmit, mEtBrand, mEtProduct);
+        mEtBrand.addTextChangedListener(watcher);
+        mEtProduct.addTextChangedListener(watcher);
+
+        mEtBrand.setOnClickListener(v -> startActivity(new Intent(this, BrandListActivity.class)));
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));
-        mBtnSubmit.setOnClickListener(v -> checkInput());
     }
 
     public void setData(Product product) {
         mEtBrand.setText(product.getProduct_name());
+        mBtnSubmit.setOnClickListener(v -> getPresenter().query(1, mEtProduct.getText().toString().trim()));
     }
 
     private void checkInput() {
@@ -60,13 +66,15 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
             LUtils.toast(R.string.hint_product_code);
             return;
         }
-        Product product = getPresenter().getProduct();
-        product.setBrand(mEtBrand.getText().toString().trim());
-        product.setProduct_name(mEtProduct.getText().toString().trim());
-        showQueryDialog(product);
+
+
+//        Product product = getPresenter().getProduct();
+//        product.setBrand(mEtBrand.getText().toString().trim());
+//        product.setProduct_name(mEtProduct.getText().toString().trim());
+//        showQueryDialog(product);
     }
 
-    private void showQueryDialog(Product product) {
+    public void showQueryDialog(Product product) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_query_result)
                 .show();
@@ -78,10 +86,10 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         TextView tvExpiration = ButterKnife.findById(dialog, R.id.tv_query_dialog_expiration);
         Button btnSave = ButterKnife.findById(dialog, R.id.btn_query_save);
         ivClose.setOnClickListener(v -> dialog.dismiss());
-        tvName.setText("Biotherm 碧欧泉");
-        tvCode.setText(String.format(getString(R.string.label_batch_no), "00n100"));
-        tvMfgDate.setText("2016年01月01日");
-        tvExpiration.setText("2019年01月01日");
+        tvName.setText(mEtBrand.getText());
+        tvCode.setText(String.format(getString(R.string.label_batch_no), mEtProduct.getText()));
+        tvMfgDate.setText(product.getStartDay());
+        tvExpiration.setText(product.getEndDay());
         btnSave.setOnClickListener(v -> {
             dialog.dismiss();
             AddRepositoryPresenter.start(QueryCodeActivity.this, product);

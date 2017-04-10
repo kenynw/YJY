@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -25,10 +26,28 @@
                 android:id="@+id/wv_article_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
                 android:minHeight="128dp"
                 />
 
-            <include layout="@layout/include_evaluate_list"/>
+            <TextView
+                android:id="@+id/tv_product_user_evaluate_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/spacing_large"
+                android:text="@string/tv_product_detail_user_evaluate"
+                android:textAppearance="@style/TextBody"
+                />
+
+            <com.jude.easyrecyclerview.EasyRecyclerView
+                android:id="@id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                app:layout_empty="@layout/empty_evaluate_list"
+                />
 
         </LinearLayout>
 
@@ -41,26 +60,34 @@
         android:orientation="horizontal"
         >
 
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/fl_article_detail_star"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_article_detail_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:src="@mipmap/ic_star"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@mipmap/ic_star"
-                android:drawablePadding="4dp"
-                android:drawableStart="@mipmap/ic_star"
                 android:gravity="center"
                 android:text="@string/btn_star"
                 android:textColor="@color/textSecondary"
                 />
 
-        </FrameLayout>
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/fl_article_detail_comment"
@@ -74,9 +101,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:drawableLeft="@mipmap/ic_star"
+                android:drawableLeft="@mipmap/ic_write_evaluate"
                 android:drawablePadding="4dp"
-                android:drawableStart="@mipmap/ic_star"
+                android:drawableStart="@mipmap/ic_write_evaluate"
                 android:gravity="center"
                 android:text="@string/btn_comment"
                 android:textColor="@color/white"

@@ -1,7 +1,7 @@
 package com.miguan.yjy.module.account;
 
 import com.dsk.chain.bijection.Presenter;
-import com.miguan.yjy.model.services.AccountModel;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.LUtils;
 

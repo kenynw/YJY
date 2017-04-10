@@ -2,8 +2,10 @@ package com.miguan.yjy.model.services;
 
 
 import com.miguan.yjy.model.bean.Article;
-import com.miguan.yjy.model.bean.Feedback;
+import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
+import com.miguan.yjy.model.bean.LikeProductList;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.User;
@@ -12,7 +14,6 @@ import com.miguan.yjy.model.bean.Version;
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -26,16 +27,19 @@ public interface Services {
 
     String BASE_URL = "https://api.yjyapp.com/api/index/";
 
+    String DEBUG_BASE_URL = "http://api.beta.yjyapp.com/api/index/";
+
     /**
      * 首页
      *
      * @return
      */
     @GET("?action=index")
-    Observable<Home> home();
+    Observable<Home> home(
+            @Query("user_id") int user_id
+    );
 
     //////////////////用户相关/////////////////////
-
     /**
      * 用户登录
      *
@@ -93,39 +97,55 @@ public interface Services {
     );
 
     /**
-     * 用户收藏、长草列表
-     *
-     * @param userId 用户ID
-     * @param type   类型(1产品 2文章)
-     * @return
-     */
-    @GET("?action=collect")
-    Observable<List<Article>> starList(
-            @Query("userId") int userId,
-            @Query("productId") int productId,
-            @Query("type") int type
-    );
-
-    /**
      * 我在用的列表
      * //TODO
-     *
      * @return
      */
     @GET("?action=userProduct")
     Observable<List<Product>> usedProduct(
-            @Query("userId") int userId
+            @Query("user_id") int userId
     );
 
     /**
      * 我长草的列表
-     * //TODO
-     *
+     * @param userId 用户ID
+     * @param cateId 栏目ID
+     * @param effect 功效
+     * @param page 当前页数
      * @return
      */
-    @GET("?action=userProduct")
-    Observable<List<Product>> likeProduct(
-            @Query("userId") int userId
+    @GET("?action=userGrass")
+    Observable<LikeProductList> likeList(
+            @Query("user_id") int userId,
+            @Query("cate_id") int cateId,
+            @Query("effect") String effect,
+            @Query("page") int page
+    );
+
+    /**
+     * 我点评的列表
+     * @param userId 用户ID
+     * @param type  (选填)类型1产品2文章
+     * @param page 当前页数
+     * @return
+     */
+    @GET("?action=comment")
+    Observable<List<Evaluate>> userEvaluateList(
+            @Query("user_id") int userId,
+            @Query("type") int type,
+            @Query("page") int page
+    );
+
+    /**
+     * 我收藏的列表
+     * @param userId 用户ID
+     * @param page 当前页数
+     * @return
+     */
+    @GET("?action=userCollect")
+    Observable<List<Article>> starList(
+            @Query("user_id") int userId,
+            @Query("page") int page
     );
 
     /**
@@ -153,7 +173,7 @@ public interface Services {
      *
      * @return
      */
-    @FormUrlEncoded
+     
     @GET("user/message/edit")
     Observable<Boolean> modifyProfile(
             @QueryMap Map<String, String> request
@@ -162,48 +182,111 @@ public interface Services {
     /**
      * 消息列表
      */
-    @FormUrlEncoded
-    @GET("user/systemmessage/system-message")
+    @GET("?action=userPms")
     Observable<List<Message>> getMessageList(
-            @Query("token") String token,
-            @Query("type") Integer type,
+            @Query("user_id") int userId,
             @Query("page") Integer page
     );
 
     /**
      * 吐槽一下
-     *
-     * @param token   登录令牌
-     * @param type    类型（0:产品建议、1:发现BUG、2:举报作弊、3:其他）
-     * @param contact 联系方式
+     * @param userId 用户ID
+     * @param username 用户名
      * @param content 吐槽内容
-     * @param img     上传照片
-     * @param source  信息来源（来源 0:安卓 1：IOS）
      * @return
      */
-    @FormUrlEncoded
-    @GET("user/feedback/feedback")
-    Observable<Feedback> feedback(
-            @Query("token") String token,
-            @Query("type") Integer type,
-            @Query("contact") String contact,
-            @Query("content") String content,
-            @Query("img") String img,
-            @Query("source") int source
+    @GET("?action=userFeedback")
+    Observable<String> feedback(
+            @Query("user_id") int userId,
+            @Query("username") String username,
+            @Query("content") String content
     );
 
-    ////////////////////产品//////////////////////
+    ////////////////////产品&&文章//////////////////////
+    /**
+     *  产品或文章评论列表
+     * @param id 产品或文章的ID
+     * @param page 当前页数
+     * @param user_id 用户ID 可空
+     * @param type 类型 1-产品，2-文章
+     * @param orderBy 排序字段,目前有'Praise'好评,'middle'中评,'bad'差评,'likeNum'综合排序按点赞数
+     * @param desc 排序方式,值为'DESC'或'ASC'
+     * @return
+     */
+    @GET("?action=commentList")
+    Observable<List<Evaluate>> evaluateList(
+            @Query("id") int id,
+            @Query("page") int page,
+            @Query("pageSize") int pageSize,
+            @Query("user_id") int user_id,
+            @Query("type") int type,
+            @Query("orderBy") String orderBy,
+            @Query("desc") String desc
+    );
+
+    /**
+     * 产品或文章添加评论
+     * @param id 产品或文章的ID
+     * @param user_id 用户ID 可空
+     * @param type 类型 1-产品，2-文章
+     * @param star 星级(文章可不传)
+     * @param content 评论内容
+     * @return
+     */
+    @GET("?action=addComment")
+    Observable<String> addEvaluate(
+            @Query("id") int id,
+            @Query("user_id") int user_id,
+            @Query("type") int type,
+            @Query("star") int star,
+            @Query("comment") String content
+    );
+
+    /**
+     * 产品或文章添加评论
+     * @param evaluateId 产品或文章的ID
+     * @param user_id 用户ID 可空
+     * @return
+     */
+    @GET("?action=addCommentLike")
+    Observable<String> addEvaluateLike(
+            @Query("commentId") int evaluateId,
+            @Query("user_id") int user_id
+    );
+
+    /**
+     * 品牌列表
+     *
+     */
+    @GET("?action=brandList")
+    Observable<Brand> brandList();
 
     /**
      * 批号查询
-     * //TODO
-     *
+     * @param brandId 品牌ID
+     * @param number 批号
      * @return
      */
-    @GET("?action=queryCode")
+    @GET("?action=queryCosmetics")
     Observable<Product> queryCode(
-            @Query("brand") String brand,
-            @Query("name") String name
+            @Query("id") int brandId,
+            @Query("number") String number
+    );
+
+    /**
+     * 添加到保质期提醒
+     *
+     */
+    @GET("?action=addRemind")
+    Observable<String> addRepository(
+            @Query("user_id") int userId,
+            @Query("brand_id") int brandId,
+            @Query("brand_name") String brand_name,
+            @Query("product") String product,
+            @Query("is_seal") int is_seal,
+            @Query("seal_time") String seal_time,
+            @Query("quality_time") int quality_time,
+            @Query("overdue_time") String overdue_time
     );
 
     /**
@@ -215,19 +298,6 @@ public interface Services {
     Observable<Product> productDetail(
             @Query("id") int id,
             @Query("uid") int uid
-    );
-
-    /**
-     * 产品长草
-     *
-     * @param type － 类型(1产品 2文章)
-     * @return
-     */
-    @GET("?action=productInfo")
-    Observable<Product> productLike(
-            @Query("id") int productId,
-            @Query("userId") int uid,
-            @Query("type") int type
     );
 
     /**
@@ -281,15 +351,17 @@ public interface Services {
     );
 
     /**
-     * 收藏文章
-     * //TODO
-     *
-     * @param articleId 文章ID
+     * 收藏产品或文章
+     * @param id 产品或文章ID
+     * @param user_id 用户ID
+     * @param type 1产品 2文章
      * @return
      */
-    @GET("?action=articleStar")
-    Observable<Article> articleStar(
-            @Query("article_id") int articleId
+    @GET("?action=collect")
+    Observable<String> addStar(
+            @Query("relation_id") int id,
+            @Query("user_id") int user_id,
+            @Query("type") int type
     );
 
     ////////////////////其他//////////////////////
@@ -297,12 +369,9 @@ public interface Services {
     /**
      * 检测更新
      *
-     * @param version 当前版本号
      * @return
      */
-    @GET("system/system/version-upgrade")
-    Observable<Version> checkUpdate(
-            @Query("version") String version
-    );
+    @GET("?action=versionUp")
+    Observable<Version> checkUpdate();
 
 }

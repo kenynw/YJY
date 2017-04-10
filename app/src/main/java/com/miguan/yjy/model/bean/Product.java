@@ -28,13 +28,19 @@ public class Product implements Parcelable {
 //    pageSize(int) － 当前页数
 //
     private ArrayList<ProductInfo> list;
+
     private ArrayList<Sort> categories;
+
     private ArrayList<String> effects;
+
     private int pageTotal;
+
     private int pageSize;
 
     private int id;
+
     private String name;
+
     private int cate_id;
 
     private String product_name;
@@ -63,13 +69,81 @@ public class Product implements Parcelable {
 
     private String en_product_company;
 
+    private String startDay;
 
-    public String getName() {
-        return name;
+    private String endDay;
+
+    static class Sort implements Parcelable {
+        private int id;
+        private String cate_name;
+
+        protected Sort(Parcel in) {
+            id = in.readInt();
+            cate_name = in.readString();
+        }
+
+        public static final Creator<Sort> CREATOR = new Creator<Sort>() {
+            @Override
+            public Sort createFromParcel(Parcel in) {
+                return new Sort(in);
+            }
+
+            @Override
+            public Sort[] newArray(int size) {
+                return new Sort[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(id);
+            dest.writeString(cate_name);
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ArrayList<ProductInfo> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<ProductInfo> list) {
+        this.list = list;
+    }
+
+    public ArrayList<Sort> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Sort> categories) {
+        this.categories = categories;
+    }
+
+    public ArrayList<String> getEffects() {
+        return effects;
+    }
+
+    public void setEffects(ArrayList<String> effects) {
+        this.effects = effects;
+    }
+
+    public int getPageTotal() {
+        return pageTotal;
+    }
+
+    public void setPageTotal(int pageTotal) {
+        this.pageTotal = pageTotal;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public int getId() {
@@ -78,6 +152,14 @@ public class Product implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getCate_id() {
@@ -192,41 +274,20 @@ public class Product implements Parcelable {
         this.en_product_company = en_product_company;
     }
 
-    public Product() {
+    public String getStartDay() {
+        return startDay;
     }
 
+    public void setStartDay(String startDay) {
+        this.startDay = startDay;
+    }
 
-    static class Sort implements Parcelable {
-        private int id;
-        private String cate_name;
+    public String getEndDay() {
+        return endDay;
+    }
 
-        protected Sort(Parcel in) {
-            id = in.readInt();
-            cate_name = in.readString();
-        }
-
-        public static final Creator<Sort> CREATOR = new Creator<Sort>() {
-            @Override
-            public Sort createFromParcel(Parcel in) {
-                return new Sort(in);
-            }
-
-            @Override
-            public Sort[] newArray(int size) {
-                return new Sort[size];
-            }
-        };
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(id);
-            dest.writeString(cate_name);
-        }
+    public void setEndDay(String endDay) {
+        this.endDay = endDay;
     }
 
     @Override
@@ -257,6 +318,11 @@ public class Product implements Parcelable {
         dest.writeString(this.product_company);
         dest.writeString(this.brand);
         dest.writeString(this.en_product_company);
+        dest.writeString(this.startDay);
+        dest.writeString(this.endDay);
+    }
+
+    public Product() {
     }
 
     protected Product(Parcel in) {
@@ -281,6 +347,8 @@ public class Product implements Parcelable {
         this.product_company = in.readString();
         this.brand = in.readString();
         this.en_product_company = in.readString();
+        this.startDay = in.readString();
+        this.endDay = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {

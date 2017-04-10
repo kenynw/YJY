@@ -1,12 +1,14 @@
 package com.miguan.yjy.module.product;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -28,7 +30,7 @@ import butterknife.ButterKnife;
  * @描述 产品详情页
  */
 @RequiresPresenter(ProductDetailPresenter.class)
-public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements View.OnClickListener {
+public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     @BindView(R.id.iv_product_detail)
     ImageView mIvThumb;
@@ -75,17 +77,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @BindView(R.id.tv_product_detail_lock_all_component)
     TextView tvLockAllComponent;
 
-    @BindView(R.id.tv_product_user_evalute_num)
+    @BindView(R.id.tv_product_user_evaluate_num)
     TextView tvUserEvaluteNum;
 
-    @BindView(R.id.tv_product_high_evaluate)
-    TextView tvHighEvaluate;
-
-    @BindView(R.id.tv_product_medium_evaluate)
-    TextView tvMediumEvaluate;
-
-    @BindView(R.id.tv_product_bad_evaluate)
-    TextView tvBadEvaluate;
+    @BindView(R.id.rgrp_evaluate_list_rank)
+    RadioGroup mRgrpEvaluateRank;
 
     @BindView(R.id.tv_product_detail_like)
     TextView mTvLike;
@@ -112,6 +108,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         setToolbarTitle("产品详情");
         ButterKnife.bind(this);
 
+        mRgrpEvaluateRank.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -127,7 +124,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvCompany.setText(product.getProduct_company());
 
         // 下面按钮
-        mTvLike.setOnClickListener(v -> getPresenter().like());
+        mTvLike.setOnClickListener(v -> getPresenter().addLike());
 
         tvRemark.setOnClickListener(v -> ProductRemarkPresenter.start(this, product));
         Component component = new Component();
@@ -163,4 +160,20 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             mIvProductDown.setBackgroundResource(R.mipmap.ic_product_detail_record_down);
         }
     }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        switch (checkedId) {
+            case R.id.rbtn_product_high_evaluate :
+                getPresenter().setOrder("praise");
+                break;
+            case R.id.rbtn_product_medium_evaluate :
+                getPresenter().setOrder("middle");
+                break;
+            case R.id.rbtn_product_bad_evaluate :
+                getPresenter().setOrder("bad");
+                break;
+        }
+    }
+
 }

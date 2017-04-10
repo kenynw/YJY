@@ -1,8 +1,10 @@
-package com.miguan.yjy.model.services;
+package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.model.services.DefaultTransform;
+import com.miguan.yjy.model.services.ServicesClient;
 
 import rx.Observable;
 
@@ -11,7 +13,6 @@ import rx.Observable;
  */
 
 public class AccountModel extends AbsModel {
-
 
     public static AccountModel getInstance() {
         return getInstance(AccountModel.class);
@@ -52,6 +53,7 @@ public class AccountModel extends AbsModel {
      */
     private void saveAccount(User user) {
         UserPreferences.setUserID(user.getUser_id());
+        UserPreferences.setUsername(user.getUsername());
     }
 
 }

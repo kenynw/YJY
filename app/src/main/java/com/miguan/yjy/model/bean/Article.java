@@ -19,56 +19,19 @@ public class Article implements Parcelable {
 
     private int like_num;
 
+    private int comment_num;
+
     private String created_at;
+
+    private String linkUrl;
+
+    private int isGras;
 
     private List<Evaluate> evaluates;
 
     private int pageTotal;
 
     private int pageSize;
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.title);
-        dest.writeString(this.article_img);
-        dest.writeInt(this.like_num);
-        dest.writeString(this.created_at);
-        dest.writeTypedList(this.evaluates);
-        dest.writeInt(this.pageTotal);
-        dest.writeInt(this.pageSize);
-    }
-
-    public Article() {
-    }
-
-    protected Article(Parcel in) {
-        this.id = in.readInt();
-        this.title = in.readString();
-        this.article_img = in.readString();
-        this.like_num = in.readInt();
-        this.created_at = in.readString();
-        this.evaluates = in.createTypedArrayList(Evaluate.CREATOR);
-        this.pageTotal = in.readInt();
-        this.pageSize = in.readInt();
-    }
-
-    public static final Creator<Article> CREATOR = new Creator<Article>() {
-        @Override
-        public Article createFromParcel(Parcel source) {
-            return new Article(source);
-        }
-
-        @Override
-        public Article[] newArray(int size) {
-            return new Article[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -102,12 +65,36 @@ public class Article implements Parcelable {
         this.like_num = like_num;
     }
 
+    public int getComment_num() {
+        return comment_num;
+    }
+
+    public void setComment_num(int comment_num) {
+        this.comment_num = comment_num;
+    }
+
     public String getCreated_at() {
         return created_at;
     }
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public String getLinkUrl() {
+        return linkUrl;
+    }
+
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
+    }
+
+    public int getIsGras() {
+        return isGras;
+    }
+
+    public void setIsGras(int isGras) {
+        this.isGras = isGras;
     }
 
     public List<Evaluate> getEvaluates() {
@@ -134,6 +121,9 @@ public class Article implements Parcelable {
         this.pageSize = pageSize;
     }
 
+    public Article() {
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -142,9 +132,57 @@ public class Article implements Parcelable {
                 ", article_img='" + article_img + '\'' +
                 ", like_num=" + like_num +
                 ", created_at='" + created_at + '\'' +
+                ", linkUrl='" + linkUrl + '\'' +
+                ", isGras=" + isGras +
                 ", evaluates=" + evaluates +
                 ", pageTotal=" + pageTotal +
                 ", pageSize=" + pageSize +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.article_img);
+        dest.writeInt(this.like_num);
+        dest.writeInt(this.comment_num);
+        dest.writeString(this.created_at);
+        dest.writeString(this.linkUrl);
+        dest.writeInt(this.isGras);
+        dest.writeTypedList(this.evaluates);
+        dest.writeInt(this.pageTotal);
+        dest.writeInt(this.pageSize);
+    }
+
+    protected Article(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.article_img = in.readString();
+        this.like_num = in.readInt();
+        this.comment_num = in.readInt();
+        this.created_at = in.readString();
+        this.linkUrl = in.readString();
+        this.isGras = in.readInt();
+        this.evaluates = in.createTypedArrayList(Evaluate.CREATOR);
+        this.pageTotal = in.readInt();
+        this.pageSize = in.readInt();
+    }
+
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel source) {
+            return new Article(source);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 }

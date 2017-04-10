@@ -1,8 +1,10 @@
 package com.miguan.yjy.utils;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 
 /**
@@ -27,13 +29,16 @@ public class PermissionUtils {
         }
     }
 
-
+    @TargetApi(value = Build.VERSION_CODES.M)
     public static void requestPermission(Activity activity, String[] permissions, int requestCode) {
-        ActivityCompat.requestPermissions(activity, permissions, requestCode);
+        for (String permission : permissions) {
+            if (!checkPermissionGranted(activity, permission)) ActivityCompat.requestPermissions(activity, new String[] {permission}, requestCode);
+        }
     }
 
+    @TargetApi(value = Build.VERSION_CODES.M)
     public static void requestPermission(Activity activity, String permission, int requestCode) {
-        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        if (!checkPermissionGranted(activity, permission)) ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
     }
 
     public static boolean checkPermissionGranted(Context context, String permission) {

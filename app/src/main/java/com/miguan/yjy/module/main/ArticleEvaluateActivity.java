@@ -1,7 +1,9 @@
 package com.miguan.yjy.module.main;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
@@ -14,8 +16,8 @@ import butterknife.ButterKnife;
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
  */
-@RequiresPresenter(ArticleCommentPresenter.class)
-public class ArticleCommentActivity extends ChainBaseActivity<ArticleCommentPresenter> {
+@RequiresPresenter(ArticleEvaluatePresenter.class)
+public class ArticleEvaluateActivity extends ChainBaseActivity<ArticleEvaluatePresenter> {
 
     @BindView(R.id.et_input_content)
     EditText mEtContent;
@@ -34,6 +36,18 @@ public class ArticleCommentActivity extends ChainBaseActivity<ArticleCommentPres
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        checkInput();
+        return super.onOptionsItemSelected(item);
+    }
 
+    private void checkInput() {
+        if (TextUtils.isEmpty(mEtContent.getText())) {
+            return;
+        }
+
+        getPresenter().submit(mEtContent.getText().toString().trim());
+    }
 
 }

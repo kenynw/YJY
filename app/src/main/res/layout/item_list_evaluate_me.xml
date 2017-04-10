@@ -42,6 +42,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/ll_evaluate_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_large"
@@ -51,11 +52,11 @@
         android:paddingTop="@dimen/spacing_small"
         >
 
-        <ImageView
-            android:id="@+id/iv_evaluate_product_img"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_evaluate_product_img"
             android:layout_width="98dp"
             android:layout_height="98dp"
-            android:src="@mipmap/def_image_loading"
+            style="@style/BaseImage"
             />
 
         <LinearLayout

@@ -55,7 +55,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
 
     private void initData() {
         mRecyProductComponentCreate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductComponentListActivity.this, ProductModel.getInstantce().getReadListData());
+        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductComponentListActivity.this, ProductModel.getInstance().getReadListData());
         mRecyProductComponentCreate.setAdapter(productReadAdapter);
     }
 

@@ -50,18 +50,16 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
-
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.facebook.fresco:fresco:1.2.0' // 图片库
-
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-
-    compile 'com.dsk:imageprovider:2.1.2'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar" //侧滑删除
     compile 'com.contrarywind:Android-PickerView:3.2.2' // 时间选择器、省市区三级联动
 
+    compile 'com.dsk:imageprovider:2.1.2'
     compile 'com.umeng.analytics:analytics:latest.integration' // 友盟统计
 
-    compile "com.daimajia.swipelayout:library:1.2.0@aar" //侧滑删除
 }

@@ -1,10 +1,10 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.net.Uri;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Article;
@@ -19,8 +19,8 @@ import butterknife.ButterKnife;
 
 public class StarViewHolder extends BaseViewHolder<Article> {
 
-    @BindView(R.id.iv_star_thumb)
-    ImageView mIvThumb;
+    @BindView(R.id.dv_star_thumb)
+    SimpleDraweeView mDvThumb;
 
     @BindView(R.id.tv_star_title)
     TextView mTvTitle;
@@ -32,12 +32,7 @@ public class StarViewHolder extends BaseViewHolder<Article> {
 
     @Override
     public void setData(Article data) {
-        Glide.with(getContext())
-                .load(data.getArticle_img())
-                .centerCrop()
-                .placeholder(R.mipmap.def_image_loading)
-                .error(R.mipmap.def_image_loading)
-                .into(mIvThumb);
+        mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
         mTvTitle.setText(data.getTitle());
         itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data));
     }

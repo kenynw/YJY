@@ -1,6 +1,7 @@
 package com.dsk.chain.expansion.overlay;
 
 import android.app.ProgressDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 public class DefaultViewExpansionDelegate extends ViewExpansionDelegate {
 
     private ProgressDialog mProgressDialog;
+
+    private View mLoadingView;
 
     private TextView mTvEmpty;
 
@@ -55,6 +58,22 @@ public class DefaultViewExpansionDelegate extends ViewExpansionDelegate {
     }
 
     @Override
+    public void showLoadingView() {
+        if (mLoadingView == null) {
+            mLoadingView = getActivity().getLayoutInflater().inflate(R.layout.default_view_list_progress, getContainer());
+            if (mLoadingView.getParent() == null) getContainer().addView(mLoadingView);
+        } else {
+            mLoadingView.setVisibility(View.VISIBLE);
+        }
+        setToolbar(mLoadingView);
+    }
+
+    @Override
+    public void hideLoadingView() {
+        if (mLoadingView != null) mLoadingView.setVisibility(View.GONE);
+    }
+
+    @Override
     public void hideProgressBar() {
         if (mProgressDialog != null) mProgressDialog.dismiss();
         if (mContent != null) mContent.setVisibility(View.VISIBLE);
@@ -85,6 +104,14 @@ public class DefaultViewExpansionDelegate extends ViewExpansionDelegate {
             getContainer().addView(mTvEmpty, getLayoutParams());
         } else {
             mTvEmpty.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setToolbar(View view) {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        if (toolbar!=null){
+            getActivity().setSupportActionBar(toolbar);
+            getActivity().onSetToolbar(toolbar);
         }
     }
 

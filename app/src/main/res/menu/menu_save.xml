@@ -5,6 +5,7 @@
     <item
         android:title="@string/btn_save"
         app:showAsAction="always"
+        android:enabled="false"
         />
 
 </menu>

@@ -17,46 +17,9 @@ public class Brand implements Parcelable {
 
     private String letter;
 
-    private List<Brand> hot;
+    private List<Brand> hotCosmetics;
 
-    private List<Brand> other;
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.name);
-        dest.writeString(this.letter);
-        dest.writeTypedList(this.hot);
-        dest.writeTypedList(this.other);
-    }
-
-    public Brand() {
-    }
-
-    protected Brand(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.letter = in.readString();
-        this.hot = in.createTypedArrayList(Brand.CREATOR);
-        this.other = in.createTypedArrayList(Brand.CREATOR);
-    }
-
-    public static final Creator<Brand> CREATOR = new Creator<Brand>() {
-        @Override
-        public Brand createFromParcel(Parcel source) {
-            return new Brand(source);
-        }
-
-        @Override
-        public Brand[] newArray(int size) {
-            return new Brand[size];
-        }
-    };
+    private List<Brand> otherCosmetics;
 
     public int getId() {
         return id;
@@ -82,19 +45,56 @@ public class Brand implements Parcelable {
         this.letter = letter;
     }
 
-    public List<Brand> getHot() {
-        return hot;
+    public List<Brand> getHotCosmetics() {
+        return hotCosmetics;
     }
 
-    public void setHot(List<Brand> hot) {
-        this.hot = hot;
+    public void setHotCosmetics(List<Brand> hotCosmetics) {
+        this.hotCosmetics = hotCosmetics;
     }
 
-    public List<Brand> getOther() {
-        return other;
+    public List<Brand> getOtherCosmetics() {
+        return otherCosmetics;
     }
 
-    public void setOther(List<Brand> other) {
-        this.other = other;
+    public void setOtherCosmetics(List<Brand> otherCosmetics) {
+        this.otherCosmetics = otherCosmetics;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.letter);
+        dest.writeTypedList(this.hotCosmetics);
+        dest.writeTypedList(this.otherCosmetics);
+    }
+
+    public Brand() {
+    }
+
+    protected Brand(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.letter = in.readString();
+        this.hotCosmetics = in.createTypedArrayList(Brand.CREATOR);
+        this.otherCosmetics = in.createTypedArrayList(Brand.CREATOR);
+    }
+
+    public static final Creator<Brand> CREATOR = new Creator<Brand>() {
+        @Override
+        public Brand createFromParcel(Parcel source) {
+            return new Brand(source);
+        }
+
+        @Override
+        public Brand[] newArray(int size) {
+            return new Brand[size];
+        }
+    };
 }

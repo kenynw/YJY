@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsk.chain.bijection.Presenter;
+import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.services.ServicesResponse;
 
 /**
  * Copyright (c) 2017/3/27. LiaoPeiKun Inc. All rights reserved.
@@ -34,4 +36,15 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
         super.onCreateView(view);
         getView().setData(mProduct);
     }
+
+    public void submit(int brandId, String brandName, String productName, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+        ProductModel.getInstance().addRepository(brandId, brandName, productName, isSeal, sealTime, qualityTime, overdueTime)
+                .unsafeSubscribe(new ServicesResponse<String>() {
+                    @Override
+                    public void onNext(String s) {
+
+                    }
+                });
+    }
+
 }
