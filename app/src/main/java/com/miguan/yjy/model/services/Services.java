@@ -5,18 +5,16 @@ import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
-import com.miguan.yjy.model.bean.LikeProductList;
+import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -51,7 +49,7 @@ public interface Services {
     Observable<User> login(
             @Query("mobile") CharSequence mobile,
             @Query("password") CharSequence password,
-            @Query("type") int type
+            @Query("mType") int type
     );
 
     /**
@@ -78,7 +76,7 @@ public interface Services {
     @GET("?action=message")
     Observable<Boolean> sendCaptcha(
             @Query("mobile") CharSequence mobile,
-            @Query("type") int type
+            @Query("mType") int type
     );
 
     /**
@@ -115,10 +113,10 @@ public interface Services {
      * @return
      */
     @GET("?action=userGrass")
-    Observable<LikeProductList> likeList(
+    Observable<ProductList> likeList(
             @Query("user_id") int userId,
-            @Query("cate_id") int cateId,
-            @Query("effect") String effect,
+            @Query("mCateId") int cateId,
+            @Query("mEffect") String effect,
             @Query("page") int page
     );
 
@@ -132,7 +130,7 @@ public interface Services {
     @GET("?action=comment")
     Observable<List<Evaluate>> userEvaluateList(
             @Query("user_id") int userId,
-            @Query("type") int type,
+            @Query("mType") int type,
             @Query("page") int page
     );
 
@@ -161,22 +159,15 @@ public interface Services {
 
     /**
      * 个人资料修改
-     * token
-     * photo
-     * qq
-     * email
-     * actuality
-     * birthday
-     * province
-     * city
-     * sign
-     *
+     * @param attribute － 需要修改的字段(username,mobile,birthday,img)
+     * @param content － 修改的值
      * @return
      */
-     
-    @GET("user/message/edit")
-    Observable<Boolean> modifyProfile(
-            @QueryMap Map<String, String> request
+    @GET("?action=userUpdate")
+    Observable<String> modifyProfile(
+            @Query("user_id") int userId,
+            @Query("attribute") String attribute,
+            @Query("content") String content
     );
 
     /**
@@ -219,7 +210,7 @@ public interface Services {
             @Query("page") int page,
             @Query("pageSize") int pageSize,
             @Query("user_id") int user_id,
-            @Query("type") int type,
+            @Query("mType") int type,
             @Query("orderBy") String orderBy,
             @Query("desc") String desc
     );
@@ -237,7 +228,7 @@ public interface Services {
     Observable<String> addEvaluate(
             @Query("id") int id,
             @Query("user_id") int user_id,
-            @Query("type") int type,
+            @Query("mType") int type,
             @Query("star") int star,
             @Query("comment") String content
     );
@@ -311,21 +302,20 @@ public interface Services {
      */
     @GET("?action=searchAssociate")
     Observable<List<Product>> searchAssociate(
-            @Query("keywords") String keywords
+            @Query("mKeywords") String keywords
     );
 
     /**
      * 搜索结果接口
-     * action(string) － 固定值searchQuery
-     * keywords(string) － （非必填）关键词
-     * type(int) － （非必填）类型 ：不传或者传1为默认搜索产品
-     * cate_id(int) － （非必填）分类id
-     * effect(string) － （非必填）功效关键字
-     * page(int) － （非必填）当前页数
-     * pageSize(string) － （非必填）每页多少条
+     * @param keywords
+     * @param type
+     * @param cate_id
+     * @param effect
+     * @param page
+     * @return
      */
     @GET("?action=searchQuery")
-    Observable<Product> searchQuery(
+    Observable<ProductList> searchQuery(
             @Query("keywords") String keywords,
             @Query("type") int type,
             @Query("cate_id") int cate_id,
@@ -360,7 +350,7 @@ public interface Services {
     Observable<String> addStar(
             @Query("relation_id") int id,
             @Query("user_id") int user_id,
-            @Query("type") int type
+            @Query("mType") int type
     );
 
     ////////////////////其他//////////////////////

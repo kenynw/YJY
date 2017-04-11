@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  */
 @RequiresPresenter(ProductRemarkPresenter.class)
 public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresenter> {
-    @BindView(R.id.img_proudct)
+    @BindView(R.id.iv_proudct_thumb)
     ImageView mImgProudct;
     @BindView(R.id.tv_product_name)
     TextView mTvProductName;

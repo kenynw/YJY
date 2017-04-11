@@ -1,14 +1,14 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.ProductInfo;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import butterknife.BindView;
@@ -20,16 +20,19 @@ import butterknife.ButterKnife;
  * @描述 搜索结果（产品列表）
  */
 
-public class SearchReslutViewHolder extends BaseViewHolder<ProductInfo> {
+public class SearchReslutViewHolder extends BaseViewHolder<Product> {
 
-    @BindView(R.id.img_proudct)
-    ImageView imgProudct;
+    @BindView(R.id.iv_proudct_thumb)
+    ImageView mDvThumb;
+
     @BindView(R.id.tv_product_name)
-    TextView tvProductName;
+    TextView mTvName;
+
     @BindView(R.id.ratbar_product)
-    RatingBar ratbarProduct;
+    RatingBar mRatbar;
+
     @BindView(R.id.tv_product_money)
-    TextView tvProductMoney;
+    TextView mTvSpec;
 
     public SearchReslutViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_product_list);
@@ -37,11 +40,11 @@ public class SearchReslutViewHolder extends BaseViewHolder<ProductInfo> {
     }
 
     @Override
-    public void setData(ProductInfo data) {
-        tvProductName.setText(data.getProduct_name());
-        ratbarProduct.setRating(data.getStar());
-        tvProductMoney.setText(data.getPrice()+"/"+data.getForm());
-        Glide.with(getContext()).load(data.getProduct_img()).error(R.mipmap.def_image_loading).placeholder(R.mipmap.def_image_loading).into(imgProudct);
+    public void setData(Product data) {
+        mDvThumb.setImageURI(Uri.parse(data.getProduct_img()));
+        mTvName.setText(data.getProduct_name());
+        mRatbar.setRating(data.getStar());
+        mTvSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm().toUpperCase()));
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
 }

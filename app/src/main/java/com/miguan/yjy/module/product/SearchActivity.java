@@ -40,7 +40,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
     @BindView(R.id.edt_product_search)
     EditText edtSearch;
-    @BindView(R.id.img_product_search_cancle)
+    @BindView(R.id.iv_product_search_clear)
     ImageView imgSearchCancle;
     @BindView(R.id.tv_cancel)
     TextView tvCancel;

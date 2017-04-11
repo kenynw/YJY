@@ -19,7 +19,7 @@
         android:paddingRight="15dp">
 
         <ImageView
-            android:id="@+id/img_proudct"
+            android:id="@+id/iv_proudct_thumb"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="15dp"
@@ -29,10 +29,10 @@
             android:id="@+id/tv_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/img_proudct"
+            android:layout_alignTop="@+id/iv_proudct_thumb"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/img_proudct"
+            android:layout_toRightOf="@+id/iv_proudct_thumb"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="sss"

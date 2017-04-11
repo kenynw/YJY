@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class TestListViewHolder extends BaseViewHolder<Test> {
 
-    @BindView(R.id.img_proudct)
+    @BindView(R.id.iv_proudct_thumb)
     ImageView imgProudct;
     @BindView(R.id.tv_product_name)
     TextView tvProductName;

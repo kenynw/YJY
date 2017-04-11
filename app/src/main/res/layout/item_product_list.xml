@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginLeft="15dp"
-              android:layout_marginRight="15dp"
-              android:orientation="vertical">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_proudct_thumb"
+        style="@style/BaseImage"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        tools:background="@mipmap/def_image_loading"
+        />
 
-        <ImageView
-            android:id="@+id/img_proudct"
-            android:layout_width="98dp"
-            android:layout_height="98dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/gray"/>
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_proudct_thumb"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_toEndOf="@id/iv_proudct_thumb"
+        android:layout_toRightOf="@+id/iv_proudct_thumb"
+        android:textAppearance="@style/TextBody"
+        tools:text="这是标题"
+        />
 
-        <TextView
-            android:id="@+id/tv_product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/img_proudct"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/img_proudct"
-            android:text="sss"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15"/>
+    <RatingBar
+        android:id="@+id/ratbar_product"
+        style="@style/MySmallRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_product_name"
+        android:layout_below="@id/tv_product_name"
+        android:layout_marginTop="10dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="1"
+        />
 
-        <RatingBar
-            android:id="@+id/ratbar_product"
-            style="@style/MySmallRatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_product_name"
-            android:layout_below="@+id/tv_product_name"
-            android:layout_marginTop="10dp"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:stepSize="1"/>
+    <TextView
+        android:id="@+id/tv_product_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/ratbar_product"
+        android:layout_alignStart="@id/ratbar_product"
+        android:layout_below="@id/ratbar_product"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        tools:text="￥320/250ML"
+        />
 
-        <TextView
-            android:id="@+id/tv_product_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ratbar_product"
-            android:layout_below="@+id/ratbar_product"
-            android:layout_marginTop="15dp"
-            android:text="sss"
-            android:textColor="@color/f6"
-            android:textSize="@dimen/text_size_small_14"/>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

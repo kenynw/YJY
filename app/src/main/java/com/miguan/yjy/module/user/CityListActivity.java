@@ -54,7 +54,7 @@ public class CityListActivity extends ChainBaseActivity<CityListPresenter> imple
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_city);
+        setContentView(R.layout.user_activity_city);
         setToolbarTitle("选择城市");
         filterList = new ArrayList<ContactItemInterface>();
         contactList = CityData.getSampleContactList();

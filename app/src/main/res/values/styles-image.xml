@@ -9,11 +9,10 @@
         <item name="com.miguan.yjy:actualImageScaleType">centerCrop</item>
     </style>
 
-
-    <style name="AvatarMedium" parent="BaseImage">
-        <item name="android:layout_width">@dimen/widget_medium</item>
-        <item name="android:layout_height">@dimen/widget_medium</item>
+    <style name="BaseAvatar" parent="BaseImage">
         <item name="com.miguan.yjy:roundAsCircle">true</item>
+        <item name="com.miguan.yjy:placeholderImage">@mipmap/def_image_avatar</item>
+        <item name="com.miguan.yjy:failureImage">@mipmap/def_image_avatar</item>
     </style>
 
 </resources>

@@ -3,6 +3,7 @@ package com.miguan.yjy.module.user;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -14,12 +15,19 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
+import com.jude.library.imageprovider.ImageProvider;
+import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.ImageModel;
+import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SendValidateButton;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 
@@ -27,9 +35,12 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity, User> implements TextWatcher {
+public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity, User> implements TextWatcher, OnImageSelectListener {
 
     public static final String EXTRA_USER = "user";
+
+    private ImageProvider mImageProvider; // 图片浏览
+
     EditText mEtUserDialogFirst;
     EditText mEtUserDialogSecond;
     EditText mEtUserDialogThird;
@@ -48,6 +59,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     @Override
     protected void onCreateView(ProfileActivity view) {
         super.onCreateView(view);
+        mImageProvider = new ImageProvider(view);
         publishObject(getView().getIntent().getParcelableExtra(EXTRA_USER));
     }
 
@@ -188,5 +200,43 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
         return true;
     }
 
+    public void pickImage(int type) {
+        switch (type) {
+            case 0:
+                mImageProvider.getImageFromAlbum(this);
+                break;
+            case 1:
+                mImageProvider.getImageFromCamera(this);
+                break;
+        }
+    }
+
+    @Override
+    protected void onResult(int requestCode, int resultCode, Intent data) {
+        super.onResult(requestCode, resultCode, data);
+        mImageProvider.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onImageSelect() {
+
+    }
+
+    @Override
+    public void onImageLoaded(Uri uri) {
+        ImageModel.getInstance().uploadImageAsync(new File(uri.getPath()).getPath())
+                .flatMap(s -> UserModel.getInstance().modifyProfile(UserModel.KEY_PROFILE_AVATAR, s))
+                .unsafeSubscribe(new ServicesResponse<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        getView().setAvatar(uri);
+                    }
+                });
+    }
+
+    @Override
+    public void onError() {
+
+    }
 }
 

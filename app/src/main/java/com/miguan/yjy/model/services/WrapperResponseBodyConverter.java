@@ -1,6 +1,9 @@
 package com.miguan.yjy.model.services;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.miguan.yjy.model.bean.EntityList;
 import com.miguan.yjy.utils.LUtils;
 
 import org.json.JSONException;
@@ -47,8 +50,15 @@ public class WrapperResponseBodyConverter<T> implements Converter<ResponseBody, 
                 return new Gson().fromJson(data.toString(), mType);
             }
 
-            return new Gson().fromJson(result, mType);
+            T entity = new Gson().fromJson(result, mType);
+
+            if (entity instanceof EntityList && !data.isNull("pageTotal")) {
+                ((EntityList) entity).setPageTotal(data.optInt("pageTotal"));
+            }
+
+            return entity;
         } catch (JSONException e) {
+            LUtils.log(Log.getStackTraceString(e));
             throw new ServiceException(0, "数据解析错误");
         }
     }

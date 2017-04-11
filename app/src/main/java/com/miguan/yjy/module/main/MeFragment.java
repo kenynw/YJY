@@ -31,6 +31,8 @@ import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -92,7 +94,7 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         View view = inflater.inflate(R.layout.main_fragment_me, container, false);
         mBind = ButterKnife.bind(this, view);
 
-//        mTvSkinTest.setOnClickListener(v -> startActivity(null));
+        mTvSkinTest.setOnClickListener(v -> EventBus.getDefault().post(2));
         mTvFaceScore.setOnClickListener(v -> startActivity(new Intent(getActivity(), FaceScoreActivity.class)));
         mBtnUsed.setOnClickListener(v -> startActivity(new Intent(getActivity(), UsedListActivity.class)));
         mBtnLike.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProductLikeListActivity.class)));

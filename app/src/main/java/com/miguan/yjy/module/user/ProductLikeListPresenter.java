@@ -2,7 +2,7 @@ package com.miguan.yjy.module.user;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.UserModel;
-import com.miguan.yjy.model.bean.LikeProductList;
+import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Product;
 
 /**
@@ -20,7 +20,7 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
     @Override
     public void onRefresh() {
         UserModel.getInstance().getLikeProductList(1, "美白", 1)
-                .map(LikeProductList::getData)
+                .map(ProductList::getData)
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 }

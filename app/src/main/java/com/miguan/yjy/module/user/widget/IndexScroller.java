@@ -282,7 +282,7 @@ public class IndexScroller
 		switch (mState)
 		{
 		case STATE_HIDDEN:
-			// Cancel any fade effect
+			// Cancel any fade mEffect
 			mHandler.removeMessages(0);
 			break;
 		case STATE_SHOWING:
@@ -291,7 +291,7 @@ public class IndexScroller
 			fade(0);
 			break;
 		case STATE_SHOWN:
-			// Cancel any fade effect
+			// Cancel any fade mEffect
 			mHandler.removeMessages(0);
 			break;
 		case STATE_HIDING:
@@ -339,7 +339,7 @@ public class IndexScroller
 			switch (mState)
 			{
 			case STATE_SHOWING:
-				// Fade in effect
+				// Fade in mEffect
 				mAlphaRate += (1 - mAlphaRate) * 0.2;
 				if (mAlphaRate > 0.9)
 				{
@@ -359,7 +359,7 @@ public class IndexScroller
 				}
 				break;
 			case STATE_HIDING:
-				// Fade out effect
+				// Fade out mEffect
 				mAlphaRate -= mAlphaRate * 0.2;
 				if (mAlphaRate < 0.1)
 				{

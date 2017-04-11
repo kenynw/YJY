@@ -1,7 +1,8 @@
 package com.miguan.yjy.model.bean;
 
 import android.os.Parcel;
-import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -9,9 +10,12 @@ import java.util.List;
  * Copyright (c) 2017/4/9. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class LikeProductList implements Parcelable {
+public class ProductList extends EntityList {
+
+    @SerializedName(value = "data", alternate = { "list" })
     private List<Product> data;
 
+    @SerializedName(value = "categroy", alternate = { "categories" })
     private List<Category> categroy;
 
     private String[] effects;
@@ -52,24 +56,24 @@ public class LikeProductList implements Parcelable {
         dest.writeStringArray(this.effects);
     }
 
-    public LikeProductList() {
+    public ProductList() {
     }
 
-    protected LikeProductList(Parcel in) {
+    protected ProductList(Parcel in) {
         this.data = in.createTypedArrayList(Product.CREATOR);
         this.categroy = in.createTypedArrayList(Category.CREATOR);
         this.effects = in.createStringArray();
     }
 
-    public static final Creator<LikeProductList> CREATOR = new Creator<LikeProductList>() {
+    public static final Creator<ProductList> CREATOR = new Creator<ProductList>() {
         @Override
-        public LikeProductList createFromParcel(Parcel source) {
-            return new LikeProductList(source);
+        public ProductList createFromParcel(Parcel source) {
+            return new ProductList(source);
         }
 
         @Override
-        public LikeProductList[] newArray(int size) {
-            return new LikeProductList[size];
+        public ProductList[] newArray(int size) {
+            return new ProductList[size];
         }
     };
 }

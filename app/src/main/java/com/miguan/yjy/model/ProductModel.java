@@ -4,6 +4,7 @@ import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -25,7 +26,6 @@ public class ProductModel extends AbsModel {
         return getInstance(ProductModel.class);
     }
 
-
     /**
      * 大家都在搜
      */
@@ -43,8 +43,8 @@ public class ProductModel extends AbsModel {
     /**
      * 搜索结果接口
      */
-    public Observable<Product> searchQuery(String keywords, int type, int cate_id, String effect, int page) {
-        return ServicesClient.getServices().searchQuery(keywords, type, cate_id, effect, page).compose(new DefaultTransform<>());
+    public Observable<ProductList> searchQuery(String keywords, int cate_id, String effect, int page) {
+        return ServicesClient.getServices().searchQuery(keywords, 1, cate_id, effect, page).compose(new DefaultTransform<>());
     }
 
     public Observable<List<Product>> getSearchList() {

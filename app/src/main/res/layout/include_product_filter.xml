@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_product_filter"
+    android:layout_width="match_parent"
+    android:layout_height="38dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    >
+
+    <ToggleButton
+        android:id="@+id/tbtn_product_filter_all"
+        style="@style/TextCaption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@null"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/tv_product_all"
+        android:textColor="@color/textPrimary"
+        android:textOff="@null"
+        android:textOn="@null"
+        />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+        <ToggleButton
+            android:id="@+id/tbtn_product_filter_cate"
+            style="@style/TextCaption"
+            android:layout_width="@dimen/widget_max"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:drawableEnd="@drawable/btn_product_filter_selector"
+            android:drawableRight="@drawable/btn_product_filter_selector"
+            android:text="@string/tv_product_sort"
+            android:textColor="@color/textPrimary"
+            android:textOff="@null"
+            android:textOn="@null"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+        <ToggleButton
+            android:id="@+id/tbtn_product_filter_effect"
+            style="@style/TextCaption"
+            android:layout_width="@dimen/widget_max"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:drawableEnd="@drawable/btn_product_filter_selector"
+            android:drawableRight="@drawable/btn_product_filter_selector"
+            android:text="@string/tv_product_function"
+            android:textColor="@color/textPrimary"
+            android:textOff="@null"
+            android:textOn="@null"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

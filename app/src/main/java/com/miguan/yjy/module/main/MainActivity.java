@@ -14,6 +14,9 @@ import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -61,12 +64,18 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
 
             }
         });
-        for (int i=0; i<adapter.getCount(); i++) {
+        for (int i = 0; i < adapter.getCount(); i++) {
             TabLayout.Tab tab = mTab.newTab();
             mTab.addTab(tab);
             tab.setIcon(adapter.getIconRes(i))
                     .setText(adapter.getPageTitle(i));
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setCurrentTab(Integer index) {
+        if (index < 0 || index > 3) return;
+        mTab.getTabAt(index).select();
     }
 
 }

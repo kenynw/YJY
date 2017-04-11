@@ -48,13 +48,10 @@ public class ProductAllSearchAdapter extends BaseAdapter {
         convertView = View.inflate(context, R.layout.item_product_all_search, null);
         TextView textView = (TextView) convertView.findViewById(R.id.item_label_tv);
         textView.setText(datas.get(position).getName());
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SearchResultActivity.class);
-                intent.putExtra("name", datas.get(position).getName());
-                context.startActivity(intent);
-            }
+        textView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, SearchResultActivity.class);
+            intent.putExtra("keywords", datas.get(position).getName());
+            context.startActivity(intent);
         });
         return convertView;
     }
