@@ -74,7 +74,6 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
             @Override
             public void apply(@NonNull ToggleButton view, int index) {
                 if (index > 0) {
-                    String[] strings = index == 1 ? categories : mEffects;
                     view.setTag(index - 1);
                     view.setOnCheckedChangeListener(FilterPanel.this);
                 } else {
@@ -151,6 +150,10 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
             return true;
         }
         return false;
+    }
+
+    public void setMenuText(int index, String text) {
+        mTbtnList.get(index).setText(text);
     }
 
     private OnItemSelectedListener mListener;

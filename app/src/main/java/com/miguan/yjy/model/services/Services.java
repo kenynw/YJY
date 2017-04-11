@@ -49,7 +49,7 @@ public interface Services {
     Observable<User> login(
             @Query("mobile") CharSequence mobile,
             @Query("password") CharSequence password,
-            @Query("mType") int type
+            @Query("type") int type
     );
 
     /**
@@ -76,7 +76,7 @@ public interface Services {
     @GET("?action=message")
     Observable<Boolean> sendCaptcha(
             @Query("mobile") CharSequence mobile,
-            @Query("mType") int type
+            @Query("type") int type
     );
 
     /**
@@ -115,8 +115,8 @@ public interface Services {
     @GET("?action=userGrass")
     Observable<ProductList> likeList(
             @Query("user_id") int userId,
-            @Query("mCateId") int cateId,
-            @Query("mEffect") String effect,
+            @Query("cateId") int cateId,
+            @Query("effect") String effect,
             @Query("page") int page
     );
 
@@ -130,7 +130,7 @@ public interface Services {
     @GET("?action=comment")
     Observable<List<Evaluate>> userEvaluateList(
             @Query("user_id") int userId,
-            @Query("mType") int type,
+            @Query("type") int type,
             @Query("page") int page
     );
 
@@ -210,7 +210,7 @@ public interface Services {
             @Query("page") int page,
             @Query("pageSize") int pageSize,
             @Query("user_id") int user_id,
-            @Query("mType") int type,
+            @Query("type") int type,
             @Query("orderBy") String orderBy,
             @Query("desc") String desc
     );
@@ -228,7 +228,7 @@ public interface Services {
     Observable<String> addEvaluate(
             @Query("id") int id,
             @Query("user_id") int user_id,
-            @Query("mType") int type,
+            @Query("type") int type,
             @Query("star") int star,
             @Query("comment") String content
     );
@@ -302,7 +302,7 @@ public interface Services {
      */
     @GET("?action=searchAssociate")
     Observable<List<Product>> searchAssociate(
-            @Query("mKeywords") String keywords
+            @Query("keywords") String keywords
     );
 
     /**
@@ -350,7 +350,7 @@ public interface Services {
     Observable<String> addStar(
             @Query("relation_id") int id,
             @Query("user_id") int user_id,
-            @Query("mType") int type
+            @Query("type") int type
     );
 
     ////////////////////其他//////////////////////

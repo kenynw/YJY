@@ -67,19 +67,22 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                 .setContainerEmptyView(view);
     }
 
-    public void setData(String keywords, ProductList productList) {
+    public void setData(String keywords, ProductList productList, String cateName) {
         mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
+        mEtKeywords.requestFocus();
         mFilterPanel = new FilterPanel(this, productList.getCategroy(), productList.getEffects());
+        mFilterPanel.setMenuText(1, cateName);
         mFilterPanel.setOnItemSelectedListener((cateId, text) -> {
             mFilterPanel.dismissMenu();
             if (cateId > 0) {
                 getPresenter().setCateId(cateId);
             }
-            else if (!TextUtils.isEmpty(text)) {
+            if (!TextUtils.isEmpty(text)) {
                 getPresenter().setEffect("");
-            } else {
+            }
+            if (cateId <= 0 && text.isEmpty()){
                 getPresenter().setEffect("");
                 getPresenter().setCateId(0);
             }

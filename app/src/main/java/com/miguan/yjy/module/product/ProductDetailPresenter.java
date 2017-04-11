@@ -41,12 +41,12 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     }
 
     private void loadData() {
-        ProductModel.getInstance().getProductDetail(226104).unsafeSubscribe(getDataSubscriber());
+        ProductModel.getInstance().getProductDetail(mProductId).unsafeSubscribe(getDataSubscriber());
     }
 
     // 长草
     public void addLike() {
-        ProductModel.getInstance().addLike(226104).unsafeSubscribe(new ServicesResponse<String>() {
+        ProductModel.getInstance().addLike(mProductId).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String result) {
                 LUtils.toast("长草成功");

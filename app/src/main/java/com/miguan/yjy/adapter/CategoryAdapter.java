@@ -10,6 +10,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Category;
+import com.miguan.yjy.module.product.SearchResultPresenter;
 
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class CategoryAdapter extends RecyclerArrayAdapter<Category> {
                     .into(mIvThumb);
 
             mTvName.setText(data.getCate_name());
+            itemView.setOnClickListener(v -> SearchResultPresenter.start(getContext(), "", data.getId(), data.getCate_name()));
         }
     }
 

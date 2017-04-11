@@ -49,9 +49,7 @@
                 android:textColorHint="@color/fcd"
                 android:textSize="@dimen/text_size_small_15"
                 tools:hint="@string/hint_home_search"
-                >
-                <requestFocus />
-            </EditText>
+                />
 
             <ImageView
                 android:id="@+id/iv_product_search_clear"
