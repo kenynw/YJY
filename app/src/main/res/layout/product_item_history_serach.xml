@@ -30,11 +30,22 @@
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_15"/>
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/ll_product_his_close"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@mipmap/ic_product_history_del"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="2dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_product_history_del"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <View

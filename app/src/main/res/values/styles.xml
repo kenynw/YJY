@@ -71,8 +71,9 @@
         <item name="android:layout_height">47dp</item>
         <item name="android:layout_width">47dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/f32d</item>
+        <item name="android:textColor">@color/color_sencond_title</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/bg_f5_line</item>
     </style>
 
 

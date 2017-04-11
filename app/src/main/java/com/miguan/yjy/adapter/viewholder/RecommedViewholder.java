@@ -1,12 +1,14 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.product.SearchResultActivity;
 
 import butterknife.BindView;
@@ -37,6 +39,14 @@ public class RecommedViewholder extends BaseViewHolder<Product> {
         Intent intent = new Intent(getContext(), SearchResultActivity.class);
         intent.putExtra("name", name);
         getContext().startActivity(intent);
+        String oldName = SystemPreferences.getSearchName();
+        if (!TextUtils.isEmpty(oldName)) {
+            if (!oldName.contains(name))
+                SystemPreferences.setSearchName(oldName + name + ",");
+        } else {
+            SystemPreferences.setSearchName(name + ",");
+        }
     }
+
 
 }

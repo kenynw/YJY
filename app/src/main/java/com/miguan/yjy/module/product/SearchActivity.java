@@ -22,8 +22,11 @@ import com.miguan.yjy.adapter.HistorySearchAdpter;
 import com.miguan.yjy.adapter.ProductAllSearchAdapter;
 import com.miguan.yjy.adapter.viewholder.RecommedViewholder;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.SystemPreferences;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,12 +61,18 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     @BindView(R.id.tv_product_clear_his)
     TextView tvClearHis;
 
+    HistorySearchAdpter mHistorySearchAdpter;
+    private List<String> mKeywordList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initListener();
         recyHistorySearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//        mHistorySearchAdpter = new HistorySearchAdpter(SearchActivity.this, mKeywordList);
+//        recyHistorySearch.setAdapter(mHistorySearchAdpter);
+        refreshAdapter();
     }
 
     @Override
@@ -82,7 +91,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             finish();
+                finish();
             }
         });
 
@@ -111,6 +120,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         });
     }
 
+
     public void setData(List<Product> datas) {
 
         ProductAllSearchAdapter productAllSearchAdapter = new ProductAllSearchAdapter(SearchActivity.this, datas);
@@ -118,8 +128,28 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         flowtagAllSearch.setAdapter(productAllSearchAdapter);
         productAllSearchAdapter.onlyAddAll(datas);
 
-        recyHistorySearch.setAdapter(new HistorySearchAdpter(SearchActivity.this,datas));
+    }
 
+    public void refreshAdapter() {
+        String historyKeywords = SystemPreferences.getSearchName();
+        if (!TextUtils.isEmpty(historyKeywords)) {
+            List<String> keywordList = new ArrayList<>();
+            for (String name : historyKeywords.split(",")) {
+                keywordList.add(name);
+            }
+            mKeywordList = keywordList;
+        }
+        mHistorySearchAdpter = new HistorySearchAdpter(SearchActivity.this, mKeywordList);
+        recyHistorySearch.setAdapter(mHistorySearchAdpter);
+        mHistorySearchAdpter.setRemoveClicklinsener(new HistorySearchAdpter.SetOnRemoveClicklinsener() {
+            @Override
+            public void removeName(String data) {
+                LUtils.toast("移除选择搜索");
+                mHistorySearchAdpter.remove(data);
+                mKeywordList.remove(mKeywordList.indexOf(data));
+                removeCurName(mKeywordList);
+            }
+        });
 
     }
 
@@ -136,5 +166,14 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     public ListConfig getListConfig() {
         return super.getListConfig().setRefreshAble(false).setLoadMoreAble(false);
     }
+
+    private void removeCurName(List<String>names) {
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<names.size();i++) {
+            sb.append(names.get(i) + ",");
+        }
+        SystemPreferences.setSearchName(sb.toString());
+    }
+
 
 }

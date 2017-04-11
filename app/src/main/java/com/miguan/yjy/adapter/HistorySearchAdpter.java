@@ -1,13 +1,16 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.product.SearchResultActivity;
 
 import java.util.List;
 
@@ -20,8 +23,15 @@ import butterknife.ButterKnife;
  * @描述 历史搜索
  */
 
-public class HistorySearchAdpter extends RecyclerArrayAdapter<Product> {
-    public HistorySearchAdpter(Context context, List<Product> objects) {
+public class HistorySearchAdpter extends RecyclerArrayAdapter<String> {
+
+    private SetOnRemoveClicklinsener mSetRemoveClicklinsener;
+
+    public void setRemoveClicklinsener(SetOnRemoveClicklinsener setRemoveClicklinsener) {
+        mSetRemoveClicklinsener = setRemoveClicklinsener;
+    }
+
+    public HistorySearchAdpter(Context context, List<String> objects) {
         super(context, objects);
     }
 
@@ -35,9 +45,15 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<Product> {
         holder.setData(mObjects.get(position));
     }
 
-    class HistorySearchViewHolder extends BaseViewHolder<Product> {
+    public interface SetOnRemoveClicklinsener {
+        public void removeName(String data);
+    }
+
+    class HistorySearchViewHolder extends BaseViewHolder<String> {
         @BindView(R.id.tv_product_name)
         TextView tvProductName;
+        @BindView(R.id.ll_product_his_close)
+        LinearLayout llProductHisClose;
 
         public HistorySearchViewHolder(ViewGroup parent) {
             super(parent, R.layout.product_item_history_serach);
@@ -45,9 +61,26 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<Product> {
         }
 
         @Override
-        public void setData(Product data) {
+        public void setData(String data) {
             super.setData(data);
-            tvProductName.setText(data.getProduct_name());
+            tvProductName.setText(data);
+            llProductHisClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    HistorySearchAdpter.this.remove(data);
+                    if (mSetRemoveClicklinsener != null) {
+                        mSetRemoveClicklinsener.removeName(data);
+                    }
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), SearchResultActivity.class);
+                    intent.putExtra("name", data);
+                    getContext().startActivity(intent);
+                }
+            });
         }
     }
 

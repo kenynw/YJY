@@ -57,6 +57,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> {
         ButterKnife.bind(this);
 
         mLlAvatar.setOnClickListener(v -> showImagePicker());
+        mTvUsername.setOnClickListener(v -> getPresenter().updateUserName());
         mTvLogout.setOnClickListener(v -> getPresenter().logout());
         mTvMobile.setOnClickListener(v -> getPresenter().bindMobile());
         mTvArea.setOnClickListener(v -> CityListActivity.star(ProfileActivity.this));
