@@ -11,8 +11,8 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.ProductReadAdapter;
-import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.module.common.WebViewActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +30,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
     RecyclerView mRecyProductComponentCreate;
     @BindView(R.id.tv_product_create_img)
     TextView mTvProductCreateImg;
+    public static final String WEBVIEW_READ = "http://m.yjyapp.com/site/skin-unscramble";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +50,14 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        WebViewActivity.satr(ProductComponentListActivity.this,"解读表",WEBVIEW_READ);
         return super.onOptionsItemSelected(item);
     }
 
     private void initData() {
         mRecyProductComponentCreate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductComponentListActivity.this, ProductModel.getInstance().getReadListData());
+        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductComponentListActivity.this, getPresenter().mComponents);
         mRecyProductComponentCreate.setAdapter(productReadAdapter);
+        mTvProductConponentNum.setText(String.format(getString(R.string.tv_product_component_num),getPresenter().mComponents.size()));
     }
-
 }

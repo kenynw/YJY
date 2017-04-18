@@ -30,8 +30,18 @@ public class TestResultPresenter extends BaseListActivityPresenter<TestResultAct
                 getView().setData(tests);
             }
         });
+        TestModel.getInstantce().getTestResult(12, 20, 30, 40).subscribe(new ServicesResponse<Test>(){
+
+            @Override
+            public void onNext(Test test) {
+                super.onNext(test);
+            }
+        });
+
 
     }
+
+
 
 
 }

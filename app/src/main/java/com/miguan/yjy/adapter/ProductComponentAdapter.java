@@ -7,8 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.module.product.SearchResultPresenter;
+import com.miguan.yjy.model.bean.ComponentTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,28 +15,29 @@ import java.util.List;
 /**
  * @作者 cjh
  * @日期 2017/3/21 16:03
- * @描述 大家都在搜
+ * @描述 成分
  */
 
-public class ProductAllSearchAdapter extends BaseAdapter {
-    private Context context;
-    private List<Product> datas;
-    private List<Product> mdatas;
+public class ProductComponentAdapter extends BaseAdapter {
 
-    public ProductAllSearchAdapter(Context context, List<Product> datas) {
+    private Context context;
+    private List<ComponentTag> lists;
+    private List<ComponentTag> mdatas;
+
+    public ProductComponentAdapter(Context context, List<ComponentTag> lists) {
         this.context = context;
-        this.datas = datas;
+        this.lists = lists;
         mdatas = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return datas.size();
+        return lists.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return datas.get(position);
+        return lists.get(position);
     }
 
     @Override
@@ -49,14 +49,28 @@ public class ProductAllSearchAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = View.inflate(context, R.layout.item_product_all_search, null);
         TextView textView = (TextView) convertView.findViewById(R.id.item_label_tv);
-        textView.setText(datas.get(position).getName());
+        textView.setText(lists.get(position).getName()+":"+lists.get(position).getId().size()+"种");
         textView.setOnClickListener(v -> {
-            SearchResultPresenter.start(context,datas.get(position).getName(),0,"");
+            if (mSetOnTagClickListener != null) {
+                mSetOnTagClickListener.itemClick(v);
+            }
+//            ProductReadPresenter.start(context,lists);
         });
         return convertView;
     }
-    public void onlyAddAll(List<Product> datas) {
+    public void onlyAddAll(List<ComponentTag> datas) {
         mdatas.addAll(datas);
         notifyDataSetChanged();
+    }
+
+
+    public interface  SetOnTagClickListener{
+        public void itemClick(View v);
+    }
+
+    private SetOnTagClickListener mSetOnTagClickListener;
+
+    public void setSetOnTagClickListener(SetOnTagClickListener setOnTagClickListener) {
+        mSetOnTagClickListener = setOnTagClickListener;
     }
 }

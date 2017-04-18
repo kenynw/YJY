@@ -30,12 +30,13 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/tv_product_skin_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableEnd="@mipmap/ic_product_detail_sort"
             android:drawablePadding="7dp"
             android:drawableRight="@mipmap/ic_product_detail_sort"
-            android:text="@string/tv_product_detail_sort"
+            android:text="@string/tv_product_detail_sort_total"
             android:textColor="@color/f6"
             android:textSize="@dimen/text_size_small_14"
             />
@@ -109,7 +110,7 @@
     </RadioGroup>
 
     <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recycle"
+        android:id="@+id/recy_product_evaluate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"

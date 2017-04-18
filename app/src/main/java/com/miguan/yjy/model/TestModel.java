@@ -3,6 +3,9 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.model.services.DefaultTransform;
+import com.miguan.yjy.model.services.ServicesClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,22 @@ public class TestModel extends AbsModel {
         }
         return Observable.just(tests);
     }
+
+    /**
+     * 测试结果
+     *
+     * @param dry
+     * @param tolerance
+     * @param pigment
+     * @param compact
+     */
+
+    public Observable<Test> getTestResult(int dry, int tolerance, int pigment, int compact) {
+
+        return ServicesClient.getServices().saveSkin(UserPreferences.getUserID(), dry, tolerance, pigment, compact).compose(new DefaultTransform<>());
+    }
+
+
 
 
 }

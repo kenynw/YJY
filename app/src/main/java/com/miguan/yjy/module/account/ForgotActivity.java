@@ -7,6 +7,7 @@ import android.widget.EditText;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.widget.SendValidateButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +25,7 @@ public class ForgotActivity extends ChainBaseActivity<ForgotPresenter> {
     EditText mEtCaptcha;
 
     @BindView(R.id.btn_account_captcha)
-    Button mBtnCaptcha;
+    SendValidateButton mBtnCaptcha;
 
     @BindView(R.id.et_account_password)
     EditText mEtPassword;
@@ -43,6 +44,17 @@ public class ForgotActivity extends ChainBaseActivity<ForgotPresenter> {
         mEtUsername.addTextChangedListener(watcher);
         mEtPassword.addTextChangedListener(watcher);
         mEtCaptcha.addTextChangedListener(watcher);
+        if (mBtnCaptcha.isClickable()) {
+            mBtnCaptcha.setTextColor(getResources().getColor(R.color.white));
+        }
+        mBtnCaptcha.setmEnableColor(getResources().getColor(R.color.white));
+        mBtnCaptcha.setmEnableString("获取验证码");
+        mBtnCaptcha.setOnClickListener(v->getPresenter().getCode());
+        mBtnSubmit.setOnClickListener(v->getPresenter().updatePwd());
+
     }
+
+
+
 
 }

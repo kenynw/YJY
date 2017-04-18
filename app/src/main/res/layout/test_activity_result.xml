@@ -188,6 +188,7 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/ll_test_grade"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -215,6 +216,7 @@
                     />
 
                 <LinearLayout
+                    android:id="@+id/ll_test_again"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -306,8 +308,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:paddingLeft="10dp"
                     android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
                     android:paddingRight="15dp">
 
                     <ImageView

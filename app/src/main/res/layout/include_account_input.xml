@@ -37,7 +37,7 @@
             android:textColor="@color/textPrimary"
             />
 
-        <Button
+        <com.miguan.yjy.widget.SendValidateButton
             android:id="@+id/btn_account_captcha"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -47,7 +47,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_body_material"
             />
-
     </LinearLayout>
 
     <EditText

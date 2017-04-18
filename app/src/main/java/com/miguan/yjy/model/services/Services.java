@@ -8,6 +8,7 @@ import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 
@@ -38,6 +39,7 @@ public interface Services {
     );
 
     //////////////////用户相关/////////////////////
+
     /**
      * 用户登录
      *
@@ -87,16 +89,17 @@ public interface Services {
      * @param captcha 验证码
      * @return
      */
-    @GET("user/user/reset-password")
-    Observable<Boolean> modifyPwd(
+    @GET("?action=resetPassword")
+    Observable<String> modifyPwd(
             @Query("mobile") CharSequence mobile,
             @Query("captcha") CharSequence captcha,
-            @Query("password") CharSequence newPwd
+            @Query("newPassword") CharSequence newPwd
     );
 
     /**
      * 我在用的列表
      * //TODO
+     *
      * @return
      */
     @GET("?action=userProduct")
@@ -106,10 +109,11 @@ public interface Services {
 
     /**
      * 我长草的列表
+     *
      * @param userId 用户ID
      * @param cateId 栏目ID
      * @param effect 功效
-     * @param page 当前页数
+     * @param page   当前页数
      * @return
      */
     @GET("?action=userGrass")
@@ -122,9 +126,10 @@ public interface Services {
 
     /**
      * 我点评的列表
+     *
      * @param userId 用户ID
-     * @param type  (选填)类型1产品2文章
-     * @param page 当前页数
+     * @param type   (选填)类型1产品2文章
+     * @param page   当前页数
      * @return
      */
     @GET("?action=comment")
@@ -136,8 +141,9 @@ public interface Services {
 
     /**
      * 我收藏的列表
+     *
      * @param userId 用户ID
-     * @param page 当前页数
+     * @param page   当前页数
      * @return
      */
     @GET("?action=userCollect")
@@ -159,8 +165,9 @@ public interface Services {
 
     /**
      * 个人资料修改
+     *
      * @param attribute － 需要修改的字段(username,mobile,birthday,img)
-     * @param content － 修改的值
+     * @param content   － 修改的值
      * @return
      */
     @GET("?action=userUpdate")
@@ -181,9 +188,10 @@ public interface Services {
 
     /**
      * 吐槽一下
-     * @param userId 用户ID
+     *
+     * @param userId   用户ID
      * @param username 用户名
-     * @param content 吐槽内容
+     * @param content  吐槽内容
      * @return
      */
     @GET("?action=userFeedback")
@@ -194,14 +202,16 @@ public interface Services {
     );
 
     ////////////////////产品&&文章//////////////////////
+
     /**
-     *  产品或文章评论列表
-     * @param id 产品或文章的ID
-     * @param page 当前页数
-     * @param user_id 用户ID 可空
-     * @param type 类型 1-产品，2-文章
-     * @param orderBy 排序字段,目前有'Praise'好评,'middle'中评,'bad'差评,'likeNum'综合排序按点赞数
-     * @param desc 排序方式,值为'DESC'或'ASC'
+     * 产品或文章评论列表
+     *
+     * @param id        产品或文章的ID
+     * @param page      当前页数
+     * @param user_id   用户ID 可空
+     * @param type      类型 1-产品，2-文章
+     * @param orderBy   － 排序方式-默认default综合排序，skin 肤质排序
+     * @param condition 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
      * @return
      */
     @GET("?action=commentList")
@@ -212,15 +222,16 @@ public interface Services {
             @Query("user_id") int user_id,
             @Query("type") int type,
             @Query("orderBy") String orderBy,
-            @Query("desc") String desc
+            @Query("condition") String condition
     );
 
     /**
      * 产品或文章添加评论
-     * @param id 产品或文章的ID
+     *
+     * @param id      产品或文章的ID
      * @param user_id 用户ID 可空
-     * @param type 类型 1-产品，2-文章
-     * @param star 星级(文章可不传)
+     * @param type    类型 1-产品，2-文章
+     * @param star    星级(文章可不传)
      * @param content 评论内容
      * @return
      */
@@ -235,8 +246,9 @@ public interface Services {
 
     /**
      * 产品或文章添加评论
+     *
      * @param evaluateId 产品或文章的ID
-     * @param user_id 用户ID 可空
+     * @param user_id    用户ID 可空
      * @return
      */
     @GET("?action=addCommentLike")
@@ -247,15 +259,15 @@ public interface Services {
 
     /**
      * 品牌列表
-     *
      */
     @GET("?action=brandList")
     Observable<Brand> brandList();
 
     /**
      * 批号查询
+     *
      * @param brandId 品牌ID
-     * @param number 批号
+     * @param number  批号
      * @return
      */
     @GET("?action=queryCosmetics")
@@ -266,7 +278,6 @@ public interface Services {
 
     /**
      * 添加到保质期提醒
-     *
      */
     @GET("?action=addRemind")
     Observable<String> addRepository(
@@ -288,7 +299,7 @@ public interface Services {
     @GET("?action=productInfo")
     Observable<Product> productDetail(
             @Query("id") int id,
-            @Query("uid") int uid
+            @Query("user_id") int user_id
     );
 
     /**
@@ -307,6 +318,7 @@ public interface Services {
 
     /**
      * 搜索结果接口
+     *
      * @param keywords
      * @param type
      * @param cate_id
@@ -341,9 +353,10 @@ public interface Services {
 
     /**
      * 收藏产品或文章
-     * @param id 产品或文章ID
+     *
+     * @param id      产品或文章ID
      * @param user_id 用户ID
-     * @param type 1产品 2文章
+     * @param type    1产品 2文章
      * @return
      */
     @GET("?action=collect")
@@ -352,6 +365,23 @@ public interface Services {
             @Query("user_id") int user_id,
             @Query("type") int type
     );
+    ////////////////////测试//////////////////////
+
+    /**
+     * 肤质提交及推荐接口
+     * action(string) － 固定值saveSkin
+     * user_id(int) － 用户ID
+     * dry(int) － 干性值
+     * tolerance(int) － 敏感值
+     * pigment(int) － 色素值
+     * compact(int) － 紧致值
+     */
+    @GET("?action=saveSkin")
+    Observable<Test> saveSkin(@Query("user_id") int userId,
+                              @Query("dry") int dry,
+                              @Query("tolerance") int tolerance,
+                              @Query("pigment") int pigment,
+                              @Query("compact") int compact);
 
     ////////////////////其他//////////////////////
 

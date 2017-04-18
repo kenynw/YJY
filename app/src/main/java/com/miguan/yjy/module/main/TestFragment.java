@@ -20,7 +20,9 @@ import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.test.TestGuideActivity;
+import com.miguan.yjy.module.test.TestResultActivity;
 import com.miguan.yjy.utils.DateUtils;
 
 import java.util.Calendar;
@@ -28,6 +30,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * @作者 cjh
  * @日期 2017/3/30 16:00
@@ -109,20 +112,23 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_test_wrinkle:
-                showTestUserInfoPop();
-                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(0));
+                if (UserPreferences.getUserID() <= 0) {
+                    showTestUserInfoPop();
+                } else {
+                    TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(0), TestGuideActivity.EXTRA_TEST__FIRST_TYPE);
+                }
                 break;
             case R.id.ll_test_oily:
-                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(1));
+                TestResultActivity.star(getActivity());
+//                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(1), TestGuideActivity.EXTRA_TEST_SECOND_TYPE);
                 break;
             case R.id.ll_test_sensitive:
-                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(2));
+                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(2), TestGuideActivity.EXTRA_TEST_THIRD_TYPE);
                 break;
             case R.id.ll_test_pigment:
-                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(3));
+                TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(3), TestGuideActivity.EXTRA_TEST_FOUR_TYPE);
                 break;
             case R.id.tv_test_man:
-                mTvTestMan.setText(R.string.crop_discard_text);
                 mTvTestMan.setBackgroundResource(R.drawable.bg_shape_63c);
                 mTvTestWoman.setBackgroundResource(R.drawable.bg_round_stroke_div);
                 mTvTestMan.setTextColor(getResources().getColor(R.color.white));
@@ -177,8 +183,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
             public void onTimeSelect(Date date, View v) {//选中事件回调
                 mTvTestSelectBirthday.setText(DateUtils.DateToStr(date));
             }
-        })
-                .setCancelColor(getResources().getColor(R.color.f9)).setSubmitColor(getResources().getColor(R.color.f32d)).isDialog(true).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
+        }).setCancelColor(getResources().getColor(R.color.f9)).setSubmitColor(getResources().getColor(R.color.f32d)).isDialog(true).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
         pvTime.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
         pvTime.show();
 

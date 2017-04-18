@@ -25,6 +25,7 @@
         android:id="@+id/ll_evaluate_user_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:layout_alignTop="@+id/dv_evaluate_avatar"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="@dimen/spacing_normal"

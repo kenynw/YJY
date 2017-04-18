@@ -16,6 +16,7 @@ public class RegisterPresenter extends Presenter<RegisterActivity> {
             @Override
             public void onNext(Boolean result) {
                 LUtils.toast("发送成功");
+                getView().mBtnCaptcha.startTickWork();
             }
         });
     }

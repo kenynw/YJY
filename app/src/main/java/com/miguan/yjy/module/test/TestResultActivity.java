@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestListAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.module.common.WebViewActivity;
 
 import java.util.List;
 
@@ -29,6 +31,8 @@ import butterknife.ButterKnife;
  */
 @RequiresPresenter(TestResultPresenter.class)
 public class TestResultActivity extends BaseListActivity<TestResultPresenter> {
+
+    public static final String H5_SCORE="http://m.yjyapp.com/site/score-tip";
 
     @BindView(R.id.tv_test_result_descirbe)
     TextView mTvResultDescirbe;
@@ -46,6 +50,12 @@ public class TestResultActivity extends BaseListActivity<TestResultPresenter> {
     RecyclerView mRecyTestSencond;
     @BindView(R.id.ll_test_sencond_more)
     LinearLayout mLlTestSencondMore;
+    @BindView(R.id.ll_test_grade)
+    LinearLayout mLlTestGrade;
+    @BindView(R.id.ll_test_again)
+    LinearLayout mLlTestAgain;
+    @BindView(R.id.recycle)
+    EasyRecyclerView mRecycle;
 
 
     @Override
@@ -53,6 +63,7 @@ public class TestResultActivity extends BaseListActivity<TestResultPresenter> {
         super.onCreate(savedInstanceState);
         setToolbarTitle("我的肤质");
         ButterKnife.bind(this);
+        mLlTestGrade.setOnClickListener(v-> WebViewActivity.satr(this,getString(R.string.text_test_grade),H5_SCORE));
     }
 
     @Override

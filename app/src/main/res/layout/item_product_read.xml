@@ -4,13 +4,8 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/fe2"
-        />
-
     <LinearLayout
+        android:id="@+id/ll_product_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/f5"
@@ -24,7 +19,6 @@
             android:layout_margin="5dp"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="@string/tv_product_component_name"
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_14"/>
 
@@ -34,14 +28,39 @@
             android:background="@color/fe2"
             />
 
-        <TextView
-            android:id="@+id/tv_product_component_safe"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_product_component_safe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small_14"/>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/fe2"
+            />
+
+        <ImageView
+            android:id="@+id/iv_product_component_active"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/tv_product_component_safe"
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_14"/>
 
@@ -51,31 +70,13 @@
             android:background="@color/fe2"
             />
 
-        <TextView
-            android:id="@+id/tv_product_component_active"
+        <ImageView
+            android:id="@+id/iv_product_component_pox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/tv_product_component_active"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_14"/>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/fe2"
-            />
-
-        <TextView
-            android:id="@+id/tv_product_component_pox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/tv_product_component_pox"
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_14"/>
 
@@ -92,8 +93,14 @@
             android:layout_margin="5dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="@string/tv_product_component_goal"
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_14"/>
     </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/fe2"
+        />
 </LinearLayout>

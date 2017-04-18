@@ -97,4 +97,9 @@
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_14"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/fe2"
+        />
 </LinearLayout>

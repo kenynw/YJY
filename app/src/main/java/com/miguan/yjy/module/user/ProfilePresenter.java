@@ -139,6 +139,14 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
         TextView mTvDialogCancel = findById(bindMobile, R.id.tv_user_dialog_cancel);
         SendValidateButton mBtnDialogSure = findById(bindMobile, R.id.btn_user_dialog_sure);
         mBtnDialogSure.startTickWork();
+        mBtnDialogSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBtnDialogSure.isClickable()) {
+                    mBtnDialogSure.startTickWork();
+                }
+            }
+        });
         scvEdt.setInputCompleteListener(this);
 //        mBtnDialogSure.setText(R.string.text_user_next);
         codePop = new PopupWindow(bindMobile, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);

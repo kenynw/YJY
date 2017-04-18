@@ -32,9 +32,9 @@ public class ArticleModel extends AbsModel {
         return ServicesClient.getServices().articleList(page, 5).compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Evaluate>> getEvaluateList(int articleId, int page, String orderBy, String desc) {
+    public Observable<List<Evaluate>> getEvaluateList(int articleId, int page, String orderBy) {
         return ServicesClient.getServices().evaluateList(
-                articleId, page, 10, UserPreferences.getUserID(), TYPE_ARTICLE, orderBy, desc
+                articleId, page, 10, UserPreferences.getUserID(), TYPE_ARTICLE, orderBy,""
         ).compose(new DefaultTransform<>());
     }
 

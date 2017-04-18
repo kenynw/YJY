@@ -3,6 +3,7 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.local.UserPreferences;
@@ -21,6 +22,8 @@ import rx.Observable;
  */
 
 public class ProductModel extends AbsModel {
+
+    public static final int TYPE_PRODUCT = 1;
 
     public static ProductModel getInstance() {
         return getInstance(ProductModel.class);
@@ -135,4 +138,38 @@ public class ProductModel extends AbsModel {
                 UserPreferences.getUserID(), brandId, brandName, product, isSeal, sealTime, qualityTime, overdueTime
         ).compose(new DefaultTransform<>());
     }
+
+    /**
+     * 写点评
+     */
+    public Observable<String> addEvaluate(int productId, int satr, String content) {
+        return ServicesClient.getServices()
+                .addEvaluate(productId, UserPreferences.getUserID(), TYPE_PRODUCT, satr, content)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 获取用户点评列表
+     * id(int) － 对应ID
+     * user_id(int) － 用户ID，未登录可为空
+     * type(int) － 类型 1-产品，2-文章
+     * orderBy(string) － 排序方式-默认default综合排序，skin 肤质排序
+     * condition(string) － 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
+     * page(int) － 当前页数
+     * pageSize(int) － 每页多少条
+     */
+    public Observable<List<Evaluate>> getEvaluate(int productId, int page, String orderBy, String condition) {
+        return ServicesClient.getServices()
+                .evaluateList(productId, page, 10, UserPreferences.getUserID(), TYPE_PRODUCT, orderBy, condition)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 产品评论列表点赞
+     */
+    public Observable<String> addEvaluateLike(int evaluateId) {
+        return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+
 }

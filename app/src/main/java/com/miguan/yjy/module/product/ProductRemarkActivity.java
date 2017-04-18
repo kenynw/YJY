@@ -10,9 +10,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.ProductModel;
+import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.services.ServicesResponse;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +42,7 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
     TextView mTvRemarkEvaluate;
     @BindView(R.id.et_product_remark)
     EditText mEtRemark;
+    Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
         setContentView(R.layout.product_activity_remark);
         ButterKnife.bind(this);
         setToolbarTitle("写点评");
+        product = getIntent().getParcelableExtra(ProductRemarkPresenter.EXTRA_PROUDUCT);
+        setView(product);
         initListener();
     }
 
@@ -62,7 +69,13 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
     }
 
     private void submit() {
-
+        ProductModel.getInstance().addEvaluate(product.getId(), mRatbarProduct.getNumStars(), mEtRemark.getText().toString())
+        .subscribe(new ServicesResponse<String>(){
+            @Override
+            public void onNext(String s) {
+                finish();
+            }
+        });
     }
 
     private void initListener() {
@@ -93,8 +106,6 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
         mRatbarProduct.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
 
             final int numStars = ratingBar.getNumStars();
-            mTvProductName.setText( getString(R.string.tv_product_detail_user_evaluate) + " " + rating + "/" + numStars);
-
             // Since this rating bar is updated to reflect any of the other rating
             // bars, we should update it to the current values.
             if (mRatbarProduct.getNumStars() != numStars) {
@@ -107,7 +118,7 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
             if (mRatbarProduct.getStepSize() != ratingBarStepSize) {
                 mRatbarProduct.setStepSize(ratingBarStepSize);
             }
-            switch ((int)rating) {
+            switch ((int) rating) {
                 case 1:
                 case 2:
                     mTvRemarkEvaluate.setText("差评");
@@ -124,6 +135,13 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
         });
 
 
+    }
+
+
+    private void setView(Product product) {
+        Glide.with(this).load(product.getProduct_img()).fitCenter().placeholder(R.mipmap.def_image_product).error(R.mipmap.def_image_product).into(mImgProudct);
+        mTvProductName.setText(product.getProduct_name());
+        mTvProductMoney.setText(product.getPrice());
     }
 
 }

@@ -105,7 +105,8 @@
     <string name="tv_product_detail_info">备案、安全及功效信息</string>
     <string name="tv_product_detail_compare_price">去比价</string>
     <string name="tv_product_detail_user_evaluate">用户评价(%d)</string>
-    <string name="tv_product_detail_sort">肤质排序</string>
+    <string name="tv_product_detail_sort_skin">肤质排序</string>
+    <string name="tv_product_detail_sort_total">综合排序</string>
     <string name="tv_product_detail_read">颜究院官方解读</string>
     <string name="tv_product_detail_record_inf0">备案信息:  </string>
     <string name="tv_product_detail_record_document_number">备案文号:  </string>
@@ -130,6 +131,9 @@
     <string name="tv_product_component_describe">本成分列表数据来自国家食品药品监督管理局标签排序\n按添加量从多到少排序</string>
     <string name="tv_menu_read_list">解读表</string>
     <string name="tv_product_component_img">生成成分表图片</string>
+    <string name="tv_product_component_num">本产品包含%d种成分</string>
+    <string name="tv_product_fit_skin">适合我的肤质:%d种</string>
+    <string name="tv_product_no_fit_skin">不适合我的肤质:%d种</string>
 
     <!--测试相关-->
     <string name="tv_test_wrinkele">皱纹/紧致测试</string>
@@ -167,6 +171,7 @@
     <string name="btn_user_again">重发</string>
     <string name="btn_user_sure">确定</string>
     <string name="btn_user_bined_content">如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。</string>
+    <string name="btn_update_pwd">修改密码</string>
 
     <string name="tv_cancel">取消</string>
     <string name="tv_share_content">分享内容到</string>

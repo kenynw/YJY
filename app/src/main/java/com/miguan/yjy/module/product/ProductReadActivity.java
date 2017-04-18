@@ -10,8 +10,11 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.ProductReadAdapter;
-import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.model.bean.Product;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +38,8 @@ public class ProductReadActivity extends BaseDataActivity<ProductReadPresenter, 
     TextView mTvProductFunctionInfo;
 
     private int type = 0;
+    private ProductReadAdapter productReadAdapter;
+    private List<Component> mReadLists = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class ProductReadActivity extends BaseDataActivity<ProductReadPresenter, 
     private void initData() {
         mRecyProductRead.setFocusable(false);
         mRecyProductRead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductReadActivity.this, ProductModel.getInstance().getReadListData());
+        productReadAdapter = new ProductReadAdapter(ProductReadActivity.this, mReadLists);
         mRecyProductRead.setAdapter(productReadAdapter);
     }
 
@@ -70,20 +75,25 @@ public class ProductReadActivity extends BaseDataActivity<ProductReadPresenter, 
                 mTvProductNoCompare.setSelected(false);
                 mTvProductSafe.setSelected(false);
                 mTvProductFunctionInfo.setSelected(false);
+                getRecommendLists(getPresenter().product);
                 break;
             case R.id.tv_product_no_compare:
+                getNoRecommendLists(getPresenter().product);
                 mTvProductCompare.setSelected(false);
                 mTvProductNoCompare.setSelected(true);
                 mTvProductSafe.setSelected(false);
                 mTvProductFunctionInfo.setSelected(false);
                 break;
             case R.id.tv_product_safe:
+                getSafeLists(getPresenter().product);
                 mTvProductCompare.setSelected(false);
                 mTvProductNoCompare.setSelected(false);
                 mTvProductSafe.setSelected(true);
                 mTvProductFunctionInfo.setSelected(false);
                 break;
             case R.id.tv_product_function_info:
+
+                getEffectLists(getPresenter().product);
                 mTvProductCompare.setSelected(false);
                 mTvProductNoCompare.setSelected(false);
                 mTvProductSafe.setSelected(false);
@@ -92,5 +102,72 @@ public class ProductReadActivity extends BaseDataActivity<ProductReadPresenter, 
         }
     }
 
+    private List<Component> getRecommendLists(Product product) {
+        productReadAdapter.clear();
+        mReadLists.clear();
+        for (int i = 0; i < product.getRecommend().size(); i++) {
+            for (int j = 0; j < product.getComponentList().size(); j++) {
+                Component component = product.getComponentList().get(j);
+                List<String> recommendId = product.getRecommend();
+                String productId = component.getId();
+                    if (recommendId.contains(productId)) {
+                        mReadLists.add(component);
+                    }
+            }
+        }
+        productReadAdapter.addAll(mReadLists);
+        return mReadLists;
+    }
+
+    private List<Component> getNoRecommendLists(Product product) {
+        productReadAdapter.clear();
+        mReadLists.clear();
+        for (int i = 0; i < product.getNotRecommend().size(); i++) {
+            for (int j = 0; j < product.getComponentList().size(); j++) {
+                Component component = product.getComponentList().get(j);
+                List<String> noRecommendId = product.getNotRecommend();
+                String productId = component.getId();
+                if (noRecommendId.contains(productId)) {
+                    mReadLists.add(component);
+                }
+            }
+        }
+        productReadAdapter.addAll(mReadLists);
+        return mReadLists;
+    }
+
+    private List<Component> getEffectLists(Product product) {
+        productReadAdapter.clear();
+        mReadLists.clear();
+        for (int i = 0; i < product.getEffect().size(); i++) {
+            for (int j = 0; j < product.getComponentList().size(); j++) {
+                Component component = product.getComponentList().get(j);
+                List<String> effectId = product.getEffect().get(i).getId();
+                String productId = component.getId();
+                if (effectId.contains(productId)) {
+                    mReadLists.add(component);
+                }
+            }
+        }
+        productReadAdapter.addAll(mReadLists);
+        return mReadLists;
+    }
+
+    private List<Component> getSafeLists(Product product) {
+        productReadAdapter.clear();
+        mReadLists.clear();
+        for (int i = 0; i < product.getSecurity().size(); i++) {
+            for (int j = 0; j < product.getComponentList().size(); j++) {
+                Component component = product.getComponentList().get(j);
+                List<String> effectId = product.getSecurity().get(i).getId();
+                String productId = component.getId();
+                if (effectId.contains(productId)) {
+                    mReadLists.add(component);
+                }
+            }
+        }
+        productReadAdapter.addAll(mReadLists);
+        return mReadLists;
+    }
 
 }
