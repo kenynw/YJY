@@ -2,6 +2,7 @@ package com.miguan.yjy.module.product;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +15,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.adapter.EvaluateAdapter;
+import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,6 +107,22 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.iv_product_down)
     ImageView mIvProductDown;
+    @BindView(R.id.tv_product_taobao)
+    TextView mTvTaobao;
+    @BindView(R.id.tv_product_jingdong)
+    TextView mTvJingdong;
+    @BindView(R.id.tv_product_amazon)
+    TextView mTvAmazon;
+    @BindView(R.id.recy_product_evaluate)
+    EasyRecyclerView mRecyEvalutate;
+    @BindView(R.id.tv_product_skin_sort)
+    TextView mTvSkinSort;
+
+    private ProductComponentAdapter mComponentAdapter;
+    private ProductComponentAdapter mEffectAdapter;
+    private EvaluateAdapter mEvaluateAdapter;
+    private List<Evaluate> mEvaluates;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +130,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         setContentView(R.layout.product_activity_detail);
         setToolbarTitle("产品详情");
         ButterKnife.bind(this);
-
+        mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
     }
 
@@ -117,18 +141,68 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvSpec.setText(String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
 
+        tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), product.getRecommend().size()));
+        tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), product.getNotRecommend().size()));
+
         // 备案
         mTvProvisionNo.setText(product.getStandard_number());
         mTvCountry.setText(product.getProduct_country());
         mTvCompany.setText(product.getProduct_company());
+        ratbarGrade.setRating(product.getStar());
+
+        mComponentAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getSecurity());
+        flowtagGrade.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+        flowtagGrade.setAdapter(mComponentAdapter);
+        mComponentAdapter.onlyAddAll(product.getSecurity());
+        mComponentAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
+            @Override
+            public void itemClick(View v) {
+                ProductReadPresenter.start(ProductDetailActivity.this, product);
+            }
+        });
+
+        mEffectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
+        flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+        flowtagEffectInfo.setAdapter(mEffectAdapter);
+        mEffectAdapter.onlyAddAll(product.getEffect());
+
+        mEffectAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
+            @Override
+            public void itemClick(View v) {
+                ProductReadPresenter.start(ProductDetailActivity.this, product);
+            }
+        });
+
+        //去比价
+        mTvTaobao.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
+        mTvJingdong.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getJd()));
+        mTvAmazon.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getAmazon()));
+
 
         // 下面按钮
         mTvLike.setOnClickListener(v -> getPresenter().addLike());
 
         tvRemark.setOnClickListener(v -> ProductRemarkPresenter.start(this, product));
         Component component = new Component();
-        tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, component));
+        tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, product));
         ll_info.setOnClickListener(this);
+
+        tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+        tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+        mTvSkinSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mTvSkinSort.getText().equals("肤质排序")) {
+                    mTvSkinSort.setText(R.string.tv_product_detail_sort_total);
+                    getPresenter().getEvaluateData(getPresenter().getUserEvluate(),getPresenter().SORT_DEFAULT);
+                } else {
+                    mTvSkinSort.setText(R.string.tv_product_detail_sort_skin);
+                    getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_SKIN);
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -162,16 +236,28 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
-            case R.id.rbtn_product_high_evaluate :
+            case R.id.rbtn_product_high_evaluate:
                 getPresenter().setOrder("praise");
+                getPresenter().getEvaluateData(getPresenter().START_PRAISE, getPresenter().getSort());
                 break;
-            case R.id.rbtn_product_medium_evaluate :
+            case R.id.rbtn_product_medium_evaluate:
                 getPresenter().setOrder("middle");
+                getPresenter().getEvaluateData(getPresenter().START_MIDDLE, getPresenter().getSort());
                 break;
-            case R.id.rbtn_product_bad_evaluate :
+            case R.id.rbtn_product_bad_evaluate:
                 getPresenter().setOrder("bad");
+                getPresenter().getEvaluateData(getPresenter().START_BAD, getPresenter().getSort());
                 break;
         }
     }
+
+    public void setEvaluate(List<Evaluate> list) {
+        mEvaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
+        mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyEvalutate.setAdapter(mEvaluateAdapter);
+        tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));
+
+    }
+
 
 }

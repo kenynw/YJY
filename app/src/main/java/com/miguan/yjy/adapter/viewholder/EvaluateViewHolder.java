@@ -1,6 +1,9 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,13 +17,13 @@ import com.miguan.yjy.model.services.ServicesResponse;
 
 import butterknife.BindView;
 
-
 /**
  * Copyright (c) 2017/3/24. LiaoPeiKun Inc. All rights reserved.
  */
 
 public class EvaluateViewHolder extends BaseEvaluateViewHolder {
 
+    private int type;
     @BindView(R.id.dv_evaluate_avatar)
     SimpleDraweeView mDvAvatar;
 
@@ -42,7 +45,7 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
     @BindView(R.id.ll_evaluate_user_info)
     LinearLayout mLlUserInfo;
 
-    @BindView(R.id.tv_evaluate_label)
+    @BindView(com.miguan.yjy.R.id.tv_evaluate_label)
     TextView mTvLabel;
 
     public EvaluateViewHolder(ViewGroup parent) {
@@ -58,6 +61,10 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
         mTvLabel.setText(data.getSkin());
         mIvLike.setImageResource(data.getIsLike() == 0 ? R.mipmap.ic_like_normal : R.mipmap.ic_like_pressed);
         mTvLike.setText(String.valueOf((data.getLike_num())));
+        if (TextUtils.isEmpty(data.getSkin())) {
+            mTvLabel.setVisibility(View.GONE);
+            mLlUserInfo.setGravity(Gravity.CENTER_VERTICAL);
+        }
         mLlEvaluateLike.setOnClickListener(v -> ArticleModel.getInstance().addEvaluateLike(data.getId())
                 .subscribe(new ServicesResponse<String>() {
                     @Override

@@ -74,7 +74,7 @@ public class UserModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
-    public Observable<Boolean> modifyPwd(String mobile, String code, String newPwd) {
+    public Observable<String> modifyPwd(String mobile, String code, String newPwd) {
         return ServicesClient.getServices().modifyPwd(mobile, code, newPwd).compose(new DefaultTransform<>());
     }
 

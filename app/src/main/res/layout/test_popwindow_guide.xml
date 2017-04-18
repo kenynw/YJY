@@ -17,7 +17,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:gravity="center"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
@@ -27,9 +26,10 @@
         <View style="@style/ItemLineHeight"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_test_height_dry"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:text="@string/tv_test_height_dry"
@@ -38,18 +38,22 @@
         <View style="@style/ItemLineHeight"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_test_low_dry"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:text="@string/tv_test_low_dry"
             />
+
         <View style="@style/ItemLineHeight"/>
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_test_low_oily"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:text="@string/tv_test_low_oily"
@@ -58,9 +62,10 @@
         <View style="@style/ItemLineHeight"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_test_height_oily"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:text="@string/text_test_height_oily"

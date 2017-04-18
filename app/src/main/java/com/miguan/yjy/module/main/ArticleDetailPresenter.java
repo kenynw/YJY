@@ -42,12 +42,12 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     @Override
     public void onRefresh() {
         getView().setData(mArticle);
-        ArticleModel.getInstance().getEvaluateList(mArticle.getId(), 1, "", "desc").unsafeSubscribe(getRefreshSubscriber());
+        ArticleModel.getInstance().getEvaluateList(mArticle.getId(), 1, "").unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        ArticleModel.getInstance().getEvaluateList(mArticle.getId(), getCurPage(), "", "desc").unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getEvaluateList(mArticle.getId(), getCurPage(), "").unsafeSubscribe(getMoreSubscriber());
     }
 
     public void star() {

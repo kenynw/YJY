@@ -3,7 +3,7 @@
           package="com.miguan.yjy">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
@@ -16,8 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data android:value="58db9d8ba40fa3429000013a" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="test" android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58db9d8ba40fa3429000013a"/>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="test"/>
 
         <activity
             android:name=".module.main.LauncherActivity"
@@ -37,7 +41,7 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             >
         </activity>
-        <activity android:name=".module.product.SearchActivity" >
+        <activity android:name=".module.product.SearchActivity">
         </activity>
         <activity
             android:name=".module.main.ArticleDetailActivity"
@@ -107,9 +111,9 @@
         <activity
             android:name=".module.product.QueryCodeActivity"
             android:configChanges="orientation"
+            android:label="@string/text_query_production_date"
             android:screenOrientation="portrait"
             android:theme="@style/QueryTheme"
-            android:label="@string/text_query_production_date"
             android:windowSoftInputMode="adjustResize|stateAlwaysVisible">
         </activity>
         <activity
@@ -214,6 +218,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
+
+
+        <activity
+            android:name=".module.common.WebViewActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+
+
     </application>
 
 </manifest>

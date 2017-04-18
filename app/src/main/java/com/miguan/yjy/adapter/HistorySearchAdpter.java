@@ -1,7 +1,6 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -10,7 +9,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.module.product.SearchResultActivity;
+import com.miguan.yjy.module.product.SearchResultPresenter;
 
 import java.util.List;
 
@@ -76,9 +75,7 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<String> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), SearchResultActivity.class);
-                    intent.putExtra("name", data);
-                    getContext().startActivity(intent);
+                    SearchResultPresenter.start(getContext(),data,0,"");
                 }
             });
         }

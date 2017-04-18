@@ -27,15 +27,18 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
     private int mDisableTime = DISABLE_TIME; // 倒计时时间，默认60秒
     private int mEnableColor = getResources().getColor(R.color.f32d);
     private int mDisableColor = getResources().getColor(R.color.f9);
+    private int mEnableBgColor = R.color.white;
     private String mEnableString = "重发";
     private String mDisableString = "剩余";
     private String Second = "秒";
     private boolean mClickBle = true;
     private SendValidateButtonListener mListener = null;
 
+
     public int getmDisableTime() {
 
         return mDisableTime;
+
 
     }
 
@@ -43,6 +46,11 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
 
         return mEnableColor;
 
+    }
+
+    public void setEnableBgColor(int enableBgColor) {
+        mEnableBgColor = enableBgColor;
+        this.setBackgroundResource(enableBgColor);
     }
 
     public void setmEnableColor(int mEnableColor) {
@@ -60,6 +68,7 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
     public void setmDisableColor(int mDisableColor) {
 
         this.mDisableColor = mDisableColor;
+        this.setTextColor(mDisableColor);
 
     }
 
@@ -134,6 +143,7 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
         this.setText(mEnableString);
         this.setGravity(Gravity.CENTER);
         this.setTextColor(mEnableColor);
+//        setEnableBgColor(mEnableBgColor);
         initTimer();
         this.setOnClickListener(new OnClickListener() {
             @Override
@@ -166,8 +176,10 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
             SendValidateButton.this.setText(mDisableString + mDisableTime
                     + Second);
             this.setEnabled(false);
+//            setmDisableColor(mDisableColor);
             SendValidateButton.this.setTextColor(mDisableColor);
-            SendValidateButton.this.setBackgroundResource(R.color.white);
+//            setEnableBgColor(mEnableBgColor);
+//            SendValidateButton.this.setBackgroundResource();
             initTimerTask();
             mTimer.schedule(mTask, 0, 1000);
 
@@ -197,8 +209,8 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
         mTask = null;
         mDisableTime = DISABLE_TIME;
         this.setText(mEnableString);
-
         this.setTextColor(mEnableColor);
+//        setEnableBgColor(mEnableBgColor);
 //        SendValidateButton.this.setBackgroundResource(R.mipmap.ic_get_code_ok);
         this.setEnabled(true);
         mClickBle = true;

@@ -11,6 +11,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.SendValidateButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
     EditText mEtCaptcha;
 
     @BindView(R.id.btn_account_captcha)
-    Button mBtnCaptcha;
+    SendValidateButton mBtnCaptcha;
 
     @BindView(R.id.btn_register_submit)
     Button mBtnSubmit;
@@ -48,8 +49,14 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
         mEtPassword.addTextChangedListener(watcher);
         mEtCaptcha.addTextChangedListener(watcher);
 
+        if (mBtnCaptcha.isClickable()) {
+            mBtnCaptcha.setTextColor(getResources().getColor(R.color.white));
+        }
+        mBtnCaptcha.setmEnableColor(getResources().getColor(R.color.white));
+        mBtnCaptcha.setmEnableString("获取验证码");
         mBtnCaptcha.setOnClickListener(v -> checkCaptcha());
         mBtnSubmit.setOnClickListener(v -> checkInput());
+
     }
 
     private void checkCaptcha() {

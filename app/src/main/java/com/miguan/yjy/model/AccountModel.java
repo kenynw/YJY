@@ -31,6 +31,7 @@ public class AccountModel extends AbsModel {
 
     /**
      * 注册验证码
+     *
      * @param mobile 手机号
      * @return 发送结果
      */
@@ -40,11 +41,12 @@ public class AccountModel extends AbsModel {
 
     /**
      * 忘记密码验证码
+     *
      * @param mobile 手机号
      * @return 发送结果
      */
     public Observable<Boolean> forgotCaptcha(String mobile) {
-        return ServicesClient.getServices().sendCaptcha(mobile, 2).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().sendCaptcha(mobile, 1).compose(new DefaultTransform<>());
     }
 
     /**
@@ -58,11 +60,24 @@ public class AccountModel extends AbsModel {
 
     /**
      * 账号相关本地存储
+     *
      * @param user
      */
     private void saveAccount(User user) {
         UserPreferences.setUserID(user.getUser_id());
         UserPreferences.setUsername(user.getUsername());
+    }
+
+    /**
+     * 用户重置密码
+     * action(string) － 固定值resetPassword
+     * mobile(string) － 手机号码
+     * captcha(int) － 验证码
+     * newPassword(string) － 新密码
+     */
+
+    public Observable<String> resetPassword(String mobile,String captcha,String newPwd) {
+        return ServicesClient.getServices().modifyPwd(mobile, captcha, newPwd).compose(new DefaultTransform<>());
     }
 
 }

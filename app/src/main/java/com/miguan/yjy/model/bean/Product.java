@@ -3,6 +3,8 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * @作者 cjh
  * @日期 2017/3/21 9:38
@@ -42,6 +44,81 @@ public class Product implements Parcelable {
     private String brand;
 
     private String en_product_company;
+
+    private int isGras;
+    private int Praise;
+    private int middle;
+    private int bad;
+    private int total;
+    private List<Component> componentList;
+    private List<ComponentTag> effect;
+    private List<String> recommend;
+    private List<String> notRecommend;
+    private List<ComponentTag> security;
+
+    public List<ComponentTag> getEffect() {
+        return effect;
+    }
+
+    private Buy buy;
+
+    public int getIsGras() {
+        return isGras;
+    }
+
+    public void setIsGras(int isGras) {
+        this.isGras = isGras;
+    }
+
+    public int getPraise() {
+        return Praise;
+    }
+
+    public void setPraise(int praise) {
+        Praise = praise;
+    }
+
+    public int getMiddle() {
+        return middle;
+    }
+
+    public void setMiddle(int middle) {
+        this.middle = middle;
+    }
+
+    public int getBad() {
+        return bad;
+    }
+
+    public void setBad(int bad) {
+        this.bad = bad;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public List<Component> getComponentList() {
+        return componentList;
+    }
+
+    public void setComponentList(List<Component> componentList) {
+        this.componentList = componentList;
+    }
+
+
+
+    public List<ComponentTag> getSecurity() {
+        return security;
+    }
+
+    public void setSecurity(List<ComponentTag> security) {
+        this.security = security;
+    }
 
     public int getId() {
         return id;
@@ -174,6 +251,25 @@ public class Product implements Parcelable {
     public Product() {
     }
 
+    public Buy getBuy() {
+        return buy;
+    }
+
+    public List<String> getNotRecommend() {
+        return notRecommend;
+    }
+
+    public void setNotRecommend(List<String> notRecommend) {
+        this.notRecommend = notRecommend;
+    }
+    public List<String> getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(List<String> recommend) {
+        this.recommend = recommend;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -197,6 +293,17 @@ public class Product implements Parcelable {
         dest.writeString(this.product_company);
         dest.writeString(this.brand);
         dest.writeString(this.en_product_company);
+        dest.writeInt(this.isGras);
+        dest.writeInt(this.Praise);
+        dest.writeInt(this.middle);
+        dest.writeInt(this.bad);
+        dest.writeInt(this.total);
+        dest.writeTypedList(this.componentList);
+        dest.writeTypedList(this.effect);
+        dest.writeStringList(this.recommend);
+        dest.writeStringList(this.notRecommend);
+        dest.writeTypedList(this.security);
+        dest.writeParcelable(this.buy, flags);
     }
 
     protected Product(Parcel in) {
@@ -216,6 +323,17 @@ public class Product implements Parcelable {
         this.product_company = in.readString();
         this.brand = in.readString();
         this.en_product_company = in.readString();
+        this.isGras = in.readInt();
+        this.Praise = in.readInt();
+        this.middle = in.readInt();
+        this.bad = in.readInt();
+        this.total = in.readInt();
+        this.componentList = in.createTypedArrayList(Component.CREATOR);
+        this.effect = in.createTypedArrayList(ComponentTag.CREATOR);
+        this.recommend = in.createStringArrayList();
+        this.notRecommend = in.createStringArrayList();
+        this.security = in.createTypedArrayList(ComponentTag.CREATOR);
+        this.buy = in.readParcelable(Buy.class.getClassLoader());
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
