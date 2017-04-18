@@ -47,6 +47,8 @@
     <string name="text_face_score">颜值</string>
     <string name="text_title_template">功课模板</string>
     <string name="text_search_count">共为您找到%d款产品</string>
+    <string name="text_remaining_day">剩余&#160;%d&#160;天</string>
+    <string name="text_tms_weixin">(tmshuo520)</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -86,7 +88,9 @@
     <string name="hint_brand_name">请输入品牌名称</string>
     <string name="hint_product_name">请输入产品名称</string>
     <string name="hint_product_code">请输入产品批号</string>
+    <string name="hint_mobile">手机号</string>
     <string name="hint_username_mobile">用户名/手机号</string>
+    <string name="hint_username">用户名</string>
     <string name="hint_password">密码</string>
     <string name="hint_captcha">短信验证码</string>
 

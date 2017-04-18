@@ -60,4 +60,8 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
         });
     }
 
+    public Article getArticle() {
+        return mArticle;
+    }
+
 }

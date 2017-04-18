@@ -20,4 +20,10 @@ public class MsgListPresenter extends BaseListActivityPresenter<MsgListActivity,
     public void onRefresh() {
         UserModel.getInstance().getMessageList(1).unsafeSubscribe(getRefreshSubscriber());
     }
+
+    @Override
+    public void onLoadMore() {
+        UserModel.getInstance().getMessageList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+    }
+
 }

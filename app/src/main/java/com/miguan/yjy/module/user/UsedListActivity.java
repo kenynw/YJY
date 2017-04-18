@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.user;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -17,6 +18,12 @@ import com.miguan.yjy.module.product.AddRepositoryActivity;
  */
 @RequiresPresenter(UsedListPresenter.class)
 public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setToolbarTitle(R.string.text_my_product_repository);
+    }
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {

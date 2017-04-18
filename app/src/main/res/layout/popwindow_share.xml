@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_share_window"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@color/half_transparent"></LinearLayout>-->
+    android:layout_height="match_parent"
+    android:background="@color/half_transparent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +13,11 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,6 +34,7 @@
                 android:layout_weight="1"/>
 
             <TextView
+                android:id="@+id/tv_share_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -46,7 +48,8 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="23dp"
                 android:layout_marginRight="38dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                />
 
         </LinearLayout>
 
@@ -97,7 +100,8 @@
             android:background="@color/fed"
             android:gravity="center"
             android:text="@string/tv_cancel"
-            android:textSize="@dimen/text_size_small_16"/>
+            android:textSize="@dimen/text_size_small_16"
+            />
 
     </LinearLayout>
 

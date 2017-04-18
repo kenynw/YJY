@@ -3,19 +3,77 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 /**
  * Copyright (c) 2016/12/26. LiaoPeiKun Inc. All rights reserved.
  */
 
 public class Message implements Parcelable {
 
-    private String id;
+    private int id;
 
-    private String message;
+    private String user_name;
 
-    private String create_id;
+    private String content;
+
+    private long created_at;
+
+    private String img;
+
+    private int type;
 
     public Message() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCreated_at() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        return format.format(created_at * 1000);
+    }
+
+    public void setCreated_at(long created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     @Override
@@ -25,15 +83,20 @@ public class Message implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(this.message);
-        dest.writeString(this.create_id);
+        dest.writeInt(this.id);
+        dest.writeString(this.user_name);
+        dest.writeString(this.content);
+        dest.writeLong(this.created_at);
+        dest.writeString(this.img);
+        dest.writeInt(this.type);
     }
 
     protected Message(Parcel in) {
-        this.id = in.readString();
-        this.message = in.readString();
-        this.create_id = in.readString();
+        this.user_name = in.readString();
+        this.content = in.readString();
+        this.created_at = in.readLong();
+        this.img = in.readString();
+        this.type = in.readInt();
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {
@@ -47,28 +110,4 @@ public class Message implements Parcelable {
             return new Message[size];
         }
     };
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getCreate_id() {
-        return create_id;
-    }
-
-    public void setCreate_id(String create_id) {
-        this.create_id = create_id;
-    }
 }

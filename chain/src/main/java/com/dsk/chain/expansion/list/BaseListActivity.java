@@ -19,6 +19,8 @@ public abstract class BaseListActivity<P extends BaseListActivityPresenter> exte
 
     private ListConfig mListConfig;
 
+    private LinearLayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public abstract class BaseListActivity<P extends BaseListActivityPresenter> exte
     private void findRecycleView() {
         if (mListView == null) mListView = (EasyRecyclerView) findViewById(R.id.recycle);
         if (mListView == null) throw new RuntimeException("No found RecycleView with id 'recycle'");
-        mListView.setLayoutManager(new LinearLayoutManager(this));
+        mListView.setLayoutManager(mLayoutManager = new LinearLayoutManager(this));
     }
 
     private void initRecycle() {
@@ -108,6 +110,10 @@ public abstract class BaseListActivity<P extends BaseListActivityPresenter> exte
 
     public EasyRecyclerView getListView() {
         return mListView;
+    }
+
+    public LinearLayoutManager getLayoutManager() {
+        return mLayoutManager;
     }
 
     public int getViewType(int position){

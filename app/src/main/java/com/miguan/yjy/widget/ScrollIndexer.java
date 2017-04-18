@@ -8,8 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.miguan.yjy.utils.LUtils;
+import android.view.ViewConfiguration;
 
 /**
  * Copyright (c) 2017/3/28. LiaoPeiKun Inc. All rights reserved.
@@ -27,6 +26,10 @@ public class ScrollIndexer extends View {
     private int mWidth;
 
     private int mHeight;
+
+    private int mTouchSlop;
+
+    private boolean mIsMove = false;
 
     public ScrollIndexer(Context context) {
         this(context, null);
@@ -47,6 +50,8 @@ public class ScrollIndexer extends View {
         mPaint.setColor(0xff666666);
         mPaint.setTextSize(32);
         mBound = new Rect();
+
+        mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
     }
 
     @Override
@@ -66,20 +71,39 @@ public class ScrollIndexer extends View {
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int downY = 0;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN :
+                downY = (int) event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE :
+                int dy = (int) (event.getY() - downY);
+                if (dy > mTouchSlop) {
+                    mIsMove = true;
+                }
+                break;
+        }
+
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        LUtils.log("action: " + action);
         int y = (int) event.getY();
         switch (action) {
             case MotionEvent.ACTION_DOWN :
                 setBackgroundColor(0x33000000);
                 break;
             case MotionEvent.ACTION_MOVE :
-                int position = y / mHeight;
-                if (position > letters.length -1) position = letters.length - 1;
-                if (position < 0) position = 0;
-                if (mListener != null) {
-                    mListener.onTextSelected(position, String.valueOf(letters[position]));
+                if (mIsMove) {
+                    int position = y / mHeight;
+                    if (position > letters.length -1) position = letters.length - 1;
+                    if (position < 0) position = 0;
+                    if (mListener != null) {
+                        mListener.onTextSelected(position, String.valueOf(letters[position]));
+                    }
                 }
                 break;
             case MotionEvent.ACTION_UP :

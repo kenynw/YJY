@@ -2,13 +2,14 @@ package com.miguan.yjy.model.services;
 
 
 import com.miguan.yjy.model.bean.Article;
-import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
-import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.User;
+import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.bean.Version;
 
 import java.util.List;
@@ -95,13 +96,40 @@ public interface Services {
     );
 
     /**
+     * 绑定手机
+     * @param userId
+     * @param mobile
+     * @param captcha
+     * @return
+     */
+    @GET("?action=mobileBind")
+    Observable<String> bindMobile(
+            @Query("user_id") int userId,
+            @Query("mobile") String mobile,
+            @Query("captcha") String captcha
+    );
+
+    /**
      * 我在用的列表
-     * //TODO
+     *
      * @return
      */
     @GET("?action=userProduct")
-    Observable<List<Product>> usedProduct(
-            @Query("user_id") int userId
+    Observable<List<UserProduct>> usedProduct(
+            @Query("user_id") int userId,
+            @Query("page") int page
+    );
+
+    /**
+     * 我在用的列表
+     *
+     * @return
+     */
+    @GET("?action=operateUserproduct")
+    Observable<String> deleteUsedProduct(
+            @Query("user_id") int userId,
+            @Query("id") int id,
+            @Query("type") int type
     );
 
     /**
@@ -115,7 +143,7 @@ public interface Services {
     @GET("?action=userGrass")
     Observable<ProductList> likeList(
             @Query("user_id") int userId,
-            @Query("cateId") int cateId,
+            @Query("cate_id") int cateId,
             @Query("effect") String effect,
             @Query("page") int page
     );
@@ -123,14 +151,12 @@ public interface Services {
     /**
      * 我点评的列表
      * @param userId 用户ID
-     * @param type  (选填)类型1产品2文章
      * @param page 当前页数
      * @return
      */
-    @GET("?action=comment")
+    @GET("?action=userComment")
     Observable<List<Evaluate>> userEvaluateList(
             @Query("user_id") int userId,
-            @Query("type") int type,
             @Query("page") int page
     );
 
@@ -250,7 +276,7 @@ public interface Services {
      *
      */
     @GET("?action=brandList")
-    Observable<Brand> brandList();
+    Observable<BrandList> brandList();
 
     /**
      * 批号查询
@@ -259,7 +285,7 @@ public interface Services {
      * @return
      */
     @GET("?action=queryCosmetics")
-    Observable<Product> queryCode(
+    Observable<UserProduct> queryCode(
             @Query("id") int brandId,
             @Query("number") String number
     );
@@ -321,7 +347,6 @@ public interface Services {
             @Query("cate_id") int cate_id,
             @Query("effect") String effect,
             @Query("page") int page
-
     );
 
 

@@ -1,12 +1,14 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.net.Uri;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,8 +19,8 @@ import butterknife.ButterKnife;
 
 public class ProductLikeViewHolder extends BaseViewHolder<Product> {
 
-    @BindView(R.id.iv_product_thumb)
-    ImageView mIvThumb;
+    @BindView(R.id.dv_product_thumb)
+    SimpleDraweeView mDvThumb;
 
     @BindView(R.id.tv_product_name)
     TextView mTvName;
@@ -30,6 +32,8 @@ public class ProductLikeViewHolder extends BaseViewHolder<Product> {
 
     @Override
     public void setData(Product data) {
+        mDvThumb.setImageURI(Uri.parse(data.getProduct_img()));
         mTvName.setText(data.getProduct_name());
+        itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
 }

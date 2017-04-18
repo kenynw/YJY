@@ -33,7 +33,7 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
 
     @Override
     protected int getLayout() {
-        return R.layout.common_activity_list;
+        return R.layout.user_activity_like;
     }
 
     public void setData(ProductList productList) {
@@ -45,7 +45,7 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
                 getPresenter().setCateId(cateId);
             }
             if (!TextUtils.isEmpty(text)) {
-                getPresenter().setEffect("");
+                getPresenter().setEffect(text);
             }
             if (cateId <= 0 && text.isEmpty()){
                 getPresenter().setEffect("");

@@ -10,11 +10,11 @@
     android:padding="@dimen/spacing_normal">
 
 
-    <ImageView
-        android:id="@+id/iv_product_thumb"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_product_thumb"
+        style="@style/BaseImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@mipmap/def_image_loading"
         />
 
     <TextView

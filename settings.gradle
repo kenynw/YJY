@@ -1,1 +1,1 @@
-include ':app', ':chain'
+include ':app', ':chain', ':umshare'

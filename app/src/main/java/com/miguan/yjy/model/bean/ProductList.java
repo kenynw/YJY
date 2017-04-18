@@ -12,11 +12,10 @@ import java.util.List;
 
 public class ProductList extends EntityList {
 
-    @SerializedName(value = "data", alternate = { "list" })
     private List<Product> data;
 
-    @SerializedName(value = "categroy", alternate = { "categories" })
-    private List<Category> categroy;
+    @SerializedName(value = "categories", alternate = { "categroy" })
+    private List<Category> categories;
 
     private String[] effects;
 
@@ -29,11 +28,11 @@ public class ProductList extends EntityList {
     }
 
     public List<Category> getCategroy() {
-        return categroy;
+        return categories;
     }
 
     public void setCategroy(List<Category> categroy) {
-        this.categroy = categroy;
+        this.categories = categroy;
     }
 
     public String[] getEffects() {
@@ -52,7 +51,7 @@ public class ProductList extends EntityList {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(this.data);
-        dest.writeTypedList(this.categroy);
+        dest.writeTypedList(this.categories);
         dest.writeStringArray(this.effects);
     }
 
@@ -61,7 +60,7 @@ public class ProductList extends EntityList {
 
     protected ProductList(Parcel in) {
         this.data = in.createTypedArrayList(Product.CREATOR);
-        this.categroy = in.createTypedArrayList(Category.CREATOR);
+        this.categories = in.createTypedArrayList(Category.CREATOR);
         this.effects = in.createStringArray();
     }
 

@@ -20,6 +20,7 @@
         >
 
         <EditText
+            android:id="@+id/et_brand_list_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/widget_small"
             android:layout_weight="1"

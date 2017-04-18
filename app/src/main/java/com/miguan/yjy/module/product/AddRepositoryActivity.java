@@ -6,15 +6,16 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.utils.DateUtils;
 import com.miguan.yjy.utils.LUtils;
 
@@ -42,11 +43,14 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     @BindView(R.id.iv_add_repository_is_open)
     ImageView mIvIsOpen;
 
-    @BindView(R.id.tv_add_repository_open_date)
+    @BindView(R.id.tv_add_repository_seal_date)
     TextView mEtOpenDate;
 
-    @BindView(R.id.tv_add_repository_expiration_time)
-    TextView mTvExpirationTime;
+    @BindView(R.id.tv_add_repository_exp_time)
+    TextView mTvExpTime;
+
+    @BindView(R.id.ll_add_repository_is_seal)
+    LinearLayout mLlIsSeal;
 
     private TimePickerView mTimePickerView;
 
@@ -64,13 +68,6 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         initViews();
     }
 
-    public void setData(Product product) {
-        if (product == null) return;
-        mTvBrand.setText(product.getBrand());
-        mTvExpiration.setText(product.getEndDay());
-        mEtOpenDate.setText(DateUtils.getCurrentFormatDate());
-    }
-
     private void initViews() {
         mTimePickerView = new TimePickerView.Builder(this, (date, v) -> {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -86,15 +83,23 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         String[] times = new String[]{"3个月", "6个月", "12个月", "24个月"};
         mTimeDialog = new AlertDialog.Builder(this)
                 .setTitle("选择保质期")
-                .setItems(times, (dialog, which) -> mTvExpirationTime.setText(times[which])).create();
+                .setItems(times, (dialog, which) -> mTvExpTime.setText(times[which])).create();
 
         mIvIsOpen.setOnClickListener(v -> {
             mIsSeal = mIsSeal == 1 ? 0 : 1;
+            mLlIsSeal.setVisibility(mIsSeal == 1 ? View.VISIBLE : View.GONE);
             mIvIsOpen.setImageResource(mIsSeal == 1 ? R.mipmap.ic_swc_on : R.mipmap.ic_swc_off);
+
         });
-        mTvBrand.setOnClickListener(v -> startActivity(new Intent(this, BrandListActivity.class)));
+        mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
         mEtOpenDate.setOnClickListener(v -> mTimePickerView.show(v));
-        mTvExpirationTime.setOnClickListener(v -> mTimeDialog.show());
+        mTvExpTime.setOnClickListener(v -> mTimeDialog.show());
+    }
+
+    public void setData(String brandName, String overtime) {
+        mTvBrand.setText(brandName);
+        mTvExpiration.setText(overtime);
+        mEtOpenDate.setText(DateUtils.getCurrentFormatDate());
     }
 
     @Override
@@ -114,9 +119,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             LUtils.toast("请输入产品");
             return;
         }
-        getPresenter().submit(
-                1, "test", mEtName.getText().toString().trim(), mIsSeal,
-                mEtOpenDate.getText().toString(), 4, mTvExpiration.getText().toString()
+        getPresenter().submit(mEtName.getText().toString().trim(),
+                mIsSeal,
+                mEtOpenDate.getText().toString(),
+                Integer.valueOf(mTvExpTime.getText().toString().trim().replace("个月", "")),
+                mTvExpiration.getText().toString()
         );
     }
 

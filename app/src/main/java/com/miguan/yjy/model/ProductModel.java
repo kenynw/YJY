@@ -1,10 +1,11 @@
 package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
-import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -65,7 +66,7 @@ public class ProductModel extends AbsModel {
         return ServicesClient.getServices().productDetail(productId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
-    public Observable<Product> queryCode(int brandId, String number) {
+    public Observable<UserProduct> queryCode(int brandId, String number) {
         return ServicesClient.getServices().queryCode(brandId, number).compose(new DefaultTransform<>());
     }
 
@@ -89,30 +90,30 @@ public class ProductModel extends AbsModel {
         return list;
     }
 
-    public Observable<Brand> getBrandList() {
-        List<Brand> hot = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            Brand brand = new Brand();
-            brand.setName("Biotherm 碧欧泉");
-            brand.setLetter("B");
-            hot.add(brand);
-        }
-        String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
-                "T", "U", "V", "W", "X", "Y", "Z"};
-        List<Brand> other = new ArrayList<>();
-        for (String letter : letters) {
-            for (int i = 0; i < 5; i++) {
-                Brand brand = new Brand();
-                brand.setName("安娜苏" + letter);
-                brand.setLetter(letter);
-                other.add(brand);
-            }
-        }
-        Brand brand = new Brand();
-        brand.setHotCosmetics(hot);
-        brand.setOtherCosmetics(other);
-        return Observable.just(brand).compose(new DefaultTransform<>());
-//        return ServicesClient.getServices().brandList().compose(new DefaultTransform<>());
+    public Observable<BrandList> getBrandList() {
+//        List<Brand> hot = new ArrayList<>();
+//        for (int i = 0; i < 4; i++) {
+//            Brand brand = new Brand();
+//            brand.setName("Biotherm 碧欧泉");
+//            brand.setLetter("B");
+//            hot.add(brand);
+//        }
+//        String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+//                "T", "U", "V", "W", "X", "Y", "Z"};
+//        List<Brand> other = new ArrayList<>();
+//        for (String letter : letters) {
+//            for (int i = 0; i < 5; i++) {
+//                Brand brand = new Brand();
+//                brand.setName("安娜苏" + letter);
+//                brand.setLetter(letter);
+//                other.add(brand);
+//            }
+//        }
+//        Brand brand = new Brand();
+//        brand.setHotCosmetics(hot);
+//        brand.setOtherCosmetics(other);
+//        return Observable.just(brand).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().brandList().compose(new DefaultTransform<>());
     }
 
     /**

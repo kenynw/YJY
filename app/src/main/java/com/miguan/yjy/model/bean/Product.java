@@ -43,10 +43,6 @@ public class Product implements Parcelable {
 
     private String en_product_company;
 
-    private String startDay;
-
-    private String endDay;
-
     public int getId() {
         return id;
     }
@@ -175,22 +171,6 @@ public class Product implements Parcelable {
         this.en_product_company = en_product_company;
     }
 
-    public String getStartDay() {
-        return startDay;
-    }
-
-    public void setStartDay(String startDay) {
-        this.startDay = startDay;
-    }
-
-    public String getEndDay() {
-        return endDay;
-    }
-
-    public void setEndDay(String endDay) {
-        this.endDay = endDay;
-    }
-
     public Product() {
     }
 
@@ -217,8 +197,6 @@ public class Product implements Parcelable {
         dest.writeString(this.product_company);
         dest.writeString(this.brand);
         dest.writeString(this.en_product_company);
-        dest.writeString(this.startDay);
-        dest.writeString(this.endDay);
     }
 
     protected Product(Parcel in) {
@@ -238,8 +216,6 @@ public class Product implements Parcelable {
         this.product_company = in.readString();
         this.brand = in.readString();
         this.en_product_company = in.readString();
-        this.startDay = in.readString();
-        this.endDay = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {

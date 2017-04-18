@@ -3,6 +3,7 @@ package com.miguan.yjy.module.user;
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.ProductList;
 
 /**
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
@@ -28,6 +29,13 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
                     return productList.getData();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
+    }
+
+    @Override
+    public void onLoadMore() {
+        UserModel.getInstance().getLikeProductList(mCateId, mEffect, getCurPage())
+                .map(ProductList::getData)
+                .unsafeSubscribe(getMoreSubscriber());
     }
 
     public void setCateId(int cateId) {

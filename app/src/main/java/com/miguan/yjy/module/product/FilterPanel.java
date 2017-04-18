@@ -80,7 +80,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
                     view.setOnClickListener(v -> {
                         mTbtnList.get(1).setText("分类");
                         mTbtnList.get(2).setText("功效");
-                        mListener.onItemSelected(0, "");
+                        if (mListener != null) mListener.onItemSelected(0, "");
                     });
                 }
             }
@@ -88,11 +88,15 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
 
         mMenuList.add(createRecyclerView(categories, position -> {
             mTbtnList.get(1).setText(categories[position]);
-            mListener.onItemSelected(mCategories.get(position).getId(), categories[position]);
+            if (mListener != null) {
+                mListener.onItemSelected(mCategories.get(position).getId(), categories[position]);
+            }
         }));
         mMenuList.add(createRecyclerView(mEffects, position -> {
             mTbtnList.get(2).setText(mEffects[position]);
-            mListener.onItemSelected(position, mEffects[position]);
+            if (mListener != null) {
+                mListener.onItemSelected(position, mEffects[position]);
+            }
         }));
     }
 
@@ -127,6 +131,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
         if (mMenuWindow == null) {
             mMenuWindow = new PopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             mMenuWindow.setFocusable(false);
+            mMenuWindow.setAnimationStyle(R.style.PopupWindowPushUpAnimation);
             mMenuWindow.setOutsideTouchable(true);
         }
 
@@ -153,7 +158,8 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
     }
 
     public void setMenuText(int index, String text) {
-        mTbtnList.get(index).setText(text);
+        if (index > 0 && index < 3 && !text.isEmpty())
+            mTbtnList.get(index).setText(text);
     }
 
     private OnItemSelectedListener mListener;

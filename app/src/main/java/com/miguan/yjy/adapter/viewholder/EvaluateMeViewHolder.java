@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -37,6 +38,15 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
     @BindView(R.id.tv_evaluate_product_spec)
     TextView mTvProductSpec;
 
+    @BindView(R.id.ll_evaluate_article)
+    LinearLayout mLlArticle;
+
+    @BindView(R.id.dv_evaluate_article_thumb)
+    SimpleDraweeView mDvArticleThumb;
+
+    @BindView(R.id.tv_evaluate_article_title)
+    TextView mTvArticleTitle;
+
     public EvaluateMeViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_list_evaluate_me);
     }
@@ -46,11 +56,19 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
         super.setData(data);
         mTvDate.setText(data.getCreated_at());
         if (data.getDetail() != null) {
-            mLlProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getDetail().getId()));
-            mDvProductImg.setImageURI(Uri.parse(data.getDetail().getProduct_img()));
-            mTvProductName.setText(data.getDetail().getProduct_name());
-            mTvProductSpec.setText(String.format(getContext().getString(R.string.text_product_spec),
-                    data.getDetail().getPrice(), data.getDetail().getForm().toUpperCase()));
+            if (data.getType() == 1) {
+                mLlArticle.setVisibility(View.GONE);
+                mDvProductImg.setImageURI(Uri.parse(data.getDetail().getImg()));
+                mTvProductName.setText(data.getDetail().getName());
+                mTvProductSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getDetail().getPrice(),
+                        data.getDetail().getForm()));
+                mLlProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getDetail().getId()));
+            } else {
+                mLlProduct.setVisibility(View.GONE);
+                mDvArticleThumb.setImageURI(Uri.parse(data.getDetail().getImg()));
+                mTvArticleTitle.setText(data.getDetail().getName());
+//                mLlArticle.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getDetail().getId()));
+            }
         }
     }
 

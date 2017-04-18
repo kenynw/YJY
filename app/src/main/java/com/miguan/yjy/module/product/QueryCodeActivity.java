@@ -3,7 +3,6 @@ package com.miguan.yjy.module.product;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,9 +11,8 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.module.account.UserTextWatcher;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,33 +46,16 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         mEtBrand.addTextChangedListener(watcher);
         mEtProduct.addTextChangedListener(watcher);
 
-        mEtBrand.setOnClickListener(v -> startActivity(new Intent(this, BrandListActivity.class)));
+        mEtBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));
     }
 
-    public void setData(Product product) {
-        mEtBrand.setText(product.getProduct_name());
-        mBtnSubmit.setOnClickListener(v -> getPresenter().query(1, mEtProduct.getText().toString().trim()));
+    public void setBrand(String brandName, int brandId) {
+        mEtBrand.setText(brandName);
+        mBtnSubmit.setOnClickListener(v -> getPresenter().query(brandId, mEtProduct.getText().toString().trim()));
     }
 
-    private void checkInput() {
-        if (TextUtils.isEmpty(mEtBrand.getText())) {
-            LUtils.toast(R.string.hint_brand_name);
-            return;
-        }
-        if (TextUtils.isEmpty(mEtProduct.getText())) {
-            LUtils.toast(R.string.hint_product_code);
-            return;
-        }
-
-
-//        Product product = getPresenter().getProduct();
-//        product.setBrand(mEtBrand.getText().toString().trim());
-//        product.setProduct_name(mEtProduct.getText().toString().trim());
-//        showQueryDialog(product);
-    }
-
-    public void showQueryDialog(Product product) {
+    public void showQueryDialog(UserProduct product, int brandId) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_query_result)
                 .show();
@@ -85,6 +66,7 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         TextView tvMfgDate = ButterKnife.findById(dialog, R.id.tv_query_dialog_mfg_date);
         TextView tvExpiration = ButterKnife.findById(dialog, R.id.tv_query_dialog_expiration);
         Button btnSave = ButterKnife.findById(dialog, R.id.btn_query_save);
+
         ivClose.setOnClickListener(v -> dialog.dismiss());
         tvName.setText(mEtBrand.getText());
         tvCode.setText(String.format(getString(R.string.label_batch_no), mEtProduct.getText()));
@@ -92,7 +74,7 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         tvExpiration.setText(product.getEndDay());
         btnSave.setOnClickListener(v -> {
             dialog.dismiss();
-            AddRepositoryPresenter.start(QueryCodeActivity.this, product);
+            AddRepositoryPresenter.start(QueryCodeActivity.this, mEtBrand.getText().toString(), brandId, product.getEndDay());
         });
     }
 

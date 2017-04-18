@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/half_transparent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/half_transparent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,9 +40,9 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center"
-                android:maxLength="11"
-                android:hint="手机号"
+                android:hint="@string/hint_mobile"
                 android:inputType="phone"
+                android:maxLength="11"
                 />
 
             <ImageView
@@ -95,5 +96,7 @@
                 android:textSize="@dimen/text_size_small_16"/>
 
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

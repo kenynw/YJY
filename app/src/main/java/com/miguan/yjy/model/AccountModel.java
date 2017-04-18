@@ -48,6 +48,15 @@ public class AccountModel extends AbsModel {
     }
 
     /**
+     * 忘记密码验证码
+     * @param mobile 手机号
+     * @return 发送结果
+     */
+    public Observable<Boolean> bindCaptcha(String mobile) {
+        return ServicesClient.getServices().sendCaptcha(mobile, 4).compose(new DefaultTransform<>());
+    }
+
+    /**
      * 账号相关本地存储
      * @param user
      */

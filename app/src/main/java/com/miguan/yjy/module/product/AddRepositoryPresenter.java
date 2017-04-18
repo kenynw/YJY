@@ -1,12 +1,13 @@
 package com.miguan.yjy.module.product;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.ProductModel;
-import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.services.ServicesResponse;
 
 /**
@@ -15,36 +16,58 @@ import com.miguan.yjy.model.services.ServicesResponse;
 
 public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
 
-    public static final String EXTRA_PRODUCT = "product";
+    public static final String EXTRA_BRAND_NAME = "brand_name";
+    public static final String EXTRA_BRAND_ID = "brand_id";
+    public static final String EXTRA_OVERTIME = "overtime";
 
-    public static void start(Context context, Product product) {
+    public static void start(Context context, String brandName, int brandId, String overtime) {
         Intent intent = new Intent(context, AddRepositoryActivity.class);
-        intent.putExtra(EXTRA_PRODUCT, product);
+        intent.putExtra(EXTRA_BRAND_NAME, brandName);
+        intent.putExtra(EXTRA_BRAND_ID, brandId);
+        intent.putExtra(EXTRA_OVERTIME, overtime);
         context.startActivity(intent);
     }
 
-    private Product mProduct;
+    private String mBrandName;
+
+    private int mBrandId;
+
+    private String mOvertime;
 
     @Override
     protected void onCreate(AddRepositoryActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        mProduct = getView().getIntent().getParcelableExtra(EXTRA_PRODUCT);
+        mBrandName = getView().getIntent().getStringExtra(EXTRA_BRAND_NAME);
+        mBrandId = getView().getIntent().getIntExtra(EXTRA_BRAND_ID, 0);
+        mOvertime = getView().getIntent().getStringExtra(EXTRA_OVERTIME);
     }
 
     @Override
     protected void onCreateView(AddRepositoryActivity view) {
         super.onCreateView(view);
-        getView().setData(mProduct);
+        getView().setData(mBrandName, mOvertime);
     }
 
-    public void submit(int brandId, String brandName, String productName, int isSeal, String sealTime, int qualityTime, String overdueTime) {
-        ProductModel.getInstance().addRepository(brandId, brandName, productName, isSeal, sealTime, qualityTime, overdueTime)
+    public void submit(String productName, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+        ProductModel.getInstance().addRepository(mBrandId, mBrandName,
+                productName, isSeal, sealTime, qualityTime, overdueTime)
                 .unsafeSubscribe(new ServicesResponse<String>() {
                     @Override
                     public void onNext(String s) {
-
+                        getView().finish();
                     }
                 });
+    }
+
+    @Override
+    protected void onResult(int requestCode, int resultCode, Intent data) {
+        super.onResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            Brand brand = data.getParcelableExtra("brand");
+            mBrandId = brand.getId();
+            mBrandName = brand.getName();
+            getView().setData(brand.getName(), mOvertime);
+        }
     }
 
 }

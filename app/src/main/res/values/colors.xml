@@ -66,7 +66,7 @@
     <color name="textSecondary">#999</color>
     <color name="textTertiary">#666</color>
     <color name="textHint">#ccc</color>
-    <color name="textYellow">#ccc</color>
+    <color name="textYellow">#fdff00</color>
 
     <!--分割线颜色，添加div前缀-->
     <color name="divPrimary">#EEEEEE</color>

@@ -77,7 +77,7 @@ public class SecurityCodeView extends RelativeLayout {
                         if (stringBuffer.length() == 4) {
                             //文字长度位4  则调用完成输入的监听
                             if (inputCompleteListener != null) {
-                                inputCompleteListener.inputComplete();
+                                inputCompleteListener.inputComplete(stringBuffer.toString());
                             }
                         }
                     }
@@ -149,7 +149,7 @@ public class SecurityCodeView extends RelativeLayout {
     }
 
     public interface InputCompleteListener {
-        void inputComplete();
+        void inputComplete(String captcha);
 
         void deleteContent(boolean isDelete);
     }

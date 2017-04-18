@@ -1,13 +1,15 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Message;
+import com.miguan.yjy.utils.SpanUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,9 +23,6 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
 
     @BindView(R.id.dv_message_avatar)
     SimpleDraweeView mDvAvatar;
-
-    @BindView(R.id.iv_message_more)
-    ImageView mIvMore;
 
     @BindView(R.id.tv_message_name)
     TextView mTvName;
@@ -41,7 +40,16 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
 
     @Override
     public void setData(Message data) {
-
+        mDvAvatar.setImageURI(Uri.parse(data.getImg()));
+        mTvName.setText(data.getUser_name());
+        mTvTime.setText(data.getCreated_at());
+        if (data.getType() == 1) {
+            mTvContent.setVisibility(View.GONE);
+            mTvTime.append(" 赞了你的评论");
+        } else {
+            mTvContent.setVisibility(View.VISIBLE);
+            mTvContent.setText(SpanUtils.getContentSpannable(data.getContent()));
+        }
     }
 
 }

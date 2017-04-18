@@ -8,6 +8,7 @@ import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.utils.LUtils;
 
 /**
  * @作者 cjh
@@ -58,6 +59,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
         ProductModel.getInstance().searchQuery(mKeywords, mCateId, mEffect, 1)
                 .map(product -> {
                     getView().setData(mKeywords, product, mCateName);
+                    LUtils.log("size: " + mCateName);
                     return product.getData();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());

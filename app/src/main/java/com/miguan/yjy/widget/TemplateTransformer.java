@@ -24,15 +24,12 @@ public class TemplateTransformer implements ViewPager.PageTransformer {
         } else if (position < 0) {
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
-            page.setTranslationX(-rotate);
         } else if (position >= 0 && position < 1) {
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
-            page.setTranslationX(rotate);
         } else if (position >= 1) {
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
-            page.setTranslationX(rotate);
         }
     }
 

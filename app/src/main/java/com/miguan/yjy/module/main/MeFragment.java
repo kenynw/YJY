@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.main;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
@@ -16,11 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.User;
+import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.EvaluateListActivity;
 import com.miguan.yjy.module.user.FaceScoreActivity;
 import com.miguan.yjy.module.user.FeedbackActivity;
@@ -29,14 +31,13 @@ import com.miguan.yjy.module.user.ProductLikeListActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
-import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.SharePopupWindow;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
@@ -53,8 +54,8 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
     @BindView(R.id.tv_me_face_score)
     TextView mTvFaceScore;
 
-    @BindView(R.id.iv_me_avatar)
-    ImageView mIvAvatar;
+    @BindView(R.id.dv_me_avatar)
+    ImageView mDvAvatar;
 
     @BindView(R.id.tv_me_username)
     TextView mTvUsername;
@@ -101,26 +102,38 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         mBtnComment.setOnClickListener(v -> startActivity(new Intent(getActivity(), EvaluateListActivity.class)));
         mBtnStar.setOnClickListener(v -> startActivity(new Intent(getActivity(), StarListActivity.class)));
         mBtnMessage.setOnClickListener(v -> startActivity(new Intent(getActivity(), MsgListActivity.class)));
+        mBtnQueryNo.setOnClickListener(v -> startActivity(new Intent(getActivity(), QueryCodeActivity.class)));
         mBtnFeedback.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeedbackActivity.class)));
+        mBtnCommend.setOnClickListener(v -> showSharePopupWindow());
 
         return view;
+    }
+
+    private void showSharePopupWindow() {
+        new SharePopupWindow.Builder(getActivity())
+                .setViewTitle("推荐颜究院给")
+                .setTitle("颜究院，一款专业的护肤应用")
+                .setContent("查成分、测肤质，颜究院根据肤质推荐安全有效护肤品")
+                .setUrl("http://m.yjyapp.com/")
+                .show(mLlInfo);
     }
 
     @Override
     public void setData(User user) {
         mLlInfo.setOnClickListener(v -> ProfilePresenter.start(getActivity(), user));
-        LUtils.log(user.getImg());
-        Glide.with(this).load(user.getImg())
-                .bitmapTransform(new CropCircleTransformation(getActivity()))
-                .placeholder(R.mipmap.def_image_loading)
-                .error(R.mipmap.def_image_loading)
-                .into(mIvAvatar);
+        mDvAvatar.setImageURI(Uri.parse(user.getImg()));
         mTvUsername.setText(user.getUsername());
         mTvSkin.setText(user.getSkin_name());
 
         SpannableString spannableString = new SpannableString(String.format(getString(R.string.label_looking_value), user.getRank_points()));
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textYellow)), 3, 3 + user.getRank_points().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         mTvFaceScore.setText(spannableString);
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+        UserPreferences.setUserID(0);
+        EventBus.getDefault().post(0);
     }
 
     @Override
@@ -142,4 +155,5 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         super.onDestroyView();
         mBind.unbind();
     }
+
 }

@@ -116,7 +116,15 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SharePopupWindow sharePopupWindow = new SharePopupWindow(this);
+//        SharePopupWindow sharePopupWindow = new SharePopupWindow(this);
+        Article article = getPresenter().getArticle();
+        if (article != null) {
+            new SharePopupWindow.Builder(this)
+                    .setTitle(article.getTitle())
+                    .setUrl(article.getLinkUrl())
+                    .setContent(article.getTitle())
+                    .show(getToolbar());
+        }
         return super.onOptionsItemSelected(item);
     }
 

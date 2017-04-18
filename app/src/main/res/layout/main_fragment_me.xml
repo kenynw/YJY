@@ -25,10 +25,11 @@
             android:paddingTop="@dimen/spacing_huge"
             >
 
-            <ImageView
-                android:id="@+id/iv_me_avatar"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_me_avatar"
                 android:layout_width="@dimen/widget_max"
                 android:layout_height="@dimen/widget_max"
+                style="@style/BaseAvatar"
                 />
 
             <LinearLayout

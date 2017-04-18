@@ -2,7 +2,6 @@ package com.miguan.yjy.module.product;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -116,7 +115,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         Glide.with(this).load(product.getProduct_img()).placeholder(R.mipmap.def_image_loading).error(R.mipmap.def_image_loading).into(mIvThumb);
         mTvName.setText(product.getProduct_name());
         mTvSpec.setText(String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
-        mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, product));
+        mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
 
         // 备案
         mTvProvisionNo.setText(product.getStandard_number());
@@ -141,13 +140,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        SharePopupWindow popupWindow = new SharePopupWindow(this);
-        popupWindow.showAtLocation(getToolbar(), Gravity.BOTTOM, 0, 0);
+        Product product = getPresenter().getData();
+        new SharePopupWindow.Builder(this).setUrl("http://m.yjyapp.com/")
+                .setTitle(product.getProduct_name())
+                .setContent(product.getProduct_name())
+                .show(getToolbar());
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showSharePopWindow() {
-
     }
 
     @Override

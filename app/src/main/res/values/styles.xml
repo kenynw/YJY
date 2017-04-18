@@ -76,5 +76,9 @@
         <item name="android:background">@drawable/bg_f5_line</item>
     </style>
 
+    <style name="PopupWindowPushUpAnimation">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="android:windowExitAnimation">@anim/push_up_out</item>
+    </style>
 
 </resources>
