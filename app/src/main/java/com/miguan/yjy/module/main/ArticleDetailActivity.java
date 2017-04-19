@@ -8,6 +8,7 @@ import android.support.annotation.IdRes;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -24,6 +25,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.EvaluateViewHolder;
 import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.module.common.WebViewOB;
 import com.miguan.yjy.widget.SharePopupWindow;
 
 import butterknife.BindView;
@@ -42,7 +44,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
     FrameLayout mFlComment;
 
     @BindView(R.id.wv_article_detail)
-    WebView mWvDetail;
+    WebView mWebView;
 
     @BindView(R.id.recycle)
     EasyRecyclerView mRecycle;
@@ -52,6 +54,8 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
     @BindView(R.id.tv_product_user_evaluate_num)
     TextView mTvEvaluateNum;
+
+    WebSettings mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,23 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
         mFlStar.setOnClickListener(v -> getPresenter().star());
 
-        mWvDetail.setWebViewClient(new WebViewClient() {
+        mSettings = mWebView.getSettings();
+        mSettings.setJavaScriptEnabled(true);
+        mSettings.setBlockNetworkImage(true);
+        mSettings.setDomStorageEnabled(true);
+        mSettings.setDefaultTextEncodingName("utf-8");
+        mSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        //往浏览器标识字符串里添加自定义的字符串，用于服务器判断是否为客户端
+        if (!mSettings.getUserAgentString().contains("android")) {
+            mSettings.setUserAgentString(mSettings.getUserAgentString() + "/android");
+        }
+
+        mWebView.setVerticalScrollBarEnabled(false);
+        mWebView.setHorizontalScrollBarEnabled(false);
+
+        mWebView.addJavascriptInterface(new WebViewOB(this), "Android");
+        mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -86,7 +106,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
     }
 
     public void setData(Article article) {
-        mWvDetail.loadUrl(article.getLinkUrl());
+        mWebView.loadUrl(article.getLinkUrl());
         mTvEvaluateNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), article.getComment_num()));
         setStar(article.getIsGras() == 1);
         mFlComment.setOnClickListener(v -> ArticleEvaluatePresenter.start(this, article.getId()));

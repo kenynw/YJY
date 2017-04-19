@@ -49,6 +49,7 @@
     <string name="text_search_count">共为您找到%d款产品</string>
     <string name="text_remaining_day">剩余&#160;%d&#160;天</string>
     <string name="text_tms_weixin">(tmshuo520)</string>
+    <string name="text_apply_all_image">将滤镜应用到模板中的所有图片</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>

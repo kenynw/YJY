@@ -34,7 +34,8 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     private void requestPremission() {
         PermissionUtils.requestPermission(getView(), new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA
         }, 100);
     }
 

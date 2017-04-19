@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <ImageView
+            android:id="@+id/iv_image_edit_thumb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/def_image_template"
+            />
+
+        <ImageView
+            android:id="@+id/iv_image_edit_rotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/spacing_large"
+            android:src="@mipmap/ic_image_rotation"
+            />
+
+    </FrameLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_medium"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_large"
+        >
+
+        <CheckBox
+            android:id="@+id/cb_image_edit_apply_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/checkbox_selector"
+            android:paddingLeft="7dp"
+            android:text="@string/text_apply_all_image"
+            android:textColor="@color/textTertiary"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+        <com.jude.exgridview.ExGridView
+            android:id="@+id/grid_image_edit_filters"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:layout_below="@id/cb_image_edit_apply_all"
+            android:layout_marginTop="@dimen/spacing_small"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/widget_tiny"
+            android:layout_height="@dimen/widget_tiny"
+            android:layout_below="@id/grid_image_edit_filters"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:src="@mipmap/ic_dialog_close"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/widget_tiny"
+            android:layout_height="@dimen/widget_tiny"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/grid_image_edit_filters"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:src="@mipmap/ic_dialog_close"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
