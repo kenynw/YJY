@@ -7,6 +7,7 @@
               android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_test_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -15,6 +16,7 @@
         <View style="@style/ItemLineHeight"/>
 
         <TextView
+            android:id="@+id/tv_test_which"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -72,4 +74,6 @@
             />
 
     </LinearLayout>
+
+
 </LinearLayout>

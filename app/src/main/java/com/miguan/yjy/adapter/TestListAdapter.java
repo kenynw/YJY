@@ -9,8 +9,8 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Test;
-import com.miguan.yjy.module.test.TestRecomendPresenter;
+import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import java.util.List;
 
@@ -23,10 +23,10 @@ import butterknife.ButterKnife;
  * @描述
  */
 
-public class TestListAdapter extends RecyclerArrayAdapter<Test> {
+public class TestListAdapter extends RecyclerArrayAdapter<Product> {
 
 
-    public TestListAdapter(Context context, List<Test> objects) {
+    public TestListAdapter(Context context, List<Product> objects) {
         super(context, objects);
     }
 
@@ -41,7 +41,7 @@ public class TestListAdapter extends RecyclerArrayAdapter<Test> {
     }
 
 
-    class MyViewHolder extends BaseViewHolder<Test> {
+    class MyViewHolder extends BaseViewHolder<Product> {
 
         @BindView(R.id.iv_test_list)
         ImageView mIvTestList;
@@ -55,11 +55,11 @@ public class TestListAdapter extends RecyclerArrayAdapter<Test> {
 
 
         @Override
-        public void setData(Test data) {
-            Glide.with(getContext()).load(data.getImg()).into(mIvTestList);
+        public void setData(Product data) {
+            Glide.with(getContext()).load(data.getProduct_img()).into(mIvTestList);
 //            mIvTestList.setBackgroundResource(data.getImg());
-            mTvTestListName.setText(data.getTitle());
-            itemView.setOnClickListener(v -> TestRecomendPresenter.star(getContext()));
+            mTvTestListName.setText(data.getProduct_name());
+            itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(),data.getId()));
         }
     }
 

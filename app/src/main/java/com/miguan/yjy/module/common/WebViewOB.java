@@ -64,8 +64,16 @@ public class WebViewOB {
     @JavascriptInterface
     public void toHome() {
         Intent intent = new Intent(mContext, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mContext.startActivity(intent);
+    }
+
+    public void ajaxBegin() {
+        LUtils.toast("AJAXBegin");
+    }
+
+    public void ajaxDone() {
+        LUtils.toast("AJAX Done");
     }
 
 }

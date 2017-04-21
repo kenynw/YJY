@@ -11,14 +11,17 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
+import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.TestListAdapter;
+import com.miguan.yjy.adapter.TestSkinAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
-import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.module.common.WebViewActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,30 +35,36 @@ import butterknife.ButterKnife;
 @RequiresPresenter(TestResultPresenter.class)
 public class TestResultActivity extends BaseListActivity<TestResultPresenter> {
 
-    public static final String H5_SCORE="http://m.yjyapp.com/site/score-tip";
+    public static final String H5_SCORE = "http://m.yjyapp.com/site/score-tip";
 
     @BindView(R.id.tv_test_result_descirbe)
     TextView mTvResultDescirbe;
     @BindView(R.id.tv_test_result_descirbe_second)
     TextView mTvResultDescirbeSecond;
-    @BindView(R.id.tv_test_first)
-    TextView mTvTestFirst;
-    @BindView(R.id.rect_test_first)
-    RecyclerView mRectTestFirst;
-    @BindView(R.id.ll_test_first_more)
-    LinearLayout mLlTestFirstMore;
-    @BindView(R.id.tv_test_sencond)
-    TextView mTvTestSencond;
-    @BindView(R.id.recy_test_sencond)
-    RecyclerView mRecyTestSencond;
-    @BindView(R.id.ll_test_sencond_more)
-    LinearLayout mLlTestSencondMore;
+    @BindView(R.id.rect_test_my_skin)
+    RecyclerView mRectTestMySkin;
     @BindView(R.id.ll_test_grade)
     LinearLayout mLlTestGrade;
     @BindView(R.id.ll_test_again)
     LinearLayout mLlTestAgain;
     @BindView(R.id.recycle)
     EasyRecyclerView mRecycle;
+    @BindView(R.id.tv_test_first_letter)
+    TextView mTvFirstLetter;
+    @BindView(R.id.tv_test_first_name)
+    TextView mTvFirstName;
+    @BindView(R.id.tv_test_second_letter)
+    TextView mTvSecondLetter;
+    @BindView(R.id.tv_test_second_name)
+    TextView mTvSecondName;
+    @BindView(R.id.tv_test_third_letter)
+    TextView mTvThirdLetter;
+    @BindView(R.id.tv_test_third_name)
+    TextView mTvThirdName;
+    @BindView(R.id.tv_test_four_letter)
+    TextView mTvFourLetter;
+    @BindView(R.id.tv_test_four_name)
+    TextView mTvFourName;
 
 
     @Override
@@ -63,7 +72,7 @@ public class TestResultActivity extends BaseListActivity<TestResultPresenter> {
         super.onCreate(savedInstanceState);
         setToolbarTitle("我的肤质");
         ButterKnife.bind(this);
-        mLlTestGrade.setOnClickListener(v-> WebViewActivity.satr(this,getString(R.string.text_test_grade),H5_SCORE));
+        mLlTestGrade.setOnClickListener(v -> WebViewActivity.satr(this, getString(R.string.text_test_grade), H5_SCORE));
     }
 
     @Override
@@ -81,10 +90,20 @@ public class TestResultActivity extends BaseListActivity<TestResultPresenter> {
         context.startActivity(intent);
     }
 
-    public void setData(List<Test> datas) {
-        mRectTestFirst.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRectTestFirst.setAdapter(new TestListAdapter(TestResultActivity.this, datas));
+    public void setData(List<Skin> datas,ArrayList<Skin> categoryList) {
+        mRectTestMySkin.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        TestSkinAdapter testSkinAdapter=new TestSkinAdapter(TestResultActivity.this, datas);
+        testSkinAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                TestRecomendPresenter.star(TestResultActivity.this, categoryList);
+            }
+        });
+        mRectTestMySkin.setAdapter(testSkinAdapter);
     }
 
-
+    @Override
+    public ListConfig getListConfig() {
+        return super.getListConfig().setLoadMoreAble(false);
+    }
 }

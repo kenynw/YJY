@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.miguan.yjy.adapter.viewholder.TestListViewHolder;
-import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.main.TestFragmentPrensenter;
 
 /**
@@ -19,7 +19,7 @@ import com.miguan.yjy.module.main.TestFragmentPrensenter;
  * @描述
  */
 @RequiresPresenter(TestFragmentPrensenter.class)
-public class TestTabFragment extends BaseListFragment<TestTabFragmentPrensenter,Test> {
+public class TestTabFragment extends BaseListFragment<TestTabFragmentPrensenter,Product> {
 
     @Nullable
     @Override
@@ -28,8 +28,8 @@ public class TestTabFragment extends BaseListFragment<TestTabFragmentPrensenter,
     }
 
     @Override
-    public BaseViewHolder<Test> createViewHolder(ViewGroup parent, int viewType) {
-        return new TestListViewHolder(parent);
+    public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
+        return new SearchReslutViewHolder(parent);
     }
 
 

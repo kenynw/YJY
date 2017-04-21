@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
-    <ScrollView
+    <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -40,6 +40,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_test_first_letter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -50,6 +51,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/tv_test_first_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -73,6 +75,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_test_second_letter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -83,6 +86,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/tv_test_second_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -105,6 +109,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_test_third_letter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -115,6 +120,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/tv_test_third_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -137,6 +143,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_test_four_letter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -147,6 +154,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/tv_test_four_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -178,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/text_test_feature"
+                    android:text="@string/text_test_explain"
                     android:textColor="@color/color_sencond_title"
                     android:textSize="@dimen/text_size_small_16"/>
 
@@ -270,138 +278,12 @@
                 style="@style/ItemLineHeight"
                 />
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rect_test_my_skin"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                >
-
-                <View
-                    android:layout_width="3dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:background="@color/f32d"
-                    android:gravity="center_vertical"/>
-
-                <TextView
-                    android:id="@+id/tv_test_first"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:text="洗面奶"
-                    android:textColor="@color/f3"
-                    android:textSize="@dimen/text_size_small_15"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <View
-                style="@style/ItemLineHeight"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rect_test_first"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:paddingLeft="10dp"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_test_first_more"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="15dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/ic_more"/>
-
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
-            <View
-                style="@style/ItemLineHeight"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="30dp"
-                >
-
-                <View
-                    android:layout_width="3dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="7dp"
-                    android:background="@color/f85"
-                    android:gravity="center_vertical"/>
-
-                <TextView
-                    android:id="@+id/tv_test_sencond"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:text="洗面奶"
-                    android:textColor="@color/f3"
-                    android:textSize="@dimen/text_size_small_15"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
-
-            <View
-                style="@style/ItemLineHeight"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recy_test_sencond"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_test_sencond_more"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="15dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/ic_more"/>
-
-                </LinearLayout>
-            </LinearLayout>
 
             <View
                 style="@style/ItemLineHeight"
@@ -428,7 +310,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </com.miguan.yjy.widget.CustomNestedScrollView>
 
 
 </LinearLayout>

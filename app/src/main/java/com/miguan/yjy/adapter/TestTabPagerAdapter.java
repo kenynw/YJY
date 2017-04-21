@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.module.test.TestTabFragment;
 
 import java.util.List;
@@ -20,8 +20,8 @@ public class TestTabPagerAdapter extends FragmentPagerAdapter{
 
     Context mContext;
     int type;
-    List<Test> mTests;
-    public TestTabPagerAdapter(FragmentManager fm, Context context,int type, List<Test>list) {
+    List<Skin> mTests;
+    public TestTabPagerAdapter(FragmentManager fm, Context context,int type, List<Skin>list) {
         super(fm);
         mContext = context;
         this.type = type;
@@ -40,6 +40,6 @@ public class TestTabPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mTests.get(position).getTestName();
+        return mTests.get(position).getName();
     }
 }

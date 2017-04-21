@@ -7,14 +7,16 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
+import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestTabPagerAdapter;
-import com.miguan.yjy.adapter.viewholder.TestListViewHolder;
-import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
+import com.miguan.yjy.model.TestModel;
+import com.miguan.yjy.model.bean.Skin;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,17 +36,21 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     EasyRecyclerView mRecycle;
     @BindView(R.id.tv_test_recommend_change)
     TextView mTvTestRecommendChange;
+    public ArrayList<Skin> categoryList;
+    public int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.text_test_recommend_product);
+        categoryList = getIntent().getParcelableArrayListExtra(TestRecomendPresenter.EXTRA_CATEGORY_LIST);
         ButterKnife.bind(this);
+        setData();
     }
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new TestListViewHolder(parent);
+        return new SearchReslutViewHolder(parent);
     }
 
     @Override
@@ -52,12 +58,15 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
         return R.layout.test_activity_recomend;
     }
 
-    public void setData(List<Test>tests) {
-        TestTabPagerAdapter testTabPagerAdapter = new TestTabPagerAdapter(getSupportFragmentManager(),TestRecomendActivity.this,0,tests);
+    public void setData() {
+        TestTabPagerAdapter testTabPagerAdapter = new TestTabPagerAdapter(getSupportFragmentManager(), TestRecomendActivity.this, 0, categoryList);
 
         mtabTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                position = tab.getPosition();
+                TestModel.getInstantce().getSkinRecommendList(categoryList.get(position).getId(), 1).
+                        unsafeSubscribe(getPresenter().getRefreshSubscriber());
             }
 
             @Override
@@ -70,7 +79,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
             }
         });
-        for (int i=0; i<testTabPagerAdapter.getCount(); i++) {
+        for (int i = 0; i < testTabPagerAdapter.getCount(); i++) {
             TabLayout.Tab tab = mtabTest.newTab();
             mtabTest.addTab(tab);
             tab.setText(testTabPagerAdapter.getPageTitle(i));
@@ -78,5 +87,8 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
     }
 
-
+    @Override
+    public ListConfig getListConfig() {
+        return super.getListConfig();
+    }
 }

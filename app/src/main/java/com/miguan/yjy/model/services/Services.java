@@ -99,6 +99,7 @@ public interface Services {
 
     /**
      * 绑定手机
+     *
      * @param userId
      * @param mobile
      * @param captcha
@@ -400,20 +401,51 @@ public interface Services {
     ////////////////////测试//////////////////////
 
     /**
-     * 肤质提交及推荐接口
+     * 肤质提交接口
      * action(string) － 固定值saveSkin
      * user_id(int) － 用户ID
-     * dry(int) － 干性值
-     * tolerance(int) － 敏感值
-     * pigment(int) － 色素值
-     * compact(int) － 紧致值
+     * type(string) － dry,tolerance,pigment,compact四种类型
+     * value(int) － 对应值
      */
     @GET("?action=saveSkin")
-    Observable<Test> saveSkin(@Query("user_id") int userId,
-                              @Query("dry") int dry,
-                              @Query("tolerance") int tolerance,
-                              @Query("pigment") int pigment,
-                              @Query("compact") int compact);
+    Observable<String> saveSkin(@Query("user_id") int userId,
+                                @Query("type") String type,
+                                @Query("value") int value
+    );
+
+    /**
+     * 用户肤质接口
+     * action(string) － 固定值userSkin
+     * user_id(int) － 用户ID
+     */
+    @GET("?action=userSkin")
+    Observable<Test> userSkin(@Query("user_id") int userId
+    );
+
+    /**
+     * 肤质推荐列表接口
+     * action(string) － 固定值getSkinRecommendList
+     * user_id(int) － 用户ID
+     * cate_id(string) － 栏目ID
+     * page(int) － 当前页数
+     * pageSize(int) － 每页多少条
+     */
+    @GET("?action=getSkinRecommendList")
+    Observable<List<Product>> getSkinRecommendList(
+            @Query("user_id") int userId,
+            @Query("cate_id") String cateId,
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
+    );
+
+    /**
+     * 肤质推荐接口
+     * action(string) － 固定值getSkinRecommend
+     * user_id(int) － 用户ID
+     */
+    @GET("?action=getSkinRecommend")
+    Observable<Test> getSkinRecommend(@Query("user_id") int userId
+    );
 
     ////////////////////其他//////////////////////
 
