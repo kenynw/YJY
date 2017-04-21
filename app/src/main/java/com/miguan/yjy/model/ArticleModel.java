@@ -28,30 +28,72 @@ public class ArticleModel extends AbsModel {
         return ServicesClient.getServices().home(UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 文章列表
+     * @param page
+     * @return
+     */
     public Observable<List<Article>> getArticleList(int page) {
         return ServicesClient.getServices().articleList(page, 5).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 文章列表
+     * @param articleId
+     * @return
+     */
+    public Observable<Article> getArticleDetail(int articleId) {
+        return ServicesClient.getServices().articleDetail(articleId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 评论列表
+     * @param articleId
+     * @param page
+     * @param orderBy
+     * @return
+     */
     public Observable<List<Evaluate>> getEvaluateList(int articleId, int page, String orderBy) {
         return ServicesClient.getServices().evaluateList(
                 articleId, page, 10, UserPreferences.getUserID(), TYPE_ARTICLE, orderBy,""
         ).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 添加评论
+     * @param articleId
+     * @param content
+     * @return
+     */
     public Observable<String> addEvaluate(int articleId, String content) {
         return ServicesClient.getServices()
                 .addEvaluate(articleId, UserPreferences.getUserID(), TYPE_ARTICLE, 0, content)
                 .compose(new DefaultTransform<>());
     }
 
+    /**
+     * 评论点赞
+     * @param evaluateId
+     * @return
+     */
     public Observable<String> addEvaluateLike(int evaluateId) {
         return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 收藏文章
+     * @param articleId
+     * @return
+     */
     public Observable<String> star(int articleId) {
         return ServicesClient.getServices().addStar(articleId, UserPreferences.getUserID(), TYPE_ARTICLE).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 我的收藏列表
+     * @param page
+     * @return
+     */
     public Observable<List<Article>> getStarList(int page) {
         return ServicesClient.getServices().starList(UserPreferences.getUserID(), page).compose(new DefaultTransform<>());
     }

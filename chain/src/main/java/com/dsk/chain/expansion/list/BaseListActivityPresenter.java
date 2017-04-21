@@ -70,12 +70,8 @@ public class BaseListActivityPresenter<V extends BaseListActivity, M> extends Pr
         return mMoreSubscriber;
     }
 
-    public DataAdapter createAdapter() {
-        return new DataAdapter(getView());
-    }
-
     public DataAdapter getAdapter() {
-        if (mAdapter == null) mAdapter = createAdapter();
+        if (mAdapter == null) mAdapter = new DataAdapter(getView());
         return mAdapter;
     }
 

@@ -113,10 +113,6 @@ public interface Services {
 
     /**
      * 我在用的列表
-<<<<<<< HEAD
-=======
-     * //TODO
->>>>>>> 1ff4f62f5af5b23b2704412383752c0f1ae761b6
      *
      * @return
      */
@@ -364,9 +360,6 @@ public interface Services {
             @Query("page") int page
     );
 
-
-    ////////////////////文章//////////////////////
-
     /**
      * 文章列表
      *
@@ -377,6 +370,16 @@ public interface Services {
     Observable<List<Article>> articleList(
             @Query("page") int page,
             @Query("pageSize") int pageSize
+    );
+    /**
+     * 文章详情
+     *
+     * @return
+     */
+    @GET("?action=articleInfo")
+    Observable<Article> articleDetail(
+            @Query("id") int articleId,
+            @Query("user_id") int userId
     );
 
     /**
@@ -393,6 +396,7 @@ public interface Services {
             @Query("user_id") int user_id,
             @Query("type") int type
     );
+
     ////////////////////测试//////////////////////
 
     /**
@@ -420,5 +424,27 @@ public interface Services {
      */
     @GET("?action=versionUp")
     Observable<Version> checkUpdate();
+
+    /**
+     * 未读消息数
+     *
+     * @return
+     */
+    @GET("?action=noticeUnread")
+    Observable<Message> unreadMsg(
+            @Query("user_id") int userId
+    );
+
+    /**
+     * 设置消息为已读
+     *
+     * @return
+     */
+    @GET("?action=readNotice")
+    Observable<String> setMsgRead(
+            @Query("user_id") int userId,
+            @Query("id") int msgId,
+            @Query("type") String type
+    );
 
 }

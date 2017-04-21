@@ -13,6 +13,8 @@ import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 /**
  * @作者 cjh
  * @日期 2017/3/22 10:12
@@ -53,6 +55,7 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     public static void start(Context context, int productId) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
         intent.putExtra(EXTRA_PRODUCT_ID, productId);
+        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 

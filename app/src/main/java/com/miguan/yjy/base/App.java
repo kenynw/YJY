@@ -10,6 +10,8 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by LPK on 2016/11/21.
  */
@@ -24,6 +26,9 @@ public class App extends Application {
         Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
+
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);
 
         initShare();
     }

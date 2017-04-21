@@ -8,12 +8,16 @@ import android.text.Html;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.UpdateService;
 import com.miguan.yjy.utils.LUtils;
+
+import rx.Observable;
 
 /**
  * Copyright (c) 2017/1/13. LiaoPeiKun Inc. All rights reserved.
@@ -69,6 +73,14 @@ public class CommonModel extends AbsModel {
                 .show();
     }
 
+    public Observable<Message> getUnreadMsg() {
+        return ServicesClient.getServices().unreadMsg(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    public Observable<String> setMsgRead(int msgId, String type) {
+        return ServicesClient.getServices().setMsgRead(UserPreferences.getUserID(), msgId, type).compose(new DefaultTransform<>());
+    }
+
     private String findDownLoadDirectory(){
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             return Environment.getExternalStorageDirectory() + "/" + "download/";
@@ -76,5 +88,7 @@ public class CommonModel extends AbsModel {
             return Environment.getRootDirectory() + "/" + "download/";
         }
     }
+
+
 
 }

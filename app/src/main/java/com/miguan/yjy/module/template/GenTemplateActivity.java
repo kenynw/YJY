@@ -1,21 +1,26 @@
 package com.miguan.yjy.module.template;
 
-import android.graphics.Bitmap;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
-import com.dsk.chain.expansion.list.BaseListActivity;
-import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
+import com.jude.library.imageprovider.ImageProvider;
+import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.ScreenShot;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,38 +29,45 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(GenTemplatePresenter.class)
-public class GenTemplateActivity extends BaseListActivity<GenTemplatePresenter> {
+public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter> implements OnImageSelectListener {
 
     @BindView(R.id.fl_template_gen_add)
     FrameLayout mFlAdd;
 
+    @BindView(R.id.rcv_template_gen_list)
+    RecyclerView mRcvList;
+
+    @BindView(R.id.tv_template_delete)
+    TextView mTvDelete;
+
+    private ImageProvider mImageProvider;
+
+    private int mPosition;
+
+    private List<TemplateViewHolder> mViewHolders;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.template_activity_gen);
         setToolbarTitle(R.string.text_title_template);
         ButterKnife.bind(this);
 
+        mImageProvider = new ImageProvider(GenTemplateActivity.this);
+
+        mRcvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mRcvList.setAdapter(getPresenter().getAdapter());
         mFlAdd.setOnClickListener(v -> getPresenter().getAdapter().add(new Product()));
     }
 
-    @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new TemplateViewHolder(parent);
-    }
+        TemplateViewHolder templateViewHolder = new TemplateViewHolder(parent);
+        templateViewHolder.setOnImageClickListener(position -> {
+            mPosition = position;
+            mImageProvider.getImageFromCameraOrAlbum(GenTemplateActivity.this);
+        });
 
-    @Override
-    public ListConfig getListConfig() {
-        SpaceDecoration spaceDecoration = new SpaceDecoration(LUtils.dp2px(8));
-        spaceDecoration.setPaddingStart(false);
-        spaceDecoration.setPaddingEdgeSide(false);
-
-        return super.getListConfig()
-                .setContainerLayoutRes(R.layout.template_activity_gen)
-                .setItemDecoration(spaceDecoration)
-                .setFooterErrorAble(false)
-                .setNoMoreAble(false)
-                .setLoadMoreAble(false)
-                .setRefreshAble(false);
+        return templateViewHolder;
     }
 
     @Override
@@ -66,11 +78,34 @@ public class GenTemplateActivity extends BaseListActivity<GenTemplatePresenter> 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Bitmap bitmap1 = ScreenShot.getInstance().takeScreenShotOfJustView(getListView());
-        String filePath = ScreenShot.getInstance().saveScreenshotToPicturesFolder(this, bitmap1, "yjy");
-        SaveTemplatePresenter.start(this, filePath);
-        finish();
+        getExpansionDelegate().showProgressBar("正在生成图片");
+        ScreenShot.getInstance().saveRecyclerViewScreenshot(mRcvList, uri -> {
+            getExpansionDelegate().hideProgressBar();
+            SaveTemplatePresenter.start(GenTemplateActivity.this, uri);
+        });
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mImageProvider.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onImageSelect() {
+
+    }
+
+    @Override
+    public void onImageLoaded(Uri uri) {
+        FilterActivity.start(this, uri, mPosition);
+    }
+
+    @Override
+    public void onError() {
+
     }
 
 }

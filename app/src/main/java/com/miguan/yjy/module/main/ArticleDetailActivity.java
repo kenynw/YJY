@@ -1,8 +1,5 @@
 package com.miguan.yjy.module.main;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.Menu;
@@ -26,7 +23,6 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.EvaluateViewHolder;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.module.common.WebViewOB;
-import com.miguan.yjy.widget.SharePopupWindow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,15 +89,9 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                try {
-                    startActivity(new Intent("android.intent.action.VIEW", Uri.parse(url)));
-                    return true;
-                } catch (ActivityNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                return super.shouldOverrideUrlLoading(view, url);
+                return true;
             }
+
         });
     }
 
@@ -136,15 +126,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        SharePopupWindow sharePopupWindow = new SharePopupWindow(this);
-        Article article = getPresenter().getArticle();
-        if (article != null) {
-            new SharePopupWindow.Builder(this)
-                    .setTitle(article.getTitle())
-                    .setUrl(article.getLinkUrl())
-                    .setContent(article.getTitle())
-                    .show(getToolbar());
-        }
+        getPresenter().share();
         return super.onOptionsItemSelected(item);
     }
 
@@ -152,4 +134,5 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
 
     }
+
 }

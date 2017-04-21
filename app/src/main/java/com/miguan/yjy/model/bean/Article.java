@@ -27,7 +27,7 @@ public class Article implements Parcelable {
 
     private int isGras;
 
-    private List<Evaluate> evaluates;
+    private List<Evaluate> commentList;
 
     private int pageTotal;
 
@@ -97,12 +97,12 @@ public class Article implements Parcelable {
         this.isGras = isGras;
     }
 
-    public List<Evaluate> getEvaluates() {
-        return evaluates;
+    public List<Evaluate> getCommentList() {
+        return commentList;
     }
 
-    public void setEvaluates(List<Evaluate> evaluates) {
-        this.evaluates = evaluates;
+    public void setCommentList(List<Evaluate> commentList) {
+        this.commentList = commentList;
     }
 
     public int getPageTotal() {
@@ -134,7 +134,7 @@ public class Article implements Parcelable {
                 ", created_at='" + created_at + '\'' +
                 ", linkUrl='" + linkUrl + '\'' +
                 ", isGras=" + isGras +
-                ", evaluates=" + evaluates +
+                ", commentList=" + commentList +
                 ", pageTotal=" + pageTotal +
                 ", pageSize=" + pageSize +
                 '}';
@@ -155,7 +155,7 @@ public class Article implements Parcelable {
         dest.writeString(this.created_at);
         dest.writeString(this.linkUrl);
         dest.writeInt(this.isGras);
-        dest.writeTypedList(this.evaluates);
+        dest.writeTypedList(this.commentList);
         dest.writeInt(this.pageTotal);
         dest.writeInt(this.pageSize);
     }
@@ -169,7 +169,7 @@ public class Article implements Parcelable {
         this.created_at = in.readString();
         this.linkUrl = in.readString();
         this.isGras = in.readInt();
-        this.evaluates = in.createTypedArrayList(Evaluate.CREATOR);
+        this.commentList = in.createTypedArrayList(Evaluate.CREATOR);
         this.pageTotal = in.readInt();
         this.pageSize = in.readInt();
     }

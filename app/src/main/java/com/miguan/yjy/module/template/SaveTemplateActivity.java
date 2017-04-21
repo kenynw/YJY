@@ -37,8 +37,8 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
         setToolbarTitle("已保存");
         ButterKnife.bind(this);
 
-        String uri = getIntent().getStringExtra(SaveTemplatePresenter.EXTRA_IMAGE);
-        mIvThumb.setImageURI(Uri.parse(uri));
+        Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE);
+        mIvThumb.setImageURI(uri);
     }
 
 }

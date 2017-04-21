@@ -2,6 +2,7 @@ package com.miguan.yjy.module.template;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.dsk.chain.bijection.Presenter;
 
@@ -13,7 +14,7 @@ public class SaveTemplatePresenter extends Presenter<SaveTemplateActivity> {
 
     public static final String EXTRA_IMAGE = "image";
 
-    public static void start(Context context, String uri) {
+    public static void start(Context context, Uri uri) {
         Intent intent = new Intent(context, SaveTemplateActivity.class);
         intent.putExtra(EXTRA_IMAGE, uri);
         context.startActivity(intent);

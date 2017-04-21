@@ -67,9 +67,14 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         for (int i = 0; i < adapter.getCount(); i++) {
             TabLayout.Tab tab = mTab.newTab();
             mTab.addTab(tab);
-            tab.setIcon(adapter.getIconRes(i))
+            tab.setCustomView(R.layout.item_tab_main)
+                    .setIcon(adapter.getIconRes(i))
                     .setText(adapter.getPageTitle(i));
         }
+    }
+
+    public TabLayout.Tab getTab(int position) {
+        return mTab.getTabAt(position);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

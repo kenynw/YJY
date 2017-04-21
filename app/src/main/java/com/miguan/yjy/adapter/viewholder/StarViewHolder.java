@@ -34,7 +34,7 @@ public class StarViewHolder extends BaseViewHolder<Article> {
     public void setData(Article data) {
         mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
         mTvTitle.setText(data.getTitle());
-        itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data));
+        itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
     }
 
 }

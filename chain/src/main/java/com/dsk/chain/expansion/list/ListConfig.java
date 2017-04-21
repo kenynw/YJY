@@ -11,7 +11,7 @@ import com.dsk.chain.R;
  */
 public class ListConfig implements Cloneable {
 
-    static ListConfig DEFAULT = new ListConfig();
+    public static ListConfig DEFAULT = new ListConfig();
 
     public static void setDefaultListConfig(ListConfig config){
         DEFAULT = config;

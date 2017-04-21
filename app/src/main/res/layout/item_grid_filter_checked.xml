@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="65dp"
+    android:layout_width="69dp"
     android:layout_height="92dp"
     android:orientation="vertical"
-    android:paddingTop="9dp"
+    android:padding="@dimen/spacing_tiny"
+    android:background="@color/colorPrimary"
+    android:layout_gravity="bottom"
     >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/dv_filter_image"
+    <jp.co.cyberagent.android.gpuimage.GPUImageView
+        android:id="@+id/gpu_filter_image"
         android:layout_width="match_parent"
-        android:layout_height="83dp"
-        android:largeHeap="true"
-        app:actualImageScaleType="centerCrop"
-        app:placeholderImage="@mipmap/def_image_loading"
-        app:placeholderImageScaleType="centerCrop"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         />
 
     <TextView
@@ -24,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_gravity="bottom"
-        android:background="#CDCECECE"
+        android:background="#CD32DAC3"
         android:gravity="center"
-        android:textColor="@color/textTertiary"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size_caption_material"
         tools:text="原图"
         />

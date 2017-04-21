@@ -11,6 +11,8 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 /**
  * @作者 cjh
  * @日期 2016/9/29 10:59
@@ -45,6 +47,7 @@ public class WebViewActivity extends ChainBaseActivity {
         Intent intent = new Intent(context,WebViewActivity.class);
         intent.putExtra(WebViewActivity.REQUEST_NAME_TITLE, title);
         intent.putExtra(WebViewActivity.REQUEST_NAME_URL, url);
+        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 

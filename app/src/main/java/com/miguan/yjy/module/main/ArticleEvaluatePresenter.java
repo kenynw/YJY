@@ -1,6 +1,6 @@
 package com.miguan.yjy.module.main;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,10 +16,10 @@ public class ArticleEvaluatePresenter extends Presenter<ArticleEvaluateActivity>
 
     public static final String EXTRA_ARTICLE_ID = "article_id";
 
-    public static void start(Context context, int articleId) {
+    public static void start(Activity context, int articleId) {
         Intent intent = new Intent(context, ArticleEvaluateActivity.class);
         intent.putExtra(EXTRA_ARTICLE_ID, articleId);
-        context.startActivity(intent);
+        context.startActivityForResult(intent, 100);
     }
 
     private int mArticleId;
@@ -34,6 +34,7 @@ public class ArticleEvaluatePresenter extends Presenter<ArticleEvaluateActivity>
         ArticleModel.getInstance().addEvaluate(mArticleId, content).subscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String evaluate) {
+                getView().setResult(Activity.RESULT_OK);
                 getView().finish();
             }
         });
