@@ -19,6 +19,7 @@ import java.util.List;
 public class ProductComponentListPresenter extends BaseDataActivityPresenter<ProductComponentListActivity, Component> {
     public static final String EXTRA_PRODUCT_COMPONENT = "component";
     public List<Component> mComponents;
+    Product product;
 
     public static void start(Context context, Product product) {
         Intent intent = new Intent(context, ProductComponentListActivity.class);
@@ -29,7 +30,7 @@ public class ProductComponentListPresenter extends BaseDataActivityPresenter<Pro
     @Override
     protected void onCreate(ProductComponentListActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        Product product = getView().getIntent().getParcelableExtra(EXTRA_PRODUCT_COMPONENT);
+        product = getView().getIntent().getParcelableExtra(EXTRA_PRODUCT_COMPONENT);
         mComponents = product.getComponentList();
     }
 

@@ -2,6 +2,7 @@ package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
@@ -57,20 +58,41 @@ public class TestModel extends AbsModel {
     }
 
     /**
-     * 测试结果
+     * 肤质提交接口
      *
-     * @param dry
-     * @param tolerance
-     * @param pigment
-     * @param compact
+     * @param type
+     * @param value
      */
 
-    public Observable<Test> getTestResult(int dry, int tolerance, int pigment, int compact) {
+    public Observable<String> saveSkin(String type, int value) {
 
-        return ServicesClient.getServices().saveSkin(UserPreferences.getUserID(), dry, tolerance, pigment, compact).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().saveSkin(UserPreferences.getUserID(), type, value).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 用户肤质接口
+     */
 
+    public Observable<Test> userSkin() {
+
+        return ServicesClient.getServices().userSkin(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 肤质推荐接口
+     */
+    public Observable<Test> getSkinRecommend() {
+
+        return ServicesClient.getServices().getSkinRecommend(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 肤质推荐接口
+     */
+    public Observable<List<Product>> getSkinRecommendList(String cateId, int page) {
+
+        return ServicesClient.getServices().getSkinRecommendList(UserPreferences.getUserID(), cateId, page, 10).compose(new DefaultTransform<>());
+    }
 
 
 }

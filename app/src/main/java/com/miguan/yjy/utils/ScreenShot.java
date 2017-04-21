@@ -19,6 +19,7 @@ package com.miguan.yjy.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
 import android.util.Log;
@@ -30,6 +31,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 import static android.view.View.MeasureSpec;
@@ -138,4 +140,43 @@ public class ScreenShot {
         mediaFile = new File(mediaStorageDirectory.getPath() + File.separator + mImageName);
         return mediaFile;
     }
+
+    /**
+     * @param first 原始图
+     * @param mark  水印图
+     */
+    public static Bitmap waterMark(Bitmap first, Bitmap mark) {
+        float scale = ((float) first.getWidth()) / mark.getWidth();
+
+        mark = scaleImg(mark, 0.3f);
+        int width = first.getWidth();
+        int height = first.getHeight();
+        Bitmap result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(first, 0, 0, null);
+        int h = 0;
+        for (int k = 0; k < 30; k++) {
+            Random rand = new Random();
+            int i = rand.nextInt(1000);
+            int j = rand.nextInt(1000);
+            canvas.drawBitmap(mark, i, j, null);
+            h = h + mark.getHeight();
+        }
+//        while (h < height + mark.getHeight()) {
+//            Random rand = new Random();
+//            int i = rand.nextInt(10000);
+//            int j= rand.nextInt(10000);
+//            canvas.drawBitmap(mark, i, j, null);
+//            h = h + mark.getHeight();
+//        }
+        return result;
+    }
+
+    private static Bitmap scaleImg(Bitmap bitmap, float scale) {
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale, scale); //长和宽放大缩小的比例
+        Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        return resizeBmp;
+    }
+
 }

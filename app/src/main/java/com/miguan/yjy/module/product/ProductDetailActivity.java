@@ -22,6 +22,7 @@ import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
@@ -30,7 +31,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
  * @作者 cjh
  * @日期 2017/3/22 10:11
@@ -141,9 +141,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvSpec.setText(String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
 
-        tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), product.getRecommend().size()));
-        tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), product.getNotRecommend().size()));
-
+        if (UserPreferences.getUserID() <= 0) {
+            tvSuitNum.setVisibility(View.GONE);
+            tvUnsuitNum.setVisibility(View.GONE);
+        } else {
+            tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), product.getRecommend().size()));
+            tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), product.getNotRecommend().size()));
+        }
         // 备案
         mTvProvisionNo.setText(product.getStandard_number());
         mTvCountry.setText(product.getProduct_country());
@@ -152,6 +156,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
         mComponentAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getSecurity());
         flowtagGrade.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+        flowtagGrade.setFocusable(false);
         flowtagGrade.setAdapter(mComponentAdapter);
         mComponentAdapter.onlyAddAll(product.getSecurity());
         mComponentAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
@@ -164,6 +169,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mEffectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
         flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagEffectInfo.setAdapter(mEffectAdapter);
+        flowtagEffectInfo.setFocusable(false);
         mEffectAdapter.onlyAddAll(product.getEffect());
 
         mEffectAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
@@ -254,6 +260,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     public void setEvaluate(List<Evaluate> list) {
         mEvaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyEvalutate.setFocusable(false);
         mRecyEvalutate.setAdapter(mEvaluateAdapter);
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));
 

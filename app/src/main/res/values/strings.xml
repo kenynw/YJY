@@ -161,12 +161,14 @@
     <string name="tv_test_low_oily">轻度油性皮肤</string>
     <string name="text_test_height_oily">重度油性皮肤</string>
     <string name="text_test_feature">肤质特征</string>
+    <string name="text_test_explain">保养要素</string>
     <string name="text_test_grade">评分细则</string>
     <string name="text_test_again">重新测试</string>
     <string name="text_test_list">推荐产品清单</string>
     <string name="text_test_guide">护肤指南</string>
     <string name="text_test_recommend_product">推荐产品</string>
     <string name="text_test_recommend_change">换一批</string>
+    <string name="text_test_search_component">查询护肤品成分</string>
 
     <!--用户相关-->
     <string name="text_user_bind_mobile">绑定手机号</string>

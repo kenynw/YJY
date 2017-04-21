@@ -5,10 +5,10 @@ import android.content.Intent;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.TestModel;
-import com.miguan.yjy.model.bean.Test;
-import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.Skin;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @作者 cjh
@@ -16,27 +16,37 @@ import java.util.List;
  * @描述
  */
 
-public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomendActivity, Test> {
+public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomendActivity, Product> {
 
-    public static void star(Context context) {
+    public static final String EXTRA_CATEGORY_LIST = "categoryList";
+
+    public static void star(Context context, ArrayList<Skin> skin) {
         Intent intent = new Intent(context, TestRecomendActivity.class);
+        intent.putParcelableArrayListExtra(EXTRA_CATEGORY_LIST, skin);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreateView(TestRecomendActivity view) {
         super.onCreateView(view);
-        TestModel.getInstantce().getTestList().subscribe(new ServicesResponse<List<Test>>() {
-            @Override
-            public void onNext(List<Test> tests) {
-                getView().setData(tests);
-            }
-        });
+//        TestModel.getInstantce().getTestList().subscribe(new ServicesResponse<List<Test>>() {
+//            @Override
+//            public void onNext(List<Test> tests) {
+//                getView().setData(tests);
+//            }
+//        });
+
         onRefresh();
     }
 
     @Override
     public void onRefresh() {
-        TestModel.getInstantce().getTestList().unsafeSubscribe(getRefreshSubscriber());
+//        TestModel.getInstantce().getTestList().unsafeSubscribe(getRefreshSubscriber());
+    }
+
+    @Override
+    public void onLoadMore() {
+        TestModel.getInstantce().getSkinRecommendList(getView().categoryList.get(getView().position).getId(), getCurPage()).
+                unsafeSubscribe(getMoreSubscriber());
     }
 }

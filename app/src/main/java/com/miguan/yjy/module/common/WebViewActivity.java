@@ -3,6 +3,8 @@ package com.miguan.yjy.module.common;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.webkit.JsResult;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -10,6 +12,7 @@ import android.webkit.WebViewClient;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.utils.LUtils;
 
 /**
  * @作者 cjh
@@ -67,8 +70,29 @@ public class WebViewActivity extends ChainBaseActivity {
     private void initWebView() {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.loadUrl("javascript:$(document).ajaxStart(function (event, request, settings) { " +
+                        "android.ajaxBegin(); " + // Event called when an AJAX call begins
+                        "});");
+                view.loadUrl("javascript:$(document).ajaxComplete(function (event, request, settings) { " +
+                        "android.ajaxDone(); " + // Event called when an AJAX call ends
+                        "});");
+            }
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                LUtils.toast(message);
+                return super.onJsAlert(view, url, message, result);
+            }
+
+        });
         webView.loadUrl(url);
+        webView.addJavascriptInterface( new WebViewOB(this), "android");
+
     }
 
     @Override
@@ -79,6 +103,5 @@ public class WebViewActivity extends ChainBaseActivity {
             super.onBackPressed();
         }
     }
-
 
 }

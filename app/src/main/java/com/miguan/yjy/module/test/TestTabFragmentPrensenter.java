@@ -16,8 +16,6 @@ public class TestTabFragmentPrensenter extends BaseListFragmentPresenter<TestTab
     protected void onCreateView(TestTabFragment view) {
         super.onCreateView(view);
         onRefresh();
-        TestModel.getInstantce().getTestList().unsafeSubscribe(getRefreshSubscriber());
-
     }
 
     @Override

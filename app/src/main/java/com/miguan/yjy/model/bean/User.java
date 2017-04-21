@@ -44,62 +44,45 @@ public class User implements Parcelable {
 
     private String mobile;
 
-    @Override
-    public int describeContents() {
-        return 0;
+    private String dry;
+    private String tolerance;
+    private String pigment;
+    private String compact;
+
+    public String getDry() {
+        return dry;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.user_id);
-        dest.writeInt(this.sex);
-        dest.writeString(this.status);
-        dest.writeString(this.img);
-        dest.writeString(this.birth_year);
-        dest.writeString(this.birth_day);
-        dest.writeString(this.birth_month);
-        dest.writeString(this.city);
-        dest.writeInt(this.img_state);
-        dest.writeString(this.username);
-        dest.writeString(this.email);
-        dest.writeString(this.skin_name);
-        dest.writeString(this.province);
-        dest.writeString(this.rank_points);
-        dest.writeString(this.mobile);
+    public void setDry(String dry) {
+        this.dry = dry;
+    }
+
+    public String getTolerance() {
+        return tolerance;
+    }
+
+    public void setTolerance(String tolerance) {
+        this.tolerance = tolerance;
+    }
+
+    public String getPigment() {
+        return pigment;
+    }
+
+    public void setPigment(String pigment) {
+        this.pigment = pigment;
+    }
+
+    public String getCompact() {
+        return compact;
+    }
+
+    public void setCompact(String compact) {
+        this.compact = compact;
     }
 
     public User() {
     }
-
-    protected User(Parcel in) {
-        this.user_id = in.readInt();
-        this.sex = in.readInt();
-        this.status = in.readString();
-        this.img = in.readString();
-        this.birth_year = in.readString();
-        this.birth_day = in.readString();
-        this.birth_month = in.readString();
-        this.city = in.readString();
-        this.img_state = in.readInt();
-        this.username = in.readString();
-        this.email = in.readString();
-        this.skin_name = in.readString();
-        this.province = in.readString();
-        this.rank_points = in.readString();
-        this.mobile = in.readString();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     public int getUser_id() {
         return user_id;
@@ -220,4 +203,66 @@ public class User implements Parcelable {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.user_id);
+        dest.writeString(this.img);
+        dest.writeString(this.username);
+        dest.writeInt(this.sex);
+        dest.writeString(this.status);
+        dest.writeString(this.birth_year);
+        dest.writeString(this.birth_day);
+        dest.writeString(this.birth_month);
+        dest.writeString(this.city);
+        dest.writeInt(this.img_state);
+        dest.writeString(this.email);
+        dest.writeString(this.skin_name);
+        dest.writeString(this.province);
+        dest.writeString(this.rank_points);
+        dest.writeString(this.mobile);
+        dest.writeString(this.dry);
+        dest.writeString(this.tolerance);
+        dest.writeString(this.pigment);
+        dest.writeString(this.compact);
+    }
+
+    protected User(Parcel in) {
+        this.user_id = in.readInt();
+        this.img = in.readString();
+        this.username = in.readString();
+        this.sex = in.readInt();
+        this.status = in.readString();
+        this.birth_year = in.readString();
+        this.birth_day = in.readString();
+        this.birth_month = in.readString();
+        this.city = in.readString();
+        this.img_state = in.readInt();
+        this.email = in.readString();
+        this.skin_name = in.readString();
+        this.province = in.readString();
+        this.rank_points = in.readString();
+        this.mobile = in.readString();
+        this.dry = in.readString();
+        this.tolerance = in.readString();
+        this.pigment = in.readString();
+        this.compact = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }
