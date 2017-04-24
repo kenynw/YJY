@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.product.SearchResultPresenter;
 
 import java.util.ArrayList;
@@ -52,7 +54,17 @@ public class ProductAllSearchAdapter extends BaseAdapter {
         textView.setText(datas.get(position).getName());
         textView.setOnClickListener(v -> {
             SearchResultPresenter.start(context,datas.get(position).getName(),0,"");
+            String oldName = SystemPreferences.getSearchName();
+            if (!TextUtils.isEmpty(oldName)) {
+                if (!oldName.contains(datas.get(position).getName()))
+                    SystemPreferences.setSearchName(oldName + datas.get(position).getName() + ",");
+            } else {
+                SystemPreferences.setSearchName(datas.get(position).getName() + ",");
+            }
+
         });
+
+
         return convertView;
     }
     public void onlyAddAll(List<Product> datas) {

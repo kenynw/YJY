@@ -17,16 +17,18 @@
 package com.miguan.yjy.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+
 import static android.content.ContentValues.TAG;
 import static android.view.View.MeasureSpec;
 
@@ -95,15 +98,26 @@ public class ScreenShot {
      * @param v the v
      * @return the bitmap
      */
-    public void takeScreenShotOfJustView(View v, OnSaveListener listener) {
+    public Bitmap takeScreenShotOfJustView(View v) {
         v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
         Bitmap bitmap = takeScreenShotOfView(v);
-//        new SaveTask(v.getContext(), bitmap, listener).execute();
+        return bitmap;
     }
 
-    public void saveRecyclerViewScreenshot(RecyclerView view , OnSaveListener listener) {
+    /**
+     * Take screen shot of just the View without any constraints
+     *
+     * @param v the v
+     * @return the bitmap
+     */
+    public void takeScreenShotOfJustView(View v, OnSaveListener listener) {
+        Bitmap bitmap = takeScreenShotOfJustView(v);
+        new SaveTask(v.getContext(), bitmap, listener).execute();
+    }
+
+    public void saveRecyclerViewScreenshot(RecyclerView view, OnSaveListener listener) {
         RecyclerArrayAdapter adapter = (RecyclerArrayAdapter) view.getAdapter();
 
         int bitmapHeight = 0;
@@ -170,8 +184,8 @@ public class ScreenShot {
     /**
      * Save screenshot to pictures folder.
      *
-     * @param context  the context
-     * @param image    the image
+     * @param context the context
+     * @param image   the image
      */
     public void saveScreenshotToPicturesFolder(Context context, Bitmap image, OnSaveListener listener) {
         new SaveTask(context, image, listener).execute();
@@ -216,7 +230,7 @@ public class ScreenShot {
             File bitmapFile = getOutputMediaFile(filename);
             if (bitmapFile == null) {
                 Log.d(TAG, "Error creating media file, check storage permissions: ");// e.getMessage());
-                return ;
+                return;
             }
             try {
                 FileOutputStream fos = new FileOutputStream(bitmapFile);
@@ -227,6 +241,15 @@ public class ScreenShot {
                 // Initiate media scanning to make the image available in gallery apps
                 MediaScannerConnection.scanFile(mContext, new String[]{bitmapFile.getPath()},
                         new String[]{"image/jpeg"}, (path, uri) -> {
+                            // 其次把文件插入到系统图库
+                            try {
+                                MediaStore.Images.Media.insertImage(mContext.getContentResolver(),
+                                        bitmapFile.getAbsolutePath(), filename, null);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            // 最后通知图库更新
+                            mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
                             if (mListener != null) {
                                 mHandler.post(() -> mListener.onPictureSaved(uri));
                             }
@@ -236,6 +259,8 @@ public class ScreenShot {
             } catch (IOException e) {
                 Log.d(TAG, "Error accessing file: " + e.getMessage());
             }
+
+
         }
 
         private File getOutputMediaFile(String filename) {
@@ -265,6 +290,7 @@ public class ScreenShot {
     public interface OnSaveListener {
         void onPictureSaved(Uri uri);
     }
+
     /**
      * @param first 原始图
      * @param mark  水印图
@@ -281,8 +307,8 @@ public class ScreenShot {
         int h = 0;
         for (int k = 0; k < 30; k++) {
             Random rand = new Random();
-            int i = rand.nextInt(1000);
-            int j = rand.nextInt(1000);
+            int i = rand.nextInt(width);
+            int j = rand.nextInt(height);
             canvas.drawBitmap(mark, i, j, null);
             h = h + mark.getHeight();
         }

@@ -1,5 +1,8 @@
 package com.miguan.yjy.module.product;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +22,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.ProductReadAdapter;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.ScreenShot;
 
 import butterknife.BindView;
@@ -91,17 +95,19 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
     private void waterMark() {
         mRlWaterTop.setVisibility(View.VISIBLE);
         mLlWaterBottom.setVisibility(View.VISIBLE);
-        ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle, new ScreenShot.OnSaveListener() {
+        Bitmap bitmap=ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle);
+//        mLlWaterMiddle.setVisibility(View.GONE);
+        Resources res = getResources();
+        Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_water);
+        bitmap = ScreenShot.waterMark(bitmap, bmp);
+//        tv_test_img.setImageBitmap(bitmap);
+        ScreenShot.getInstance().saveScreenshotToPicturesFolder(this, bitmap, new ScreenShot.OnSaveListener() {
             @Override
             public void onPictureSaved(Uri uri) {
-
+                LUtils.toast("图片已生成,请至相册查收!");
+                mRlWaterTop.setVisibility(View.GONE);
+                mLlWaterBottom.setVisibility(View.GONE);
             }
         });
-
-//        mLlWaterMiddle.setVisibility(View.GONE);
-//        Resources res = getResources();
-//        Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_test_oily);
-//        bitmap = ScreenShot.waterMark(bitmap, bmp);
-//        tv_test_img.setImageBitmap(bitmap);
     }
 }
