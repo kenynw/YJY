@@ -7,19 +7,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.utils.ScreenShot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -54,21 +52,23 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         ButterKnife.bind(this);
 
         mImageProvider = new ImageProvider(GenTemplateActivity.this);
+        mViewHolders = new ArrayList<>();
 
         mRcvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRcvList.setAdapter(getPresenter().getAdapter());
         mFlAdd.setOnClickListener(v -> getPresenter().getAdapter().add(new Product()));
     }
-
-    protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        TemplateViewHolder templateViewHolder = new TemplateViewHolder(parent);
-        templateViewHolder.setOnImageClickListener(position -> {
-            mPosition = position;
-            mImageProvider.getImageFromCameraOrAlbum(GenTemplateActivity.this);
-        });
-
-        return templateViewHolder;
-    }
+//
+//    protected BaseViewHolder createViewHolder(ViewGroup parent) {
+//        TemplateViewHolder templateViewHolder = new TemplateViewHolder(parent);
+//        templateViewHolder.setOnImageClickListener(position -> {
+//            mPosition = position;
+//            mImageProvider.getImageFromCameraOrAlbum(GenTemplateActivity.this);
+//        });
+//        mViewHolders.add(templateViewHolder);
+//
+//        return templateViewHolder;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,10 +79,11 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         getExpansionDelegate().showProgressBar("正在生成图片");
-        ScreenShot.getInstance().saveRecyclerViewScreenshot(mRcvList, uri -> {
-            getExpansionDelegate().hideProgressBar();
-            SaveTemplatePresenter.start(GenTemplateActivity.this, uri);
-        });
+        getPresenter().takeShot(mRcvList);
+//        ScreenShot.getInstance().saveRecyclerViewScreenshot(mRcvList, uri -> {
+//            getExpansionDelegate().hideProgressBar();
+//            SaveTemplatePresenter.start(GenTemplateActivity.this, uri);
+//        });
 
         return super.onOptionsItemSelected(item);
     }

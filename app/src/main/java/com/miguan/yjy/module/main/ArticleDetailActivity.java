@@ -51,17 +51,19 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
     @BindView(R.id.tv_product_user_evaluate_num)
     TextView mTvEvaluateNum;
 
-    WebSettings mSettings;
+    private boolean mIsStar;
+
+    private WebSettings mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarTitle("这是品牌名");
+        setToolbarTitle(R.string.text_article_detail);
         ButterKnife.bind(this);
 
         getExpansionDelegate().showProgressBar();
 
-        mFlStar.setOnClickListener(v -> getPresenter().star());
+        mFlStar.setOnClickListener(v -> getPresenter().star(mIsStar));
 
         mSettings = mWebView.getSettings();
         mSettings.setJavaScriptEnabled(true);
@@ -72,7 +74,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
         //往浏览器标识字符串里添加自定义的字符串，用于服务器判断是否为客户端
         if (!mSettings.getUserAgentString().contains("android")) {
-            mSettings.setUserAgentString(mSettings.getUserAgentString() + "/android");
+            mSettings.setUserAgentString(mSettings.getUserAgentString() + "android");
         }
 
         mWebView.setVerticalScrollBarEnabled(false);
@@ -84,6 +86,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                mSettings.setBlockNetworkImage(false);
                 getExpansionDelegate().hideProgressBar();
             }
 
@@ -97,12 +100,13 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
     public void setData(Article article) {
         mWebView.loadUrl(article.getLinkUrl());
-        mTvEvaluateNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), article.getComment_num()));
+        mTvEvaluateNum.setText(String.format(getString(R.string.text_article_evaluate), article.getComment_num()));
         setStar(article.getIsGras() == 1);
         mFlComment.setOnClickListener(v -> ArticleEvaluatePresenter.start(this, article.getId()));
     }
 
     public void setStar(boolean isStar) {
+        mIsStar = isStar;
         mIvStar.setImageResource(isStar ? R.mipmap.ic_product_start_select_ok : R.mipmap.ic_star);
     }
 

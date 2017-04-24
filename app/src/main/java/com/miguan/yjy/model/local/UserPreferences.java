@@ -10,7 +10,6 @@ import com.miguan.yjy.utils.LUtils;
 public class UserPreferences {
 
     private static final String KEY_USER_ID = "user_id";
-
     private static final String KEY_USERNAME = "username";
     private static final String KEY_USER_BIRTHDAY = "userBirthday";
     private static final String KEY_USER_SEX = "userSex";

@@ -44,8 +44,9 @@ public class ArticleViewHolder extends BaseViewHolder<Article> {
         mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
         mTvTitle.setText(data.getTitle());
         mTvDate.setText(data.getCreated_at());
-        mTvLike.setText(String.valueOf(data.getLike_num()));
+        mTvLike.setText(data.getLike_num() <= 0 ? "赞" : String.valueOf(data.getLike_num()));
         mIvLike.setImageResource(data.getIsGras() == 1 ? R.mipmap.ic_like_pressed : R.mipmap.ic_like_normal);
         itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
     }
+
 }

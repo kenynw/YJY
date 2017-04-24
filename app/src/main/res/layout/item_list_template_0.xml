@@ -51,7 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/spacing_small"
-                fresco:placeholderImage="@mipmap/image_instruction_1"
+                fresco:placeholderImage="@mipmap/def_image_template"
                 fresco:placeholderImageScaleType="centerCrop"
                 fresco:roundAsCircle="true"
                 />
@@ -61,6 +61,15 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:src="@mipmap/bg_image_template_1"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_0_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_normal"
+                android:src="@mipmap/ic_filter"
                 />
 
         </FrameLayout>
@@ -101,7 +110,7 @@
             android:background="@mipmap/bg_template_0_text"
             android:lineSpacingMultiplier="1.2"
             android:padding="@dimen/spacing_normal"
-            android:text="很多品牌的化妆水都同时含有去角质功能，所以即使没有去角质，角质层也会越来越薄。所以，在使用化妆水前，一定要先看清说明上有没有去角质的作用，可以尝试在洁面后用化妆棉沾化妆水轻轻擦拭皮肤，擦拭后化妆棉上有黄或黑色的脏污，表面这款化妆水已经具有去角质功能，不再需要其他去角质产品了。"
+            android:text="@string/text_template_0_content"
             android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_subhead_material"
             />

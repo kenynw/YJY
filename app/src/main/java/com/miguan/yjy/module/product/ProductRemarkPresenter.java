@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.module.account.LoginActivity;
 
 /**
  * @作者 cjh
@@ -12,13 +14,18 @@ import com.miguan.yjy.model.bean.Product;
  * @描述
  */
 
-public class ProductRemarkPresenter extends Presenter<Product> {
-    public static String EXTRA_PROUDUCT = "product";
+public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
+
+    public static final String EXTRA_PRODUCT = "product";
 
     public static void start(Context context, Product product) {
-        Intent intent = new Intent(context,ProductRemarkActivity.class);
-        intent.putExtra(EXTRA_PROUDUCT,product);
-        context.startActivity(intent);
+        if (UserPreferences.getUserID() > 0) {
+            Intent intent = new Intent(context,ProductRemarkActivity.class);
+            intent.putExtra(EXTRA_PRODUCT,product);
+            context.startActivity(intent);
+        } else {
+            context.startActivity(new Intent(context, LoginActivity.class));
+        }
     }
 
 }

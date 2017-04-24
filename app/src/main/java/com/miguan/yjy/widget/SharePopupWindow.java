@@ -87,7 +87,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             case R.id.tv_share_wx_friend:
                 UMWeb umWeb = new UMWeb(mBuilder.getUrl());
                 umWeb.setTitle(mBuilder.getTitle());
-                umWeb.setThumb(new UMImage(mActivity, R.mipmap.ic_launcher));
+                umWeb.setThumb(new UMImage(mActivity, "http://oss.yjyapp.com/static/h5/images/logo/share.jpg"));
                 umWeb.setDescription(mBuilder.getContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
                         .setCallback(this)
@@ -97,7 +97,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             case R.id.tv_share_wx_circle:
                 UMWeb umWebCircle = new UMWeb(mBuilder.getUrl());
                 umWebCircle.setTitle(mBuilder.getTitle());
-                umWebCircle.setThumb(new UMImage(mActivity, R.mipmap.ic_launcher));
+                umWebCircle.setThumb(new UMImage(mActivity, "http://oss.yjyapp.com/static/h5/images/logo/share.jpg"));
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(this)
                         .withMedia(umWebCircle)
@@ -106,7 +106,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             case R.id.tv_share_weibo:
                 UMWeb umWebWeibo = new UMWeb(mBuilder.getUrl());
                 umWebWeibo.setTitle(mBuilder.getTitle());
-                umWebWeibo.setThumb(new UMImage(mActivity, R.mipmap.ic_launcher));
+                umWebWeibo.setThumb(new UMImage(mActivity, "http://oss.yjyapp.com/static/h5/images/logo/share.jpg"));
                 umWebWeibo.setDescription(mBuilder.getContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
                         .setCallback(this)

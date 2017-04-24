@@ -102,8 +102,7 @@ public class ScreenShot {
         v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        Bitmap bitmap = takeScreenShotOfView(v);
-        return bitmap;
+        return takeScreenShotOfView(v);
     }
 
     /**
@@ -191,7 +190,7 @@ public class ScreenShot {
         new SaveTask(context, image, listener).execute();
     }
 
-    private void measureView(View view, int width) {
+    public void measureView(View view, int width) {
         view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
@@ -259,7 +258,6 @@ public class ScreenShot {
             } catch (IOException e) {
                 Log.d(TAG, "Error accessing file: " + e.getMessage());
             }
-
 
         }
 

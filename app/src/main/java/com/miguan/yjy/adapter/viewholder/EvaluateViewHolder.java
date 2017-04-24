@@ -23,7 +23,6 @@ import butterknife.BindView;
 
 public class EvaluateViewHolder extends BaseEvaluateViewHolder {
 
-    private int type;
     @BindView(R.id.dv_evaluate_avatar)
     SimpleDraweeView mDvAvatar;
 
@@ -48,6 +47,8 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
     @BindView(com.miguan.yjy.R.id.tv_evaluate_label)
     TextView mTvLabel;
 
+    private int mIsLike;
+
     public EvaluateViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_list_evaluate);
     }
@@ -57,10 +58,11 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
         super.setData(data);
         mDvAvatar.setImageURI(Uri.parse(data.getImg()));
         mTvUserName.setText(data.getUsername());
-        mTvUserAge.setText(data.getAge() + "岁");
+        mTvUserAge.setText(data.getAge() > 0 ? data.getAge() + "岁" : "");
         mTvLabel.setText(data.getSkin());
         mIvLike.setImageResource(data.getIsLike() == 0 ? R.mipmap.ic_like_normal : R.mipmap.ic_like_pressed);
-        mTvLike.setText(String.valueOf((data.getLike_num())));
+        mTvLike.setText(data.getLike_num() > 0 ? String.valueOf((data.getLike_num())) : "赞");
+        mIsLike = data.getIsLike();
         if (TextUtils.isEmpty(data.getSkin())) {
             mTvLabel.setVisibility(View.GONE);
             mLlUserInfo.setGravity(Gravity.CENTER_VERTICAL);
@@ -69,8 +71,11 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
                 .subscribe(new ServicesResponse<String>() {
                     @Override
                     public void onNext(String s) {
-                        mTvLike.setText(String.valueOf(data.getLike_num() + 1));
-                        mIvLike.setImageResource(R.mipmap.ic_like_pressed);
+                        int curLikeCount = mTvLike.getText().equals("赞") ? 0 : Integer.valueOf(mTvLike.getText().toString());
+                        int likeCount = curLikeCount + (mIsLike == 0 ? 1 : -1);
+                        mTvLike.setText(likeCount == 0 ? "赞" : String.valueOf(likeCount));
+                        mIvLike.setImageResource(mIsLike == 0 ? R.mipmap.ic_like_pressed : R.mipmap.ic_like_normal);
+                        mIsLike = mIsLike == 0 ? 1 : 0;
                     }
                 }));
     }

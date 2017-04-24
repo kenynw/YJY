@@ -81,7 +81,7 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.0.3'
     compile 'cn.jiguang.sdk:jcore:1.1.1'
 
-    compile 'com.github.nekocode:Badge:2.0'
+    compile 'q.rorbin:badgeview:1.1.0'
 
     final RETROFIT_VERSION = '2.1.0'
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"

@@ -46,12 +46,12 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_activity_remark);
         ButterKnife.bind(this);
         setToolbarTitle("写点评");
-        product = getIntent().getParcelableExtra(ProductRemarkPresenter.EXTRA_PROUDUCT);
+
+        product = getIntent().getParcelableExtra(ProductRemarkPresenter.EXTRA_PRODUCT);
         setView(product);
         initListener();
     }
@@ -68,6 +68,7 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO 写在Presenter,并且提交前要检查下参数合法性
     private void submit() {
         ProductModel.getInstance().addEvaluate(product.getId(), mRatbarProduct.getNumStars(), mEtRemark.getText().toString())
         .subscribe(new ServicesResponse<String>(){
@@ -136,7 +137,6 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
 
     }
-
 
     private void setView(Product product) {
         Glide.with(this).load(product.getProduct_img()).fitCenter().placeholder(R.mipmap.def_image_product).error(R.mipmap.def_image_product).into(mImgProudct);

@@ -1,37 +1,46 @@
 package com.miguan.yjy.module.template;
 
 import android.net.Uri;
-import android.support.annotation.LayoutRes;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.ButterKnife;
+import butterknife.BindView;
 
 /**
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class TemplateViewHolder extends BaseViewHolder<Product> implements View.OnClickListener {
+public class Template0ViewHolder extends TemplateViewHolder {
 
-    public TemplateViewHolder(ViewGroup parent, @LayoutRes int res) {
-        super(parent, res);
-        ButterKnife.bind(this, itemView);
-        EventBus.getDefault().register(this);
+    @BindView(R.id.fl_template_0_image)
+    FrameLayout mFlImage;
+
+    @BindView(R.id.dv_template_0_image)
+    SimpleDraweeView mDvImage;
+
+    @BindView(R.id.tv_template_0_desc)
+    TextView mTvDesc;
+
+    @BindView(R.id.iv_template_0_filter)
+    ImageView mIvFilter;
+
+    public Template0ViewHolder(ViewGroup parent) {
+        super(parent, R.layout.item_list_template_0);
     }
 
     @Override
-    public void onClick(View v) {
-        if (mListener != null) {
-            mListener.onImageClick(getAdapterPosition());
-        }
+    public void setData(Product data) {
+        mIvFilter.setOnClickListener(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -39,6 +48,7 @@ public class TemplateViewHolder extends BaseViewHolder<Product> implements View.
         if (event.mApplyAll || (getAdapterPosition() == event.mPosition)) {
 
         }
+        mDvImage.setController(event.mController);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

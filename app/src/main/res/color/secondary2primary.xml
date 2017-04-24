@@ -7,6 +7,8 @@
 
     <item android:state_pressed="true" android:color="@color/colorPrimary" />
 
+    <item android:state_selected="true" android:color="@color/colorPrimary" />
+
     <item android:color="@color/textSecondary" />
 
 </selector>

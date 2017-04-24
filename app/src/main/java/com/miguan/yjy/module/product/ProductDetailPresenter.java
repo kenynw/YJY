@@ -8,7 +8,9 @@ import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
@@ -80,12 +82,13 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
 
     // 长草
     public void addLike() {
-        ProductModel.getInstance().addLike(mProductId).unsafeSubscribe(new ServicesResponse<String>() {
-            @Override
-            public void onNext(String result) {
-                LUtils.toast("长草成功");
-            }
-        });
+        if (isLogin())
+            ProductModel.getInstance().addLike(mProductId).unsafeSubscribe(new ServicesResponse<String>() {
+                @Override
+                public void onNext(String result) {
+                    LUtils.toast("长草成功");
+                }
+            });
     }
 
     public void setOrder(String order) {
@@ -103,5 +106,12 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         });
     }
 
+    private boolean isLogin() {
+        if (UserPreferences.getUserID() <= 0) {
+            getView().startActivity(new Intent(getView(), LoginActivity.class));
+            return false;
+        }
+        return true;
+    }
 
 }

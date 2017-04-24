@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Banner;
+import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.module.main.ArticleDetailPresenter;
+import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,15 +38,26 @@ public class BannerPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView iv = new ImageView(mContext);
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        iv.setLayoutParams(lp);
+        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        Banner banner = mBannerList.get(position);
         Glide.with(mContext)
-                .load("http://oss.yjyapp.com/cs/static/h5/images/banner.jpg")
+                .load(banner.getImg())
                 .placeholder(R.mipmap.def_image_loading)
                 .error(R.mipmap.def_image_loading)
                 .centerCrop()
                 .into(iv);
+
+        iv.setOnClickListener(v -> {
+            if (banner.getType() == 1) {
+                WebViewActivity.satr(mContext, "", banner.getUrl());
+            } else if (banner.getType() == 2) {
+                ProductDetailPresenter.start(mContext, banner.getRelation_id());
+            } else if (banner.getType() == 3) {
+                ArticleDetailPresenter.start(mContext, banner.getRelation_id());
+            }
+        });
 
         container.addView(iv);
         mViewList.add(iv);
@@ -52,7 +66,7 @@ public class BannerPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mBannerList.size() + 2;
+        return mBannerList.size();
     }
 
     @Override

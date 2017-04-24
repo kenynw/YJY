@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,18 +20,21 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
-import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * @作者 cjh
  * @日期 2017/3/22 10:11
@@ -94,7 +98,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     TextView mTvLike;
 
     @BindView(R.id.tv_product_detail_homework)
-    TextView tvHomework;
+    TextView mTvTemplate;
 
     @BindView(R.id.tv_product_detail_remark)
     TextView tvRemark;
@@ -118,6 +122,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @BindView(R.id.tv_product_skin_sort)
     TextView mTvSkinSort;
 
+    @BindView(R.id.iv_product_detail_like)
+    ImageView mIvLike;
+
     private ProductComponentAdapter mComponentAdapter;
     private ProductComponentAdapter mEffectAdapter;
     private EvaluateAdapter mEvaluateAdapter;
@@ -132,6 +139,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         ButterKnife.bind(this);
         mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
+
+        mTvTemplate.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            EventBus.getDefault().post(1);
+        });
     }
 
     @Override
@@ -171,43 +185,32 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         flowtagEffectInfo.setAdapter(mEffectAdapter);
         flowtagEffectInfo.setFocusable(false);
         mEffectAdapter.onlyAddAll(product.getEffect());
-
-        mEffectAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
-            @Override
-            public void itemClick(View v) {
-                ProductReadPresenter.start(ProductDetailActivity.this, product);
-            }
-        });
+        mEffectAdapter.setSetOnTagClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
 
         //去比价
         mTvTaobao.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
         mTvJingdong.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getJd()));
         mTvAmazon.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getAmazon()));
 
-
-        // 下面按钮
+        // 长草按钮
+        mIvLike.setImageResource(product.getIsGras() == 1 ? R.mipmap.ic_product_like_checked : R.mipmap.ic_product_like_normal);
         mTvLike.setOnClickListener(v -> getPresenter().addLike());
 
         tvRemark.setOnClickListener(v -> ProductRemarkPresenter.start(this, product));
-        Component component = new Component();
         tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, product));
         ll_info.setOnClickListener(this);
 
         tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
         tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
-        mTvSkinSort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mTvSkinSort.getText().equals("肤质排序")) {
-                    mTvSkinSort.setText(R.string.tv_product_detail_sort_total);
-                    getPresenter().getEvaluateData(getPresenter().getUserEvluate(),getPresenter().SORT_DEFAULT);
-                } else {
-                    mTvSkinSort.setText(R.string.tv_product_detail_sort_skin);
-                    getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_SKIN);
-                }
+        mTvSkinSort.setOnClickListener(v -> {
+            if (mTvSkinSort.getText().equals("肤质排序")) {
+                mTvSkinSort.setText(R.string.tv_product_detail_sort_total);
+                getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_DEFAULT);
+            } else {
+                mTvSkinSort.setText(R.string.tv_product_detail_sort_skin);
+                getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_SKIN);
             }
         });
-
 
     }
 

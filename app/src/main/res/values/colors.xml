@@ -61,6 +61,7 @@
 
     <!--背景颜色，添加bg前缀-->
     <color name="bgWindow">#F5F5F5</color>
+    <color name="bgWindowBar">#9e9e9e</color>
     <color name="bgActionBar">#FFFFFF</color>
     <color name="bgDisable">#D8D8D8</color>
 

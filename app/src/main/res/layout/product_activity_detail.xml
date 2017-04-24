@@ -1,322 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/white"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    >
 
     <include layout="@layout/include_toolbar"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:padding="@dimen/spacing_normal"
-                    >
-
-                    <ImageView
-                        android:id="@+id/iv_product_detail"
-                        android:layout_width="98dp"
-                        android:layout_height="98dp"
-                        android:layout_marginBottom="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:src="@mipmap/def_image_loading"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_detail_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/iv_product_detail"
-                        android:layout_marginLeft="@dimen/spacing_normal"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:layout_toRightOf="@+id/iv_product_detail"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_sencond_title"
-                        android:textSize="@dimen/text_size_small_15"
-                        tools:text="理肤泉特安舒缓修护乳"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_detail_spec"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_product_detail_name"
-                        android:layout_below="@+id/tv_product_detail_name"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="@dimen/text_size_body_material"
-                        tools:text="￥320/180ML"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_date_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_product_detail_spec"
-                        android:layout_below="@+id/tv_product_detail_spec"
-                        android:layout_marginTop="15dp"
-                        android:text="@string/text_query_production_date"
-                        android:textColor="@color/f32d"
-                        android:textSize="@dimen/text_size_small_14"/>
-
-                </RelativeLayout>
-
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_height="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/tv_product_detail_match"
-                    android:textAppearance="@style/TextSubhead"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_product_suit_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/shape_round_divider"
-                        android:gravity="center"
-                        android:paddingBottom="4dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="4dp"
-                        android:text="@string/tv_product_fit_skin"
-                        android:textColor="@color/color_sencond_title"
-                        android:textSize="@dimen/text_size_small_14"></TextView>
-
-                    <TextView
-                        android:id="@+id/tv_product_unsuit_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/shape_round_divider"
-                        android:gravity="center"
-                        android:paddingBottom="4dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="4dp"
-                        android:text="@string/tv_product_no_fit_skin"
-                        android:textColor="@color/color_sencond_title"
-                        android:textSize="@dimen/text_size_small_14"></TextView>
-
-                </LinearLayout>
-
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_product_detail_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/tv_product_detail_info"
-                        android:textColor="@color/color_sencond_title"
-                        android:textSize="@dimen/text_size_small_15"/>
-
-                    <ImageView
-                        android:id="@+id/iv_product_down"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@mipmap/ic_product_detail_record_down"/>
-
-                </LinearLayout>
-
-                <include layout="@layout/include_product_record_info"/>
-
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_height="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/tv_product_detail_compare_price"
-                    android:textColor="@color/color_sencond_title"
-                    android:textSize="@dimen/text_size_small_15"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_product_taobao"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_normal"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:drawableTop="@mipmap/ic_taobao"
-                        android:gravity="center"
-                        android:text="@string/text_taobao"
-                        android:textColor="@color/f3"
-                        android:textSize="@dimen/text_size_small_13"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_jingdong"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_normal"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:drawableTop="@mipmap/ic_jingdong"
-                        android:gravity="center"
-                        android:text="@string/text_jingdong"
-                        android:textColor="@color/f3"
-                        android:textSize="@dimen/text_size_small_13"/>
-
-                    <TextView
-                        android:id="@+id/tv_product_amazon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/spacing_normal"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:drawableTop="@mipmap/ic_amazon"
-                        android:gravity="center"
-                        android:text="@string/text_amazon"
-                        android:textColor="@color/f3"
-                        android:textSize="@dimen/text_size_small_13"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_height="10dp"/>
-
-                <include layout="@layout/include_evaluate_list"/>
-
-            </LinearLayout>
-
-        </ScrollView>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:baselineAligned="true"
-            android:gravity="center"
-            android:orientation="horizontal"
-            >
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:padding="@dimen/spacing_normal"
+                >
 
-                <View style="@style/ItemLineHeight"/>
-
-                <TextView
-                    android:id="@+id/tv_product_detail_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:drawableLeft="@mipmap/ic_product_detail_rough"
-                    android:drawablePadding="7dp"
-                    android:drawableStart="@mipmap/ic_product_detail_rough"
-                    android:gravity="center"
-                    android:text="长草"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="@dimen/text_size_body_material"
+                <ImageView
+                    android:id="@+id/iv_product_detail"
+                    android:layout_width="98dp"
+                    android:layout_height="98dp"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:src="@mipmap/def_image_loading"
                     />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <View style="@style/ItemLineHeight"/>
+                <TextView
+                    android:id="@+id/tv_product_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_product_detail"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_toRightOf="@+id/iv_product_detail"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/color_sencond_title"
+                    android:textSize="@dimen/text_size_small_15"
+                    tools:text="理肤泉特安舒缓修护乳"
+                    />
 
                 <TextView
-                    android:id="@+id/tv_product_detail_homework"
+                    android:id="@+id/tv_product_detail_spec"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:drawableLeft="@mipmap/ic_product_detail_homework"
-                    android:drawablePadding="7dp"
-                    android:gravity="center"
-                    android:text="生成功课"
-                    android:textColor="@color/f9"
-                    android:textSize="@dimen/text_size_small_15"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/f32d">
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_product_detail_name"
+                    android:layout_below="@+id/tv_product_detail_name"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_size_body_material"
+                    tools:text="￥320/180ML"
+                    />
 
                 <TextView
-                    android:id="@+id/tv_product_detail_remark"
+                    android:id="@+id/tv_product_date_detail"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:drawableLeft="@mipmap/ic_write_evaluate"
-                    android:drawablePadding="7dp"
-                    android:gravity="center"
-                    android:text="点评"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_small_15"/>
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_product_detail_spec"
+                    android:layout_below="@+id/tv_product_detail_spec"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/text_query_production_date"
+                    android:textColor="@color/f32d"
+                    android:textSize="@dimen/text_size_small_14"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
+
+            <View
+                style="@style/ItemLineHeight"
+                android:layout_height="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/tv_product_detail_match"
+                android:textAppearance="@style/TextSubhead"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_product_suit_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_round_divider"
+                    android:gravity="center"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="4dp"
+                    android:text="@string/tv_product_fit_skin"
+                    android:textColor="@color/color_sencond_title"
+                    android:textSize="@dimen/text_size_small_14"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_product_unsuit_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_round_divider"
+                    android:gravity="center"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="4dp"
+                    android:text="@string/tv_product_no_fit_skin"
+                    android:textColor="@color/color_sencond_title"
+                    android:textSize="@dimen/text_size_small_14"></TextView>
+
+            </LinearLayout>
+
+            <View
+                style="@style/ItemLineHeight"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
+            <LinearLayout
+                android:id="@+id/ll_product_detail_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tv_product_detail_info"
+                    android:textColor="@color/color_sencond_title"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+                <ImageView
+                    android:id="@+id/iv_product_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@mipmap/ic_product_detail_record_down"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/include_product_record_info"/>
+
+            <View
+                style="@style/ItemLineHeight"
+                android:layout_height="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/tv_product_detail_compare_price"
+                android:textColor="@color/color_sencond_title"
+                android:textSize="@dimen/text_size_small_15"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_product_taobao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:drawableTop="@mipmap/ic_taobao"
+                    android:gravity="center"
+                    android:text="@string/text_taobao"
+                    android:textColor="@color/f3"
+                    android:textSize="@dimen/text_size_small_13"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_product_jingdong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:drawableTop="@mipmap/ic_jingdong"
+                    android:gravity="center"
+                    android:text="@string/text_jingdong"
+                    android:textColor="@color/f3"
+                    android:textSize="@dimen/text_size_small_13"/>
+
+                <TextView
+                    android:id="@+id/tv_product_amazon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:drawableTop="@mipmap/ic_amazon"
+                    android:gravity="center"
+                    android:text="@string/text_amazon"
+                    android:textColor="@color/f3"
+                    android:textSize="@dimen/text_size_small_13"
+                    />
+
+            </LinearLayout>
+
+            <View
+                style="@style/ItemLineHeight"
+                android:layout_height="10dp"/>
+
+            <include layout="@layout/include_evaluate_list"/>
 
         </LinearLayout>
 
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:baselineAligned="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_product_detail_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_tiny"
+                android:layout_marginRight="@dimen/spacing_tiny"
+                android:src="@mipmap/ic_product_like_normal"
+                />
+
+            <TextView
+                android:id="@+id/tv_product_detail_like"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/btn_like"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/text_size_body_material"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_product_detail_homework"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@mipmap/ic_product_detail_homework"
+                android:drawablePadding="7dp"
+                android:gravity="center"
+                android:text="生成功课"
+                android:textColor="@color/f9"
+                android:textSize="@dimen/text_size_small_15"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/f32d">
+
+            <TextView
+                android:id="@+id/tv_product_detail_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@mipmap/ic_write_evaluate"
+                android:drawablePadding="7dp"
+                android:gravity="center"
+                android:text="点评"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_small_15"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

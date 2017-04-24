@@ -130,13 +130,25 @@
 
         </activity>
         <activity
+            android:name=".module.main.GuideActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            >
+        </activity>
+        <activity
             android:name=".module.main.MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             >
         </activity>
-        <activity android:name=".module.product.SearchActivity">
+        <activity
+            android:name=".module.product.SearchActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible"
+            >
         </activity>
         <activity
             android:name=".module.main.ArticleDetailActivity"
@@ -164,7 +176,7 @@
             android:name=".module.product.ProductDetailActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
         <activity
             android:name=".module.product.ProductRemarkActivity"

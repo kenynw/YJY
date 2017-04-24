@@ -71,12 +71,12 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
         }
     }
 
-    public void star() {
+    public void star(boolean isStar) {
         ArticleModel.getInstance().star(mArticleId).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String result) {
-                getView().setStar(true);
-                LUtils.toast("收藏成功");
+                getView().setStar(!isStar);
+                LUtils.toast(isStar ? "取消成功" : "收藏成功");
             }
         });
     }

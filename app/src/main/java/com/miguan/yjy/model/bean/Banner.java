@@ -17,40 +17,12 @@ public class Banner implements Parcelable {
 
     private String url;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+    private int type;
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeString(this.title);
-        dest.writeString(this.img);
-        dest.writeString(this.url);
-    }
+    private int relation_id;
 
     public Banner() {
     }
-
-    protected Banner(Parcel in) {
-        this.id = in.readInt();
-        this.title = in.readString();
-        this.img = in.readString();
-        this.url = in.readString();
-    }
-
-    public static final Creator<Banner> CREATOR = new Creator<Banner>() {
-        @Override
-        public Banner createFromParcel(Parcel source) {
-            return new Banner(source);
-        }
-
-        @Override
-        public Banner[] newArray(int size) {
-            return new Banner[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -72,6 +44,22 @@ public class Banner implements Parcelable {
         return img;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getRelation_id() {
+        return relation_id;
+    }
+
+    public void setRelation_id(int relation_id) {
+        this.relation_id = relation_id;
+    }
+
     public void setImg(String img) {
         this.img = img;
     }
@@ -83,4 +71,40 @@ public class Banner implements Parcelable {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.img);
+        dest.writeString(this.url);
+        dest.writeInt(this.type);
+        dest.writeInt(this.relation_id);
+    }
+
+    protected Banner(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.img = in.readString();
+        this.url = in.readString();
+        this.type = in.readInt();
+        this.relation_id = in.readInt();
+    }
+
+    public static final Creator<Banner> CREATOR = new Creator<Banner>() {
+        @Override
+        public Banner createFromParcel(Parcel source) {
+            return new Banner(source);
+        }
+
+        @Override
+        public Banner[] newArray(int size) {
+            return new Banner[size];
+        }
+    };
 }
