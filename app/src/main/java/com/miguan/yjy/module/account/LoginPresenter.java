@@ -1,5 +1,7 @@
 package com.miguan.yjy.module.account;
 
+import android.content.Intent;
+
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.User;
@@ -55,6 +57,12 @@ public class LoginPresenter extends Presenter<LoginActivity> {
 
             }
         });
+    }
+
+    @Override
+    protected void onResult(int requestCode, int resultCode, Intent data) {
+        super.onResult(requestCode, resultCode, data);
+        UMShareAPI.get(getView()).onActivityResult(requestCode, resultCode, data);
     }
 
 }

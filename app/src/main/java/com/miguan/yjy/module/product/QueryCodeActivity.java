@@ -52,6 +52,7 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
 
     public void setBrand(String brandName, int brandId) {
         mEtBrand.setText(brandName);
+        mEtProduct.setText("");
         mBtnSubmit.setOnClickListener(v -> getPresenter().query(brandId, mEtProduct.getText().toString().trim()));
     }
 

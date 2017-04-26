@@ -4,52 +4,9 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"></include>
+    <include layout="@layout/include_toolbar"/>
 
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:id="@+id/iv_proudct_thumb"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="15dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/iv_proudct_thumb"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/iv_proudct_thumb"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="sss"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15"/>
-
-        <TextView
-            android:id="@+id/tv_product_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_product_name"
-            android:layout_below="@+id/tv_product_name"
-            android:text="sss"
-            android:textColor="@color/f6"
-            android:textSize="@dimen/text_size_small_14"/>
-
-    </RelativeLayout>
+    <include layout="@layout/include_product_info"/>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
@@ -71,7 +28,6 @@
             android:textColor="@color/f6"
             android:textSize="@dimen/text_size_small_15"/>
 
-        <!--style="?android:attr/ratingBarStyleSmall"-->
         <RatingBar
             android:id="@+id/ratbar_product"
             style="@style/MySmallRatingBar"
@@ -81,9 +37,9 @@
             android:layout_marginLeft="20dp"
             android:isIndicator="false"
             android:numStars="5"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            android:stepSize="1"/>
+            android:paddingTop="@dimen/spacing_small"
+            android:stepSize="1"
+            />
 
         <TextView
             android:id="@+id/tv_product_remark_evaluate"

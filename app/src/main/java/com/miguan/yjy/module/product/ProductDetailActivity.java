@@ -152,7 +152,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     public void setData(Product product) {
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
-        mTvSpec.setText(String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
+
+        mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
 
         if (UserPreferences.getUserID() <= 0) {

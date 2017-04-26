@@ -18,18 +18,21 @@ public class TemplateTransformer implements ViewPager.PageTransformer {
     @Override
     public void transformPage(View page, float position) {
         float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
-        float rotate = LUtils.dp2px(20) * Math.abs(position);
+        float rotate = LUtils.dp2px(10) * Math.abs(position);
         if (position < -1) {
 
         } else if (position < 0) {
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
+            page.setTranslationX(-rotate);
         } else if (position >= 0 && position < 1) {
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
+            page.setTranslationX(rotate);
         } else if (position >= 1) {
             page.setScaleX(scaleFactor);
             page.setScaleY(scaleFactor);
+            page.setTranslationX(rotate);
         }
     }
 

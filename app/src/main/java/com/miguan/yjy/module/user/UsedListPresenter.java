@@ -23,11 +23,10 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
     }
 
     @Override
-    protected void onCreateView(UsedListActivity view) {
-        super.onCreateView(view);
+    protected void onResume() {
+        super.onResume();
         onRefresh();
     }
-
 
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void refreshEvent(UserProduct product) {

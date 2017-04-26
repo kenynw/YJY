@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -82,14 +83,17 @@
                 android:orientation="horizontal"
                 >
 
-                <TextView
+                <com.miguan.yjy.widget.SuperTextView
                     android:id="@+id/tv_product_used_is_seal"
                     android:layout_width="wrap_content"
-                    android:layout_height="21dp"
-                    android:background="@drawable/bg_red_stroke"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:gravity="center"
                     android:maxHeight="24dp"
                     android:textSize="@dimen/text_size_caption_material"
+                    app:corner="2dp"
+                    app:stroke_color="#FF5555"
+                    app:stroke_width="1dp"
                     tools:text="已开封"
                     />
 

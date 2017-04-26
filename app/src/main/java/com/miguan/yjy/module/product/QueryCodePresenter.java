@@ -49,15 +49,12 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     }
 
     public void query(int brandId, String number) {
-        getView().getExpansionDelegate().showProgressBar();
-        ProductModel.getInstance().queryCode(brandId, number)
-                .doAfterTerminate(() -> getView().getExpansionDelegate().hideProgressBar())
-                .subscribe(new ServicesResponse<UserProduct>() {
-                    @Override
-                    public void onNext(UserProduct product) {
-                        getView().showQueryDialog(product, brandId);
-                    }
-                });
+        ProductModel.getInstance().queryCode(brandId, number).subscribe(new ServicesResponse<UserProduct>() {
+            @Override
+            public void onNext(UserProduct product) {
+                getView().showQueryDialog(product, brandId);
+            }
+        });
     }
 
 }

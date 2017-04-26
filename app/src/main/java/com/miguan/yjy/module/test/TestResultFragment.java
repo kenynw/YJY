@@ -83,7 +83,7 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
         View view = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
         mToolbarTitle.setText("我的肤质");
-        mLlTestGrade.setOnClickListener(v -> WebViewActivity.satr(getActivity(), getString(R.string.text_test_grade), H5_SCORE));
+        mLlTestGrade.setOnClickListener(v -> WebViewActivity.start(getActivity(), getString(R.string.text_test_grade), H5_SCORE));
         mLlTestAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

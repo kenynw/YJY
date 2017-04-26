@@ -12,6 +12,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.widget.SuperTextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,7 +38,7 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
     TextView mTvDelete;
 
     @BindView(R.id.tv_product_used_is_seal)
-    TextView mTvIsSeal;
+    SuperTextView mTvIsSeal;
 
     @BindView(R.id.tv_product_used_name)
     TextView mTvName;
@@ -88,7 +89,8 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
 
         mTvIsSeal.setText(data.getIs_seal() == 0 ? "未开封" : "已开封");
         mTvIsSeal.setTextColor(data.getIs_seal() == 0 ? 0xFFBCBCBC : 0xFFFF5555);
-        mTvIsSeal.setBackgroundResource(data.getIs_seal() == 0 ? R.drawable.bg_gray_stroke : R.drawable.bg_red_stroke);
+        mTvIsSeal.setStrokeColor(data.getIs_seal() == 0 ? 0xFFBCBCBC : 0xFFFF5555);
+
         mTvOpen.setVisibility(data.getIs_seal() == 0 ? View.VISIBLE : View.GONE);
         mTvDate.setVisibility(data.getIs_seal() == 0 ? View.GONE : View.VISIBLE);
         mTvDate.setText(data.getSeal_time());
