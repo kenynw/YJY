@@ -28,7 +28,6 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.test.TestGuideActivity;
-import com.miguan.yjy.module.test.TestResultActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.utils.DateUtils;
 
@@ -273,8 +272,11 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 popupWindow.dismiss();
                 break;
             case R.id.tv_test_result:
-                TestResultActivity.star(getActivity());
-                break;
+                //                TestResultFragment.star(getActivity());
+                if (mMyOnTabClick != null) {
+                    mMyOnTabClick.tabClickStart();
+                    break;
+                }
 
 
         }
@@ -329,4 +331,13 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
         startActivity(intent);
     }
 
+    public interface MyOnTabClick {
+        void tabClickStart();
+    }
+
+    public  MyOnTabClick mMyOnTabClick;
+
+    public void setMyOnTabClick(MyOnTabClick myOnTabClick) {
+        mMyOnTabClick = myOnTabClick;
+    }
 }

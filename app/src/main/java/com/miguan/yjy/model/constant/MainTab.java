@@ -4,7 +4,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.module.main.HomeFragment;
 import com.miguan.yjy.module.main.MeFragment;
 import com.miguan.yjy.module.main.TemplateFragment;
-import com.miguan.yjy.module.main.TestFragment;
+import com.miguan.yjy.module.main.TestMainFragment;
 
 /**
  * Copyright (c) 2017/3/17. LiaoPeiKun Inc. All rights reserved.
@@ -14,7 +14,7 @@ public enum MainTab {
 
     HOME(0, R.drawable.tab_main_home_selector, R.string.app_name, HomeFragment.class),
     MODULE(1, R.drawable.tab_main_module_selector, R.string.btn_main_module, TemplateFragment.class),
-    TEST(2, R.drawable.tab_main_test_selector, R.string.btn_main_test, TestFragment.class),
+    TEST(2, R.drawable.tab_main_test_selector, R.string.btn_main_test, TestMainFragment.class),
     ME(3, R.drawable.tab_main_me_selector, R.string.btn_main_me, MeFragment.class);
 
     public final int mTabIndex;

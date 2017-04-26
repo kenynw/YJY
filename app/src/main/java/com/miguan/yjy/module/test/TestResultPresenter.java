@@ -1,6 +1,6 @@
 package com.miguan.yjy.module.test;
 
-import com.dsk.chain.expansion.list.BaseListActivityPresenter;
+import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Test;
@@ -16,10 +16,10 @@ import rx.functions.Func1;
  * @描述
  */
 
-public class TestResultPresenter extends BaseListActivityPresenter<TestResultActivity, Article> {
+public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFragment, Article> {
 
     @Override
-    protected void onCreateView(TestResultActivity view) {
+    protected void onCreateView(TestResultFragment view) {
         super.onCreateView(view);
         onRefresh();
     }

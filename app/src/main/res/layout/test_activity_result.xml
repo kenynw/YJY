@@ -4,7 +4,24 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/TitleToolbar"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:id="@id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="@string/text_test"
+            android:textAppearance="@style/TextSubhead"
+            android:textColor="@color/f32d"
+            />
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
