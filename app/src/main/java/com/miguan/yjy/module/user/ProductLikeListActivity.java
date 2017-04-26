@@ -45,7 +45,7 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
                 getPresenter().setCateId(cateId);
             }
             if (!TextUtils.isEmpty(text)) {
-                getPresenter().setEffect(text);
+                getPresenter().setEffect("");
             }
             if (cateId <= 0 && text.isEmpty()){
                 getPresenter().setEffect("");

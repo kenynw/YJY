@@ -1,9 +1,14 @@
 package com.miguan.yjy.module.account;
 
 import com.dsk.chain.bijection.Presenter;
-import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.AccountModel;
+import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
@@ -16,6 +21,38 @@ public class LoginPresenter extends Presenter<LoginActivity> {
             @Override
             public void onNext(User user) {
                 getView().finish();
+            }
+        });
+    }
+
+    public void wxLogin() {
+        UMShareAPI.get(getView()).getPlatformInfo(getView(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                map.put("nickname", map.get("screen_name"));
+                map.put("sex", map.get("gender"));
+                map.put("headimgurl", map.get("iconurl"));
+                AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
+                    @Override
+                    public void onNext(User user) {
+                        getView().finish();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media, int i) {
+
             }
         });
     }

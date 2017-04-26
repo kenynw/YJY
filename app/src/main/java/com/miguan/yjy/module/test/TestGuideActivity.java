@@ -86,7 +86,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
         view = View.inflate(TestGuideActivity.this, R.layout.test_popwindow_guide, null);
         initView();
 //        TestResultActivity.star(TestGuideActivity.this)//测试结果页
-        mTvTestInto.setOnClickListener(v -> WebViewActivity.satr(TestGuideActivity.this, getString(test.getTitle()), Constants.testLink + type + "&user_id=" + UserPreferences.getUserID()+"&from=android"));
+        mTvTestInto.setOnClickListener(v -> WebViewActivity.start(TestGuideActivity.this, getString(test.getTitle()), Constants.testLink + type + "&user_id=" + UserPreferences.getUserID()+"&from=android"));
     }
 
 

@@ -33,8 +33,6 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
     public static final String EXTRA_TEMPLATE = "template";
 
-
-
     public static void start(Context context, Template template) {
         Intent intent = new Intent(context, GenTemplateActivity.class);
         intent.putExtra(EXTRA_TEMPLATE, template);
@@ -73,7 +71,6 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
                 mImageProvider.getImageFromCameraOrAlbum(getView() );
             });
             mViewHolders.add(templateViewHolder);
-
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -137,11 +134,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
         int iHeight = 0;
         if (mHeader != null) {
-            mHeader.setDrawingCacheEnabled(true);
-            mHeader.buildDrawingCache();
-            bigCanvas.drawBitmap(mHeader.getDrawingCache(), 0f, iHeight, paint);
-            mHeader.setDrawingCacheEnabled(false);
-            mHeader.destroyDrawingCache();
+            bigCanvas.drawBitmap(ScreenShot.getInstance().takeScreenShotOfView(mHeader), 0f, iHeight, paint);
             iHeight += mHeader.getMeasuredHeight();
         }
 
@@ -157,20 +150,12 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
             TemplateViewHolder holder = mViewHolders.get(i);
             mAdapter.onBindViewHolder(holder, i);
-            holder.itemView.setDrawingCacheEnabled(true);
-            holder.itemView.buildDrawingCache();
-            bigCanvas.drawBitmap(holder.itemView.getDrawingCache(), 0f, iHeight, paint);
-            holder.itemView.setDrawingCacheEnabled(false);
-            holder.itemView.destroyDrawingCache();
+            bigCanvas.drawBitmap(ScreenShot.getInstance().takeScreenShotOfView(holder.itemView), 0f, iHeight, paint);
             iHeight += holder.itemView.getMeasuredHeight();
         }
 
         if (mFooter != null) {
-            mFooter.setDrawingCacheEnabled(true);
-            mFooter.buildDrawingCache();
-            bigCanvas.drawBitmap(mFooter.getDrawingCache(), 0f, iHeight, paint);
-            mFooter.setDrawingCacheEnabled(false);
-            mFooter.destroyDrawingCache();
+            bigCanvas.drawBitmap(ScreenShot.getInstance().takeScreenShotOfView(mFooter), 0f, iHeight, paint);
         }
 
         ScreenShot.getInstance().saveScreenshotToPicturesFolder(getView(), bigBitmap, uri -> {

@@ -128,11 +128,11 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         mTvUsername.setOnClickListener(v -> showPopupWindow(TYPE_USERNAME));
         mTvMobile.setText(getString(user.getMobile()));
         mTvMobile.setOnClickListener(v -> {
-//            if (user.getMobile().isEmpty()) {
+            if (user.getMobile().isEmpty()) {
                 showPopupWindow(TYPE_BIND_MOBILE);
-//            } else {
-//                showPopupWindow(TYPE_BIND_SUCCESS);
-//            }
+            } else {
+                showPopupWindow(TYPE_BIND_SUCCESS);
+            }
         });
         mTvBirthday.setText(user.getBirth_year().equals("0") ? "未设置" : String.format("%1$s-%2$s-%3$s", user.getBirth_year(), user.getBirth_month(), user.getBirth_day()));
         mTvArea.setText(getString(user.getCity()));

@@ -75,9 +75,11 @@ public class ScreenShot {
      * @return the bitmap
      */
     public Bitmap takeScreenShotOfView(View v) {
-        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
-        v.draw(canvas);
+        v.setDrawingCacheEnabled(true);
+        v.buildDrawingCache();
+        Bitmap bitmap = v.getDrawingCache();
+        v.setDrawingCacheEnabled(false);
+        v.destroyDrawingCache();
         return bitmap;
     }
 

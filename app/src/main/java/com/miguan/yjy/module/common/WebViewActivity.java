@@ -46,7 +46,7 @@ public class WebViewActivity extends ChainBaseActivity {
         initWebView();
     }
 
-    public static void satr(Context context, String title,String url) {
+    public static void start(Context context, String title, String url) {
         Intent intent = new Intent(context,WebViewActivity.class);
         intent.putExtra(WebViewActivity.REQUEST_NAME_TITLE, title);
         intent.putExtra(WebViewActivity.REQUEST_NAME_URL, url);

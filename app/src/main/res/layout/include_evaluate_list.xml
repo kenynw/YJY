@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/product_activity_detail">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,6 +46,7 @@
     </LinearLayout>
 
     <RadioGroup
+        android:id="@+id/rgrp_evaluate_list_rank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -51,7 +54,6 @@
         android:paddingBottom="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:id="@+id/rgrp_evaluate_list_rank"
         >
 
         <RadioButton
@@ -67,8 +69,8 @@
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="好评"
-            android:textSize="@dimen/text_size_body_material"
             android:textColor="@color/text_primary_to_primary"
+            android:textSize="@dimen/text_size_body_material"
             />
 
         <RadioButton
@@ -86,8 +88,8 @@
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="中评"
-            android:textSize="@dimen/text_size_body_material"
             android:textColor="@color/text_primary_to_primary"
+            android:textSize="@dimen/text_size_body_material"
             />
 
         <RadioButton
@@ -103,8 +105,8 @@
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="差评"
-            android:textSize="@dimen/text_size_body_material"
             android:textColor="@color/text_primary_to_primary"
+            android:textSize="@dimen/text_size_body_material"
             />
 
     </RadioGroup>
@@ -115,7 +117,8 @@
         android:layout_height="wrap_content"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:minHeight="128dp"
         app:layout_empty="@layout/empty_evaluate_list"
         />
 
-</merge>
+</LinearLayout>

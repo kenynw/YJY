@@ -3,6 +3,7 @@ package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.model.bean.FaceScore;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.User;
@@ -30,6 +31,14 @@ public class UserModel extends AbsModel {
      */
     public Observable<User> getUserInfo() {
         return ServicesClient.getServices().userInfo(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 颜值详情列表
+     * @return
+     */
+    public Observable<List<FaceScore>> getFaceScoreList(int page) {
+        return ServicesClient.getServices().faceScores(UserPreferences.getUserID(), page).compose(new DefaultTransform<>());
     }
 
     /**

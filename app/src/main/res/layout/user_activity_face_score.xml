@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <LinearLayout
@@ -35,15 +37,16 @@
         </android.support.v7.widget.Toolbar>
 
         <TextView
+            android:id="@id/tv_face_score_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:paddingBottom="36dp"
             android:paddingTop="@dimen/spacing_normal"
-            android:text="您的颜值部分为：999"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_large_material"
+            tools:text="您的颜值部分为：999"
             />
 
         <ImageView
@@ -70,6 +73,8 @@
             android:id="@id/recycle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             />
 
     </LinearLayout>

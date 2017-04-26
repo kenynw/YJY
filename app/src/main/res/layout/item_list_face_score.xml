@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_normal"
+    >
+
+    <TextView
+        android:id="@+id/tv_face_score_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextBody"
+        tools:text="点评产品"
+        />
+
+    <TextView
+        android:id="@+id/tv_face_score_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_face_score_title"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:textAppearance="@style/TextCaption"
+        tools:text="2017-03-03"
+        />
+
+    <TextView
+        android:id="@+id/tv_face_score_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="end"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_body_material"
+        tools:text="+20"
+        />
+
+</RelativeLayout>

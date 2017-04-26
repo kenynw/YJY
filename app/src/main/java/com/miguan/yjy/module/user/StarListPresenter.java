@@ -11,8 +11,8 @@ import com.miguan.yjy.model.bean.Article;
 public class StarListPresenter extends BaseListActivityPresenter<StarListActivity, Article> {
 
     @Override
-    protected void onCreateView(StarListActivity view) {
-        super.onCreateView(view);
+    protected void onResume() {
+        super.onResume();
         onRefresh();
     }
 

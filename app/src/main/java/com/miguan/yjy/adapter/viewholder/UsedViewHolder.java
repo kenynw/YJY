@@ -15,6 +15,12 @@ import com.miguan.yjy.model.services.ServicesResponse;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -51,16 +57,33 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
     public void setData(UserProduct data) {
         mTvName.setText(data.getProduct());
 
-        int restDay = data.getOverdue_time() * 1000 > System.currentTimeMillis() ?
-                (int) ((data.getOverdue_time() - System.currentTimeMillis() / 1000) / 3600 / 24) : 0;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        Date date = null;
+        try {
+            date = format.parse(data.getSeal_time());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, data.getQuality_time());
+        long overdueTime = Math.min(calendar.getTime().getTime() / 1000, data.getOverdue_time());
+        int restDay = overdueTime * 1000 > System.currentTimeMillis() ?
+                (int) ((overdueTime - System.currentTimeMillis() / 1000) / 3600 / 24) + 1 : 0;
+
         ForegroundColorSpan colorSpan;
         if (restDay <= 60) {
             colorSpan = new ForegroundColorSpan(0xFFFF5555);
         } else {
             colorSpan = new ForegroundColorSpan(getContext().getResources().getColor(R.color.colorPrimary));
         }
-        SpannableString spann = new SpannableString("剩余 " + restDay + " 天");
-        spann.setSpan(colorSpan, 3, (restDay + "").length() + 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString spann = new SpannableString(restDay <= 0 ? "已过期" : "剩余 " + restDay + " 天");
+        if (restDay <= 0) {
+            spann.setSpan(colorSpan, 0, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            spann.setSpan(colorSpan, 3, (restDay + "").length() + 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
         mTvResidue.setText(spann);
 
         mTvIsSeal.setText(data.getIs_seal() == 0 ? "未开封" : "已开封");

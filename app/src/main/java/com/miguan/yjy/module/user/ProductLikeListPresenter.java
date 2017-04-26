@@ -16,8 +16,8 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
     private String mEffect;//功效关键字
 
     @Override
-    protected void onCreateView(ProductLikeListActivity view) {
-        super.onCreateView(view);
+    protected void onResume() {
+        super.onResume();
         onRefresh();
     }
 

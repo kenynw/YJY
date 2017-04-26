@@ -77,7 +77,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        WebViewActivity.satr(ProductComponentListActivity.this, "解读表", WEBVIEW_READ);
+        WebViewActivity.start(ProductComponentListActivity.this, "解读表", WEBVIEW_READ);
         return super.onOptionsItemSelected(item);
     }
 

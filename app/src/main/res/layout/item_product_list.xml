@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,7 +18,9 @@
         android:layout_height="98dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
-        tools:background="@mipmap/def_image_loading"
+        app:failureImage="@mipmap/def_image_product"
+        app:failureImageScaleType="centerCrop"
+        app:placeholderImage="@mipmap/def_image_product"
         />
 
     <TextView
@@ -30,8 +33,9 @@
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_toEndOf="@id/iv_proudct_thumb"
         android:layout_toRightOf="@+id/iv_proudct_thumb"
+        android:maxLines="2"
         android:textAppearance="@style/TextBody"
-        tools:text="这是标题"
+        tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"
         />
 
     <RatingBar
@@ -54,7 +58,7 @@
         android:layout_alignLeft="@id/ratbar_product"
         android:layout_alignStart="@id/ratbar_product"
         android:layout_below="@id/ratbar_product"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/spacing_tiny"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_body_material"
         tools:text="￥320/250ML"

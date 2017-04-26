@@ -56,6 +56,7 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
         mBtnSubmit.setOnClickListener(v -> checkInput());
         mTvRegister.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
         mTvForgot.setOnClickListener(v -> startActivity(new Intent(this, ForgotActivity.class)));
+        mIvLoginWeixin.setOnClickListener(v -> getPresenter().wxLogin());
     }
 
     private void checkInput() {

@@ -127,8 +127,11 @@
             </intent-filter>
         </receiver>
 
-        <!--=================================极光推送===========================-->
+        <!--=================================END极光推送===========================-->
 
+        <service android:name=".module.common.UpdateService">
+
+        </service>
         <activity
             android:name=".module.main.LauncherActivity"
             android:theme="@style/LaunchTheme">

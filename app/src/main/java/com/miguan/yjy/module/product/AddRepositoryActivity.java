@@ -21,6 +21,7 @@ import com.miguan.yjy.utils.LUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,7 +71,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     private void initViews() {
         mTimePickerView = new TimePickerView.Builder(this, (date, v) -> {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
             ((TextView) v).setText(format.format(date));
         }).setType(TimePickerView.Type.YEAR_MONTH_DAY)
                 .setSubmitText("完成")
@@ -98,8 +99,12 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     public void setData(String brandName, String overtime) {
         mTvBrand.setText(brandName);
-        mTvExpiration.setText(overtime);
-        mEtOpenDate.setText(DateUtils.getCurrentFormatDate());
+        if (TextUtils.isEmpty(overtime)) {
+            mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
+        } else {
+            mTvExpiration.setText(overtime);
+        }
+        mEtOpenDate.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
     }
 
     @Override
@@ -121,9 +126,9 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         }
         getPresenter().submit(mEtName.getText().toString().trim(),
                 mIsSeal,
-                mEtOpenDate.getText().toString(),
+                DateUtils.getTime(mEtOpenDate.getText().toString(), "yyyy年MM月dd日"),
                 Integer.valueOf(mTvExpTime.getText().toString().trim().replace("个月", "")),
-                mTvExpiration.getText().toString()
+                DateUtils.getTime(mTvExpiration.getText().toString(), "yyyy年MM月dd日")
         );
     }
 

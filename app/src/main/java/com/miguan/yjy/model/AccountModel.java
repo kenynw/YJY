@@ -6,6 +6,8 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 
+import java.util.Map;
+
 import rx.Observable;
 
 /**
@@ -18,8 +20,43 @@ public class AccountModel extends AbsModel {
         return getInstance(AccountModel.class);
     }
 
+    /**
+     * 登录
+     * @param mobile
+     * @param password
+     * @return
+     */
     public Observable<User> login(String mobile, String password) {
         return ServicesClient.getServices().login(mobile, password, 1)
+                .doOnNext(this::saveAccount)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 微信登录
+     * @param openid 微信openid
+     * @param unionId 微信unionid
+     * @param nickname 微信昵称
+     * @param sex－ 性别
+     * @param province － 省
+     * @param city－ 市
+     * @param avatar － 微信头像地址
+     * @return
+     */
+    public Observable<User> login(CharSequence openid, CharSequence unionId, CharSequence nickname,
+                                  CharSequence sex, CharSequence province, CharSequence city,
+                                  CharSequence avatar) {
+        return ServicesClient.getServices().thirdLogin(openid, unionId, nickname, sex, province, city, avatar, "weixin")
+                .doOnNext(this::saveAccount)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 微信登录
+     * @return
+     */
+    public Observable<User> login(Map<String, String> map) {
+        return ServicesClient.getServices().thirdLogin(map, "weixin")
                 .doOnNext(this::saveAccount)
                 .compose(new DefaultTransform<>());
     }

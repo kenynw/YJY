@@ -85,9 +85,8 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
             if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {
                 mHvBanner.setAdapter(new BannerPagerAdapter(getView().getActivity(), mHome.getBanner()));
                 mIndicator.setViewPager(mHvBanner);
-            } else {
-                mIndicator.setVisibility(View.GONE);
             }
+            if (mHome.getBanner() != null && mHome.getBanner().size() <= 1) mIndicator.setVisibility(View.GONE);
             mCategory.setAdapter(new CategoryAdapter(getView().getActivity(), mHome.getCategory()));
         }
 

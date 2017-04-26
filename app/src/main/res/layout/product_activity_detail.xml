@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,10 +12,11 @@
 
     <include layout="@layout/include_toolbar"/>
 
-    <ScrollView
+    <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,27 +27,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:padding="@dimen/spacing_normal"
                 >
 
-                <ImageView
-                    android:id="@+id/iv_product_detail"
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/dv_product_detail"
+                    style="@style/BaseImage"
                     android:layout_width="98dp"
                     android:layout_height="98dp"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginTop="@dimen/spacing_small"
-                    android:src="@mipmap/def_image_loading"
+                    app:placeholderImage="@mipmap/def_image_product"
                     />
 
                 <TextView
                     android:id="@+id/tv_product_detail_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/iv_product_detail"
+                    android:layout_alignTop="@+id/dv_product_detail"
                     android:layout_marginLeft="@dimen/spacing_normal"
                     android:layout_marginTop="@dimen/spacing_small"
-                    android:layout_toRightOf="@+id/iv_product_detail"
+                    android:layout_toRightOf="@+id/dv_product_detail"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:textColor="@color/color_sencond_title"
@@ -116,7 +118,8 @@
                     android:paddingTop="4dp"
                     android:text="@string/tv_product_fit_skin"
                     android:textColor="@color/color_sencond_title"
-                    android:textSize="@dimen/text_size_small_14"></TextView>
+                    android:textSize="@dimen/text_size_small_14"
+                    />
 
                 <TextView
                     android:id="@+id/tv_product_unsuit_num"
@@ -133,7 +136,8 @@
                     android:paddingTop="4dp"
                     android:text="@string/tv_product_no_fit_skin"
                     android:textColor="@color/color_sencond_title"
-                    android:textSize="@dimen/text_size_small_14"></TextView>
+                    android:textSize="@dimen/text_size_small_14"
+                    />
 
             </LinearLayout>
 
@@ -240,7 +244,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </com.miguan.yjy.widget.CustomNestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -321,7 +325,5 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-    <View style="@style/ItemLineHeight"/>
 
 </LinearLayout>

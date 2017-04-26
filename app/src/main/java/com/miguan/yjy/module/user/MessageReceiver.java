@@ -96,7 +96,7 @@ public class MessageReceiver extends BroadcastReceiver {
                 }
             });
         } else if (type == 2) { // H5
-            WebViewActivity.satr(context, "", relation);
+            WebViewActivity.start(context, "", relation);
         } else if (type == 3) { // 文章
             ArticleDetailPresenter.start(context, Integer.valueOf(relation));
         } else if (type == 4){ // 产品

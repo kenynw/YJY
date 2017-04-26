@@ -73,20 +73,26 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     protected void onCreateView(ProductDetailActivity view) {
         super.onCreateView(view);
         loadData();
-        getEvaluateData(SORT_DEFAULT, START_PRAISE);
     }
 
     private void loadData() {
         ProductModel.getInstance().getProductDetail(mProductId).unsafeSubscribe(getDataSubscriber());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getEvaluateData(SORT_DEFAULT, START_PRAISE);
+    }
+
     // 长草
-    public void addLike() {
+    public void addLike(boolean isLike) {
         if (isLogin())
             ProductModel.getInstance().addLike(mProductId).unsafeSubscribe(new ServicesResponse<String>() {
                 @Override
                 public void onNext(String result) {
-                    LUtils.toast("长草成功");
+                    getView().setLike(!isLike);
+                    LUtils.toast(isLike ? "取消成功" : "收藏成功");
                 }
             });
     }
@@ -94,7 +100,6 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     public void setOrder(String order) {
 
     }
-
 
     public void getEvaluateData(String orderBy, String condition) {
         setUserEvluate(orderBy);

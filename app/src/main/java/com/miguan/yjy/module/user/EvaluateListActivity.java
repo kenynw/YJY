@@ -30,11 +30,6 @@ public class EvaluateListActivity extends BaseListActivity<EvaluateListPresenter
         return new EvaluateMeViewHolder(parent);
     }
 
-//    @Override
-//    public int getViewType(int position) {
-//        return getPresenter().getAdapter().getItem(position).getDetail()
-//    }
-
     @Override
     public ListConfig getListConfig() {
         SpaceDecoration spaceDecoration = new SpaceDecoration(LUtils.dp2px(10));

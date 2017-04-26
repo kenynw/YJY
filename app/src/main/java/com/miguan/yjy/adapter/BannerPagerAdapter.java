@@ -51,7 +51,7 @@ public class BannerPagerAdapter extends PagerAdapter {
 
         iv.setOnClickListener(v -> {
             if (banner.getType() == 1) {
-                WebViewActivity.satr(mContext, "", banner.getUrl());
+                WebViewActivity.start(mContext, "", banner.getUrl());
             } else if (banner.getType() == 2) {
                 ProductDetailPresenter.start(mContext, banner.getRelation_id());
             } else if (banner.getType() == 3) {

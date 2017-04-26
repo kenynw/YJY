@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.product;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +14,9 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
@@ -43,8 +44,8 @@ import butterknife.ButterKnife;
 @RequiresPresenter(ProductDetailPresenter.class)
 public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    @BindView(R.id.iv_product_detail)
-    ImageView mIvThumb;
+    @BindView(R.id.dv_product_detail)
+    SimpleDraweeView mDvThumb;
 
     @BindView(R.id.tv_product_detail_name)
     TextView mTvName;
@@ -97,6 +98,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @BindView(R.id.tv_product_detail_like)
     TextView mTvLike;
 
+    @BindView(R.id.iv_product_detail_like)
+    ImageView mIvLike;
+
     @BindView(R.id.tv_product_detail_homework)
     TextView mTvTemplate;
 
@@ -117,19 +121,14 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     TextView mTvJingdong;
     @BindView(R.id.tv_product_amazon)
     TextView mTvAmazon;
+
     @BindView(R.id.recy_product_evaluate)
     EasyRecyclerView mRecyEvalutate;
+
     @BindView(R.id.tv_product_skin_sort)
     TextView mTvSkinSort;
 
-    @BindView(R.id.iv_product_detail_like)
-    ImageView mIvLike;
-
-    private ProductComponentAdapter mComponentAdapter;
-    private ProductComponentAdapter mEffectAdapter;
-    private EvaluateAdapter mEvaluateAdapter;
-    private List<Evaluate> mEvaluates;
-
+    private boolean mIsLike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +136,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         setContentView(R.layout.product_activity_detail);
         setToolbarTitle("产品详情");
         ButterKnife.bind(this);
+
         mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
 
@@ -150,7 +150,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @Override
     public void setData(Product product) {
-        Glide.with(this).load(product.getProduct_img()).placeholder(R.mipmap.def_image_loading).error(R.mipmap.def_image_loading).into(mIvThumb);
+        mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
         mTvSpec.setText(String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
@@ -168,33 +168,33 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvCompany.setText(product.getProduct_company());
         ratbarGrade.setRating(product.getStar());
 
-        mComponentAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getSecurity());
+        ProductComponentAdapter componentAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getSecurity());
         flowtagGrade.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagGrade.setFocusable(false);
-        flowtagGrade.setAdapter(mComponentAdapter);
-        mComponentAdapter.onlyAddAll(product.getSecurity());
-        mComponentAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
+        flowtagGrade.setAdapter(componentAdapter);
+        componentAdapter.onlyAddAll(product.getSecurity());
+        componentAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
             @Override
             public void itemClick(View v) {
                 ProductReadPresenter.start(ProductDetailActivity.this, product);
             }
         });
 
-        mEffectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
+        ProductComponentAdapter effectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
         flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
-        flowtagEffectInfo.setAdapter(mEffectAdapter);
+        flowtagEffectInfo.setAdapter(effectAdapter);
         flowtagEffectInfo.setFocusable(false);
-        mEffectAdapter.onlyAddAll(product.getEffect());
-        mEffectAdapter.setSetOnTagClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+        effectAdapter.onlyAddAll(product.getEffect());
+        effectAdapter.setSetOnTagClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
 
         //去比价
-        mTvTaobao.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
-        mTvJingdong.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getJd()));
-        mTvAmazon.setOnClickListener(v -> WebViewActivity.satr(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getAmazon()));
+        mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
+        mTvJingdong.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getJd()));
+        mTvAmazon.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getAmazon()));
 
         // 长草按钮
-        mIvLike.setImageResource(product.getIsGras() == 1 ? R.mipmap.ic_product_like_checked : R.mipmap.ic_product_like_normal);
-        mTvLike.setOnClickListener(v -> getPresenter().addLike());
+        setLike(product.getIsGras() == 1);
+        mTvLike.setOnClickListener(v -> getPresenter().addLike(mIsLike));
 
         tvRemark.setOnClickListener(v -> ProductRemarkPresenter.start(this, product));
         tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, product));
@@ -211,13 +211,17 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_SKIN);
             }
         });
+    }
 
+    // 设置长草图标样式
+    public void setLike(boolean isLike) {
+        mIsLike = isLike;
+        mIvLike.setImageResource(isLike ? R.mipmap.ic_product_like_checked : R.mipmap.ic_product_like_normal);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_share, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -261,13 +265,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     }
 
     public void setEvaluate(List<Evaluate> list) {
-        mEvaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
+        EvaluateAdapter evaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyEvalutate.setFocusable(false);
-        mRecyEvalutate.setAdapter(mEvaluateAdapter);
+        mRecyEvalutate.setEmptyView(R.layout.empty_evaluate_list);
+        mRecyEvalutate.setAdapter(evaluateAdapter);
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));
-
     }
-
 
 }

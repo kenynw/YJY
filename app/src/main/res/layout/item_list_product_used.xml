@@ -60,8 +60,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/spacing_normal"
-            android:paddingRight="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
             >
 
             <TextView
@@ -86,9 +86,9 @@
                     android:id="@+id/tv_product_used_is_seal"
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
-                    android:maxHeight="24dp"
                     android:background="@drawable/bg_red_stroke"
                     android:gravity="center"
+                    android:maxHeight="24dp"
                     android:textSize="@dimen/text_size_caption_material"
                     tools:text="已开封"
                     />
@@ -122,7 +122,7 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:ems="5"
             android:textAppearance="@style/TextBody"
-            tools:text="剩余 4554 天"
+            tools:text="剩余 45 天"
             />
 
     </LinearLayout>

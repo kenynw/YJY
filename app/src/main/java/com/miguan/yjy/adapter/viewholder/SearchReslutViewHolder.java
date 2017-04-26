@@ -44,7 +44,12 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
         mDvThumb.setImageURI(Uri.parse(data.getProduct_img()));
         mTvName.setText(data.getProduct_name());
         mRatbar.setRating(data.getStar());
-        mTvSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm().toUpperCase()));
+        mTvSpec.setText(data.getPrice().equals("0") ? "暂无报价" : getSpec(data));
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
+
+    private String getSpec(Product data) {
+        return String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm().toUpperCase());
+    }
+
 }

@@ -24,7 +24,7 @@ import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.EvaluateListActivity;
-import com.miguan.yjy.module.user.FaceScoreActivity;
+import com.miguan.yjy.module.user.FaceScorePresenter;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.module.user.MsgListActivity;
 import com.miguan.yjy.module.user.ProductLikeListActivity;
@@ -96,7 +96,6 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         mBind = ButterKnife.bind(this, view);
 
         mTvSkinTest.setOnClickListener(v -> EventBus.getDefault().post(2));
-        mTvFaceScore.setOnClickListener(v -> startActivity(new Intent(getActivity(), FaceScoreActivity.class)));
         mBtnUsed.setOnClickListener(v -> startActivity(new Intent(getActivity(), UsedListActivity.class)));
         mBtnLike.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProductLikeListActivity.class)));
         mBtnComment.setOnClickListener(v -> startActivity(new Intent(getActivity(), EvaluateListActivity.class)));
@@ -128,6 +127,7 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         SpannableString spannableString = new SpannableString(String.format(getString(R.string.label_looking_value), user.getRank_points()));
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textYellow)), 3, 3 + user.getRank_points().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         mTvFaceScore.setText(spannableString);
+        mTvFaceScore.setOnClickListener(v -> FaceScorePresenter.start(getActivity(), user.getRank_points()));
     }
 
     @Override

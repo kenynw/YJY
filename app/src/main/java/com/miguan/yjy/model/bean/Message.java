@@ -14,6 +14,8 @@ public class Message implements Parcelable {
 
     private int id;
 
+    private int relation_id;
+
     private String user_name;
 
     private String content;
@@ -23,6 +25,8 @@ public class Message implements Parcelable {
     private String img;
 
     private int type;
+
+    private int otype;
 
     /**
      * 过期产品数
@@ -55,6 +59,14 @@ public class Message implements Parcelable {
 
     public int getId() {
         return id;
+    }
+
+    public int getRelation_id() {
+        return relation_id;
+    }
+
+    public void setRelation_id(int relation_id) {
+        this.relation_id = relation_id;
     }
 
     public void setId(int id) {
@@ -102,6 +114,14 @@ public class Message implements Parcelable {
         this.type = type;
     }
 
+    public int getOtype() {
+        return otype;
+    }
+
+    public void setOtype(int otype) {
+        this.otype = otype;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -110,22 +130,26 @@ public class Message implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
+        dest.writeInt(this.relation_id);
         dest.writeString(this.user_name);
         dest.writeString(this.content);
         dest.writeLong(this.created_at);
         dest.writeString(this.img);
         dest.writeInt(this.type);
+        dest.writeInt(this.otype);
         dest.writeInt(this.overdueNum);
         dest.writeInt(this.unReadNUM);
     }
 
     protected Message(Parcel in) {
         this.id = in.readInt();
+        this.relation_id = in.readInt();
         this.user_name = in.readString();
         this.content = in.readString();
         this.created_at = in.readLong();
         this.img = in.readString();
         this.type = in.readInt();
+        this.otype = in.readInt();
         this.overdueNum = in.readInt();
         this.unReadNUM = in.readInt();
     }

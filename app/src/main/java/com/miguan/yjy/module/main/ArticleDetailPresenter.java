@@ -9,7 +9,9 @@ import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SharePopupWindow;
 
@@ -72,13 +74,17 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     }
 
     public void star(boolean isStar) {
-        ArticleModel.getInstance().star(mArticleId).unsafeSubscribe(new ServicesResponse<String>() {
-            @Override
-            public void onNext(String result) {
-                getView().setStar(!isStar);
-                LUtils.toast(isStar ? "取消成功" : "收藏成功");
-            }
-        });
+        if (UserPreferences.getUserID() > 0) {
+            ArticleModel.getInstance().star(mArticleId).unsafeSubscribe(new ServicesResponse<String>() {
+                @Override
+                public void onNext(String result) {
+                    getView().setStar(!isStar);
+                    LUtils.toast(isStar ? "取消成功" : "收藏成功");
+                }
+            });
+        } else {
+            getView().startActivity(new Intent(getView(), LoginActivity.class));
+        }
     }
 
     /**

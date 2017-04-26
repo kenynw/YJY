@@ -4,6 +4,7 @@ package com.miguan.yjy.model.services;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.model.bean.FaceScore;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
@@ -14,9 +15,11 @@ import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.bean.Version;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -53,6 +56,41 @@ public interface Services {
             @Query("mobile") CharSequence mobile,
             @Query("password") CharSequence password,
             @Query("type") int type
+    );
+
+    /**
+     * 第三方登录
+     * @param type － 类型（例：weixin）
+     * @return
+     */
+    @GET("?action=thirdLogin")
+    Observable<User> thirdLogin(
+            @QueryMap Map<String, String> map,
+            @Query("type") CharSequence type
+    );
+
+    /**
+     * 第三方登录
+     * @param openid 微信openid
+     * @param unionId 微信unionid
+     * @param nickname 微信昵称
+     * @param sex － 性别
+     * @param province － 省
+     * @param city－ 市
+     * @param avatar － 微信头像地址
+     * @param type － 类型（例：weixin）
+     * @return
+     */
+    @GET("?action=thirdLogin")
+    Observable<User> thirdLogin(
+            @Query("openid") CharSequence openid,
+            @Query("unionid") CharSequence unionId,
+            @Query("nickname") CharSequence nickname,
+            @Query("sex") CharSequence sex,
+            @Query("province") CharSequence province,
+            @Query("city") CharSequence city,
+            @Query("headimgurl") CharSequence avatar,
+            @Query("type") CharSequence type
     );
 
     /**
@@ -201,6 +239,15 @@ public interface Services {
             @Query("user_id") int userId,
             @Query("attribute") String attribute,
             @Query("content") String content
+    );
+
+    /**
+     * 颜值记录
+     */
+    @GET("?action=faceList")
+    Observable<List<FaceScore>> faceScores(
+            @Query("user_id") int userId,
+            @Query("page") Integer page
     );
 
     /**

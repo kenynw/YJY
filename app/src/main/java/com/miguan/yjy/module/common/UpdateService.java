@@ -84,7 +84,6 @@ public class UpdateService extends Service {
 
     }
 
-
     private void updateNotification(int downloadCount) {
         contentView.setTextViewText(R.id.tv_note_percent, downloadCount + "%");
         contentView.setProgressBar(R.id.tv_note_progress, 100, downloadCount, false);

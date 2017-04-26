@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.module.main.ArticleDetailPresenter;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import butterknife.BindView;
@@ -67,7 +68,7 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
                 mLlProduct.setVisibility(View.GONE);
                 mDvArticleThumb.setImageURI(Uri.parse(data.getDetail().getImg()));
                 mTvArticleTitle.setText(data.getDetail().getName());
-//                mLlArticle.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getDetail().getId()));
+                mLlArticle.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getDetail().getId()));
             }
         }
     }
