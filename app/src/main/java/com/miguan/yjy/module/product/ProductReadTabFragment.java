@@ -18,7 +18,7 @@ import com.miguan.yjy.model.bean.Component;
  * @描述
  */
 @RequiresPresenter(ProductReadTabFragmentPrensenter.class)
-public class ProductReadTabFragment extends BaseListFragment<ProductReadTabFragmentPrensenter,Component> {
+public class ProductReadTabFragment extends BaseListFragment<ProductReadTabFragmentPrensenter, Component> {
 
     @Nullable
     @Override
@@ -30,7 +30,6 @@ public class ProductReadTabFragment extends BaseListFragment<ProductReadTabFragm
     public BaseViewHolder<Component> createViewHolder(ViewGroup parent, int viewType) {
         return new ProductReadViewHolder(parent);
     }
-
 
 
 }

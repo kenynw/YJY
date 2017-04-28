@@ -29,21 +29,10 @@ import butterknife.ButterKnife;
  */
 @RequiresPresenter(ProductReadPresenter.class)
 public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> implements View.OnClickListener {
-    //    @BindView(R.id.recy_product_read)
-//    RecyclerView mRecyProductRead;
-    //    @BindView(R.id.tv_product_compare)
-//    TextView mTvProductCompare;
-//    @BindView(R.id.tv_product_no_compare)
-//    TextView mTvProductNoCompare;
-//    @BindView(R.id.tv_product_safe)
-//    TextView mTvProductSafe;
-//    @BindView(R.id.tv_product_function_info)
-//    TextView mTvProductFunctionInfo;
     @BindView(R.id.tab_product_read)
     TabLayout mTabProductRead;
     private int type = 0;
-//    private ProductReadAdapter productReadAdapter;
-    private List<Component> mReadLists = new ArrayList<>();
+    public ArrayList<Component> mReadLists = new ArrayList<>();
     private List<ComponentTag> mComponentTags = new ArrayList<>();
     ProductReadTabPagerAdapter tabadapter;
 
@@ -53,7 +42,6 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
         setContentView(R.layout.product_activity_read);
         ButterKnife.bind(this);
         setToolbarTitle(R.string.tv_title_read);
-        initData();
         initListener();
     }
 
@@ -63,32 +51,24 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
     }
 
 
-    private void initData() {
-        Log.e("test", mReadLists.size()+"==走吗====");
+    public void initData() {
+        Log.e("test", mReadLists.size() + "==走吗====");
         if (getPresenter().type == 1) {
             mReadLists = getEffectLists(getPresenter().product);
-            mComponentTags=  getPresenter().product.getEffect();
-            Log.e("mReadLists.size()", mReadLists.size()+"======");
+            mComponentTags = getPresenter().product.getEffect();
+            Log.e("mReadLists.size()", mReadLists.size() + "======");
 
         } else if (getPresenter().type == 2) {
             mReadLists = getSafeLists(getPresenter().product);
-            mComponentTags=  getPresenter().product.getSecurity();
-            Log.e("mReadLists.size(22222)", mReadLists.size()+"======");
+            mComponentTags = getPresenter().product.getSecurity();
+            Log.e("mReadLists.size(22222)", mReadLists.size() + "======");
         } else {
 
         }
-//        mRecyProductRead.setFocusable(false);
-//        mRecyProductRead.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//        productReadAdapter = new ProductReadAdapter(ProductReadActivity.this, mReadLists);
-//        mRecyProductRead.setAdapter(productReadAdapter);
-        tabadapter = new ProductReadTabPagerAdapter(getSupportFragmentManager(), ProductReadActivity.this, 0, mReadLists,mComponentTags);
-//       int positon= getPresenter().position;
-//        mTabProductRead.getTabAt(getPresenter().position).select();
-//        mTabProductRead.addTab( mTabProductRead.newTab(),getPresenter().position);
+        tabadapter = new ProductReadTabPagerAdapter(getSupportFragmentManager(), ProductReadActivity.this, 0, mReadLists, mComponentTags);
         mTabProductRead.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
             }
 
             @Override
@@ -98,7 +78,6 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                tabadapter.notifyDataSetChanged();
 
             }
         });
@@ -111,51 +90,13 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
 
     }
 
+
+
     private void initListener() {
-//        mTvProductCompare.setSelected(true);
-//        mTvProductCompare.setOnClickListener(this);
-//        mTvProductNoCompare.setOnClickListener(this);
-//        mTvProductSafe.setOnClickListener(this);
-//        mTvProductFunctionInfo.setOnClickListener(this);
 
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.tv_product_compare:
-//                mTvProductCompare.setSelected(true);
-//                mTvProductNoCompare.setSelected(false);
-//                mTvProductSafe.setSelected(false);
-//                mTvProductFunctionInfo.setSelected(false);
-//                getRecommendLists(getPresenter().product);
-//                break;
-//            case R.id.tv_product_no_compare:
-//                getNoRecommendLists(getPresenter().product);
-//                mTvProductCompare.setSelected(false);
-//                mTvProductNoCompare.setSelected(true);
-//                mTvProductSafe.setSelected(false);
-//                mTvProductFunctionInfo.setSelected(false);
-//                break;
-//            case R.id.tv_product_safe:
-//                getSafeLists(getPresenter().product);
-//                mTvProductCompare.setSelected(false);
-//                mTvProductNoCompare.setSelected(false);
-//                mTvProductSafe.setSelected(true);
-//                mTvProductFunctionInfo.setSelected(false);
-//                break;
-//            case R.id.tv_product_function_info:
-//
-//                getEffectLists(getPresenter().product);
-//                mTvProductCompare.setSelected(false);
-//                mTvProductNoCompare.setSelected(false);
-//                mTvProductSafe.setSelected(false);
-//                mTvProductFunctionInfo.setSelected(true);
-//                break;
-//        }
-//    }
-
-    private List<Component> getRecommendLists(Product product) {
+    private ArrayList<Component> getRecommendLists(Product product) {
 //        productReadAdapter.clear();
         mReadLists.clear();
         for (int i = 0; i < product.getRecommend().size(); i++) {
@@ -172,8 +113,7 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
         return mReadLists;
     }
 
-    private List<Component> getNoRecommendLists(Product product) {
-//        productReadAdapter.clear();
+    private ArrayList<Component> getNoRecommendLists(Product product) {
         mReadLists.clear();
         for (int i = 0; i < product.getNotRecommend().size(); i++) {
             for (int j = 0; j < product.getComponentList().size(); j++) {
@@ -185,12 +125,10 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
                 }
             }
         }
-//        productReadAdapter.addAll(mReadLists);
         return mReadLists;
     }
 
-    private List<Component> getEffectLists(Product product) {
-//        productReadAdapter.clear();
+    private ArrayList<Component> getEffectLists(Product product) {
         mReadLists.clear();
         for (int i = 0; i < product.getEffect().size(); i++) {
             for (int j = 0; j < product.getComponentList().size(); j++) {
@@ -202,11 +140,10 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
                 }
             }
         }
-//        productReadAdapter.addAll(mReadLists);
         return mReadLists;
     }
 
-    private List<Component> getSafeLists(Product product) {
+    private ArrayList<Component> getSafeLists(Product product) {
 //        productReadAdapter.clear();
         mReadLists.clear();
         for (int i = 0; i < product.getSecurity().size(); i++) {

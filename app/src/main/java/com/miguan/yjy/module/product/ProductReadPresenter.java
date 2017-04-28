@@ -8,6 +8,8 @@ import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Product;
 
+import rx.Observable;
+
 /**
  * @作者 cjh
  * @日期 2017/3/29 10:52
@@ -20,7 +22,7 @@ public class ProductReadPresenter extends BaseListActivityPresenter<ProductReadA
     public static final String EXTRA_PRODUCT_COMPONENT_POSITION = "component_position";
     public Product product;
     public int type;
-    public int position;
+    public int position = 0;
 
     public static void start(Context context, Product product, int type, int position) {
         Intent intent = new Intent(context, ProductReadActivity.class);
@@ -41,5 +43,12 @@ public class ProductReadPresenter extends BaseListActivityPresenter<ProductReadA
     @Override
     protected void onCreateView(ProductReadActivity view) {
         super.onCreateView(view);
+        getView().initData();
+        getView().mTabProductRead.getTabAt(position).select();
+    }
+
+    @Override
+    public void onRefresh() {
+        Observable.just(getView().mReadLists).unsafeSubscribe(getRefreshSubscriber());
     }
 }
