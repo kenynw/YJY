@@ -138,4 +138,11 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     public void setMyOnTabClick(MyOnTabClick myOnTabClick) {
         mMyOnTabClick = myOnTabClick;
     }
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(menuVisible);
+        if (getView() != null) {
+            getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
 }

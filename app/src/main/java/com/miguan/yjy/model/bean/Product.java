@@ -45,6 +45,7 @@ public class Product implements Parcelable {
 
     private String en_product_company;
     private String copy;
+    private int effectNum;
 
     private int isGras;
     private int Praise;
@@ -62,6 +63,15 @@ public class Product implements Parcelable {
     }
 
     private Buy buy;
+
+
+    public int getEffectNum() {
+        return effectNum;
+    }
+
+    public void setEffectNum(int effectNum) {
+        this.effectNum = effectNum;
+    }
 
     public String getCopy() {
         return copy;
@@ -303,6 +313,7 @@ public class Product implements Parcelable {
         dest.writeString(this.brand);
         dest.writeString(this.en_product_company);
         dest.writeString(this.copy);
+        dest.writeInt(this.effectNum);
         dest.writeInt(this.isGras);
         dest.writeInt(this.Praise);
         dest.writeInt(this.middle);
@@ -334,6 +345,7 @@ public class Product implements Parcelable {
         this.brand = in.readString();
         this.en_product_company = in.readString();
         this.copy = in.readString();
+        this.effectNum = in.readInt();
         this.isGras = in.readInt();
         this.Praise = in.readInt();
         this.middle = in.readInt();

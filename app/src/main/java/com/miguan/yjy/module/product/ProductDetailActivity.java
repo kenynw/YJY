@@ -23,7 +23,6 @@ import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.widget.FlowTagLayout;
@@ -56,11 +55,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @BindView(R.id.tv_product_date_detail)
     TextView mTvQueryDate;
 
-    @BindView(R.id.tv_product_suit_num)
-    TextView tvSuitNum;
-
-    @BindView(R.id.tv_product_unsuit_num)
-    TextView tvUnsuitNum;
+//    @BindView(R.id.tv_product_suit_num)
+//    TextView tvSuitNum;
+//
+//    @BindView(R.id.tv_product_unsuit_num)
+//    TextView tvUnsuitNum;
 
     @BindView(R.id.tv_product_detail_record_inf0)
     TextView tvRecordInf0;
@@ -156,13 +155,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
 
-        if (UserPreferences.getUserID() <= 0) {
-            tvSuitNum.setVisibility(View.GONE);
-            tvUnsuitNum.setVisibility(View.GONE);
-        } else {
-            tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), product.getRecommend().size()));
-            tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), product.getNotRecommend().size()));
-        }
+//        if (UserPreferences.getUserID() <= 0) {
+//            tvSuitNum.setVisibility(View.GONE);
+//            tvUnsuitNum.setVisibility(View.GONE);
+//        } else {
+//            tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), product.getRecommend().size()));
+//            tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), product.getNotRecommend().size()));
+//        }
         // 备案
         mTvProvisionNo.setText(product.getStandard_number());
         mTvCountry.setText(product.getProduct_country());
@@ -176,17 +175,23 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         componentAdapter.onlyAddAll(product.getSecurity());
         componentAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
             @Override
-            public void itemClick(View v) {
-                ProductReadPresenter.start(ProductDetailActivity.this, product);
+            public void itemClick(View v, int position) {
+                ProductReadPresenter.start(ProductDetailActivity.this, product,2,position);
             }
-        });
 
+        });
+        tvEffectInfo.setText(String.format(getString(R.string.tv_product_effect_num),product.getEffectNum()));
         ProductComponentAdapter effectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
         flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagEffectInfo.setAdapter(effectAdapter);
         flowtagEffectInfo.setFocusable(false);
         effectAdapter.onlyAddAll(product.getEffect());
-        effectAdapter.setSetOnTagClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+        effectAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
+            @Override
+            public void itemClick(View v, int position) {
+                ProductReadPresenter.start(ProductDetailActivity.this, product,1,position);
+            }
+        });
 
         //去比价
         mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
@@ -200,9 +205,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         tvRemark.setOnClickListener(v -> ProductRemarkPresenter.start(this, product));
         tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, product));
         ll_info.setOnClickListener(this);
-
-        tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
-        tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+//
+//        tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+//        tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
         mTvSkinSort.setOnClickListener(v -> {
             if (mTvSkinSort.getText().equals("肤质排序")) {
                 mTvSkinSort.setText(R.string.tv_product_detail_sort_total);
@@ -240,10 +245,10 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     public void onClick(View v) {
         if (llRemarkInfo.getVisibility() == View.VISIBLE) {
             llRemarkInfo.setVisibility(View.GONE);
-            mIvProductDown.setBackgroundResource(R.mipmap.ic_product_detail_up);
+            mIvProductDown.setBackgroundResource(R.mipmap.ic_product_detail_record_down);
         } else {
             llRemarkInfo.setVisibility(View.VISIBLE);
-            mIvProductDown.setBackgroundResource(R.mipmap.ic_product_detail_record_down);
+            mIvProductDown.setBackgroundResource(R.mipmap.ic_product_detail_up);
         }
     }
 

@@ -115,7 +115,7 @@
     <string name="tv_product_no_find_think">找不到想要的？</string>
     <string name="tv_product_feedback">点我反馈</string>
     <string name="tv_product_detail_match">肤质匹配程度</string>
-    <string name="tv_product_detail_info">备案、安全及功效信息</string>
+    <string name="tv_product_detail_info">备案信息</string>
     <string name="tv_product_detail_compare_price">去比价</string>
     <string name="tv_product_detail_user_evaluate">用户评价(%d)</string>
     <string name="tv_product_detail_sort_skin">肤质排序</string>
@@ -147,16 +147,18 @@
     <string name="tv_product_component_num">本产品包含%d种成分</string>
     <string name="tv_product_fit_skin">适合我的肤质:%d种</string>
     <string name="tv_product_no_fit_skin">不适合我的肤质:%d种</string>
+    <string name="tv_product_num">查询%d种护肤品的安全和功效</string>
+    <string name="tv_product_effect_num">主要功效成分:%d种</string>
 
     <!--测试相关-->
     <string name="tv_test_wrinkele">皱纹/紧致测试</string>
     <string name="tv_test_oily">干性/油性测试</string>
     <string name="tv_test_sensitive">敏感/耐受测试</string>
     <string name="tv_test_pigment">色素/非色素测试</string>
-    <string name="tv_test_wrinkele_describe">皱纹描述</string>
-    <string name="tv_test_oily_describe">干性描述</string>
-    <string name="tv_test_sensitive_describe">敏感描述</string>
-    <string name="tv_test_pigment_describe">色素描述</string>
+    <string name="tv_test_wrinkele_describe">通过回答这部分的问题，可以准确分析出你的皮肤是否属于容易生出皱纹的类型，以及你现在的已经出现的皱纹危机。</string>
+    <string name="tv_test_oily_describe">通过回答这部分的问题，可以准确分析出皮肤的含水状况和出油程度。\n\n研究表明，虽然许多人对于自己属于油性或干性皮肤显得很确定，但其实这些预见往往并不准确。</string>
+    <string name="tv_test_sensitive_describe">通过回答这部分的问题，可以准确分析出你的皮肤趋向于发生各种敏感肌肤症状的程度。\n\n所有的面疱（痤疮/痘痘）、红肿、潮红、发痒都属于皮肤的敏感症状。</string>
+    <string name="tv_test_pigment_describe">通过回答这部分的问题，测试你是否有形成黑色素的倾向。黑色素会使你受到日晒后的皮肤出现黑斑、雀斑以及一些深色区域。反过来说，黑色素的生成也是皮肤自我保护的反应，它会通过使肤色变深来保护你不被晒伤。</string>
     <string name="text_test_info">基础信息</string>
     <string name="text_test_front_info">开始测试前,请先填写您的基础信息</string>
     <string name="text_test_birthday">点击选择出生日期</string>

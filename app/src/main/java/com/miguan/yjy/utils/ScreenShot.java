@@ -75,11 +75,9 @@ public class ScreenShot {
      * @return the bitmap
      */
     public Bitmap takeScreenShotOfView(View v) {
-        v.setDrawingCacheEnabled(true);
-        v.buildDrawingCache();
-        Bitmap bitmap = v.getDrawingCache();
-        v.setDrawingCacheEnabled(false);
-        v.destroyDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        v.draw(canvas);
         return bitmap;
     }
 
@@ -296,7 +294,7 @@ public class ScreenShot {
      * @param mark  水印图
      */
     public static Bitmap waterMark(Bitmap first, Bitmap mark) {
-        float scale = ((float) first.getWidth()) / mark.getWidth();
+//        float scale = ((float) first.getWidth()) / mark.getWidth();
 
         mark = scaleImg(mark, 0.3f);
         int width = first.getWidth();

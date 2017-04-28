@@ -57,7 +57,7 @@ public class ProductAllSearchAdapter extends BaseAdapter {
             String oldName = SystemPreferences.getSearchName();
             if (!TextUtils.isEmpty(oldName)) {
                 if (!oldName.contains(datas.get(position).getName()))
-                    SystemPreferences.setSearchName(oldName + datas.get(position).getName() + ",");
+                    SystemPreferences.setSearchName(datas.get(position).getName() + ","+oldName);
             } else {
                 SystemPreferences.setSearchName(datas.get(position).getName() + ",");
             }

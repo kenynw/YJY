@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.product;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.ProductModel;
@@ -8,6 +9,8 @@ import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.services.ServicesResponse;
 
 import java.util.List;
+
+import rx.functions.Action1;
 
 /**
  * @作者 cjh
@@ -37,6 +40,15 @@ public class SearchActivityPresenter extends BaseListActivityPresenter<SearchAct
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().searchAssociate(getView().edtSearch.getText().toString()).unsafeSubscribe(getRefreshSubscriber());
+        ProductModel.getInstance().searchAssociate(getView().edtSearch.getText().toString()).doOnNext(new Action1<List<Product>>() {
+            @Override
+            public void call(List<Product> products) {
+                if (products.size() == 0) {
+                    getView().llSearchSencond.setVisibility(View.GONE);
+                } else {
+                    getView().llSearchSencond.setVisibility(View.VISIBLE);
+                }
+            }
+        }).unsafeSubscribe(getRefreshSubscriber());
     }
 }

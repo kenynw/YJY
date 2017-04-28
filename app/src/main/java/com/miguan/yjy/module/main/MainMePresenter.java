@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.User;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.umeng.socialize.UMShareAPI;
 
 /**
@@ -19,7 +20,10 @@ public class MainMePresenter extends BaseDataFragmentPresenter<MeFragment, User>
     }
 
     public void loadData() {
-        UserModel.getInstance().getUserInfo().unsafeSubscribe(getSubscriber());
+        if (UserPreferences.getUserID() > 0) {
+            UserModel.getInstance().getUserInfo().unsafeSubscribe(getSubscriber());
+        }
+
     }
 
     @Override

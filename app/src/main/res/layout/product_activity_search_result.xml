@@ -42,6 +42,8 @@
                 android:drawablePadding="8dp"
                 android:drawableStart="@mipmap/ic_product_search"
                 android:inputType="text"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
                 android:paddingEnd="@dimen/spacing_normal"
                 android:paddingLeft="@dimen/spacing_normal"
                 android:paddingRight="@dimen/spacing_large"
@@ -64,27 +66,62 @@
 
     </LinearLayout>
 
-    <include layout="@layout/include_product_filter"/>
-
-    <TextView
-        android:id="@+id/tv_product_list_count"
+    <LinearLayout
+        android:id="@+id/ll_product_result_first"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center_vertical"
-        android:paddingEnd="@dimen/spacing_normal"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal"
-        android:paddingStart="@dimen/spacing_normal"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_body_material"
-        tools:text="@string/text_search_count"
-        />
+        android:layout_height="wrap_content">
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recycle"
+        <include layout="@layout/include_product_filter"/>
+
+        <TextView
+            android:id="@+id/tv_product_list_count"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="@string/text_search_count"
+            />
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_empty="@layout/empty_search_list"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_product_result_sencond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/tv_product_recommend"
+            android:textSize="@dimen/text_size_small_15"/>
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/recy_product_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_empty="@layout/empty_search_list"
-        />
+        android:background="@color/f5"></View>
+
 
 </LinearLayout>

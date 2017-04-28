@@ -1,12 +1,16 @@
 package com.miguan.yjy.module.product;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,11 +67,13 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
     HistorySearchAdpter mHistorySearchAdpter;
     private List<String> mKeywordList = new ArrayList<>();
+    private String productNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        productNum = getIntent().getStringExtra("productNum");
         initListener();
         recyHistorySearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 //        mHistorySearchAdpter = new HistorySearchAdpter(SearchActivity.this, mKeywordList);
@@ -86,15 +92,9 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     }
 
     private void initListener() {
+        edtSearch.setHint(productNum);
         imgSearchCancle.setOnClickListener(v -> clearStr());
         tvClearHis.setOnClickListener(v -> clearHis());
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -111,13 +111,48 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
                 if (TextUtils.isEmpty(s)) {
                     llSearchFirst.setVisibility(View.VISIBLE);
                     llSearchSencond.setVisibility(View.GONE);
+                    tvCancel.setText(R.string.tv_cancel);
                 } else {
+//                    tvCancel.setText("搜索");
                     llSearchFirst.setVisibility(View.GONE);
-                    llSearchSencond.setVisibility(View.VISIBLE);
+//                    llSearchSencond.setVisibility(View.VISIBLE);
                     getPresenter().onRefresh();
                 }
             }
         });
+
+
+       edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+           @Override
+           public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+               if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                   LUtils.closeKeyboard(edtSearch);
+                   gotoSearchResult(edtSearch.getText().toString().trim());
+                   return true;
+               }
+               return false;
+           }
+       });
+
+//        edtSearch.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+//
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    finish();
+            }
+        });
+
     }
 
 
@@ -144,10 +179,10 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         mHistorySearchAdpter.setRemoveClicklinsener(new HistorySearchAdpter.SetOnRemoveClicklinsener() {
             @Override
             public void removeName(String data) {
-                LUtils.toast("移除选择搜索");
                 mHistorySearchAdpter.remove(data);
                 mKeywordList.remove(mKeywordList.indexOf(data));
                 removeCurName(mKeywordList);
+                mHistorySearchAdpter.notifyDataSetChanged();
             }
         });
 
@@ -160,6 +195,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     private void clearHis() {
         llHisSearch.setVisibility(View.GONE);
         tvClearHis.setVisibility(View.GONE);
+       SystemPreferences.clear();
     }
 
     @Override
@@ -167,13 +203,35 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         return super.getListConfig().setRefreshAble(false).setLoadMoreAble(false);
     }
 
-    private void removeCurName(List<String>names) {
+    private void removeCurName(List<String> names) {
         StringBuilder sb = new StringBuilder();
-        for(int i=0;i<names.size();i++) {
+        for (int i = 0; i < names.size(); i++) {
             sb.append(names.get(i) + ",");
         }
         SystemPreferences.setSearchName(sb.toString());
     }
 
+    public static void start(Context context, String productNum) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        intent.putExtra("productNum", productNum);
+        context.startActivity(intent);
+    }
+    public  void gotoSearchResult(String name) {
+        LUtils.log("dsdsdfs");
+        SearchResultPresenter.start(SearchActivity.this,name,0,"");
+        String oldName = SystemPreferences.getSearchName();
+        if (!TextUtils.isEmpty(oldName)) {
+            if (!oldName.contains(name))
+                SystemPreferences.setSearchName( name + ","+oldName);
+        } else {
+            SystemPreferences.setSearchName(name + ",");
+        }
+    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshAdapter();
+    }
 }

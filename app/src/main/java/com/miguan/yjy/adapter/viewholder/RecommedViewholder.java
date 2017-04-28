@@ -34,12 +34,12 @@ public class RecommedViewholder extends BaseViewHolder<Product> {
         tvProductThink.setOnClickListener(v -> gotoSearchResult(data.getName()));
     }
 
-    private void gotoSearchResult(String name) {
-        SearchResultPresenter.start(getContext(),name,0,"");
+    public void gotoSearchResult(String name) {
+        SearchResultPresenter.start(getContext(), name, 0, "");
         String oldName = SystemPreferences.getSearchName();
         if (!TextUtils.isEmpty(oldName)) {
             if (!oldName.contains(name))
-                SystemPreferences.setSearchName(oldName + name + ",");
+                SystemPreferences.setSearchName(name + "," + oldName);
         } else {
             SystemPreferences.setSearchName(name + ",");
         }

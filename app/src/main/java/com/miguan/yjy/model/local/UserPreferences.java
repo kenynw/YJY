@@ -54,4 +54,7 @@ public class UserPreferences {
         LUtils.getPreferences().edit().putString(key, value).apply();
     }
 
+
+
+
 }

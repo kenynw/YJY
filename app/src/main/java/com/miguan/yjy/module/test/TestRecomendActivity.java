@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
-import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
@@ -87,8 +86,4 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
     }
 
-    @Override
-    public ListConfig getListConfig() {
-        return super.getListConfig();
-    }
 }
