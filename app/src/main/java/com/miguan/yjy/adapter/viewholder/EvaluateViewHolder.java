@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -13,7 +14,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.module.account.LoginActivity;
 
 import butterknife.BindView;
 
@@ -67,17 +70,23 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
             mTvLabel.setVisibility(View.GONE);
             mLlUserInfo.setGravity(Gravity.CENTER_VERTICAL);
         }
-        mLlEvaluateLike.setOnClickListener(v -> ArticleModel.getInstance().addEvaluateLike(data.getId())
-                .subscribe(new ServicesResponse<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        int curLikeCount = mTvLike.getText().equals("赞") ? 0 : Integer.valueOf(mTvLike.getText().toString());
-                        int likeCount = curLikeCount + (mIsLike == 0 ? 1 : -1);
-                        mTvLike.setText(likeCount == 0 ? "赞" : String.valueOf(likeCount));
-                        mIvLike.setImageResource(mIsLike == 0 ? R.mipmap.ic_like_pressed : R.mipmap.ic_like_normal);
-                        mIsLike = mIsLike == 0 ? 1 : 0;
-                    }
-                }));
+        mLlEvaluateLike.setOnClickListener(v -> {
+            if (UserPreferences.getUserID() > 0) {
+                ArticleModel.getInstance().addEvaluateLike(data.getId())
+                        .subscribe(new ServicesResponse<String>() {
+                            @Override
+                            public void onNext(String s) {
+                                int curLikeCount = mTvLike.getText().equals("赞") ? 0 : Integer.valueOf(mTvLike.getText().toString());
+                                int likeCount = curLikeCount + (mIsLike == 0 ? 1 : -1);
+                                mTvLike.setText(likeCount == 0 ? "赞" : String.valueOf(likeCount));
+                                mIvLike.setImageResource(mIsLike == 0 ? R.mipmap.ic_like_pressed : R.mipmap.ic_like_normal);
+                                mIsLike = mIsLike == 0 ? 1 : 0;
+                            }
+                        });
+            } else {
+                getContext().startActivity(new Intent(getContext(), LoginActivity.class));
+            }
+        });
     }
 
 }

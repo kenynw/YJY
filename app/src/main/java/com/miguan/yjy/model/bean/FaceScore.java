@@ -69,7 +69,7 @@ public class FaceScore implements Parcelable {
 
     public String getCreated_at() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-        return format.format(created_at);
+        return format.format(created_at * 1000);
     }
 
     public void setCreated_at(long created_at) {

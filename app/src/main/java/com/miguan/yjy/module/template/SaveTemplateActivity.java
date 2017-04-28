@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +42,19 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
 
         Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE);
         mIvThumb.setImageURI(uri);
+
+        mIvWeixin.setOnClickListener(v -> share(uri));
+    }
+
+    private void share(Uri uri) {
+        UMImage umImage = new UMImage(this, "http://oss.yjyapp.com/static/h5/images/logo/share.jpg");
+//        UMImage thumb = new UMImage(this, R.mipmap.ic_launcher);
+//        umImage.setThumb(thumb);
+
+        new ShareAction(this).setPlatform(SHARE_MEDIA.WEIXIN)
+                .withText("hello")
+                .withMedia(umImage)
+                .share();
     }
 
 }

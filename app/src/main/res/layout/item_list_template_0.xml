@@ -70,6 +70,7 @@
                 android:layout_gravity="end"
                 android:layout_margin="@dimen/spacing_normal"
                 android:src="@mipmap/ic_filter"
+                android:visibility="gone"
                 />
 
         </FrameLayout>

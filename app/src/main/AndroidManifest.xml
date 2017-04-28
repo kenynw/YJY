@@ -129,9 +129,10 @@
 
         <!--=================================END极光推送===========================-->
 
-        <service android:name=".module.common.UpdateService">
+        <service android:name=".module.common.UpdateService" />
+        <service android:name=".module.common.DownloadService" />
 
-        </service>
+
         <activity
             android:name=".module.main.LauncherActivity"
             android:theme="@style/LaunchTheme">
@@ -155,6 +156,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:launchMode="singleTop"
             >
         </activity>
         <activity

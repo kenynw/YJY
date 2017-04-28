@@ -16,7 +16,7 @@
         >
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_template_0_image_0"
+            android:id="@+id/dv_template_1_image_0"
             android:layout_width="match_parent"
             android:layout_height="256dp"
             android:layout_gravity="center"
@@ -25,12 +25,13 @@
             />
 
         <ImageView
-            android:id="@+id/iv_template_0_filter"
+            android:id="@+id/iv_template_1_filter_0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_margin="@dimen/spacing_normal"
             android:src="@mipmap/ic_filter"
+            android:visibility="gone"
             />
 
     </FrameLayout>
@@ -39,37 +40,89 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_small"
-        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
         app:grid_column="3"
         app:grid_divider_horizontal="@dimen/spacing_normal"
         >
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_template_0_image_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:placeholderImage="@mipmap/def_image_template"
-            app:placeholderImageScaleType="centerCrop"
-            />
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_template_0_image_2"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:placeholderImage="@mipmap/def_image_template"
-            app:placeholderImageScaleType="centerCrop"
-            />
+            >
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_template_0_image_3"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_1_image_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_1_filter_1"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_small"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:placeholderImage="@mipmap/def_image_template"
-            app:placeholderImageScaleType="centerCrop"
-            />
+            >
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_1_image_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_1_filter_2"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_small"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_1_image_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_1_filter_3"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_small"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
 
     </com.jude.exgridview.ExGridView>
 

@@ -14,7 +14,7 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.module.common.UpdateService;
+import com.miguan.yjy.module.common.DownloadService;
 import com.miguan.yjy.utils.LUtils;
 
 import rx.Observable;
@@ -63,11 +63,11 @@ public class CommonModel extends AbsModel {
                 .setNegativeButton("取消", null)
                 .setPositiveButton("去更新", (dialog, which) -> {
                     LUtils.log("开始下载");
-                    Intent intent = new Intent(context, UpdateService.class);
+                    Intent intent = new Intent(context, DownloadService.class);
                     intent.putExtra("title", "正在下载" + context.getString(R.string.app_name));
                     intent.putExtra("url", version.getDownloadUrl());
                     intent.putExtra("path", findDownLoadDirectory());
-                    intent.putExtra("name", context.getString(R.string.app_name) + "v" + version.getNumber() + ".apk");
+                    intent.putExtra("name", "YJY" + System.currentTimeMillis() + ".apk");
                     context.startService(intent);
                 })
                 .show();
@@ -83,7 +83,7 @@ public class CommonModel extends AbsModel {
 
     private String findDownLoadDirectory(){
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            return Environment.getExternalStorageDirectory() + "/" + "download/";
+            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         }else{
             return Environment.getRootDirectory() + "/" + "download/";
         }

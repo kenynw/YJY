@@ -1,17 +1,18 @@
 package com.miguan.yjy.module.template;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.LayoutRes;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.utils.ScreenShot;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 
@@ -19,71 +20,56 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class TemplateViewHolder extends BaseViewHolder<Product> implements View.OnClickListener {
+public abstract class TemplateViewHolder extends BaseViewHolder<Product> implements OnImageSelectListener, FilterActivity.OnFilterSelectedListener {
+
+    protected Map<Uri, SimpleDraweeView> mDraweeViewMap;
 
     public TemplateViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         ButterKnife.bind(this, itemView);
-        EventBus.getDefault().register(this);
+        mDraweeViewMap = new HashMap<>();
+    }
+
+    protected void setImageUri(Uri uri, SimpleDraweeView draweeView) {
+        draweeView.setImageURI(uri);
+        mDraweeViewMap.put(uri, draweeView);
+    }
+
+
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public abstract void setFilter(Postprocessor processor);
+
+    public Bitmap takeShot(int width) {
+//        itemView.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+//        itemView.layout(0, 0, itemView.getMeasuredWidth(), itemView.getMeasuredHeight());
+
+//        itemView.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+//        itemView.layout(0, 0, itemView.getMeasuredWidth(), itemView.getMeasuredHeight());
+
+//        v.setDrawingCacheEnabled(true);
+//        v.buildDrawingCache();
+//        Bitmap bitmap = v.getDrawingCache();
+//        v.setDrawingCacheEnabled(false);
+//        v.destroyDrawingCache();
+
+        return ScreenShot.getInstance().takeScreenShotOfJustView(itemView);
     }
 
     @Override
-    public void onClick(View v) {
-        if (mListener != null) {
-            mListener.onImageClick(getAdapterPosition());
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setFilter(FilterEvent event) {
-        if (event.mApplyAll || (getAdapterPosition() == event.mPosition)) {
-
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setGpuImage(UriEvent uri) {
-        if (uri.position == getAdapterPosition()) {
-//            mDvImage.setImage(uri.mUri);
-        }
-    }
-
-    public static class FilterEvent {
-
-        final PipelineDraweeController mController;
-
-        final boolean mApplyAll;
-
-        final int mPosition;
-
-        public FilterEvent(PipelineDraweeController controller, boolean applyAll, int position) {
-            mController = controller;
-            mApplyAll = applyAll;
-            mPosition = position;
-        }
-    }
-
-    public static class UriEvent {
-
-        final Uri mUri;
-
-        final int position;
-
-        UriEvent(Uri uri, int position) {
-            mUri = uri;
-            this.position = position;
-        }
+    public void onImageSelect() {
 
     }
 
-    public interface OnImageClickListener {
-        void onImageClick(int position);
+    @Override
+    public void onImageLoaded(Uri uri) {
+
     }
 
-    private OnImageClickListener mListener;
+    @Override
+    public void onError() {
 
-    public void setOnImageClickListener(OnImageClickListener listener) {
-        mListener = listener;
     }
 
 }

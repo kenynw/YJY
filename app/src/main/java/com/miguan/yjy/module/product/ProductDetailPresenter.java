@@ -12,6 +12,7 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
 
@@ -117,6 +118,12 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void onResult(int requestCode, int resultCode, Intent data) {
+        super.onResult(requestCode, resultCode, data);
+        UMShareAPI.get(getView()).onActivityResult(requestCode, resultCode, data);
     }
 
 }

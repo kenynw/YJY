@@ -99,7 +99,7 @@ public class ScreenShot {
      * @return the bitmap
      */
     public Bitmap takeScreenShotOfJustView(View v) {
-        v.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+        v.measure(MeasureSpec.makeMeasureSpec(LUtils.getScreenWidth(), MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
         return takeScreenShotOfView(v);
@@ -249,6 +249,7 @@ public class ScreenShot {
                             }
                             // 最后通知图库更新
                             mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+
                             if (mListener != null) {
                                 mHandler.post(() -> mListener.onPictureSaved(uri));
                             }
