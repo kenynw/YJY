@@ -3,6 +3,7 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,13 +53,18 @@ public class Product implements Parcelable {
     private int middle;
     private int bad;
     private int total;
-    private List<Component> componentList;
-    private List<ComponentTag> effect;
-    private List<String> recommend;
-    private List<String> notRecommend;
-    private List<ComponentTag> security;
 
-    public List<ComponentTag> getEffect() {
+    private ArrayList<Component> componentList;
+
+    private ArrayList<ComponentTag> effect;
+
+    private List<String> recommend;
+
+    private List<String> notRecommend;
+
+    private ArrayList<ComponentTag> security;
+
+    public ArrayList<ComponentTag> getEffect() {
         return effect;
     }
 
@@ -121,21 +127,19 @@ public class Product implements Parcelable {
         this.total = total;
     }
 
-    public List<Component> getComponentList() {
+    public ArrayList<Component> getComponentList() {
         return componentList;
     }
 
-    public void setComponentList(List<Component> componentList) {
+    public void setComponentList(ArrayList<Component> componentList) {
         this.componentList = componentList;
     }
 
-
-
-    public List<ComponentTag> getSecurity() {
+    public ArrayList<ComponentTag> getSecurity() {
         return security;
     }
 
-    public void setSecurity(List<ComponentTag> security) {
+    public void setSecurity(ArrayList<ComponentTag> security) {
         this.security = security;
     }
 

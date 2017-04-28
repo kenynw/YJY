@@ -17,7 +17,7 @@ import com.miguan.yjy.model.services.ServicesResponse;
 
 public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
 
-    public static final String EXTRA_PRODUCT = "product";
+    public static final String EXTRA_PRODUCT = "mProduct";
 
     public static void start(Context context, UserProduct product) {
         Intent intent = new Intent(context, QueryCodeActivity.class);

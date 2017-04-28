@@ -357,7 +357,7 @@ public interface Services {
             @Query("user_id") int userId,
             @Query("brand_id") int brandId,
             @Query("brand_name") String brand_name,
-            @Query("product") String product,
+            @Query("mProduct") String product,
             @Query("is_seal") int is_seal,
             @Query("seal_time") String seal_time,
             @Query("quality_time") int quality_time,

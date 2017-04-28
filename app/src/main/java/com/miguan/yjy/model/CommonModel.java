@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
@@ -59,7 +58,7 @@ public class CommonModel extends AbsModel {
     private void showUpdateDialog(Context context, Version version) {
         new AlertDialog.Builder(context)
                 .setTitle("新版本发布啦~" + version.getNumber())
-                .setMessage(Html.fromHtml(version.getContent()[0]))
+                .setMessage(getContent(version.getContent()))
                 .setNegativeButton("取消", null)
                 .setPositiveButton("去更新", (dialog, which) -> {
                     LUtils.log("开始下载");
@@ -89,6 +88,12 @@ public class CommonModel extends AbsModel {
         }
     }
 
-
+    private String getContent(String[] strings) {
+        StringBuilder builder = new StringBuilder();
+        for (String string : strings) {
+            builder.append(string + "\n\r");
+        }
+        return new String(builder);
+    }
 
 }

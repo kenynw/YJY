@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
 
-            <include layout="@layout/include_product_effect_safe"></include>
+            <include layout="@layout/include_product_effect_safe" />
 
             <View
                 style="@style/ItemLineHeight"

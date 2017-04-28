@@ -20,7 +20,7 @@ import com.miguan.yjy.utils.LUtils;
 
 public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
 
-    public static final String EXTRA_PRODUCT = "product";
+    public static final String EXTRA_PRODUCT = "mProduct";
 
     public static void start(Context context, Product product) {
         if (UserPreferences.getUserID() > 0) {

@@ -7,9 +7,12 @@ import android.widget.ImageView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +50,8 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
     }
 
     private void share(Uri uri) {
-        UMImage umImage = new UMImage(this, "http://oss.yjyapp.com/static/h5/images/logo/share.jpg");
+        LUtils.log("uri: " + uri.getPath());
+        UMImage umImage = new UMImage(this, new File(uri.getPath()));
 //        UMImage thumb = new UMImage(this, R.mipmap.ic_launcher);
 //        umImage.setThumb(thumb);
 

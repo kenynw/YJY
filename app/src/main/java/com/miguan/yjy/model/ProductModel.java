@@ -62,10 +62,10 @@ public class ProductModel extends AbsModel {
     }
 
     public Observable<Product> getProductDetail(int productId) {
-//        Product product = new Product();
-//        product.setProduct_name("hahaha");
-//        product.setBrand("理肤泉");
-//        return Observable.just(product).compose(new DefaultTransform<>());
+//        Product mProduct = new Product();
+//        mProduct.setProduct_name("hahaha");
+//        mProduct.setBrand("理肤泉");
+//        return Observable.just(mProduct).compose(new DefaultTransform<>());
         return ServicesClient.getServices().productDetail(productId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 

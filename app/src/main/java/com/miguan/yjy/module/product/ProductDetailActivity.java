@@ -159,8 +159,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 //            tvSuitNum.setVisibility(View.GONE);
 //            tvUnsuitNum.setVisibility(View.GONE);
 //        } else {
-//            tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), product.getRecommend().size()));
-//            tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), product.getNotRecommend().size()));
+//            tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), mProduct.getRecommend().size()));
+//            tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), mProduct.getNotRecommend().size()));
 //        }
         // 备案
         mTvProvisionNo.setText(product.getStandard_number());
@@ -173,25 +173,18 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         flowtagGrade.setFocusable(false);
         flowtagGrade.setAdapter(componentAdapter);
         componentAdapter.onlyAddAll(product.getSecurity());
-        componentAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
-            @Override
-            public void itemClick(View v, int position) {
-                ProductReadPresenter.start(ProductDetailActivity.this, product,2,position);
-            }
-
-        });
+        componentAdapter.setSetOnTagClickListener((v, position) ->
+                ProductReadPresenter.start(ProductDetailActivity.this, product.getComponentList(), product.getSecurity(), position)
+        );
         tvEffectInfo.setText(String.format(getString(R.string.tv_product_effect_num),product.getEffectNum()));
         ProductComponentAdapter effectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
         flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagEffectInfo.setAdapter(effectAdapter);
         flowtagEffectInfo.setFocusable(false);
         effectAdapter.onlyAddAll(product.getEffect());
-        effectAdapter.setSetOnTagClickListener(new ProductComponentAdapter.SetOnTagClickListener() {
-            @Override
-            public void itemClick(View v, int position) {
-                ProductReadPresenter.start(ProductDetailActivity.this, product,1,position);
-            }
-        });
+        effectAdapter.setSetOnTagClickListener((v, position) ->
+                ProductReadPresenter.start(ProductDetailActivity.this, product.getComponentList(), product.getEffect(), position)
+        );
 
         //去比价
         mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
@@ -206,8 +199,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, product));
         ll_info.setOnClickListener(this);
 //
-//        tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
-//        tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, product));
+//        tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, mProduct));
+//        tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, mProduct));
         mTvSkinSort.setOnClickListener(v -> {
             if (mTvSkinSort.getText().equals("肤质排序")) {
                 mTvSkinSort.setText(R.string.tv_product_detail_sort_total);

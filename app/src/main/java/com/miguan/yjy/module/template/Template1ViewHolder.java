@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.jude.library.imageprovider.ImageProvider;
@@ -51,17 +53,21 @@ public class Template1ViewHolder extends TemplateViewHolder {
         ButterKnife.apply(mDvImages, new ButterKnife.Action<SimpleDraweeView>() {
             @Override
             public void apply(@NonNull SimpleDraweeView view, int index) {
-                view.setOnClickListener(v -> ImageProvider.getInstance((Activity) getContext())
-                        .getImageFromCameraOrAlbum(Template1ViewHolder.this));
-                mCurPosition = index;
+                view.setOnClickListener(v -> {
+                    ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(Template1ViewHolder.this);
+                    mCurPosition = index;
+                });
             }
         });
 
         ButterKnife.apply(mIvFilters, new ButterKnife.Action<ImageView>() {
             @Override
             public void apply(@NonNull ImageView view, int index) {
-                view.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(),
-                        mUris.get(index), Template1ViewHolder.this));
+                view.setOnClickListener(v -> {
+                    FilterActivity.start((AppCompatActivity) getContext(),
+                            mUris.get(index), Template1ViewHolder.this);
+                    mCurPosition = index;
+                });
             }
         });
     }
@@ -75,7 +81,13 @@ public class Template1ViewHolder extends TemplateViewHolder {
 
     @Override
     public void onFilterSelected(ImageRequest request) {
+        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request)
+                .setTapToRetryEnabled(true)
+                .setOldController(mDvImages.get(mCurPosition).getController())
+                .build();
 
+        mDvImages.get(mCurPosition).setController(controller);
     }
 
 //    @Override
