@@ -134,7 +134,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                 getPresenter().setCateId(cateId);
             }
             if (!TextUtils.isEmpty(text)) {
-                getPresenter().setEffect("");
+                getPresenter().setEffect(text);
             }
             if (cateId <= 0 && text.isEmpty()) {
                 getPresenter().setEffect("");

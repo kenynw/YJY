@@ -44,7 +44,14 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
 
         mRcvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRcvList.setAdapter(getPresenter().getAdapter());
-        mFlAdd.setOnClickListener(v -> getPresenter().getAdapter().add(new Product()));
+        mFlAdd.setOnClickListener(v -> {
+            GenTemplatePresenter.TemplateAdapter adapter = getPresenter().getAdapter();
+            if (adapter.getCount() >= 5) {
+                LUtils.toast("最多只能添加5个");
+            } else {
+                getPresenter().getAdapter().add(new Product());
+            }
+        });
         mTvDelete.setOnClickListener(v -> {
             GenTemplatePresenter.TemplateAdapter adapter = getPresenter().getAdapter();
             if (adapter.getCount() <= 1) {
@@ -66,9 +73,9 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         getExpansionDelegate().showProgressBar("正在生成图片");
 //        getPresenter().takeShot(mRcvList);
 //        ScreenShot.getInstance().takeScreenShotOfJustView(mRcvList, );
-        ScreenShot.getInstance().takeScreenShotOfJustView(mRcvList, uri -> {
+        ScreenShot.getInstance().takeScreenShotOfJustView(mRcvList, (path, uri) -> {
             getExpansionDelegate().hideProgressBar();
-            SaveTemplatePresenter.start(GenTemplateActivity.this, uri);
+            SaveTemplatePresenter.start(GenTemplateActivity.this, path, uri);
             finish();
         });
 

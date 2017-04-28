@@ -12,11 +12,14 @@ import com.dsk.chain.bijection.Presenter;
 
 public class SaveTemplatePresenter extends Presenter<SaveTemplateActivity> {
 
-    public static final String EXTRA_IMAGE = "image";
+    public static final String EXTRA_IMAGE_URI = "uri";
 
-    public static void start(Context context, Uri uri) {
+    public static final String EXTRA_IMAGE_PATH = "path";
+
+    public static void start(Context context, String path, Uri uri) {
         Intent intent = new Intent(context, SaveTemplateActivity.class);
-        intent.putExtra(EXTRA_IMAGE, uri);
+        intent.putExtra(EXTRA_IMAGE_PATH, path);
+        intent.putExtra(EXTRA_IMAGE_URI, uri);
         context.startActivity(intent);
     }
 

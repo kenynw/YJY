@@ -12,7 +12,6 @@ import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
 
@@ -66,7 +65,6 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
         ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mCateId, mEffect, 1)
                 .map(product -> {
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
-                    LUtils.log("size: " + mCateName);
                     return product.getData();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());

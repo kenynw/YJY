@@ -2,19 +2,21 @@ package com.miguan.yjy.module.template;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 
@@ -27,14 +29,8 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
     @BindView(R.id.iv_template_thumb)
     ImageView mIvThumb;
 
-    @BindView(R.id.iv_template_weixin)
-    ImageView mIvWeixin;
-
-    @BindView(R.id.iv_template_circle)
-    ImageView mIvCircle;
-
-    @BindView(R.id.iv_template_weibo)
-    ImageView mIvWeibo;
+    @BindViews({R.id.iv_template_weixin, R.id.iv_template_circle, R.id.iv_template_weibo})
+    List<ImageView> mIvShares;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +39,35 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
         setToolbarTitle("已保存");
         ButterKnife.bind(this);
 
-        Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE);
+        Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE_URI);
+        String path = getIntent().getStringExtra(SaveTemplatePresenter.EXTRA_IMAGE_PATH);
+
         mIvThumb.setImageURI(uri);
 
-        mIvWeixin.setOnClickListener(v -> share(uri));
-    }
+        ButterKnife.apply(mIvShares, new ButterKnife.Action<ImageView>() {
+            @Override
+            public void apply(@NonNull ImageView view, int index) {
+                view.setOnClickListener(v -> {
+                    UMImage image = new UMImage(SaveTemplateActivity.this, new File(path));
+                    image.compressStyle = UMImage.CompressStyle.QUALITY;
 
-    private void share(Uri uri) {
-        LUtils.log("uri: " + uri.getPath());
-        UMImage umImage = new UMImage(this, new File(uri.getPath()));
-//        UMImage thumb = new UMImage(this, R.mipmap.ic_launcher);
-//        umImage.setThumb(thumb);
-
-        new ShareAction(this).setPlatform(SHARE_MEDIA.WEIXIN)
-                .withText("hello")
-                .withMedia(umImage)
-                .share();
+                    ShareAction action = new ShareAction(SaveTemplateActivity.this)
+                            .withMedia(image);
+                    switch (index) {
+                        case 0:
+                            action.setPlatform(SHARE_MEDIA.WEIXIN);
+                            break;
+                        case 1:
+                            action.setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE);
+                            break;
+                        case 2:
+                            action.setPlatform(SHARE_MEDIA.SINA);
+                            break;
+                    }
+                    action.share();
+                });
+            }
+        });
     }
 
 }

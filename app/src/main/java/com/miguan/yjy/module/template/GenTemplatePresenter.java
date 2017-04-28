@@ -160,9 +160,9 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
             bigCanvas.drawBitmap(ScreenShot.getInstance().takeScreenShotOfView(mFooter), 0f, iHeight, paint);
         }
 
-        ScreenShot.getInstance().saveScreenshotToPicturesFolder(getView(), bigBitmap, uri -> {
+        ScreenShot.getInstance().saveScreenshotToPicturesFolder(getView(), bigBitmap, (path, uri) -> {
             getView().getExpansionDelegate().hideProgressBar();
-            SaveTemplatePresenter.start(getView(), uri);
+            SaveTemplatePresenter.start(getView(), path, uri);
         });
     }
 

@@ -240,6 +240,9 @@ public class ScreenShot {
                 // Initiate media scanning to make the image available in gallery apps
                 MediaScannerConnection.scanFile(mContext, new String[]{bitmapFile.getPath()},
                         new String[]{"image/jpeg"}, (path, uri) -> {
+                            if (mListener != null) {
+                                mHandler.post(() -> mListener.onPictureSaved(path, uri));
+                            }
                             // 其次把文件插入到系统图库
                             try {
                                 MediaStore.Images.Media.insertImage(mContext.getContentResolver(),
@@ -249,10 +252,6 @@ public class ScreenShot {
                             }
                             // 最后通知图库更新
                             mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
-
-                            if (mListener != null) {
-                                mHandler.post(() -> mListener.onPictureSaved(uri));
-                            }
                         });
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
@@ -287,7 +286,7 @@ public class ScreenShot {
     }
 
     public interface OnSaveListener {
-        void onPictureSaved(Uri uri);
+        void onPictureSaved(String path, Uri uri);
     }
 
     /**

@@ -103,11 +103,12 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
 //        tv_test_img.setImageBitmap(bitmap);
         ScreenShot.getInstance().saveScreenshotToPicturesFolder(this, bitmap, new ScreenShot.OnSaveListener() {
             @Override
-            public void onPictureSaved(Uri uri) {
+            public void onPictureSaved(String path, Uri uri) {
                 LUtils.toast("图片已生成,请至相册查收!");
                 mRlWaterTop.setVisibility(View.GONE);
                 mLlWaterBottom.setVisibility(View.GONE);
             }
+
         });
     }
 }
