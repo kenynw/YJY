@@ -1,8 +1,9 @@
 package com.miguan.yjy.model.local;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
-
-import com.miguan.yjy.utils.LUtils;
+import android.content.SharedPreferences;
 
 import java.util.List;
 
@@ -13,6 +14,33 @@ import java.util.List;
  */
 
 public class SystemPreferences {
+
+    private static Context sContext;
+    private static final String SYSTEM = "system";
+
+    public static void initialize(Application app) {
+        sContext = app.getApplicationContext();
+    }
+    public static SharedPreferences getPreferences() {
+        return getPreferences(SYSTEM, Activity.MODE_PRIVATE);
+    }
+
+    public static SharedPreferences getPreferences(String name) {
+        return getPreferences(name, Activity.MODE_PRIVATE);
+    }
+
+    public static SharedPreferences getPreferences(String name, int mode) {
+        return sContext.getSharedPreferences(name, mode);
+    }
+
+
+    /**
+     * 获取Context
+     * @return
+     */
+    public static Context getAppContext() {
+        return sContext;
+    }
 
     public static final String SEARCH_NAME = "searchName";
 
@@ -26,11 +54,16 @@ public class SystemPreferences {
 
     public static void setString(String key, String value) {
 
-        LUtils.getPreferences().edit().putString(key, value).apply();
+       getPreferences().edit().putString(key, value).apply();
     }
 
     public static String getString(String key) {
-        return LUtils.getPreferences().getString(key, "");
+        return getPreferences().getString(key, "");
+    }
+
+    public static void clear() {
+       getPreferences().edit().clear().apply();
+
     }
 
 

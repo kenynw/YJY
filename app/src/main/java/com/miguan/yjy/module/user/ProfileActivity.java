@@ -191,6 +191,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         TextView tvCancel = findById(view, R.id.tv_user_dialog_cancel);
         TextView tvSure = findById(view, R.id.tv_user_dialog_sure);
         etContent.setHint(R.string.hint_username);
+        etContent.setSelection(0);
         etContent.setInputType(EditorInfo.TYPE_CLASS_TEXT);
         tvSure.setText(R.string.btn_save);
         tvTitle.setText(mTvUsername.getText());

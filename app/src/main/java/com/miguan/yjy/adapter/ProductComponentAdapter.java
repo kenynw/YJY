@@ -52,7 +52,7 @@ public class ProductComponentAdapter extends BaseAdapter {
         textView.setText(lists.get(position).getName()+":"+lists.get(position).getId().size()+"种");
         textView.setOnClickListener(v -> {
             if (mSetOnTagClickListener != null) {
-                mSetOnTagClickListener.itemClick(v);
+                mSetOnTagClickListener.itemClick(v,position);
             }
 //            ProductReadPresenter.start(context,lists);
         });
@@ -65,7 +65,7 @@ public class ProductComponentAdapter extends BaseAdapter {
 
 
     public interface  SetOnTagClickListener{
-        public void itemClick(View v);
+        public void itemClick(View v,int position);
     }
 
     private SetOnTagClickListener mSetOnTagClickListener;

@@ -121,4 +121,69 @@ public class Skin implements Parcelable {
             return new Skin[size];
         }
     };
+
+    public static boolean matchValue(int value, int star, int end) {
+        for (int i = star; i < end; i++) {
+            if (value == i) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static String getDryOil(int value) {
+        if (matchValue(value, 11, 16)) {
+            return "重度干性皮肤";
+        }
+        if (matchValue(value, 17, 26)) {
+            return "轻度干性皮肤";
+        }
+        if (matchValue(value, 27, 33)) {
+            return "轻度油性皮肤";
+        }
+        if (matchValue(value, 34, 44)) {
+            return "重度油性皮肤";
+        }
+        return "";
+    }
+
+
+    public static String getTolerance(int value) {
+        if (matchValue(value, 17, 24)) {
+            return "重度耐受性皮肤";
+        }
+        if (matchValue(value, 25, 29)) {
+            return "轻度耐受性皮肤";
+        }
+        if (matchValue(value, 30, 33)) {
+            return "轻度敏感性皮肤";
+        }
+        if (matchValue(value, 34, 72)) {
+            return "重度敏感性皮肤";
+        }
+        return "";
+    }
+
+
+    public static String getPigment(int value) {
+        if (matchValue(value, 10, 30)) {
+            return "非色素敏感性皮肤";
+        }
+        if (matchValue(value, 31, 45)) {
+            return "色素性皮肤";
+        }
+        return "";
+    }
+
+    public static String getCompact(int value) {
+        if (matchValue(value, 20, 40)) {
+            return "紧致性皮肤";
+        }
+        if (matchValue(value, 41, 85)) {
+            return "皱纹性皮肤";
+        }
+        return "";
+    }
+
 }

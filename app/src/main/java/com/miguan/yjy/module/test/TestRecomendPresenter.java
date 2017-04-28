@@ -41,6 +41,8 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
 
     @Override
     public void onRefresh() {
+        TestModel.getInstantce().getSkinRecommendList(getView().categoryList.get(getView().position).getId(), 1).
+                unsafeSubscribe(getRefreshSubscriber());
 //        TestModel.getInstantce().getTestList().unsafeSubscribe(getRefreshSubscriber());
     }
 

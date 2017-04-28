@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.main;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -47,7 +46,6 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
         View view = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        mflSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), SearchActivity.class)));
         getListView().getSwipeToRefresh().setProgressViewOffset(true, 100, 200);
         getListView().setOnScrollListener(new RecyclerView.OnScrollListener() {
             int y = 0;
@@ -71,7 +69,11 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
     }
 
     public void setSearchHint(int count) {
-        mTvSearch.setText(String.format(getString(R.string.hint_home_search), count));
+      String productNum=  String.format(getString(R.string.hint_home_search), count);
+        mTvSearch.setText(productNum);
+
+        mflSearch.setOnClickListener(v ->
+                SearchActivity.start(getActivity(),productNum));
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.UserModel;
+import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
@@ -30,6 +31,7 @@ import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.test.TestGuideActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.utils.DateUtils;
+import com.umeng.socialize.utils.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -117,23 +119,23 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                     userInfo = user;
                     if (!TextUtils.isEmpty(userInfo.getCompact())) {
                         mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                        mTvTestWrinkle.setText(userInfo.getCompact());
+                        mTvTestWrinkle.setText( Skin.getCompact(Integer.parseInt(userInfo.getCompact())));
                         nums.add(0);
                     }
                     if (!TextUtils.isEmpty(userInfo.getDry())) {
                         mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(1);
-                        mTvTestOily.setText(userInfo.getDry());
+                        mTvTestOily.setText( Skin.getDryOil(Integer.parseInt(userInfo.getDry())));
                     }
                     if (!TextUtils.isEmpty(userInfo.getTolerance())) {
                         mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(2);
-                        mTvTestSensitive.setText(userInfo.getTolerance());
+                        mTvTestSensitive.setText( Skin.getTolerance(Integer.parseInt(userInfo.getTolerance())));
                     }
                     if (!TextUtils.isEmpty(userInfo.getPigment())) {
                         mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         nums.add(3);
-                        mTvTestPigment.setText(userInfo.getPigment());
+                        mTvTestPigment.setText( Skin.getPigment(Integer.parseInt(userInfo.getPigment())));
                     }
                     if (nums.size() == 4) {
                         mTvTestResult.setText("查看结果");
@@ -144,7 +146,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 }
             });
         } else {
-
+            Log.e("userId",UserPreferences.getUserID()+"--=0--");
         }
 
     }
@@ -272,12 +274,16 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 popupWindow.dismiss();
                 break;
             case R.id.tv_test_result:
-                //                TestResultFragment.star(getActivity());
-                if (mMyOnTabClick != null) {
-                    mMyOnTabClick.tabClickStart();
-                    break;
+                if (UserPreferences.getUserID() > 0) {
+                    if (mMyOnTabClick != null) {
+                        mMyOnTabClick.tabClickStart();
+
+                    }
+                } else {
+                    startToLogin();
                 }
 
+                break;
 
         }
     }
@@ -340,4 +346,5 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
     public void setMyOnTabClick(MyOnTabClick myOnTabClick) {
         mMyOnTabClick = myOnTabClick;
     }
+
 }

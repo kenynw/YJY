@@ -56,7 +56,7 @@ public class TestListAdapter extends RecyclerArrayAdapter<Product> {
 
         @Override
         public void setData(Product data) {
-            Glide.with(getContext()).load(data.getProduct_img()).into(mIvTestList);
+            Glide.with(getContext()).load(data.getProduct_img()).placeholder(R.mipmap.def_image_product).error(R.mipmap.def_image_product).into(mIvTestList);
 //            mIvTestList.setBackgroundResource(data.getImg());
             mTvTestListName.setText(data.getProduct_name());
             itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(),data.getId()));

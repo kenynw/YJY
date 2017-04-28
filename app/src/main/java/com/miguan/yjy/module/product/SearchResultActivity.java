@@ -2,21 +2,30 @@ package com.miguan.yjy.module.product;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.module.user.FeedbackActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +49,12 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @BindView(R.id.tv_product_list_count)
     TextView mTvCount;
+    @BindView(R.id.ll_product_result_first)
+    LinearLayout mLlResultFirst;
+    @BindView(R.id.recy_product_recommend)
+    EasyRecyclerView mRecyRecommend;
+    @BindView(R.id.ll_product_result_sencond)
+    LinearLayout mLlResultSencond;
 
     private FilterPanel mFilterPanel;
 
@@ -71,7 +86,46 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
+        mEtKeywords.setSelection(keywords.length());
         mEtKeywords.requestFocus();
+        mEtKeywords.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s)) {
+                    mLlResultFirst.setVisibility(View.VISIBLE);
+                    mLlResultSencond.setVisibility(View.GONE);
+                } else {
+                    mLlResultFirst.setVisibility(View.GONE);
+                    getPresenter().setRecommendData(s.toString());
+//                    getPresenter().onRefresh();
+                }
+            }
+        });
+
+        mEtKeywords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    getPresenter().onRefresh();
+                    mLlResultFirst.setVisibility(View.VISIBLE);
+                    mLlResultSencond.setVisibility(View.GONE);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        imgSearchCancle.setOnClickListener(v -> clearStr());
         mFilterPanel = new FilterPanel(this, productList.getCategroy(), productList.getEffects());
         mFilterPanel.setMenuText(1, cateName);
         mFilterPanel.setOnItemSelectedListener((cateId, text) -> {
@@ -82,13 +136,32 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             if (!TextUtils.isEmpty(text)) {
                 getPresenter().setEffect("");
             }
-            if (cateId <= 0 && text.isEmpty()){
+            if (cateId <= 0 && text.isEmpty()) {
                 getPresenter().setEffect("");
                 getPresenter().setCateId(0);
             }
             getPresenter().onRefresh();
         });
         mIsInit = true;
+    }
+
+    private void initListener(List<Product>datas) {
+//        mEtKeywords.setHint(productNum);
+//        tvCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (tvCancel.getText().toString().equals("取消")) {
+//                    finish();
+//                } else {
+//                    gotoSearchResult(edtSearch.getText().toString().trim());
+//                }
+//            }
+//        });
+
+    }
+
+    private void clearStr() {
+        mEtKeywords.setText("");
     }
 
     @Override

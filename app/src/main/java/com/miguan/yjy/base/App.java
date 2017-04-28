@@ -5,6 +5,7 @@ import android.app.Application;
 import com.dsk.chain.Chain;
 import com.dsk.chain.model.ModelManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -22,6 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         LUtils.initialize(this);
+        SystemPreferences.initialize(this);
         LUtils.isDebug = true;
         Fresco.initialize(this);
         ModelManager.init(this);

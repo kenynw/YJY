@@ -4,6 +4,7 @@ import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 
 import java.util.List;
@@ -27,26 +28,22 @@ public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFra
     @Override
     public void onRefresh() {
         super.onRefresh();
-        TestModel.getInstantce().getTestList().subscribe(new ServicesResponse<List<Test>>() {
-            @Override
-            public void onNext(List<Test> tests) {
-//                getView().setData(tests);
-            }
-        });
-        TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
-            @Override
-            public void onNext(Test test) {
-                setView(test);
-            }
-        });
-        TestModel.getInstantce().getSkinRecommend().map(new Func1<Test, List<Article>>() {
-            @Override
-            public List<Article> call(Test test) {
-                getView().setData(test.getSkinProduct(),test.getCategoryList());
-                return test.getSkinArticle();
-            }
-        }).unsafeSubscribe(getRefreshSubscriber());
+        if (UserPreferences.getUserID() > 0) {
+            TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
+                @Override
+                public void onNext(Test test) {
+                    setView(test);
+                }
+            });
+            TestModel.getInstantce().getSkinRecommend().map(new Func1<Test, List<Article>>() {
+                @Override
+                public List<Article> call(Test test) {
+                    getView().setData(test.getSkinProduct(),test.getCategoryList());
+                    return test.getSkinArticle();
+                }
+            }).unsafeSubscribe(getRefreshSubscriber());
 
+        }
 
     }
 
