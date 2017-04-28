@@ -37,8 +37,6 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
 
     public static final String EXTRA_USER = "user";
 
-    private ImageProvider mImageProvider; // 图片浏览
-
     private String mMobile;
 
     public static void start(Context context, User user) {
@@ -50,7 +48,6 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     @Override
     protected void onCreateView(ProfileActivity view) {
         super.onCreateView(view);
-        mImageProvider = new ImageProvider(view);
         publishObject(getView().getIntent().getParcelableExtra(EXTRA_USER));
     }
 
@@ -101,10 +98,10 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     public void pickImage(int type) {
         switch (type) {
             case 0:
-                mImageProvider.getImageFromAlbum(this);
+                ImageProvider.getInstance(getView()).getImageFromAlbum(this);
                 break;
             case 1:
-                mImageProvider.getImageFromCamera(this);
+                ImageProvider.getInstance(getView()).getImageFromCamera(this);
                 break;
         }
     }
@@ -112,7 +109,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
-        mImageProvider.onActivityResult(requestCode, resultCode, data);
+        ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

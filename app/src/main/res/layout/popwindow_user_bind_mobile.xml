@@ -33,25 +33,20 @@
             android:paddingBottom="10dp"
             android:paddingTop="50dp">
 
-            <RelativeLayout
+            <EditText
+                android:id="@+id/et_user_dialog_content"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/widget_medium"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:background="@null"
+                android:hint="@string/hint_mobile"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textAlignment="center"
+                >
 
-                <EditText
-                    android:id="@+id/et_user_dialog_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/widget_medium"
-                    android:background="@null"
-                    android:hint="@string/hint_mobile"
-                    android:inputType="phone"
-                    android:gravity="center"
-                    android:maxLength="11"
-                    />
-            </RelativeLayout>
-
+                <requestFocus />
+            </EditText>
 
             <ImageView
                 android:id="@+id/iv_user_dialog_close"

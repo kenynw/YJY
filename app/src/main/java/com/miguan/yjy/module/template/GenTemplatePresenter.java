@@ -39,8 +39,6 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         context.startActivity(intent);
     }
 
-    private ImageProvider mImageProvider;
-
     private Template mTemplate;
 
     private TemplateAdapter mAdapter;
@@ -54,8 +52,8 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onCreate(GenTemplateActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
+
         mViewHolders = new ArrayList<>();
-        mImageProvider = new ImageProvider(getView());
 
         mTemplate = (Template) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
         mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
@@ -67,9 +65,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         try {
             Constructor<? extends TemplateViewHolder> constructor = mTemplate.mClass.getDeclaredConstructor(ViewGroup.class);
             templateViewHolder = constructor.newInstance(parent);
-            templateViewHolder.setOnImageClickListener(position -> {
-                mImageProvider.getImageFromCameraOrAlbum(getView() );
-            });
+//            templateViewHolder.setImageProvider(mImageProvider, getView());
             mViewHolders.add(templateViewHolder);
         } catch (InstantiationException e) {
             e.printStackTrace();
@@ -134,13 +130,15 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
         int iHeight = 0;
         if (mHeader != null) {
-            bigCanvas.drawBitmap(ScreenShot.getInstance().takeScreenShotOfView(mHeader), 0f, iHeight, paint);
+            mHeader.setDrawingCacheEnabled(true);
+            mHeader.buildDrawingCache();
+            bigCanvas.drawBitmap(mHeader.getDrawingCache(), 0f, iHeight, paint);
+            mHeader.setDrawingCacheEnabled(false);
+            mHeader.destroyDrawingCache();
             iHeight += mHeader.getMeasuredHeight();
         }
 
-        LUtils.log("count: " + recyclerView.getChildCount() );
-
-        for (int i=0; i<mAdapter.getCount(); i++) {
+        for (int i=0; i<mViewHolders.size(); i++) {
 //            View view = recyclerView.getChildAt(i);
 //            view.setDrawingCacheEnabled(true);
 //            view.buildDrawingCache();
@@ -149,8 +147,12 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 //            view.destroyDrawingCache();
 
             TemplateViewHolder holder = mViewHolders.get(i);
-            mAdapter.onBindViewHolder(holder, i);
-            bigCanvas.drawBitmap(ScreenShot.getInstance().takeScreenShotOfView(holder.itemView), 0f, iHeight, paint);
+//            mAdapter.onBindViewHolder(holder, holder.getAdapterPosition());
+//            holder.itemView.setDrawingCacheEnabled(true);
+//            holder.itemView.buildDrawingCache();
+            bigCanvas.drawBitmap(holder.takeShot(recyclerView.getMeasuredWidth()), 0f, iHeight, paint);
+//            holder.itemView.setDrawingCacheEnabled(false);
+//            holder.itemView.destroyDrawingCache();
             iHeight += holder.itemView.getMeasuredHeight();
         }
 
@@ -167,7 +169,8 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
-        mImageProvider.onActivityResult(requestCode, resultCode, data);
+        ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
+        LUtils.log("requestCode: " + requestCode);
     }
 
     public void measureView(View view, int width) {

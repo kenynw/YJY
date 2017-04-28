@@ -17,6 +17,7 @@
         android:layout_marginBottom="@dimen/spacing_small"
         android:layout_marginTop="@dimen/spacing_small"
         app:placeholderImage="@mipmap/def_image_product"
+        app:failureImage="@mipmap/def_image_product"
         />
 
     <TextView

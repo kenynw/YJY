@@ -3,7 +3,6 @@ package com.miguan.yjy.module.template;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
-import android.net.Uri;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -48,8 +46,6 @@ import jp.wasabeef.fresco.processors.gpu.VignetteFilterPostprocessor;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterViewHolder> {
 
-    private Uri mUri;
-
     private List<FilterType> mTypeList;
 
     private List<Postprocessor> mPostprocessors;
@@ -76,9 +72,8 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
         BlurAndGrayscale
     }
 
-    public FilterAdapter(Context context, List<FilterType> list, Uri uri) {
+    public FilterAdapter(Context context, List<FilterType> list) {
         mTypeList = list;
-        mUri = uri;
 
         mPostprocessors = new ArrayList<>();
         for (FilterType filterType : list) {
@@ -150,12 +145,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
 
     @Override
     public void onBindViewHolder(FilterViewHolder holder, int position) {
-        Context context = holder.itemView.getContext();
-        Postprocessor processor = null;
-
-        holder.mDvImage.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);
-
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(mUri)
+        ImageRequest request = ImageRequestBuilder.newBuilderWithResourceId(R.mipmap.def_image_filter)
                 .setResizeOptions(new ResizeOptions(65, 92))
                 .setLocalThumbnailPreviewsEnabled(true)
                 .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
@@ -165,26 +155,16 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
 
         PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
                         .setImageRequest(request)
-                        .setTapToRetryEnabled(true)
                         .setOldController(holder.mDvImage.getController())
                         .build();
 
-        try {
-            holder.mDvImage.setController(controller);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        holder.mDvImage.setController(controller);
         holder.mTvName.setText(mTypeList.get(position).name());
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
-                mListener.onFilterSelected(position);
+                mListener.onFilterSelected(mPostprocessors.get(position));
             }
         });
-    }
-
-    public Postprocessor getProcessor(int position) {
-        return mPostprocessors.get(position);
     }
 
     @Override
@@ -197,7 +177,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
     }
 
     public interface OnFilterSelectedListener {
-        void onFilterSelected(int position);
+        void onFilterSelected(Postprocessor postprocessor);
     }
 
     class FilterViewHolder extends BaseViewHolder<Filter> {

@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.dsk.chain.bijection.ChainBaseActivity;
+import com.dsk.chain.bijection.RequiresPresenter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -18,27 +20,20 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.module.template.FilterAdapter.FilterType;
 import com.miguan.yjy.utils.LUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.co.cyberagent.android.gpuimage.GPUImageView;
 
 /**
  * Copyright (c) 2017/4/18. LiaoPeiKun Inc. All rights reserved.
  */
-
-public class FilterActivity extends AppCompatActivity implements GPUImageView.OnPictureSavedListener {
+@RequiresPresenter(FilterActivityPresenter.class)
+public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> implements FilterAdapter.OnFilterSelectedListener {
 
     public static final String EXTRA_FILTER_URI = "filter_uri";
-
-    public static final String EXTRA_FILTER_POSITION = "position";
 
     @BindView(R.id.dv_filter_thumb)
     SimpleDraweeView mDvImage;
@@ -58,16 +53,20 @@ public class FilterActivity extends AppCompatActivity implements GPUImageView.On
     @BindView(R.id.iv_filter_ok)
     ImageView mIvrOk;
 
+    private static OnFilterSelectedListener sFilterSelectedListener;
+
     private int mRotation;
 
-    private int mCurPosition;
+    private Uri mUri;
 
-    private PipelineDraweeController mController;
+    private ImageRequest mRequest;
 
-    public static void start(AppCompatActivity activity, Uri uri, int position) {
+    private Postprocessor mPostprocessor;
+
+    public static void start(AppCompatActivity activity, Uri uri, OnFilterSelectedListener listener) {
+        sFilterSelectedListener = listener;
         Intent intent = new Intent(activity, FilterActivity.class);
         intent.putExtra(EXTRA_FILTER_URI, uri);
-        intent.putExtra(EXTRA_FILTER_POSITION, position);
         activity.startActivity(intent);
     }
 
@@ -77,13 +76,13 @@ public class FilterActivity extends AppCompatActivity implements GPUImageView.On
         setContentView(R.layout.template_activity_filter);
         ButterKnife.bind(this);
 
-        Uri uri = getIntent().getParcelableExtra(EXTRA_FILTER_URI);
-        mDvImage.setImageURI(uri);
+        mDvImage.setImageURI(mUri = getIntent().getParcelableExtra(EXTRA_FILTER_URI));
         mIvCancel.setOnClickListener(v -> finish());
         mIvrOk.setOnClickListener(v -> {
-            if (mController != null) {
-                EventBus.getDefault().post(new TemplateViewHolder.FilterEvent(mController, mCbApplyAll.isChecked(), mCurPosition));
+            if (mCbApplyAll.isChecked() && mPostprocessor != null) {
+                EventBus.getDefault().post(mPostprocessor);
             }
+            sFilterSelectedListener.onFilterSelected(mRequest);
             finish();
         });
 
@@ -95,42 +94,7 @@ public class FilterActivity extends AppCompatActivity implements GPUImageView.On
         mGridFilters.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mGridFilters.setHasFixedSize(true);
         mGridFilters.addItemDecoration(getDecoration());
-        mGridFilters.setAdapter(createAdapter(uri));
-    }
-
-    private FilterAdapter createAdapter(Uri uri) {
-        List<FilterType> dataSet = new ArrayList<>();
-        dataSet.add(FilterType.Original);
-        dataSet.add(FilterType.Grayscale);
-        dataSet.add(FilterType.ColorFilter);
-        dataSet.add(FilterType.Pixel);
-        dataSet.add(FilterType.Vignette);
-        dataSet.add(FilterType.Brightness);
-        dataSet.add(FilterType.Sketch);
-        dataSet.add(FilterType.Invert);
-        dataSet.add(FilterType.Contrast);
-        dataSet.add(FilterType.Sepia);
-        dataSet.add(FilterType.Toon);
-
-        FilterAdapter adapter = new FilterAdapter(this, dataSet, uri);
-        adapter.setOnFilterSelectedListener(position -> {
-            Postprocessor processor = adapter.getProcessor(position);
-            ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
-                    .setResizeOptions(new ResizeOptions(mDvImage.getWidth(), mDvImage.getHeight()))
-                    .setLocalThumbnailPreviewsEnabled(true)
-                    .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
-                    .setProgressiveRenderingEnabled(false)
-                    .setPostprocessor(processor)
-                    .build();
-
-            mController = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                    .setImageRequest(request)
-                    .setTapToRetryEnabled(true)
-                    .setOldController(mDvImage.getController())
-                    .build();
-            mDvImage.setController(mController);
-        });
-        return adapter;
+        mGridFilters.setAdapter(getPresenter().createAdapter());
     }
 
     private SpaceDecoration getDecoration() {
@@ -141,13 +105,26 @@ public class FilterActivity extends AppCompatActivity implements GPUImageView.On
     }
 
     @Override
-    public void onPictureSaved(Uri uri) {
-//        if (mCbApplyAll.isChecked()) {
-//            EventBus.getDefault().post(new TemplateViewHolder.FilterEvent(mCurFilter));
-//        } else {
-//            EventBus.getDefault().post(new TemplateViewHolder.UriEvent(uri, getIntent().getIntExtra(EXTRA_FILTER_POSITION, 0)));
-//        }
-        finish();
+    public void onFilterSelected(Postprocessor postprocessor) {
+        mPostprocessor = postprocessor;
+        mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
+                .setResizeOptions(new ResizeOptions(LUtils.getScreenWidth() / 3, LUtils.getScreenHeight() / 3))
+                .setLocalThumbnailPreviewsEnabled(true)
+                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
+                .setProgressiveRenderingEnabled(false)
+                .setPostprocessor(postprocessor)
+                .build();
+
+        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                .setImageRequest(mRequest)
+                .setTapToRetryEnabled(true)
+                .setOldController(mDvImage.getController())
+                .build();
+        mDvImage.setController(controller);
+    }
+
+    public interface OnFilterSelectedListener {
+        void onFilterSelected(ImageRequest request);
     }
 
 }

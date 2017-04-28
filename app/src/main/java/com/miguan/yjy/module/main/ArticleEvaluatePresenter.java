@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.ArticleModel;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.module.account.LoginActivity;
 
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
@@ -17,9 +19,13 @@ public class ArticleEvaluatePresenter extends Presenter<ArticleEvaluateActivity>
     public static final String EXTRA_ARTICLE_ID = "article_id";
 
     public static void start(Activity context, int articleId) {
-        Intent intent = new Intent(context, ArticleEvaluateActivity.class);
-        intent.putExtra(EXTRA_ARTICLE_ID, articleId);
-        context.startActivityForResult(intent, 100);
+        if (UserPreferences.getUserID() > 0) {
+            Intent intent = new Intent(context, ArticleEvaluateActivity.class);
+            intent.putExtra(EXTRA_ARTICLE_ID, articleId);
+            context.startActivityForResult(intent, 100);
+        } else {
+            context.startActivity(new Intent(context, LoginActivity.class));
+        }
     }
 
     private int mArticleId;

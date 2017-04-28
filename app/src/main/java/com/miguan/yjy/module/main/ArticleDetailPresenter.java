@@ -14,6 +14,7 @@ import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SharePopupWindow;
+import com.umeng.socialize.UMShareAPI;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -68,6 +69,7 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
+        UMShareAPI.get(getView()).onActivityResult(requestCode,resultCode,data);
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             onRefresh();
         }

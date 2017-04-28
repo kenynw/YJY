@@ -46,6 +46,8 @@ public class UpdateService extends Service {
         String filepath = intent.getExtras().getString("path");
         String filename = intent.getExtras().getString("name");
 
+        LUtils.log("url: " + url);
+
         if(url!=null&&LUtils.isNetWorkAvilable() && task==null){
             LUtils.log("onStartCommand url:"+url+"  filepath:"+filename+"  filename:"+filename);
             createNotification(title);
@@ -162,16 +164,15 @@ public class UpdateService extends Service {
             notificationManager.cancel(notification_id);
             if(finish&&!cancelUpdate){
                 Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setDataAndType(
                         Uri.fromFile(new File(path+name)),
                         "application/vnd.android.package-archive");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }else{
                 LUtils.toast("下载错误");
             }
         }
-
 
         @Override
         protected void onProgressUpdate(Integer... values) {

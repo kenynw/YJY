@@ -50,8 +50,8 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
         mTvName.setText(data.getUser_name());
         mTvTime.setText(data.getCreated_at());
         itemView.setOnClickListener(null);
-        mIvMore.setVisibility(data.getOtype() == 0 ? View.INVISIBLE : View.VISIBLE);
-        if (data.getOtype() == 0) {
+        mIvMore.setVisibility(data.getType() == 2 ? View.INVISIBLE : View.VISIBLE);
+        if (data.getType() == 2) {
             mTvContent.setVisibility(View.VISIBLE);
             mTvContent.setText(SpanUtils.getContentSpannable(data.getContent(), mTvContent));
         } else {

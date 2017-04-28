@@ -116,6 +116,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
                     .setCancelColor(getResources().getColor(R.color.textSecondary))
                     .setLabel("", "", "", "", "", "")
                     .setDate(Calendar.getInstance())
+                    .setRangDate(null, Calendar.getInstance())
                     .build();
         }
         mTimePickerView.show(view);
