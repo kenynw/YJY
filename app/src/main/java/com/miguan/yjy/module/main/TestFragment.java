@@ -119,23 +119,23 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                     userInfo = user;
                     if (!TextUtils.isEmpty(userInfo.getCompact())) {
                         mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                        mTvTestWrinkle.setText( Skin.getCompact(Integer.parseInt(userInfo.getCompact())));
+                        mTvTestWrinkle.setText(Skin.getCompact(Integer.parseInt(userInfo.getCompact())));
                         nums.add(0);
                     }
                     if (!TextUtils.isEmpty(userInfo.getDry())) {
                         mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(1);
-                        mTvTestOily.setText( Skin.getDryOil(Integer.parseInt(userInfo.getDry())));
+                        mTvTestOily.setText(Skin.getDryOil(Integer.parseInt(userInfo.getDry())));
                     }
                     if (!TextUtils.isEmpty(userInfo.getTolerance())) {
                         mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(2);
-                        mTvTestSensitive.setText( Skin.getTolerance(Integer.parseInt(userInfo.getTolerance())));
+                        mTvTestSensitive.setText(Skin.getTolerance(Integer.parseInt(userInfo.getTolerance())));
                     }
                     if (!TextUtils.isEmpty(userInfo.getPigment())) {
                         mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         nums.add(3);
-                        mTvTestPigment.setText( Skin.getPigment(Integer.parseInt(userInfo.getPigment())));
+                        mTvTestPigment.setText(Skin.getPigment(Integer.parseInt(userInfo.getPigment())));
                     }
                     if (nums.size() == 4) {
                         mTvTestResult.setText("查看结果");
@@ -146,7 +146,17 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 }
             });
         } else {
-            Log.e("userId",UserPreferences.getUserID()+"--=0--");
+            Log.e("userId", UserPreferences.getUserID() + "--=0--");
+            mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_white);
+            mTvTestWrinkle.setText(R.string.text_no_test);
+            mLlTestOily.setBackgroundResource(R.drawable.bg_shape_white);
+            mTvTestOily.setText(R.string.text_no_test);
+            mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_white);
+            mTvTestSensitive.setText(R.string.text_no_test);
+            mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_white);
+            mTvTestPigment.setText(R.string.text_no_test);
+            mTvTestResult.setText("完成度\n"+ "0/4");
+
         }
 
     }
@@ -341,7 +351,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
         void tabClickStart();
     }
 
-    public  MyOnTabClick mMyOnTabClick;
+    public MyOnTabClick mMyOnTabClick;
 
     public void setMyOnTabClick(MyOnTabClick myOnTabClick) {
         mMyOnTabClick = myOnTabClick;

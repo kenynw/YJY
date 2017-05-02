@@ -60,6 +60,9 @@
     <string name="text_template_1_title">YSL  唇釉   407</string>
     <string name="text_template_1_desc">YSL ROUGE PUR COUTURE THE MATS</string>
     <string name="text_template_1_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>
+    <string name="text_template_4_title">\n&#064;FELTON</string>
+    <string name="text_template_4_desc">第四个描述</string>
+    <string name="text_template_4_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -181,6 +184,7 @@
     <string name="text_test_recommend_product">推荐产品</string>
     <string name="text_test_recommend_change">换一批</string>
     <string name="text_test_search_component">查询护肤品成分</string>
+    <string name="text_no_test">未测试</string>
 
     <!--用户相关-->
     <string name="text_user_bind_mobile">绑定手机号</string>

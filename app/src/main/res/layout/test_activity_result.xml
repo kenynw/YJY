@@ -29,17 +29,23 @@
 
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
+            android:id="@+id/ll_test_tag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="vertical"
                 android:paddingLeft="35dp"
                 android:paddingRight="35dp">
@@ -298,8 +304,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rect_test_my_skin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"></android.support.v7.widget.RecyclerView>
 
 
             <View
@@ -322,7 +329,9 @@
             <com.jude.easyrecyclerview.EasyRecyclerView
                 android:id="@+id/recycle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
 
 
         </LinearLayout>

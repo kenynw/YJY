@@ -272,6 +272,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRecyEvalutate.setFocusable(false);
         mRecyEvalutate.setEmptyView(R.layout.empty_evaluate_list);
         mRecyEvalutate.setAdapter(evaluateAdapter);
+        evaluateAdapter.notifyDataSetChanged();
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));
     }
 
