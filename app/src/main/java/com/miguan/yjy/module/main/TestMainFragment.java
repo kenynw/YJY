@@ -41,8 +41,8 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadData();
         initFragment();
+
     }
 
     @Nullable
@@ -77,6 +77,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
             ft.add(containerId,fragment);
         }
         ft.commit();
+        loadData();
 //        showFragment(0);
     }
 

@@ -143,7 +143,7 @@
     <string name="tv_product_no_compare">肤质不匹配</string>
     <string name="tv_product_safe">安全信息</string>
     <string name="tv_product_fuction_info">功效信息</string>
-    <string name="tv_product_component_describe">本成分列表数据来自国家食品药品监督管理局标签排序\n按添加量从多到少排序</string>
+    <string name="tv_product_component_describe">本成分列表数据来自国家食品药品监督管理局</string>
     <string name="tv_menu_read_list">解读表</string>
     <string name="tv_product_component_img">生成成分表图片</string>
     <string name="tv_product_component_num">本产品包含%d种成分</string>
