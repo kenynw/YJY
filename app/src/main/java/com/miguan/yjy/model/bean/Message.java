@@ -36,7 +36,7 @@ public class Message implements Parcelable {
     /**
      * 未读消息数
      */
-    private int unReadNUM;
+    private int unReadNum;
 
     public Message() {
     }
@@ -50,11 +50,11 @@ public class Message implements Parcelable {
     }
 
     public int getUnReadNUM() {
-        return unReadNUM;
+        return unReadNum;
     }
 
     public void setUnReadNUM(int unReadNUM) {
-        this.unReadNUM = unReadNUM;
+        this.unReadNum = unReadNUM;
     }
 
     public int getId() {
@@ -138,7 +138,7 @@ public class Message implements Parcelable {
         dest.writeInt(this.type);
         dest.writeInt(this.otype);
         dest.writeInt(this.overdueNum);
-        dest.writeInt(this.unReadNUM);
+        dest.writeInt(this.unReadNum);
     }
 
     protected Message(Parcel in) {
@@ -151,7 +151,7 @@ public class Message implements Parcelable {
         this.type = in.readInt();
         this.otype = in.readInt();
         this.overdueNum = in.readInt();
-        this.unReadNUM = in.readInt();
+        this.unReadNum = in.readInt();
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {

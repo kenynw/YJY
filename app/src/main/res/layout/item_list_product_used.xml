@@ -53,7 +53,7 @@
             android:id="@+id/dv_product_used_thumb"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/def_image_product"
+            android:src="@mipmap/def_image_product_used"
             />
 
         <LinearLayout
@@ -70,24 +70,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
-                android:textAppearance="@style/TextSubhead"
+                android:textAppearance="@style/TextBody"
                 tools:text="理肤泉特安舒缓修护乳理肤泉特安舒缓修护乳理肤泉特安舒缓修护乳理肤泉特安舒缓修护乳"
                 />
 
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:gravity="bottom"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="@dimen/spacing_small"
                 >
 
                 <com.miguan.yjy.widget.SuperTextView
                     android:id="@+id/tv_product_used_is_seal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
+                    android:padding="2dp"
                     android:gravity="center"
                     android:maxHeight="24dp"
                     android:textSize="@dimen/text_size_caption_material"

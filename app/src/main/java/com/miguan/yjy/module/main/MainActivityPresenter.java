@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.main;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.PermissionUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,6 +35,12 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
         CommonModel.getInstance().update(getView());
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        getView().setCurrentTab(0);
+    }
+
     private void requestPremission() {
         PermissionUtils.requestPermission(getView(), new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -49,6 +57,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
                 @Override
                 public void onNext(Message message) {
                     int count = message.getOverdueNum() + message.getUnReadNUM();
+                    LUtils.toast("count: " + count);
                     View view = getView().getTab(3).getCustomView();
                     new QBadgeView(getView()).bindTarget(view).setBadgeNumber(count);
                 }

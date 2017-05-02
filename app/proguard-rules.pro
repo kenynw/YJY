@@ -66,3 +66,15 @@
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
 -keep class com.miguan.yjy.model.bean.**{*;} #这是你定义的实体类
+
+#EventBus
+#-keepattributes *Annotation*
+#-keepclassmembers class ** {
+#    @org.greenrobot.eventbus.Subscribe <methods>;
+#}
+#-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+#
+## Only required if you use AsyncExecutor
+#-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+#    <init>(java.lang.Throwable);
+#}

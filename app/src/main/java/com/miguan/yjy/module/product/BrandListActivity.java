@@ -31,6 +31,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 /**
  * Copyright (c) 2017/3/28. LiaoPeiKun Inc. All rights reserved.
  */
@@ -45,6 +46,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @BindView(R.id.et_brand_list_search)
     EditText mEtSearch;
+    
     @BindView(R.id.tv_brand_list_clear)
     TextView mTvClear;
 
@@ -167,7 +169,12 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             mInSearchMode = (keyword.length() > 0);
 
             if (mInSearchMode) {
-                for (Brand brand : getPresenter().getAdapter().getAllData()) {
+                for (Brand brand : getPresenter().getBrandList().getOtherCosmetics()) {
+                    boolean isPinyin = brand.getLetter().contains(keyword);
+                    boolean isChinese = brand.getName().contains(keyword);
+                    if (isChinese || isPinyin) mFilterList.add(brand);
+                }
+                for (Brand brand : getPresenter().getBrandList().getHotCosmetics()) {
                     boolean isPinyin = brand.getLetter().contains(keyword);
                     boolean isChinese = brand.getName().contains(keyword);
                     if (isChinese || isPinyin) mFilterList.add(brand);

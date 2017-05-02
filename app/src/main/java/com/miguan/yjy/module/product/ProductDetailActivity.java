@@ -27,6 +27,7 @@ import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
+import com.umeng.socialize.media.UMImage;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -227,9 +228,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Product product = getPresenter().getData();
-        new SharePopupWindow.Builder(this).setUrl("http://m.yjyapp.com/")
+        new SharePopupWindow.Builder(this)
+                .setUrl(product.getLinkUrl())
                 .setTitle(product.getProduct_name())
                 .setContent(product.getProduct_name())
+                .setImage(new UMImage(this, product.getProduct_img()))
                 .show(getToolbar());
         return super.onOptionsItemSelected(item);
     }

@@ -15,6 +15,7 @@ import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SharePopupWindow;
 import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.media.UMImage;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -98,6 +99,7 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
                     .setTitle(mArticle.getTitle())
                     .setUrl(mArticle.getLinkUrl())
                     .setContent(mArticle.getTitle())
+                    .setImage(new UMImage(getView(), mArticle.getArticle_img()))
                     .show(getView().getToolbar());
         }
     }

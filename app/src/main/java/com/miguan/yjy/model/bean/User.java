@@ -14,10 +14,10 @@ public class User implements Parcelable {
     @SerializedName(value = "user_id", alternate = {"userId", "id"})
     private int user_id;
 
-    @SerializedName(value = "img", alternate = {"userImg"})
+    @SerializedName(value = "img", alternate = {"user_img"})
     private String img;
 
-    @SerializedName(value = "username", alternate = {"usernName"})
+    @SerializedName(value = "username", alternate = {"user_name"})
     private String username;
 
     private int sex;

@@ -89,13 +89,13 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
         mMenuList.add(createRecyclerView(categories, position -> {
             mTbtnList.get(1).setText(categories[position]);
             if (mListener != null) {
-                mListener.onItemSelected(mCategories.get(position).getId(), categories[position]);
+                mListener.onItemSelected(mCategories.get(position).getId(), "");
             }
         }));
         mMenuList.add(createRecyclerView(mEffects, position -> {
             mTbtnList.get(2).setText(mEffects[position]);
             if (mListener != null) {
-                mListener.onItemSelected(position, mEffects[position]);
+                mListener.onItemSelected(0, mEffects[position]);
             }
         }));
     }

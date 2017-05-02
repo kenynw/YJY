@@ -54,6 +54,8 @@ public class Product implements Parcelable {
     private int bad;
     private int total;
 
+    private String linkUrl;
+
     private ArrayList<Component> componentList;
 
     private ArrayList<ComponentTag> effect;
@@ -89,6 +91,14 @@ public class Product implements Parcelable {
 
     public int getIsGras() {
         return isGras;
+    }
+
+    public String getLinkUrl() {
+        return linkUrl;
+    }
+
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
     }
 
     public void setIsGras(int isGras) {
@@ -323,6 +333,7 @@ public class Product implements Parcelable {
         dest.writeInt(this.middle);
         dest.writeInt(this.bad);
         dest.writeInt(this.total);
+        dest.writeString(this.linkUrl);
         dest.writeTypedList(this.componentList);
         dest.writeTypedList(this.effect);
         dest.writeStringList(this.recommend);
@@ -355,6 +366,7 @@ public class Product implements Parcelable {
         this.middle = in.readInt();
         this.bad = in.readInt();
         this.total = in.readInt();
+        this.linkUrl = in.readString();
         this.componentList = in.createTypedArrayList(Component.CREATOR);
         this.effect = in.createTypedArrayList(ComponentTag.CREATOR);
         this.recommend = in.createStringArrayList();

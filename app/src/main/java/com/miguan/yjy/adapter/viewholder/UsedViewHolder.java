@@ -56,7 +56,7 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
 
     @Override
     public void setData(UserProduct data) {
-        mTvName.setText(data.getProduct());
+        mTvName.setText(data.getBrand_name() + data.getProduct());
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         Date date = null;

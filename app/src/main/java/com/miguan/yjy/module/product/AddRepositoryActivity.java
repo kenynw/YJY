@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresenter> {
 
     @BindView(R.id.tv_add_repository_brand)
-    TextView mTvBrand;
+    EditText mTvBrand;
 
     @BindView(R.id.et_add_repository_name)
     EditText mEtName;
@@ -92,13 +92,19 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             mIvIsOpen.setImageResource(mIsSeal == 1 ? R.mipmap.ic_swc_on : R.mipmap.ic_swc_off);
 
         });
-        mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
+
         mEtOpenDate.setOnClickListener(v -> mTimePickerView.show(v));
         mTvExpTime.setOnClickListener(v -> mTimeDialog.show());
     }
 
     public void setData(String brandName, String overtime) {
-        mTvBrand.setText(brandName);
+        if (TextUtils.isEmpty(brandName)) {
+            mTvBrand.setEnabled(true);
+        } else {
+            mTvBrand.setText(brandName);
+            mTvBrand.setEnabled(false);
+            mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
+        }
         if (TextUtils.isEmpty(overtime)) {
             mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
         } else {
@@ -122,6 +128,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     private void checkInput() {
         if (TextUtils.isEmpty(mEtName.getText())) {
             LUtils.toast("请输入产品");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mTvExpiration.getText())) {
+            LUtils.toast("请选择过期时间");
             return;
         }
 
