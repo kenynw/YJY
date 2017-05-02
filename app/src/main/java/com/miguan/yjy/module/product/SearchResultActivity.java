@@ -135,6 +135,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             }
             if (!TextUtils.isEmpty(text)) {
                 getPresenter().setEffect(text);
+                getPresenter().setType(2);
             }
             if (cateId <= 0 && text.isEmpty()) {
                 getPresenter().setEffect("");
@@ -145,7 +146,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mIsInit = true;
     }
 
-    private void initListener(List<Product>datas) {
+    private void initListener(List<Product> datas) {
 //        mEtKeywords.setHint(productNum);
 //        tvCancel.setOnClickListener(new View.OnClickListener() {
 //            @Override

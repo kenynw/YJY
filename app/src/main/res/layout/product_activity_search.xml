@@ -108,18 +108,18 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/tv_product_clear_his"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
-            android:drawableLeft="@mipmap/ic_clean"
-            android:drawablePadding="8dp"
-            android:text="@string/tv_product_clearhistory"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_13"/>
+        <!--<TextView-->
+            <!--android:id="@+id/tv_product_clear_his"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:drawableLeft="@mipmap/ic_clean"-->
+            <!--android:drawablePadding="8dp"-->
+            <!--android:text="@string/tv_product_clearhistory"-->
+            <!--android:textColor="@color/color_sencond_title"-->
+            <!--android:textSize="@dimen/text_size_small_13"/>-->
 
 
     </LinearLayout>

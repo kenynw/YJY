@@ -112,6 +112,7 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     }
 
     public void setData(List<Skin> datas,ArrayList<Skin> categoryList) {
+        mRectTestMySkin.setFocusable(false);
         mRectTestMySkin.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         TestSkinAdapter testSkinAdapter=new TestSkinAdapter(getActivity(), datas);
         testSkinAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {

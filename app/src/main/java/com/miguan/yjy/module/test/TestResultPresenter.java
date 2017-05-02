@@ -22,7 +22,7 @@ public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFra
     @Override
     protected void onCreateView(TestResultFragment view) {
         super.onCreateView(view);
-        onRefresh();
+
     }
 
     @Override
@@ -62,4 +62,9 @@ public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFra
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onRefresh();
+    }
 }

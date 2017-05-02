@@ -21,6 +21,7 @@ import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.HistorySearchAdpter;
 import com.miguan.yjy.adapter.ProductAllSearchAdapter;
@@ -62,8 +63,8 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
     @BindView(R.id.ll_product_search_sencond)
     LinearLayout llSearchSencond;
-    @BindView(R.id.tv_product_clear_his)
-    TextView tvClearHis;
+//    @BindView(R.id.tv_product_clear_his)
+//    TextView tvClearHis;
 
     HistorySearchAdpter mHistorySearchAdpter;
     private List<String> mKeywordList = new ArrayList<>();
@@ -75,9 +76,6 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         ButterKnife.bind(this);
         productNum = getIntent().getStringExtra("productNum");
         initListener();
-        recyHistorySearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//        mHistorySearchAdpter = new HistorySearchAdpter(SearchActivity.this, mKeywordList);
-//        recyHistorySearch.setAdapter(mHistorySearchAdpter);
         refreshAdapter();
     }
 
@@ -92,9 +90,11 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     }
 
     private void initListener() {
+
+        recyHistorySearch.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         edtSearch.setHint(productNum);
         imgSearchCancle.setOnClickListener(v -> clearStr());
-        tvClearHis.setOnClickListener(v -> clearHis());
+//        tvClearHis.setOnClickListener(v -> clearHis());
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -133,19 +133,6 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
                return false;
            }
        });
-
-//        edtSearch.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
-
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,11 +155,14 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     public void refreshAdapter() {
         String historyKeywords = SystemPreferences.getSearchName();
         if (!TextUtils.isEmpty(historyKeywords)) {
+            llHisSearch.setVisibility(View.VISIBLE);
             List<String> keywordList = new ArrayList<>();
             for (String name : historyKeywords.split(",")) {
                 keywordList.add(name);
             }
             mKeywordList = keywordList;
+        } else {
+            llHisSearch.setVisibility(View.GONE);
         }
         mHistorySearchAdpter = new HistorySearchAdpter(SearchActivity.this, mKeywordList);
         recyHistorySearch.setAdapter(mHistorySearchAdpter);
@@ -180,9 +170,29 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
             @Override
             public void removeName(String data) {
                 mHistorySearchAdpter.remove(data);
+                if (mKeywordList.size() == 1) {
+                    clearHis();
+                }
                 mKeywordList.remove(mKeywordList.indexOf(data));
                 removeCurName(mKeywordList);
                 mHistorySearchAdpter.notifyDataSetChanged();
+            }
+        });
+        mHistorySearchAdpter.addFooter(new RecyclerArrayAdapter.ItemView() {
+            @Override
+            public View onCreateView(ViewGroup parent) {
+               View view= View.inflate(SearchActivity.this, R.layout.foot_clear_history, null);
+                return view ;
+            }
+
+            @Override
+            public void onBindView(View headerView) {
+                headerView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        clearHis();
+                    }
+                });
             }
         });
 
@@ -194,7 +204,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
     private void clearHis() {
         llHisSearch.setVisibility(View.GONE);
-        tvClearHis.setVisibility(View.GONE);
+//        tvClearHis.setVisibility(View.GONE);
        SystemPreferences.clear();
     }
 

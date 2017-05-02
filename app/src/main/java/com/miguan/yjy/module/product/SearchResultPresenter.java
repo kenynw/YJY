@@ -36,6 +36,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     private String mCateName;//分类id
 
     private String mEffect;//功效关键字
+    private int mType = 1;//类型 ：不传或者传1为默认搜索产品
 
     public static void start(Context context, String keywords, int cateId, String cateName) {
         Intent intent = new Intent(context, SearchResultActivity.class);
@@ -62,7 +63,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mCateId, mEffect, 1)
+        ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mType, mCateId, mEffect, 1)
                 .map(product -> {
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
                     return product.getData();
@@ -73,7 +74,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     @Override
     public void onLoadMore() {
         ProductModel.getInstance()
-                .searchQuery(getView().mEtKeywords.getText().toString(), mCateId, mEffect, getCurPage())
+                .searchQuery(getView().mEtKeywords.getText().toString(), mType, mCateId, mEffect, getCurPage())
                 .map(ProductList::getData)
                 .unsafeSubscribe(getMoreSubscriber());
     }
@@ -86,6 +87,10 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
         mEffect = effect;
     }
 
+    public void setType(int type) {
+        mType = type;
+    }
+
     public void setRecommendData(String s) {
         ProductModel.getInstance().searchAssociate(s).subscribe(new ServicesResponse<List<Product>>() {
             @Override
@@ -94,7 +99,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                     getView().mLlResultSencond.setVisibility(View.GONE);
                 } else {
                     getView().mLlResultSencond.setVisibility(View.VISIBLE);
-                    getView().mRecyRecommend.setLayoutManager(new LinearLayoutManager(getView(),LinearLayoutManager.VERTICAL,false));
+                    getView().mRecyRecommend.setLayoutManager(new LinearLayoutManager(getView(), LinearLayoutManager.VERTICAL, false));
                     getView().mRecyRecommend.setAdapter(new ProductRecommentAdapter(getView(), products));
                 }
             }

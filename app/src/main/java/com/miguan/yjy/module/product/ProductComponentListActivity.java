@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,17 +44,13 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
     LinearLayout mLlWaterMiddle;
     @BindView(R.id.tv_test_img)
     ImageView tv_test_img;
-    public static final String WEBVIEW_READ = "http://m.yjyapp.com/site/skin-unscramble";
-    @BindView(R.id.rl_water_top)
-    RelativeLayout mRlWaterTop;
-    @BindView(R.id.ll_water_bottom)
-    LinearLayout mLlWaterBottom;
-    @BindView(R.id.iv_product_detail)
+
     ImageView mIvThumb;
-    @BindView(R.id.tv_product_detail_name)
     TextView mTvName;
-    @BindView(R.id.tv_product_detail_spec)
     TextView mTvSpec;
+
+
+    public static final String WEBVIEW_READ = "http://m.yjyapp.com/site/skin-unscramble";
 
 
     @Override
@@ -82,31 +77,41 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
     }
 
     private void initData() {
+        mRecyProductComponentCreate.setFocusable(false);
         mRecyProductComponentCreate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         ProductReadAdapter productReadAdapter = new ProductReadAdapter(ProductComponentListActivity.this, getPresenter().mComponents);
         mRecyProductComponentCreate.setAdapter(productReadAdapter);
         mTvProductConponentNum.setText(String.format(getString(R.string.tv_product_component_num), getPresenter().mComponents.size()));
-        Glide.with(this).load(getPresenter().product.getProduct_img()).placeholder(R.mipmap.def_image_loading).error(R.mipmap.def_image_loading).into(mIvThumb);
-        mTvName.setText(getPresenter().product.getProduct_name());
-        mTvSpec.setText(String.format(getString(R.string.text_product_spec), getPresenter().product.getPrice(), getPresenter().product.getForm()));
 
     }
 
     private void waterMark() {
-        mRlWaterTop.setVisibility(View.VISIBLE);
-        mLlWaterBottom.setVisibility(View.VISIBLE);
-        Bitmap bitmap=ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle);
-//        mLlWaterMiddle.setVisibility(View.GONE);
+        View mRlWaterTop = View.inflate(ProductComponentListActivity.this, R.layout.water_top, null);
+
+
+        View mLlWaterBottom = View.inflate(ProductComponentListActivity.this, R.layout.water_bottom, null);
+
+        mIvThumb = ButterKnife.findById(mRlWaterTop,R.id.iv_product_detail);
+        mTvName = ButterKnife.findById(mRlWaterTop,R.id.tv_product_detail_name);
+        mTvSpec = ButterKnife.findById(mRlWaterTop,R.id.tv_product_detail_spec);
+
+        Glide.with(this).load(getPresenter().product.getProduct_img()).placeholder(R.mipmap.def_image_loading).error(R.mipmap.def_image_loading).into(mIvThumb);
+        mTvName.setText(getPresenter().product.getProduct_name());
+        mTvSpec.setText(String.format(getString(R.string.text_product_spec), getPresenter().product.getPrice(), getPresenter().product.getForm()));
+
+        Bitmap waterMiddle = ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle);
+        Bitmap waterTop = ScreenShot.getInstance().takeScreenShotOfJustView(mRlWaterTop);
+        Bitmap waterBottom = ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterBottom);
+       Bitmap temp= ScreenShot.addBitmap(waterTop,waterMiddle);
+       Bitmap reslut= ScreenShot.addBitmap(temp,waterBottom);
         Resources res = getResources();
         Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_water);
-        bitmap = ScreenShot.waterMark(bitmap, bmp);
+        reslut = ScreenShot.waterMark(reslut, bmp);
 //        tv_test_img.setImageBitmap(bitmap);
-        ScreenShot.getInstance().saveScreenshotToPicturesFolder(this, bitmap, new ScreenShot.OnSaveListener() {
+        ScreenShot.getInstance().saveScreenshotToPicturesFolder(this, reslut, new ScreenShot.OnSaveListener() {
             @Override
             public void onPictureSaved(String path, Uri uri) {
                 LUtils.toast("图片已生成,请至相册查收!");
-                mRlWaterTop.setVisibility(View.GONE);
-                mLlWaterBottom.setVisibility(View.GONE);
             }
 
         });

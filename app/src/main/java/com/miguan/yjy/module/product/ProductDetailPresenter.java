@@ -93,7 +93,7 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
                 @Override
                 public void onNext(String result) {
                     getView().setLike(!isLike);
-                    LUtils.toast(isLike ? "取消成功" : "收藏成功");
+                    LUtils.toast(isLike ? "取消成功" : "长草成功");
                 }
             });
     }
@@ -103,7 +103,8 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     }
 
     public void getEvaluateData(String orderBy, String condition) {
-        setUserEvluate(orderBy);
+        setSort(orderBy);
+        setUserEvluate(condition);
         ProductModel.getInstance().getEvaluate(mProductId, 1, orderBy, condition).subscribe(new ServicesResponse<List<Evaluate>>() {
             @Override
             public void onNext(List<Evaluate> evaluates) {

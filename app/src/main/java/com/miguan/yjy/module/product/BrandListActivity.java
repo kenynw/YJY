@@ -45,6 +45,8 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @BindView(R.id.et_brand_list_search)
     EditText mEtSearch;
+    @BindView(R.id.tv_brand_list_clear)
+    TextView mTvClear;
 
     private BrandList mBrandList;
 
@@ -56,6 +58,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
         setToolbarTitle(R.string.text_brand_list);
         ButterKnife.bind(this);
 
+        mTvClear.setOnClickListener(v->finish());
         mEtSearch.addTextChangedListener(this);
         getPresenter().getAdapter().setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override

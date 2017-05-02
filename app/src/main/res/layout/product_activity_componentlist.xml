@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
+
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -24,66 +24,6 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 >
-
-                <RelativeLayout
-                    android:id="@+id/rl_water_top"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:padding="@dimen/spacing_normal"
-                    android:visibility="gone"
-                    >
-
-                    <ImageView
-                        android:id="@+id/iv_product_detail"
-                        android:layout_width="98dp"
-                        android:layout_height="98dp"
-                        android:layout_marginBottom="@dimen/spacing_small"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:src="@mipmap/def_image_loading"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_detail_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/iv_product_detail"
-                        android:layout_marginLeft="@dimen/spacing_normal"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:layout_toRightOf="@+id/iv_product_detail"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textColor="@color/color_sencond_title"
-                        android:textSize="@dimen/text_size_small_15"
-                        tools:text="理肤泉特安舒缓修护乳"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_detail_spec"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_product_detail_name"
-                        android:layout_below="@+id/tv_product_detail_name"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="@dimen/text_size_body_material"
-                        tools:text="￥320/180ML"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_product_date_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_product_detail_spec"
-                        android:layout_below="@+id/tv_product_detail_spec"
-                        android:layout_marginTop="15dp"
-                        android:text="@string/text_query_production_date"
-                        android:textColor="@color/f32d"
-                        android:textSize="@dimen/text_size_small_14"/>
-
-                </RelativeLayout>
-
-
                 <android.support.v4.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="10dp"/>
@@ -115,28 +55,6 @@
                     android:id="@+id/recy_product_component_create"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-
-                <LinearLayout
-                    android:id="@+id/ll_water_bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableLeft="@mipmap/ic_product_component_create"
-                        android:drawablePadding="5dp"
-                        android:gravity="center"
-                        android:paddingBottom="15dp"
-                        android:paddingTop="15dp"
-                        android:text="@string/text_test_search_component"
-                        android:textColor="@color/f32d"
-                        android:textSize="@dimen/text_size_small_15"/>
-                </LinearLayout>
 
             </LinearLayout>
 

@@ -250,15 +250,15 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         switch (checkedId) {
             case R.id.rbtn_product_high_evaluate:
                 getPresenter().setOrder("praise");
-                getPresenter().getEvaluateData(getPresenter().START_PRAISE, getPresenter().getSort());
+                getPresenter().getEvaluateData(getPresenter().getSort(), getPresenter().START_PRAISE);
                 break;
             case R.id.rbtn_product_medium_evaluate:
                 getPresenter().setOrder("middle");
-                getPresenter().getEvaluateData(getPresenter().START_MIDDLE, getPresenter().getSort());
+                getPresenter().getEvaluateData(getPresenter().getSort(),getPresenter().START_MIDDLE );
                 break;
             case R.id.rbtn_product_bad_evaluate:
                 getPresenter().setOrder("bad");
-                getPresenter().getEvaluateData(getPresenter().START_BAD, getPresenter().getSort());
+                getPresenter().getEvaluateData(getPresenter().getSort(),getPresenter().START_BAD);
                 break;
         }
     }

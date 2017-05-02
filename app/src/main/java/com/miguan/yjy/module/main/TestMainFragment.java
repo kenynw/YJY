@@ -41,6 +41,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadData();
         initFragment();
     }
 
@@ -104,7 +105,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
     @Override
     public void onResume() {
         super.onResume();
-        loadData();
+
     }
 
     public void loadData() {
