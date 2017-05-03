@@ -143,7 +143,9 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
         String format = mTvExpiration.getText().toString().contains("日") ? "yyyy年MM月dd日" : "yyyy年MM月";
 
-        getPresenter().submit(mEtName.getText().toString().trim(),
+        getPresenter().submit(
+                mEtBrand.getText().toString().trim(),
+                mEtName.getText().toString().trim(),
                 mIsSeal,
                 DateUtils.getTime(mEtOpenDate.getText().toString(), "yyyy年MM月dd日"),
                 Integer.valueOf(mTvExpTime.getText().toString().trim().replace("个月", "")),

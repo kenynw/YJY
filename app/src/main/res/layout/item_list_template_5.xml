@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f8f8f8"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_template_2_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_small"
+        android:layout_marginRight="@dimen/spacing_small"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_template_5_image"
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_template_5_image_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_large"
+            app:placeholderImage="@mipmap/def_image_template"
+            app:placeholderImageScaleType="centerCrop"
+            app:roundAsCircle="true"
+            />
+
+        <ImageView
+            android:id="@+id/iv_template_5_filter_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@mipmap/ic_filter"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+    <com.jude.exgridview.ExGridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_small"
+        android:paddingRight="@dimen/spacing_small"
+        app:grid_column="3"
+        app:grid_divider_horizontal="@dimen/spacing_normal"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_5_image_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_oval_white"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                app:roundAsCircle="true"
+                app:roundingBorderColor="@color/divPrimary"
+                app:roundingBorderPadding="@dimen/spacing_tiny"
+                app:roundingBorderWidth="1dp"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_5_filter_1"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_small"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_5_image_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_oval_white"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                app:roundAsCircle="true"
+                app:roundingBorderColor="@color/divPrimary"
+                app:roundingBorderPadding="@dimen/spacing_tiny"
+                app:roundingBorderWidth="1dp"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_5_filter_2"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_small"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_5_image_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_oval_white"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                app:roundAsCircle="true"
+                app:roundingBorderColor="@color/divPrimary"
+                app:roundingBorderPadding="@dimen/spacing_tiny"
+                app:roundingBorderWidth="1dp"
+                />
+
+            <ImageView
+                android:id="@+id/iv_template_5_filter_3"
+                android:layout_width="@dimen/widget_small"
+                android:layout_height="@dimen/widget_small"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_small"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
+
+    </com.jude.exgridview.ExGridView>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="textMultiLine"
+        android:lineSpacingMultiplier="1.2"
+        android:text="@string/text_template_5_content"
+        android:textColor="#4E2709"
+        android:textSize="15sp"
+        />
+
+</LinearLayout>

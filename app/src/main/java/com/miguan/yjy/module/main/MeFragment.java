@@ -45,8 +45,8 @@ import q.rorbin.badgeview.QBadgeView;
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
-@RequiresPresenter(MainMePresenter.class)
-public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
+@RequiresPresenter(MeFragmentPresenter.class)
+public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
 
     @BindView(R.id.ll_me_info)
     LinearLayout mLlInfo;

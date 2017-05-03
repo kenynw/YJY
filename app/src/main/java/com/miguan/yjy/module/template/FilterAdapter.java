@@ -180,7 +180,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
         void onFilterSelected(Postprocessor postprocessor);
     }
 
-    class FilterViewHolder extends BaseViewHolder<Filter> {
+    class FilterViewHolder extends BaseViewHolder<FilterType> {
 
         @BindView(R.id.dv_filter_image)
         SimpleDraweeView mDvImage;

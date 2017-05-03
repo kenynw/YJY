@@ -29,6 +29,7 @@ import q.rorbin.badgeview.QBadgeView;
 public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivity, Version> {
 
     private Badge mBadge;
+    private Badge mBadgeTest;
 
     @Override
     protected void onCreate(MainActivity view, Bundle saveState) {
@@ -45,6 +46,9 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
 
         View tab = getView().getTab(3).getCustomView();
         mBadge = new QBadgeView(getView()).setBadgeGravity(Gravity.TOP | Gravity.END).bindTarget(tab);
+
+        View tabTest = getView().getTab(2).getCustomView();
+        mBadgeTest = new QBadgeView(getView()).setBadgeGravity(Gravity.TOP | Gravity.END).bindTarget(tabTest);
     }
 
     @Override
@@ -71,6 +75,8 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
                     int count = user.getOverdueNum() + user.getUnReadNUM();
                     if (count <= 0) mBadge.hide(true);
                     else mBadge.setBadgeNumber(count);
+                    if (user.getIsComplete() == 1) mBadgeTest.hide(false);
+                    else mBadgeTest.setBadgeText("");
                 }
             });
         }

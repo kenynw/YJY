@@ -54,17 +54,6 @@ public class Template4ViewHolder extends BaseTemplateViewHolder {
 //        mUri = uri;
     }
 
-    @Override
-    public void onFilterSelected(ImageRequest request) {
-//        mController = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-//                .setImageRequest(request)
-//                .setTapToRetryEnabled(true)
-//                .setOldController(mDvImage.getController())
-//                .build();
-//
-//        mDvImage.setController(mController);
-    }
-//
 //    @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setFilter(Postprocessor processor) {
@@ -80,4 +69,8 @@ public class Template4ViewHolder extends BaseTemplateViewHolder {
 //        mDvImage.setController(mController);
     }
 
+    @Override
+    public void onFilterSelected(ImageRequest request, boolean applyAll) {
+
+    }
 }

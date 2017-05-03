@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(RegisterPresenter.class)
-public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> implements TextWatcher {
+public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> implements TextWatcher, SendValidateButton.SendValidateButtonListener {
 
     @BindView(R.id.et_account_username)
     EditText mEtUsername;
@@ -46,6 +46,7 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
 
         UserTextWatcher watcher = new UserTextWatcher(mBtnSubmit, mEtCaptcha, mEtPassword, mEtUsername);
         mEtUsername.addTextChangedListener(watcher);
+        mEtUsername.addTextChangedListener(this);
         mEtPassword.addTextChangedListener(watcher);
         mEtCaptcha.addTextChangedListener(watcher);
 
@@ -91,13 +92,26 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        boolean enabled = !TextUtils.isEmpty(mEtUsername.getText()) && TextUtils.isEmpty(mEtCaptcha.getText())
-                && TextUtils.isEmpty(mEtPassword.getText());
-        mBtnSubmit.setEnabled(enabled);
+        mBtnCaptcha.setEnabled(!TextUtils.isEmpty(mEtUsername.getText()) && !mBtnCaptcha.isDisable());
     }
 
     @Override
     public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onClickSendValidateButton() {
+        mBtnCaptcha.setEnabled(!TextUtils.isEmpty(mEtUsername.getText()));
+    }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
+    public void onTickStop() {
 
     }
 }

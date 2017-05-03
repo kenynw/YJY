@@ -16,7 +16,7 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
 
     private FrameLayout mContentParent;
 
-    private Toolbar mToolbar;
+    protected Toolbar mToolbar;
 
     private ViewExpansionDelegate mDelegate;
 

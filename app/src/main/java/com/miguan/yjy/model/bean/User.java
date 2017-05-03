@@ -59,6 +59,8 @@ public class User implements Parcelable {
      */
     private int unReadNum;
 
+    private int isComplete;
+
     public String getDry() {
         return dry;
     }
@@ -230,6 +232,14 @@ public class User implements Parcelable {
         this.unReadNum = unReadNUM;
     }
 
+    public int getIsComplete() {
+        return isComplete;
+    }
+
+    public void setIsComplete(int isComplete) {
+        this.isComplete = isComplete;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -258,6 +268,7 @@ public class User implements Parcelable {
         dest.writeString(this.compact);
         dest.writeInt(this.overdueNum);
         dest.writeInt(this.unReadNum);
+        dest.writeInt(this.isComplete);
     }
 
     protected User(Parcel in) {
@@ -282,6 +293,7 @@ public class User implements Parcelable {
         this.compact = in.readString();
         this.overdueNum = in.readInt();
         this.unReadNum = in.readInt();
+        this.isComplete = in.readInt();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

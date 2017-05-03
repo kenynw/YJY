@@ -12,7 +12,7 @@ import com.umeng.socialize.UMShareAPI;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class MainMePresenter extends BaseDataFragmentPresenter<MeFragment, User> {
+public class MeFragmentPresenter extends BaseDataFragmentPresenter<MeFragment, User> {
 
     @Override
     protected void onCreateView(MeFragment view) {

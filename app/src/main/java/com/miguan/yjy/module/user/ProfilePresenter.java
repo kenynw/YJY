@@ -22,6 +22,10 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
@@ -63,6 +67,10 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
             getView().startActivity(intent);
             UMShareAPI.get(getView()).deleteOauth(getView(), SHARE_MEDIA.WEIXIN, null);
             EventBus.getDefault().post(1);
+
+            Set<String> set = new HashSet<>();
+            set.add("logout");
+            JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);
         }
     }
 

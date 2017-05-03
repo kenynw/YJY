@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.User;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -12,7 +13,11 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
@@ -25,6 +30,11 @@ public class LoginPresenter extends Presenter<LoginActivity> {
             @Override
             public void onNext(User user) {
                 EventBus.getDefault().post("11");
+                // 调用 JPush 接口来设置别名。
+
+                Set<String> set = new HashSet<>();
+                set.add("login");
+                JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);
                 getView().finish();
             }
         });

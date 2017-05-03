@@ -43,7 +43,7 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
     }
 
     @Override
-    public void onFilterSelected(ImageRequest request) {
+    public void onFilterSelected(ImageRequest request, boolean applyAll) {
         setImageFilter(mDvImage, request);
     }
 

@@ -1,6 +1,9 @@
 package com.miguan.yjy.module.account;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,7 +19,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(ForgotPresenter.class)
-public class ForgotActivity extends ChainBaseActivity<ForgotPresenter> {
+public class ForgotActivity extends ChainBaseActivity<ForgotPresenter> implements TextWatcher, SendValidateButton.SendValidateButtonListener {
 
     @BindView(R.id.et_account_username)
     EditText mEtUsername;
@@ -42,19 +45,46 @@ public class ForgotActivity extends ChainBaseActivity<ForgotPresenter> {
 
         UserTextWatcher watcher = new UserTextWatcher(mBtnSubmit, mEtCaptcha, mEtPassword, mEtUsername);
         mEtUsername.addTextChangedListener(watcher);
+        mEtUsername.addTextChangedListener(this);
         mEtPassword.addTextChangedListener(watcher);
         mEtCaptcha.addTextChangedListener(watcher);
         if (mBtnCaptcha.isClickable()) {
             mBtnCaptcha.setTextColor(getResources().getColor(R.color.white));
-        }
+       }
+        mBtnCaptcha.setListener(this);
         mBtnCaptcha.setmEnableColor(getResources().getColor(R.color.white));
         mBtnCaptcha.setmEnableString("获取验证码");
         mBtnCaptcha.setOnClickListener(v->getPresenter().getCode());
         mBtnSubmit.setOnClickListener(v->getPresenter().updatePwd());
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
     }
 
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        mBtnCaptcha.setEnabled(!TextUtils.isEmpty(mEtUsername.getText()) && !mBtnCaptcha.isDisable());
+    }
 
+    @Override
+    public void afterTextChanged(Editable s) {
 
+    }
 
+    @Override
+    public void onClickSendValidateButton() {
+
+    }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
+    public void onTickStop() {
+        mBtnCaptcha.setEnabled(!TextUtils.isEmpty(mEtUsername.getText()));
+    }
 }

@@ -5,6 +5,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
 
     private List<ImageView> mIvFilters;
 
-    private List<Uri> mUris;
+    private SparseArray<Uri> mUris;
 
     private int mCurPosition;
 
@@ -36,7 +37,7 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
         super(parent, res);
         mDvImages = new ArrayList<>();
         mIvFilters = new ArrayList<>();
-        mUris = new ArrayList<>();
+        mUris = new SparseArray<>();
 
         if (getImageResIds().length > 0) {
             for (@IdRes int imageRes : getImageResIds()) {
@@ -81,14 +82,20 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
 
     @Override
     public void onImageLoaded(Uri uri) {
-        mUris.add(uri);
+        mUris.put(mCurPosition, uri);
         mDvImages.get(mCurPosition).setImageURI(uri);
         mIvFilters.get(mCurPosition).setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onFilterSelected(ImageRequest request) {
-        setImageFilter(mDvImages.get(mCurPosition), request);
+    public void onFilterSelected(ImageRequest request, boolean applyAll) {
+        if (applyAll) {
+            for (SimpleDraweeView dvImage : mDvImages) {
+                setImageFilter(dvImage, request);
+            }
+        } else {
+            setImageFilter(mDvImages.get(mCurPosition), request);
+        }
     }
 
 }

@@ -48,8 +48,8 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
         getView().setData(mBrandName, mOvertime);
     }
 
-    public void submit(String productName, int isSeal, String sealTime, int qualityTime, String overdueTime) {
-        ProductModel.getInstance().addRepository(mBrandId, mBrandName,
+    public void submit(String brandName, String productName, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+        ProductModel.getInstance().addRepository(mBrandId, brandName,
                 productName, isSeal, sealTime, qualityTime, overdueTime)
                 .unsafeSubscribe(new ServicesResponse<String>() {
                     @Override

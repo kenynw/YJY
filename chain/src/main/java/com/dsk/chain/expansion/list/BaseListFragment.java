@@ -12,6 +12,7 @@ import com.dsk.chain.R;
 import com.dsk.chain.bijection.ChainFragment;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 
 /**
  * Copyright (c) 2015. LiaoPeiKun Inc. All rights reserved.
@@ -70,7 +71,11 @@ public abstract class BaseListFragment<P extends BaseListFragmentPresenter, M> e
         }
         if (mListConfig.mHasItemDecoration) {
             if (mListConfig.mItemDecoration != null) mListView.addItemDecoration(mListConfig.mItemDecoration);
-            else mListView.addItemDecoration(new DividerItemDecoration(getActivity(), mListConfig.mDecorationOrientation));
+            else {
+                DividerDecoration decoration = new DividerDecoration(android.R.color.transparent, 4);
+                decoration.setDrawHeaderFooter(false);
+                mListView.addItemDecoration(decoration);
+            }
         }
     }
 

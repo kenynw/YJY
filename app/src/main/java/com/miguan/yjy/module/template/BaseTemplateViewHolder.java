@@ -15,9 +15,6 @@ import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.model.bean.Product;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import butterknife.ButterKnife;
 
 /**
@@ -27,27 +24,21 @@ import butterknife.ButterKnife;
 public abstract class BaseTemplateViewHolder extends BaseViewHolder<Product> implements OnImageSelectListener,
         FilterActivity.OnFilterSelectedListener, View.OnClickListener {
 
-    protected Map<Uri, SimpleDraweeView> mDraweeViewMap;
-
     public BaseTemplateViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         ButterKnife.bind(this, itemView);
-        mDraweeViewMap = new HashMap<>();
-    }
-
-    protected void setImageUri(Uri uri, SimpleDraweeView draweeView) {
-        draweeView.setImageURI(uri);
-        mDraweeViewMap.put(uri, draweeView);
     }
 
     protected void setImageFilter(SimpleDraweeView dv, ImageRequest request) {
-        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                .setImageRequest(request)
-                .setTapToRetryEnabled(true)
-                .setOldController(dv.getController())
-                .build();
+        if (request != null) {
+            PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                    .setImageRequest(request)
+                    .setTapToRetryEnabled(true)
+                    .setOldController(dv.getController())
+                    .build();
 
-        dv.setController(controller);
+            dv.setController(controller);
+        }
     }
 
     @Override

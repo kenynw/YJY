@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.template;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -24,8 +25,6 @@ import butterknife.ButterKnife;
 @RequiresPresenter(GenTemplatePresenter.class)
 public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter> {
 
-    public static final int REQUEST_FILTER = 0x1003;
-
     @BindView(R.id.fl_template_gen_add)
     FrameLayout mFlAdd;
 
@@ -42,6 +41,11 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         setToolbarTitle(R.string.text_title_template);
         ButterKnife.bind(this);
 
+
+        mToolbar.setNavigationOnClickListener(v -> new AlertDialog.Builder(GenTemplateActivity.this)
+                .setMessage("确认退出模板")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("退出", (dialog, which) -> finish()).show());
         mRcvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRcvList.setAdapter(getPresenter().getAdapter());
         mFlAdd.setOnClickListener(v -> {
@@ -71,8 +75,6 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         getExpansionDelegate().showProgressBar("正在生成图片");
-//        getPresenter().takeShot(mRcvList);
-//        ScreenShot.getInstance().takeScreenShotOfJustView(mRcvList, );
         ScreenShot.getInstance().takeScreenShotOfJustView(mRcvList, (path, uri) -> {
             getExpansionDelegate().hideProgressBar();
             SaveTemplatePresenter.start(GenTemplateActivity.this, path, uri);

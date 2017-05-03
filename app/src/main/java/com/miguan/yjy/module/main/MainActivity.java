@@ -95,4 +95,5 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         }
         super.onBackPressed();
     }
+
 }

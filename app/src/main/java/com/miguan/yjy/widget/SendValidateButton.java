@@ -34,18 +34,12 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
     private boolean mClickBle = true;
     private SendValidateButtonListener mListener = null;
 
-
     public int getmDisableTime() {
-
         return mDisableTime;
-
-
     }
 
     public int getmEnableColor() {
-
         return mEnableColor;
-
     }
 
     public void setEnableBgColor(int enableBgColor) {
@@ -73,16 +67,11 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
     }
 
     public String getmEnableString() {
-
         return mEnableString;
-
     }
 
     public boolean isDisable() {
-        if (mDisableTime > 0) {
-            return true;
-        }
-        return false;
+        return mDisableTime < DISABLE_TIME;
     }
 
     public void setmEnableString(String mEnableString) {
@@ -107,7 +96,7 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
 
     }
 
-    public void setmListener(SendValidateButtonListener mListener) {
+    public void setListener(SendValidateButtonListener mListener) {
 
         this.mListener = mListener;
 
@@ -214,11 +203,17 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
 //        SendValidateButton.this.setBackgroundResource(R.mipmap.ic_get_code_ok);
         this.setEnabled(true);
         mClickBle = true;
+
+        if (mListener != null) {
+            mListener.onTickStop();
+        }
     }
 
     public interface SendValidateButtonListener {
-        public void onClickSendValidateButton();
+        void onClickSendValidateButton();
 
-        public void onTick();
+        void onTick();
+
+        void onTickStop();
     }
 }

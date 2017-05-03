@@ -14,7 +14,7 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.common.RotationOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
@@ -82,7 +82,16 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
             if (mCbApplyAll.isChecked() && mPostprocessor != null) {
                 EventBus.getDefault().post(mPostprocessor);
             }
-            sFilterSelectedListener.onFilterSelected(mRequest);
+            if (mRotation > 0) {
+                mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
+                        .setLocalThumbnailPreviewsEnabled(true)
+                        .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
+                        .setProgressiveRenderingEnabled(false)
+                        .setRotationOptions(RotationOptions.forceRotation(mRotation))
+                        .setPostprocessor(mPostprocessor)
+                        .build();
+            }
+            sFilterSelectedListener.onFilterSelected(mRequest, mCbApplyAll.isChecked());
             finish();
         });
 
@@ -108,7 +117,6 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     public void onFilterSelected(Postprocessor postprocessor) {
         mPostprocessor = postprocessor;
         mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
-                .setResizeOptions(new ResizeOptions(LUtils.getScreenWidth() / 3, LUtils.getScreenHeight() / 3))
                 .setLocalThumbnailPreviewsEnabled(true)
                 .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
                 .setProgressiveRenderingEnabled(false)
@@ -124,7 +132,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     }
 
     public interface OnFilterSelectedListener {
-        void onFilterSelected(ImageRequest request);
+        void onFilterSelected(ImageRequest request, boolean applyAll);
     }
 
 }

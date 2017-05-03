@@ -45,6 +45,7 @@
             android:clickable="false"
             android:text="@string/btn_get_captcha"
             android:textColor="@color/white"
+            android:enabled="false"
             android:textSize="@dimen/text_size_body_material"
             />
         <!--android:background="@drawable/btn_round_right_primary_selector"-->
