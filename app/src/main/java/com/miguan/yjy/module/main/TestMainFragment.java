@@ -53,7 +53,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
         return frameLayout;
     }
 
-    private void initFragment() {
+    public void initFragment() {
         fm = getChildFragmentManager();
         fragments = new ArrayList<Fragment>();
         TestFragment testFragment = new TestFragment();
@@ -76,7 +76,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
         for (Fragment fragment : fragments) {
             ft.add(containerId,fragment);
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
         loadData();
 //        showFragment(0);
     }
@@ -86,7 +86,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
         Fragment fragment = fragments.get(position);
         FragmentTransaction ft = fm.beginTransaction();
         ft.show(fragment);
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     public void hideFragments() {
@@ -96,7 +96,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
                 ft.hide(fragment);
             }
         }
-        ft.commit();
+        ft.commitAllowingStateLoss();
     }
 
     public Fragment getFragment(int position) {
@@ -129,9 +129,9 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
                         nums.add(3);
                     }
                     if (nums.size() == 4) {
-                        showFragment(0);
-                    } else {
                         showFragment(1);
+                    } else {
+                        showFragment(0);
                     }
 
                 }
@@ -149,5 +149,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
             getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
     }
+
+
 
 }

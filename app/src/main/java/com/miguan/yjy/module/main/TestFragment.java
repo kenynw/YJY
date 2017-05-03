@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,10 @@ import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.test.TestGuideActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.utils.DateUtils;
-import com.umeng.socialize.utils.Log;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -287,7 +291,6 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 if (UserPreferences.getUserID() > 0) {
                     if (mMyOnTabClick != null) {
                         mMyOnTabClick.tabClickStart();
-
                     }
                 } else {
                     startToLogin();
@@ -342,7 +345,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
 
     }
 
-    private void startToLogin() {
+    public void startToLogin() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
     }
@@ -356,5 +359,26 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
     public void setMyOnTabClick(MyOnTabClick myOnTabClick) {
         mMyOnTabClick = myOnTabClick;
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setShowView(String showViewType) {
+        if (UserPreferences.getUserID() > 0) {
+            if (mMyOnTabClick != null) {
+               mMyOnTabClick.tabClickStart();
+            }
+        }
+    }
+
 
 }

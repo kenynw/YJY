@@ -9,5 +9,6 @@ import com.miguan.yjy.model.bean.Test;
  * @描述
  */
 
-public class TestMainFragmentPrensenter extends BaseDataFragmentPresenter<TestMainFragment,Test> {
+public class TestMainFragmentPrensenter extends BaseDataFragmentPresenter<TestMainFragment, Test> {
+
 }

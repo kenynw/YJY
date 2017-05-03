@@ -10,130 +10,172 @@
     android:paddingRight="@dimen/spacing_large"
     >
 
-    <FrameLayout
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@null"
+        android:gravity="center"
+        android:text="描述"
+        android:textColor="@color/textTertiary"
+        android:textSize="@dimen/text_size_small_13"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="center"
+        android:text="价格"
+        android:textColor="@color/color_sencond_title"
+        android:textSize="@dimen/text_size_small_14"/>
+    <!-- 中间图片-->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:orientation="horizontal">
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_template_1_image_0"
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:layout_gravity="center"
-            app:placeholderImage="@mipmap/def_image_template"
-            app:placeholderImageScaleType="centerCrop"
-            />
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            >
 
-        <ImageView
-            android:id="@+id/iv_template_1_filter_0"
+            <ImageView
+                android:id="@+id/iv_template_1_filter_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/spacing_normal"
+                android:src="@mipmap/ic_filter"
+                android:visibility="gone"
+                />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_template_1_image_0"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:layout_gravity="center"
+                app:placeholderImage="@mipmap/def_image_template"
+                app:placeholderImageScaleType="centerCrop"
+                />
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/dv_template_1_image_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:placeholderImage="@mipmap/def_image_template"
+                    app:placeholderImageScaleType="centerCrop"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_template_1_filter_1"
+                    android:layout_width="@dimen/widget_small"
+                    android:layout_height="@dimen/widget_small"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:src="@mipmap/ic_filter"
+                    android:visibility="gone"
+                    />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/dv_template_1_image_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    app:placeholderImage="@mipmap/def_image_template"
+                    app:placeholderImageScaleType="centerCrop"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_template_1_filter_2"
+                    android:layout_width="@dimen/widget_small"
+                    android:layout_height="@dimen/widget_small"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:src="@mipmap/ic_filter"
+                    android:visibility="gone"
+                    />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        android:text="ss"
+        android:textSize="22dp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/spacing_normal"
-            android:src="@mipmap/ic_filter"
-            android:visibility="gone"
-            />
+            android:background="@null"
+            android:text="美宝莲"
+            android:textColor="@color/f6"
+            android:textSize="@dimen/text_size_micro_12"/>
 
-    </FrameLayout>
-
-    <com.jude.exgridview.ExGridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:layout_marginTop="@dimen/spacing_small"
-        app:grid_column="3"
-        app:grid_divider_horizontal="@dimen/spacing_normal"
-        >
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
+            android:text="状前乳"
+            android:textColor="@color/f6"
+            android:textSize="@dimen/text_size_micro_12"/>
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/dv_template_1_image_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:placeholderImage="@mipmap/def_image_template"
-                app:placeholderImageScaleType="centerCrop"
-                />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/iv_template_1_filter_1"
-                android:layout_width="@dimen/widget_small"
-                android:layout_height="@dimen/widget_small"
-                android:layout_gravity="end"
-                android:layout_margin="@dimen/spacing_small"
-                android:src="@mipmap/ic_filter"
-                android:visibility="gone"
-                />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/dv_template_1_image_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:placeholderImage="@mipmap/def_image_template"
-                app:placeholderImageScaleType="centerCrop"
-                />
-
-            <ImageView
-                android:id="@+id/iv_template_1_filter_2"
-                android:layout_width="@dimen/widget_small"
-                android:layout_height="@dimen/widget_small"
-                android:layout_gravity="end"
-                android:layout_margin="@dimen/spacing_small"
-                android:src="@mipmap/ic_filter"
-                android:visibility="gone"
-                />
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/dv_template_1_image_3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:placeholderImage="@mipmap/def_image_template"
-                app:placeholderImageScaleType="centerCrop"
-                />
-
-            <ImageView
-                android:id="@+id/iv_template_1_filter_3"
-                android:layout_width="@dimen/widget_small"
-                android:layout_height="@dimen/widget_small"
-                android:layout_gravity="end"
-                android:layout_margin="@dimen/spacing_small"
-                android:src="@mipmap/ic_filter"
-                android:visibility="gone"
-                />
-
-        </FrameLayout>
-
-    </com.jude.exgridview.ExGridView>
-
-    <TextView
+    <EditText
         android:id="@+id/tv_template_0_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:lineSpacingMultiplier="1.2"
-        android:text="@string/text_template_1_content"
+        android:text="miaos"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_subhead_material"
         />
+
 
 </LinearLayout>

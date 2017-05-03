@@ -11,4 +11,5 @@ import com.miguan.yjy.model.bean.Test;
  */
 
 public class TestFragmentPrensenter extends BaseDataFragmentPresenter<TestFragment,Test> {
+
 }

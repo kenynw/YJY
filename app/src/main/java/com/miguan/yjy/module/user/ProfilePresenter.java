@@ -17,6 +17,8 @@ import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.utils.LUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 
 /**
@@ -53,11 +55,14 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
 
     public void logout() {
         UserPreferences.setUserID(0);
+
         if (UserPreferences.getUserID() <= 0) {
             Intent intent = new Intent(getView(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getView().startActivity(intent);
+            EventBus.getDefault().post(1);
         }
+
     }
 
     public void sendCaptcha(String mobile) {
@@ -133,6 +138,8 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     public void onError() {
 
     }
+
+
 
 }
 

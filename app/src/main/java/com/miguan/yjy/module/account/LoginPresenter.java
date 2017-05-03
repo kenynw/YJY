@@ -10,6 +10,8 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Map;
 
 /**
@@ -22,6 +24,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
         AccountModel.getInstance().login(username, pwd).unsafeSubscribe(new ServicesResponse<User>() {
             @Override
             public void onNext(User user) {
+                EventBus.getDefault().post("11");
                 getView().finish();
             }
         });
@@ -42,7 +45,9 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                 AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
                     @Override
                     public void onNext(User user) {
+                        EventBus.getDefault().post(1);
                         getView().finish();
+
                     }
                 });
             }
