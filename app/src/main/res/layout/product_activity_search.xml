@@ -27,14 +27,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:singleLine="true"
-                android:imeOptions="actionSearch"
                 android:drawableLeft="@mipmap/ic_product_search"
                 android:drawablePadding="8dp"
                 android:hint="tv_product_num"
+                android:imeOptions="actionSearch"
                 android:paddingBottom="8dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="8dp"
+                android:singleLine="true"
                 android:textColorHint="@color/fcd"
                 android:textSize="@dimen/text_size_small_15"/>
 
@@ -44,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:background="@mipmap/ic_product_search_del"/>
+                android:background="@mipmap/ic_product_search_del"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -79,7 +80,11 @@
             android:id="@+id/flowtag_product_all_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"></com.miguan.yjy.widget.FlowTagLayout>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            ></com.miguan.yjy.widget.FlowTagLayout>
 
         <View
             style="@style/ItemLineHeight"
@@ -109,17 +114,17 @@
 
 
         <!--<TextView-->
-            <!--android:id="@+id/tv_product_clear_his"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="15dp"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:drawableLeft="@mipmap/ic_clean"-->
-            <!--android:drawablePadding="8dp"-->
-            <!--android:text="@string/tv_product_clearhistory"-->
-            <!--android:textColor="@color/color_sencond_title"-->
-            <!--android:textSize="@dimen/text_size_small_13"/>-->
+        <!--android:id="@+id/tv_product_clear_his"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:drawableLeft="@mipmap/ic_clean"-->
+        <!--android:drawablePadding="8dp"-->
+        <!--android:text="@string/tv_product_clearhistory"-->
+        <!--android:textColor="@color/color_sencond_title"-->
+        <!--android:textSize="@dimen/text_size_small_13"/>-->
 
 
     </LinearLayout>
@@ -129,8 +134,8 @@
         android:id="@+id/ll_product_search_sencond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <TextView

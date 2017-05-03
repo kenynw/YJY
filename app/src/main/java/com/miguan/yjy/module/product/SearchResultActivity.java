@@ -3,6 +3,7 @@ package com.miguan.yjy.module.product;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -83,7 +84,9 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
-        mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
+//        mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
+        String money = "共为您找到<font color=\"#32DAC3\"> " + productList.getPageTotal()+ " </font>款产品";
+        mTvCount.setText(Html.fromHtml(money));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
         mEtKeywords.setSelection(keywords.length());
@@ -102,9 +105,11 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
+                    imgSearchCancle.setVisibility(View.GONE);
                     mLlResultFirst.setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
                 } else {
+                    imgSearchCancle.setVisibility(View.VISIBLE);
                     mLlResultFirst.setVisibility(View.GONE);
                     getPresenter().setRecommendData(s.toString());
 //                    getPresenter().onRefresh();

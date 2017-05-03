@@ -49,6 +49,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_product_his_line"
         style="@style/ItemLineHeight"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"/>

@@ -109,34 +109,34 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
+                    imgSearchCancle.setVisibility(View.GONE);
                     llSearchFirst.setVisibility(View.VISIBLE);
                     llSearchSencond.setVisibility(View.GONE);
                     tvCancel.setText(R.string.tv_cancel);
                 } else {
-//                    tvCancel.setText("搜索");
+                    imgSearchCancle.setVisibility(View.VISIBLE);
                     llSearchFirst.setVisibility(View.GONE);
-//                    llSearchSencond.setVisibility(View.VISIBLE);
                     getPresenter().onRefresh();
                 }
             }
         });
 
 
-       edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-           @Override
-           public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-               if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                   LUtils.closeKeyboard(edtSearch);
-                   gotoSearchResult(edtSearch.getText().toString().trim());
-                   return true;
-               }
-               return false;
-           }
-       });
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    LUtils.closeKeyboard(edtSearch);
+                    gotoSearchResult(edtSearch.getText().toString().trim());
+                    return true;
+                }
+                return false;
+            }
+        });
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    finish();
+                finish();
             }
         });
 
@@ -181,8 +181,8 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         mHistorySearchAdpter.addFooter(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-               View view= View.inflate(SearchActivity.this, R.layout.foot_clear_history, null);
-                return view ;
+                View view = View.inflate(SearchActivity.this, R.layout.foot_clear_history, null);
+                return view;
             }
 
             @Override
@@ -205,7 +205,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     private void clearHis() {
         llHisSearch.setVisibility(View.GONE);
 //        tvClearHis.setVisibility(View.GONE);
-       SystemPreferences.clear();
+        SystemPreferences.clear();
     }
 
     @Override
@@ -226,13 +226,14 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         intent.putExtra("productNum", productNum);
         context.startActivity(intent);
     }
-    public  void gotoSearchResult(String name) {
+
+    public void gotoSearchResult(String name) {
         LUtils.log("dsdsdfs");
-        SearchResultPresenter.start(SearchActivity.this,name,0,"");
+        SearchResultPresenter.start(SearchActivity.this, name, 0, "");
         String oldName = SystemPreferences.getSearchName();
         if (!TextUtils.isEmpty(oldName)) {
             if (!oldName.contains(name))
-                SystemPreferences.setSearchName( name + ","+oldName);
+                SystemPreferences.setSearchName(name + "," + oldName);
         } else {
             SystemPreferences.setSearchName(name + ",");
         }

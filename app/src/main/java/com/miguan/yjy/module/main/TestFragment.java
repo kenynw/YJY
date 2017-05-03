@@ -160,8 +160,14 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
             mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestPigment.setText(R.string.text_no_test);
             mTvTestResult.setText("完成度\n"+ "0/4");
-
         }
+//        ViewGroup.LayoutParams params = mLlTestWrinkle.getLayoutParams();
+//        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+//        params.height = params.width;
+//        mLlTestWrinkle.setLayoutParams(params);
+//        mLlTestOily.setLayoutParams(params);
+//        mLlTestSensitive.setLayoutParams(params);
+//        mLlTestPigment.setLayoutParams(params);
 
     }
 

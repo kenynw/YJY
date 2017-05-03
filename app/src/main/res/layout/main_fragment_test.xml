@@ -20,7 +20,7 @@
             android:maxLines="1"
             android:text="@string/text_test"
             android:textAppearance="@style/TextSubhead"
-            android:textColor="@color/f32d"
+            android:textColor="@color/color_sencond_title"
             />
 
     </android.support.v7.widget.Toolbar>

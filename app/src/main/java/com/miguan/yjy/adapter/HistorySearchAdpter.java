@@ -53,6 +53,8 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<String> {
         TextView tvProductName;
         @BindView(R.id.ll_product_his_close)
         LinearLayout llProductHisClose;
+        @BindView(R.id.view_product_his_line)
+        View viewProductHisLine;
 
         public HistorySearchViewHolder(ViewGroup parent) {
             super(parent, R.layout.product_item_history_serach);
@@ -63,6 +65,10 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<String> {
         public void setData(String data) {
             super.setData(data);
             tvProductName.setText(data);
+//            Log.e("getdataposition", mObjects.size()+"---"+getDataPosition() + "====" + getAdapterPosition() + "-------------");
+            if (mObjects.size() == getAdapterPosition()+1) {
+                viewProductHisLine.setVisibility(View.GONE);
+            }
             llProductHisClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,7 +81,7 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<String> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SearchResultPresenter.start(getContext(),data,0,"");
+                    SearchResultPresenter.start(getContext(), data, 0, "");
                 }
             });
         }
