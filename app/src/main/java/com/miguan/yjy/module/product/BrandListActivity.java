@@ -46,7 +46,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @BindView(R.id.et_brand_list_search)
     EditText mEtSearch;
-    
+
     @BindView(R.id.tv_brand_list_clear)
     TextView mTvClear;
 

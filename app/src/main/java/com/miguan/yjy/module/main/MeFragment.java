@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +39,8 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
@@ -89,6 +92,10 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
 
     private Unbinder mBind;
 
+    private Badge mBadgeMsg;
+
+    private Badge mBadgeOverdue;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,6 +111,9 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         mBtnQueryNo.setOnClickListener(v -> startActivity(new Intent(getActivity(), QueryCodeActivity.class)));
         mBtnFeedback.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeedbackActivity.class)));
         mBtnCommend.setOnClickListener(v -> showSharePopupWindow());
+
+        mBadgeMsg = createBadge(mBtnMessage);
+        mBadgeOverdue = createBadge(mBtnUsed);
 
         return view;
     }
@@ -128,6 +138,18 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textYellow)), 3, 3 + user.getRank_points().length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         mTvFaceScore.setText(spannableString);
         mTvFaceScore.setOnClickListener(v -> FaceScorePresenter.start(getActivity(), user.getRank_points()));
+
+        if (user.getOverdueNum() > 0) {
+            mBadgeOverdue.setBadgeText("");
+        } else {
+            mBadgeOverdue.hide(false);
+        }
+
+        if (user.getUnReadNUM() > 0) {
+            mBadgeMsg.setBadgeText("");
+        } else {
+            mBadgeMsg.hide(false);
+        }
     }
 
     @Override
@@ -154,6 +176,13 @@ public class MeFragment extends BaseDataFragment<MainMePresenter, User> {
     public void onDestroyView() {
         super.onDestroyView();
         mBind.unbind();
+    }
+
+    private Badge createBadge(View view) {
+        return new QBadgeView(getActivity())
+                .bindTarget(view)
+                .setBadgeGravity(Gravity.CENTER | Gravity.END)
+                .setGravityOffset(30, 0, true);
     }
 
 }

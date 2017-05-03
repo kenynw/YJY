@@ -3,21 +3,22 @@ package com.miguan.yjy.module.main;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.miguan.yjy.model.CommonModel;
-import com.miguan.yjy.model.bean.Message;
+import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.PermissionUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
 
@@ -27,12 +28,23 @@ import q.rorbin.badgeview.QBadgeView;
 
 public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivity, Version> {
 
+    private Badge mBadge;
+
     @Override
     protected void onCreate(MainActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         EventBus.getDefault().register(this);
         requestPremission();
         CommonModel.getInstance().update(getView());
+
+    }
+
+    @Override
+    protected void onCreateView(MainActivity view) {
+        super.onCreateView(view);
+
+        View tab = getView().getTab(3).getCustomView();
+        mBadge = new QBadgeView(getView()).setBadgeGravity(Gravity.TOP | Gravity.END).bindTarget(tab);
     }
 
     @Override
@@ -53,13 +65,12 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     protected void onResume() {
         super.onResume();
         if (UserPreferences.getUserID() > 0) {
-            CommonModel.getInstance().getUnreadMsg().unsafeSubscribe(new ServicesResponse<Message>() {
+            CommonModel.getInstance().getUnreadMsg().unsafeSubscribe(new ServicesResponse<User>() {
                 @Override
-                public void onNext(Message message) {
-                    int count = message.getOverdueNum() + message.getUnReadNUM();
-                    LUtils.toast("count: " + count);
-                    View view = getView().getTab(3).getCustomView();
-                    new QBadgeView(getView()).bindTarget(view).setBadgeNumber(count);
+                public void onNext(User user) {
+                    int count = user.getOverdueNum() + user.getUnReadNUM();
+                    if (count <= 0) mBadge.hide(true);
+                    else mBadge.setBadgeNumber(count);
                 }
             });
         }

@@ -49,6 +49,16 @@ public class User implements Parcelable {
     private String pigment;
     private String compact;
 
+    /**
+     * 过期产品数
+     */
+    private int overdueNum;
+
+    /**
+     * 未读消息数
+     */
+    private int unReadNum;
+
     public String getDry() {
         return dry;
     }
@@ -204,6 +214,22 @@ public class User implements Parcelable {
         this.mobile = mobile;
     }
 
+    public int getOverdueNum() {
+        return overdueNum;
+    }
+
+    public void setOverdueNum(int overdueNum) {
+        this.overdueNum = overdueNum;
+    }
+
+    public int getUnReadNUM() {
+        return unReadNum;
+    }
+
+    public void setUnReadNUM(int unReadNUM) {
+        this.unReadNum = unReadNUM;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -230,6 +256,8 @@ public class User implements Parcelable {
         dest.writeString(this.tolerance);
         dest.writeString(this.pigment);
         dest.writeString(this.compact);
+        dest.writeInt(this.overdueNum);
+        dest.writeInt(this.unReadNum);
     }
 
     protected User(Parcel in) {
@@ -252,6 +280,8 @@ public class User implements Parcelable {
         this.tolerance = in.readString();
         this.pigment = in.readString();
         this.compact = in.readString();
+        this.overdueNum = in.readInt();
+        this.unReadNum = in.readInt();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

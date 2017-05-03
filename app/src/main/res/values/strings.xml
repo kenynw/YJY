@@ -52,6 +52,7 @@
     <string name="text_remaining_day">剩余&#160;%d&#160;天</string>
     <string name="text_tms_weixin">(tmshuo520)</string>
     <string name="text_apply_all_image">将滤镜应用到模板中的所有图片</string>
+    <string name="text_commend_star">推荐指数</string>
     <string name="text_template_0_title">质地偏固态，涂开是他家招牌的滋润+油润感。\n很好涂开，但是对我来说不好吸收，会有点吃不进皮肤一直浮在眼周的感觉。\n使用感很像同为资生堂的百优，但是这个价格跟百优差非常多= =\n值得表扬的是它的鸭嘴系列，很卫生，不容易让产品发生变质。</string>
     <string name="text_template_0_product">美丽芳丝保湿修复柔润化妆水</string>
     <string name="text_template_0_price">参考价格：</string>
@@ -60,6 +61,10 @@
     <string name="text_template_1_title">YSL  唇釉   407</string>
     <string name="text_template_1_desc">YSL ROUGE PUR COUTURE THE MATS</string>
     <string name="text_template_1_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>
+    <string name="text_template_2_title">安娜柏林 橙花蜜原液</string>
+    <string name="text_template_2_content">【肤质】PO主混油，很少过敏，定居南方。\n\n【价格】这款原价20多欧，闺蜜在德国读研，趁打折的时候买的，寄回来188！！作为一个中高端有机护肤品牌，真的算得上便宜大碗了！\n\n【使用感】主打保湿美白。橙花的味道很天然，每次用都觉得非常享受！对于混油来说，秋冬用也不会很油。可能夏天用就会油了！三个月空瓶，对于改善肤色不均很有效果，感觉整个皮肤都提亮了~</string>
+    <string name="text_template_3_title">安耐晒银瓶</string>
+    <string name="text_template_3_content">小银瓶对比小金瓶更加适合脸部使用\n质地相对比较稀，挤出来更像乳液\n刚上脸的时候有油腻感\n不过很快就吸收了个人感觉更适合干皮</string>
     <string name="text_template_4_title">\n&#064;FELTON</string>
     <string name="text_template_4_desc">第四个描述</string>
     <string name="text_template_4_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>

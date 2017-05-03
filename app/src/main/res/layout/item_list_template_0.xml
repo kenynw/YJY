@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:src="@mipmap/bg_image_template_1"
+                android:src="@mipmap/bg_image_template"
                 />
 
             <ImageView
@@ -121,8 +121,8 @@
             android:background="@color/textTertiary"
             />
 
-        <TextView
-            android:id="@+id/tv_template_0_desc"
+        <EditText
+            android:inputType="textMultiLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"

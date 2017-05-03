@@ -38,7 +38,8 @@ public class GuideActivityPresenter extends Presenter<GuideActivity> {
         private int[] mResList = new int[] {
                 R.mipmap.image_guide_0,
                 R.mipmap.image_guide_1,
-                R.mipmap.image_guide_2
+                R.mipmap.image_guide_2,
+                R.mipmap.image_guide_3
         };
 
         public GuideAdapter(Context context) {

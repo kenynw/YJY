@@ -32,8 +32,8 @@ import butterknife.ButterKnife;
 @RequiresPresenter(AddRepositoryPresenter.class)
 public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresenter> {
 
-    @BindView(R.id.tv_add_repository_brand)
-    EditText mTvBrand;
+    @BindView(R.id.et_add_repository_brand)
+    EditText mEtBrand;
 
     @BindView(R.id.et_add_repository_name)
     EditText mEtName;
@@ -99,11 +99,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     public void setData(String brandName, String overtime) {
         if (TextUtils.isEmpty(brandName)) {
-            mTvBrand.setEnabled(true);
+            mEtBrand.setEnabled(true);
         } else {
-            mTvBrand.setText(brandName);
-            mTvBrand.setEnabled(false);
-            mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
+            mEtBrand.setText(brandName);
+            mEtBrand.setEnabled(false);
+            mEtBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
         }
         if (TextUtils.isEmpty(overtime)) {
             mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
@@ -133,6 +133,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
         if (TextUtils.isEmpty(mTvExpiration.getText())) {
             LUtils.toast("请选择过期时间");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mEtBrand.getText())) {
+            LUtils.toast("请输入品牌");
             return;
         }
 

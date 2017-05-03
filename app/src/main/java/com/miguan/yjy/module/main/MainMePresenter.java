@@ -23,7 +23,6 @@ public class MainMePresenter extends BaseDataFragmentPresenter<MeFragment, User>
         if (UserPreferences.getUserID() > 0) {
             UserModel.getInstance().getUserInfo().unsafeSubscribe(getSubscriber());
         }
-
     }
 
     @Override

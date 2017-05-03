@@ -28,33 +28,7 @@ public class Message implements Parcelable {
 
     private int otype;
 
-    /**
-     * 过期产品数
-     */
-    private int overdueNum;
-
-    /**
-     * 未读消息数
-     */
-    private int unReadNum;
-
     public Message() {
-    }
-
-    public int getOverdueNum() {
-        return overdueNum;
-    }
-
-    public void setOverdueNum(int overdueNum) {
-        this.overdueNum = overdueNum;
-    }
-
-    public int getUnReadNUM() {
-        return unReadNum;
-    }
-
-    public void setUnReadNUM(int unReadNUM) {
-        this.unReadNum = unReadNUM;
     }
 
     public int getId() {
@@ -137,8 +111,6 @@ public class Message implements Parcelable {
         dest.writeString(this.img);
         dest.writeInt(this.type);
         dest.writeInt(this.otype);
-        dest.writeInt(this.overdueNum);
-        dest.writeInt(this.unReadNum);
     }
 
     protected Message(Parcel in) {
@@ -150,8 +122,6 @@ public class Message implements Parcelable {
         this.img = in.readString();
         this.type = in.readInt();
         this.otype = in.readInt();
-        this.overdueNum = in.readInt();
-        this.unReadNum = in.readInt();
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {

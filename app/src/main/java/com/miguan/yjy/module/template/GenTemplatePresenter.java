@@ -6,17 +6,23 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dsk.chain.bijection.Presenter;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.library.imageprovider.ImageProvider;
+import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.utils.DateUtils;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.ScreenShot;
 
@@ -24,6 +30,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 /**
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
@@ -47,7 +55,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
     private View mFooter;
 
-    private List<TemplateViewHolder> mViewHolders;
+    private List<BaseTemplateViewHolder> mViewHolders;
 
     @Override
     protected void onCreate(GenTemplateActivity view, Bundle saveState) {
@@ -56,14 +64,16 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         mViewHolders = new ArrayList<>();
 
         mTemplate = (Template) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
-        mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
-        mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
+        if (mTemplate.mHeaderRes > 0)
+            mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
+        if (mTemplate.mFooterRes > 0)
+            mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
     }
 
     public BaseViewHolder createTemplateViewHolder(ViewGroup parent) {
-        TemplateViewHolder templateViewHolder = null;
+        BaseTemplateViewHolder templateViewHolder = null;
         try {
-            Constructor<? extends TemplateViewHolder> constructor = mTemplate.mClass.getDeclaredConstructor(ViewGroup.class);
+            Constructor<? extends BaseTemplateViewHolder> constructor = mTemplate.mClass.getDeclaredConstructor(ViewGroup.class);
             templateViewHolder = constructor.newInstance(parent);
 //            templateViewHolder.setImageProvider(mImageProvider, getView());
             mViewHolders.add(templateViewHolder);
@@ -93,15 +103,30 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
                 }
             });
-            mAdapter.addFooter(new RecyclerArrayAdapter.ItemView() {
+            if (mFooter != null) mAdapter.addFooter(new RecyclerArrayAdapter.ItemView() {
+
+                private SimpleDraweeView mDvAvatar;
+
+                private TextView mTvUsername;
+
+                private TextView mTvTime;
+
                 @Override
                 public View onCreateView(ViewGroup parent) {
                     return mFooter;
                 }
 
                 @Override
-                public void onBindView(View headerView) {
+                public void onBindView(View view) {
+                    mDvAvatar = ButterKnife.findById(view, R.id.dv_template_avatar);
+                    mTvUsername = ButterKnife.findById(view, R.id.tv_template_username);
+                    mTvTime = ButterKnife.findById(view, R.id.tv_template_time);
 
+                    if (mDvAvatar != null)
+                        mDvAvatar.setImageURI(Uri.parse(UserPreferences.getAvatar()));
+                    if (mTvUsername != null) mTvUsername.setText(UserPreferences.getUsername());
+                    if (mTvTime != null)
+                        mTvTime.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
                 }
             });
             mAdapter.add(new Product());
@@ -112,16 +137,20 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     public void takeShot(RecyclerView recyclerView) {
         int bitmapHeight = 0;
         // 测量Header
-        measureView(mHeader, recyclerView.getWidth());
-        bitmapHeight = bitmapHeight + mHeader.getHeight();
+        if (mHeader != null) {
+            measureView(mHeader, recyclerView.getWidth());
+            bitmapHeight = bitmapHeight + mHeader.getHeight();
+        }
 
         // 测量Item
         measureView(mViewHolders.get(0).itemView, recyclerView.getMeasuredWidth());
         bitmapHeight = bitmapHeight + mViewHolders.get(0).itemView.getMeasuredHeight() * mAdapter.getCount();
 
         // 测量footer
-        measureView(mFooter, recyclerView.getWidth());
-        bitmapHeight = bitmapHeight + mFooter.getHeight();
+        if (mFooter != null) {
+            measureView(mFooter, recyclerView.getWidth());
+            bitmapHeight = bitmapHeight + mFooter.getHeight();
+        }
 
         Bitmap bigBitmap = Bitmap.createBitmap(recyclerView.getMeasuredWidth(), bitmapHeight, Bitmap.Config.ARGB_8888);
         Canvas bigCanvas = new Canvas(bigBitmap);
@@ -138,7 +167,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
             iHeight += mHeader.getMeasuredHeight();
         }
 
-        for (int i=0; i<mViewHolders.size(); i++) {
+        for (int i = 0; i < mViewHolders.size(); i++) {
 //            View view = recyclerView.getChildAt(i);
 //            view.setDrawingCacheEnabled(true);
 //            view.buildDrawingCache();
@@ -146,11 +175,11 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 //            view.setDrawingCacheEnabled(false);
 //            view.destroyDrawingCache();
 
-            TemplateViewHolder holder = mViewHolders.get(i);
+            BaseTemplateViewHolder holder = mViewHolders.get(i);
 //            mAdapter.onBindViewHolder(holder, holder.getAdapterPosition());
 //            holder.itemView.setDrawingCacheEnabled(true);
 //            holder.itemView.buildDrawingCache();
-            bigCanvas.drawBitmap(holder.takeShot(recyclerView.getMeasuredWidth()), 0f, iHeight, paint);
+//            bigCanvas.drawBitmap(holder.takeShot(recyclerView.getMeasuredWidth()), 0f, iHeight, paint);
 //            holder.itemView.setDrawingCacheEnabled(false);
 //            holder.itemView.destroyDrawingCache();
             iHeight += holder.itemView.getMeasuredHeight();

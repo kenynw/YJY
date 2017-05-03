@@ -30,7 +30,7 @@
             android:textAppearance="@style/TextBody"/>
 
         <EditText
-            android:id="@+id/tv_add_repository_brand"
+            android:id="@+id/et_add_repository_brand"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"

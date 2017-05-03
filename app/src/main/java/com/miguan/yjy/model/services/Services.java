@@ -510,7 +510,7 @@ public interface Services {
      * @return
      */
     @GET("?action=noticeUnread")
-    Observable<Message> unreadMsg(
+    Observable<User> unreadMsg(
             @Query("user_id") int userId
     );
 

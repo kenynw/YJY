@@ -16,6 +16,7 @@
         >
 
         <TextView
+            android:id="@id/tv_template_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="bottom"
@@ -30,7 +31,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_template_1_username"
+            android:id="@id/tv_template_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
@@ -38,7 +39,7 @@
             />
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_template_1_avatar"
+            android:id="@id/dv_template_avatar"
             android:layout_width="@dimen/widget_small"
             android:layout_height="@dimen/widget_small"
             android:layout_marginLeft="@dimen/spacing_small"

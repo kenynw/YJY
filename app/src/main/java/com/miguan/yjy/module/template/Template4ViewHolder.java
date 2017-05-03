@@ -29,7 +29,7 @@ import butterknife.BindView;
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class Template4ViewHolder extends TemplateViewHolder {
+public class Template4ViewHolder extends BaseTemplateViewHolder {
 
     @BindView(R.id.fl_template_0_image)
     FrameLayout mFlImage;

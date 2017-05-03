@@ -103,6 +103,7 @@ public class AccountModel extends AbsModel {
     private void saveAccount(User user) {
         UserPreferences.setUserID(user.getUser_id());
         UserPreferences.setUsername(user.getUsername());
+        UserPreferences.setAvatar(user.getImg());
     }
 
     /**

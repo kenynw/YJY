@@ -30,7 +30,14 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<User> getUserInfo() {
-        return ServicesClient.getServices().userInfo(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        Observable<User> userObservable = ServicesClient.getServices().userInfo(UserPreferences.getUserID());
+        Observable<User> unreadMsg = ServicesClient.getServices().unreadMsg(UserPreferences.getUserID());
+
+        return Observable.zip(userObservable, unreadMsg, (user, user2) -> {
+            user.setOverdueNum(user2.getOverdueNum());
+            user.setUnReadNUM(user2.getUnReadNUM());
+            return user;
+        }).compose(new DefaultTransform<>());
     }
 
     /**

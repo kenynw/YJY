@@ -7,7 +7,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.bean.Message;
+import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
@@ -72,8 +72,10 @@ public class CommonModel extends AbsModel {
                 .show();
     }
 
-    public Observable<Message> getUnreadMsg() {
-        return ServicesClient.getServices().unreadMsg(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    public Observable<User> getUnreadMsg() {
+        return ServicesClient.getServices().unreadMsg(UserPreferences.getUserID())
+                .doOnNext(this::saveMsg)
+                .compose(new DefaultTransform<>());
     }
 
     public Observable<String> setMsgRead(int msgId, String type) {
@@ -94,6 +96,11 @@ public class CommonModel extends AbsModel {
             builder.append(string + "\n\r");
         }
         return new String(builder);
+    }
+
+    private void saveMsg(User user) {
+        UserPreferences.setUnreadMsg(user.getUnReadNUM());
+        UserPreferences.setOverdueNum(user.getOverdueNum());
     }
 
 }

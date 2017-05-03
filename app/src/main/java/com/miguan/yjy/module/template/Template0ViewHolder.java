@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
@@ -29,16 +28,13 @@ import butterknife.BindView;
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class Template0ViewHolder extends TemplateViewHolder {
+public class Template0ViewHolder extends BaseTemplateViewHolder {
 
     @BindView(R.id.fl_template_0_image)
     FrameLayout mFlImage;
 
     @BindView(R.id.dv_template_0_image)
     SimpleDraweeView mDvImage;
-
-    @BindView(R.id.tv_template_0_desc)
-    TextView mTvDesc;
 
     @BindView(R.id.iv_template_0_filter)
     ImageView mIvFilter;
@@ -55,7 +51,6 @@ public class Template0ViewHolder extends TemplateViewHolder {
     @Override
     public void setData(Product data) {
         mDvImage.setOnClickListener(v -> ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(this));
-        if (mController != null) mDvImage.setController(mController);
     }
 
     @Override
@@ -68,13 +63,7 @@ public class Template0ViewHolder extends TemplateViewHolder {
 
     @Override
     public void onFilterSelected(ImageRequest request) {
-        mController = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                .setImageRequest(request)
-                .setTapToRetryEnabled(true)
-                .setOldController(mDvImage.getController())
-                .build();
-
-        mDvImage.setController(mController);
+        setImageFilter(mDvImage, request);
     }
 //
 //    @Override
