@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:text="-Shrimp-"
+        android:text="@string/app_name"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_caption_material"
         />

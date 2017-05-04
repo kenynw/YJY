@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.jude.library.imageprovider.ImageProvider;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
@@ -44,7 +48,14 @@ public class Template0ViewHolder extends BaseTemplateViewHolder {
     public void onImageLoaded(Uri uri) {
         mIvFilter.setVisibility(View.VISIBLE);
         mIvFilter.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(), uri, this));
-        mDvImage.setImageURI(uri);
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
+                .setResizeOptions(new ResizeOptions(480, 640))
+                .build();
+        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                        .setImageRequest(request)
+                        .setOldController(mDvImage.getController())
+                        .build();
+        mDvImage.setController(controller);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class EncryptInterceptor implements Interceptor {
             request = request.newBuilder().method(methodStr, request.body()).url(requestUrl).build();
         }
 
-        LUtils.log(TAG, request.url().toString());
+        if (LUtils.isDebug) LUtils.log(TAG, request.url().toString());
 
         return chain.proceed(request);
     }

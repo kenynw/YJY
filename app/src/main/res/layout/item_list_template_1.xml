@@ -127,11 +127,13 @@
     </com.jude.exgridview.ExGridView>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:inputType="textMultiLine"
         android:lineSpacingMultiplier="1.2"
+        android:minWidth="88dp"
+        android:minHeight="88dp"
         android:text="@string/text_template_1_content"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_subhead_material"

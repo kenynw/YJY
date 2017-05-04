@@ -1,21 +1,18 @@
 package com.miguan.yjy.module.main;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
+import com.jude.exgridview.ExGridView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BannerPagerAdapter;
 import com.miguan.yjy.adapter.CategoryAdapter;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Home;
-import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
 
@@ -62,7 +59,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         CirclePageIndicator mIndicator;
 
         @BindView(R.id.recy_home_category)
-        RecyclerView mCategory;
+        ExGridView mCategory;
 
         private Home mHome;
 
@@ -75,10 +72,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
             View view = LayoutInflater.from(getView().getActivity()).inflate(R.layout.header_main_home, parent, false);
             ButterKnife.bind(this, view);
 
-            mCategory.setLayoutManager(new GridLayoutManager(getView().getActivity(), 4));
-            int space = (LUtils.getScreenWidth() - LUtils.dp2px(56) * 4) / 5;
-            mCategory.addItemDecoration(new SpaceDecoration(space));
-
             return view;
         }
 
@@ -89,6 +82,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
                 mIndicator.setViewPager(mHvBanner);
             }
             if (mHome.getBanner() != null && mHome.getBanner().size() <= 1) mIndicator.setVisibility(View.GONE);
+            mCategory.removeAllViews();
             mCategory.setAdapter(new CategoryAdapter(getView().getActivity(), mHome.getCategory()));
         }
 

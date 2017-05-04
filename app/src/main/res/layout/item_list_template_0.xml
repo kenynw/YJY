@@ -123,7 +123,7 @@
 
         <EditText
             android:inputType="textMultiLine"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"
             android:background="@mipmap/bg_template_0_text"
@@ -131,8 +131,31 @@
             android:padding="@dimen/spacing_normal"
             android:text="@string/text_template_0_content"
             android:textColor="@color/textSecondary"
+            android:minWidth="88dp"
             android:textSize="@dimen/text_size_subhead_material"
             />
+
+        <FrameLayout
+            android:id="@+id/fl_template_gen_delete"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_medium"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:drawableLeft="@mipmap/ic_clean"
+                android:drawablePadding="@dimen/spacing_small"
+                android:drawableStart="@mipmap/ic_clean"
+                android:gravity="center"
+                android:text="@string/text_delete"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/text_size_subhead_material"
+                />
+
+        </FrameLayout>
 
     </LinearLayout>
 

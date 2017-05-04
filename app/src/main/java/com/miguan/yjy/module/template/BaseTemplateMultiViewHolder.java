@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder {
 
-    private List<SimpleDraweeView> mDvImages;
+    protected List<SimpleDraweeView> mDvImages;
 
     private List<ImageView> mIvFilters;
 

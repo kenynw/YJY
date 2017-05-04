@@ -1,13 +1,14 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.module.product.SearchResultPresenter;
@@ -21,26 +22,43 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class CategoryAdapter extends RecyclerArrayAdapter<Category> {
+public class CategoryAdapter extends BaseAdapter {
 
-    public CategoryAdapter(Context context, List<Category> objects) {
-        super(context, objects);
+    private Context mContext;
+
+    private List<Category> mList;
+
+    public CategoryAdapter(Context context, List<Category> list) {
+        mContext = context;
+        mList = list;
     }
 
     @Override
-    public CategoryViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CategoryViewHolder(parent);
+    public int getCount() {
+        return mList.size();
     }
 
     @Override
-    public void OnBindViewHolder(BaseViewHolder holder, int position) {
-        holder.setData(mObjects.get(position));
+    public Category getItem(int position) {
+        return mList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        CategoryViewHolder holder = new CategoryViewHolder(parent);
+        holder.setData(getItem(position));
+        return holder.itemView;
     }
 
     class CategoryViewHolder extends BaseViewHolder<Category> {
 
         @BindView(R.id.iv_category_thumb)
-        ImageView mIvThumb;
+        SimpleDraweeView mIvThumb;
 
         @BindView(R.id.tv_category_name)
         TextView mTvName;
@@ -52,13 +70,7 @@ public class CategoryAdapter extends RecyclerArrayAdapter<Category> {
 
         @Override
         public void setData(Category data) {
-            Glide.with(getContext())
-                    .load(data.getCate_img())
-                    .placeholder(R.mipmap.def_image_loading)
-                    .error(R.mipmap.def_image_loading)
-                    .centerCrop()
-                    .into(mIvThumb);
-
+            mIvThumb.setImageURI(Uri.parse(data.getCate_img()));
             mTvName.setText(data.getCate_name());
             itemView.setOnClickListener(v -> SearchResultPresenter.start(getContext(), "", data.getId(), data.getCate_name()));
         }

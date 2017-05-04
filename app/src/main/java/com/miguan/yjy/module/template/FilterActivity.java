@@ -14,6 +14,7 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.common.RotationOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
@@ -85,6 +86,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
             if (mRotation > 0) {
                 mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
                         .setLocalThumbnailPreviewsEnabled(true)
+                        .setResizeOptions(new ResizeOptions(480, 640))
                         .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
                         .setProgressiveRenderingEnabled(false)
                         .setRotationOptions(RotationOptions.forceRotation(mRotation))
@@ -118,6 +120,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         mPostprocessor = postprocessor;
         mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
                 .setLocalThumbnailPreviewsEnabled(true)
+                .setResizeOptions(new ResizeOptions(480, 640))
                 .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
                 .setProgressiveRenderingEnabled(false)
                 .setPostprocessor(postprocessor)
