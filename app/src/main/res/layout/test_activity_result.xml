@@ -9,7 +9,6 @@
         android:id="@+id/toolbar"
         style="@style/TitleToolbar"
         android:background="@color/white"
-        app:navigationIcon="@mipmap/ic_back"
         >
 
         <TextView

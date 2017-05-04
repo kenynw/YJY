@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +24,6 @@ import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.module.common.WebViewActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +75,6 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -153,23 +147,6 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
             getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void showView(Integer showType) {
-        Log.e("--showView--", "测试有没有走");
-//        mLlTestAgain.performClick();
-        if (mMyOnTabClick != null) {
-            mMyOnTabClick.tabClickStart();
-        }
-    }
-
-
 
 
 }

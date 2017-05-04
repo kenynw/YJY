@@ -89,6 +89,11 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mTvCount.setText(Html.fromHtml(money));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
+        if (TextUtils.isEmpty(keywords)) {
+            imgSearchCancle.setVisibility(View.GONE);
+        } else {
+            imgSearchCancle.setVisibility(View.VISIBLE);
+        }
         mEtKeywords.setSelection(keywords.length());
         mEtKeywords.requestFocus();
         mEtKeywords.addTextChangedListener(new TextWatcher() {

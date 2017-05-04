@@ -16,6 +16,7 @@ public class UserPreferences {
     private static final String KEY_USER_SEX = "user_sex";
     private static final String KEY_UNREAD_MSG = "unread_msg"; //未读消息
     private static final String KEY_OVERDUE_NUM = "overdue_num"; //过期产品数
+    private static final String KEY_TEST_SHOW = "test_show"; //测试显示结果(未测试页面)
 
     public static int getUserID() {
         return LUtils.getPreferences().getInt(KEY_USER_ID, 0);
@@ -23,6 +24,14 @@ public class UserPreferences {
 
     public static void setUserID(int value) {
         LUtils.getPreferences().edit().putInt(KEY_USER_ID, value).apply();
+    }
+
+    public static Boolean getIsShowTest() {
+        return getBoolean(KEY_TEST_SHOW);
+    }
+
+    public static void setIsShowTest(boolean value) {
+       setBoolean(KEY_TEST_SHOW,value);
     }
 
     public static String getUsername() {
@@ -79,6 +88,14 @@ public class UserPreferences {
 
     private static void setString(String key, String value) {
         LUtils.getPreferences().edit().putString(key, value).apply();
+    }
+
+    private static Boolean getBoolean(String key) {
+        return LUtils.getPreferences().getBoolean(key, false);
+    }
+
+    private static void setBoolean(String key, Boolean value) {
+        LUtils.getPreferences().edit().putBoolean(key,value).apply();
     }
 
 }

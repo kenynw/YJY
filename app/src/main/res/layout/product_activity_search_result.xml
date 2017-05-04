@@ -55,6 +55,7 @@
             <ImageView
                 android:id="@+id/iv_product_search_clear"
                 android:layout_width="@dimen/widget_small"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:layout_gravity="end|center_vertical"
                 android:scaleType="centerInside"

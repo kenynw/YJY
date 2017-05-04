@@ -24,6 +24,7 @@ public class ProductComponentAdapter extends BaseAdapter {
     private List<ComponentTag> lists;
     private List<ComponentTag> mdatas;
 
+
     public ProductComponentAdapter(Context context, List<ComponentTag> lists) {
         this.context = context;
         this.lists = lists;
@@ -49,6 +50,7 @@ public class ProductComponentAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = View.inflate(context, R.layout.item_product_all_search, null);
         TextView textView = (TextView) convertView.findViewById(R.id.item_label_tv);
+        textView.setBackgroundResource(R.drawable.shape_gray_f5);
         textView.setText(lists.get(position).getName()+":"+lists.get(position).getId().size()+"种");
         textView.setOnClickListener(v -> {
             if (mSetOnTagClickListener != null) {

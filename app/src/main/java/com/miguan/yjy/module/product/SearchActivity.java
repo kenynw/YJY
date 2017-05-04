@@ -56,6 +56,8 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     FlowTagLayout flowtagAllSearch;
     @BindView(R.id.recy_product_history_search)
     EasyRecyclerView recyHistorySearch;
+    @BindView(R.id.recycle)
+    EasyRecyclerView mRecycle;
     @BindView(R.id.ll_product_his_search)
     LinearLayout llHisSearch;
     @BindView(R.id.ll_product_search_first)
@@ -86,7 +88,9 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new RecommedViewholder(parent);
+        RecommedViewholder recommedViewholder = new RecommedViewholder(parent, edtSearch.getText().toString());
+        recommedViewholder.setIsRecyclable(false);
+        return recommedViewholder;
     }
 
     private void initListener() {

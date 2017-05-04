@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -249,7 +250,14 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         TextView mTvDialogTitle = findById(view, R.id.tv_user_dialog_title);
         ImageView mIvDialogClose = findById(view, R.id.iv_user_dialog_close);
         TextView mTvDialogCancel = findById(view, R.id.tv_user_dialog_code_cancel);
+        TextView mEtDialogContent = findById(view, R.id.et_user_dialog_bind_content);
         TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_sure);
+        String mobile = "您已绑定<font color=\"#32DAC3\"> " +mTvMobile.getText() + " </font>";
+        mTvDialogTitle.setText(Html.fromHtml(mobile));
+        String wx = "tmshuo520";
+//        如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。
+        String content = "如您需要更换绑定手机号，请微信关注<br/>颜究院(微信号:<font color=\"#32DAC3\"> " +wx+"</font> )，<br/>联系客服进行更改。";
+        mEtDialogContent.setText(Html.fromHtml(content));
         mTvDialogCancel.setOnClickListener(v -> mPopupWindow.dismiss());
         mTvDialogSure.setOnClickListener(v -> mPopupWindow.dismiss());
         return view;

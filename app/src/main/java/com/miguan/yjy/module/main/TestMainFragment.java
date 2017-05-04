@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
             @Override
             public void tabClickStart() {
                 showFragment(1);
+                UserPreferences.setIsShowTest(false);
             }
         });
         fragments.add(testFragment);
@@ -69,6 +71,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
             @Override
             public void tabClickStart() {
                 showFragment(0);
+               UserPreferences.setIsShowTest(true);
             }
         });
         fragments.add(testResultFragment);
@@ -106,7 +109,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
     @Override
     public void onResume() {
         super.onResume();
-
+        loadData();
     }
 
     public void loadData() {
@@ -128,12 +131,12 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
                     if (!TextUtils.isEmpty(userInfo.getPigment())) {
                         nums.add(3);
                     }
-                    if (nums.size() == 4) {
+                    Log.e("nums", nums.size() + "--大小 boolean--"+UserPreferences.getIsShowTest());
+                    if (nums.size() == 4&&!UserPreferences.getIsShowTest()) {
                         showFragment(1);
                     } else {
-                        showFragment(0);
+               showFragment(0);
                     }
-
                 }
             });
         } else {

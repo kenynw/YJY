@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@mipmap/ic_product_up_select_no" android:state_pressed="true" />
+    <item android:drawable="@mipmap/ic_product_up_select_ok" android:state_pressed="true" />
 
-    <item android:drawable="@mipmap/ic_product_up_select_no" android:state_checked="true" />
+    <item android:drawable="@mipmap/ic_product_up_select_ok" android:state_checked="true" />
 
-    <item android:drawable="@mipmap/ic_product_up_select_no" android:state_focused="true" />
+    <item android:drawable="@mipmap/ic_product_up_select_ok" android:state_focused="true" />
 
-    <item android:drawable="@mipmap/ic_product_up_select_no" android:state_selected="true" />
+    <item android:drawable="@mipmap/ic_product_up_select_ok" android:state_selected="true" />
 
-    <item android:drawable="@mipmap/ic_product_down_select_ok" />
+    <item android:drawable="@mipmap/ic_product_down_select_no" />
 
 </selector>

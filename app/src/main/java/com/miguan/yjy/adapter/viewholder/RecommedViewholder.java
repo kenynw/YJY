@@ -1,6 +1,10 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -21,16 +25,28 @@ import butterknife.ButterKnife;
 public class RecommedViewholder extends BaseViewHolder<Product> {
     @BindView(R.id.tv_product_think)
     TextView tvProductThink;
+    String keyword;
 
-    public RecommedViewholder(ViewGroup parent) {
+    public RecommedViewholder(ViewGroup parent, String keyword) {
         super(parent, R.layout.item_product_recommend);
         ButterKnife.bind(this, itemView);
+        this.keyword = keyword;
+
     }
 
     @Override
     public void setData(Product data) {
         super.setData(data);
-        tvProductThink.setText(data.getName());
+        if (data.getName().contains(keyword)) {
+            //为文本框设置多种颜色
+            SpannableStringBuilder style = new SpannableStringBuilder(data.getName());
+//            getContext().getResources().getColor(R.color.f32d)
+            style.setSpan(new ForegroundColorSpan(Color.BLUE), data.getName().indexOf(keyword), data.getName().indexOf(keyword) + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvProductThink.setText(style);
+        } else {
+            tvProductThink.setText(data.getName());
+        }
+//
         tvProductThink.setOnClickListener(v -> gotoSearchResult(data.getName()));
     }
 

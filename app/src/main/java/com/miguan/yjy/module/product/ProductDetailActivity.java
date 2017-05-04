@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -177,7 +178,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         componentAdapter.setSetOnTagClickListener((v, position) ->
                 ProductReadPresenter.start(ProductDetailActivity.this, product.getComponentList(), product.getSecurity(), position)
         );
-        tvEffectInfo.setText(String.format(getString(R.string.tv_product_effect_num),product.getEffectNum()));
+        String effectNum = "主要功效成分:<font color=\"#32DAC3\"> " + product.getEffectNum() + " </font>种";
+        tvEffectInfo.setText(Html.fromHtml(effectNum));
         ProductComponentAdapter effectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
         flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
         flowtagEffectInfo.setAdapter(effectAdapter);
@@ -257,11 +259,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 break;
             case R.id.rbtn_product_medium_evaluate:
                 getPresenter().setOrder("middle");
-                getPresenter().getEvaluateData(getPresenter().getSort(),getPresenter().START_MIDDLE );
+                getPresenter().getEvaluateData(getPresenter().getSort(), getPresenter().START_MIDDLE);
                 break;
             case R.id.rbtn_product_bad_evaluate:
                 getPresenter().setOrder("bad");
-                getPresenter().getEvaluateData(getPresenter().getSort(),getPresenter().START_BAD);
+                getPresenter().getEvaluateData(getPresenter().getSort(), getPresenter().START_BAD);
                 break;
         }
     }

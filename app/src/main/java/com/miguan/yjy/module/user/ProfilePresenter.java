@@ -61,12 +61,13 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
 
     public void logout() {
         UserPreferences.setUserID(0);
+        UserPreferences.setIsShowTest(false);
         if (UserPreferences.getUserID() <= 0) {
             Intent intent = new Intent(getView(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getView().startActivity(intent);
             UMShareAPI.get(getView()).deleteOauth(getView(), SHARE_MEDIA.WEIXIN, null);
-            EventBus.getDefault().post(1);
+            EventBus.getDefault().post(true);
 
             Set<String> set = new HashSet<>();
             set.add("logout");

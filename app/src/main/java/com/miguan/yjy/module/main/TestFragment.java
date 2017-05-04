@@ -143,8 +143,10 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                     }
                     if (nums.size() == 4) {
                         mTvTestResult.setText("查看结果");
+                        mTvTestResult.setClickable(true);
                     } else {
                         mTvTestResult.setText("完成度\n" + nums.size() + "/4");
+                        mTvTestResult.setClickable(false);
                     }
 
                 }
@@ -160,6 +162,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
             mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestPigment.setText(R.string.text_no_test);
             mTvTestResult.setText("完成度\n"+ "0/4");
+            mTvTestResult.setClickable(true);
         }
 //        ViewGroup.LayoutParams params = mLlTestWrinkle.getLayoutParams();
 //        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
