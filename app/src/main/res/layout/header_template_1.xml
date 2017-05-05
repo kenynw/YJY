@@ -39,9 +39,34 @@
         <requestFocus/>
     </EditText>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:paddingLeft="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_large"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_template_1_decoration"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@mipmap/ic_template_1_decoration"
+            />
+
+    </FrameLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
         android:layout_marginTop="2dp"
         android:background="@color/black"
         />

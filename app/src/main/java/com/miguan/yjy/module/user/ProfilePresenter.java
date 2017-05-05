@@ -68,6 +68,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
             getView().startActivity(intent);
             UMShareAPI.get(getView()).deleteOauth(getView(), SHARE_MEDIA.WEIXIN, null);
             EventBus.getDefault().post(true);
+            EventBus.getDefault().post(0);
 
             Set<String> set = new HashSet<>();
             set.add("logout");

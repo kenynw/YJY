@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -29,6 +30,12 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
     @BindView(R.id.fl_template_2_image)
     FrameLayout mFlImage;
 
+    @BindView(R.id.et_template_2_title)
+    EditText mEtTitle;
+
+    @BindView(R.id.et_template_2_content)
+    EditText mEtContent;
+
     private Uri mUri;
 
     public Template2ViewHolder(ViewGroup parent) {
@@ -36,10 +43,14 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
     }
 
     @Override
-    public void setData(Product data) {
+    public void initViews(Product product) {
         mDvImage.setOnClickListener(this);
+        mDvImage.setImageURI("res:// /" + R.mipmap.def_image_template);
         mIvFilter.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(),
                 mUri, Template2ViewHolder.this));
+        mIvFilter.setVisibility(View.GONE);
+        mEtTitle.setText(R.string.text_template_2_title);
+        mEtContent.setText(R.string.text_template_2_content);
     }
 
     @Override
@@ -52,6 +63,12 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
         mDvImage.setImageURI(uri);
         mIvFilter.setVisibility(View.VISIBLE);
         mUri = uri;
+    }
+
+    @Override
+    public void hideOperatingViews() {
+        super.hideOperatingViews();
+        mIvFilter.setVisibility(View.GONE);
     }
 
 }

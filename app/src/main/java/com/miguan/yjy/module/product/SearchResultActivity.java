@@ -25,6 +25,7 @@ import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.module.user.FeedbackActivity;
+import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
 
@@ -50,10 +51,13 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @BindView(R.id.tv_product_list_count)
     TextView mTvCount;
+
     @BindView(R.id.ll_product_result_first)
     LinearLayout mLlResultFirst;
+
     @BindView(R.id.recy_product_recommend)
     EasyRecyclerView mRecyRecommend;
+
     @BindView(R.id.ll_product_result_sencond)
     LinearLayout mLlResultSencond;
 
@@ -138,20 +142,28 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         imgSearchCancle.setOnClickListener(v -> clearStr());
         mFilterPanel = new FilterPanel(this, productList.getCategroy(), productList.getEffects());
         mFilterPanel.setMenuText(1, cateName);
-        mFilterPanel.setOnItemSelectedListener((cateId, text) -> {
-            mFilterPanel.dismissMenu();
-            if (cateId > 0) {
-                getPresenter().setCateId(cateId);
+        mFilterPanel.setOnItemSelectedListener(new FilterPanel.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int cateId, String text) {
+                mFilterPanel.dismissMenu();
+                if (cateId > 0) {
+                    getPresenter().setCateId(cateId);
+                }
+                if (!TextUtils.isEmpty(text)) {
+                    getPresenter().setEffect(text);
+                    getPresenter().setType(2);
+                }
+                if (cateId <= 0 && text.isEmpty()) {
+                    getPresenter().setEffect("");
+                    getPresenter().setCateId(0);
+                }
+                getPresenter().onRefresh();
             }
-            if (!TextUtils.isEmpty(text)) {
-                getPresenter().setEffect(text);
-                getPresenter().setType(2);
+
+            @Override
+            public void onMenuCheck() {
+                LUtils.closeKeyboard(mEtKeywords);
             }
-            if (cateId <= 0 && text.isEmpty()) {
-                getPresenter().setEffect("");
-                getPresenter().setCateId(0);
-            }
-            getPresenter().onRefresh();
         });
         mIsInit = true;
     }
@@ -169,6 +181,11 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 //            }
 //        });
 
+    }
+
+    public void setCateLayoutVisibility(int visibility) {
+        mFilterPanel.setVisibility(visibility);
+        mTvCount.setVisibility(visibility);
     }
 
     private void clearStr() {

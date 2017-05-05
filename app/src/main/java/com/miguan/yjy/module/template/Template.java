@@ -1,46 +1,123 @@
 package com.miguan.yjy.module.template;
 
-import com.miguan.yjy.R;
-
-import static com.miguan.yjy.R.layout.footer_template_0;
-import static com.miguan.yjy.R.layout.footer_template_1;
-import static com.miguan.yjy.R.layout.footer_template_2;
-import static com.miguan.yjy.R.layout.footer_template_3;
-import static com.miguan.yjy.R.layout.footer_template_5;
-import static com.miguan.yjy.R.layout.header_template_0;
-import static com.miguan.yjy.R.layout.header_template_1;
-import static com.miguan.yjy.R.layout.header_template_2;
-import static com.miguan.yjy.R.layout.header_template_3;
-import static com.miguan.yjy.R.layout.header_template_5;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
- * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
+ * Copyright (c) 2017/5/5. LiaoPeiKun Inc. All rights reserved.
  */
 
-public enum Template {
+public class Template implements Parcelable {
 
-    TEMPLATE_0(0, R.mipmap.image_template_0, Template0ViewHolder.class, header_template_0, footer_template_0),
-    TEMPLATE_1(1, R.mipmap.image_template_1, Template1ViewHolder.class, header_template_1, footer_template_1),
-    TEMPLATE_2(2, R.mipmap.image_template_2, Template2ViewHolder.class, header_template_2, footer_template_2),
-    TEMPLATE_3(3, R.mipmap.image_template_3, Template3ViewHolder.class, header_template_3, footer_template_3),
-    TEMPLATE_4(4, R.mipmap.image_template_4, Template4ViewHolder.class, 0, footer_template_5),
-    TEMPLATE_5(5, R.mipmap.image_template_5, Template5ViewHolder.class, header_template_5, footer_template_5);
+    private String product;
 
-    public final int mIndex;
+    private String brand;
 
-    public final int mImageRes;
+    private String cate;
 
-    public final Class<? extends BaseTemplateViewHolder> mClass;
+    private String title;
 
-    public final int mHeaderRes;
+    private String desc;
 
-    public final int mFooterRes;
+    private String content;
 
-    Template(int index, int imageRes, Class<? extends BaseTemplateViewHolder> aClass, int headerRes, int footerRes) {
-        mIndex = index;
-        mImageRes = imageRes;
-        mClass = aClass;
-        mHeaderRes = headerRes;
-        mFooterRes = footerRes;
+    public String getProduct() {
+        return product;
     }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getCate() {
+        return cate;
+    }
+
+    public void setCate(String cate) {
+        this.cate = cate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.product);
+        dest.writeString(this.brand);
+        dest.writeString(this.cate);
+        dest.writeString(this.title);
+        dest.writeString(this.desc);
+        dest.writeString(this.content);
+    }
+
+    public Template() {
+    }
+
+    protected Template(Parcel in) {
+        this.product = in.readString();
+        this.brand = in.readString();
+        this.cate = in.readString();
+        this.title = in.readString();
+        this.desc = in.readString();
+        this.content = in.readString();
+    }
+
+    public static final Creator<Template> CREATOR = new Creator<Template>() {
+        @Override
+        public Template createFromParcel(Parcel source) {
+            return new Template(source);
+        }
+
+        @Override
+        public Template[] newArray(int size) {
+            return new Template[size];
+        }
+    };
+
+//    public static Template getTemplate(int type) {
+//        switch (type) {
+//            case 0 :
+//                break;
+//            case 1:
+//                break;
+//            case 2:
+//
+//                break;
+//        }
+//    }
+
 }

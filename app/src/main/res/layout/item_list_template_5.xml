@@ -147,7 +147,7 @@
     </com.jude.exgridview.ExGridView>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_template_5_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_normal"
@@ -160,5 +160,7 @@
         android:text="@string/text_template_5_content"
         android:textColor="#4E2709"
         android:textSize="15sp"/>
+
+    <include layout="@layout/include_template_delete" />
 
 </LinearLayout>

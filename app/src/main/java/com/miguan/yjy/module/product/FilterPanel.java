@@ -121,6 +121,10 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         dismissMenu();
 
+        if (mListener != null) {
+            mListener.onMenuCheck();
+        }
+
         if (isChecked && buttonView instanceof ToggleButton) {
             showMenu((Integer) buttonView.getTag());
             mCurrentBtn = (ToggleButton) buttonView;
@@ -166,6 +170,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
 
     public interface OnItemSelectedListener {
         void onItemSelected(int id, String text);
+        void onMenuCheck();
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
@@ -204,6 +209,10 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
             }
         }
 
+    }
+
+    public void setVisibility(int visibility) {
+        mLlFilter.setVisibility(visibility);
     }
 
 }

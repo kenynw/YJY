@@ -42,7 +42,6 @@
             android:paddingRight="@dimen/spacing_small"
             android:paddingStart="@dimen/spacing_small"
             android:textAppearance="@style/TextBody"
-            tools:text="@string/text_brand"
             />
 
     </LinearLayout>
@@ -81,7 +80,6 @@
             android:paddingRight="@dimen/spacing_small"
             android:paddingStart="@dimen/spacing_small"
             android:textAppearance="@style/TextBody"
-            android:textColorHint="@color/textSecondary"
             />
 
     </LinearLayout>

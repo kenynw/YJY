@@ -18,10 +18,12 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.utils.DateUtils;
-import com.miguan.yjy.utils.LUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -33,15 +35,17 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
     public static final String EXTRA_TEMPLATE = "template";
 
-    public static void start(Context context, Template template) {
+    public static void start(Context context, TemplateType template) {
         Intent intent = new Intent(context, GenTemplateActivity.class);
         intent.putExtra(EXTRA_TEMPLATE, template);
         context.startActivity(intent);
     }
 
-    private Template mTemplate;
+    private TemplateType mTemplate;
 
     private TemplateAdapter mAdapter;
+
+    public List<Product> mProductList;
 
     private View mHeader;
 
@@ -50,8 +54,9 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onCreate(GenTemplateActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
+        EventBus.getDefault().register(view);
 
-        mTemplate = (Template) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
+        mTemplate = (TemplateType) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
         if (mTemplate.mHeaderRes > 0)
             mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
         if (mTemplate.mFooterRes > 0)
@@ -79,6 +84,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     public TemplateAdapter getAdapter() {
         if (mAdapter == null) {
             mAdapter = new TemplateAdapter(getView());
+            mAdapter.add(new Product());
 
             if (mHeader != null) mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
                 @Override
@@ -123,9 +129,14 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
                     }
                 }
             });
-            mAdapter.add(new Product());
         }
         return mAdapter;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(getView());
     }
 
     @Override
@@ -142,8 +153,11 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
         @Override
         public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-            LUtils.log("createTemplateViewHolder");
             return createTemplateViewHolder(parent);
+        }
+
+        public List<Product> getData() {
+            return mObjects;
         }
 
     }

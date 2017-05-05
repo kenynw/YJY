@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
 
     @Override
     public void setData(Product data) {
+        super.setData(data);
         ButterKnife.apply(mDvImages, new ButterKnife.Action<SimpleDraweeView>() {
             @Override
             public void apply(@NonNull SimpleDraweeView view, int index) {
@@ -81,6 +83,16 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
     }
 
     @Override
+    public void initViews(Product product) {
+        for (SimpleDraweeView dvImage : mDvImages) {
+            dvImage.setImageURI("res:// /" + R.mipmap.def_image_template);
+        }
+        for (ImageView ivFilter : mIvFilters) {
+            ivFilter.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void onImageLoaded(Uri uri) {
         mUris.put(mCurPosition, uri);
         mDvImages.get(mCurPosition).setImageURI(uri);
@@ -98,4 +110,11 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
         }
     }
 
+    @Override
+    public void hideOperatingViews() {
+        super.hideOperatingViews();
+        for (ImageView ivFilter : mIvFilters) {
+            ivFilter.setVisibility(View.GONE);
+        }
+    }
 }

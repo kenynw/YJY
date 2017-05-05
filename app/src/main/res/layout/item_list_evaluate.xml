@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:paddingBottom="@dimen/spacing_large"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="@dimen/spacing_large"
@@ -25,12 +24,12 @@
         android:id="@+id/ll_evaluate_user_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_alignTop="@+id/dv_evaluate_avatar"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_toEndOf="@+id/dv_evaluate_avatar"
         android:layout_toRightOf="@+id/dv_evaluate_avatar"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -122,6 +121,11 @@
             android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_body_material"
             tools:text="查看全文"
+            />
+
+        <View
+            style="@style/ItemLineHeight"
+            android:layout_marginTop="20dp"
             />
 
     </LinearLayout>

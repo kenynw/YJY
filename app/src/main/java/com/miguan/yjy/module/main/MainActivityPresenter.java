@@ -55,6 +55,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 //        getView().setCurrentTab(0);
+        loadUnread();
     }
 
     private void requestPremission() {
@@ -68,6 +69,10 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     @Override
     protected void onResume() {
         super.onResume();
+        loadUnread();
+    }
+
+    private void loadUnread() {
         if (UserPreferences.getUserID() > 0) {
             CommonModel.getInstance().getUnreadMsg().unsafeSubscribe(new ServicesResponse<User>() {
                 @Override
@@ -79,6 +84,9 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
                     else mBadgeTest.setBadgeText("");
                 }
             });
+        } else {
+            mBadgeTest.hide(false);
+            mBadge.hide(false);
         }
     }
 

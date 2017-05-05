@@ -32,6 +32,7 @@
             style="@style/BaseInputLarge"
             android:background="@drawable/bg_round_stroke_div"
             android:hint="@string/hint_mobile"
+            android:inputType="number"
             android:textColor="@color/textPrimary"
             />
 

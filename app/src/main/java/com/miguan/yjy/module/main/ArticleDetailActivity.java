@@ -27,6 +27,7 @@ import com.miguan.yjy.module.common.WebViewOB;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
  */
@@ -119,6 +120,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
     public ListConfig getListConfig() {
         return super.getListConfig()
                 .setContainerEmptyRes(R.layout.empty_evaluate_list)
+                .hasItemDecoration(false)
                 .setContainerLayoutRes(R.layout.main_activity_article_detail);
     }
 

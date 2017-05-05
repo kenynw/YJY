@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        />
+
+    <FrameLayout
+        android:id="@+id/fl_template_delete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_medium"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:drawableLeft="@mipmap/ic_clean"
+            android:drawablePadding="@dimen/spacing_small"
+            android:drawableStart="@mipmap/ic_clean"
+            android:gravity="center"
+            android:text="@string/text_delete"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

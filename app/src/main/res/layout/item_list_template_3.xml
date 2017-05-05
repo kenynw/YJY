@@ -119,6 +119,7 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/et_template_3_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_large"
@@ -131,6 +132,7 @@
         />
 
     <EditText
+        android:id="@+id/et_template_3_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_normal"
@@ -145,5 +147,7 @@
         android:textColor="@color/textTertiary"
         android:textSize="15sp"
         />
+
+    <include layout="@layout/include_template_delete" />
 
 </LinearLayout>

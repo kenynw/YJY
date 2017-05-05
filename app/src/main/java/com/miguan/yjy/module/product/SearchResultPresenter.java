@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.adapter.ProductRecommentAdapter;
@@ -14,6 +13,9 @@ import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.services.ServicesResponse;
 
 import java.util.List;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * @作者 cjh
@@ -66,6 +68,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
         ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mType, mCateId, mEffect, 1)
                 .map(product -> {
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
+                    getView().setCateLayoutVisibility(product.getData().size() > 0 ? VISIBLE : GONE);
                     return product.getData();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
@@ -96,9 +99,9 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
             @Override
             public void onNext(List<Product> products) {
                 if (products.size() == 0) {
-                    getView().mLlResultSencond.setVisibility(View.GONE);
+                    getView().mLlResultSencond.setVisibility(GONE);
                 } else {
-                    getView().mLlResultSencond.setVisibility(View.VISIBLE);
+                    getView().mLlResultSencond.setVisibility(VISIBLE);
                     getView().mRecyRecommend.setLayoutManager(new LinearLayoutManager(getView(), LinearLayoutManager.VERTICAL, false));
                     getView().mRecyRecommend.setAdapter(new ProductRecommentAdapter(getView(), products,s.toString()));
                 }

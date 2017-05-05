@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
                 app:contentPadding="@dimen/spacing_normal"
                 >
 
@@ -58,6 +59,7 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:background="@color/white"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
                 app:contentPadding="@dimen/spacing_normal"
                 >
 
@@ -118,6 +120,7 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:background="@color/white"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
                 app:contentPadding="@dimen/spacing_normal"
                 >
 
@@ -152,6 +155,7 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:background="@color/white"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="0dp"
                 app:contentPadding="@dimen/spacing_normal"
                 >
 

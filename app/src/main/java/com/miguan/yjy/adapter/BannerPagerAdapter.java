@@ -44,8 +44,8 @@ public class BannerPagerAdapter extends PagerAdapter {
         Banner banner = mBannerList.get(position);
         Glide.with(mContext)
                 .load(banner.getImg())
-                .placeholder(R.mipmap.def_image_loading)
-                .error(R.mipmap.def_image_loading)
+                .placeholder(R.mipmap.def_image_banner)
+                .error(R.mipmap.def_image_banner)
                 .centerCrop()
                 .into(iv);
 
