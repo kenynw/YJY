@@ -54,7 +54,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        getView().setCurrentTab(0);
+//        getView().setCurrentTab(0);
     }
 
     private void requestPremission() {

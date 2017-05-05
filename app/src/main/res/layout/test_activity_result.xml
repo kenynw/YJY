@@ -25,7 +25,6 @@
     </android.support.v7.widget.Toolbar>
 
 
-
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -323,7 +322,13 @@
                 android:textSize="@dimen/text_size_small_15"
                 android:textStyle="bold"/>
 
-            <!--<View style="@style/ItemLineHeight"/>-->
+            <View
+                style="@style/ItemLineHeight"
+                />
+            <View
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
 
             <com.jude.easyrecyclerview.EasyRecyclerView
                 android:id="@+id/recycle"

@@ -161,9 +161,9 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
             mTvTestWrinkle.setText(R.string.text_no_test);
             mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle);
 
-            mTvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
+            mLlTestOily.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestOily.setText(R.string.text_no_test);
-            mTvTestOily.setBackgroundResource(R.mipmap.ic_test_oily);
+            mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily);
 
             mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestSensitive.setText(R.string.text_no_test);

@@ -66,6 +66,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
                 position = tab.getPosition();
                 TestModel.getInstantce().getSkinRecommendList(categoryList.get(position).getId(), 1).
                         unsafeSubscribe(getPresenter().getRefreshSubscriber());
+                mTvTestRecommend.setText(categoryList.get(position).getCopy());
             }
 
             @Override

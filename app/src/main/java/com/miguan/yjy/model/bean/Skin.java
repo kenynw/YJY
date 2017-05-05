@@ -19,8 +19,16 @@ public class Skin implements Parcelable {
     private List<Product> data;
     private String id;
     private String copy;
+    private String description;
 
-//      "category_id": "7",
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    //      "category_id": "7",
 //              "category_name": "化妆水",
 //              "data":
 
@@ -83,44 +91,6 @@ public class Skin implements Parcelable {
 
     public Skin() {
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.letter);
-        dest.writeString(this.category_id);
-        dest.writeString(this.category_name);
-        dest.writeTypedList(this.data);
-        dest.writeString(this.id);
-        dest.writeString(this.copy);
-    }
-
-    protected Skin(Parcel in) {
-        this.name = in.readString();
-        this.letter = in.readString();
-        this.category_id = in.readString();
-        this.category_name = in.readString();
-        this.data = in.createTypedArrayList(Product.CREATOR);
-        this.id = in.readString();
-        this.copy = in.readString();
-    }
-
-    public static final Creator<Skin> CREATOR = new Creator<Skin>() {
-        @Override
-        public Skin createFromParcel(Parcel source) {
-            return new Skin(source);
-        }
-
-        @Override
-        public Skin[] newArray(int size) {
-            return new Skin[size];
-        }
-    };
 
     public static boolean matchValue(int value, int star, int end) {
         for (int i = star; i < end; i++) {
@@ -186,4 +156,43 @@ public class Skin implements Parcelable {
         return "";
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.letter);
+        dest.writeString(this.category_id);
+        dest.writeString(this.category_name);
+        dest.writeTypedList(this.data);
+        dest.writeString(this.id);
+        dest.writeString(this.copy);
+        dest.writeString(this.description);
+    }
+
+    protected Skin(Parcel in) {
+        this.name = in.readString();
+        this.letter = in.readString();
+        this.category_id = in.readString();
+        this.category_name = in.readString();
+        this.data = in.createTypedArrayList(Product.CREATOR);
+        this.id = in.readString();
+        this.copy = in.readString();
+        this.description = in.readString();
+    }
+
+    public static final Creator<Skin> CREATOR = new Creator<Skin>() {
+        @Override
+        public Skin createFromParcel(Parcel source) {
+            return new Skin(source);
+        }
+
+        @Override
+        public Skin[] newArray(int size) {
+            return new Skin[size];
+        }
+    };
 }
