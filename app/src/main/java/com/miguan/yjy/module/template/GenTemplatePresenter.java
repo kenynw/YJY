@@ -63,6 +63,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         try {
             Constructor<? extends BaseTemplateViewHolder> constructor = mTemplate.mClass.getDeclaredConstructor(ViewGroup.class);
             templateViewHolder = constructor.newInstance(parent);
+            getView().getViewHolders().add(templateViewHolder);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -78,7 +79,8 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     public TemplateAdapter getAdapter() {
         if (mAdapter == null) {
             mAdapter = new TemplateAdapter(getView());
-            mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+
+            if (mHeader != null) mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
                 @Override
                 public View onCreateView(ViewGroup parent) {
                     return mHeader;
@@ -143,7 +145,6 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
             LUtils.log("createTemplateViewHolder");
             return createTemplateViewHolder(parent);
         }
-
 
     }
 }

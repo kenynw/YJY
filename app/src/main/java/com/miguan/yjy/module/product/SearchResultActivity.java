@@ -177,6 +177,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @Override
     public void onBackPressed() {
-        if (!mFilterPanel.dismissMenu()) super.onBackPressed();
+        if (mFilterPanel != null && !mFilterPanel.dismissMenu()) super.onBackPressed();
     }
 }

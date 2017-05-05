@@ -59,6 +59,7 @@
         android:layout_height="56dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
+        android:layout_marginTop="1dp"
         >
 
         <LinearLayout
@@ -76,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
-                android:src="@mipmap/ic_star"
+                android:src="@mipmap/ic_article_star_normal"
                 />
 
             <TextView

@@ -13,8 +13,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:background="@drawable/shape_gray_white_5"
         android:orientation="vertical"
         android:padding="15dp">
@@ -26,7 +24,7 @@
             android:layout_gravity="center"
             android:background="@null"
             android:gravity="center"
-            android:text="描述"
+            android:text="@string/text_template_4_product"
             android:textColor="@color/textTertiary"
             android:textSize="@dimen/text_size_small_13"/>
 
@@ -38,15 +36,16 @@
             android:layout_marginTop="10dp"
             android:background="@null"
             android:gravity="center"
-            android:text="价格"
+            android:text="@string/text_template_4_price"
             android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_14"/>
-        <!-- 中间图片-->
+            android:textSize="@dimen/text_size_small_14"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:baselineAligned="false"
             android:orientation="horizontal"
             >
 
@@ -56,27 +55,25 @@
                 android:layout_weight="2"
                 >
 
-                <ImageView
-                    android:id="@+id/iv_template_1_filter_0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="@dimen/spacing_normal"
-                    android:src="@mipmap/ic_filter"
-                    android:visibility="gone"
-                    />
-
                 <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/dv_template_1_image_0"
+                    android:id="@+id/dv_template_4_image_0"
                     android:layout_width="match_parent"
-                    android:layout_height="256dp"
+                    android:layout_height="120dp"
                     android:layout_gravity="center"
                     app:placeholderImage="@mipmap/def_image_template"
                     app:placeholderImageScaleType="centerCrop"
                     />
 
-            </FrameLayout>
+                <ImageView
+                    android:id="@+id/iv_template_4_filter_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:src="@mipmap/ic_filter"
+                    />
 
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -142,7 +139,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
     </LinearLayout>
@@ -155,7 +151,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:background="@null"
-        android:text="ss"
+        android:text="@string/text_template_4_title"
         android:textSize="22dp"
         android:textStyle="bold"/>
 
@@ -170,7 +166,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_gray_f5"
             android:padding="10dp"
-            android:text="美宝莲"
+            android:text="@string/text_template_4_brand"
             android:textColor="@color/f6"
             android:textSize="@dimen/text_size_micro_12"/>
 
@@ -189,13 +185,13 @@
 
     <EditText
         android:id="@+id/et_template_4_desc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:background="@null"
         android:lineSpacingMultiplier="1.2"
-        android:text="miaos"
+        android:text="@string/text_template_4_content"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_subhead_material"
         />

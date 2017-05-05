@@ -41,6 +41,7 @@
             android:id="@+id/btn_account_captcha"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:background="@drawable/btn_round_right_primary_selector"
             android:layout_weight="1"
             android:clickable="false"
             android:text="@string/btn_get_captcha"

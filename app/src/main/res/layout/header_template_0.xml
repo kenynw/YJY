@@ -33,14 +33,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@null"
             android:gravity="center"
             android:inputType="textMultiLine"
-            android:background="@null"
-            android:text="眼霜合集"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:minWidth="88dp"
+            android:text="@string/text_template_0_header"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_large_material"
             >
-            <requestFocus />
+
+            <requestFocus/>
         </EditText>
 
     </FrameLayout>

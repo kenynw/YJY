@@ -107,7 +107,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
 
     public void setStar(boolean isStar) {
         mIsStar = isStar;
-        mIvStar.setImageResource(isStar ? R.mipmap.ic_product_start_select_ok : R.mipmap.ic_star);
+        mIvStar.setImageResource(isStar ? R.mipmap.ic_article_star_pressed : R.mipmap.ic_article_star_normal);
     }
 
     @Override

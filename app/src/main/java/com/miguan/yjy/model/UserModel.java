@@ -37,7 +37,9 @@ public class UserModel extends AbsModel {
             user.setOverdueNum(user2.getOverdueNum());
             user.setUnReadNUM(user2.getUnReadNUM());
             return user;
-        }).compose(new DefaultTransform<>());
+        })
+                .doOnNext(user -> UserPreferences.setAvatar(user.getImg()))
+                .compose(new DefaultTransform<>());
     }
 
     /**

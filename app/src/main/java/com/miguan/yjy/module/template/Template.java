@@ -11,7 +11,6 @@ import static com.miguan.yjy.R.layout.header_template_0;
 import static com.miguan.yjy.R.layout.header_template_1;
 import static com.miguan.yjy.R.layout.header_template_2;
 import static com.miguan.yjy.R.layout.header_template_3;
-import static com.miguan.yjy.R.layout.header_template_4;
 import static com.miguan.yjy.R.layout.header_template_5;
 
 /**
@@ -24,7 +23,7 @@ public enum Template {
     TEMPLATE_1(1, R.mipmap.image_template_1, Template1ViewHolder.class, header_template_1, footer_template_1),
     TEMPLATE_2(2, R.mipmap.image_template_2, Template2ViewHolder.class, header_template_2, footer_template_2),
     TEMPLATE_3(3, R.mipmap.image_template_3, Template3ViewHolder.class, header_template_3, footer_template_3),
-    TEMPLATE_4(4, R.mipmap.image_template_4, Template4ViewHolder.class, header_template_4, 0),
+    TEMPLATE_4(4, R.mipmap.image_template_4, Template4ViewHolder.class, 0, footer_template_5),
     TEMPLATE_5(5, R.mipmap.image_template_5, Template5ViewHolder.class, header_template_5, footer_template_5);
 
     public final int mIndex;

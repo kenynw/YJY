@@ -42,6 +42,11 @@ public abstract class BaseTemplateViewHolder extends BaseViewHolder<Product> imp
     }
 
     @Override
+    public void setData(Product data) {
+
+    }
+
+    @Override
     public void onClick(View v) {
         ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(this);
     }

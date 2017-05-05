@@ -6,14 +6,21 @@
     android:background="@mipmap/bg_template_3_header"
     >
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="防晒霜小测评"
+        android:layout_marginTop="36dp"
+        android:background="@null"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minWidth="88dp"
+        android:text="@string/text_template_3_header"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_title_material"
-        android:layout_marginTop="36dp"
-        />
+        >
+
+        <requestFocus/>
+    </EditText>
 
 </FrameLayout>
