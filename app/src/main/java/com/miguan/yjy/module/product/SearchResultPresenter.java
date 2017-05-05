@@ -11,6 +11,7 @@ import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                     return product.getData();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
+        LUtils.closeKeyboard(getView().mEtKeywords);
     }
 
     @Override

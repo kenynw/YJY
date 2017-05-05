@@ -91,6 +91,7 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         if (System.currentTimeMillis() - mPressedTime > 2000) {
             LUtils.toast("再按一次退出颜究院");
             mPressedTime = System.currentTimeMillis();
+            UserPreferences.setIsShowTest(false);
             return;
         }
         super.onBackPressed();

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +30,7 @@ import java.util.List;
  * @描述
  */
 @RequiresPresenter(TestFragmentPrensenter.class)
-public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensenter, Test>{
+public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensenter, Test> {
     int type = 0;
     private FragmentManager fm;
     private ArrayList<Fragment> fragments;
@@ -71,13 +70,13 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
             @Override
             public void tabClickStart() {
                 showFragment(0);
-               UserPreferences.setIsShowTest(true);
+                UserPreferences.setIsShowTest(true);
             }
         });
         fragments.add(testResultFragment);
         FragmentTransaction ft = fm.beginTransaction();
         for (Fragment fragment : fragments) {
-            ft.add(containerId,fragment);
+            ft.add(containerId, fragment);
         }
         ft.commitAllowingStateLoss();
         loadData();
@@ -119,23 +118,27 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
                 public void onNext(User user) {
                     nums.clear();
                     userInfo = user;
-                    if (!TextUtils.isEmpty(userInfo.getCompact())) {
+                    if (userInfo.getCompact()!=0) {
+                        Log.e("userInfo.getCompact()", userInfo.getCompact()+"------");
                         nums.add(0);
                     }
-                    if (!TextUtils.isEmpty(userInfo.getDry())) {
+                    if (userInfo.getDry()!=0) {
                         nums.add(1);
+                        Log.e("userInfo.getDry()", userInfo.getDry()+"------");
                     }
-                    if (!TextUtils.isEmpty(userInfo.getTolerance())) {
+                    if (userInfo.getTolerance()!=0) {
                         nums.add(2);
+                        Log.e("userInfo.getTolerance()", userInfo.getTolerance()+"------");
                     }
-                    if (!TextUtils.isEmpty(userInfo.getPigment())) {
+                    if (userInfo.getPigment()!=0) {
                         nums.add(3);
+                        Log.e("userInfo.getPigment()", userInfo.getPigment()+"------");
                     }
-                    Log.e("nums", nums.size() + "--大小 boolean--"+UserPreferences.getIsShowTest());
-                    if (nums.size() == 4&&!UserPreferences.getIsShowTest()) {
+                    Log.e("nums", nums.size() + "--大小 boolean--" + UserPreferences.getIsShowTest());
+                    if (nums.size() == 4 && !UserPreferences.getIsShowTest()) {
                         showFragment(1);
                     } else {
-               showFragment(0);
+                        showFragment(0);
                     }
                 }
             });
@@ -152,7 +155,6 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
             getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
     }
-
 
 
 }

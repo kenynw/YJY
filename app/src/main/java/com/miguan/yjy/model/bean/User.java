@@ -44,10 +44,10 @@ public class User implements Parcelable {
 
     private String mobile;
 
-    private String dry;
-    private String tolerance;
-    private String pigment;
-    private String compact;
+    private int dry;
+    private int tolerance;
+    private int pigment;
+    private int compact;
 
     /**
      * 过期产品数
@@ -61,35 +61,35 @@ public class User implements Parcelable {
 
     private int isComplete;
 
-    public String getDry() {
+    public int getDry() {
         return dry;
     }
 
-    public void setDry(String dry) {
+    public void setDry(int dry) {
         this.dry = dry;
     }
 
-    public String getTolerance() {
+    public int getTolerance() {
         return tolerance;
     }
 
-    public void setTolerance(String tolerance) {
+    public void setTolerance(int tolerance) {
         this.tolerance = tolerance;
     }
 
-    public String getPigment() {
+    public int getPigment() {
         return pigment;
     }
 
-    public void setPigment(String pigment) {
+    public void setPigment(int pigment) {
         this.pigment = pigment;
     }
 
-    public String getCompact() {
+    public int getCompact() {
         return compact;
     }
 
-    public void setCompact(String compact) {
+    public void setCompact(int compact) {
         this.compact = compact;
     }
 
@@ -262,10 +262,10 @@ public class User implements Parcelable {
         dest.writeString(this.province);
         dest.writeString(this.rank_points);
         dest.writeString(this.mobile);
-        dest.writeString(this.dry);
-        dest.writeString(this.tolerance);
-        dest.writeString(this.pigment);
-        dest.writeString(this.compact);
+        dest.writeInt(this.dry);
+        dest.writeInt(this.tolerance);
+        dest.writeInt(this.pigment);
+        dest.writeInt(this.compact);
         dest.writeInt(this.overdueNum);
         dest.writeInt(this.unReadNum);
         dest.writeInt(this.isComplete);
@@ -287,10 +287,10 @@ public class User implements Parcelable {
         this.province = in.readString();
         this.rank_points = in.readString();
         this.mobile = in.readString();
-        this.dry = in.readString();
-        this.tolerance = in.readString();
-        this.pigment = in.readString();
-        this.compact = in.readString();
+        this.dry = in.readInt();
+        this.tolerance = in.readInt();
+        this.pigment = in.readInt();
+        this.compact = in.readInt();
         this.overdueNum = in.readInt();
         this.unReadNum = in.readInt();
         this.isComplete = in.readInt();

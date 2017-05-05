@@ -24,6 +24,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
 
@@ -131,6 +132,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     getPresenter().onRefresh();
+                    gotoSearchResult(mEtKeywords.getText().toString().trim());
                     mLlResultFirst.setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
                     return true;
@@ -190,6 +192,17 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     private void clearStr() {
         mEtKeywords.setText("");
+    }
+
+    public void gotoSearchResult(String name) {
+        SearchResultPresenter.start(SearchResultActivity.this, name, 0, "");
+        String oldName = SystemPreferences.getSearchName();
+        if (!TextUtils.isEmpty(oldName)) {
+            if (!oldName.contains(name))
+                SystemPreferences.setSearchName(name + "," + oldName);
+        } else {
+            SystemPreferences.setSearchName(name + ",");
+        }
     }
 
     @Override

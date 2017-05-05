@@ -121,28 +121,28 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 public void onNext(User user) {
                     nums.clear();
                     userInfo = user;
-                    if (!TextUtils.isEmpty(userInfo.getCompact())) {
+                    if (userInfo.getCompact()!=0) {
                         mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                        mTvTestWrinkle.setText(Skin.getCompact(Integer.parseInt(userInfo.getCompact())));
+                        mTvTestWrinkle.setText(Skin.getCompact(userInfo.getCompact()));
                         mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
                         nums.add(0);
                     }
-                    if (!TextUtils.isEmpty(userInfo.getDry())) {
+                    if (userInfo.getDry()!=0) {
                         mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(1);
-                        mTvTestOily.setText(Skin.getDryOil(Integer.parseInt(userInfo.getDry())));
+                        mTvTestOily.setText(Skin.getDryOil(userInfo.getDry()));
                         mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
                     }
-                    if (!TextUtils.isEmpty(userInfo.getTolerance())) {
+                    if (userInfo.getTolerance()!=0) {
                         mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(2);
-                        mTvTestSensitive.setText(Skin.getTolerance(Integer.parseInt(userInfo.getTolerance())));
+                        mTvTestSensitive.setText(Skin.getTolerance(userInfo.getTolerance()));
                         mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
                     }
-                    if (!TextUtils.isEmpty(userInfo.getPigment())) {
+                    if (userInfo.getPigment()!=0) {
                         mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         nums.add(3);
-                        mTvTestPigment.setText(Skin.getPigment(Integer.parseInt(userInfo.getPigment())));
+                        mTvTestPigment.setText(Skin.getPigment(userInfo.getPigment()));
                         mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
                     }
                     if (nums.size() == 4) {

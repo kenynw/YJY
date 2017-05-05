@@ -230,6 +230,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Product product = getPresenter().getData();
+
         new SharePopupWindow.Builder(this)
                 .setUrl(product.getLinkUrl())
                 .setTitle(product.getProduct_name())
