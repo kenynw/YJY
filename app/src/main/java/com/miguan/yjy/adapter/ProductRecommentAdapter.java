@@ -1,7 +1,10 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -25,9 +28,11 @@ import butterknife.ButterKnife;
 
 public class ProductRecommentAdapter extends RecyclerArrayAdapter<Product> {
 
+    private String keyword;
 
-    public ProductRecommentAdapter(Context context, List<Product> objects) {
+    public ProductRecommentAdapter(Context context, List<Product> objects, String keyword) {
         super(context, objects);
+        this.keyword = keyword;
     }
 
     @Override
@@ -37,7 +42,9 @@ public class ProductRecommentAdapter extends RecyclerArrayAdapter<Product> {
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ProductRecommedViewholder(parent);
+        ProductRecommedViewholder recommedViewholder = new ProductRecommedViewholder(parent);
+        recommedViewholder.setIsRecyclable(false);
+        return recommedViewholder;
     }
 
     public class ProductRecommedViewholder extends BaseViewHolder<Product> {
@@ -52,12 +59,19 @@ public class ProductRecommentAdapter extends RecyclerArrayAdapter<Product> {
         @Override
         public void setData(Product data) {
             super.setData(data);
-            tvProductThink.setText(data.getName());
+            if (data.getName().contains(keyword)) {
+                //为文本框设置多种颜色
+                SpannableStringBuilder style = new SpannableStringBuilder(data.getName());
+                style.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.f32d)), data.getName().indexOf(keyword), data.getName().indexOf(keyword) + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tvProductThink.setText(style);
+            } else {
+                tvProductThink.setText(data.getName());
+            }
             tvProductThink.setOnClickListener(v -> gotoSearchResult(data.getName()));
         }
 
-        public  void gotoSearchResult(String name) {
-            SearchResultPresenter.start(getContext(),name,0,"");
+        public void gotoSearchResult(String name) {
+            SearchResultPresenter.start(getContext(), name, 0, "");
             String oldName = SystemPreferences.getSearchName();
             if (!TextUtils.isEmpty(oldName)) {
                 if (!oldName.contains(name))

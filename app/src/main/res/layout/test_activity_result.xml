@@ -323,7 +323,7 @@
                 android:textSize="@dimen/text_size_small_15"
                 android:textStyle="bold"/>
 
-            <View style="@style/ItemLineHeight"/>
+            <!--<View style="@style/ItemLineHeight"/>-->
 
             <com.jude.easyrecyclerview.EasyRecyclerView
                 android:id="@+id/recycle"

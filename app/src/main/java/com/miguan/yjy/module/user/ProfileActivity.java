@@ -256,7 +256,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         mTvDialogTitle.setText(Html.fromHtml(mobile));
         String wx = "tmshuo520";
 //        如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。
-        String content = "如您需要更换绑定手机号，请微信关注<br/>颜究院(微信号:<font color=\"#32DAC3\"> " +wx+"</font> )，<br/>联系客服进行更改。";
+        String content = "如您需要更换绑定手机号，请微信关注<br/>颜究院(微信号:<font color=\"#222222\"> " +wx+"</font> )，<br/>联系客服进行更改。";
         mEtDialogContent.setText(Html.fromHtml(content));
         mTvDialogCancel.setOnClickListener(v -> mPopupWindow.dismiss());
         mTvDialogSure.setOnClickListener(v -> mPopupWindow.dismiss());

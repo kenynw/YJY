@@ -1,11 +1,11 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
@@ -44,7 +44,7 @@ public class TestListAdapter extends RecyclerArrayAdapter<Product> {
     class MyViewHolder extends BaseViewHolder<Product> {
 
         @BindView(R.id.iv_test_list)
-        ImageView mIvTestList;
+        SimpleDraweeView mIvTestList;
         @BindView(R.id.tv_test_list_name)
         TextView mTvTestListName;
 
@@ -56,8 +56,10 @@ public class TestListAdapter extends RecyclerArrayAdapter<Product> {
 
         @Override
         public void setData(Product data) {
-            Glide.with(getContext()).load(data.getProduct_img()).placeholder(R.mipmap.def_image_product).error(R.mipmap.def_image_product).into(mIvTestList);
+//            .placeholder(R.mipmap.def_image_product).error(R.mipmap.def_image_product)
+//            Glide.with(getContext()).load(data.getProduct_img()).into(mIvTestList);
 //            mIvTestList.setBackgroundResource(data.getImg());
+            mIvTestList.setImageURI(Uri.parse(data.getProduct_img()));
             mTvTestListName.setText(data.getProduct_name());
             itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(),data.getId()));
         }

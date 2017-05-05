@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_water_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,14 +11,15 @@
     android:padding="@dimen/spacing_normal"
     android:visibility="visible"
     >
-
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_product_detail"
+        style="@style/BaseImage"
         android:layout_width="98dp"
         android:layout_height="98dp"
         android:layout_marginBottom="@dimen/spacing_small"
         android:layout_marginTop="@dimen/spacing_small"
-        android:src="@mipmap/def_image_loading"
+        app:placeholderImage="@mipmap/def_image_product"
+        app:failureImage="@mipmap/def_image_product"
         />
 
     <TextView

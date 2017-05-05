@@ -100,7 +100,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                 } else {
                     getView().mLlResultSencond.setVisibility(View.VISIBLE);
                     getView().mRecyRecommend.setLayoutManager(new LinearLayoutManager(getView(), LinearLayoutManager.VERTICAL, false));
-                    getView().mRecyRecommend.setAdapter(new ProductRecommentAdapter(getView(), products));
+                    getView().mRecyRecommend.setAdapter(new ProductRecommentAdapter(getView(), products,s.toString()));
                 }
             }
         });

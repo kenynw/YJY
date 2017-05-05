@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:paddingTop="25dp"
         android:orientation="vertical"
         >
     <TextView
@@ -17,7 +18,6 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/white"
         android:gravity="center"
-        android:paddingTop="25dp"
         android:text="您已绑定"
         android:textColor="@color/color_sencond_title"
         android:textSize="@dimen/text_size_large_20"/>

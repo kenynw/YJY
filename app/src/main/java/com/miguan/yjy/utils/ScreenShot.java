@@ -43,7 +43,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 import static android.view.View.MeasureSpec;
@@ -294,22 +293,40 @@ public class ScreenShot {
      * @param mark  水印图
      */
     public static Bitmap waterMark(Bitmap first, Bitmap mark) {
-//        float scale = ((float) first.getWidth()) / mark.getWidth();
-
-        mark = scaleImg(mark, 0.3f);
+        float scale = ((float) first.getWidth()) / mark.getWidth();
+        Log.e("--缩放比例scale--", scale+"----");
+        mark = scaleImg(mark, 1f);
         int width = first.getWidth();
         int height = first.getHeight();
         Bitmap result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
         Canvas canvas = new Canvas(result);
         canvas.drawBitmap(first, 0, 0, null);
         int h = 0;
-        for (int k = 0; k < 30; k++) {
-            Random rand = new Random();
-            int i = rand.nextInt(width);
-            int j = rand.nextInt(height);
-            canvas.drawBitmap(mark, i, j, null);
-            h = h + mark.getHeight();
+        int w = 0;
+        int count = 0;
+        int num = 3;
+        for (int k = 0; k < first.getHeight(); k++) {
+            if (k % num == 0) {
+                count += 1;
+                if (count % 2 == 0) {
+                    w = mark.getWidth()+50;
+                    h = h + mark.getHeight() + 150;
+                } else {
+                    w = 50;
+                    h = h + mark.getHeight() + 150;
+                }
+
+            } else {
+                w = w + mark.getWidth() + LUtils.getScreenWidth()/4;
+            }
+            canvas.drawBitmap(mark, w, h, null);
         }
+
+        //            Random rand = new Random();
+//            int i = rand.nextInt(width);
+//            int j = rand.nextInt(height);
+
+
 //        while (h < height + mark.getHeight()) {
 //            Random rand = new Random();
 //            int i = rand.nextInt(10000);

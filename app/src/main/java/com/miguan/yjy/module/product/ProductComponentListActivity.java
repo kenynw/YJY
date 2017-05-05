@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.ProductReadAdapter;
 import com.miguan.yjy.model.bean.Component;
@@ -45,7 +45,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
     @BindView(R.id.tv_test_img)
     ImageView tv_test_img;
 
-    ImageView mIvThumb;
+    SimpleDraweeView mIvThumb;
     TextView mTvName;
     TextView mTvSpec;
 
@@ -95,9 +95,9 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
         mTvName = ButterKnife.findById(mRlWaterTop,R.id.tv_product_detail_name);
         mTvSpec = ButterKnife.findById(mRlWaterTop,R.id.tv_product_detail_spec);
 
-        Glide.with(this).load(getPresenter().product.getProduct_img()).placeholder(R.mipmap.def_image_loading).error(R.mipmap.def_image_loading).into(mIvThumb);
+        mIvThumb.setImageURI(Uri.parse(getPresenter().product.getProduct_img()));
         mTvName.setText(getPresenter().product.getProduct_name());
-        mTvSpec.setText(String.format(getString(R.string.text_product_spec), getPresenter().product.getPrice(), getPresenter().product.getForm()));
+        mTvSpec.setText(getPresenter().product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec),getPresenter(). product.getPrice(), getPresenter().product.getForm()));
 
         Bitmap waterMiddle = ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle);
         Bitmap waterTop = ScreenShot.getInstance().takeScreenShotOfJustView(mRlWaterTop);
@@ -105,7 +105,8 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
        Bitmap temp= ScreenShot.addBitmap(waterTop,waterMiddle);
        Bitmap reslut= ScreenShot.addBitmap(temp,waterBottom);
         Resources res = getResources();
-        Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_water);
+        Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.screenshot_water_logo2);
+//        Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_water);
         reslut = ScreenShot.waterMark(reslut, bmp);
 //        tv_test_img.setImageBitmap(bitmap);
         ScreenShot.getInstance().saveScreenshotToPicturesFolder(this, reslut, new ScreenShot.OnSaveListener() {

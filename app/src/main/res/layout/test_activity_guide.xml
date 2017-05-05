@@ -11,6 +11,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
         >
@@ -29,6 +30,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="50dp"
+            android:textColor="@color/f9"
             android:text="sss"
             android:textSize="@dimen/text_size_small_15"
             android:textStyle="bold"/>
@@ -59,10 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <View
-                style="@style/ItemLineHeight"
-                android:background="@color/f9"
-                />
+            <View style="@style/ItemLineHeight"/>
 
             <TextView
                 android:id="@+id/tv_test_my_skin"

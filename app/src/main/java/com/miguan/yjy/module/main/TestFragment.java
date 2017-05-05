@@ -124,22 +124,26 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                     if (!TextUtils.isEmpty(userInfo.getCompact())) {
                         mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         mTvTestWrinkle.setText(Skin.getCompact(Integer.parseInt(userInfo.getCompact())));
+                        mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
                         nums.add(0);
                     }
                     if (!TextUtils.isEmpty(userInfo.getDry())) {
                         mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(1);
                         mTvTestOily.setText(Skin.getDryOil(Integer.parseInt(userInfo.getDry())));
+                        mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
                     }
                     if (!TextUtils.isEmpty(userInfo.getTolerance())) {
                         mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(2);
                         mTvTestSensitive.setText(Skin.getTolerance(Integer.parseInt(userInfo.getTolerance())));
+                        mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
                     }
                     if (!TextUtils.isEmpty(userInfo.getPigment())) {
                         mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         nums.add(3);
                         mTvTestPigment.setText(Skin.getPigment(Integer.parseInt(userInfo.getPigment())));
+                        mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
                     }
                     if (nums.size() == 4) {
                         mTvTestResult.setText("查看结果");
@@ -155,13 +159,21 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
             Log.e("userId", UserPreferences.getUserID() + "--=0--");
             mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestWrinkle.setText(R.string.text_no_test);
-            mLlTestOily.setBackgroundResource(R.drawable.bg_shape_white);
+            mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle);
+
+            mTvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
             mTvTestOily.setText(R.string.text_no_test);
+            mTvTestOily.setBackgroundResource(R.mipmap.ic_test_oily);
+
             mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestSensitive.setText(R.string.text_no_test);
+            mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive);
+
             mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_white);
             mTvTestPigment.setText(R.string.text_no_test);
-            mTvTestResult.setText("完成度\n"+ "0/4");
+            mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment);
+
+            mTvTestResult.setText("完成度\n" + "0/4");
             mTvTestResult.setClickable(true);
         }
 //        ViewGroup.LayoutParams params = mLlTestWrinkle.getLayoutParams();
@@ -188,11 +200,6 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
         mLlTestSensitive.setOnClickListener(this);
         mLlTestPigment.setOnClickListener(this);
         mTvTestResult.setOnClickListener(this);
-
-//        mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-//        mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-//        mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-//        mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
 
     }
 
@@ -374,6 +381,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -384,7 +392,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
     public void setShowView(String showViewType) {
         if (UserPreferences.getUserID() > 0) {
             if (mMyOnTabClick != null) {
-               mMyOnTabClick.tabClickStart();
+                mMyOnTabClick.tabClickStart();
             }
         }
     }

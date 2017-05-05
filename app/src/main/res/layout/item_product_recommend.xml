@@ -16,5 +16,5 @@
         android:textColor="@color/color_sencond_title"
         android:textSize="@dimen/text_size_small_15" />
 
-    <!--<View style="@style/ItemLineHeight"></View>-->
+    <View style="@style/ItemLineHeight"></View>
 </LinearLayout>

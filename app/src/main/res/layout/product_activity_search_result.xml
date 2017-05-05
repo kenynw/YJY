@@ -84,7 +84,7 @@
             android:paddingRight="@dimen/spacing_normal"
             android:paddingStart="@dimen/spacing_normal"
             android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_body_material"
+            android:textSize="@dimen/text_size_caption_material"
             tools:text="@string/text_search_count"
             />
 

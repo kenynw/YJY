@@ -127,7 +127,7 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(false);
+        return super.getListConfig().setLoadMoreAble(false).hasItemDecoration(false);
     }
 
 

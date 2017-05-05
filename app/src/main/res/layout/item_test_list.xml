@@ -4,14 +4,19 @@
               android:layout_height="wrap_content"
               android:layout_marginLeft="10dp"
               android:layout_marginRight="10dp"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/white"
               android:layout_marginTop="20dp"
               android:orientation="vertical">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/iv_test_list"
         android:layout_width="50dp"
+        style="@style/BaseImage"
+        app:placeholderImage="@mipmap/def_image_product"
+        app:failureImage="@mipmap/def_image_product"
         android:layout_height="50dp"
-        android:background="@color/f32d"/>
+        />
 
 
     <TextView

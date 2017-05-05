@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
-        android:src="@mipmap/ic_empty_brand_list"
+        android:src="@mipmap/ic_product_no_find"
         />
 
     <TextView
