@@ -96,7 +96,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
                 break;
             case R.id.tv_share_wx_circle:
                 UMWeb umWebCircle = new UMWeb(mBuilder.getUrl());
-                umWebCircle.setTitle(mBuilder.getTitle());
+                umWebCircle.setTitle(mBuilder.getWxCircleTitle());
                 umWebCircle.setThumb(mBuilder.getImage());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(this)
@@ -105,12 +105,14 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
                 break;
             case R.id.tv_share_weibo:
                 UMWeb umWebWeibo = new UMWeb(mBuilder.getUrl());
-                umWebWeibo.setTitle(mBuilder.getTitle());
                 umWebWeibo.setThumb(mBuilder.getImage());
-                umWebWeibo.setDescription(mBuilder.getContent());
+                umWebWeibo.setTitle(mBuilder.getWbContent());
+                umWebWeibo.setDescription(mBuilder.getWbContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
                         .setCallback(this)
                         .withMedia(umWebWeibo)
+                        .withText(mBuilder.getWbContent())
+                        .withMedia(mBuilder.getImage())
                         .share();
                 break;
             case R.id.tv_share_cancel:
@@ -153,6 +155,27 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
         private String mContent;
 
         private UMImage mImage;
+
+        private String mWxCircleTitle;
+        private String mWbContent;
+
+        public String getWxCircleTitle() {
+            return mWxCircleTitle;
+        }
+
+        public Builder setWxCircleTitle(String wxCircleTitle) {
+            mWxCircleTitle = wxCircleTitle;
+            return this;
+        }
+
+        public String getWbContent() {
+            return mWbContent;
+        }
+
+        public Builder setWbContent(String wbContent) {
+            mWbContent = wbContent;
+            return this;
+        }
 
         public Builder(Context context) {
             mContext = context;

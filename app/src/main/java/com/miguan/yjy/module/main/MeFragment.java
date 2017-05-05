@@ -33,6 +33,7 @@ import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.widget.SharePopupWindow;
+import com.umeng.socialize.media.UMImage;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,6 +49,7 @@ import q.rorbin.badgeview.QBadgeView;
 @RequiresPresenter(MeFragmentPresenter.class)
 public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
 
+    public static final String DEFALUT_LOG_IMG = "http://oss.yjyapp.com/static/h5/images/logo/share.jpg";
     @BindView(R.id.ll_me_info)
     LinearLayout mLlInfo;
 
@@ -123,7 +125,10 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
                 .setViewTitle("推荐颜究院给")
                 .setTitle("颜究院，一款专业的护肤应用")
                 .setContent("查成分、测肤质，颜究院根据肤质推荐安全有效护肤品")
-                .setUrl("http://m.yjyapp.com/")
+                .setUrl("http://m.yjyapp.com/site/download")
+                .setWxCircleTitle("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？")
+                .setWbContent("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？#颜究院APP# http://m.yjyapp.com/site/download")
+                .setImage(new UMImage(getActivity(),DEFALUT_LOG_IMG))
                 .show(mLlInfo);
     }
 

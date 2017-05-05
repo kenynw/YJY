@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.ArticleModel;
@@ -18,6 +19,7 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.media.UMImage;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static com.miguan.yjy.module.product.ProductDetailActivity.DEFALUT_LOG_IMG;
 
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
@@ -98,8 +100,10 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
             new SharePopupWindow.Builder(getView())
                     .setTitle(mArticle.getTitle())
                     .setUrl(mArticle.getLinkUrl())
-                    .setContent(mArticle.getTitle())
-                    .setImage(new UMImage(getView(), mArticle.getArticle_img()))
+                    .setContent("护肤不交智商税，颜究院帮你科学高效护肤。")
+                    .setWxCircleTitle(mArticle.getTitle()+"(来自颜究院APP)")
+                    .setWbContent(mArticle.getTitle()+"，分享来自#颜究院APP# 网页链接")
+                    .setImage(new UMImage(getView(), TextUtils.isEmpty(mArticle.getArticle_img())?DEFALUT_LOG_IMG:mArticle.getArticle_img() ))
                     .show(getView().getToolbar());
         }
     }
