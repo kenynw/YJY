@@ -102,7 +102,7 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
                     .setUrl(mArticle.getLinkUrl())
                     .setContent("护肤不交智商税，颜究院帮你科学高效护肤。")
                     .setWxCircleTitle(mArticle.getTitle()+"(来自颜究院APP)")
-                    .setWbContent(mArticle.getTitle()+"，分享来自#颜究院APP# 网页链接")
+                    .setWbContent(mArticle.getTitle()+" 分享来自#颜究院APP# " + mArticle.getLinkUrl())
                     .setImage(new UMImage(getView(), TextUtils.isEmpty(mArticle.getArticle_img())?DEFALUT_LOG_IMG:mArticle.getArticle_img() ))
                     .show(getView().getToolbar());
         }

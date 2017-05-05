@@ -239,7 +239,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 .setContent("科学分析产品成分，只有我们知道它适不适合你")
                 .setImage(new UMImage(this, TextUtils.isEmpty(product.getProduct_img())?DEFALUT_LOG_IMG:product.getProduct_img() ))
                 .setWxCircleTitle(product.getProduct_name()+"里面都含有些什么成分，查了你就知道")
-                .setWbContent(product.getProduct_name()+"里面都含有些什么成分，查了你就知道，分享来自#颜究院APP# 网页链接")
+                .setWbContent(product.getProduct_name()+"里面都含有些什么成分，查了你就知道，分享来自#颜究院APP# " + product.getLinkUrl())
                 .show(getToolbar());
         return super.onOptionsItemSelected(item);
     }

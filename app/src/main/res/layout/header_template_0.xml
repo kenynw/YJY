@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     >
 
@@ -26,10 +28,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:src="@mipmap/bg_template_1_header"
+            android:id="@+id/layout_template_header"
             />
 
-        <EditText
+        <com.miguan.yjy.widget.ClearEditText
+            android:id="@+id/et_template_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -104,13 +104,12 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
                         .share();
                 break;
             case R.id.tv_share_weibo:
-                UMWeb umWebWeibo = new UMWeb(mBuilder.getUrl());
-                umWebWeibo.setThumb(mBuilder.getImage());
-                umWebWeibo.setTitle(mBuilder.getWbContent());
-                umWebWeibo.setDescription(mBuilder.getWbContent());
+//                UMWeb umWebWeibo = new UMWeb(mBuilder.getUrl());
+//                umWebWeibo.setThumb(mBuilder.getImage());
+//                umWebWeibo.setTitle(mBuilder.getWbContent());
+//                umWebWeibo.setDescription(mBuilder.getWbContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
                         .setCallback(this)
-                        .withMedia(umWebWeibo)
                         .withText(mBuilder.getWbContent())
                         .withMedia(mBuilder.getImage())
                         .share();

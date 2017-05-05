@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.Presenter;
@@ -47,7 +48,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
     public List<Product> mProductList;
 
-    private View mHeader;
+    public View mHeader;
 
     private View mFooter;
 
@@ -61,6 +62,19 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
             mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
         if (mTemplate.mFooterRes > 0)
             mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
+    }
+
+    public void hideCursor() {
+        if (mHeader != null) {
+            EditText et = (EditText) mHeader.findViewById(R.id.et_template_header);
+            if (et != null) {
+                et.setCursorVisible(false);
+            }
+            EditText et2 = (EditText) mHeader.findViewById(R.id.et_template_header_2);
+            if (et2 != null) {
+                et2.setCursorVisible(false);
+            }
+        }
     }
 
     public BaseViewHolder createTemplateViewHolder(ViewGroup parent) {
@@ -96,6 +110,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
                 public void onBindView(View headerView) {
 
                 }
+
             });
             if (mFooter != null) mAdapter.addFooter(new RecyclerArrayAdapter.ItemView() {
 

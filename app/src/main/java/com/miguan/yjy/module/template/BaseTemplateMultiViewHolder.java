@@ -116,5 +116,7 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
         for (ImageView ivFilter : mIvFilters) {
             ivFilter.setVisibility(View.GONE);
         }
+        mIvFilters.get(0).setFocusableInTouchMode(true);
+        mIvFilters.get(0).setFocusable(true);
     }
 }

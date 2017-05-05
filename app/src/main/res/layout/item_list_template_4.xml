@@ -14,28 +14,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_gray_white_5"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="15dp">
 
-        <EditText
+        <com.miguan.yjy.widget.ClearEditText
             android:id="@+id/et_template_4_product_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
             android:gravity="center"
+            android:minWidth="88dp"
             android:text="@string/text_template_4_product"
             android:textColor="@color/textTertiary"
             android:textSize="@dimen/text_size_small_13"/>
 
-        <EditText
+        <com.miguan.yjy.widget.ClearEditText
             android:id="@+id/et_template_4_price"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@null"
             android:gravity="center"
+            android:minWidth="88dp"
             android:text="@string/text_template_4_price"
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_14"
@@ -144,8 +148,7 @@
 
     </LinearLayout>
 
-
-    <EditText
+    <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_4_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -154,6 +157,7 @@
         android:background="@null"
         android:inputType="text"
         android:text="@string/text_template_4_title"
+        android:textColorHint="@color/textPrimary"
         android:textSize="22sp"
         android:textStyle="bold"
         />
@@ -163,7 +167,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
+        <com.miguan.yjy.widget.ClearEditText
             android:id="@+id/et_template_4_first_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -173,7 +177,7 @@
             android:textColor="@color/f6"
             android:textSize="@dimen/text_size_micro_12"/>
 
-        <EditText
+        <com.miguan.yjy.widget.ClearEditText
             android:id="@+id/et_template_4_second_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -182,11 +186,12 @@
             android:padding="10dp"
             android:text="@string/text_template_4_cate"
             android:textColor="@color/f6"
+            android:textColorHint="@color/f6"
             android:textSize="@dimen/text_size_micro_12"/>
 
     </LinearLayout>
 
-    <EditText
+    <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_4_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

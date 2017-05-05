@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
 
     @BindView(R.id.tv_query_code_brand)
-    TextView mEtBrand;
+    EditText mEtBrand;
 
     @BindView(R.id.et_query_code_product)
     EditText mEtProduct;
@@ -35,6 +35,8 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
     @BindView(R.id.btn_query_code_submit)
     Button mBtnSubmit;
 
+    private boolean mIsInit = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +46,18 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
 
         UserTextWatcher watcher = new UserTextWatcher(mBtnSubmit, mEtBrand, mEtProduct);
         mEtBrand.addTextChangedListener(watcher);
+        mEtBrand.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && mIsInit) {
+                startActivityForResult(new Intent(QueryCodeActivity.this, BrandListActivity.class), 100);
+                mIsInit = true;
+            }
+        });
         mEtProduct.addTextChangedListener(watcher);
 
-        mEtBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), 100));
+        mEtBrand.setOnClickListener(v -> {
+            startActivityForResult(new Intent(this, BrandListActivity.class), 100);
+            mIsInit = true;
+        });
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));
     }
 

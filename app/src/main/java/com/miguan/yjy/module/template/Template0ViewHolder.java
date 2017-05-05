@@ -17,6 +17,8 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 
 /**
@@ -76,6 +78,9 @@ public class Template0ViewHolder extends BaseTemplateViewHolder {
         super.hideOperatingViews();
         mIvFilter.setVisibility(View.GONE);
         mEtProduct.setCursorVisible(false);
+        mDvImage.setFocusable(true);
+        mDvImage.setFocusableInTouchMode(true);
+        EventBus.getDefault().post(new Product());
     }
 
     @Override

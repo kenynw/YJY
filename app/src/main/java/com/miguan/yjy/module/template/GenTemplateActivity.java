@@ -81,8 +81,8 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     public boolean onOptionsItemSelected(MenuItem item) {
         getExpansionDelegate().showProgressBar("正在生成图片");
 
-        mRcvList.setFocusable(true);
-        mRcvList.setFocusableInTouchMode(true);
+        getPresenter().hideCursor();
+
         for (BaseTemplateViewHolder viewHolder : mViewHolders) {
             viewHolder.hideOperatingViews();
         }

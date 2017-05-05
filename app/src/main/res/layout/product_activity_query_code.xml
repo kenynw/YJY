@@ -17,7 +17,7 @@
         android:paddingRight="45dp"
         >
 
-        <TextView
+        <EditText
             android:id="@+id/tv_query_code_brand"
             style="@style/BaseInputLarge"
             android:layout_marginLeft="0dp"

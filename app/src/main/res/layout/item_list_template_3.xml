@@ -118,20 +118,20 @@
 
     </LinearLayout>
 
-    <EditText
+    <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_3_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_large"
         android:background="@color/white"
         android:gravity="center"
+        android:text="@string/text_template_3_title"
         android:inputType="text"
         android:maxLines="1"
-        android:text="@string/text_template_3_title"
         android:textAppearance="@style/TextTitle"
         />
 
-    <EditText
+    <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_3_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -141,13 +141,13 @@
         android:layout_marginTop="@dimen/spacing_normal"
         android:background="@color/white"
         android:gravity="center"
+        android:text="@string/text_template_3_content"
         android:inputType="textMultiLine"
         android:lineSpacingMultiplier="1.4"
-        android:text="@string/text_template_3_content"
         android:textColor="@color/textTertiary"
         android:textSize="15sp"
         />
 
-    <include layout="@layout/include_template_delete" />
+    <include layout="@layout/include_template_delete"/>
 
 </LinearLayout>

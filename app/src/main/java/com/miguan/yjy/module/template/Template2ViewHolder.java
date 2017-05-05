@@ -69,6 +69,8 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
     public void hideOperatingViews() {
         super.hideOperatingViews();
         mIvFilter.setVisibility(View.GONE);
+        mDvImage.setFocusable(true);
+        mDvImage.setFocusableInTouchMode(true);
     }
 
 }
