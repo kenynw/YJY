@@ -20,11 +20,13 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
 
     public static final String EXTRA_CATEGORY_LIST = "categoryList";
     public static final String EXTRA_CATEGORY_position = "position";
+    public static final String EXTRA_CATEGORY_NAME = "name";
 
-    public static void star(Context context, ArrayList<Skin> skin,int position) {
+    public static void star(Context context, ArrayList<Skin> skin,int position,String name) {
         Intent intent = new Intent(context, TestRecomendActivity.class);
         intent.putParcelableArrayListExtra(EXTRA_CATEGORY_LIST, skin);
         intent.putExtra(EXTRA_CATEGORY_position, position);
+        intent.putExtra(EXTRA_CATEGORY_NAME, name);
         context.startActivity(intent);
     }
 

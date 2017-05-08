@@ -48,7 +48,7 @@ public class TestSkinAdapter extends RecyclerView.Adapter<TestSkinAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return mSkinList.size();
+        return mSkinList.size()>=2?2:mSkinList.size();
     }
 
     public void setOnItemClickListener(RecyclerArrayAdapter.OnItemClickListener onItemClickListener) {

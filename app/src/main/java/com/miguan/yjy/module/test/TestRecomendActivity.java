@@ -36,6 +36,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     TextView mTvTestRecommendChange;
     public ArrayList<Skin> categoryList;
     public int position;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
         setToolbarTitle(R.string.text_test_recommend_product);
         categoryList = getIntent().getParcelableArrayListExtra(TestRecomendPresenter.EXTRA_CATEGORY_LIST);
         position = getIntent().getIntExtra(TestRecomendPresenter.EXTRA_CATEGORY_position, 0);
+        name = getIntent().getStringExtra(TestRecomendPresenter.EXTRA_CATEGORY_NAME);
         ButterKnife.bind(this);
         setData();
     }
@@ -79,9 +81,14 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
             }
         });
+        for (int i = 0; i < categoryList.size(); i++) {
+            if (name.equals(categoryList.get(i).getName())) {
+                position = i;
+            }
+        }
         for (int i = 0; i < testTabPagerAdapter.getCount(); i++) {
             TabLayout.Tab tab = mtabTest.newTab();
-            mtabTest.addTab(tab,i==position);
+            mtabTest.addTab(tab, i == position);
             tab.setText(testTabPagerAdapter.getPageTitle(i));
         }
 

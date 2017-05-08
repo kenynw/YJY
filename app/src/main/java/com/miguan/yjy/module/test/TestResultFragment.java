@@ -128,7 +128,7 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
             list.add(datas.get(i));
         }
         TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
-        testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), categoryList, position));
+        testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), categoryList, position,datas.get(position).getCategory_name()));
         mRectTestMySkin.setAdapter(testSkinAdapter);
     }
 
