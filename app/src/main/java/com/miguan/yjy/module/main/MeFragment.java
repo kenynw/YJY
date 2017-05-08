@@ -33,7 +33,6 @@ import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.widget.SharePopupWindow;
-import com.umeng.socialize.media.UMImage;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -128,7 +127,6 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
                 .setUrl("http://m.yjyapp.com/site/download")
                 .setWxCircleTitle("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？")
                 .setWbContent("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？#颜究院APP# http://m.yjyapp.com/site/download")
-                .setImage(new UMImage(getActivity(),DEFALUT_LOG_IMG))
                 .show(mLlInfo);
     }
 

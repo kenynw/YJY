@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.CommonModel;
+import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -27,6 +29,8 @@ import butterknife.ButterKnife;
  */
 
 public class SharePopupWindow extends PopupWindow implements View.OnClickListener, UMShareListener {
+
+    public static final String DEFAULT_IMAGE_URL = "http://oss.yjyapp.com/static/h5/images/logo/share.jpg";
 
     @BindView(R.id.rl_share_window)
     RelativeLayout mRlShareWindow;
@@ -87,7 +91,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             case R.id.tv_share_wx_friend:
                 UMWeb umWeb = new UMWeb(mBuilder.getUrl());
                 umWeb.setTitle(mBuilder.getTitle());
-                umWeb.setThumb(mBuilder.getImage());
+                umWeb.setThumb(new UMImage(mActivity, TextUtils.isEmpty(mBuilder.getImage()) ? DEFAULT_IMAGE_URL : mBuilder.getImage()));
                 umWeb.setDescription(mBuilder.getContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
                         .setCallback(this)
@@ -97,7 +101,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             case R.id.tv_share_wx_circle:
                 UMWeb umWebCircle = new UMWeb(mBuilder.getUrl());
                 umWebCircle.setTitle(mBuilder.getWxCircleTitle());
-                umWebCircle.setThumb(mBuilder.getImage());
+                umWebCircle.setThumb(new UMImage(mActivity, TextUtils.isEmpty(mBuilder.getImage()) ? DEFAULT_IMAGE_URL : mBuilder.getImage()));
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(this)
                         .withMedia(umWebCircle)
@@ -111,7 +115,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
                         .setCallback(this)
                         .withText(mBuilder.getWbContent())
-                        .withMedia(mBuilder.getImage())
+                        .withMedia(new UMImage(mActivity, TextUtils.isEmpty(mBuilder.getImage()) ? DEFAULT_IMAGE_URL : mBuilder.getImage()))
                         .share();
                 break;
             case R.id.tv_share_cancel:
@@ -128,7 +132,15 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
 
     @Override
     public void onResult(SHARE_MEDIA share_media) {
-
+        if (mBuilder.getId() > 0 && mBuilder.getType() > 0) {
+            CommonModel.getInstance().analyticsShare(mBuilder.getId(), mBuilder.getType())
+                    .subscribe(new ServicesResponse<String>() {
+                        @Override
+                        public void onNext(String s) {
+                            LUtils.toast("分享成功");
+                        }
+                    });
+        }
     }
 
     @Override
@@ -153,10 +165,15 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
 
         private String mContent;
 
-        private UMImage mImage;
+        private String mImageUrl;
 
         private String mWxCircleTitle;
+
         private String mWbContent;
+
+        private int mId; // 分享的id
+
+        private int mType; // 1为产品，2为文章
 
         public String getWxCircleTitle() {
             return mWxCircleTitle;
@@ -200,12 +217,30 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             return this;
         }
 
-        public UMImage getImage() {
-            return mImage;
+        public int getId() {
+            return mId;
         }
 
-        public Builder setImage(UMImage image) {
-            mImage = image;
+        public Builder setId(int id) {
+            mId = id;
+            return this;
+        }
+
+        public int getType() {
+            return mType;
+        }
+
+        public Builder setType(int type) {
+            mType = type;
+            return this;
+        }
+
+        public String getImage() {
+            return mImageUrl;
+        }
+
+        public Builder setImageUrl(String image) {
+            mImageUrl = image;
             return this;
         }
 

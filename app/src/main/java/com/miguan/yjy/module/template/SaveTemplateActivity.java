@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -46,7 +47,10 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
         Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE_URI);
         String path = getIntent().getStringExtra(SaveTemplatePresenter.EXTRA_IMAGE_PATH);
 
-        mIvThumb.setImageURI(uri);
+        if (uri != null && !TextUtils.isEmpty(path)) {
+            getPresenter().addAnalytics();
+            mIvThumb.setImageURI(uri);
+        }
 
         ButterKnife.apply(mIvShares, new ButterKnife.Action<ImageView>() {
             @Override

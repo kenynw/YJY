@@ -82,6 +82,30 @@ public class CommonModel extends AbsModel {
         return ServicesClient.getServices().setMsgRead(UserPreferences.getUserID(), msgId, type).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 统计BANNER点击数
+     * @return
+     */
+    public Observable<String> analyticsBanner(int bannerId) {
+        return ServicesClient.getServices().analyticsBanner(UserPreferences.getUserID(), bannerId).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 统计分享数
+     * @return
+     */
+    public Observable<String> analyticsShare(int id, int type) {
+        return ServicesClient.getServices().analyticsShare(UserPreferences.getUserID(), id, type).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 统计模板生成
+     * @return
+     */
+    public Observable<String> analyticsTemplate() {
+        return ServicesClient.getServices().analyticsTemplate(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+    }
+
     private String findDownLoadDirectory(){
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +28,6 @@ import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
-import com.umeng.socialize.media.UMImage;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -47,6 +45,7 @@ import butterknife.ButterKnife;
 public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     public static final String DEFALUT_LOG_IMG = "http://oss.yjyapp.com/static/h5/images/logo/share.jpg";
+
     @BindView(R.id.dv_product_detail)
     SimpleDraweeView mDvThumb;
 
@@ -118,10 +117,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.iv_product_down)
     ImageView mIvProductDown;
+
     @BindView(R.id.tv_product_taobao)
     TextView mTvTaobao;
+
     @BindView(R.id.tv_product_jingdong)
     TextView mTvJingdong;
+
     @BindView(R.id.tv_product_amazon)
     TextView mTvAmazon;
 
@@ -235,11 +237,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
         new SharePopupWindow.Builder(this)
                 .setUrl(product.getLinkUrl())
-                .setTitle(product.getProduct_name()+"【颜究院】")
+                .setTitle(product.getProduct_name() + "【颜究院】")
                 .setContent("科学分析产品成分，只有我们知道它适不适合你")
-                .setImage(new UMImage(this, TextUtils.isEmpty(product.getProduct_img())?DEFALUT_LOG_IMG:product.getProduct_img() ))
-                .setWxCircleTitle(product.getProduct_name()+"里面都含有些什么成分，查了你就知道")
-                .setWbContent(product.getProduct_name()+"里面都含有些什么成分，查了你就知道，分享来自#颜究院APP# " + product.getLinkUrl())
+                .setImageUrl(product.getProduct_img())
+                .setId(product.getId())
+                .setType(1)
+                .setWxCircleTitle(product.getProduct_name() + "里面都含有些什么成分，查了你就知道")
+                .setWbContent(product.getProduct_name() + "里面都含有些什么成分，查了你就知道，分享来自#颜究院APP# " + product.getLinkUrl())
                 .show(getToolbar());
         return super.onOptionsItemSelected(item);
     }

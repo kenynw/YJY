@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.ArticleModel;
@@ -16,10 +15,8 @@ import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SharePopupWindow;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.media.UMImage;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.miguan.yjy.module.product.ProductDetailActivity.DEFALUT_LOG_IMG;
 
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
@@ -72,7 +69,7 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
-        UMShareAPI.get(getView()).onActivityResult(requestCode,resultCode,data);
+        UMShareAPI.get(getView()).onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             onRefresh();
         }
@@ -101,9 +98,11 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
                     .setTitle(mArticle.getTitle())
                     .setUrl(mArticle.getLinkUrl())
                     .setContent("护肤不交智商税，颜究院帮你科学高效护肤。")
-                    .setWxCircleTitle(mArticle.getTitle()+"(来自颜究院APP)")
-                    .setWbContent(mArticle.getTitle()+" 分享来自#颜究院APP# " + mArticle.getLinkUrl())
-                    .setImage(new UMImage(getView(), TextUtils.isEmpty(mArticle.getArticle_img())?DEFALUT_LOG_IMG:mArticle.getArticle_img() ))
+                    .setWxCircleTitle(mArticle.getTitle() + "(来自颜究院APP)")
+                    .setWbContent(mArticle.getTitle() + " 分享来自#颜究院APP# " + mArticle.getLinkUrl())
+                    .setImageUrl(mArticle.getArticle_img())
+                    .setId(mArticle.getId())
+                    .setType(2)
                     .show(getView().getToolbar());
         }
     }

@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 
 public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Article> {
 
-    public int productNum;
     @Override
     protected void onCreateView(HomeFragment view) {
         super.onCreateView(view);
@@ -36,7 +35,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     public void onRefresh() {
         ArticleModel.getInstance().getHomeList()
                 .map(home -> {
-                    productNum = home.getNum();
                     getView().setSearchHint(home.getNum());
                     getAdapter().removeAllHeader();
                     getAdapter().addHeader(new HomeHeader(home));

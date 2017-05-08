@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,7 +25,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:id="@+id/custom_scv"
         android:layout_width="match_parent"
@@ -37,17 +37,17 @@
             android:layout_height="match_parent"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:orientation="vertical"
                 android:paddingLeft="35dp"
-                android:paddingRight="35dp">
+                android:paddingRight="35dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,9 +68,10 @@
                             android:layout_gravity="center"
                             android:background="@drawable/bg_shape_main_color_white_5"
                             android:gravity="center"
-                            android:text="D"
                             android:textColor="@color/f32d"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            tools:text="D"
+                            />
 
                         <TextView
                             android:id="@+id/tv_test_first_name"
@@ -201,8 +202,8 @@
                     android:id="@+id/tv_test_result_descirbe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="描述1"
-                    android:textColor="@color/f9"/>
+                    android:textColor="@color/f9"
+                    tools:text="描述1"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -218,8 +219,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="40dp"
                     android:layout_marginTop="20dp"
-                    android:text="描述2"
-                    android:textColor="@color/f9"/>
+                    android:textColor="@color/f9"
+                    tools:text="描述2"
+                    />
+
             </LinearLayout>
 
             <View style="@style/ItemLineHeight"/>
@@ -304,9 +307,7 @@
                 android:id="@+id/rect_test_my_skin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"></android.support.v7.widget.RecyclerView>
-
+                />
 
             <View
                 style="@style/ItemLineHeight"
@@ -334,16 +335,15 @@
 
             <com.jude.easyrecyclerview.EasyRecyclerView
                 android:id="@+id/recycle"
-                android:focusableInTouchMode="false"
-                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-            />
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                />
 
 
         </LinearLayout>
 
     </com.miguan.yjy.widget.CustomNestedScrollView>
-
 
 </LinearLayout>

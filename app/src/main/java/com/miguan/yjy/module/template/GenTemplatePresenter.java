@@ -19,8 +19,11 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.utils.DateUtils;
+import com.miguan.yjy.utils.LUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -55,7 +58,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onCreate(GenTemplateActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        EventBus.getDefault().register(view);
+        EventBus.getDefault().register(this);
 
         mTemplate = (TemplateType) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
         if (mTemplate.mHeaderRes > 0)
@@ -151,13 +154,23 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(getView());
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
         ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN) // 删除模板
+    public void deleteItem(BaseTemplateViewHolder.TemplateDeleteEvent event) {
+        if (mAdapter.getCount() <= 1) {
+            LUtils.toast("至少要保留一个吧");
+            return;
+        }
+
+        mAdapter.remove(event.getPosition());
     }
 
     public class TemplateAdapter extends RecyclerArrayAdapter<Product> {

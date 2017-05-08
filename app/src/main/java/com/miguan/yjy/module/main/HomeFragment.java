@@ -69,11 +69,11 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
     }
 
     public void setSearchHint(int count) {
-      String productNum=  String.format(getString(R.string.hint_home_search), count);
+        String productNum = String.format(getString(R.string.hint_home_search), count);
         mTvSearch.setText(productNum);
 
         mflSearch.setOnClickListener(v ->
-                SearchActivity.start(getActivity(),productNum));
+                SearchActivity.start(getActivity(), productNum));
     }
 
     @Override

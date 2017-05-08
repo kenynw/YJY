@@ -8,7 +8,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.Banner;
+import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.main.ArticleDetailPresenter;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
@@ -44,12 +46,14 @@ public class BannerPagerAdapter extends PagerAdapter {
         Banner banner = mBannerList.get(position);
         Glide.with(mContext)
                 .load(banner.getImg())
-                .placeholder(R.mipmap.def_image_banner)
-                .error(R.mipmap.def_image_banner)
+                .placeholder(R.mipmap.def_image_loading)
+                .error(R.mipmap.def_image_loading)
                 .centerCrop()
                 .into(iv);
 
         iv.setOnClickListener(v -> {
+            CommonModel.getInstance().analyticsBanner(banner.getId()).subscribe(new ServicesResponse<>());
+
             if (banner.getType() == 1) {
                 WebViewActivity.start(mContext, "", banner.getUrl());
             } else if (banner.getType() == 2) {

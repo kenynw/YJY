@@ -526,4 +526,46 @@ public interface Services {
             @Query("type") String type
     );
 
+    /**
+     * 统计Banner点击
+     * user_id(int) － 用户ID
+     * id(int) － 对应ID
+     * type(string) － 1为产品，2为文章
+     *
+     * @return
+     */
+    @GET("?action=bannerLog")
+    Observable<String> analyticsBanner(
+            @Query("user_id") int userId,
+            @Query("id") int bannerId
+    );
+
+    /**
+     * 统计分享
+     * user_id(int) － 用户ID
+     * id(int) － 对应ID
+     * type(string) － 1为产品，2为文章
+     *
+     * @return
+     */
+    @GET("?action=addShare")
+    Observable<String> analyticsShare(
+            @Query("user_id") int userId,
+            @Query("id") int id,
+            @Query("type") int type
+    );
+
+    /**
+     * 统计功课模板
+     * user_id(int) － 用户ID
+     * id(int) － 对应ID
+     * type(string) － 1为产品，2为文章
+     *
+     * @return
+     */
+    @GET("?action=addLessons")
+    Observable<String> analyticsTemplate(
+            @Query("user_id") int userId
+    );
+
 }

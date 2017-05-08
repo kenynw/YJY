@@ -59,7 +59,7 @@
         android:layout_height="56dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="2dp"
         >
 
         <LinearLayout

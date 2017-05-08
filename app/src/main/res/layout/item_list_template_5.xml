@@ -148,18 +148,15 @@
 
     <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_5_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BaseTemplateInput"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="@dimen/spacing_small"
-        android:background="@null"
         android:text="@string/text_template_5_content"
-        android:inputType="textMultiLine"
-        android:lineSpacingMultiplier="1.2"
         android:textColor="#4E2709"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        />
 
     <include layout="@layout/include_template_delete"/>
 

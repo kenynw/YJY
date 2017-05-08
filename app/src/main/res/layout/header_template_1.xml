@@ -4,22 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingBottom="@dimen/spacing_large"
     android:paddingTop="@dimen/spacing_large"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     >
 
     <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@null"
-        android:gravity="center"
-        android:inputType="textMultiLine"
-        android:minWidth="88dp"
+        style="@style/BaseTemplateInput"
         android:text="@string/text_template_1_title"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_large_material"
@@ -27,13 +21,8 @@
 
     <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_header_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        style="@style/BaseTemplateInput"
         android:layout_marginTop="@dimen/spacing_small"
-        android:background="@null"
-        android:gravity="center"
-        android:inputType="textMultiLine"
         android:text="@string/text_template_1_desc"
         android:textAppearance="@style/TextCaption"
         />

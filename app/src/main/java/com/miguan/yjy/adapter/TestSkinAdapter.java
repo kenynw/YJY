@@ -23,31 +23,37 @@ import butterknife.ButterKnife;
  * @描述 推荐产品清单
  */
 
-public class TestSkinAdapter extends RecyclerArrayAdapter<Skin> {
+public class TestSkinAdapter extends RecyclerView.Adapter<TestSkinAdapter.MyViewHolder> {
 
-    private List<Skin> datas;
-    public TestSkinAdapter(Context context, List<Skin> objects) {
-        super(context, objects);
-        datas = objects;
+    private Context mContext;
+
+    private List<Skin> mSkinList;
+
+    private RecyclerArrayAdapter.OnItemClickListener mItemClickListener;
+
+    public TestSkinAdapter(Context context, List<Skin> skinList) {
+        mContext = context;
+        mSkinList = skinList;
     }
 
     @Override
-    public void OnBindViewHolder(BaseViewHolder holder, int position) {
-        holder.setData(mObjects.get(position));
-    }
-
-    @Override
-    public int getCount() {
-//        return mObjects.size()>=2?2:mObjects.size();
-        return datas.size()>=2?2:datas.size();
-//        return 3;
-    }
-
-    @Override
-    public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(parent);
     }
 
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        holder.setData(mSkinList.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mSkinList.size();
+    }
+
+    public void setOnItemClickListener(RecyclerArrayAdapter.OnItemClickListener onItemClickListener) {
+        mItemClickListener = onItemClickListener;
+    }
 
     class MyViewHolder extends BaseViewHolder<Skin> {
 
@@ -71,14 +77,12 @@ public class TestSkinAdapter extends RecyclerArrayAdapter<Skin> {
             mRectCategory.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             mRectCategory.setAdapter(new TestListAdapter(getContext(), data.getData()));
 //            mLlTestMore.setOnClickListener(v -> TestRecomendPresenter.star(getContext(),));
-        }
+            itemView.setOnClickListener(v -> {
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(getAdapterPosition());
+                }
+            });
+         }
     }
 
-    public List<Skin> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<Skin> datas) {
-        this.datas = datas;
-    }
 }

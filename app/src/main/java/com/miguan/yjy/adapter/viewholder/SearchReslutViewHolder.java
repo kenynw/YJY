@@ -49,7 +49,7 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
     }
 
     private String getSpec(Product data) {
-        return String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm().toUpperCase());
+        return String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm());
     }
 
 }

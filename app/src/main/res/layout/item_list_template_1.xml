@@ -128,13 +128,9 @@
 
     <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_1_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:inputType="textMultiLine"
+        style="@style/BaseTemplateInput"
+        android:gravity="top|start"
         android:lineSpacingMultiplier="1.2"
-        android:minHeight="88dp"
-        android:minWidth="88dp"
         android:text="@string/text_template_1_content"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_subhead_material"

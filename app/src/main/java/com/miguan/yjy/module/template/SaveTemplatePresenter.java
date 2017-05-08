@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.dsk.chain.bijection.Presenter;
+import com.miguan.yjy.model.CommonModel;
+import com.miguan.yjy.model.services.ServicesResponse;
 
 /**
  * Copyright (c) 2017/4/6. LiaoPeiKun Inc. All rights reserved.
@@ -21,6 +23,10 @@ public class SaveTemplatePresenter extends Presenter<SaveTemplateActivity> {
         intent.putExtra(EXTRA_IMAGE_PATH, path);
         intent.putExtra(EXTRA_IMAGE_URI, uri);
         context.startActivity(intent);
+    }
+
+    public void addAnalytics() {
+        CommonModel.getInstance().analyticsTemplate().subscribe(new ServicesResponse<String>());
     }
 
 }

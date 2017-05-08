@@ -82,7 +82,6 @@ public class TestModel extends AbsModel {
      * 肤质推荐接口
      */
     public Observable<Test> getSkinRecommend() {
-
         return ServicesClient.getServices().getSkinRecommend(UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
@@ -90,7 +89,6 @@ public class TestModel extends AbsModel {
      * 肤质推荐接口
      */
     public Observable<List<Product>> getSkinRecommendList(String cateId, int page) {
-
         return ServicesClient.getServices().getSkinRecommendList(UserPreferences.getUserID(), cateId, page, 10).compose(new DefaultTransform<>());
     }
 

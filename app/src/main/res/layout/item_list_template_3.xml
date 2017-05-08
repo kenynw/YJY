@@ -120,30 +120,21 @@
 
     <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_3_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BaseTemplateInput"
         android:layout_marginTop="@dimen/spacing_large"
-        android:background="@color/white"
-        android:gravity="center"
         android:text="@string/text_template_3_title"
-        android:inputType="text"
-        android:maxLines="1"
         android:textAppearance="@style/TextTitle"
         />
 
     <com.miguan.yjy.widget.ClearEditText
         android:id="@+id/et_template_3_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/BaseTemplateInput"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="@string/text_template_3_content"
-        android:inputType="textMultiLine"
         android:lineSpacingMultiplier="1.4"
+        android:text="@string/text_template_3_content"
         android:textColor="@color/textTertiary"
         android:textSize="15sp"
         />

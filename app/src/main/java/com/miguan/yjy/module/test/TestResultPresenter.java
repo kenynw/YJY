@@ -5,10 +5,8 @@ import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.local.UserPreferences;
-import com.miguan.yjy.model.services.ServicesResponse;
 
-import java.util.List;
-
+import rx.Observable;
 import rx.functions.Func1;
 
 /**
@@ -20,51 +18,28 @@ import rx.functions.Func1;
 public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFragment, Article> {
 
     @Override
-    protected void onCreateView(TestResultFragment view) {
-        super.onCreateView(view);
-
-    }
-
-    @Override
-    public void onRefresh() {
-        super.onRefresh();
-        if (UserPreferences.getUserID() > 0) {
-            TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
-                @Override
-                public void onNext(Test test) {
-                    setView(test);
-                }
-            });
-            TestModel.getInstantce().getSkinRecommend().map(new Func1<Test, List<Article>>() {
-                @Override
-                public List<Article> call(Test test) {
-                    getView().setData(test.getSkinProduct(),test.getCategoryList());
-                    return test.getSkinArticle();
-                }
-            }).unsafeSubscribe(getRefreshSubscriber());
-
-        }
-
-    }
-
-
-    private void setView(Test test) {
-        getView().mTvFirstLetter.setText(test.getDesc().get(0).getLetter());
-        getView().mTvSecondLetter.setText(test.getDesc().get(1).getLetter());
-        getView().mTvThirdLetter.setText(test.getDesc().get(2).getLetter());
-        getView().mTvFourLetter.setText(test.getDesc().get(3).getLetter());
-        getView().mTvFirstName.setText(test.getDesc().get(0).getName());
-        getView().mTvSecondName.setText(test.getDesc().get(1).getName());
-        getView().mTvThirdName.setText(test.getDesc().get(2).getName());
-        getView().mTvFourName.setText(test.getDesc().get(3).getName());
-        getView().mTvResultDescirbe.setText(test.getFeatures());
-        getView().mTvResultDescirbeSecond.setText(test.getElements());
-
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         onRefresh();
     }
+
+    @Override
+    public void onRefresh() {
+        if (UserPreferences.getUserID() > 0) {
+            TestModel.getInstantce().userSkin()
+                    .flatMap(new Func1<Test, Observable<Test>>() {
+                        @Override
+                        public Observable<Test> call(Test test) {
+                            getView().setSkinResult(test);
+                            return TestModel.getInstantce().getSkinRecommend();
+                        }
+                    })
+                    .map(test -> {
+                        getView().setData(test.getSkinProduct(), test.getCategoryList());
+                        getView().setFocusable();
+                        return test.getSkinArticle();
+                    }).unsafeSubscribe(getRefreshSubscriber());
+        }
+    }
+
 }
