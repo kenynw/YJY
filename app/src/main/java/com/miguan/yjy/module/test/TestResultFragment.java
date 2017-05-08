@@ -24,6 +24,7 @@ import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.widget.CustomNestedScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,8 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     TextView mTvFourName;
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.custom_scv)
+    CustomNestedScrollView mCustomScv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,14 +115,13 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     }
 
     public void setData(List<Skin> datas,ArrayList<Skin> categoryList) {
-//        mRectTestMySkin.setFocusable(false);
-//        mRectTestMySkin.setFocusableInTouchMode(false);
+
         mRectTestMySkin.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         TestSkinAdapter testSkinAdapter=new TestSkinAdapter(getActivity(), datas);
         testSkinAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                TestRecomendPresenter.star(getActivity(), categoryList);
+                TestRecomendPresenter.star(getActivity(), categoryList,position);
             }
         });
         mRectTestMySkin.setAdapter(testSkinAdapter);
@@ -147,6 +149,5 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
             getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
     }
-
 
 }

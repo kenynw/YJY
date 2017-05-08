@@ -58,7 +58,7 @@ public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFra
         getView().mTvThirdName.setText(test.getDesc().get(2).getName());
         getView().mTvFourName.setText(test.getDesc().get(3).getName());
         getView().mTvResultDescirbe.setText(test.getFeatures());
-        getView().mTvResultDescirbeSecond.setText(test.getExplain());
+        getView().mTvResultDescirbeSecond.setText(test.getElements());
 
     }
 

@@ -12,7 +12,6 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestTabPagerAdapter;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
-import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Skin;
 
 import java.util.ArrayList;
@@ -43,6 +42,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.text_test_recommend_product);
         categoryList = getIntent().getParcelableArrayListExtra(TestRecomendPresenter.EXTRA_CATEGORY_LIST);
+        position = getIntent().getIntExtra(TestRecomendPresenter.EXTRA_CATEGORY_position, 0);
         ButterKnife.bind(this);
         setData();
     }
@@ -59,13 +59,13 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
     public void setData() {
         TestTabPagerAdapter testTabPagerAdapter = new TestTabPagerAdapter(getSupportFragmentManager(), TestRecomendActivity.this, 0, categoryList);
-
         mtabTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 position = tab.getPosition();
-                TestModel.getInstantce().getSkinRecommendList(categoryList.get(position).getId(), 1).
-                        unsafeSubscribe(getPresenter().getRefreshSubscriber());
+                getPresenter().onRefresh();
+//                TestModel.getInstantce().getSkinRecommendList(categoryList.get(position).getId(), 1).
+//                        unsafeSubscribe(getPresenter().getRefreshSubscriber());
                 mTvTestRecommend.setText(categoryList.get(position).getCopy());
             }
 
@@ -81,7 +81,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
         });
         for (int i = 0; i < testTabPagerAdapter.getCount(); i++) {
             TabLayout.Tab tab = mtabTest.newTab();
-            mtabTest.addTab(tab);
+            mtabTest.addTab(tab,i==position);
             tab.setText(testTabPagerAdapter.getPageTitle(i));
         }
 

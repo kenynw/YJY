@@ -19,10 +19,12 @@ import java.util.ArrayList;
 public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomendActivity, Product> {
 
     public static final String EXTRA_CATEGORY_LIST = "categoryList";
+    public static final String EXTRA_CATEGORY_position = "position";
 
-    public static void star(Context context, ArrayList<Skin> skin) {
+    public static void star(Context context, ArrayList<Skin> skin,int position) {
         Intent intent = new Intent(context, TestRecomendActivity.class);
         intent.putParcelableArrayListExtra(EXTRA_CATEGORY_LIST, skin);
+        intent.putExtra(EXTRA_CATEGORY_position, position);
         context.startActivity(intent);
     }
 

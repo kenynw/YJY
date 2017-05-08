@@ -36,6 +36,11 @@ public class TestSkinAdapter extends RecyclerArrayAdapter<Skin> {
     }
 
     @Override
+    public int getCount() {
+        return mObjects.size()>=2?2:mObjects.size();
+    }
+
+    @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(parent);
     }

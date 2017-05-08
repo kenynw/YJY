@@ -21,9 +21,18 @@ public class Test implements Parcelable {
     private List<Skin> desc;
     private String explain;
     private String features;
+    private String elements;
     private List<Skin> skinProduct;
     private List<Article> skinArticle;
     private ArrayList<Skin> categoryList;
+
+    public String getElements() {
+        return elements;
+    }
+
+    public void setElements(String elements) {
+        this.elements = elements;
+    }
 
     public ArrayList<Skin> getCategoryList() {
         return categoryList;
@@ -123,6 +132,7 @@ public class Test implements Parcelable {
         dest.writeTypedList(this.desc);
         dest.writeString(this.explain);
         dest.writeString(this.features);
+        dest.writeString(this.elements);
         dest.writeTypedList(this.skinProduct);
         dest.writeTypedList(this.skinArticle);
         dest.writeTypedList(this.categoryList);
@@ -136,6 +146,7 @@ public class Test implements Parcelable {
         this.desc = in.createTypedArrayList(Skin.CREATOR);
         this.explain = in.readString();
         this.features = in.readString();
+        this.elements = in.readString();
         this.skinProduct = in.createTypedArrayList(Skin.CREATOR);
         this.skinArticle = in.createTypedArrayList(Article.CREATOR);
         this.categoryList = in.createTypedArrayList(Skin.CREATOR);
