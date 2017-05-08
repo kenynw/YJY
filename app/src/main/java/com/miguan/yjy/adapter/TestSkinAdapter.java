@@ -25,9 +25,10 @@ import butterknife.ButterKnife;
 
 public class TestSkinAdapter extends RecyclerArrayAdapter<Skin> {
 
-
+    private List<Skin> datas;
     public TestSkinAdapter(Context context, List<Skin> objects) {
         super(context, objects);
+        datas = objects;
     }
 
     @Override
@@ -37,7 +38,9 @@ public class TestSkinAdapter extends RecyclerArrayAdapter<Skin> {
 
     @Override
     public int getCount() {
-        return mObjects.size()>=2?2:mObjects.size();
+//        return mObjects.size()>=2?2:mObjects.size();
+        return datas.size()>=2?2:datas.size();
+//        return 3;
     }
 
     @Override
@@ -71,4 +74,11 @@ public class TestSkinAdapter extends RecyclerArrayAdapter<Skin> {
         }
     }
 
+    public List<Skin> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List<Skin> datas) {
+        this.datas = datas;
+    }
 }

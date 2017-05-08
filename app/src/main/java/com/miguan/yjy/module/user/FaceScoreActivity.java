@@ -2,6 +2,9 @@ package com.miguan.yjy.module.user;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.TextAppearanceSpan;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -31,8 +34,12 @@ public class FaceScoreActivity extends BaseListActivity<FaceScorePresenter> {
         getToolbar().setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         getTitleView().setTextColor(Color.WHITE);
         ButterKnife.bind(this);
-
-        mTvValue.setText("您的颜值总分为：" + getIntent().getStringExtra(EXTRA_SCORE));
+        String value="您的颜值总分为：";
+        String value1=getIntent().getStringExtra(EXTRA_SCORE);
+        SpannableString styledText = new SpannableString(value+value1);
+        styledText.setSpan(new TextAppearanceSpan(this, R.style.style0), 0, value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new TextAppearanceSpan(this, R.style.style1), value.length(), styledText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvValue.setText(styledText, TextView.BufferType.SPANNABLE);
     }
 
     @Override
