@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@id/toolbar"
         style="@style/TitleToolbar"
         android:background="@color/white"
         >
@@ -20,7 +21,6 @@
             android:maxLines="1"
             android:text="@string/text_test"
             android:textAppearance="@style/TextSubhead"
-            android:textColor="@color/color_sencond_title"
             />
 
     </android.support.v7.widget.Toolbar>
@@ -28,13 +28,13 @@
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:id="@+id/custom_scv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
 
         <LinearLayout
             android:id="@+id/ll_test_tag"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingBottom="40dp"
+                    android:paddingBottom="35dp"
                     android:paddingTop="40dp">
 
                     <LinearLayout
@@ -193,32 +193,35 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="@dimen/spacing_small"
                     android:text="@string/text_test_feature"
                     android:textColor="@color/color_sencond_title"
-                    android:textSize="@dimen/text_size_small_16"/>
+                    android:textSize="@dimen/text_size_small_16"
+                    />
 
                 <TextView
                     android:id="@+id/tv_test_result_descirbe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/f9"
-                    tools:text="描述1"/>
+                    tools:text="描述1"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/spacing_normal"
                     android:text="@string/text_test_explain"
                     android:textColor="@color/color_sencond_title"
-                    android:textSize="@dimen/text_size_small_16"/>
+                    android:textSize="@dimen/text_size_small_16"
+                    />
 
                 <TextView
                     android:id="@+id/tv_test_result_descirbe_second"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="40dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:textColor="@color/f9"
                     tools:text="描述2"
                     />
@@ -297,7 +300,8 @@
                 android:text="@string/text_test_list"
                 android:textColor="@color/f3"
                 android:textSize="@dimen/text_size_small_15"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                />
 
             <View
                 style="@style/ItemLineHeight"
@@ -309,9 +313,10 @@
                 android:layout_height="wrap_content"
                 />
 
-            <View
-                style="@style/ItemLineHeight"
-                android:layout_height="10dp"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_small"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -328,19 +333,14 @@
                 style="@style/ItemLineHeight"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/white"/>
-
             <com.jude.easyrecyclerview.EasyRecyclerView
-                android:id="@+id/recycle"
+                android:id="@id/recycle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
+                android:paddingTop="@dimen/spacing_small"
                 />
-
 
         </LinearLayout>
 

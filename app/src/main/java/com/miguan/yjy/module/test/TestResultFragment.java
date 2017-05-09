@@ -123,10 +123,6 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     }
 
     public void setData(List<Skin> datas, ArrayList<Skin> categoryList) {
-        List<Skin> list = new ArrayList<>();
-        for (int i=0; i<(datas.size()>=2 ? 2 : datas.size()); i++) {
-            list.add(datas.get(i));
-        }
         TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
         testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), categoryList, position,datas.get(position).getCategory_name()));
         mRectTestMySkin.setAdapter(testSkinAdapter);

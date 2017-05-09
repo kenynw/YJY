@@ -94,8 +94,7 @@ public class WebViewActivity extends ChainBaseActivity {
 
         });
         webView.loadUrl(url);
-        webView.addJavascriptInterface( new WebViewOB(this), "android");
-
+        webView.addJavascriptInterface(new WebViewOB(this), "android");
     }
 
     @Override

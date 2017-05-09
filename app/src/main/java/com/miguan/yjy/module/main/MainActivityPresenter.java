@@ -35,7 +35,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     protected void onCreate(MainActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         EventBus.getDefault().register(this);
-        requestPremission();
+        requestPermission();
         CommonModel.getInstance().update(getView());
 
     }
@@ -58,7 +58,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
         loadUnread();
     }
 
-    private void requestPremission() {
+    private void requestPermission() {
         PermissionUtils.requestPermission(getView(), new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
