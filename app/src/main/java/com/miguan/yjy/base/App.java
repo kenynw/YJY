@@ -31,12 +31,12 @@ public class App extends Application {
         super.onCreate();
         LUtils.initialize(this);
         SystemPreferences.initialize(this);
-        LUtils.isDebug = true;
+        LUtils.isDebug = false;
         Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
 
-        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.setDebugMode(LUtils.isDebug); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
 
         initShare();
