@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,7 @@
         android:id="@id/toolbar"
         style="@style/TitleToolbar"
         android:background="@color/white"
+        android:layout_marginBottom="1dp"
         >
 
         <TextView
@@ -29,6 +31,7 @@
         android:id="@+id/custom_scv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <LinearLayout
@@ -68,7 +71,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/bg_shape_main_color_white_5"
                             android:gravity="center"
-                            android:textColor="@color/f32d"
+                            android:textColor="@color/colorPrimary"
                             android:textStyle="bold"
                             tools:text="D"
                             />
@@ -81,7 +84,7 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="轻干"
-                            android:textColor="@color/f9"
+                            android:textColor="@color/textSecondary"
                             android:textSize="@dimen/text_size_small_14"/>
 
                     </LinearLayout>
@@ -105,7 +108,7 @@
                             android:background="@drawable/bg_shape_main_color_white_5"
                             android:gravity="center"
                             android:text="D"
-                            android:textColor="@color/f32d"
+                            android:textColor="@color/colorPrimary"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -115,7 +118,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="10dp"
                             android:text="轻干"
-                            android:textColor="@color/f9"
+                            android:textColor="@color/textSecondary"
                             android:textSize="@dimen/text_size_small_14"/>
 
                     </LinearLayout>
@@ -139,7 +142,7 @@
                             android:background="@drawable/bg_shape_main_color_white_5"
                             android:gravity="center"
                             android:text="D"
-                            android:textColor="@color/f32d"
+                            android:textColor="@color/colorPrimary"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -149,7 +152,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="10dp"
                             android:text="轻干"
-                            android:textColor="@color/f9"
+                            android:textColor="@color/textSecondary"
                             android:textSize="@dimen/text_size_small_14"/>
 
                     </LinearLayout>
@@ -173,7 +176,7 @@
                             android:background="@drawable/bg_shape_main_color_white_5"
                             android:gravity="center"
                             android:text="D"
-                            android:textColor="@color/f32d"
+                            android:textColor="@color/colorPrimary"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -183,7 +186,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="10dp"
                             android:text="轻干"
-                            android:textColor="@color/f9"
+                            android:textColor="@color/textSecondary"
                             android:textSize="@dimen/text_size_small_14"/>
 
                     </LinearLayout>
@@ -203,7 +206,7 @@
                     android:id="@+id/tv_test_result_descirbe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/f9"
+                    android:textColor="@color/textSecondary"
                     tools:text="描述1"
                     />
 
@@ -222,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="40dp"
                     android:layout_marginTop="@dimen/spacing_small"
-                    android:textColor="@color/f9"
+                    android:textColor="@color/textSecondary"
                     tools:text="描述2"
                     />
 
@@ -251,9 +254,11 @@
                         android:layout_height="match_parent"
                         android:drawableLeft="@mipmap/ic_test_grade"
                         android:drawablePadding="10dp"
+                        android:drawableStart="@mipmap/ic_test_grade"
                         android:text="@string/text_test_grade"
-                        android:textColor="@color/f32d"
-                        android:textSize="@dimen/text_size_small_14"/>
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_small_14"
+                        />
 
                 </LinearLayout>
 
@@ -280,7 +285,7 @@
                         android:drawableLeft="@mipmap/ic_test_again"
                         android:drawablePadding="10dp"
                         android:text="@string/text_test_again"
-                        android:textColor="@color/f32d"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_small_14"/>
 
                 </LinearLayout>
@@ -303,9 +308,7 @@
                 android:textStyle="bold"
                 />
 
-            <View
-                style="@style/ItemLineHeight"
-                />
+            <View style="@style/ItemLineHeight"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rect_test_my_skin"
@@ -324,21 +327,22 @@
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:text="@string/text_test_guide"
                 android:textColor="@color/f3"
                 android:textSize="@dimen/text_size_small_15"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                />
 
             <View
                 style="@style/ItemLineHeight"
                 />
 
-            <com.jude.easyrecyclerview.EasyRecyclerView
-                android:id="@id/recycle"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recy_test_article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
+                android:background="@color/white"
                 android:paddingTop="@dimen/spacing_small"
                 />
 

@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="国家药监局进口备案"
-            android:textColor="@color/f9"
+            android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_small_14"/>
 
     </LinearLayout>
@@ -57,7 +57,7 @@
             android:id="@+id/tv_product_detail_provision_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/f9"
+            android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_small_14"
             tools:text="粤G妆网备字2014009024"
             />
@@ -81,7 +81,7 @@
             android:id="@+id/tv_product_detail_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/f9"
+            android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_small_14"
             tools:text="中国"/>
 
@@ -105,7 +105,7 @@
             android:id="@+id/tv_product_detail_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/f9"
+            android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_small_14"
             tools:text="广东真丽斯化妆品有限公司"
             />

@@ -47,7 +47,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/tv_product_component_describe"
-                    android:textColor="@color/f9"
+                    android:textColor="@color/textSecondary"
                     android:textSize="@dimen/text_size_small_14"/>
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_marginBottom="15dp"
                     android:gravity="center"
                     android:text="成分标签按添加量从多到少排序"
-                    android:textColor="@color/f9"
+                    android:textColor="@color/textSecondary"
                     android:textSize="@dimen/text_size_small_14"/>
 
                 <include layout="@layout/include_component"/>
@@ -91,7 +91,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/tv_product_component_img"
-                    android:textColor="@color/f32d"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_small_15"/>
 
                 <ImageView

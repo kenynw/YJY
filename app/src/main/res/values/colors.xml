@@ -5,6 +5,22 @@
     <color name="colorPrimaryLight">#78E0D4</color>
     <color name="colorAccent">#FF5E87</color>
 
+    <!--背景颜色，添加bg前缀-->
+    <color name="bgWindow">#FFF5F5F5</color>
+    <color name="bgWindowBar">#9e9e9e</color>
+    <color name="bgActionBar">#FFFFFF</color>
+    <color name="bgDisable">#D8D8D8</color>
+
+    <!--文本颜色，添加text前缀-->
+    <color name="textPrimary">#222</color>
+    <color name="textSecondary">#999</color>
+    <color name="textTertiary">#666</color>
+    <color name="textHint">#ccc</color>
+    <color name="textYellow">#fdff00</color>
+
+    <!--分割线颜色，添加div前缀-->
+    <color name="divPrimary">#EEEEEE</color>
+
     <!--查询产品相关-->
     <color name="color_sencond_title">#222222</color>
     <color name="fcd">#cdcdcd</color>
@@ -12,9 +28,7 @@
     <color name="f7">#f7f7f7</color>
     <color name="f3">#333333</color>
     <color name="f6">#666666</color>
-    <color name="f9">#999999</color>
     <color name="fa">#AAAAAA</color>
-    <color name="f32d">#32dac3</color>
     <color name="fe2">#e2e2e2</color>
     <color name="fed">#ededed</color>
     <color name="fb74">#fb7474</color>
@@ -60,21 +74,5 @@
     <!--通用颜色-->
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
-
-    <!--背景颜色，添加bg前缀-->
-    <color name="bgWindow">#FFF5F5F5</color>
-    <color name="bgWindowBar">#9e9e9e</color>
-    <color name="bgActionBar">#FFFFFF</color>
-    <color name="bgDisable">#D8D8D8</color>
-
-    <!--文本颜色，添加text前缀-->
-    <color name="textPrimary">#222</color>
-    <color name="textSecondary">#999</color>
-    <color name="textTertiary">#666</color>
-    <color name="textHint">#ccc</color>
-    <color name="textYellow">#fdff00</color>
-
-    <!--分割线颜色，添加div前缀-->
-    <color name="divPrimary">#EEEEEE</color>
 
 </resources>

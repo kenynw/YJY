@@ -95,7 +95,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/btn_save"
-                android:textColor="@color/f32d"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_small_16"/>
 
         </LinearLayout>

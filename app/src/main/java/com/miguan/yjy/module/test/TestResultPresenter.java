@@ -1,8 +1,8 @@
 package com.miguan.yjy.module.test;
 
-import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
+import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
 import com.miguan.yjy.model.TestModel;
-import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.local.UserPreferences;
 
 /**
@@ -11,22 +11,17 @@ import com.miguan.yjy.model.local.UserPreferences;
  * @描述
  */
 
-public class TestResultPresenter extends BaseListFragmentPresenter<TestResultFragment, Article> {
+public class TestResultPresenter extends BaseDataFragmentPresenter<TestResultFragment, Test> {
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        onRefresh();
+    protected void onCreateView(TestResultFragment view) {
+        super.onCreateView(view);
+        loadData();
     }
 
-    @Override
-    public void onRefresh() {
+    public void loadData() {
         if (UserPreferences.getUserID() > 0) {
-            TestModel.getInstantce().getSkinRecommend()
-                    .map(test -> {
-//                        getView().setData(test);
-                        return test.getSkinArticle();
-                    }).unsafeSubscribe(getRefreshSubscriber());
+            TestModel.getInstantce().getSkinRecommend().unsafeSubscribe(getSubscriber());
         }
     }
 

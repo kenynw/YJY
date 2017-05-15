@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/text_test_front_info"
-                android:textColor="@color/f9"
+                android:textColor="@color/textSecondary"
                 android:textSize="@dimen/text_size_small_13"/>
 
             <TextView
@@ -58,7 +58,7 @@
                 android:background="@drawable/bg_round_stroke_div"
                 android:gravity="center"
                 android:text="@string/text_test_birthday"
-                android:textColor="@color/f9"
+                android:textColor="@color/textSecondary"
                 android:textSize="@dimen/text_size_small_14"/>
 
             <LinearLayout
@@ -76,7 +76,7 @@
                     android:background="@drawable/bg_round_stroke_div"
                     android:gravity="center"
                     android:text="男"
-                    android:textColor="@color/f9"
+                    android:textColor="@color/textSecondary"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -103,7 +103,7 @@
                 android:background="@drawable/bg_shape_main_color_white"
                 android:gravity="center"
                 android:text="@string/text_test_into"
-                android:textColor="@color/f32d"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_small_14"/>
         </LinearLayout>
 

@@ -25,8 +25,8 @@ public class SendValidateButton extends android.support.v7.widget.AppCompatButto
     private Timer mTimer = null;
     private TimerTask mTask = null;
     private int mDisableTime = DISABLE_TIME; // 倒计时时间，默认60秒
-    private int mEnableColor = getResources().getColor(R.color.f32d);
-    private int mDisableColor = getResources().getColor(R.color.f9);
+    private int mEnableColor = getResources().getColor(R.color.colorPrimary);
+    private int mDisableColor = getResources().getColor(R.color.textSecondary);
     private int mEnableBgColor = R.color.white;
     private String mEnableString = "重发";
     private String mDisableString = "剩余";

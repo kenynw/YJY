@@ -55,7 +55,7 @@
         android:layout_below="@+id/tv_product_detail_spec"
         android:layout_marginTop="15dp"
         android:text="@string/text_query_production_date"
-        android:textColor="@color/f32d"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_small_14"
         android:visibility="gone"/>
 

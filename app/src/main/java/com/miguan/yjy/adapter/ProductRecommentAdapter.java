@@ -62,7 +62,7 @@ public class ProductRecommentAdapter extends RecyclerArrayAdapter<Product> {
             if (data.getName().contains(keyword)) {
                 //为文本框设置多种颜色
                 SpannableStringBuilder style = new SpannableStringBuilder(data.getName());
-                style.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.f32d)), data.getName().indexOf(keyword), data.getName().indexOf(keyword) + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                style.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.colorPrimary)), data.getName().indexOf(keyword), data.getName().indexOf(keyword) + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tvProductThink.setText(style);
             } else {
                 tvProductThink.setText(data.getName());

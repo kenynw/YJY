@@ -259,7 +259,7 @@
                 android:drawablePadding="7dp"
                 android:gravity="center"
                 android:text="生成功课"
-                android:textColor="@color/f9"
+                android:textColor="@color/textSecondary"
                 android:textSize="@dimen/text_size_small_15"/>
 
         </RelativeLayout>
@@ -271,7 +271,7 @@
         <RelativeLayout
             android:layout_width="125dp"
             android:layout_height="match_parent"
-            android:background="@color/f32d">
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:id="@+id/tv_product_detail_remark"

@@ -28,7 +28,7 @@
         android:text="@string/slide_show"
         android:maxLines="2"
         android:ellipsize="end"
-        android:textColor="@color/f9"
+        android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_micro_12"/>
 
 </LinearLayout>

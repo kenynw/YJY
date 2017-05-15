@@ -6,7 +6,7 @@ Properties properties = new Properties();
 properties.load(new FileInputStream(file("../config/signing.properties")))
 
 static def releaseTime() {
-    return new Date().format("MMddHHmm", TimeZone.getTimeZone("CTT"))
+    return new Date().format("MMddHH", TimeZone.getTimeZone("CTT"))
 }
 
 android {
@@ -68,16 +68,16 @@ android {
         }
     }
 
-    android.applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                //这里修改apk文件名
-                def fileName = "YJY_${defaultConfig.versionName}_${releaseTime()}.apk"
-                output.outputFile = new File(outputFile.parent, fileName)
-            }
-        }
-    }
+//    android.applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                //这里修改apk文件名
+//                def fileName = "YJY_${defaultConfig.versionName}_${releaseTime()}.apk"
+//                output.outputFile = new File(outputFile.parent, fileName)
+//            }
+//        }
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -99,6 +99,6 @@
         android:paddingRight="20dp"
         android:paddingTop="4dp"
         android:text="@string/tv_product_detail_lock_all_component"
-        android:textColor="@color/f32d"/>
+        android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>

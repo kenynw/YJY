@@ -11,6 +11,7 @@ import com.dsk.chain.model.ModelManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.module.common.AppCrashHandler;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -35,6 +36,7 @@ public class App extends Application {
         Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
+        AppCrashHandler.getInstance(this);
 
         JPushInterface.setDebugMode(LUtils.isDebug); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);

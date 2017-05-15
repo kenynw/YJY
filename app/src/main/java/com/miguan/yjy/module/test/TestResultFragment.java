@@ -11,24 +11,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
-import com.dsk.chain.expansion.list.BaseListFragment;
-import com.dsk.chain.expansion.list.ListConfig;
-import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestSkinAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
-import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.widget.CustomNestedScrollView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @作者 cjh
@@ -36,9 +32,11 @@ import butterknife.ButterKnife;
  * @描述 测试结果(我的肤质)
  */
 @RequiresPresenter(TestResultPresenter.class)
-public class TestResultFragment extends BaseListFragment<TestResultPresenter, Article> {
+public class TestResultFragment extends BaseDataFragment<TestResultPresenter, Test> {
 
     public static final String H5_SCORE = "http://m.yjyapp.com/site/score-tip";
+
+    private Unbinder mBind;
 
     @BindView(R.id.tv_test_result_descirbe)
     TextView mTvResultDescirbe;
@@ -55,9 +53,6 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     @BindView(R.id.ll_test_again)
     LinearLayout mLlTestAgain;
 
-    @BindView(R.id.recycle)
-    EasyRecyclerView mRecycle;
-
     @BindViews({R.id.tv_test_first_letter, R.id.tv_test_second_letter, R.id.tv_test_third_letter, R.id.tv_test_four_letter})
     List<TextView> mSkinLetters;
 
@@ -67,14 +62,14 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
 
-    @BindView(R.id.custom_scv)
-    CustomNestedScrollView mCustomScv;
+    @BindView(R.id.recy_test_article)
+    RecyclerView mRecyArticle;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, view);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.test_activity_result, container, false);
+        mBind = ButterKnife.bind(this, view);
 
         mToolbarTitle.setText("我的肤质");
         mLlTestGrade.setOnClickListener(v -> WebViewActivity.start(getActivity(), getString(R.string.text_test_grade), H5_SCORE));
@@ -83,36 +78,43 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
                 mMyOnTabClick.tabClickStart();
             }
         });
+
         mRectTestMySkin.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyArticle.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         return view;
     }
 
     @Override
-    public ArticleViewHolder createViewHolder(ViewGroup prent, int viewType) {
-        return new ArticleViewHolder(prent);
-    }
+    public void setData(Test test) {
+        setSkinResult(test);
 
-    @Override
-    public int getLayout() {
-        return R.layout.test_activity_result;
-    }
+        mRecyArticle.setAdapter(new RecyclerView.Adapter<ArticleViewHolder>() {
 
-    @Override
-    public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(false)
-                .setNoMoreAble(false)
-                .setFooterErrorAble(false)
-                .hasItemDecoration(false);
-    }
+            @Override
+            public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return new ArticleViewHolder(parent);
+            }
 
-    public void setFocusable() {
-        getListView().setFocusable(false);
-        getListView().setFocusableInTouchMode(false);
+            @Override
+            public void onBindViewHolder(ArticleViewHolder holder, int position) {
+                holder.setData(test.getSkinArticle().get(position));
+            }
+
+            @Override
+            public int getItemCount() {
+                return test.getSkinArticle().size();
+            }
+        });
+
+        List<Skin> datas = test.getSkinProduct();
+        TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
+        testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), test.getCategoryList(), position, datas.get(position).getCategory_name()));
+        mRectTestMySkin.setAdapter(testSkinAdapter);
     }
 
     // 设置肤质
-    public void setSkinResult(Test test) {
+    private void setSkinResult(Test test) {
         List<Skin> skinList = test.getDesc();
         for (int i = 0; i < skinList.size(); i++) {
             mSkinLetters.get(i).setText(skinList.get(i).getLetter());
@@ -122,10 +124,10 @@ public class TestResultFragment extends BaseListFragment<TestResultPresenter, Ar
         mTvResultDescirbeSecond.setText(test.getElements());
     }
 
-    public void setData(List<Skin> datas, ArrayList<Skin> categoryList) {
-        TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
-        testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), categoryList, position,datas.get(position).getCategory_name()));
-        mRectTestMySkin.setAdapter(testSkinAdapter);
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mBind.unbind();
     }
 
     public interface MyOnTabClick {

@@ -34,7 +34,7 @@ public class ArticleModel extends AbsModel {
      * @return
      */
     public Observable<List<Article>> getArticleList(int page) {
-        return ServicesClient.getServices().articleList(page, 5).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().articleList(page).compose(new DefaultTransform<>());
     }
 
     /**

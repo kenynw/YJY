@@ -48,7 +48,6 @@ import q.rorbin.badgeview.QBadgeView;
 @RequiresPresenter(MeFragmentPresenter.class)
 public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
 
-    public static final String DEFALUT_LOG_IMG = "http://oss.yjyapp.com/static/h5/images/logo/share.jpg";
     @BindView(R.id.ll_me_info)
     LinearLayout mLlInfo;
 

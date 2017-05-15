@@ -260,13 +260,13 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 mTvTestMan.setBackgroundResource(R.drawable.bg_shape_63c);
                 mTvTestWoman.setBackgroundResource(R.drawable.bg_round_stroke_div);
                 mTvTestMan.setTextColor(getResources().getColor(R.color.white));
-                mTvTestWoman.setTextColor(getResources().getColor(R.color.f9));
+                mTvTestWoman.setTextColor(getResources().getColor(R.color.textSecondary));
                 break;
             case R.id.tv_test_woman:
                 sex = 0;
                 mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
                 mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
-                mTvTestMan.setTextColor(getResources().getColor(R.color.f9));
+                mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
                 mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
                 break;
             case R.id.tv_test_into:
@@ -352,7 +352,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 birthDay = String.valueOf(date.getTime() / 1000);
                 mTvTestSelectBirthday.setText(DateUtils.DateToStr(date));
             }
-        }).setCancelColor(getResources().getColor(R.color.f9)).setSubmitColor(getResources().getColor(R.color.f32d)).isDialog(true).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
+        }).setCancelColor(getResources().getColor(R.color.textSecondary)).setSubmitColor(getResources().getColor(R.color.colorPrimary)).isDialog(true).setType(TimePickerView.Type.YEAR_MONTH_DAY).build();
         pvTime.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
         pvTime.show();
     }
