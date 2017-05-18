@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Unique;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Copyright (c) 2017/3/28. LiaoPeiKun Inc. All rights reserved.
@@ -90,6 +91,14 @@ public class Brand implements Parcelable {
         dest.writeInt(this.hot);
     }
 
+    public boolean getIsLocal() {
+        return this.isLocal;
+    }
+
+    public void setIsLocal(boolean isLocal) {
+        this.isLocal = isLocal;
+    }
+
     public Brand() {
     }
 
@@ -100,6 +109,17 @@ public class Brand implements Parcelable {
         this.isLocal = in.readByte() != 0;
         this.img = in.readString();
         this.hot = in.readInt();
+    }
+
+    @Generated(hash = 1362967694)
+    public Brand(Long id, String name, String letter, boolean isLocal, String img,
+            int hot) {
+        this.id = id;
+        this.name = name;
+        this.letter = letter;
+        this.isLocal = isLocal;
+        this.img = img;
+        this.hot = hot;
     }
 
     public static final Creator<Brand> CREATOR = new Creator<Brand>() {
