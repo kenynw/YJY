@@ -83,6 +83,10 @@ public class BaseListActivityPresenter<V extends BaseListActivity, M> extends Pr
         this.mPage = page;
     }
 
+    public M getItem(int position) {
+        return mAdapter.getItem(position);
+    }
+
     @Override
     public void onLoadMore() {
     }

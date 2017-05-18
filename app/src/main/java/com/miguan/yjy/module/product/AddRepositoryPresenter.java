@@ -20,7 +20,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     public static final String EXTRA_BRAND_ID = "brand_id";
     public static final String EXTRA_OVERTIME = "overtime";
 
-    public static void start(Context context, String brandName, int brandId, String overtime) {
+    public static void start(Context context, String brandName, Long brandId, String overtime) {
         Intent intent = new Intent(context, AddRepositoryActivity.class);
         intent.putExtra(EXTRA_BRAND_NAME, brandName);
         intent.putExtra(EXTRA_BRAND_ID, brandId);
@@ -30,7 +30,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
 
     private String mBrandName;
 
-    private int mBrandId;
+    private Long mBrandId;
 
     private String mOvertime;
 
@@ -38,7 +38,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     protected void onCreate(AddRepositoryActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         mBrandName = getView().getIntent().getStringExtra(EXTRA_BRAND_NAME);
-        mBrandId = getView().getIntent().getIntExtra(EXTRA_BRAND_ID, 0);
+        mBrandId = getView().getIntent().getLongExtra(EXTRA_BRAND_ID, 0);
         mOvertime = getView().getIntent().getStringExtra(EXTRA_OVERTIME);
     }
 

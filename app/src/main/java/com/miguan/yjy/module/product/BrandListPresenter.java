@@ -31,6 +31,10 @@ public class BrandListPresenter extends BaseListActivityPresenter<BrandListActiv
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 
+    public void insertBrand(Brand brand) {
+        ProductModel.getInstance().insertBrand(brand);
+    }
+
     public BrandList getBrandList() {
         return mBrandList;
     }

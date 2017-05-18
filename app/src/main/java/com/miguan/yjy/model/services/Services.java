@@ -345,7 +345,7 @@ public interface Services {
      */
     @GET("?action=queryCosmetics")
     Observable<UserProduct> queryCode(
-            @Query("id") int brandId,
+            @Query("id") Long brandId,
             @Query("number") String number
     );
 
@@ -355,7 +355,7 @@ public interface Services {
     @GET("?action=addRemind")
     Observable<String> addRepository(
             @Query("user_id") int userId,
-            @Query("brand_id") int brandId,
+            @Query("brand_id") Long brandId,
             @Query("brand_name") String brand_name,
             @Query("product") String product,
             @Query("is_seal") int is_seal,

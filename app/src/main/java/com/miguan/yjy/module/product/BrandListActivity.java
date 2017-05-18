@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
+import com.github.promeg.pinyinhelper.Pinyin;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
@@ -65,8 +66,13 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
         getPresenter().getAdapter().setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Brand brand = getPresenter().getAdapter().getItem(position);
+                if (brand != null && brand.getId() == null) {
+                    getPresenter().insertBrand(brand);
+                }
+
                 Intent intent = new Intent();
-                intent.putExtra("brand", getPresenter().getAdapter().getItem(position));
+                intent.putExtra("brand", brand);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
@@ -178,6 +184,14 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
                     boolean isPinyin = brand.getLetter().contains(keyword);
                     boolean isChinese = brand.getName().contains(keyword);
                     if (isChinese || isPinyin) mFilterList.add(brand);
+                }
+
+                if (mFilterList.size() == 0) {
+                    Brand brand = new Brand();
+                    brand.setName(keyword);
+                    brand.setLetter(String.valueOf(Pinyin.toPinyin(keyword.charAt(0)).charAt(0)));
+                    brand.setLocal(false);
+                    mFilterList.add(brand);
                 }
             }
 

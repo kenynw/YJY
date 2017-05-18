@@ -28,6 +28,8 @@ public class FilterActivityPresenter extends Presenter<FilterActivity> {
             dataSet.add(FilterType.Contrast);
             dataSet.add(FilterType.Sepia);
             dataSet.add(FilterType.Toon);
+            dataSet.add(FilterType.Amaro);
+            dataSet.add(FilterType.IF1997);
 
             mAdapter = new FilterAdapter(getView(), dataSet);
             mAdapter.setOnFilterSelectedListener(getView());

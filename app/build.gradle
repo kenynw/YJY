@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda' // lambda插件
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao'
 
 Properties properties = new Properties();
 properties.load(new FileInputStream(file("../config/signing.properties")))
@@ -10,14 +11,15 @@ static def releaseTime() {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
     defaultConfig {
         applicationId "com.miguan.yjy"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 //        ndk {
@@ -25,6 +27,8 @@ android {
 //            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86'
 //            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
 //        }
+
+        resConfigs "zh-rCN", "zh-rHK", "zh-rTW", "en"
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
@@ -87,42 +91,42 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile 'junit:junit:4.12'
+
     compile project(':chain')
     compile project(':umshare')
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.0'
-    compile 'com.android.support:cardview-v7:25.3.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    compile project(':processors')
 
-    // 图片相关
-    compile 'com.facebook.fresco:fresco:1.2.0'
-    compile 'jp.wasabeef:fresco-processors:2.1.0'
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' //图片处理
+    // network
+    compile rootProject.ext.dependencies["retrofit"];
+    compile rootProject.ext.dependencies["retrofit-converter-gson"];
+    compile rootProject.ext.dependencies["retrofit-adapter-rxjava"];
+    compile rootProject.ext.dependencies["glide"]
+    compile rootProject.ext.dependencies["glide-transformations"]
 
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    // tools
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar'//侧滑删除
-    compile 'com.contrarywind:Android-PickerView:3.2.2'// 时间选择器、省市区三级联动
     compile 'com.dsk:imageprovider:2.2.1'
-    compile 'com.jude:exgridview:1.1.5'
-    compile 'com.umeng.analytics:analytics:latest.integration'// 友盟统计
+    compile 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
 
-    // 极光推送
+    // view
+    compile rootProject.ext.dependencies["swipelayout"]
+    compile rootProject.ext.dependencies["pickerview"]
+    compile rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    compile 'com.jude:exgridview:1.1.5'
+    compile 'q.rorbin:badgeview:1.1.0'
+
+    // database
+    compile 'org.greenrobot:greendao:3.2.2'
+
+    // 第三方
+    compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'cn.jiguang.sdk:jpush:3.0.3'
     compile 'cn.jiguang.sdk:jcore:1.1.1'
 
-    compile 'q.rorbin:badgeview:1.1.0'
-
-//    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
-
-    final RETROFIT_VERSION = '2.1.0'
-    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+    // test
+    testCompile rootProject.ext.dependencies["junit"]
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }

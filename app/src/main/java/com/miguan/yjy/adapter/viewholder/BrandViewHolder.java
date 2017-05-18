@@ -1,7 +1,9 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.support.annotation.LayoutRes;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -20,6 +22,9 @@ public class BrandViewHolder extends BaseViewHolder<Brand> {
     @BindView(R.id.tv_brand_name)
     TextView mTvName;
 
+    @BindView(R.id.iv_brand_delete)
+    ImageView mIvDelete;
+
     public BrandViewHolder(ViewGroup parent) {
         this(parent, R.layout.item_list_brand);
     }
@@ -32,5 +37,6 @@ public class BrandViewHolder extends BaseViewHolder<Brand> {
     @Override
     public void setData(Brand data) {
         mTvName.setText(data.getName());
+        mIvDelete.setVisibility(data.isLocal() ? View.VISIBLE : View.GONE);
     }
 }

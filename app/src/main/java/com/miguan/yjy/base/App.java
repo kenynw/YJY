@@ -4,11 +4,14 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.dsk.chain.Chain;
 import com.dsk.chain.model.ModelManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.miguan.yjy.model.bean.DaoMaster;
+import com.miguan.yjy.model.bean.DaoSession;
 import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.AppCrashHandler;
@@ -27,26 +30,30 @@ import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
 
+    private static DaoSession sDaoSession;
+
     @Override
     public void onCreate() {
         super.onCreate();
         LUtils.initialize(this);
         SystemPreferences.initialize(this);
-        LUtils.isDebug = false;
+        LUtils.isDebug = true;
         Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
-        AppCrashHandler.getInstance(this);
+        if (!LUtils.isDebug) AppCrashHandler.getInstance(this);
 
         JPushInterface.setDebugMode(LUtils.isDebug); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
 
         initShare();
+
+        setupDatabase();
+
         if (!isApplicationInBackground(this)) {
             Log.e("是否在后台", "----");
             UserPreferences.setIsShowTest(false);
         }
-
     }
 
     // 初始化友盟分享
@@ -57,7 +64,14 @@ public class App extends Application {
         PlatformConfig.setWeixin("wxd949cf326bc0972f", "962b92d13242d27ed55e9e44230eb744");
     }
 
-    public static boolean isApplicationInBackground(Context context) {
+    private void setupDatabase() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "yjy.db");
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        sDaoSession = daoMaster.newSession();
+    }
+
+    private boolean isApplicationInBackground(Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> taskList = am.getRunningTasks(1);
         if (taskList != null && !taskList.isEmpty()) {
@@ -69,5 +83,8 @@ public class App extends Application {
         return false;
     }
 
+    public static DaoSession getDaoSession() {
+        return sDaoSession;
+    }
 
 }

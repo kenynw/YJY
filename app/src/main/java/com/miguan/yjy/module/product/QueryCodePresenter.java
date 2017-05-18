@@ -36,7 +36,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     @Override
     protected void onCreateView(QueryCodeActivity view) {
         super.onCreateView(view);
-        if (mProduct != null) getView().setBrand(mProduct.getBrand_name(), mProduct.getBrand_id());
+        if (mProduct != null) getView().setBrand(mProduct.getBrand_name(), (long) mProduct.getBrand_id());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
         }
     }
 
-    public void query(int brandId, String number) {
+    public void query(Long brandId, String number) {
         ProductModel.getInstance().queryCode(brandId, number).subscribe(new ServicesResponse<UserProduct>() {
             @Override
             public void onNext(UserProduct product) {

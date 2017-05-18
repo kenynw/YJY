@@ -28,8 +28,10 @@ import jp.wasabeef.fresco.processors.ColorFilterPostprocessor;
 import jp.wasabeef.fresco.processors.CombinePostProcessors;
 import jp.wasabeef.fresco.processors.GrayscalePostprocessor;
 import jp.wasabeef.fresco.processors.MaskPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.AmaroFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.BrightnessFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.ContrastFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.IF1997FilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.InvertFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.KuawaharaFilterPostprocessor;
 import jp.wasabeef.fresco.processors.gpu.PixelationFilterPostprocessor;
@@ -69,7 +71,9 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
         Brightness,
         Kuawahara,
         Vignette,
-        BlurAndGrayscale
+        BlurAndGrayscale,
+        Amaro,
+        IF1997
     }
 
     public FilterAdapter(Context context, List<FilterType> list) {
@@ -132,7 +136,14 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
                     break;
                 case Vignette:
                     processor = new VignetteFilterPostprocessor(context, new PointF(0.5f, 0.5f),
-                            new float[] { 0.0f, 0.0f, 0.0f }, 0f, 0.75f);
+                            new float[]{0.0f, 0.0f, 0.0f}, 0f, 0.75f);
+                    break;
+                case Amaro:
+                    processor = new AmaroFilterPostprocessor(context);
+                    break;
+                case IF1997:
+                    processor = new IF1997FilterPostprocessor(context);
+                    break;
             }
             mPostprocessors.add(processor);
         }
@@ -154,9 +165,9 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
                 .build();
 
         PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                        .setImageRequest(request)
-                        .setOldController(holder.mDvImage.getController())
-                        .build();
+                .setImageRequest(request)
+                .setOldController(holder.mDvImage.getController())
+                .build();
 
         holder.mDvImage.setController(controller);
         holder.mTvName.setText(mTypeList.get(position).name());

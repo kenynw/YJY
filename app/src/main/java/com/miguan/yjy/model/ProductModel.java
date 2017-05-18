@@ -1,6 +1,8 @@
 package com.miguan.yjy.model;
 
 import com.dsk.chain.model.AbsModel;
+import com.miguan.yjy.base.App;
+import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Evaluate;
@@ -12,6 +14,7 @@ import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import rx.Observable;
@@ -62,15 +65,7 @@ public class ProductModel extends AbsModel {
     }
 
     public Observable<Product> getProductDetail(int productId) {
-//        Product mProduct = new Product();
-//        mProduct.setProduct_name("hahaha");
-//        mProduct.setBrand("理肤泉");
-//        return Observable.just(mProduct).compose(new DefaultTransform<>());
         return ServicesClient.getServices().productDetail(productId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
-    }
-
-    public Observable<UserProduct> queryCode(int brandId, String number) {
-        return ServicesClient.getServices().queryCode(brandId, number).compose(new DefaultTransform<>());
     }
 
     public Observable<List<Component>> getReadList() {
@@ -93,30 +88,42 @@ public class ProductModel extends AbsModel {
         return list;
     }
 
+    /**
+     * 批号查询
+     * @param brandId
+     * @param number
+     * @return
+     */
+    public Observable<UserProduct> queryCode(Long brandId, String number) {
+        return ServicesClient.getServices().queryCode(brandId, number).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 获取品牌列表
+     * @return
+     */
     public Observable<BrandList> getBrandList() {
-//        List<Brand> hot = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            Brand brand = new Brand();
-//            brand.setName("Biotherm 碧欧泉");
-//            brand.setLetter("B");
-//            hot.add(brand);
-//        }
-//        String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
-//                "T", "U", "V", "W", "X", "Y", "Z"};
-//        List<Brand> other = new ArrayList<>();
-//        for (String letter : letters) {
-//            for (int i = 0; i < 5; i++) {
-//                Brand brand = new Brand();
-//                brand.setName("安娜苏" + letter);
-//                brand.setLetter(letter);
-//                other.add(brand);
-//            }
-//        }
-//        Brand brand = new Brand();
-//        brand.setHotCosmetics(hot);
-//        brand.setOtherCosmetics(other);
-//        return Observable.just(brand).compose(new DefaultTransform<>());
-        return ServicesClient.getServices().brandList().compose(new DefaultTransform<>());
+        return ServicesClient.getServices().brandList()
+                .map(brandList -> {
+                    List<Brand> brands = queryAll();
+                    for (Brand brand : brands) {
+                        brand.setLocal(true);
+                    }
+
+                    brandList.getOtherCosmetics().addAll(brands);
+                    Collections.sort(brandList.getOtherCosmetics(),
+                            (brandFirst, brandSecond) -> brandFirst.getLetter().compareTo(brandSecond.getLetter()));
+                    return brandList;
+                })
+                .compose(new DefaultTransform<>());
+    }
+
+    public void insertBrand(Brand brand) {
+        App.getDaoSession().getBrandDao().insertOrReplace(brand);
+    }
+
+    public List<Brand> queryAll() {
+        return App.getDaoSession().getBrandDao().loadAll();
     }
 
     /**
@@ -134,7 +141,7 @@ public class ProductModel extends AbsModel {
      *
      * @return
      */
-    public Observable<String> addRepository(int brandId, String brandName, String product, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+    public Observable<String> addRepository(Long brandId, String brandName, String product, int isSeal, String sealTime, int qualityTime, String overdueTime) {
         return ServicesClient.getServices().addRepository(
                 UserPreferences.getUserID(), brandId, brandName, product, isSeal, sealTime, qualityTime, overdueTime
         ).compose(new DefaultTransform<>());

@@ -61,13 +61,13 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));
     }
 
-    public void setBrand(String brandName, int brandId) {
+    public void setBrand(String brandName, Long brandId) {
         mEtBrand.setText(brandName);
         mEtProduct.setText("");
         mBtnSubmit.setOnClickListener(v -> getPresenter().query(brandId, mEtProduct.getText().toString().trim()));
     }
 
-    public void showQueryDialog(UserProduct product, int brandId) {
+    public void showQueryDialog(UserProduct product, Long brandId) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_query_result)
                 .show();

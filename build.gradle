@@ -1,4 +1,4 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from : "config.gradle"
 
 buildscript {
     repositories {
@@ -8,12 +8,11 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.2'
 
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
-    }
-}
 
-plugins {
-    // lambda 插件
-    id "me.tatarka.retrolambda" version "3.2.0"
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+    }
 }
 
 allprojects {
