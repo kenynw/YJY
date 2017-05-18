@@ -241,6 +241,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         } else {
             SystemPreferences.setSearchName(name + ",");
         }
+        finish();
     }
 
 

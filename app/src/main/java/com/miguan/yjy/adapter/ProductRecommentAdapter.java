@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -79,6 +80,7 @@ public class ProductRecommentAdapter extends RecyclerArrayAdapter<Product> {
             } else {
                 SystemPreferences.setSearchName(name + ",");
             }
+            ((Activity) getContext()).finish();
         }
 
 

@@ -14,6 +14,24 @@ public class Brand implements Parcelable {
     private String name;
 
     private String letter;
+    private String img;
+    private int hot;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getHot() {
+        return hot;
+    }
+
+    public void setHot(int hot) {
+        this.hot = hot;
+    }
 
     public int getId() {
         return id;
@@ -39,6 +57,9 @@ public class Brand implements Parcelable {
         this.letter = letter;
     }
 
+    public Brand() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -49,15 +70,16 @@ public class Brand implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.name);
         dest.writeString(this.letter);
-    }
-
-    public Brand() {
+        dest.writeString(this.img);
+        dest.writeInt(this.hot);
     }
 
     protected Brand(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
         this.letter = in.readString();
+        this.img = in.readString();
+        this.hot = in.readInt();
     }
 
     public static final Creator<Brand> CREATOR = new Creator<Brand>() {

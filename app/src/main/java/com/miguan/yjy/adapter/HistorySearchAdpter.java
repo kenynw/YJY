@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,7 @@ public class HistorySearchAdpter extends RecyclerArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     SearchResultPresenter.start(getContext(), data, 0, "");
+                    ((Activity)getContext()).finish();
                 }
             });
         }

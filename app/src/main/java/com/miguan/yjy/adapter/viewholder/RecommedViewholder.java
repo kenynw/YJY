@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.app.Activity;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -57,6 +58,7 @@ public class RecommedViewholder extends BaseViewHolder<Product> {
         } else {
             SystemPreferences.setSearchName(name + ",");
         }
+        ((Activity) getContext()).finish();
     }
 
 
