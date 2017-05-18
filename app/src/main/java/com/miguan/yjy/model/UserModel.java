@@ -54,8 +54,8 @@ public class UserModel extends AbsModel {
      * 我在用的列表
      * @return
      */
-    public Observable<List<UserProduct>> getUsedProductList(int page) {
-        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID(), page).compose(new DefaultTransform<>());
+    public Observable<List<UserProduct>> getUsedProductList(int type, int page) {
+        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID(), type, page, 10).compose(new DefaultTransform<>());
     }
 
     /**

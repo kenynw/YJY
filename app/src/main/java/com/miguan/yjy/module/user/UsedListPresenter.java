@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.user;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.UserModel;
@@ -14,7 +15,9 @@ import org.greenrobot.eventbus.ThreadMode;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivity, UserProduct> {
+public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivity, UserProduct> implements TabLayout.OnTabSelectedListener {
+
+    private int mType = 0;
 
     @Override
     protected void onCreate(UsedListActivity view, Bundle saveState) {
@@ -35,17 +38,33 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
 
     @Override
     public void onRefresh() {
-        UserModel.getInstance().getUsedProductList(1).unsafeSubscribe(getRefreshSubscriber());
+        UserModel.getInstance().getUsedProductList(mType, 1).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        UserModel.getInstance().getUsedProductList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        UserModel.getInstance().getUsedProductList(mType, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mType = tab.getPosition();
+        onRefresh();
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }

@@ -158,7 +158,9 @@ public interface Services {
     @GET("?action=userProduct")
     Observable<List<UserProduct>> usedProduct(
             @Query("user_id") int userId,
-            @Query("page") int page
+            @Query("type") int type,
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
     );
 
     /**
