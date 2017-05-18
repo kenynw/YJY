@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Unique;
 
@@ -23,6 +22,10 @@ public class Brand implements Parcelable {
     private String letter;
 
     private boolean isLocal;
+
+    private String img;
+
+    private int hot;
 
     public Long getId() {
         return id;
@@ -56,7 +59,20 @@ public class Brand implements Parcelable {
         isLocal = local;
     }
 
-    public Brand() {
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getHot() {
+        return hot;
+    }
+
+    public void setHot(int hot) {
+        this.hot = hot;
     }
 
     @Override
@@ -66,33 +82,24 @@ public class Brand implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.id);
+        dest.writeValue(this.id);
         dest.writeString(this.name);
         dest.writeString(this.letter);
         dest.writeByte(this.isLocal ? (byte) 1 : (byte) 0);
+        dest.writeString(this.img);
+        dest.writeInt(this.hot);
     }
 
-    public boolean getIsLocal() {
-        return this.isLocal;
-    }
-
-    public void setIsLocal(boolean isLocal) {
-        this.isLocal = isLocal;
+    public Brand() {
     }
 
     protected Brand(Parcel in) {
-        this.id = in.readLong();
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.name = in.readString();
         this.letter = in.readString();
         this.isLocal = in.readByte() != 0;
-    }
-
-    @Generated(hash = 1984431535)
-    public Brand(Long id, String name, String letter, boolean isLocal) {
-        this.id = id;
-        this.name = name;
-        this.letter = letter;
-        this.isLocal = isLocal;
+        this.img = in.readString();
+        this.hot = in.readInt();
     }
 
     public static final Creator<Brand> CREATOR = new Creator<Brand>() {
@@ -106,5 +113,4 @@ public class Brand implements Parcelable {
             return new Brand[size];
         }
     };
-
 }

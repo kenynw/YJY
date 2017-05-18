@@ -23,13 +23,10 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
-import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,7 +96,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     public void setData(String keywords, ProductList productList, String cateName) {
 //        mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
-        String money = "共为您找到<font color=\"#32DAC3\"> " + productList.getPageTotal()+ " </font>款产品";
+        String money = "共为您找到<font color=\"#32DAC3\"> " + productList.getPageTotal() + " </font>款产品";
         mTvCount.setText(Html.fromHtml(money));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
@@ -131,7 +128,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                     imgSearchCancle.setVisibility(View.VISIBLE);
                     mLlResultFirst.setVisibility(View.GONE);
                     getPresenter().setRecommendData(s.toString());
-//                    getPresenter().onRefresh();
                 }
             }
         });
@@ -179,21 +175,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mIsInit = true;
     }
 
-    private void initListener(List<Product> datas) {
-//        mEtKeywords.setHint(productNum);
-//        tvCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (tvCancel.getText().toString().equals("取消")) {
-//                    finish();
-//                } else {
-//                    gotoSearchResult(edtSearch.getText().toString().trim());
-//                }
-//            }
-//        });
-
-    }
-
     public void setCateLayoutVisibility(int visibility) {
         mFilterPanel.setVisibility(visibility);
         mTvCount.setVisibility(visibility);
@@ -204,7 +185,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     }
 
     public void gotoSearchResult(String name) {
-        SearchResultPresenter.start(SearchResultActivity.this, name, 0, "");
+//        SearchResultPresenter.start(SearchResultActivity.this, name, 0, "");
         String oldName = SystemPreferences.getSearchName();
         if (!TextUtils.isEmpty(oldName)) {
             if (!oldName.contains(name))

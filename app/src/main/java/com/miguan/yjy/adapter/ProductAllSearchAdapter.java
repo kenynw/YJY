@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -61,7 +62,7 @@ public class ProductAllSearchAdapter extends BaseAdapter {
             } else {
                 SystemPreferences.setSearchName(datas.get(position).getName() + ",");
             }
-
+            ((Activity)context).finish();
         });
 
 
