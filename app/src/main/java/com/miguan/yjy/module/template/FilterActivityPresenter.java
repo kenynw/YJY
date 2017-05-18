@@ -18,18 +18,15 @@ public class FilterActivityPresenter extends Presenter<FilterActivity> {
         if (mAdapter == null) {
             List<FilterType> dataSet = new ArrayList<>();
             dataSet.add(FilterType.Original);
-            dataSet.add(FilterType.Grayscale);
-            dataSet.add(FilterType.ColorFilter);
-            dataSet.add(FilterType.Pixel);
-            dataSet.add(FilterType.Vignette);
-            dataSet.add(FilterType.Brightness);
-            dataSet.add(FilterType.Sketch);
-            dataSet.add(FilterType.Invert);
-            dataSet.add(FilterType.Contrast);
-            dataSet.add(FilterType.Sepia);
-            dataSet.add(FilterType.Toon);
             dataSet.add(FilterType.Amaro);
-            dataSet.add(FilterType.IF1997);
+            dataSet.add(FilterType.Brannan);
+            dataSet.add(FilterType.Hudson);
+            dataSet.add(FilterType.Inkwell);
+            dataSet.add(FilterType.Rise);
+            dataSet.add(FilterType.Sierra);
+            dataSet.add(FilterType.Sutro);
+            dataSet.add(FilterType.Valencia);
+            dataSet.add(FilterType.Xproll);
 
             mAdapter = new FilterAdapter(getView(), dataSet);
             mAdapter.setOnFilterSelectedListener(getView());

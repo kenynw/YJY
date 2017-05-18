@@ -76,8 +76,9 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         super.onCreate(savedInstanceState);
         setContentView(R.layout.template_activity_filter);
         ButterKnife.bind(this);
+        mUri = getIntent().getParcelableExtra(EXTRA_FILTER_URI);
+        mDvImage.setImageURI(mUri);
 
-        mDvImage.setImageURI(mUri = getIntent().getParcelableExtra(EXTRA_FILTER_URI));
         mIvCancel.setOnClickListener(v -> finish());
         mIvrOk.setOnClickListener(v -> {
             if (mCbApplyAll.isChecked() && mPostprocessor != null) {
@@ -119,8 +120,8 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     public void onFilterSelected(Postprocessor postprocessor) {
         mPostprocessor = postprocessor;
         mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
-                .setLocalThumbnailPreviewsEnabled(true)
                 .setResizeOptions(new ResizeOptions(480, 640))
+                .setLocalThumbnailPreviewsEnabled(true)
                 .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
                 .setProgressiveRenderingEnabled(false)
                 .setPostprocessor(postprocessor)
@@ -128,7 +129,6 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
         PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
                 .setImageRequest(mRequest)
-                .setTapToRetryEnabled(true)
                 .setOldController(mDvImage.getController())
                 .build();
         mDvImage.setController(controller);
