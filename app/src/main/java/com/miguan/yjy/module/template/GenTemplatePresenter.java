@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -39,9 +38,9 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
     public static final String EXTRA_TEMPLATE = "template";
 
-    public static void start(Context context, TemplateType template) {
+    public static void start(Context context, int index) {
         Intent intent = new Intent(context, GenTemplateActivity.class);
-        intent.putExtra(EXTRA_TEMPLATE, template);
+        intent.putExtra(EXTRA_TEMPLATE, index);
         context.startActivity(intent);
     }
 
@@ -60,11 +59,11 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         super.onCreate(view, saveState);
         EventBus.getDefault().register(this);
 
-        mTemplate = (TemplateType) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
-        if (mTemplate.mHeaderRes > 0)
-            mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
-        if (mTemplate.mFooterRes > 0)
-            mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
+//        mTemplate = (TemplateType) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
+//        if (mTemplate.mHeaderRes > 0)
+//            mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
+//        if (mTemplate.mFooterRes > 0)
+//            mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
     }
 
     public void hideCursor() {

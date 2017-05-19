@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.miguan.yjy.module.template.TemplateView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -36,6 +36,7 @@
             android:layout_gravity="end"
             android:layout_margin="@dimen/spacing_normal"
             android:src="@mipmap/ic_filter"
+            android:tag="filter"
             android:visibility="gone"
             />
 
@@ -109,4 +110,4 @@
 
     <include layout="@layout/include_template_delete"/>
 
-</LinearLayout>
+</com.miguan.yjy.module.template.TemplateView>
