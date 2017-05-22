@@ -22,6 +22,8 @@ public class UserProduct implements Parcelable {
 
     private String product;
 
+    private String img;
+
     private int is_seal;
 
     private long seal_time;
@@ -36,56 +38,8 @@ public class UserProduct implements Parcelable {
 
     private String endDay;
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
-        dest.writeInt(this.user_id);
-        dest.writeInt(this.brand_id);
-        dest.writeString(this.brand_name);
-        dest.writeString(this.product);
-        dest.writeInt(this.is_seal);
-        dest.writeLong(this.seal_time);
-        dest.writeInt(this.quality_time);
-        dest.writeLong(this.overdue_time);
-        dest.writeLong(this.add_time);
-        dest.writeString(this.startDay);
-        dest.writeString(this.endDay);
-    }
-
     public UserProduct() {
     }
-
-    protected UserProduct(Parcel in) {
-        this.id = in.readInt();
-        this.user_id = in.readInt();
-        this.brand_id = in.readInt();
-        this.brand_name = in.readString();
-        this.product = in.readString();
-        this.is_seal = in.readInt();
-        this.seal_time = in.readLong();
-        this.quality_time = in.readInt();
-        this.overdue_time = in.readLong();
-        this.add_time = in.readLong();
-        this.startDay = in.readString();
-        this.endDay = in.readString();
-    }
-
-    public static final Creator<UserProduct> CREATOR = new Creator<UserProduct>() {
-        @Override
-        public UserProduct createFromParcel(Parcel source) {
-            return new UserProduct(source);
-        }
-
-        @Override
-        public UserProduct[] newArray(int size) {
-            return new UserProduct[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -133,6 +87,14 @@ public class UserProduct implements Parcelable {
 
     public void setIs_seal(int is_seal) {
         this.is_seal = is_seal;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getSeal_time() {
@@ -184,4 +146,53 @@ public class UserProduct implements Parcelable {
         this.endDay = endDay;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeInt(this.user_id);
+        dest.writeInt(this.brand_id);
+        dest.writeString(this.brand_name);
+        dest.writeString(this.product);
+        dest.writeString(this.img);
+        dest.writeInt(this.is_seal);
+        dest.writeLong(this.seal_time);
+        dest.writeInt(this.quality_time);
+        dest.writeLong(this.overdue_time);
+        dest.writeLong(this.add_time);
+        dest.writeString(this.startDay);
+        dest.writeString(this.endDay);
+    }
+
+    protected UserProduct(Parcel in) {
+        this.id = in.readInt();
+        this.user_id = in.readInt();
+        this.brand_id = in.readInt();
+        this.brand_name = in.readString();
+        this.product = in.readString();
+        this.img = in.readString();
+        this.is_seal = in.readInt();
+        this.seal_time = in.readLong();
+        this.quality_time = in.readInt();
+        this.overdue_time = in.readLong();
+        this.add_time = in.readLong();
+        this.startDay = in.readString();
+        this.endDay = in.readString();
+    }
+
+    public static final Creator<UserProduct> CREATOR = new Creator<UserProduct>() {
+        @Override
+        public UserProduct createFromParcel(Parcel source) {
+            return new UserProduct(source);
+        }
+
+        @Override
+        public UserProduct[] newArray(int size) {
+            return new UserProduct[size];
+        }
+    };
 }

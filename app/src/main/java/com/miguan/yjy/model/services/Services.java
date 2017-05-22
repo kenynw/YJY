@@ -13,6 +13,7 @@ import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,8 @@ import rx.Observable;
  */
 
 public interface Services {
+
+    String BASE_BETA_URL = LUtils.isDebug ? "http://m.beta.yjyapp.com/" : "http://m.yjyapp.com/";
 
     String BASE_URL = "https://api.yjyapp.com/api/index/";
 
@@ -360,6 +363,7 @@ public interface Services {
             @Query("brand_id") Long brandId,
             @Query("brand_name") String brand_name,
             @Query("product") String product,
+            @Query("product_img") String img,
             @Query("is_seal") int is_seal,
             @Query("seal_time") String seal_time,
             @Query("quality_time") int quality_time,

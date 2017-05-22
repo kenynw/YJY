@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.net.Uri;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.UserModel;
@@ -49,6 +51,9 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
     @BindView(R.id.tv_product_used_residue)
     TextView mTvResidue;
 
+    @BindView(R.id.dv_product_used_thumb)
+    SimpleDraweeView mDvThumb;
+
     public UsedViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_list_product_used);
         ButterKnife.bind(this, itemView);
@@ -57,6 +62,7 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
     @Override
     public void setData(UserProduct data) {
         mTvName.setText(data.getBrand_name() + data.getProduct());
+        mDvThumb.setImageURI(Uri.parse(data.getImg()));
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         Date date = null;

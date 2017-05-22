@@ -141,9 +141,9 @@ public class ProductModel extends AbsModel {
      *
      * @return
      */
-    public Observable<String> addRepository(Long brandId, String brandName, String product, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+    public Observable<String> addRepository(Long brandId, String brandName, String product, String img, int isSeal, String sealTime, int qualityTime, String overdueTime) {
         return ServicesClient.getServices().addRepository(
-                UserPreferences.getUserID(), brandId, brandName, product, isSeal, sealTime, qualityTime, overdueTime
+                UserPreferences.getUserID(), brandId, brandName, product, img, isSeal, sealTime, qualityTime, overdueTime
         ).compose(new DefaultTransform<>());
     }
 
