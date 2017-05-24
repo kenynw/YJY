@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -26,16 +27,20 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
     ImageView mDvThumb;
 
     @BindView(R.id.tv_product_name)
-    TextView mTvName;
+    public TextView mTvName;
 
     @BindView(R.id.ratbar_product)
-    RatingBar mRatbar;
+    public RatingBar mRatbar;
 
     @BindView(R.id.tv_product_money)
-    TextView mTvSpec;
+    public TextView mTvSpec;
 
     public SearchReslutViewHolder(ViewGroup parent) {
-        super(parent, R.layout.item_product_list);
+        this(parent, R.layout.item_product_list);
+    }
+
+    public SearchReslutViewHolder(ViewGroup parent, @LayoutRes int res) {
+        super(parent, res);
         ButterKnife.bind(this, itemView);
     }
 
@@ -48,7 +53,7 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
 
-    private String getSpec(Product data) {
+    protected String getSpec(Product data) {
         return String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm());
     }
 

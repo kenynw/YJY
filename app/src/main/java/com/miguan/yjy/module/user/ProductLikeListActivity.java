@@ -10,7 +10,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.ProductLikeViewHolder;
 import com.miguan.yjy.model.bean.ProductList;
-import com.miguan.yjy.module.product.FilterPanel;
+import com.miguan.yjy.module.product.SearchFilterPanel;
 
 /**
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
@@ -38,8 +38,8 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
 
     public void setData(ProductList productList) {
         if (mIsInit) return;
-        FilterPanel filterPanel = new FilterPanel(this, productList.getCategroy(), productList.getEffects());
-        filterPanel.setOnItemSelectedListener(new FilterPanel.OnItemSelectedListener() {
+        SearchFilterPanel filterPanel = new SearchFilterPanel(this, productList.getCategroy(), productList.getEffects());
+        filterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int cateId, String text) {
                 filterPanel.dismissMenu();

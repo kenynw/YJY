@@ -28,7 +28,8 @@
             android:paddingRight="@dimen/spacing_normal"
             android:paddingStart="@dimen/spacing_normal"
             android:text="@string/text_brand"
-            android:textAppearance="@style/TextBody"/>
+            android:textAppearance="@style/TextBody"
+            />
 
         <EditText
             android:id="@+id/et_add_repository_brand"
@@ -69,14 +70,14 @@
             android:textAppearance="@style/TextBody"
             />
 
-        <EditText
-            android:id="@+id/et_add_repository_name"
+        <TextView
+            android:id="@+id/tv_add_repository_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"
             android:background="@color/white"
+            android:gravity="center_vertical"
             android:hint="@string/hint_product_name"
-            android:inputType="text"
             android:paddingEnd="@dimen/spacing_small"
             android:paddingLeft="@dimen/spacing_small"
             android:paddingRight="@dimen/spacing_small"
@@ -117,7 +118,7 @@
             >
 
             <TextView
-                android:id="@+id/et_add_repository_image"
+                android:id="@+id/tv_add_repository_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -136,6 +137,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/spacing_normal"
                 android:layout_marginRight="@dimen/spacing_normal"
                 app:failureImage="@mipmap/def_image_product_used"
                 app:placeholderImage="@mipmap/def_image_product_used"

@@ -3,6 +3,7 @@ package com.miguan.yjy.model.services;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.miguan.yjy.model.bean.EntityList;
 import com.miguan.yjy.utils.LUtils;
 
@@ -42,7 +43,9 @@ public class WrapperResponseBodyConverter<T> implements Converter<ResponseBody, 
             }
 
             String result = "";
-            if (data.has("msg")) {
+            if (TypeToken.get(mType).toString().contains("EntityRoot")) {
+                return new Gson().fromJson(data.toString(), mType);
+            } else if (data.has("msg")) {
                 if (!data.isNull("msg")) result = data.opt("msg").toString();
                 else return null;
             } else if (data.has("data")) {

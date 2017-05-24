@@ -3,6 +3,10 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Unique;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +15,11 @@ import java.util.List;
  * @日期 2017/3/21 9:38
  * @描述 产品相关（搜索）
  */
-
+@Entity
 public class Product implements Parcelable {
 
+    @Id
+    @Unique
     private int id;
 
     private String name;
@@ -42,10 +48,14 @@ public class Product implements Parcelable {
 
     private String product_company;
 
-    private String brand;
+    private Long brand_id;
+
+    private String brand_name;
 
     private String en_product_company;
+
     private String copy;
+
     private int effectNum;
 
     private int isGras;
@@ -72,6 +82,7 @@ public class Product implements Parcelable {
 
     private Buy buy;
 
+    private boolean isLocal;
 
     public int getEffectNum() {
         return effectNum;
@@ -265,20 +276,28 @@ public class Product implements Parcelable {
         this.product_company = product_company;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public String getEn_product_company() {
         return en_product_company;
     }
 
     public void setEn_product_company(String en_product_company) {
         this.en_product_company = en_product_company;
+    }
+
+    public Long getBrand_id() {
+        return brand_id;
+    }
+
+    public void setBrand_id(Long brand_id) {
+        this.brand_id = brand_id;
+    }
+
+    public String getBrand_name() {
+        return brand_name;
+    }
+
+    public void setBrand_name(String brand_name) {
+        this.brand_name = brand_name;
     }
 
     public Product() {
@@ -303,6 +322,14 @@ public class Product implements Parcelable {
         this.recommend = recommend;
     }
 
+    public boolean isLocal() {
+        return isLocal;
+    }
+
+    public void setLocal(boolean local) {
+        isLocal = local;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -324,7 +351,8 @@ public class Product implements Parcelable {
         dest.writeString(this.remark);
         dest.writeString(this.product_img);
         dest.writeString(this.product_company);
-        dest.writeString(this.brand);
+        dest.writeValue(this.brand_id);
+        dest.writeString(this.brand_name);
         dest.writeString(this.en_product_company);
         dest.writeString(this.copy);
         dest.writeInt(this.effectNum);
@@ -340,6 +368,7 @@ public class Product implements Parcelable {
         dest.writeStringList(this.notRecommend);
         dest.writeTypedList(this.security);
         dest.writeParcelable(this.buy, flags);
+        dest.writeByte(this.isLocal ? (byte) 1 : (byte) 0);
     }
 
     protected Product(Parcel in) {
@@ -357,7 +386,8 @@ public class Product implements Parcelable {
         this.remark = in.readString();
         this.product_img = in.readString();
         this.product_company = in.readString();
-        this.brand = in.readString();
+        this.brand_id = (Long) in.readValue(Long.class.getClassLoader());
+        this.brand_name = in.readString();
         this.en_product_company = in.readString();
         this.copy = in.readString();
         this.effectNum = in.readInt();
@@ -373,6 +403,7 @@ public class Product implements Parcelable {
         this.notRecommend = in.createStringArrayList();
         this.security = in.createTypedArrayList(ComponentTag.CREATOR);
         this.buy = in.readParcelable(Buy.class.getClassLoader());
+        this.isLocal = in.readByte() != 0;
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {

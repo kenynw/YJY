@@ -5,6 +5,7 @@ import com.miguan.yjy.base.App;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
@@ -54,14 +55,11 @@ public class ProductModel extends AbsModel {
         return ServicesClient.getServices().searchQuery(keywords, type, cate_id, effect, page).compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Product>> getSearchList() {
-        List<Product> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Product product = new Product();
-            product.setProduct_name("sss");
-            list.add(product);
-        }
-        return Observable.just(list);
+    /**
+     * 搜索结果接口
+     */
+    public Observable<EntityRoot<List<Product>>> getProductList(String keywords, int brandId, int page) {
+        return ServicesClient.getServices().productList(keywords, brandId, 0, page).compose(new DefaultTransform<>());
     }
 
     public Observable<Product> getProductDetail(int productId) {
@@ -105,12 +103,9 @@ public class ProductModel extends AbsModel {
     public Observable<BrandList> getBrandList() {
         return ServicesClient.getServices().brandList()
                 .map(brandList -> {
-                    List<Brand> brands = queryAll();
-                    for (Brand brand : brands) {
-                        brand.setLocal(true);
+                    if (queryAll() != null && queryAll().size() > 0) {
+                        brandList.getOtherCosmetics().addAll(queryAll());
                     }
-
-                    brandList.getOtherCosmetics().addAll(brands);
                     Collections.sort(brandList.getOtherCosmetics(),
                             (brandFirst, brandSecond) -> brandFirst.getLetter().compareTo(brandSecond.getLetter()));
                     return brandList;

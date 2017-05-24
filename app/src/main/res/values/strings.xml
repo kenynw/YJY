@@ -33,7 +33,6 @@
     <string name="text_query_instruction">批号说明</string>
     <string name="text_my_product_repository">我的护肤品库</string>
     <string name="text_empty_article_list">没有文章咯！\n热情好学颜究生，我就服你~</string>
-    <string name="text_empty_brand_list">没有查询到结果，请联系颜究院公众号</string>
     <string name="text_other_way">其他方式</string>
     <string name="text_forgot_password">忘记密码</string>
     <string name="text_taobao">淘宝网</string>
@@ -50,7 +49,7 @@
     <string name="text_open">开封</string>
     <string name="text_face_score">颜值</string>
     <string name="text_title_template">功课模板</string>
-    <string name="text_search_count">共为您找到%d款产品</string>
+    <string name="text_search_count"><![CDATA[共为您找到<font color="#32DAC3">%d</font>款产品]]></string>
     <string name="text_remaining_day">剩余&#160;%d&#160;天</string>
     <string name="text_tms_weixin">(tmshuo520)</string>
     <string name="text_apply_all_image">将滤镜应用到模板中的所有图片</string>

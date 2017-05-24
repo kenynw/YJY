@@ -3,6 +3,7 @@ package com.miguan.yjy.model.services;
 
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.BrandList;
+import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
 import com.miguan.yjy.model.bean.Home;
@@ -411,6 +412,23 @@ public interface Services {
             @Query("type") int type,
             @Query("cate_id") int cate_id,
             @Query("effect") String effect,
+            @Query("page") int page
+    );
+
+    /**
+     * 搜索结果接口
+     *
+     * @param keywords(string) － 搜索内容
+     * @param brandId(int) － 品牌ID
+     * @param isTop(int) － 明星产品,1为是,0为不传为所有
+     * @param page(int) － 当前页数
+     * @return
+     */
+    @GET("?action=productList")
+    Observable<EntityRoot<List<Product>>> productList(
+            @Query("search") String keywords,
+            @Query("brand_id") int brandId,
+            @Query("is_top") int isTop,
             @Query("page") int page
     );
 

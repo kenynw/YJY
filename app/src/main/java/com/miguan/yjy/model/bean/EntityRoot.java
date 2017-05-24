@@ -7,13 +7,15 @@ import android.os.Parcelable;
  * Copyright (c) 2017/4/11. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class EntityList<T> implements Parcelable {
+public class EntityRoot<T> implements Parcelable {
+
+    private int status;
 
     private int pageTotal;
 
     private int pageSize;
 
-    private T list;
+    private T msg;
 
     public int getPageTotal() {
         return pageTotal;
@@ -31,15 +33,15 @@ public class EntityList<T> implements Parcelable {
         this.pageSize = pageSize;
     }
 
-    public T getList() {
-        return list;
+    public T getData() {
+        return msg;
     }
 
-    public void setList(T list) {
-        this.list = list;
+    public void setData(T list) {
+        this.msg = list;
     }
 
-    public EntityList() {
+    public EntityRoot() {
     }
 
     @Override
@@ -51,29 +53,29 @@ public class EntityList<T> implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.pageTotal);
         dest.writeInt(this.pageSize);
-        dest.writeString(this.list.getClass().getName());
+        dest.writeString(this.msg.getClass().getName());
     }
 
-    protected EntityList(Parcel in) {
+    protected EntityRoot(Parcel in) {
         this.pageTotal = in.readInt();
         this.pageSize = in.readInt();
         String className = in.readString();
         try {
-            this.list = in.readParcelable(Class.forName(className).getClassLoader());
+            this.msg = in.readParcelable(Class.forName(className).getClassLoader());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static final Creator<EntityList> CREATOR = new Creator<EntityList>() {
+    public static final Creator<EntityRoot> CREATOR = new Creator<EntityRoot>() {
         @Override
-        public EntityList createFromParcel(Parcel source) {
-            return new EntityList(source);
+        public EntityRoot createFromParcel(Parcel source) {
+            return new EntityRoot(source);
         }
 
         @Override
-        public EntityList[] newArray(int size) {
-            return new EntityList[size];
+        public EntityRoot[] newArray(int size) {
+            return new EntityRoot[size];
         }
     };
 }
