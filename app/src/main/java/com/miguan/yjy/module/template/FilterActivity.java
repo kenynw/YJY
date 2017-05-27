@@ -1,32 +1,32 @@
 package com.miguan.yjy.module.template;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.common.RotationOptions;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.facebook.imagepipeline.request.Postprocessor;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.CropImageView;
 
-import org.greenrobot.eventbus.EventBus;
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.co.cyberagent.android.gpuimage.GPUImage;
+import jp.co.cyberagent.android.gpuimage.GPUImageFilter;
 
 /**
  * Copyright (c) 2017/4/18. LiaoPeiKun Inc. All rights reserved.
@@ -36,8 +36,10 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
     public static final String EXTRA_FILTER_URI = "filter_uri";
 
-    @BindView(R.id.dv_filter_thumb)
-    SimpleDraweeView mDvImage;
+    public static final String EXTRA_IS_CIRCLE = "is_circle";
+
+    @BindView(R.id.iv_filter_thumb)
+    CropImageView mIvCropImage;
 
     @BindView(R.id.iv_image_edit_rotation)
     ImageView mIvRotation;
@@ -58,16 +60,13 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
     private int mRotation;
 
-    private Uri mUri;
+    private Bitmap mBitmap;
 
-    private ImageRequest mRequest;
-
-    private Postprocessor mPostprocessor;
-
-    public static void start(AppCompatActivity activity, Uri uri, OnFilterSelectedListener listener) {
+    public static void start(AppCompatActivity activity, Uri uri, boolean isCircle, OnFilterSelectedListener listener) {
         sFilterSelectedListener = listener;
         Intent intent = new Intent(activity, FilterActivity.class);
         intent.putExtra(EXTRA_FILTER_URI, uri);
+        intent.putExtra(EXTRA_IS_CIRCLE, isCircle);
         activity.startActivity(intent);
     }
 
@@ -76,31 +75,49 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         super.onCreate(savedInstanceState);
         setContentView(R.layout.template_activity_filter);
         ButterKnife.bind(this);
-        mUri = getIntent().getParcelableExtra(EXTRA_FILTER_URI);
-        mDvImage.setImageURI(mUri);
+
+        Uri uri = getIntent().getParcelableExtra(EXTRA_FILTER_URI);
+        boolean isCircle = getIntent().getBooleanExtra(EXTRA_IS_CIRCLE, false);
+
+        Glide.with(this)
+                .load(uri)
+                .asBitmap()
+                .fitCenter()
+                .override(768, 768)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        mBitmap = resource;
+                        mIvCropImage.setImageBitmap(resource);
+                    }
+                });
+
+        mIvCropImage.setFocusWidth(LUtils.getScreenWidth());
+        mIvCropImage.setFocusStyle(isCircle ? CropImageView.Style.CIRCLE : CropImageView.Style.RECTANGLE);
 
         mIvCancel.setOnClickListener(v -> finish());
         mIvrOk.setOnClickListener(v -> {
-            if (mCbApplyAll.isChecked() && mPostprocessor != null) {
-                EventBus.getDefault().post(mPostprocessor);
-            }
-            if (mRotation > 0) {
-                mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
-                        .setLocalThumbnailPreviewsEnabled(true)
-                        .setResizeOptions(new ResizeOptions(480, 640))
-                        .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
-                        .setProgressiveRenderingEnabled(false)
-                        .setRotationOptions(RotationOptions.forceRotation(mRotation))
-                        .setPostprocessor(mPostprocessor)
-                        .build();
-            }
-            sFilterSelectedListener.onFilterSelected(mRequest, mCbApplyAll.isChecked());
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File mediaStorageDirectory = new File(path, "YJY/");
+            mIvCropImage.saveBitmapToFile(mediaStorageDirectory, 800, 800, false);
+            mIvCropImage.setOnBitmapSaveCompleteListener(new CropImageView.OnBitmapSaveCompleteListener() {
+                @Override
+                public void onBitmapSaveSuccess(File file) {
+                    if (sFilterSelectedListener != null)
+                        sFilterSelectedListener.onFilterSelected(file, mCbApplyAll.isChecked());
+                }
+
+                @Override
+                public void onBitmapSaveError(File file) {
+
+                }
+            });
             finish();
         });
 
         mIvRotation.setOnClickListener(v -> {
             mRotation = mRotation >= 270 ? 0 : mRotation + 90;
-            mDvImage.setRotation(mRotation);
+            mIvCropImage.rotate90();
         });
 
         mGridFilters.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -117,25 +134,16 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     }
 
     @Override
-    public void onFilterSelected(Postprocessor postprocessor) {
-        mPostprocessor = postprocessor;
-        mRequest = ImageRequestBuilder.newBuilderWithSource(mUri)
-                .setResizeOptions(new ResizeOptions(480, 640))
-                .setLocalThumbnailPreviewsEnabled(true)
-                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
-                .setProgressiveRenderingEnabled(false)
-                .setPostprocessor(postprocessor)
-                .build();
-
-        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                .setImageRequest(mRequest)
-                .setOldController(mDvImage.getController())
-                .build();
-        mDvImage.setController(controller);
+    public void onFilterSelected(GPUImageFilter filter) {
+        GPUImage gpuImage = new GPUImage(FilterActivity.this);
+        gpuImage.setImage(mBitmap);
+        gpuImage.setFilter(filter);
+        Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
+        mIvCropImage.setImageBitmap(bitmap);
     }
 
     public interface OnFilterSelectedListener {
-        void onFilterSelected(ImageRequest request, boolean applyAll);
+        void onFilterSelected(File file, boolean applyAll);
     }
 
 }

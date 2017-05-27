@@ -14,12 +14,11 @@
         android:layout_weight="1"
         >
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_filter_thumb"
+        <com.miguan.yjy.widget.CropImageView
+            android:id="@+id/iv_filter_thumb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:actualImageScaleType="fitCenter"
+            app:cropStyle="circle"
             />
 
         <ImageView
@@ -60,6 +59,7 @@
             android:layout_height="92dp"
             android:layout_below="@id/cb_filter_apply_all"
             android:layout_marginTop="@dimen/spacing_small"
+            android:overScrollMode="never"
             />
 
         <ImageView

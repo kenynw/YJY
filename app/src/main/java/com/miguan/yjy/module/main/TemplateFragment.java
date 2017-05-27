@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.dsk.chain.bijection.ChainFragment;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TemplatePagerAdapter;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.TemplateTransformer;
 
@@ -35,6 +37,9 @@ public class TemplateFragment extends ChainFragment<TemplatePresenter> implement
     @BindView(R.id.cpi_template)
     CirclePageIndicator mCpi;
 
+    @BindView(R.id.iv_template_gen_guide)
+    ImageView mIvGuide;
+
     private Unbinder mBind;
 
     @Nullable
@@ -49,6 +54,16 @@ public class TemplateFragment extends ChainFragment<TemplatePresenter> implement
         mVp.setPageTransformer(true, new TemplateTransformer());
         mVp.setAdapter(new TemplatePagerAdapter(getActivity()));
         mCpi.setViewPager(mVp);
+
+        if (LUtils.getPreferences().getBoolean("first_template_home", true)) {
+            mIvGuide.setVisibility(View.VISIBLE);
+            mIvGuide.setOnClickListener(v -> {
+                mIvGuide.setVisibility(View.GONE);
+                LUtils.getPreferences().edit().putBoolean("first_template_home", false).apply();
+            });
+        } else {
+            mIvGuide.setVisibility(View.GONE);
+        }
 
         return view;
     }

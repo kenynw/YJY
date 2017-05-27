@@ -23,6 +23,7 @@ import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,38 +76,41 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             if (viewGroup.getChildAt(i) instanceof SimpleDraweeView) {
                 SimpleDraweeView dv = (SimpleDraweeView) viewGroup.getChildAt(i);
-                dv.setOnClickListener(v -> ImageProvider.getInstance((Activity) getContext())
-                        .getImageFromCameraOrAlbum(new OnImageSelectListener() {
-                            @Override
-                            public void onImageSelect() {
-
-                            }
-
-                            @Override
-                            public void onImageLoaded(Uri uri) {
-                                ImageProvider.getInstance((Activity) getContext()).corpImage(uri, 640, 640, TemplateView.this);
-                            }
-
-                            @Override
-                            public void onError() {
-
-                            }
-                        }));
+                dv.setOnClickListener(v -> {
+                    ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(this);
+                    mCurPosition = mDvImages.indexOf(dv);
+                });
                 mDvImages.add(dv);
-                mCurPosition = mDvImages.indexOf(dv);
             }
 
             if (viewGroup.getChildAt(i).getTag() != null && viewGroup.getChildAt(i).getTag().equals("filter")) {
                 ImageView iv = (ImageView) viewGroup.getChildAt(i);
                 mIvFilters.add(iv);
                 iv.setOnClickListener(v -> {
-                    FilterActivity.start((AppCompatActivity) getContext(), mUris.get(mCurPosition), TemplateView.this);
+                    boolean roundAsCircle = mDvImages.get(mCurPosition).getHierarchy().getRoundingParams() != null;
+                    FilterActivity.start((AppCompatActivity) getContext(), mUris.get(mCurPosition), roundAsCircle, TemplateView.this);
                     mCurPosition = mIvFilters.indexOf(iv);
                 });
             }
 
             if (viewGroup.getChildAt(i) instanceof ViewGroup) {
                 findAllChild((ViewGroup) viewGroup.getChildAt(i));
+            }
+        }
+    }
+
+    public SparseArray<Uri> getUris() {
+        return mUris;
+    }
+
+    public void setImages(SparseArray<Uri> uris) {
+        if (mDvImages.size() <= 0) {
+            findAllChild(this);
+        }
+
+        if (uris.size() > 0) {
+            for (int i = 0; i < uris.size(); i++) {
+                mDvImages.get(i).setImageURI(uris.valueAt(i));
             }
         }
     }
@@ -119,13 +123,13 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
     }
 
     @Override
-    public void onFilterSelected(ImageRequest request, boolean applyAll) {
+    public void onFilterSelected(File filter, boolean applyAll) {
         if (applyAll) {
             for (SimpleDraweeView dvImage : mDvImages) {
-                setImageFilter(dvImage, request);
+                dvImage.setImageURI(Uri.fromFile(filter));
             }
         } else {
-            setImageFilter(mDvImages.get(mCurPosition), request);
+            mDvImages.get(mCurPosition).setImageURI(Uri.fromFile(filter));
         }
     }
 

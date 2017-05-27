@@ -1,7 +1,6 @@
 package com.miguan.yjy.module.template;
 
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -18,6 +17,8 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -62,7 +63,7 @@ public class Template0ViewHolder extends BaseTemplateViewHolder {
     @Override
     public void onImageLoaded(Uri uri) {
         mIvFilter.setVisibility(View.VISIBLE);
-        mIvFilter.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(), uri, this));
+//        mIvFilter.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(), uri, this));
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                 .setResizeOptions(new ResizeOptions(480, 640))
                 .build();
@@ -83,9 +84,13 @@ public class Template0ViewHolder extends BaseTemplateViewHolder {
         EventBus.getDefault().post(new Product());
     }
 
-    @Override
-    public void onFilterSelected(ImageRequest request, boolean applyAll) {
-        setImageFilter(mDvImage, request);
-    }
+//    @Override
+//    public void onFilterSelected(ImageRequest request, boolean applyAll) {
+//        setImageFilter(mDvImage, request);
+//    }
 
+    @Override
+    public void onFilterSelected(File file, boolean applyAll) {
+
+    }
 }

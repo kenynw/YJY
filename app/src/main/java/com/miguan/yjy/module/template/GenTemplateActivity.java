@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.template;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AlertDialog;
@@ -7,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.utils.DateUtils;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.ScreenShot;
 
@@ -30,11 +37,21 @@ import static com.miguan.yjy.module.template.GenTemplatePresenter.EXTRA_TEMPLATE
 @RequiresPresenter(GenTemplatePresenter.class)
 public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter> {
 
+    private final int[] mImages = new int[] {
+            R.mipmap.image_template_guide_0,R.mipmap.image_template_guide_1,
+            R.mipmap.image_template_guide_2,R.mipmap.image_template_guide_3
+    };
+
     @BindView(R.id.fl_template_gen_add)
     FrameLayout mFlAdd;
 
     @BindView(R.id.ll_template_gen)
     LinearLayout mLlGen;
+
+    @BindView(R.id.iv_template_gen_guide)
+    ImageView mIvGuide;
+
+    private int mCurGuide = 0;
 
     private List<BaseTemplateViewHolder> mViewHolders;
 
@@ -42,7 +59,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
 
     private View mFooter;
 
-    private List<View> mViewList = new ArrayList<>();
+    private List<TemplateView> mViewList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +67,60 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         setContentView(R.layout.template_activity_gen);
         setToolbarTitle(R.string.text_title_template);
         ButterKnife.bind(this);
+
+        int index = getIntent().getIntExtra(EXTRA_TEMPLATE, 0);
         mToolbar.setNavigationOnClickListener(v -> new AlertDialog.Builder(GenTemplateActivity.this)
                 .setMessage("确认退出模板")
                 .setNegativeButton("取消", null)
-                .setPositiveButton("退出", (dialog, which) -> finish()).show());
+                .setPositiveButton("退出", (dialog, which) -> {
+                    getPresenter().saveDraft(index, mHeader, mViewList, mFooter);
+                    finish();
+                }).show());
 
         mViewHolders = new ArrayList<>();
 
-        int index = getIntent().getIntExtra(EXTRA_TEMPLATE, 0);
+        // 设置首次进入导航
+        if (LUtils.getPreferences().getBoolean("first_template", true)) {
+            mIvGuide.setVisibility(View.VISIBLE);
+            mIvGuide.setOnClickListener(v -> {
+                if (mCurGuide >= mImages.length) {
+                    LUtils.getPreferences().edit().putBoolean("first_template", false).apply();
+                    mIvGuide.setVisibility(View.GONE);
+                } else {
+                    mIvGuide.setImageResource(mImages[mCurGuide]);
+                    mCurGuide++;
+                }
+            });
+        } else {
+            mIvGuide.setVisibility(View.GONE);
+        }
+    }
+
+    public void initTemplate(int index, Template template) {
         int layoutRes = getResources().getIdentifier("item_list_template_" + index, "layout", getPackageName());
         int headerRes = getResources().getIdentifier("header_template_" + index, "layout", getPackageName());
         int footerRes = getResources().getIdentifier("footer_template_" + index, "layout", getPackageName());
 
         addHeader(headerRes);
-        addItem(layoutRes);
+        addItem(layoutRes, null);
         addFooter(footerRes);
 
-        mFlAdd.setOnClickListener(v -> addItem(layoutRes));
+        mFlAdd.setOnClickListener(v -> addItem(layoutRes, null));
+        if (template != null) {
+            if (mHeader != null) {
+                EditText et = (EditText) mHeader.findViewById(R.id.et_template_header);
+                if (et != null) {
+                    et.setText(template.getTitle());
+                }
+                EditText et2 = (EditText) mHeader.findViewById(R.id.et_template_header_2);
+                if (et2 != null) {
+                    et2.setText(template.getDesc());
+                }
+            }
+            for (Template.Item item : template.getItems()) {
+                addItem(layoutRes, item);
+            }
+        }
     }
 
     @Override
@@ -102,13 +156,13 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         if (mHeader == null) {
             mHeader = LayoutInflater.from(this).inflate(res, null);
         }
-        if (mLlGen.indexOfChild(mHeader) != -1) {
+        if (mHeader != null && mLlGen.indexOfChild(mHeader) != -1) {
             return;
         }
         mLlGen.addView(mHeader, 0);
     }
 
-    private void addItem(@LayoutRes int res) {
+    private void addItem(@LayoutRes int res, Template.Item item) {
         if (res <= 0) return;
 
         if (mViewList.size() >= 5) {
@@ -126,12 +180,31 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         int index = mLlGen.indexOfChild(mFooter) != -1 ? mLlGen.indexOfChild(mFooter) : mLlGen.getChildCount();
         mLlGen.addView(templateView, index);
         mViewList.add(templateView);
+        if (item != null) {
+            templateView.setImages(item.getUris());
+        }
     }
 
     private void addFooter(@LayoutRes int res) {
         if (res <= 0) return;
         if (mFooter == null) {
             mFooter = LayoutInflater.from(this).inflate(res, null);
+
+            TextView tvTime = ButterKnife.findById(mFooter, R.id.tv_template_time);
+            if (tvTime != null) {
+                tvTime.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
+            }
+
+            if (UserPreferences.getUserID() > 0) {
+                SimpleDraweeView dvAvatar = ButterKnife.findById(mFooter, R.id.dv_template_avatar);
+                TextView tvUsername = ButterKnife.findById(mFooter, R.id.tv_template_username);
+                if (dvAvatar != null) {
+                    dvAvatar.setImageURI(Uri.parse(UserPreferences.getAvatar()));
+                }
+                if (tvUsername != null) {
+                    tvUsername.setText(UserPreferences.getUsername());
+                }
+            }
         }
         if (mLlGen.indexOfChild(mFooter) != -1) {
             return;

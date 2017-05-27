@@ -4,17 +4,16 @@ import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,9 +73,9 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
             @Override
             public void apply(@NonNull ImageView view, int index) {
                 view.setOnClickListener(v -> {
-                    FilterActivity.start((AppCompatActivity) getContext(),
-                            mUris.get(index), BaseTemplateMultiViewHolder.this);
-                    mCurPosition = index;
+//                    FilterActivity.start((AppCompatActivity) getContext(),
+//                            mUris.get(index), BaseTemplateMultiViewHolder.this);
+//                    mCurPosition = index;
                 });
             }
         });
@@ -100,14 +99,14 @@ public abstract class BaseTemplateMultiViewHolder extends BaseTemplateViewHolder
     }
 
     @Override
-    public void onFilterSelected(ImageRequest request, boolean applyAll) {
-        if (applyAll) {
-            for (SimpleDraweeView dvImage : mDvImages) {
-                setImageFilter(dvImage, request);
-            }
-        } else {
-            setImageFilter(mDvImages.get(mCurPosition), request);
-        }
+    public void onFilterSelected(File file, boolean applyAll) {
+//        if (applyAll) {
+//            for (SimpleDraweeView dvImage : mDvImages) {
+//                setImageFilter(dvImage, request);
+//            }
+//        } else {
+//            setImageFilter(mDvImages.get(mCurPosition), request);
+//        }
     }
 
     @Override

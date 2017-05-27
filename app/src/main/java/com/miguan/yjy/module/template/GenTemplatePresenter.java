@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.Presenter;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.library.imageprovider.ImageProvider;
@@ -26,6 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -59,11 +63,70 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         super.onCreate(view, saveState);
         EventBus.getDefault().register(this);
 
-//        mTemplate = (TemplateType) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
-//        if (mTemplate.mHeaderRes > 0)
-//            mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
-//        if (mTemplate.mFooterRes > 0)
-//            mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
+    }
+
+    @Override
+    protected void onCreateView(GenTemplateActivity view) {
+        super.onCreateView(view);
+
+        int index = getView().getIntent().getIntExtra(EXTRA_TEMPLATE, 0);
+        String templateStr;
+        if (!(templateStr = LUtils.getPreferences().getString(EXTRA_TEMPLATE, "")).isEmpty()) {
+            new AlertDialog.Builder(getView())
+                    .setTitle("上次的创作还未完成哦~")
+                    .setItems(new String[]{"加载草稿", "重新创作", "取消"}, (dialog, which) -> {
+                        if (which == 0) {
+                            Template template = new Gson().fromJson(templateStr, Template.class);
+                            getView().initTemplate(template.getType(), template);
+                        } else {
+                            getView().initTemplate(index, null);
+                        }
+                    })
+                    .show();
+        } else {
+            getView().initTemplate(index, null);
+        }
+    }
+
+    public SparseArray<String> findAllEditText(ViewGroup parent) {
+        SparseArray<String> etList = new SparseArray<>();
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof EditText) {
+                etList.put(child.getId(), ((EditText) child).getText().toString());
+            }
+            if (child instanceof ViewGroup) {
+                findAllEditText((ViewGroup) child);
+            }
+        }
+        return etList;
+    }
+
+    // 存草稿
+    public void saveDraft(int type, View header, List<TemplateView> items, View footer) {
+        Template template = new Template();
+        template.setType(type);
+        if (header != null) {
+            EditText et = (EditText) header.findViewById(R.id.et_template_header);
+            if (et != null) {
+                template.setTitle(et.getText().toString());
+            }
+            EditText et2 = (EditText) header.findViewById(R.id.et_template_header_2);
+            if (et2 != null) {
+                template.setDesc(et2.getText().toString());
+            }
+        }
+        if (items != null && items.size() > 0) {
+            List<Template.Item> itemList = new ArrayList<>();
+            for (TemplateView templateView : items) {
+                Template.Item item = new Template.Item();
+                item.setEtContents(findAllEditText(templateView));
+                item.setUris(templateView.getUris());
+                itemList.add(item);
+            }
+            template.setItems(itemList);
+        }
+        LUtils.getPreferences().edit().putString(EXTRA_TEMPLATE, new Gson().toJson(template)).apply();
     }
 
     public void hideCursor() {

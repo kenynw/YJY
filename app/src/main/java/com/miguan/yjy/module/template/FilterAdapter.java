@@ -1,7 +1,6 @@
 package com.miguan.yjy.module.template;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -17,7 +16,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.facebook.imagepipeline.request.Postprocessor;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 
@@ -27,16 +25,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.co.cyberagent.android.gpuimage.GPUImageFilter;
-import jp.wasabeef.fresco.processors.BlurPostprocessor;
-import jp.wasabeef.fresco.processors.ColorFilterPostprocessor;
-import jp.wasabeef.fresco.processors.CombinePostProcessors;
-import jp.wasabeef.fresco.processors.GrayscalePostprocessor;
-import jp.wasabeef.fresco.processors.MaskPostprocessor;
 import jp.wasabeef.fresco.processors.filter.IF1977Filter;
 import jp.wasabeef.fresco.processors.filter.IFAmaroFilter;
 import jp.wasabeef.fresco.processors.filter.IFBrannanFilter;
 import jp.wasabeef.fresco.processors.filter.IFHudsonFilter;
 import jp.wasabeef.fresco.processors.filter.IFInkwellFilter;
+import jp.wasabeef.fresco.processors.filter.IFNormalFilter;
 import jp.wasabeef.fresco.processors.filter.IFRiseFilter;
 import jp.wasabeef.fresco.processors.filter.IFSierraFilter;
 import jp.wasabeef.fresco.processors.filter.IFSutroFilter;
@@ -65,7 +59,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
 
     private List<FilterType> mTypeList;
 
-    private List<Postprocessor> mPostprocessors;
+    private List<GPUFilterPostprocessor> mPostprocessors;
 
     private OnFilterSelectedListener mListener;
 
@@ -105,32 +99,9 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
 
         mPostprocessors = new ArrayList<>();
         for (FilterType filterType : list) {
-            Postprocessor processor = null;
+            GPUFilterPostprocessor processor = null;
 
             switch (filterType) {
-                case Mask: {
-                    processor = new MaskPostprocessor(context, R.mipmap.ic_launcher);
-                    break;
-                }
-                case NinePatchMask: {
-                    processor = new MaskPostprocessor(context, R.mipmap.ic_launcher);
-                    break;
-                }
-                case ColorFilter:
-                    processor = new ColorFilterPostprocessor(Color.argb(40, 200, 0, 0));
-                    break;
-                case Grayscale:
-                    processor = new GrayscalePostprocessor();
-                    break;
-                case Blur:
-                    processor = new BlurPostprocessor(context, 25);
-                    break;
-                case BlurAndGrayscale:
-                    processor = new CombinePostProcessors.Builder()
-                            .add(new BlurPostprocessor(context, 25))
-                            .add(new GrayscalePostprocessor())
-                            .build();
-                    break;
                 case Toon:
                     processor = new ToonFilterPostprocessor(context);
                     break;
@@ -161,6 +132,9 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
                 case Vignette:
                     processor = new VignetteFilterPostprocessor(context, new PointF(0.5f, 0.5f),
                             new float[]{0.0f, 0.0f, 0.0f}, 0f, 0.75f);
+                    break;
+                case Original:
+                    processor = createPostprocessor(new IFNormalFilter(context), "normal");
                     break;
                 case Amaro:
                     processor = createPostprocessor(new IFAmaroFilter(context), "amaro");
@@ -221,7 +195,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
         holder.mTvName.setText(mTypeList.get(position).name());
         holder.itemView.setOnClickListener(v -> {
             if (mListener != null) {
-                mListener.onFilterSelected(mPostprocessors.get(position));
+                mListener.onFilterSelected(mPostprocessors.get(position).getFilter());
             }
         });
     }
@@ -246,7 +220,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
     }
 
     public interface OnFilterSelectedListener {
-        void onFilterSelected(Postprocessor postprocessor);
+        void onFilterSelected(GPUImageFilter filter);
     }
 
     class FilterViewHolder extends BaseViewHolder<FilterType> {

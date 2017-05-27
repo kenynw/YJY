@@ -3,10 +3,6 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Unique;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +11,9 @@ import java.util.List;
  * @日期 2017/3/21 9:38
  * @描述 产品相关（搜索）
  */
-@Entity
 public class Product implements Parcelable {
 
-    @Id
-    @Unique
-    private int id;
+    private Long id;
 
     private String name;
 
@@ -165,10 +158,10 @@ public class Product implements Parcelable {
     }
 
     public int getId() {
-        return id;
+        return id.intValue();
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -337,7 +330,7 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
+        dest.writeValue(this.id);
         dest.writeString(this.name);
         dest.writeInt(this.cate_id);
         dest.writeString(this.product_name);
@@ -372,7 +365,7 @@ public class Product implements Parcelable {
     }
 
     protected Product(Parcel in) {
-        this.id = in.readInt();
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.name = in.readString();
         this.cate_id = in.readInt();
         this.product_name = in.readString();

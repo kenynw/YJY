@@ -1,20 +1,20 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-  buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
-  defaultConfig {
-    minSdkVersion rootProject.ext.android["minSdkVersion"]
-    targetSdkVersion rootProject.ext.android["targetSdkVersion"]
-    versionCode rootProject.ext.android["versionCode"]
-    versionName rootProject.ext.android["versionName"]
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
 
-    consumerProguardFiles 'proguard-rules.txt'
-  }
+        consumerProguardFiles 'proguard-rules.txt'
+    }
 }
 
 dependencies {
-  compile 'com.facebook.fresco:fresco:1.2.0'
-  compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' //图片处理
+    compile rootProject.ext.dependencies["fresco"]
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' //图片处理
 }
