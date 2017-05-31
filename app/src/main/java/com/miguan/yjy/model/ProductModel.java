@@ -3,6 +3,7 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.base.App;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.Evaluate;
@@ -43,7 +44,7 @@ public class ProductModel extends AbsModel {
     /**
      * 搜索联想
      */
-    public Observable<List<Product>> searchAssociate(String keywords) {
+    public Observable<ProductList> searchAssociate(String keywords) {
         return ServicesClient.getServices().searchAssociate(keywords).compose(new DefaultTransform<>());
     }
 
@@ -179,5 +180,18 @@ public class ProductModel extends AbsModel {
         return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 品牌主页(品牌详情接口)
+     */
+    public Observable<BrandAll> getBrandInfo(long brandId) {
+        return ServicesClient.getServices().brandInfo(brandId).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 品牌列表
+     */
+    public Observable<List<Product>> getProductList(long brandId, int isTop,int page) {
+        return ServicesClient.getServices().productList(brandId, isTop, page, 20).compose(new DefaultTransform<>());
+    }
 
 }

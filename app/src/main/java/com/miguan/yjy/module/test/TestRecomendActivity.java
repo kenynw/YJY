@@ -51,7 +51,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new SearchReslutViewHolder(parent);
+        return new SearchReslutViewHolder(parent,2);
     }
 
     @Override

@@ -28,6 +28,18 @@ public class Brand implements Parcelable {
 
     private int hot;
 
+    private String description;
+    private String relevantArticle;
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -76,6 +88,30 @@ public class Brand implements Parcelable {
         this.hot = hot;
     }
 
+    public boolean getIsLocal() {
+        return this.isLocal;
+    }
+
+    public void setIsLocal(boolean isLocal) {
+        this.isLocal = isLocal;
+    }
+
+    public Brand() {
+    }
+
+    @Generated(hash = 1202386878)
+    public Brand(Long id, String name, String letter, boolean isLocal, String img,
+            int hot, String description, String relevantArticle) {
+        this.id = id;
+        this.name = name;
+        this.letter = letter;
+        this.isLocal = isLocal;
+        this.img = img;
+        this.hot = hot;
+        this.description = description;
+        this.relevantArticle = relevantArticle;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -89,17 +125,16 @@ public class Brand implements Parcelable {
         dest.writeByte(this.isLocal ? (byte) 1 : (byte) 0);
         dest.writeString(this.img);
         dest.writeInt(this.hot);
+        dest.writeString(this.description);
+        dest.writeString(this.relevantArticle);
     }
 
-    public boolean getIsLocal() {
-        return this.isLocal;
+    public String getRelevantArticle() {
+        return this.relevantArticle;
     }
 
-    public void setIsLocal(boolean isLocal) {
-        this.isLocal = isLocal;
-    }
-
-    public Brand() {
+    public void setRelevantArticle(String relevantArticle) {
+        this.relevantArticle = relevantArticle;
     }
 
     protected Brand(Parcel in) {
@@ -109,17 +144,8 @@ public class Brand implements Parcelable {
         this.isLocal = in.readByte() != 0;
         this.img = in.readString();
         this.hot = in.readInt();
-    }
-
-    @Generated(hash = 1362967694)
-    public Brand(Long id, String name, String letter, boolean isLocal, String img,
-            int hot) {
-        this.id = id;
-        this.name = name;
-        this.letter = letter;
-        this.isLocal = isLocal;
-        this.img = img;
-        this.hot = hot;
+        this.description = in.readString();
+        this.relevantArticle = in.readString();
     }
 
     public static final Creator<Brand> CREATOR = new Creator<Brand>() {

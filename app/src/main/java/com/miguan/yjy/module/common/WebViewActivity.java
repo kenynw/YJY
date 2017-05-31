@@ -2,8 +2,12 @@ package com.miguan.yjy.module.common;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.JsResult;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -47,7 +51,7 @@ public class WebViewActivity extends ChainBaseActivity {
     }
 
     public static void start(Context context, String title, String url) {
-        Intent intent = new Intent(context,WebViewActivity.class);
+        Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(WebViewActivity.REQUEST_NAME_TITLE, title);
         intent.putExtra(WebViewActivity.REQUEST_NAME_URL, url);
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
@@ -73,7 +77,19 @@ public class WebViewActivity extends ChainBaseActivity {
     private void initWebView() {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
@@ -84,7 +100,18 @@ public class WebViewActivity extends ChainBaseActivity {
                         "android.ajaxDone(); " + // Event called when an AJAX call ends
                         "});");
             }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed();
+            }
         });
+
+        // 设置允许加载混合内容
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {

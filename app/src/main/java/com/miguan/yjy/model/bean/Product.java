@@ -30,6 +30,12 @@ public class Product implements Parcelable {
 
     private int star;
 
+    private int is_top;
+    private int rule;
+    private String product_explain;
+    private List<String> tagList;
+
+
     private String standard_number;
 
     private String product_country;
@@ -72,6 +78,37 @@ public class Product implements Parcelable {
 
     private Buy buy;
 
+    public int getIs_top() {
+        return is_top;
+    }
+
+    public void setIs_top(int is_top) {
+        this.is_top = is_top;
+    }
+
+    public int getRule() {
+        return rule;
+    }
+
+    public void setRule(int rule) {
+        this.rule = rule;
+    }
+
+    public String getProduct_explain() {
+        return product_explain;
+    }
+
+    public void setProduct_explain(String product_explain) {
+        this.product_explain = product_explain;
+    }
+
+    public List<String> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
+    }
 
     public int getEffectNum() {
         return effectNum;
@@ -295,6 +332,7 @@ public class Product implements Parcelable {
     public void setNotRecommend(List<String> notRecommend) {
         this.notRecommend = notRecommend;
     }
+
     public List<String> getRecommend() {
         return recommend;
     }
@@ -318,6 +356,10 @@ public class Product implements Parcelable {
         dest.writeString(this.form);
         dest.writeString(this.alias);
         dest.writeInt(this.star);
+        dest.writeInt(this.is_top);
+        dest.writeInt(this.rule);
+        dest.writeString(this.product_explain);
+        dest.writeStringList(this.tagList);
         dest.writeString(this.standard_number);
         dest.writeString(this.product_country);
         dest.writeString(this.product_date);
@@ -351,6 +393,10 @@ public class Product implements Parcelable {
         this.form = in.readString();
         this.alias = in.readString();
         this.star = in.readInt();
+        this.is_top = in.readInt();
+        this.rule = in.readInt();
+        this.product_explain = in.readString();
+        this.tagList = in.createStringArrayList();
         this.standard_number = in.readString();
         this.product_country = in.readString();
         this.product_date = in.readString();

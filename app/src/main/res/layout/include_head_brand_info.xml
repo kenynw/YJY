@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_product_include_brand"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:visibility="gone">
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="15dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdv_brand_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/ic_no_commponet"/>
+
+        <TextView
+            android:id="@+id/tv_brand_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/sdv_brand_img"
+            android:layout_marginLeft="@dimen/text_size_small_15"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/sdv_brand_img"
+            android:text="name"/>
+
+        <TextView
+            android:id="@+id/tv_brand_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_brand_name"
+            android:layout_below="@+id/tv_brand_name"
+            android:layout_marginTop="15dp"
+            android:text="num"/>
+
+        <TextView
+            android:id="@+id/tv_brand_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_brand_name"
+            android:text="@string/tv_product_brand_main"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

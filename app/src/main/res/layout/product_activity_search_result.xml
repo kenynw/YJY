@@ -66,13 +66,14 @@
 
     </LinearLayout>
 
+    <include layout="@layout/include_head_brand_info"/>
+
+    <include layout="@layout/include_product_filter"/>
     <LinearLayout
         android:id="@+id/ll_product_result_first"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <include layout="@layout/include_product_filter"/>
 
         <TextView
             android:id="@+id/tv_product_list_count"
@@ -91,7 +92,7 @@
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_empty="@layout/empty_search_list"
             />
     </LinearLayout>

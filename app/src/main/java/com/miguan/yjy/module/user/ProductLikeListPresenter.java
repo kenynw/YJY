@@ -26,7 +26,7 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
         UserModel.getInstance().getLikeProductList(mCateId, mEffect, 1)
                 .map(productList -> {
                     getView().setData(productList);
-                    return productList.getData();
+                    return productList.getProduct();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
     }
@@ -34,7 +34,7 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
     @Override
     public void onLoadMore() {
         UserModel.getInstance().getLikeProductList(mCateId, mEffect, getCurPage())
-                .map(ProductList::getData)
+                .map(ProductList::getProduct)
                 .unsafeSubscribe(getMoreSubscriber());
     }
 

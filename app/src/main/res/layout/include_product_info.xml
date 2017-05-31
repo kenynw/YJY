@@ -24,9 +24,7 @@
         android:id="@+id/tv_product_detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/dv_product_detail"
         android:layout_marginLeft="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_small"
         android:layout_toRightOf="@+id/dv_product_detail"
         android:ellipsize="end"
         android:maxLines="2"
@@ -46,17 +44,41 @@
         android:textSize="@dimen/text_size_body_material"
         tools:text="￥320/180ML"
         />
-
     <TextView
-        android:id="@+id/tv_product_date_detail"
+        android:id="@+id/tv_product_tag_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv_product_detail_spec"
         android:layout_below="@+id/tv_product_detail_spec"
         android:layout_marginTop="15dp"
         android:text="@string/text_query_production_date"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_small_14"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/tv_product_date_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_product_detail_spec"
+        android:layout_below="@+id/tv_product_tag_detail"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_shape_main_color_white"
+        android:text="@string/text_production_date"
+        android:textColor="@color/colorPrimary"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="@dimen/text_size_small_13"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/iv_is_top"
+        android:background="@color/f3"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+
 
 </RelativeLayout>

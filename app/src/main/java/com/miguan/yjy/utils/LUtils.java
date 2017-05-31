@@ -43,6 +43,7 @@ public class LUtils {
 
     /**
      * 获取Context
+     *
      * @return
      */
     public static Context getAppContext() {
@@ -51,6 +52,7 @@ public class LUtils {
 
     /**
      * 打印
+     *
      * @param msg
      */
     public static void log(String msg) {
@@ -68,7 +70,7 @@ public class LUtils {
         } else {
             toast.setText(text);
         }
-        toast.setGravity(Gravity.CENTER,0,0);
+        toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
 
@@ -90,6 +92,7 @@ public class LUtils {
 
     /**
      * 获取屏幕宽度
+     *
      * @return
      */
     public static int getScreenWidth() {
@@ -101,6 +104,7 @@ public class LUtils {
 
     /**
      * 获取屏幕高度
+     *
      * @return
      */
     public static int getScreenHeight() {
@@ -112,6 +116,7 @@ public class LUtils {
 
     /**
      * dp转化成px
+     *
      * @param dpVal
      * @return
      */
@@ -122,6 +127,7 @@ public class LUtils {
 
     /**
      * 打开虚拟键盘
+     *
      * @param editText
      */
     public static void openKeyboard(EditText editText) {
@@ -132,6 +138,7 @@ public class LUtils {
 
     /**
      * 关闭虚拟键盘
+     *
      * @param editText
      */
     public static void closeKeyboard(EditText editText) {
@@ -141,6 +148,7 @@ public class LUtils {
 
     /**
      * 检查当前网络是否可用
+     *
      * @return
      */
     public static boolean isNetWorkAvilable() {
@@ -156,12 +164,13 @@ public class LUtils {
 
     /**
      * 获取版本号
+     *
      * @return
      */
-    public static int getAppVersionCode(){
+    public static int getAppVersionCode() {
         try {
             PackageManager mPackageManager = sContext.getPackageManager();
-            PackageInfo _info = mPackageManager.getPackageInfo(sContext.getPackageName(),0);
+            PackageInfo _info = mPackageManager.getPackageInfo(sContext.getPackageName(), 0);
             return _info.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             return 0;
@@ -170,12 +179,13 @@ public class LUtils {
 
     /**
      * 获取版本名
+     *
      * @return
      */
-    public static String getAppVersionName(){
+    public static String getAppVersionName() {
         try {
             PackageManager mPackageManager = sContext.getPackageManager();
-            PackageInfo _info = mPackageManager.getPackageInfo(sContext.getPackageName(),0);
+            PackageInfo _info = mPackageManager.getPackageInfo(sContext.getPackageName(), 0);
             return _info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             return null;
@@ -184,6 +194,7 @@ public class LUtils {
 
     /**
      * 获取当前进程名
+     *
      * @param context
      * @return 进程名
      */
@@ -218,6 +229,7 @@ public class LUtils {
 
     /**
      * MD5加密
+     *
      * @param s
      * @return
      */
@@ -229,7 +241,7 @@ public class LUtils {
             digest.update(s.getBytes());
             BigInteger hash = new BigInteger(1, digest.digest());
             result = hash.toString(16);
-            while(result.length() < 32) { //40 for SHA-1
+            while (result.length() < 32) { //40 for SHA-1
                 result = "0" + result;
             }
 //
@@ -246,5 +258,26 @@ public class LUtils {
         }
         return result;
     }
+
+    /**
+     * 检测该包名所对应的应用是否存在
+     *
+     * @param packageName
+     * @return
+     */
+
+    public static boolean checkPackage(String packageName) {
+        if (packageName == null || "".equals(packageName))
+
+            return false;
+        try {
+            sContext.getPackageManager().getApplicationInfo(packageName, PackageManager
+                    .GET_UNINSTALLED_PACKAGES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
 
 }

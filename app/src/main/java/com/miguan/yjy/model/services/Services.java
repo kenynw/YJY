@@ -2,6 +2,7 @@ package com.miguan.yjy.model.services;
 
 
 import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
@@ -60,6 +61,7 @@ public interface Services {
 
     /**
      * 第三方登录
+     *
      * @param type － 类型（例：weixin）
      * @return
      */
@@ -71,14 +73,15 @@ public interface Services {
 
     /**
      * 第三方登录
-     * @param openid 微信openid
-     * @param unionId 微信unionid
+     *
+     * @param openid   微信openid
+     * @param unionId  微信unionid
      * @param nickname 微信昵称
-     * @param sex － 性别
+     * @param sex      － 性别
      * @param province － 省
-     * @param city－ 市
-     * @param avatar － 微信头像地址
-     * @param type － 类型（例：weixin）
+     * @param city－    市
+     * @param avatar   － 微信头像地址
+     * @param type     － 类型（例：weixin）
      * @return
      */
     @GET("?action=thirdLogin")
@@ -331,6 +334,13 @@ public interface Services {
     );
 
     /**
+     * 品牌详情
+     */
+    @GET("?action=brandInfo")
+    Observable<BrandAll> brandInfo(
+            @Query("id") long id);
+
+    /**
      * 品牌列表
      */
     @GET("?action=brandList")
@@ -365,6 +375,24 @@ public interface Services {
     );
 
     /**
+     * 产品列表接口
+     * action(string) － 固定值productList
+     * brand_id(int) － 品牌ID
+     * is_top(int) － 明星产品,1为是,0为不传为所有
+     * page(int) － 当前页数
+     * pageSize(int) － 每页多少条
+     */
+
+    @GET("?action=productList")
+    Observable<List<Product>> productList(
+            @Query("brand_id") long brand_id,
+            @Query("is_top") int is_top,
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
+
+    );
+
+    /**
      * 产品详情
      *
      * @return
@@ -385,7 +413,7 @@ public interface Services {
      * 搜索联想接口
      */
     @GET("?action=searchAssociate")
-    Observable<List<Product>> searchAssociate(
+    Observable<ProductList> searchAssociate(
             @Query("keywords") String keywords
     );
 
@@ -408,6 +436,7 @@ public interface Services {
             @Query("page") int page
     );
 
+
     /**
      * 文章列表
      *
@@ -416,6 +445,8 @@ public interface Services {
      */
     @GET("?action=articleList")
     Observable<List<Article>> articleList(
+            @Query("user_id") int user_id,
+            @Query("brand_id") long brand_id,
             @Query("page") int page
     );
 

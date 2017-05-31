@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,11 +26,10 @@ import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.module.main.MainActivity;
+import com.miguan.yjy.module.user.UsedListActivity;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -132,6 +132,14 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.tv_product_skin_sort)
     TextView mTvSkinSort;
+    @BindView(R.id.tv_product_tag_detail)
+    TextView mTvTag;
+    @BindView(R.id.tv_product_detail_read_describe)
+    TextView mTvReadDescribe;
+    @BindView(R.id.ll_product_detail_read)
+    LinearLayout mLlRead;
+    @BindView(R.id.iv_is_top)
+    ImageView mIvIsTop;
 
     private boolean mIsLike;
 
@@ -146,20 +154,43 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
 
         mTvTemplate.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            startActivity(intent);
+//            EventBus.getDefault().post(1);
+            Intent intent = new Intent(this, UsedListActivity.class);
             startActivity(intent);
-            EventBus.getDefault().post(1);
         });
     }
 
     @Override
     public void setData(Product product) {
+        if (product.getIs_top() > 0) {
+            mIvIsTop.setVisibility(View.VISIBLE);
+        } else {
+            mIvIsTop.setVisibility(View.GONE);
+        }
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
 
         mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
+
+        if (product.getTagList().size() >= 2) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("#").append(product.getTagList().get(0)).append("   #").append(product.getTagList().get(1));
+            mTvTag.setText(sb);
+        } else if (product.getTagList().size() == 1) {
+            mTvTag.setText("#" + product.getTagList().get(0));
+        } else {
+            mTvTag.setVisibility(View.GONE);
+        }
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
+        if (TextUtils.isEmpty(product.getProduct_explain())) {
+            mLlRead.setVisibility(View.GONE);
+        } else {
+            mLlRead.setVisibility(View.VISIBLE);
+            mTvReadDescribe.setText(product.getProduct_explain());
+        }
 
 //        if (UserPreferences.getUserID() <= 0) {
 //            tvSuitNum.setVisibility(View.GONE);
@@ -194,7 +225,24 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         );
 
         //去比价
-        mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
+        String ss = "https://ai.taobao.com/search/index.htm?key=CeraVeR%E9%9D%A2%E9%83%A8%E5%A4%9C%E9%97%B4%E8%A1%A5%E6%B0%B4%E4%BF%9D%E6%B9%BF%E4%B9%B3%E6%B6%B2&pid=mm_124287267_25890794_99532920";
+//        mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
+//        mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), ss));
+        mTvTaobao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (LUtils.checkPackage("com.taobao.taobao")) {
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(product.getBuy().getTaobao()); // 淘宝商品的地址
+                    intent.setData(content_url);
+//                intent.setClassName("com.taobao.taobao", "com.taobao.tao.detail.activity.DetailActivity");
+                    startActivity(intent);
+                } else {
+                    WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao());
+                }
+            }
+        });
         mTvJingdong.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getJd()));
         mTvAmazon.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getAmazon()));
 

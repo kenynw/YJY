@@ -15,10 +15,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
@@ -59,6 +61,24 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @BindView(R.id.ll_product_result_sencond)
     LinearLayout mLlResultSencond;
+    @BindView(R.id.sdv_brand_img)
+    SimpleDraweeView mSdvBrandImg;
+    @BindView(R.id.tv_brand_name)
+    TextView mTvBrandName;
+    @BindView(R.id.tv_brand_num)
+    TextView mTvBrandNum;
+    @BindView(R.id.tbtn_product_filter_cate)
+    ToggleButton mTbtnProductFilterCate;
+    @BindView(R.id.tbtn_product_filter_effect)
+    ToggleButton mTbtnProductFilterEffect;
+    @BindView(R.id.ll_product_filter)
+    LinearLayout mLlProductFilter;
+    @BindView(R.id.recycle)
+    EasyRecyclerView mRecycle;
+    @BindView(R.id.tv_brand_main)
+    TextView mTvBrandMain;
+    @BindView(R.id.ll_product_include_brand)
+    LinearLayout mLlIncludeBrand;
 
     private FilterPanel mFilterPanel;
 
@@ -66,7 +86,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new SearchReslutViewHolder(parent);
+        return new SearchReslutViewHolder(parent, 2);
     }
 
     @Override
@@ -98,6 +118,18 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 //        mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
         String money = "共为您找到<font color=\"#32DAC3\"> " + productList.getPageTotal() + " </font>款产品";
         mTvCount.setText(Html.fromHtml(money));
+        if (productList.getBrand().getId()== null) {
+            mLlIncludeBrand.setVisibility(View.GONE);
+        } else {
+            mLlIncludeBrand.setVisibility(View.VISIBLE);
+            mSdvBrandImg.setImageURI(productList.getBrand().getImg());
+            mTvBrandName.setText(productList.getBrand().getName());
+            String num = "收录产品数 : <font color=\"#32DAC3\"> " + productList.getBrand().getHot() + " </font>";
+            mTvBrandNum.setText(Html.fromHtml(num));
+        }
+
+
+        mTvBrandMain.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
         if (TextUtils.isEmpty(keywords)) {
@@ -128,6 +160,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                     imgSearchCancle.setVisibility(View.VISIBLE);
                     mLlResultFirst.setVisibility(View.GONE);
                     getPresenter().setRecommendData(s.toString());
+                    setBrandLayoutVisibility(View.GONE);
                 }
             }
         });
@@ -140,6 +173,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                     gotoSearchResult(mEtKeywords.getText().toString().trim());
                     mLlResultFirst.setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
+                    mFilterPanel.setVisibility(View.VISIBLE);
                     return true;
                 }
                 return false;
@@ -147,7 +181,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         });
 
         imgSearchCancle.setOnClickListener(v -> clearStr());
-        mFilterPanel = new FilterPanel(this, productList.getCategroy(), productList.getEffects());
+        mFilterPanel = new FilterPanel(this, productList.getCategoryList(), productList.getEffectList());
         mFilterPanel.setMenuText(1, cateName);
         mFilterPanel.setOnItemSelectedListener(new FilterPanel.OnItemSelectedListener() {
             @Override
@@ -176,10 +210,14 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     }
 
     public void setCateLayoutVisibility(int visibility) {
-        mFilterPanel.setVisibility(visibility);
+//        mFilterPanel.setVisibility(visibility);
         mTvCount.setVisibility(visibility);
     }
 
+    public void setBrandLayoutVisibility(int visibility) {
+        mLlIncludeBrand.setVisibility(visibility);
+        mFilterPanel.setVisibility(visibility);
+    }
     private void clearStr() {
         mEtKeywords.setText("");
     }

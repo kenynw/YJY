@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -33,14 +34,25 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
 
     @BindView(R.id.tv_product_money)
     TextView mTvSpec;
+    @BindView(R.id.tv_product_sort)
+    TextView mTvProductSort;
 
-    public SearchReslutViewHolder(ViewGroup parent) {
+    private int type;
+
+    public SearchReslutViewHolder(ViewGroup parent, int type) {
         super(parent, R.layout.item_product_list);
+        this.type = type;
         ButterKnife.bind(this, itemView);
     }
 
     @Override
     public void setData(Product data) {
+        if (type == 1) {
+            mTvProductSort.setText("No."+(getAdapterPosition()+1));
+            mTvProductSort.setVisibility(View.VISIBLE);
+        } else {
+            mTvProductSort.setVisibility(View.GONE);
+        }
         mDvThumb.setImageURI(Uri.parse(data.getProduct_img()));
         mTvName.setText(data.getProduct_name());
         mRatbar.setRating(data.getStar());

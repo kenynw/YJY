@@ -32,6 +32,7 @@ import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.test.TestGuideActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.utils.DateUtils;
+import com.miguan.yjy.utils.LUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -121,25 +122,25 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 public void onNext(User user) {
                     nums.clear();
                     userInfo = user;
-                    if (userInfo.getCompact()!=0) {
+                    if (userInfo.getCompact() != 0) {
                         mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         mTvTestWrinkle.setText(Skin.getCompact(userInfo.getCompact()));
                         mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
                         nums.add(0);
                     }
-                    if (userInfo.getDry()!=0) {
+                    if (userInfo.getDry() != 0) {
                         mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(1);
                         mTvTestOily.setText(Skin.getDryOil(userInfo.getDry()));
                         mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
                     }
-                    if (userInfo.getTolerance()!=0) {
+                    if (userInfo.getTolerance() != 0) {
                         mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
                         nums.add(2);
                         mTvTestSensitive.setText(Skin.getTolerance(userInfo.getTolerance()));
                         mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
                     }
-                    if (userInfo.getPigment()!=0) {
+                    if (userInfo.getPigment() != 0) {
                         mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         nums.add(3);
                         mTvTestPigment.setText(Skin.getPigment(userInfo.getPigment()));
@@ -270,35 +271,39 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
                 break;
             case R.id.tv_test_into:
-                UserModel.getInstance()
-                        .modifyProfile(ProfilePresenter.KEY_PROFILE_BIRTHDAY, birthDay)
-                        .flatMap(new Func1<String, Observable<String>>() {
-                            @Override
-                            public Observable<String> call(String s) {
-                                return UserModel.getInstance().modifyProfile("sex", sex + "");
-                            }
-                        })
-                        .subscribe(new ServicesResponse<String>() {
-                            @Override
-                            public void onNext(String s) {
-                                switch (tag) {
-                                    case 0:
-                                        TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(0), TestGuideActivity.EXTRA_TEST_FIRST_TYPE);
-                                        break;
-                                    case 1:
-                                        TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(1), TestGuideActivity.EXTRA_TEST_SECOND_TYPE);
-                                        break;
-                                    case 2:
-                                        TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(2), TestGuideActivity.EXTRA_TEST_THIRD_TYPE);
-                                        break;
-                                    case 3:
-                                        TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(3), TestGuideActivity.EXTRA_TEST_FOUR_TYPE);
-                                        break;
+                if (TextUtils.isEmpty(birthDay)) {
+                    LUtils.toast("请输入完整信息喔~");
+                } else {
+                    UserModel.getInstance()
+                            .modifyProfile(ProfilePresenter.KEY_PROFILE_BIRTHDAY, birthDay)
+                            .flatMap(new Func1<String, Observable<String>>() {
+                                @Override
+                                public Observable<String> call(String s) {
+                                    return UserModel.getInstance().modifyProfile("sex", sex + "");
                                 }
+                            })
+                            .subscribe(new ServicesResponse<String>() {
+                                @Override
+                                public void onNext(String s) {
+                                    switch (tag) {
+                                        case 0:
+                                            TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(0), TestGuideActivity.EXTRA_TEST_FIRST_TYPE);
+                                            break;
+                                        case 1:
+                                            TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(1), TestGuideActivity.EXTRA_TEST_SECOND_TYPE);
+                                            break;
+                                        case 2:
+                                            TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(2), TestGuideActivity.EXTRA_TEST_THIRD_TYPE);
+                                            break;
+                                        case 3:
+                                            TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(3), TestGuideActivity.EXTRA_TEST_FOUR_TYPE);
+                                            break;
+                                    }
 
-                            }
-                        });
-                popupWindow.dismiss();
+                                }
+                            });
+                    popupWindow.dismiss();
+                }
                 break;
             case R.id.iv_test_close:
                 popupWindow.dismiss();

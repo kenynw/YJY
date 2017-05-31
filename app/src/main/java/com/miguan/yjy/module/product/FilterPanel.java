@@ -20,6 +20,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Category;
+import com.miguan.yjy.model.bean.Effect;
 import com.miguan.yjy.utils.LUtils;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
 
     private List<Category> mCategories;
 
-    private String[] mEffects;
+    private List<Effect>mEffects;
 
     private List<View> mMenuList;
 
@@ -53,7 +54,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
 
     private ToggleButton mCurrentBtn;
 
-    public FilterPanel(ChainBaseActivity activity, List<Category> categories, String[] effects) {
+    public FilterPanel(ChainBaseActivity activity, List<Category> categories,List<Effect> effects) {
         mActivity = activity;
         mCategories = categories;
         mEffects = effects;
@@ -68,6 +69,11 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
         String[] categories = new String[mCategories.size()];
         for (int i = 0; i < mCategories.size(); i++) {
             categories[i] = mCategories.get(i).getCate_name();
+        }
+
+        String[] effects = new String[mEffects.size()];
+        for (int i = 0; i < mEffects.size(); i++) {
+            effects[i] = mEffects.get(i).getEffect_name();
         }
 
         ButterKnife.apply(mTbtnList, new ButterKnife.Action<ToggleButton>() {
@@ -92,10 +98,10 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
                 mListener.onItemSelected(mCategories.get(position).getId(), "");
             }
         }));
-        mMenuList.add(createRecyclerView(mEffects, position -> {
-            mTbtnList.get(2).setText(mEffects[position]);
+        mMenuList.add(createRecyclerView(effects, position -> {
+            mTbtnList.get(2).setText(effects[position]);
             if (mListener != null) {
-                mListener.onItemSelected(0, mEffects[position]);
+                mListener.onItemSelected(mEffects.get(position).getEffect_id(), "");
             }
         }));
     }

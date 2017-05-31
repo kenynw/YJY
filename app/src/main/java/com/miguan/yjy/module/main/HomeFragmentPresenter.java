@@ -51,7 +51,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
 
     @Override
     public void onLoadMore() {
-        ArticleModel.getInstance().getArticleList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getArticleList(0,getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
     public class HomeHeader implements RecyclerArrayAdapter.ItemView {

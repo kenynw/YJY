@@ -64,4 +64,17 @@
         tools:text="￥320/250ML"
         />
 
+    <TextView
+        android:id="@+id/tv_product_sort"
+        android:background="@color/black"
+        android:layout_width="30dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="No.1"
+        android:textSize="8dp"
+        android:textStyle="bold"
+        android:layout_height="15dp"/>
+
 </RelativeLayout>

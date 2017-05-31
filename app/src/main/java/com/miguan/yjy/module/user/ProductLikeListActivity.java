@@ -38,7 +38,7 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
 
     public void setData(ProductList productList) {
         if (mIsInit) return;
-        FilterPanel filterPanel = new FilterPanel(this, productList.getCategroy(), productList.getEffects());
+        FilterPanel filterPanel = new FilterPanel(this, productList.getCategoryList(), productList.getEffectList());
         filterPanel.setOnItemSelectedListener(new FilterPanel.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int cateId, String text) {

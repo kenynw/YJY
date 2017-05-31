@@ -40,7 +40,10 @@ public class SearchActivityPresenter extends BaseListActivityPresenter<SearchAct
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().searchAssociate(getView().edtSearch.getText().toString()).doOnNext(new Action1<List<Product>>() {
+        ProductModel.getInstance().searchAssociate(getView().edtSearch.getText().toString()).map(products -> {
+            return products.getProduct();
+
+        }).doOnNext(new Action1<List<Product>>() {
             @Override
             public void call(List<Product> products) {
                 if (products.size() == 0) {

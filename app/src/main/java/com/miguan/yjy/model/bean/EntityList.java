@@ -29,6 +29,9 @@ public class EntityList implements Parcelable {
         this.pageSize = pageSize;
     }
 
+    public EntityList() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -38,9 +41,6 @@ public class EntityList implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.pageTotal);
         dest.writeInt(this.pageSize);
-    }
-
-    public EntityList() {
     }
 
     protected EntityList(Parcel in) {

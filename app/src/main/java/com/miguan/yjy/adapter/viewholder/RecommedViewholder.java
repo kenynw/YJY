@@ -37,16 +37,16 @@ public class RecommedViewholder extends BaseViewHolder<Product> {
     @Override
     public void setData(Product data) {
         super.setData(data);
-        if (data.getName().contains(keyword)) {
+        if (data.getProduct_name().contains(keyword)) {
             //为文本框设置多种颜色
-            SpannableStringBuilder style = new SpannableStringBuilder(data.getName());
-            style.setSpan(new ForegroundColorSpan(  getContext().getResources().getColor(R.color.colorPrimary)), data.getName().indexOf(keyword), data.getName().indexOf(keyword) + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            SpannableStringBuilder style = new SpannableStringBuilder(data.getProduct_name());
+            style.setSpan(new ForegroundColorSpan(  getContext().getResources().getColor(R.color.colorPrimary)), data.getProduct_name().indexOf(keyword), data.getProduct_name().indexOf(keyword) + keyword.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             tvProductThink.setText(style);
         } else {
-            tvProductThink.setText(data.getName());
+            tvProductThink.setText(data.getProduct_name());
         }
 //
-        tvProductThink.setOnClickListener(v -> gotoSearchResult(data.getName()));
+        tvProductThink.setOnClickListener(v -> gotoSearchResult(data.getProduct_name()));
     }
 
     public void gotoSearchResult(String name) {

@@ -47,7 +47,15 @@ public class LoginPresenter extends Presenter<LoginActivity> {
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
                 map.put("nickname", map.get("screen_name"));
-                map.put("sex", map.get("gender"));
+                int sex;
+                if (map.get("gender").equals("女")) {
+                    sex = 0;
+                } else if (map.get("gender").equals("男")) {
+                    sex = 1;
+                } else {
+                    sex = 2;
+                }
+                map.put("sex", sex + "");
                 map.put("headimgurl", map.get("iconurl"));
                 AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
                     @Override

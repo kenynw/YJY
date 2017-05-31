@@ -17,7 +17,7 @@
     <string name="text_me_star">我收藏的</string>
     <string name="text_skin_test">肤质测试</string>
     <string name="text_query_production_date">批号查询</string>
-    <string name="text_production_date">生产日期查询></string>
+    <string name="text_production_date">生产日期查询 > </string>
     <string name="text_query_instructions">查询说明</string>
     <string name="text_query_title_1">什么是批号？</string>
     <string name="text_query_content_1">护肤品批号是生产商/品牌商用于记录产品生产日期、产地、生产批次等信息的重要手段，我们也可以通过查询批号信息获取最准确的生产信息~</string>
@@ -167,6 +167,8 @@
     <string name="tv_product_no_fit_skin">不适合我的肤质:%d种</string>
     <string name="tv_product_num">查询%d种护肤品的安全和功效</string>
     <string name="tv_product_effect_num">主要功效成分:%d种</string>
+    <string name="tv_product_brand_main">品牌主页 > </string>
+    <string name="tv_product_brand_num">收录产品数 : %d</string>
 
     <!--测试相关-->
     <string name="tv_test_wrinkele">皱纹/紧致测试</string>

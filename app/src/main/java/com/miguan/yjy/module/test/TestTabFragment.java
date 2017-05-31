@@ -29,7 +29,7 @@ public class TestTabFragment extends BaseListFragment<TestTabFragmentPrensenter,
 
     @Override
     public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
-        return new SearchReslutViewHolder(parent);
+        return new SearchReslutViewHolder(parent,2);
     }
 
 

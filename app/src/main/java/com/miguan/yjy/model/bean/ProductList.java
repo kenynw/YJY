@@ -12,35 +12,51 @@ import java.util.List;
 
 public class ProductList extends EntityList {
 
-    private List<Product> data;
+    private List<Product> product;
 
-    @SerializedName(value = "categories", alternate = { "categroy" })
-    private List<Category> categories;
+    @SerializedName(value = "categoryList", alternate = {"categroy"})
+    private List<Category> categoryList;
 
-    private String[] effects;
+    private List<Effect> effectList;
 
-    public List<Product> getData() {
-        return data;
+    private Brand brand;
+
+
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setData(List<Product> data) {
-        this.data = data;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
-    public List<Category> getCategroy() {
-        return categories;
+    public List<Category> getCategoryList() {
+        return categoryList;
     }
 
-    public void setCategroy(List<Category> categroy) {
-        this.categories = categroy;
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
-    public String[] getEffects() {
-        return effects;
+    public List<Effect> getEffectList() {
+        return effectList;
     }
 
-    public void setEffects(String[] effects) {
-        this.effects = effects;
+    public void setEffectList(List<Effect> effectList) {
+        this.effectList = effectList;
+    }
+
+    public List<Product> getProduct() {
+        return product;
+
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
+    }
+
+
+    public ProductList() {
     }
 
     @Override
@@ -50,18 +66,19 @@ public class ProductList extends EntityList {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.data);
-        dest.writeTypedList(this.categories);
-        dest.writeStringArray(this.effects);
-    }
-
-    public ProductList() {
+        super.writeToParcel(dest, flags);
+        dest.writeTypedList(this.product);
+        dest.writeTypedList(this.categoryList);
+        dest.writeTypedList(this.effectList);
+        dest.writeParcelable(this.brand, flags);
     }
 
     protected ProductList(Parcel in) {
-        this.data = in.createTypedArrayList(Product.CREATOR);
-        this.categories = in.createTypedArrayList(Category.CREATOR);
-        this.effects = in.createStringArray();
+        super(in);
+        this.product = in.createTypedArrayList(Product.CREATOR);
+        this.categoryList = in.createTypedArrayList(Category.CREATOR);
+        this.effectList = in.createTypedArrayList(Effect.CREATOR);
+        this.brand = in.readParcelable(Brand.class.getClassLoader());
     }
 
     public static final Creator<ProductList> CREATOR = new Creator<ProductList>() {
