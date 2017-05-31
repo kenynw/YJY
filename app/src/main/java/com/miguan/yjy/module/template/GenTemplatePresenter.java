@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -33,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+
 
 /**
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
@@ -73,12 +73,17 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         String templateStr;
         if (!(templateStr = LUtils.getPreferences().getString(EXTRA_TEMPLATE, "")).isEmpty()) {
             new AlertDialog.Builder(getView())
+                    .setCancelable(false)
                     .setTitle("上次的创作还未完成哦~")
                     .setItems(new String[]{"加载草稿", "重新创作", "取消"}, (dialog, which) -> {
                         if (which == 0) {
                             Template template = new Gson().fromJson(templateStr, Template.class);
+                            getView().getIntent().putExtra(EXTRA_TEMPLATE, template.getType());
                             getView().initTemplate(template.getType(), template);
                         } else {
+                            if (which == 1) {
+                                LUtils.getPreferences().edit().putString(EXTRA_TEMPLATE, "").apply();
+                            }
                             getView().initTemplate(index, null);
                         }
                     })
@@ -88,39 +93,26 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         }
     }
 
-    public SparseArray<String> findAllEditText(ViewGroup parent) {
-        SparseArray<String> etList = new SparseArray<>();
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            View child = parent.getChildAt(i);
-            if (child instanceof EditText) {
-                etList.put(child.getId(), ((EditText) child).getText().toString());
-            }
-            if (child instanceof ViewGroup) {
-                findAllEditText((ViewGroup) child);
-            }
-        }
-        return etList;
-    }
-
-    // 存草稿
-    public void saveDraft(int type, View header, List<TemplateView> items, View footer) {
+    @Override
+    protected void onDestroyView() {
+        super.onDestroyView();
         Template template = new Template();
-        template.setType(type);
-        if (header != null) {
-            EditText et = (EditText) header.findViewById(R.id.et_template_header);
+        template.setType(getView().getIntent().getIntExtra(EXTRA_TEMPLATE, 0));
+        if (getView().getHeader() != null) {
+            EditText et = (EditText) getView().getHeader().findViewById(R.id.et_template_header);
             if (et != null) {
                 template.setTitle(et.getText().toString());
             }
-            EditText et2 = (EditText) header.findViewById(R.id.et_template_header_2);
+            EditText et2 = (EditText) getView().getHeader().findViewById(R.id.et_template_header_2);
             if (et2 != null) {
                 template.setDesc(et2.getText().toString());
             }
         }
-        if (items != null && items.size() > 0) {
+        if (getView().getTemplateList() != null && getView().getTemplateList().size() > 0) {
             List<Template.Item> itemList = new ArrayList<>();
-            for (TemplateView templateView : items) {
+            for (TemplateView templateView : getView().getTemplateList()) {
                 Template.Item item = new Template.Item();
-                item.setEtContents(findAllEditText(templateView));
+                item.setEtContents(templateView.getTexts());
                 item.setUris(templateView.getUris());
                 itemList.add(item);
             }

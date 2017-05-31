@@ -59,7 +59,10 @@ public class ProductModel extends AbsModel {
      * 搜索结果接口
      */
     public Observable<EntityRoot<List<Product>>> getProductList(String keywords, int brandId, int page) {
-        return ServicesClient.getServices().productList(keywords, brandId, 0, page).compose(new DefaultTransform<>());
+
+        return ServicesClient.getServices().productList(keywords, brandId, 0, page)
+//                .map()
+                .compose(new DefaultTransform<>());
     }
 
     public Observable<Product> getProductDetail(int productId) {
@@ -120,6 +123,9 @@ public class ProductModel extends AbsModel {
     public List<Brand> queryAll() {
         return App.getDaoSession().getBrandDao().loadAll();
     }
+
+//    public List<Product> queryAll() {
+//    }
 
     /**
      * 添加收藏（长草）

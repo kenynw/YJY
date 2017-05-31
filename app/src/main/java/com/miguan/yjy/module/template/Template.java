@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.template;
 
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
@@ -90,9 +89,28 @@ public class Template implements Parcelable {
 
     public static class Item implements Parcelable {
 
-        private SparseArray<Uri> mUris;
+        private SparseArray<String> mUris;
 
         private SparseArray<String> mEtContents;
+
+        public Item() {
+        }
+
+        public SparseArray<String> getUris() {
+            return mUris;
+        }
+
+        public void setUris(SparseArray<String> uris) {
+            mUris = uris;
+        }
+
+        public SparseArray<String> getEtContents() {
+            return mEtContents;
+        }
+
+        public void setEtContents(SparseArray<String> etContents) {
+            mEtContents = etContents;
+        }
 
         @Override
         public int describeContents() {
@@ -105,11 +123,8 @@ public class Template implements Parcelable {
             dest.writeSparseArray((SparseArray) this.mEtContents);
         }
 
-        public Item() {
-        }
-
         protected Item(Parcel in) {
-            this.mUris = in.readSparseArray(Uri.class.getClassLoader());
+            this.mUris = in.readSparseArray(String.class.getClassLoader());
             this.mEtContents = in.readSparseArray(String.class.getClassLoader());
         }
 
@@ -124,22 +139,6 @@ public class Template implements Parcelable {
                 return new Item[size];
             }
         };
-
-        public SparseArray<Uri> getUris() {
-            return mUris;
-        }
-
-        public void setUris(SparseArray<Uri> uris) {
-            mUris = uris;
-        }
-
-        public SparseArray<String> getEtContents() {
-            return mEtContents;
-        }
-
-        public void setEtContents(SparseArray<String> etContents) {
-            mEtContents = etContents;
-        }
     }
 
 }

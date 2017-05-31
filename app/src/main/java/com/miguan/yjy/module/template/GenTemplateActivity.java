@@ -29,17 +29,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.miguan.yjy.module.template.GenTemplatePresenter.EXTRA_TEMPLATE;
-
 /**
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(GenTemplatePresenter.class)
 public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter> {
 
-    private final int[] mImages = new int[] {
-            R.mipmap.image_template_guide_0,R.mipmap.image_template_guide_1,
-            R.mipmap.image_template_guide_2,R.mipmap.image_template_guide_3
+    private final int[] mImages = new int[]{
+            R.mipmap.image_template_guide_0, R.mipmap.image_template_guide_1,
+            R.mipmap.image_template_guide_2, R.mipmap.image_template_guide_3
     };
 
     @BindView(R.id.fl_template_gen_add)
@@ -68,15 +66,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         setToolbarTitle(R.string.text_title_template);
         ButterKnife.bind(this);
 
-        int index = getIntent().getIntExtra(EXTRA_TEMPLATE, 0);
-        mToolbar.setNavigationOnClickListener(v -> new AlertDialog.Builder(GenTemplateActivity.this)
-                .setMessage("确认退出模板")
-                .setNegativeButton("取消", null)
-                .setPositiveButton("退出", (dialog, which) -> {
-                    getPresenter().saveDraft(index, mHeader, mViewList, mFooter);
-                    finish();
-                }).show());
-
+        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
         mViewHolders = new ArrayList<>();
 
         // 设置首次进入导航
@@ -100,12 +90,9 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         int layoutRes = getResources().getIdentifier("item_list_template_" + index, "layout", getPackageName());
         int headerRes = getResources().getIdentifier("header_template_" + index, "layout", getPackageName());
         int footerRes = getResources().getIdentifier("footer_template_" + index, "layout", getPackageName());
+        mFlAdd.setOnClickListener(v -> addItem(layoutRes, null));
 
         addHeader(headerRes);
-        addItem(layoutRes, null);
-        addFooter(footerRes);
-
-        mFlAdd.setOnClickListener(v -> addItem(layoutRes, null));
         if (template != null) {
             if (mHeader != null) {
                 EditText et = (EditText) mHeader.findViewById(R.id.et_template_header);
@@ -120,7 +107,10 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
             for (Template.Item item : template.getItems()) {
                 addItem(layoutRes, item);
             }
+        } else {
+            addItem(layoutRes, null);
         }
+        addFooter(footerRes);
     }
 
     @Override
@@ -162,6 +152,10 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         mLlGen.addView(mHeader, 0);
     }
 
+    public View getHeader() {
+        return mHeader;
+    }
+
     private void addItem(@LayoutRes int res, Template.Item item) {
         if (res <= 0) return;
 
@@ -181,8 +175,12 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         mLlGen.addView(templateView, index);
         mViewList.add(templateView);
         if (item != null) {
-            templateView.setImages(item.getUris());
+            templateView.setData(item);
         }
+    }
+
+    public List<TemplateView> getTemplateList() {
+        return mViewList;
     }
 
     private void addFooter(@LayoutRes int res) {
@@ -212,4 +210,13 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         mLlGen.addView(mFooter, mLlGen.getChildCount());
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(GenTemplateActivity.this)
+                .setMessage("确认退出模板")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("退出", (dialog, which) -> {
+                    finish();
+                }).show();
+    }
 }

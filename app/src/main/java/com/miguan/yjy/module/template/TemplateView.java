@@ -7,10 +7,12 @@ import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +29,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 /**
  * Copyright (c) 2017/5/19. LiaoPeiKun Inc. All rights reserved.
  */
@@ -39,7 +43,9 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
 
     private List<ImageView> mIvFilters = new ArrayList<>();
 
-    private SparseArray<Uri> mUris = new SparseArray<>();
+    private List<EditText> mEditTexts = new ArrayList<>();
+
+    private SparseArray<String> mUris = new SparseArray<>();
 
     private int mCurPosition;
 
@@ -74,8 +80,9 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
 
     private void findAllChild(ViewGroup viewGroup) {
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            if (viewGroup.getChildAt(i) instanceof SimpleDraweeView) {
-                SimpleDraweeView dv = (SimpleDraweeView) viewGroup.getChildAt(i);
+            View child = viewGroup.getChildAt(i);
+            if (child instanceof SimpleDraweeView) {
+                SimpleDraweeView dv = (SimpleDraweeView) child;
                 dv.setOnClickListener(v -> {
                     ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(this);
                     mCurPosition = mDvImages.indexOf(dv);
@@ -83,14 +90,19 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
                 mDvImages.add(dv);
             }
 
-            if (viewGroup.getChildAt(i).getTag() != null && viewGroup.getChildAt(i).getTag().equals("filter")) {
-                ImageView iv = (ImageView) viewGroup.getChildAt(i);
+            if (child.getTag() != null && viewGroup.getChildAt(i).getTag().equals("filter")) {
+                ImageView iv = (ImageView) child;
                 mIvFilters.add(iv);
                 iv.setOnClickListener(v -> {
                     boolean roundAsCircle = mDvImages.get(mCurPosition).getHierarchy().getRoundingParams() != null;
-                    FilterActivity.start((AppCompatActivity) getContext(), mUris.get(mCurPosition), roundAsCircle, TemplateView.this);
+                    FilterActivity.start((AppCompatActivity) getContext(), Uri.parse(mUris.get(mDvImages.get(mCurPosition).getId(), "")),
+                            roundAsCircle, TemplateView.this);
                     mCurPosition = mIvFilters.indexOf(iv);
                 });
+            }
+
+            if (child instanceof EditText) {
+                mEditTexts.add((EditText) child);
             }
 
             if (viewGroup.getChildAt(i) instanceof ViewGroup) {
@@ -99,37 +111,65 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
         }
     }
 
-    public SparseArray<Uri> getUris() {
+    public SparseArray<String> getUris() {
         return mUris;
     }
 
-    public void setImages(SparseArray<Uri> uris) {
+    public SparseArray<String> getTexts() {
+        SparseArray<String> ets = new SparseArray<>();
+        for (EditText editText : mEditTexts) {
+            ets.put(editText.getId(), editText.getText().toString().trim());
+        }
+        return ets;
+    }
+
+    public void setData(Template.Item item) {
         if (mDvImages.size() <= 0) {
             findAllChild(this);
         }
 
-        if (uris.size() > 0) {
-            for (int i = 0; i < uris.size(); i++) {
-                mDvImages.get(i).setImageURI(uris.valueAt(i));
+        if (item.getUris().size() > 0) {
+            mUris = item.getUris();
+            for (SimpleDraweeView dvImage : mDvImages) {
+                String uri = item.getUris().get(dvImage.getId(), "");
+                if (!TextUtils.isEmpty(uri)) {
+                    dvImage.setImageURI(Uri.parse(uri));
+                    mIvFilters.get(mDvImages.indexOf(dvImage)).setVisibility(VISIBLE);
+                }
             }
+        }
+
+        if (item.getEtContents().size() > 0) {
+            for (int i = 0; i < item.getEtContents().size(); i++) {
+                int id = item.getEtContents().keyAt(i);
+                if (id > 0) {
+                    EditText editText = ButterKnife.findById(this, id);
+                    if (editText != null) {
+                        editText.setText(item.getEtContents().valueAt(i));
+                    }
+                }
+            }
+
         }
     }
 
     @Override
     public void onImageLoaded(Uri uri) {
-        mUris.put(mCurPosition, uri);
+        mUris.put(mDvImages.get(mCurPosition).getId(), uri.toString());
         mDvImages.get(mCurPosition).setImageURI(uri);
         mIvFilters.get(mCurPosition).setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onFilterSelected(File filter, boolean applyAll) {
+    public void onFilterSelected(File file, boolean applyAll) {
         if (applyAll) {
             for (SimpleDraweeView dvImage : mDvImages) {
-                dvImage.setImageURI(Uri.fromFile(filter));
+                dvImage.setImageURI(Uri.fromFile(file));
             }
         } else {
-            mDvImages.get(mCurPosition).setImageURI(Uri.fromFile(filter));
+            Uri uri = Uri.fromFile(file);
+            mDvImages.get(mCurPosition).setImageURI(uri);
+            mUris.put(mDvImages.get(mCurPosition).getId(), uri.toString());
         }
     }
 
