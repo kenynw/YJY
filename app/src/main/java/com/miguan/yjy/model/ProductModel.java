@@ -1,6 +1,10 @@
 package com.miguan.yjy.model;
 
+import android.text.TextUtils;
+
 import com.dsk.chain.model.AbsModel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.miguan.yjy.base.App;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandAll;
@@ -14,6 +18,8 @@ import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
+import com.miguan.yjy.module.product.RepositoryListPresenter;
+import com.miguan.yjy.utils.LUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,9 +66,23 @@ public class ProductModel extends AbsModel {
      * 搜索结果接口
      */
     public Observable<EntityRoot<List<Product>>> getProductList(String keywords, int brandId, int page) {
-
         return ServicesClient.getServices().productList(keywords, brandId, 0, page)
-//                .map()
+                .map(listEntityRoot -> {
+                    if (page == 1) {
+                        String productsStr = LUtils.getPreferences().getString(RepositoryListPresenter.EXTRA_REPOSITORY_PRODUCT, "");
+                        if (!TextUtils.isEmpty(productsStr)) {
+                            List<Product> list = new Gson().fromJson(productsStr, new TypeToken<List<Product>>() {
+                            }.getType());
+                            if (list.size() > 0) {
+                                for (Product product : list) {
+                                    if (product.getProduct_name().contains(keywords) && !listEntityRoot.getData().contains(product))
+                                        listEntityRoot.getData().add(0, product);
+                                }
+                            }
+                        }
+                    }
+                    return listEntityRoot;
+                })
                 .compose(new DefaultTransform<>());
     }
 

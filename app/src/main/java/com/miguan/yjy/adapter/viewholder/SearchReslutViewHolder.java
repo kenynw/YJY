@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,28 +28,36 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
     ImageView mDvThumb;
 
     @BindView(R.id.tv_product_name)
-    protected TextView mTvName;
+    TextView mTvName;
 
     @BindView(R.id.ratbar_product)
     protected RatingBar mRatbar;
 
     @BindView(R.id.tv_product_money)
-    protected TextView mTvSpec;
+    TextView mTvSpec;
 
     @BindView(R.id.tv_product_sort)
     TextView mTvProductSort;
 
-    private int type;
+    private boolean mShowRank;
 
-    public SearchReslutViewHolder(ViewGroup parent, int type) {
-        super(parent, R.layout.item_product_list);
-        this.type = type;
+    public SearchReslutViewHolder(ViewGroup parent, boolean showRank) {
+        this(parent, R.layout.item_product_list, showRank);
+    }
+
+    public SearchReslutViewHolder(ViewGroup parent, @LayoutRes int res) {
+        this(parent, res, false);
+    }
+
+    public SearchReslutViewHolder(ViewGroup parent, @LayoutRes int res, boolean showRank) {
+        super(parent, res);
+        this.mShowRank = showRank;
         ButterKnife.bind(this, itemView);
     }
 
     @Override
     public void setData(Product data) {
-        if (type == 1) {
+        if (mShowRank) {
             mTvProductSort.setText("No."+(getAdapterPosition()+1));
             mTvProductSort.setVisibility(View.VISIBLE);
         } else {

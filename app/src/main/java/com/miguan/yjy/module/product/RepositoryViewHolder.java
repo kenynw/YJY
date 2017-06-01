@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
@@ -26,15 +27,17 @@ public class RepositoryViewHolder extends SearchReslutViewHolder {
     @BindView(R.id.tv_product_delete)
     TextView mTvDelete;
 
+    @BindView(R.id.swp_product_layout)
+    SwipeLayout mSwpLayout;
+
     public RepositoryViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_repository_product_list);
     }
 
     @Override
     public void setData(Product data) {
-        mTvName.setText(data.getProduct_name());
+        super.setData(data);
         mRatbar.setVisibility(View.GONE);
-        mTvSpec.setText(data.getPrice().equals("0") ? "暂无报价" : getSpec(data));
         mRlInfo.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("product", data);
@@ -44,6 +47,7 @@ public class RepositoryViewHolder extends SearchReslutViewHolder {
         mTvDelete.setOnClickListener(v -> {
             LUtils.toast("delete");
         });
+        mSwpLayout.setSwipeEnabled(data.isLocal());
     }
 
 }

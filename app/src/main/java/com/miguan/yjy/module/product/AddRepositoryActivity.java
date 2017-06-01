@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,8 +41,8 @@ import static com.miguan.yjy.module.product.AddRepositoryPresenter.REQUEST_CODE_
 @RequiresPresenter(AddRepositoryPresenter.class)
 public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresenter> implements OnImageSelectListener {
 
-    @BindView(R.id.et_add_repository_brand)
-    EditText mEtBrand;
+    @BindView(R.id.tv_add_repository_brand)
+    TextView mTvBrand;
 
     @BindView(R.id.tv_add_repository_name)
     TextView mTvProduct;
@@ -95,6 +94,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         mLlImage.setOnClickListener(v -> ImageProvider.getInstance(this).getImageFromCameraOrAlbum(this));
         mTvQuery.setOnClickListener(v -> startActivity(new Intent(this, QueryCodeActivity.class)));
         mTvIntro.setOnClickListener(v -> WebViewActivity.start(this, "开封保质期说明", Services.BASE_BETA_URL + "site/quality"));
+        mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), REQUEST_CODE_BRAND));
         mTvProduct.setOnClickListener(v -> startActivityForResult(new Intent(this, RepositoryListActivity.class), REQUEST_CODE_PRODUCT));
 
         mTimePickerView = new TimePickerView.Builder(this, (date, v) -> {
@@ -125,13 +125,6 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     }
 
     public void setBrand(String brandName, String overtime) {
-        if (TextUtils.isEmpty(brandName)) {
-            mEtBrand.setEnabled(true);
-        } else {
-            mEtBrand.setText(brandName);
-            mEtBrand.setEnabled(false);
-            mEtBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), REQUEST_CODE_BRAND));
-        }
         if (TextUtils.isEmpty(overtime)) {
             mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
             mTvQuery.setVisibility(View.VISIBLE);
@@ -144,7 +137,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     public void setProduct(Product product) {
         getPresenter().setBrandId(product.getBrand_id());
-        mEtBrand.setText(product.getBrand_name());
+        mTvBrand.setText(product.getBrand_name());
         mTvProduct.setText(product.getProduct_name());
         mDvImage.setImageURI(Uri.parse(product.getProduct_img()));
     }
@@ -172,7 +165,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             return;
         }
 
-        if (TextUtils.isEmpty(mEtBrand.getText())) {
+        if (TextUtils.isEmpty(mTvBrand.getText())) {
             LUtils.toast("请输入品牌");
             return;
         }
@@ -180,7 +173,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         String format = mTvExpiration.getText().toString().contains("日") ? "yyyy年MM月dd日" : "yyyy年MM月";
 
         getPresenter().submit(
-                mEtBrand.getText().toString().trim(),
+                mTvBrand.getText().toString().trim(),
                 mTvProduct.getText().toString().trim(),
                 mIsSeal,
                 DateUtils.getTime(mEtOpenDate.getText().toString(), "yyyy年MM月dd日"),

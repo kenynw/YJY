@@ -20,7 +20,7 @@ import java.util.List;
 
 public class RepositoryListPresenter extends BaseListActivityPresenter<RepositoryListActivity, Product> {
 
-    public final String EXTRA_REPOSITORY_PRODUCT = "repository_product";
+    public static final String EXTRA_REPOSITORY_PRODUCT = "repository_product";
 
     private int mBrandId;
 

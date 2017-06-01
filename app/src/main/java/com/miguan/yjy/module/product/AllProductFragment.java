@@ -19,7 +19,7 @@ import com.miguan.yjy.model.bean.Product;
 public class AllProductFragment extends BaseListFragment<AllProductPresenter,Product>{
     @Override
     public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
-        return new SearchReslutViewHolder(parent,2);
+        return new SearchReslutViewHolder(parent, false);
     }
 
     @Override

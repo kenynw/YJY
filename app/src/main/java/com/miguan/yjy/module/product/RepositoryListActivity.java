@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.product;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -63,11 +64,18 @@ public class RepositoryListActivity extends BaseListActivity<RepositoryListPrese
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), count)));
         mInputPanel.tvCancel.setText(count == 0 ? "添加" : "取消");
         mInputPanel.tvCancel.setOnClickListener(v -> {
-            Product product = new Product();
-            product.setProduct_name(mInputPanel.getInputText());
-            product.setPrice("0");
-            product.setLocal(true);
-            getPresenter().insertLocalProduct(product);
+            if (count == 0) {
+                Product product = new Product();
+                product.setProduct_name(mInputPanel.getInputText());
+                product.setPrice("0");
+                product.setLocal(true);
+                product.setProduct_img("");
+                getPresenter().insertLocalProduct(product);
+                Intent intent = new Intent();
+                intent.putExtra("product", product);
+                setResult(Activity.RESULT_OK, intent);
+            }
+            finish();
         });
     }
 

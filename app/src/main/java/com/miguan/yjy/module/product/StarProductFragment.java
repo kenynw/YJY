@@ -22,7 +22,7 @@ public class StarProductFragment extends BaseListFragment<StarProductPresenter, 
 
     @Override
     public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
-        return new SearchReslutViewHolder(parent,1);
+        return new SearchReslutViewHolder(parent, true);
     }
 
     @Override
