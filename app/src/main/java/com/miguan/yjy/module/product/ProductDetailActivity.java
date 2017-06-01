@@ -44,8 +44,6 @@ import butterknife.ButterKnife;
 @RequiresPresenter(ProductDetailPresenter.class)
 public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    public static final String DEFALUT_LOG_IMG = "http://oss.yjyapp.com/static/h5/images/logo/share.jpg";
-
     @BindView(R.id.dv_product_detail)
     SimpleDraweeView mDvThumb;
 
@@ -191,6 +189,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         }
 
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
+        mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, product));
         if (TextUtils.isEmpty(product.getProduct_explain())) {
             mLlRead.setVisibility(View.GONE);
         } else {

@@ -28,11 +28,8 @@ public class ArticleViewHolder extends BaseViewHolder<Article> {
     @BindView(R.id.tv_article_date)
     TextView mTvDate;
 
-    @BindView(R.id.tv_article_like)
-    TextView mTvLike;
-
-    @BindView(R.id.iv_article_like)
-    ImageView mIvLike;
+    @BindView(R.id.tv_article_comment)
+    TextView mTvComment;
 
     public ArticleViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_list_article);
@@ -44,8 +41,7 @@ public class ArticleViewHolder extends BaseViewHolder<Article> {
         mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
         mTvTitle.setText(data.getTitle());
         mTvDate.setText(data.getCreated_at());
-        mTvLike.setText(data.getLike_num() <= 0 ? "评论" : String.valueOf(data.getComment_num()));
-        mIvLike.setImageResource(data.getIsGras() == 1 ? R.mipmap.ic_like_pressed : R.mipmap.ic_like_normal);
+        mTvComment.setText(data.getLike_num() <= 0 ? "" : String.valueOf(data.getComment_num()));
         itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
     }
 

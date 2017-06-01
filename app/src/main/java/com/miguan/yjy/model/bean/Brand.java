@@ -3,19 +3,11 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Unique;
-import org.greenrobot.greendao.annotation.Generated;
-
 /**
  * Copyright (c) 2017/3/28. LiaoPeiKun Inc. All rights reserved.
  */
-@Entity
 public class Brand implements Parcelable {
 
-    @Id(autoincrement = true)
-    @Unique
     private Long id;
 
     private String name;
@@ -99,7 +91,6 @@ public class Brand implements Parcelable {
     public Brand() {
     }
 
-    @Generated(hash = 1202386878)
     public Brand(Long id, String name, String letter, boolean isLocal, String img,
             int hot, String description, String relevantArticle) {
         this.id = id;

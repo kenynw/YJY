@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.services.ServicesResponse;
 
@@ -17,15 +18,15 @@ import com.miguan.yjy.model.services.ServicesResponse;
 
 public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
 
-    public static final String EXTRA_PRODUCT = "mProduct";
+    public static final String EXTRA_PRODUCT = "product";
 
-    public static void start(Context context, UserProduct product) {
+    public static void start(Context context, Product product) {
         Intent intent = new Intent(context, QueryCodeActivity.class);
         intent.putExtra(EXTRA_PRODUCT, product);
         context.startActivity(intent);
     }
 
-    private UserProduct mProduct;
+    private Product mProduct;
 
     @Override
     protected void onCreate(QueryCodeActivity view, Bundle saveState) {
@@ -36,7 +37,9 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     @Override
     protected void onCreateView(QueryCodeActivity view) {
         super.onCreateView(view);
-        if (mProduct != null) getView().setBrand(mProduct.getBrand_name(), (long) mProduct.getBrand_id());
+        if (mProduct != null) {
+            getView().setBrand(mProduct.getBrand_name(), mProduct.getBrand_id());
+        }
     }
 
     @Override
@@ -49,12 +52,13 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     }
 
     public void query(Long brandId, String number) {
-        ProductModel.getInstance().queryCode(brandId, number).subscribe(new ServicesResponse<UserProduct>() {
-            @Override
-            public void onNext(UserProduct product) {
-                getView().showQueryDialog(product, brandId);
-            }
-        });
+        ProductModel.getInstance().queryCode(brandId, number)
+                .subscribe(new ServicesResponse<UserProduct>() {
+                    @Override
+                    public void onNext(UserProduct product) {
+                        getView().showQueryDialog(product, brandId);
+                    }
+                });
     }
 
 }

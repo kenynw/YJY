@@ -13,9 +13,7 @@ public class BrandList implements Parcelable {
 
     private String[] letterArr;
 
-    private List<Brand> hotCosmetics;
-
-    private List<Brand> otherCosmetics;
+    private List<Brand> cosmeticsList;
 
     public String[] getLetterArr() {
         return letterArr;
@@ -25,23 +23,12 @@ public class BrandList implements Parcelable {
         this.letterArr = letterArr;
     }
 
-    public List<Brand> getHotCosmetics() {
-        return hotCosmetics;
+    public List<Brand> getCosmeticsList() {
+        return cosmeticsList;
     }
 
-    public void setHotCosmetics(List<Brand> hotCosmetics) {
-        this.hotCosmetics = hotCosmetics;
-    }
-
-    public List<Brand> getOtherCosmetics() {
-        return otherCosmetics;
-    }
-
-    public void setOtherCosmetics(List<Brand> otherCosmetics) {
-        this.otherCosmetics = otherCosmetics;
-    }
-
-    public BrandList() {
+    public void setCosmeticsList(List<Brand> cosmeticsList) {
+        this.cosmeticsList = cosmeticsList;
     }
 
     @Override
@@ -52,14 +39,15 @@ public class BrandList implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeStringArray(this.letterArr);
-        dest.writeTypedList(this.hotCosmetics);
-        dest.writeTypedList(this.otherCosmetics);
+        dest.writeTypedList(this.cosmeticsList);
+    }
+
+    public BrandList() {
     }
 
     protected BrandList(Parcel in) {
         this.letterArr = in.createStringArray();
-        this.hotCosmetics = in.createTypedArrayList(Brand.CREATOR);
-        this.otherCosmetics = in.createTypedArrayList(Brand.CREATOR);
+        this.cosmeticsList = in.createTypedArrayList(Brand.CREATOR);
     }
 
     public static final Creator<BrandList> CREATOR = new Creator<BrandList>() {

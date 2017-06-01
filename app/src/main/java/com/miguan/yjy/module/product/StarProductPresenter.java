@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  * @描述
  */
 
-public class StarProductPresenter extends BaseListFragmentPresenter<StarProductFragment, Product> {
+public class  StarProductPresenter extends BaseListFragmentPresenter<StarProductFragment, Product> {
     long brandId;
 
     private List<Brand> brandList = new ArrayList<>();

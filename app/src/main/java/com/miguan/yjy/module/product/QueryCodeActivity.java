@@ -13,6 +13,7 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.module.account.UserTextWatcher;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,7 +65,15 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
     public void setBrand(String brandName, Long brandId) {
         mEtBrand.setText(brandName);
         mEtProduct.setText("");
-        mBtnSubmit.setOnClickListener(v -> getPresenter().query(brandId, mEtProduct.getText().toString().trim()));
+        mBtnSubmit.setOnClickListener(v -> checkInput(brandId));
+    }
+
+    public void checkInput(Long brandId) {
+        if (brandId <= 0) {
+            LUtils.toast("暂不提供该品牌查询哦~");
+            return;
+        }
+        getPresenter().query(brandId, mEtProduct.getText().toString().trim());
     }
 
     public void showQueryDialog(UserProduct product, Long brandId) {

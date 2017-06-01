@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
@@ -308,9 +306,10 @@
                 android:drawableLeft="@mipmap/ic_add_product"
                 android:drawablePadding="7dp"
                 android:gravity="center"
-                android:text="添加到产品库"
+                android:text="@string/btn_me_used"
                 android:textColor="@color/textSecondary"
-                android:textSize="@dimen/text_size_small_15"/>
+                android:textSize="@dimen/text_size_small_15"
+                />
 
         </RelativeLayout>
 

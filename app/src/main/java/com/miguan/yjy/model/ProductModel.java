@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.dsk.chain.model.AbsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.miguan.yjy.base.App;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
@@ -35,6 +34,8 @@ import rx.Observable;
 
 public class ProductModel extends AbsModel {
 
+    private final String EXTRA_BRAND_LIST = "brand_list";
+
     public static final int TYPE_PRODUCT = 1;
 
     public static ProductModel getInstance() {
@@ -58,12 +59,12 @@ public class ProductModel extends AbsModel {
     /**
      * 搜索结果接口
      */
-    public Observable<ProductList> searchQuery(String keywords,int type, int cate_id, String effect, int page) {
+    public Observable<ProductList> searchQuery(String keywords, int type, int cate_id, String effect, int page) {
         return ServicesClient.getServices().searchQuery(keywords, type, cate_id, effect, page).compose(new DefaultTransform<>());
     }
 
     /**
-     * 搜索结果接口
+     * 添加产品库的产品列表
      */
     public Observable<EntityRoot<List<Product>>> getProductList(String keywords, int brandId, int page) {
         return ServicesClient.getServices().productList(keywords, brandId, 0, page)
@@ -112,6 +113,7 @@ public class ProductModel extends AbsModel {
 
     /**
      * 批号查询
+     *
      * @param brandId
      * @param number
      * @return
@@ -122,31 +124,45 @@ public class ProductModel extends AbsModel {
 
     /**
      * 获取品牌列表
+     *
      * @return
      */
     public Observable<BrandList> getBrandList() {
         return ServicesClient.getServices().brandList()
                 .map(brandList -> {
-                    if (queryAll() != null && queryAll().size() > 0) {
-                        brandList.getOtherCosmetics().addAll(queryAll());
+                    List<Brand> brands = queryAll();
+                    if (brands != null && brands.size() > 0) {
+                        brandList.getCosmeticsList().addAll(queryAll());
                     }
-                    Collections.sort(brandList.getOtherCosmetics(),
+                    Collections.sort(brandList.getCosmeticsList(),
                             (brandFirst, brandSecond) -> brandFirst.getLetter().compareTo(brandSecond.getLetter()));
                     return brandList;
                 })
                 .compose(new DefaultTransform<>());
     }
 
+    /**
+     * 添加品牌到本地
+     * @param brand
+     */
     public void insertBrand(Brand brand) {
-        App.getDaoSession().getBrandDao().insertOrReplace(brand);
+        List<Brand> brands = queryAll();
+        if (brands == null) brands = new ArrayList<>();
+        brands.add(brand);
+        LUtils.getPreferences().edit().putString(EXTRA_BRAND_LIST, new Gson().toJson(brands)).apply();
     }
 
-    public List<Brand> queryAll() {
-        return App.getDaoSession().getBrandDao().loadAll();
+    /**
+     * 从数据库查询品牌列表
+     *
+     * @return
+     */
+    private List<Brand> queryAll() {
+        return new Gson().fromJson(
+                LUtils.getPreferences().getString(EXTRA_BRAND_LIST, ""),
+                new TypeToken<List<Brand>>() {}.getType()
+        );
     }
-
-//    public List<Product> queryAll() {
-//    }
 
     /**
      * 添加收藏（长草）
@@ -211,7 +227,7 @@ public class ProductModel extends AbsModel {
     /**
      * 品牌列表
      */
-    public Observable<List<Product>> getProductList(long brandId, int isTop,int page) {
+    public Observable<List<Product>> getProductList(long brandId, int isTop, int page) {
         return ServicesClient.getServices().productList(brandId, isTop, page, 20).compose(new DefaultTransform<>());
     }
 

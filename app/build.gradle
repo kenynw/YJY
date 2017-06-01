@@ -116,9 +116,6 @@ dependencies {
     compile 'com.jude:exgridview:1.1.5'
     compile 'q.rorbin:badgeview:1.1.0'
 
-    // database
-    compile 'org.greenrobot:greendao:3.2.2'
-
     // 第三方
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'cn.jiguang.sdk:jpush:3.0.3'

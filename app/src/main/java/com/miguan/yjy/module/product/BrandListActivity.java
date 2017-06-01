@@ -22,7 +22,6 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.BrandLetterViewHolder;
 import com.miguan.yjy.adapter.viewholder.BrandViewHolder;
 import com.miguan.yjy.model.bean.Brand;
-import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.ScrollIndexer;
 
@@ -51,8 +50,6 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @BindView(R.id.tv_brand_list_clear)
     TextView mTvClear;
-
-    private BrandList mBrandList;
 
     private SearchListTask mSearchListTask;
 
@@ -120,10 +117,6 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
         }
     }
 
-    public void setBrandList(BrandList list) {
-        mBrandList = list;
-    }
-
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -175,27 +168,19 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             mInSearchMode = (keyword.length() > 0);
 
             if (mInSearchMode) {
-                for (Brand brand : getPresenter().getBrandList().getOtherCosmetics()) {
+                for (Brand brand : getPresenter().getBrandList()) {
                     boolean isPinyin = brand.getLetter().contains(keyword);
                     boolean isChinese = brand.getName().contains(keyword);
                     if (isChinese || isPinyin) mFilterList.add(brand);
                 }
-                for (Brand brand : getPresenter().getBrandList().getHotCosmetics()) {
-                    boolean isPinyin = brand.getLetter().contains(keyword);
-                    boolean isChinese = brand.getName().contains(keyword);
-                    if (isChinese || isPinyin) mFilterList.add(brand);
-                }
-
             }
 
             return keyword;
         }
 
         protected void onPostExecute(String result) {
-            getPresenter().getAdapter().removeAllHeader();
-            getPresenter().getAdapter().addHeader(new BrandHeader(BrandListActivity.this, mInSearchMode ? null : mBrandList.getHotCosmetics()));
             getPresenter().getAdapter().clear();
-            getPresenter().getAdapter().addAll(mInSearchMode ? mFilterList : mBrandList.getOtherCosmetics());
+            getPresenter().getAdapter().addAll(mInSearchMode ? mFilterList : getPresenter().getBrandList());
             mIndexer.setVisibility(mInSearchMode ? View.GONE : View.VISIBLE);
 
             mTvClear.setText(mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
