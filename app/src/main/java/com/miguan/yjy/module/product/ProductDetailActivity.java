@@ -166,7 +166,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @Override
     public void setData(Product product) {
         if (product.getIs_top() > 0) {
-            mIvIsTop.setVisibility(View.VISIBLE);
+            mIvIsTop.setVisibility(View.GONE);
         } else {
             mIvIsTop.setVisibility(View.GONE);
         }

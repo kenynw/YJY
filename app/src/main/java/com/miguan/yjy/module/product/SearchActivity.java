@@ -112,6 +112,7 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
 
             @Override
             public void afterTextChanged(Editable s) {
+                edtSearch.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
                 if (TextUtils.isEmpty(s)) {
                     imgSearchCancle.setVisibility(View.GONE);
                     llSearchFirst.setVisibility(View.VISIBLE);

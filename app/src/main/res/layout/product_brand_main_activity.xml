@@ -33,7 +33,7 @@
                 android:layout_marginLeft="@dimen/text_size_small_15"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/sdv_brand_img"
-                android:text="name"
+                android:text=""
                 android:textColor="@color/f3"
                 android:textSize="@dimen/text_size_large_20"/>
 
@@ -44,7 +44,7 @@
                 android:layout_alignLeft="@+id/tv_brand_name"
                 android:layout_below="@+id/tv_brand_name"
                 android:layout_marginTop="15dp"
-                android:text="num"
+                android:text=""
                 android:textColor="@color/f3"
                 android:textSize="@dimen/text_size_small_13"/>
 
@@ -65,7 +65,7 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="brief"
+                android:text=""
                 android:textColor="@color/textHint"
                 android:textSize="@dimen/text_size_micro_12"/>
 
