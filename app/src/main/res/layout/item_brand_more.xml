@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/brand_more_img"
+        style="@style/BaseAvatar"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/text_size_small_15"
+        app:failureImage="@mipmap/def_image_product"
+        app:placeholderImage="@mipmap/def_image_product"
+        app:roundingBorderColor="@color/f5"
+        app:roundingBorderWidth="1dp"/>
+</LinearLayout>
