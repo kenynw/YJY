@@ -53,7 +53,7 @@
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_empty="@layout/empty_brand_list"
             />
 

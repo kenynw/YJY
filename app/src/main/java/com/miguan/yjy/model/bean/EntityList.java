@@ -7,11 +7,13 @@ import android.os.Parcelable;
  * Copyright (c) 2017/4/11. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class EntityList implements Parcelable {
+public class EntityList<T> implements Parcelable {
 
     private int pageTotal;
 
     private int pageSize;
+
+    private T list;
 
     public int getPageTotal() {
         return pageTotal;
@@ -32,6 +34,17 @@ public class EntityList implements Parcelable {
     public EntityList() {
     }
 
+    public T getList() {
+        return list;
+    }
+
+    public void setList(T list) {
+        this.list = list;
+    }
+
+    public EntityList() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -41,11 +54,18 @@ public class EntityList implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.pageTotal);
         dest.writeInt(this.pageSize);
+        dest.writeString(this.list.getClass().getName());
     }
 
     protected EntityList(Parcel in) {
         this.pageTotal = in.readInt();
         this.pageSize = in.readInt();
+        String className = in.readString();
+        try {
+            this.list = in.readParcelable(Class.forName(className).getClassLoader());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static final Creator<EntityList> CREATOR = new Creator<EntityList>() {

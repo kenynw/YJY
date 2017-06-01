@@ -37,7 +37,8 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/28. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(BrandListPresenter.class)
-public class BrandListActivity extends BaseListActivity<BrandListPresenter> implements TextWatcher {
+public class BrandListActivity extends BaseListActivity<BrandListPresenter> implements TextWatcher,
+        RecyclerArrayAdapter.OnItemClickListener {
 
     @BindView(R.id.indexer_brand_list)
     ScrollIndexer mIndexer;
@@ -63,20 +64,6 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
         mTvClear.setOnClickListener(v->finish());
         mEtSearch.addTextChangedListener(this);
-        getPresenter().getAdapter().setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Brand brand = getPresenter().getAdapter().getItem(position);
-                if (brand != null && brand.getId() == null) {
-                    getPresenter().insertBrand(brand);
-                }
-
-                Intent intent = new Intent();
-                intent.putExtra("brand", brand);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
-        });
         mIndexer.setOnTextSelectedListener(new ScrollIndexer.OnTextSelectedListener() {
             @Override
             public void onTextSelected(int position, String text) {
@@ -106,6 +93,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
     @Override
     public ListConfig getListConfig() {
         return super.getListConfig().setRefreshAble(false)
+                .setContainerEmptyRes(R.layout.empty_brand_list)
                 .setLoadMoreAble(false)
                 .setNoMoreAble(false)
                 .setContainerLayoutRes(R.layout.product_brand_list_activity);
@@ -160,6 +148,18 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
         mSearchListTask.execute(keywords);
     }
 
+    @Override
+    public void onItemClick(int position) {
+        selectedFinish(getPresenter().getAdapter().getItem(position));
+    }
+
+    public void selectedFinish(Brand brand) {
+        Intent intent = new Intent();
+        intent.putExtra("brand", brand);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
+
     private class SearchListTask extends AsyncTask<String, Void, String> {
 
         private List<Brand> mFilterList = new ArrayList<>();
@@ -186,16 +186,9 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
                     if (isChinese || isPinyin) mFilterList.add(brand);
                 }
 
-                if (mFilterList.size() == 0) {
-                    Brand brand = new Brand();
-                    brand.setName(keyword);
-                    brand.setLetter(String.valueOf(Pinyin.toPinyin(keyword.charAt(0)).charAt(0)));
-                    brand.setLocal(false);
-                    mFilterList.add(brand);
-                }
             }
 
-            return null;
+            return keyword;
         }
 
         protected void onPostExecute(String result) {
@@ -204,6 +197,19 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             getPresenter().getAdapter().clear();
             getPresenter().getAdapter().addAll(mInSearchMode ? mFilterList : mBrandList.getOtherCosmetics());
             mIndexer.setVisibility(mInSearchMode ? View.GONE : View.VISIBLE);
+
+            mTvClear.setText(mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
+            mTvClear.setOnClickListener(v -> {
+                if (mInSearchMode && mFilterList.size() == 0) {
+                    Brand brand = new Brand();
+                    brand.setName(result);
+                    brand.setLetter(String.valueOf(Pinyin.toPinyin(result.charAt(0)).charAt(0)));
+                    brand.setLocal(true);
+                    getPresenter().insertBrand(brand);
+                    selectedFinish(brand);
+                }
+                finish();
+            });
         }
     }
 

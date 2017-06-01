@@ -16,6 +16,7 @@ public class BrandListPresenter extends BaseListActivityPresenter<BrandListActiv
     @Override
     protected void onCreateView(BrandListActivity view) {
         super.onCreateView(view);
+        getAdapter().setOnItemClickListener(getView());
         onRefresh();
     }
 

@@ -45,33 +45,51 @@
             app:grid_divider_vertical="15dp"
             />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            android:gravity="center"
             android:orientation="horizontal"
             >
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
             <Button
                 android:id="@+id/btn_home_query_batch"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@mipmap/bg_btn_home_query"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/text_query_production_date"
                 />
 
             <Button
                 android:id="@+id/btn_home_my_product"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@mipmap/bg_btn_home_my_repository"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/text_my_product_repository"
                 />
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
 
         <ImageView
             android:layout_width="match_parent"

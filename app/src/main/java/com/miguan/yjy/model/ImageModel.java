@@ -28,9 +28,11 @@ import rx.Observable;
 
 public class ImageModel extends AbsModel {
 
+    public static final String OSS_PATH_REPOSITORY = "user_product";
+
     private static final String ENDPOINT = "http://oss-cn-shenzhen.aliyuncs.com";
 
-    private static final String OSS_PATH = LUtils.isDebug ? "cs/uploads/" : "uploads/";
+    private static final String OSS_PATH = (LUtils.isDebug ? "cs" : "") + "/uploads/";
 
     private static final String OSS_BUCKET = "oss-yjyapp-com";
 
@@ -48,12 +50,21 @@ public class ImageModel extends AbsModel {
     }
 
     /**
-     * 异步上传图片
+     * 异步上传图片到默认路径
      *
      * @return
      */
     public Observable<String> uploadImageAsync(String filePath) {
-        return Observable.just(createFilePath())
+        return uploadImageAsync("photo", filePath);
+    }
+
+    /**
+     * 异步上传图片,指定路径
+     *
+     * @return
+     */
+    public Observable<String> uploadImageAsync(String path, String filePath) {
+        return Observable.just(createFilePath(path))
                 .doOnNext(s -> {
                     // 构造上传请求
                     PutObjectRequest put = new PutObjectRequest(OSS_BUCKET, OSS_PATH + s, filePath);
@@ -78,7 +89,7 @@ public class ImageModel extends AbsModel {
                             }
                         }
                     });
-                });
+                }).compose(new DefaultTransform<>());
     }
 
     /**
@@ -88,7 +99,7 @@ public class ImageModel extends AbsModel {
      * @return
      */
     public Observable<String> uploadImageSync(File file) {
-        return Observable.just(createFilePath())
+        return Observable.just(createFilePath("photo"))
                 .flatMap(s -> Observable.create((Observable.OnSubscribe<String>) subscriber -> {
                     // 构造上传请求
                     PutObjectRequest put = new PutObjectRequest(OSS_BUCKET, OSS_PATH + s, file.getPath());
@@ -109,14 +120,14 @@ public class ImageModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
-    public String createFilePath() {
+    public String createFilePath(String path) {
         long timeMillis = System.currentTimeMillis();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.CHINA);
         String date = format.format(new Date(timeMillis));
 
-        String fileName = String.valueOf(timeMillis) + String.valueOf((int)(Math.random() * 1000000 + 100000));
+        String fileName = String.valueOf(timeMillis) + String.valueOf((int) (Math.random() * 1000000 + 100000));
 
-        return "photo" + File.separator + date + File.separator + fileName + ".jpg";
+        return path + File.separator + date + File.separator + fileName + ".jpg";
     }
 
 }

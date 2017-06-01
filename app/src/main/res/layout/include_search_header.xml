@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="15dp"
+    >
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1"
+        android:background="@drawable/shape_product_f7"
+        >
+
+        <EditText
+            android:id="@+id/edt_product_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ic_product_search"
+            android:drawablePadding="8dp"
+            android:drawableStart="@mipmap/ic_product_search"
+            android:hint="@string/tv_product_num"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:paddingBottom="8dp"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingTop="8dp"
+            android:textColorHint="@color/fcd"
+            android:textSize="@dimen/text_size_small_15"
+            />
+
+        <ImageView
+            android:id="@+id/iv_product_search_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_product_search_del"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="@string/tv_cancel"
+        android:textColor="@color/color_sencond_title"
+        android:textSize="@dimen/text_size_small_15"
+        />
+
+</LinearLayout>

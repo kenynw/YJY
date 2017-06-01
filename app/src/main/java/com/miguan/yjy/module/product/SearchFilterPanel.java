@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/4/10. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
+public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.ll_product_filter)
     LinearLayout mLlFilter;
@@ -54,7 +54,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
 
     private ToggleButton mCurrentBtn;
 
-    public FilterPanel(ChainBaseActivity activity, List<Category> categories,List<Effect> effects) {
+    public SearchFilterPanel(ChainBaseActivity activity, List<Category> categories,List<Effect> effects) {
         mActivity = activity;
         mCategories = categories;
         mEffects = effects;
@@ -81,7 +81,7 @@ public class FilterPanel implements CompoundButton.OnCheckedChangeListener {
             public void apply(@NonNull ToggleButton view, int index) {
                 if (index > 0) {
                     view.setTag(index - 1);
-                    view.setOnCheckedChangeListener(FilterPanel.this);
+                    view.setOnCheckedChangeListener(SearchFilterPanel.this);
                 } else {
                     view.setOnClickListener(v -> {
                         mTbtnList.get(1).setText("分类");

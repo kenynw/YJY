@@ -2,6 +2,9 @@ package com.miguan.yjy.module.template;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.SparseArray;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2017/5/5. LiaoPeiKun Inc. All rights reserved.
@@ -9,64 +12,47 @@ import android.os.Parcelable;
 
 public class Template implements Parcelable {
 
-    private String product;
+    private String mTitle;
 
-    private String brand;
+    private String mDesc;
 
-    private String cate;
+    private List<Item> mItems;
 
-    private String title;
+    private int mType;
 
-    private String desc;
-
-    private String content;
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getCate() {
-        return cate;
-    }
-
-    public void setCate(String cate) {
-        this.cate = cate;
+    public Template() {
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        mTitle = title;
     }
 
     public String getDesc() {
-        return desc;
+        return mDesc;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        mDesc = desc;
     }
 
-    public String getContent() {
-        return content;
+    public List<Item> getItems() {
+        return mItems;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setItems(List<Item> items) {
+        mItems = items;
+    }
+
+    public int getType() {
+        return mType;
+    }
+
+    public void setType(int type) {
+        mType = type;
     }
 
     @Override
@@ -76,24 +62,17 @@ public class Template implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.product);
-        dest.writeString(this.brand);
-        dest.writeString(this.cate);
-        dest.writeString(this.title);
-        dest.writeString(this.desc);
-        dest.writeString(this.content);
-    }
-
-    public Template() {
+        dest.writeString(this.mTitle);
+        dest.writeString(this.mDesc);
+        dest.writeTypedList(this.mItems);
+        dest.writeInt(this.mType);
     }
 
     protected Template(Parcel in) {
-        this.product = in.readString();
-        this.brand = in.readString();
-        this.cate = in.readString();
-        this.title = in.readString();
-        this.desc = in.readString();
-        this.content = in.readString();
+        this.mTitle = in.readString();
+        this.mDesc = in.readString();
+        this.mItems = in.createTypedArrayList(Item.CREATOR);
+        this.mType = in.readInt();
     }
 
     public static final Creator<Template> CREATOR = new Creator<Template>() {
@@ -108,16 +87,58 @@ public class Template implements Parcelable {
         }
     };
 
-//    public static Template getTemplate(int type) {
-//        switch (type) {
-//            case 0 :
-//                break;
-//            case 1:
-//                break;
-//            case 2:
-//
-//                break;
-//        }
-//    }
+    public static class Item implements Parcelable {
+
+        private SparseArray<String> mUris;
+
+        private SparseArray<String> mEtContents;
+
+        public Item() {
+        }
+
+        public SparseArray<String> getUris() {
+            return mUris;
+        }
+
+        public void setUris(SparseArray<String> uris) {
+            mUris = uris;
+        }
+
+        public SparseArray<String> getEtContents() {
+            return mEtContents;
+        }
+
+        public void setEtContents(SparseArray<String> etContents) {
+            mEtContents = etContents;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeSparseArray((SparseArray) this.mUris);
+            dest.writeSparseArray((SparseArray) this.mEtContents);
+        }
+
+        protected Item(Parcel in) {
+            this.mUris = in.readSparseArray(String.class.getClassLoader());
+            this.mEtContents = in.readSparseArray(String.class.getClassLoader());
+        }
+
+        public static final Creator<Item> CREATOR = new Creator<Item>() {
+            @Override
+            public Item createFromParcel(Parcel source) {
+                return new Item(source);
+            }
+
+            @Override
+            public Item[] newArray(int size) {
+                return new Item[size];
+            }
+        };
+    }
 
 }

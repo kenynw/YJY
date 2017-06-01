@@ -29,6 +29,7 @@ ext {
             "butterknife-compiler"      : "com.jakewharton:butterknife-compiler:${version["butterknife"]}",
             "pickerview"                : "com.contrarywind:Android-PickerView:3.2.2",
             "swipelayout"               : "com.daimajia.swipelayout:library:1.2.0@aar",
+            "photoview"                 : "com.github.chrisbanes.photoview:library:1.2.3",
 
             // rx1
             "rxandroid"                : "io.reactivex:rxandroid:1.2.1",
@@ -57,6 +58,7 @@ ext {
             "retrofit-adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofit"]}",
             "glide"                     : "com.github.bumptech.glide:glide:3.8.0",
             "glide-transformations"     : "jp.wasabeef:glide-transformations:2.0.2",
+            "fresco"                    : "com.facebook.fresco:fresco:1.2.0",
 
             // test
             "junit"                     : "junit:junit:4.12"

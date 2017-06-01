@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:orientation="horizontal"
         >
@@ -27,7 +28,8 @@
             android:paddingRight="@dimen/spacing_normal"
             android:paddingStart="@dimen/spacing_normal"
             android:text="@string/text_brand"
-            android:textAppearance="@style/TextBody"/>
+            android:textAppearance="@style/TextBody"
+            />
 
         <EditText
             android:id="@+id/et_add_repository_brand"
@@ -49,6 +51,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:orientation="horizontal"
         >
@@ -67,14 +70,14 @@
             android:textAppearance="@style/TextBody"
             />
 
-        <EditText
-            android:id="@+id/et_add_repository_name"
+        <TextView
+            android:id="@+id/tv_add_repository_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2.5"
             android:background="@color/white"
+            android:gravity="center_vertical"
             android:hint="@string/hint_product_name"
-            android:inputType="text"
             android:paddingEnd="@dimen/spacing_small"
             android:paddingLeft="@dimen/spacing_small"
             android:paddingRight="@dimen/spacing_small"
@@ -85,8 +88,69 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_add_repository_image"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:padding="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:text="@string/text_image"
+            android:textAppearance="@style/TextBody"
+            />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            >
+
+            <TextView
+                android:id="@+id/tv_add_repository_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:hint="@string/hint_product_image"
+                android:paddingEnd="@dimen/spacing_small"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small"
+                android:paddingStart="@dimen/spacing_small"
+                android:textAppearance="@style/TextBody"
+                />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/dv_add_repository_image"
+                style="@style/BaseImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_marginRight="@dimen/spacing_normal"
+                app:failureImage="@mipmap/def_image_product_used"
+                app:placeholderImage="@mipmap/def_image_product_used"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:background="@color/white"
         android:orientation="horizontal"
         >
@@ -109,7 +173,7 @@
             android:id="@+id/tv_add_repository_expiration"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="1.5"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:paddingEnd="@dimen/spacing_small"
@@ -120,11 +184,35 @@
             tools:text="2019年1月"
             />
 
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/tv_add_repository_query"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableEnd="@mipmap/ic_more"
+                android:drawablePadding="@dimen/spacing_normal"
+                android:drawableRight="@mipmap/ic_more"
+                android:gravity="center"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
+                android:text="@string/btn_query_batch"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                />
+
+        </FrameLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         android:orientation="horizontal"
         >
@@ -169,6 +257,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
             android:orientation="horizontal"
             >
@@ -245,5 +334,22 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/tv_add_repository_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/widget_medium"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/text_expiration_opened_intro"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_body_material"
+        />
 
 </LinearLayout>

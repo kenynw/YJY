@@ -12,6 +12,8 @@
     <string name="text_is_open">是否开封</string>
     <string name="text_open_time">开封日期</string>
     <string name="text_expiration_opened">开封保质期</string>
+    <string name="text_expiration_opened_intro">开封保质期说明</string>
+    <string name="text_image">图片</string>
     <string name="text_empty_evaluate_list">快来抢沙发，消灭零回复</string>
     <string name="text_me">我的</string>
     <string name="text_me_star">我收藏的</string>
@@ -31,7 +33,6 @@
     <string name="text_query_instruction">批号说明</string>
     <string name="text_my_product_repository">我的护肤品库</string>
     <string name="text_empty_article_list">没有文章咯！\n热情好学颜究生，我就服你~</string>
-    <string name="text_empty_brand_list">没有查询到结果，请联系颜究院公众号</string>
     <string name="text_other_way">其他方式</string>
     <string name="text_forgot_password">忘记密码</string>
     <string name="text_taobao">淘宝网</string>
@@ -48,7 +49,7 @@
     <string name="text_open">开封</string>
     <string name="text_face_score">颜值</string>
     <string name="text_title_template">功课模板</string>
-    <string name="text_search_count">共为您找到%d款产品</string>
+    <string name="text_search_count"><![CDATA[共为您找到<font color="#32DAC3">%d</font>款产品]]></string>
     <string name="text_remaining_day">剩余&#160;%d&#160;天</string>
     <string name="text_tms_weixin">(tmshuo520)</string>
     <string name="text_apply_all_image">将滤镜应用到模板中的所有图片</string>
@@ -90,6 +91,7 @@
     <string name="btn_share">分享</string>
     <string name="btn_save">保存</string>
     <string name="btn_home">首页</string>
+    <string name="btn_query_batch">查批号</string>
     <string name="btn_query_now">立即查询</string>
     <string name="btn_me_used">我在用的</string>
     <string name="btn_me_like">我长草的</string>
@@ -116,6 +118,7 @@
     <string name="hint_brand_name">请输入品牌名称</string>
     <string name="hint_product_name">请输入产品名称</string>
     <string name="hint_product_code">请输入产品批号</string>
+    <string name="hint_product_image">点击可更换</string>
     <string name="hint_mobile">手机号</string>
     <string name="hint_username">用户名</string>
     <string name="hint_password">密码</string>

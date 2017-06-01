@@ -80,7 +80,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     @BindView(R.id.ll_product_include_brand)
     LinearLayout mLlIncludeBrand;
 
-    private FilterPanel mFilterPanel;
+    private SearchFilterPanel mFilterPanel;
 
     private boolean mIsInit = false;
 
@@ -115,9 +115,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
-//        mTvCount.setText(String.format(getString(R.string.text_search_count), productList.getPageTotal()));
-        String money = "共为您找到<font color=\"#32DAC3\"> " + productList.getPageTotal() + " </font>款产品";
-        mTvCount.setText(Html.fromHtml(money));
+        mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
         if (productList.getBrand().getId()== null) {
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
@@ -181,9 +179,9 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         });
 
         imgSearchCancle.setOnClickListener(v -> clearStr());
-        mFilterPanel = new FilterPanel(this, productList.getCategoryList(), productList.getEffectList());
+        mFilterPanel = new SearchFilterPanel(this, productList.getCategroy(), productList.getEffectList());
         mFilterPanel.setMenuText(1, cateName);
-        mFilterPanel.setOnItemSelectedListener(new FilterPanel.OnItemSelectedListener() {
+        mFilterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int cateId, String text) {
                 mFilterPanel.dismissMenu();

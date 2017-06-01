@@ -1,65 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="15dp">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_product_f7"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edt_product_search"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:drawableLeft="@mipmap/ic_product_search"
-                android:drawablePadding="8dp"
-                android:hint="tv_product_num"
-                android:imeOptions="actionSearch"
-                android:paddingBottom="8dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="8dp"
-                android:singleLine="true"
-                android:textColorHint="@color/fcd"
-                android:textSize="@dimen/text_size_small_15"/>
-
-            <ImageView
-                android:id="@+id/iv_product_search_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="15dp"
-                android:background="@mipmap/ic_product_search_del"
-                android:visibility="gone"/>
-
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/tv_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
-            android:text="@string/tv_cancel"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15"/>
-    </LinearLayout>
+    <include layout="@layout/include_search_header" />
 
     <LinearLayout
         android:id="@+id/ll_product_search_first"
@@ -67,7 +13,6 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,15 +25,16 @@
             android:id="@+id/flowtag_product_all_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp"
-            ></com.miguan.yjy.widget.FlowTagLayout>
+            />
 
         <View
             style="@style/ItemLineHeight"
-            android:layout_height="10dp"></View>
+            android:layout_height="10dp"
+            />
 
         <LinearLayout
             android:id="@+id/ll_product_his_search"

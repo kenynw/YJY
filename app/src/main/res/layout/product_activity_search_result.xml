@@ -66,33 +66,20 @@
 
     </LinearLayout>
 
-    <include layout="@layout/include_head_brand_info"/>
-
-    <include layout="@layout/include_product_filter"/>
     <LinearLayout
         android:id="@+id/ll_product_result_first"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_product_list_count"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center_vertical"
-            android:paddingEnd="@dimen/spacing_normal"
-            android:paddingLeft="@dimen/spacing_normal"
-            android:paddingRight="@dimen/spacing_normal"
-            android:paddingStart="@dimen/spacing_normal"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_caption_material"
-            tools:text="@string/text_search_count"
-            />
+        <include layout="@layout/include_product_filter" />
+
+        <include layout="@layout/include_product_list" />
 
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_empty="@layout/empty_search_list"
             />
     </LinearLayout>
@@ -122,7 +109,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/f5"></View>
+        android:background="@color/f5"
+        />
 
 
 </LinearLayout>

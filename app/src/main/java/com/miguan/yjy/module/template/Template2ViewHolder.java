@@ -1,7 +1,6 @@
 package com.miguan.yjy.module.template;
 
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -9,9 +8,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -46,17 +46,17 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
     public void initViews(Product product) {
         mDvImage.setOnClickListener(this);
         mDvImage.setImageURI("res:// /" + R.mipmap.def_image_template);
-        mIvFilter.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(),
-                mUri, Template2ViewHolder.this));
+//        mIvFilter.setOnClickListener(v -> FilterActivity.start((AppCompatActivity) getContext(),
+//                mUri, Template2ViewHolder.this));
         mIvFilter.setVisibility(View.GONE);
         mEtTitle.setText(R.string.text_template_2_title);
         mEtContent.setText(R.string.text_template_2_content);
     }
 
-    @Override
-    public void onFilterSelected(ImageRequest request, boolean applyAll) {
-        setImageFilter(mDvImage, request);
-    }
+//    @Override
+//    public void onFilterSelected(ImageRequest request, boolean applyAll) {
+//        setImageFilter(mDvImage, request);
+//    }
 
     @Override
     public void onImageLoaded(Uri uri) {
@@ -73,4 +73,8 @@ public class Template2ViewHolder extends BaseTemplateViewHolder {
         mDvImage.setFocusableInTouchMode(true);
     }
 
+    @Override
+    public void onFilterSelected(File file, boolean applyAll) {
+
+    }
 }

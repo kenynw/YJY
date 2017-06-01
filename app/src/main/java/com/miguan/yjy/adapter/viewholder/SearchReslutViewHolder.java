@@ -2,6 +2,7 @@ package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
 import android.view.View;
+import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;

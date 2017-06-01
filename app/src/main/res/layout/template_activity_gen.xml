@@ -7,33 +7,68 @@
 
     <include layout="@layout/include_toolbar"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_template_gen_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
-        android:layout_weight="1"
-        android:scrollbars="none"
-        />
-
     <FrameLayout
-        android:id="@+id/fl_template_gen_add"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_medium"
-        android:background="@color/white"
+        android:layout_height="match_parent"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:drawableLeft="@mipmap/ic_template_add"
-            android:drawablePadding="@dimen/spacing_small"
-            android:drawableStart="@mipmap/ic_template_add"
-            android:gravity="center"
-            android:text="@string/btn_add"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_subhead_material"
+            android:orientation="vertical"
+            >
+
+            <ScrollView
+                android:id="@+id/sc_template_gen"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_template_gen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <FrameLayout
+                android:id="@+id/fl_template_gen_add"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_medium"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@mipmap/ic_template_add"
+                    android:drawablePadding="@dimen/spacing_small"
+                    android:drawableStart="@mipmap/ic_template_add"
+                    android:gravity="center"
+                    android:text="@string/btn_add"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_subhead_material"
+                    />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_template_gen_guide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/image_template_guide_0"
+            android:visibility="gone"
             />
 
     </FrameLayout>

@@ -12,6 +12,7 @@ import com.miguan.yjy.module.template.TemplateType;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
  */
@@ -25,23 +26,22 @@ public class TemplatePagerAdapter extends PagerAdapter {
     public TemplatePagerAdapter(Context context) {
         mContext = context;
         mViews = new ArrayList<>();
-
-        for (TemplateType templatePager : TemplateType.values()) {
-            ImageView iv = new ImageView(mContext);
-            iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            iv.setImageResource(templatePager.mImageRes);
-            mViews.add(iv);
-        }
-
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = mViews.get(position);
-        view.setOnClickListener(v -> GenTemplatePresenter.start(mContext, TemplateType.values()[position]));
-        container.addView(view);
-        return view;
+        int res = mContext.getResources().getIdentifier("image_template_" + position, "mipmap", mContext.getPackageName());
+        ImageView iv = new ImageView(mContext);
+        iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        iv.setImageResource(res);
+        iv.setOnClickListener(v -> {
+            GenTemplatePresenter.start(mContext, position);
+        });
+        mViews.add(iv);
+
+        container.addView(iv);
+        return iv;
     }
 
     @Override

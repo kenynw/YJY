@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.Presenter;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.library.imageprovider.ImageProvider;
@@ -27,9 +28,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+
 
 /**
  * Copyright (c) 2017/4/5. LiaoPeiKun Inc. All rights reserved.
@@ -39,9 +42,9 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
 
     public static final String EXTRA_TEMPLATE = "template";
 
-    public static void start(Context context, TemplateType template) {
+    public static void start(Context context, int index) {
         Intent intent = new Intent(context, GenTemplateActivity.class);
-        intent.putExtra(EXTRA_TEMPLATE, template);
+        intent.putExtra(EXTRA_TEMPLATE, index);
         context.startActivity(intent);
     }
 
@@ -60,11 +63,62 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         super.onCreate(view, saveState);
         EventBus.getDefault().register(this);
 
-        mTemplate = (TemplateType) getView().getIntent().getSerializableExtra(EXTRA_TEMPLATE);
-        if (mTemplate.mHeaderRes > 0)
-            mHeader = LayoutInflater.from(getView()).inflate(mTemplate.mHeaderRes, null);
-        if (mTemplate.mFooterRes > 0)
-            mFooter = LayoutInflater.from(getView()).inflate(mTemplate.mFooterRes, null);
+    }
+
+    @Override
+    protected void onCreateView(GenTemplateActivity view) {
+        super.onCreateView(view);
+
+        int index = getView().getIntent().getIntExtra(EXTRA_TEMPLATE, 0);
+        String templateStr;
+        if (!(templateStr = LUtils.getPreferences().getString(EXTRA_TEMPLATE, "")).isEmpty()) {
+            new AlertDialog.Builder(getView())
+                    .setCancelable(false)
+                    .setTitle("上次的创作还未完成哦~")
+                    .setItems(new String[]{"加载草稿", "重新创作", "取消"}, (dialog, which) -> {
+                        if (which == 0) {
+                            Template template = new Gson().fromJson(templateStr, Template.class);
+                            getView().getIntent().putExtra(EXTRA_TEMPLATE, template.getType());
+                            getView().initTemplate(template.getType(), template);
+                        } else {
+                            if (which == 1) {
+                                LUtils.getPreferences().edit().putString(EXTRA_TEMPLATE, "").apply();
+                            }
+                            getView().initTemplate(index, null);
+                        }
+                    })
+                    .show();
+        } else {
+            getView().initTemplate(index, null);
+        }
+    }
+
+    @Override
+    protected void onDestroyView() {
+        super.onDestroyView();
+        Template template = new Template();
+        template.setType(getView().getIntent().getIntExtra(EXTRA_TEMPLATE, 0));
+        if (getView().getHeader() != null) {
+            EditText et = (EditText) getView().getHeader().findViewById(R.id.et_template_header);
+            if (et != null) {
+                template.setTitle(et.getText().toString());
+            }
+            EditText et2 = (EditText) getView().getHeader().findViewById(R.id.et_template_header_2);
+            if (et2 != null) {
+                template.setDesc(et2.getText().toString());
+            }
+        }
+        if (getView().getTemplateList() != null && getView().getTemplateList().size() > 0) {
+            List<Template.Item> itemList = new ArrayList<>();
+            for (TemplateView templateView : getView().getTemplateList()) {
+                Template.Item item = new Template.Item();
+                item.setEtContents(templateView.getTexts());
+                item.setUris(templateView.getUris());
+                itemList.add(item);
+            }
+            template.setItems(itemList);
+        }
+        LUtils.getPreferences().edit().putString(EXTRA_TEMPLATE, new Gson().toJson(template)).apply();
     }
 
     public void hideCursor() {

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
@@ -47,9 +48,10 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
         Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE_URI);
         String path = getIntent().getStringExtra(SaveTemplatePresenter.EXTRA_IMAGE_PATH);
 
+        Glide.with(this).load(uri).into(mIvThumb);
+
         if (uri != null && !TextUtils.isEmpty(path)) {
             getPresenter().addAnalytics();
-            mIvThumb.setImageURI(uri);
         }
 
         ButterKnife.apply(mIvShares, new ButterKnife.Action<ImageView>() {
