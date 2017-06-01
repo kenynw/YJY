@@ -66,23 +66,11 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_product_result_first"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <include layout="@layout/include_head_brand_info"/>
 
-        <include layout="@layout/include_product_filter" />
+    <include layout="@layout/include_product_filter"/>
 
-        <include layout="@layout/include_product_list" />
-
-        <com.jude.easyrecyclerview.EasyRecyclerView
-            android:id="@+id/recycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_empty="@layout/empty_search_list"
-            />
-    </LinearLayout>
+    <include layout="@layout/include_product_list" />
 
     <LinearLayout
         android:id="@+id/ll_product_result_sencond"
@@ -98,12 +86,14 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:text="@string/tv_product_recommend"
-            android:textSize="@dimen/text_size_small_15"/>
+            android:textSize="@dimen/text_size_small_15"
+            />
 
         <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recy_product_recommend"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 
     <View

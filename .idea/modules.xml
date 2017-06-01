@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/YanJiuYuan.iml" filepath="$PROJECT_DIR$/YanJiuYuan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/chain/chain.iml" filepath="$PROJECT_DIR$/chain/chain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/processors/processors.iml" filepath="$PROJECT_DIR$/processors/processors.iml" />
       <module fileurl="file://$PROJECT_DIR$/umshare/umshare.iml" filepath="$PROJECT_DIR$/umshare/umshare.iml" />
     </modules>
   </component>

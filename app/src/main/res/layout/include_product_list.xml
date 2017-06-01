@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_product_result_first"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:showIn="@layout/product_activity_search_result"
     android:orientation="vertical"
+    tools:showIn="@layout/product_activity_search_result"
     >
 
     <TextView
@@ -30,4 +31,4 @@
         app:layout_empty="@layout/empty_search_list"
         />
 
-</merge>
+</LinearLayout>

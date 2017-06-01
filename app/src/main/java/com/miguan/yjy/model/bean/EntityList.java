@@ -42,9 +42,6 @@ public class EntityList<T> implements Parcelable {
         this.list = list;
     }
 
-    public EntityList() {
-    }
-
     @Override
     public int describeContents() {
         return 0;

@@ -61,8 +61,10 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @BindView(R.id.ll_product_result_sencond)
     LinearLayout mLlResultSencond;
+
     @BindView(R.id.sdv_brand_img)
     SimpleDraweeView mSdvBrandImg;
+
     @BindView(R.id.tv_brand_name)
     TextView mTvBrandName;
     @BindView(R.id.tv_brand_num)
@@ -179,7 +181,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         });
 
         imgSearchCancle.setOnClickListener(v -> clearStr());
-        mFilterPanel = new SearchFilterPanel(this, productList.getCategroy(), productList.getEffectList());
+        mFilterPanel = new SearchFilterPanel(this, productList.getCategoryList(), productList.getEffectList());
         mFilterPanel.setMenuText(1, cateName);
         mFilterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
             @Override
