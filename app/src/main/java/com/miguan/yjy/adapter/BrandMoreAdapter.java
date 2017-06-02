@@ -2,7 +2,6 @@ package com.miguan.yjy.adapter;
 
 import android.content.Context;
 import android.net.Uri;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
