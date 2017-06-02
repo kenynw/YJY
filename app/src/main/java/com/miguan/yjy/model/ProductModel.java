@@ -1,7 +1,5 @@
 package com.miguan.yjy.model;
 
-import android.text.TextUtils;
-
 import com.dsk.chain.model.AbsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,7 +15,6 @@ import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
-import com.miguan.yjy.module.product.RepositoryListPresenter;
 import com.miguan.yjy.utils.LUtils;
 
 import java.util.ArrayList;
@@ -35,6 +32,8 @@ import rx.Observable;
 public class ProductModel extends AbsModel {
 
     private final String EXTRA_BRAND_LIST = "brand_list";
+
+    private final String EXTRA_PRODUCT_LIST = "product_list";
 
     public static final int TYPE_PRODUCT = 1;
 
@@ -70,15 +69,11 @@ public class ProductModel extends AbsModel {
         return ServicesClient.getServices().productList(keywords, brandId, 0, page)
                 .map(listEntityRoot -> {
                     if (page == 1) {
-                        String productsStr = LUtils.getPreferences().getString(RepositoryListPresenter.EXTRA_REPOSITORY_PRODUCT, "");
-                        if (!TextUtils.isEmpty(productsStr)) {
-                            List<Product> list = new Gson().fromJson(productsStr, new TypeToken<List<Product>>() {
-                            }.getType());
-                            if (list.size() > 0) {
-                                for (Product product : list) {
-                                    if (product.getProduct_name().contains(keywords) && !listEntityRoot.getData().contains(product))
-                                        listEntityRoot.getData().add(0, product);
-                                }
+                        List<Product> list = queryProducts();
+                        if (list != null && list.size() > 0) {
+                            for (Product product : list) {
+                                if (product.getProduct_name().contains(keywords) && !listEntityRoot.getData().contains(product))
+                                    listEntityRoot.getData().add(0, product);
                             }
                         }
                     }
@@ -118,7 +113,7 @@ public class ProductModel extends AbsModel {
      * @param number
      * @return
      */
-    public Observable<UserProduct> queryCode(Long brandId, String number) {
+    public Observable<UserProduct> queryCode(int brandId, String number) {
         return ServicesClient.getServices().queryCode(brandId, number).compose(new DefaultTransform<>());
     }
 
@@ -153,6 +148,20 @@ public class ProductModel extends AbsModel {
     }
 
     /**
+     * 添加品牌到本地
+     * @param brand
+     */
+    public void deleteBrand(Brand brand) {
+        List<Brand> list = queryBrands();
+        if (list != null) {
+            for (Brand item : list) {
+                if (item.getName().equals(brand.getName())) list.remove(item);
+            }
+        }
+        LUtils.getPreferences().edit().putString(EXTRA_BRAND_LIST, new Gson().toJson(list)).apply();
+    }
+
+    /**
      * 从数据库查询品牌列表
      *
      * @return
@@ -164,13 +173,38 @@ public class ProductModel extends AbsModel {
         );
     }
 
-//    public void insertProduct(Product product) {
-//
-//    }
-//
-//    public List<Product> queryProducts() {
-//
-//    }
+    /**
+     * 插入本地产品
+     * @param product
+     */
+    public void insertProduct(Product product) {
+        List<Product> products = queryProducts();
+        if (products == null) products = new ArrayList<>();
+        products.add(product);
+        LUtils.getPreferences().edit().putString(EXTRA_PRODUCT_LIST, new Gson().toJson(products)).apply();
+    }
+
+    /**
+     * 删除本地产品
+     * @param product
+     */
+    public void deleteProduct(Product product) {
+        List<Product> list = queryProducts();
+        if (list != null) {
+            for (Product item : list) {
+                if (item.getProduct_name().equals(product.getProduct_name())) list.remove(item);
+            }
+        }
+        LUtils.getPreferences().edit().putString(EXTRA_PRODUCT_LIST, new Gson().toJson(list)).apply();
+    }
+
+    // 获取本地产品列表
+    public List<Product> queryProducts() {
+        return new Gson().fromJson(
+                LUtils.getPreferences().getString(EXTRA_PRODUCT_LIST, ""),
+                new TypeToken<List<Product>>() {}.getType()
+        );
+    }
 
     /**
      * 添加收藏（长草）
@@ -187,7 +221,7 @@ public class ProductModel extends AbsModel {
      *
      * @return
      */
-    public Observable<String> addRepository(Long brandId, String brandName, String product, String img, int isSeal, String sealTime, int qualityTime, String overdueTime) {
+    public Observable<String> addRepository(int brandId, String brandName, String product, String img, int isSeal, String sealTime, int qualityTime, String overdueTime) {
         return ServicesClient.getServices().addRepository(
                 UserPreferences.getUserID(), brandId, brandName, product, img, isSeal, sealTime, qualityTime, overdueTime
         ).compose(new DefaultTransform<>());

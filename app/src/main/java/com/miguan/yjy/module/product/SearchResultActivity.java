@@ -113,7 +113,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     public void setData(String keywords, ProductList productList, String cateName) {
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
-        if (productList.getBrand().getId()== null) {
+        if (productList.getBrand().getId() <= 0) {
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
             mLlIncludeBrand.setVisibility(View.VISIBLE);

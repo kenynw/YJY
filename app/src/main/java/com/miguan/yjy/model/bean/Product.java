@@ -50,7 +50,7 @@ public class Product implements Parcelable {
 
     private String product_company;
 
-    private Long brand_id;
+    private int brand_id;
 
     @SerializedName("brand")
     private String brand_name;
@@ -318,11 +318,11 @@ public class Product implements Parcelable {
         this.en_product_company = en_product_company;
     }
 
-    public Long getBrand_id() {
+    public int getBrand_id() {
         return brand_id;
     }
 
-    public void setBrand_id(Long brand_id) {
+    public void setBrand_id(int brand_id) {
         this.brand_id = brand_id;
     }
 
@@ -389,7 +389,7 @@ public class Product implements Parcelable {
         dest.writeString(this.remark);
         dest.writeString(this.product_img);
         dest.writeString(this.product_company);
-        dest.writeValue(this.brand_id);
+        dest.writeInt(this.brand_id);
         dest.writeString(this.brand_name);
         dest.writeString(this.en_product_company);
         dest.writeString(this.copy);
@@ -428,7 +428,7 @@ public class Product implements Parcelable {
         this.remark = in.readString();
         this.product_img = in.readString();
         this.product_company = in.readString();
-        this.brand_id = (Long) in.readValue(Long.class.getClassLoader());
+        this.brand_id = in.readInt();
         this.brand_name = in.readString();
         this.en_product_company = in.readString();
         this.copy = in.readString();

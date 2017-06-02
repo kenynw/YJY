@@ -10,17 +10,20 @@
 
     <TextView
         android:id="@+id/tv_brand_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
+        android:layout_weight="1"
+        android:padding="@dimen/spacing_normal"
         android:textAppearance="@style/TextBody"
         tools:text="Biotherm 碧欧泉"
         />
 
     <ImageView
         android:id="@+id/iv_brand_delete"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/widget_medium"
         android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
         android:scaleType="centerInside"
         android:src="@mipmap/ic_brand_delete"
         />

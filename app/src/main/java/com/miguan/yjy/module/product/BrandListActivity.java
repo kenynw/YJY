@@ -84,7 +84,9 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return viewType == 1 ? new BrandViewHolder(parent) : new BrandLetterViewHolder(parent);
+        BrandViewHolder viewHolder = viewType == 1 ? new BrandViewHolder(parent) : new BrandLetterViewHolder(parent);
+        viewHolder.setOnBrandDeleteListener(getPresenter());
+        return viewHolder;
     }
 
     @Override
@@ -188,7 +190,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
                 if (mInSearchMode && mFilterList.size() == 0) {
                     Brand brand = new Brand();
                     brand.setName(result);
-                    brand.setLetter(String.valueOf(Pinyin.toPinyin(result.charAt(0)).charAt(0)));
+                    brand.setLetter(getLetter(result));
                     brand.setLocal(true);
                     getPresenter().insertBrand(brand);
                     selectedFinish(brand);
@@ -196,6 +198,12 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
                 finish();
             });
         }
+
+        private String getLetter(String string) {
+            char charLetter = Pinyin.toPinyin(string.charAt(0)).charAt(0);
+            return Character.isLetter(charLetter) ? String.valueOf(charLetter) : "#";
+        }
+
     }
 
 }

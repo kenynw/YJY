@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.module.account.UserTextWatcher;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,23 +60,15 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
             mIsInit = true;
         });
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));
+        mBtnSubmit.setOnClickListener(v -> getPresenter().query(mEtProduct.getText().toString().trim()));
     }
 
-    public void setBrand(String brandName, Long brandId) {
+    public void setBrand(String brandName) {
         mEtBrand.setText(brandName);
         mEtProduct.setText("");
-        mBtnSubmit.setOnClickListener(v -> checkInput(brandId));
     }
 
-    public void checkInput(Long brandId) {
-        if (brandId <= 0) {
-            LUtils.toast("暂不提供该品牌查询哦~");
-            return;
-        }
-        getPresenter().query(brandId, mEtProduct.getText().toString().trim());
-    }
-
-    public void showQueryDialog(UserProduct product, Long brandId) {
+    public void showQueryDialog(UserProduct product, Brand brand) {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_query_result)
                 .show();
@@ -95,8 +87,9 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         tvExpiration.setText(product.getEndDay());
         btnSave.setOnClickListener(v -> {
             dialog.dismiss();
-            AddRepositoryPresenter.start(QueryCodeActivity.this,
-                    mEtBrand.getText().toString(), brandId, product.getEndDay(), null);
+            AddRepositoryPresenter.start(QueryCodeActivity.this, brand, product.getEndDay(),
+                    getIntent().getParcelableExtra(QueryCodePresenter.EXTRA_PRODUCT));
+            finish();
         });
     }
 

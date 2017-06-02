@@ -175,11 +175,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         }
         if (product.getRule() != 0) {
             mTvQueryDate.setVisibility(View.VISIBLE);
+            mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, product));
         } else {
             mTvQueryDate.setVisibility(View.GONE);
         }
 
-        mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, product));
         if (TextUtils.isEmpty(product.getProduct_explain())) {
             mLlRead.setVisibility(View.GONE);
         } else {
@@ -261,8 +261,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             }
         });
 
-        mTvTemplate.setOnClickListener(v ->
-                AddRepositoryPresenter.start(this, product.getBrand_name(), product.getBrand_id(), "", product));
+        mTvTemplate.setOnClickListener(v -> AddRepositoryPresenter.start(this, null, "", product));
     }
 
     // 设置长草图标样式

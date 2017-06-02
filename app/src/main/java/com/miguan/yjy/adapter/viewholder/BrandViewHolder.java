@@ -25,6 +25,8 @@ public class BrandViewHolder extends BaseViewHolder<Brand> {
     @BindView(R.id.iv_brand_delete)
     ImageView mIvDelete;
 
+    private OnBrandDeleteListener mListener;
+
     public BrandViewHolder(ViewGroup parent) {
         this(parent, R.layout.item_list_brand);
     }
@@ -37,6 +39,18 @@ public class BrandViewHolder extends BaseViewHolder<Brand> {
     @Override
     public void setData(Brand data) {
         mTvName.setText(data.getName());
+        mIvDelete.setOnClickListener(v -> {
+            if (mListener != null) mListener.onBrandDelete(data);
+        });
         mIvDelete.setVisibility(data.isLocal() ? View.VISIBLE : View.GONE);
     }
+
+    public void setOnBrandDeleteListener(OnBrandDeleteListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnBrandDeleteListener {
+        void onBrandDelete(Brand brand);
+    }
+
 }

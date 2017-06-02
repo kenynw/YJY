@@ -24,29 +24,25 @@ import java.io.File;
 
 public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
 
-    public static final String EXTRA_BRAND_NAME = "brand_name";
-    public static final String EXTRA_BRAND_ID = "brand_id";
+    public static final String EXTRA_BRAND = "brand";
     public static final String EXTRA_OVERTIME = "overtime";
     public static final String EXTRA_PRODUCT = "product";
 
     public static final int REQUEST_CODE_BRAND = 0x200;
     public static final int REQUEST_CODE_PRODUCT = 0x201;
 
-    public static void start(Context context, String brandName, Long brandId, String overtime, Product product) {
+    public static void start(Context context, Brand brand, String overtime, Product product) {
         Intent intent = new Intent(context, UserPreferences.getUserID() > 0 ? AddRepositoryActivity.class : LoginActivity.class);
-        if (!TextUtils.isEmpty(brandName)) intent.putExtra(EXTRA_BRAND_NAME, brandName);
-        if (brandId <= 0) intent.putExtra(EXTRA_BRAND_ID, brandId);
+        if (brand != null) intent.putExtra(EXTRA_BRAND, brand);
         if (!TextUtils.isEmpty(overtime)) intent.putExtra(EXTRA_OVERTIME, overtime);
         if (product != null) intent.putExtra(EXTRA_PRODUCT, product);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
 
-    private String mBrandName;
+    private Brand mBrand;
 
-    private Long mBrandId;
-
-    private String mImagePath;
+    private String mImagePath = "";
 
     private String mOvertime;
 
@@ -55,8 +51,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     @Override
     protected void onCreate(AddRepositoryActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        mBrandName = getView().getIntent().getStringExtra(EXTRA_BRAND_NAME);
-        mBrandId = getView().getIntent().getLongExtra(EXTRA_BRAND_ID, 0);
+        mBrand = getView().getIntent().getParcelableExtra(EXTRA_BRAND);
         mOvertime = getView().getIntent().getStringExtra(EXTRA_OVERTIME);
         mProduct = getView().getIntent().getParcelableExtra(EXTRA_PRODUCT);
     }
@@ -64,23 +59,20 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     @Override
     protected void onCreateView(AddRepositoryActivity view) {
         super.onCreateView(view);
-        getView().setBrand(mBrandName, mOvertime);
-        if (mProduct != null) {
-            getView().setProduct(mProduct);
-        }
+        if (mBrand != null) getView().setBrand(mBrand, mOvertime);
+        if (mProduct != null) getView().setProduct(mProduct);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        mBrandName = intent.getStringExtra(EXTRA_BRAND_NAME);
-        mBrandId = intent.getLongExtra(EXTRA_BRAND_ID, 0);
+        mBrand = intent.getParcelableExtra(EXTRA_BRAND);
         mOvertime = intent.getStringExtra(EXTRA_OVERTIME);
-        getView().setBrand(mBrandName, mOvertime);
+        getView().setBrand(mBrand, mOvertime);
     }
 
     public void submit(String brandName, String productName, int isSeal, String sealTime, int qualityTime, String overdueTime) {
-        ProductModel.getInstance().addRepository(mBrandId, brandName, productName, mImagePath, isSeal,
+        ProductModel.getInstance().addRepository(mBrand.getId(), brandName, productName, mImagePath, isSeal,
                 sealTime, qualityTime, overdueTime)
                 .unsafeSubscribe(new ServicesResponse<String>() {
                     @Override
@@ -96,10 +88,8 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_BRAND:
-                    Brand brand = data.getParcelableExtra("brand");
-                    mBrandId = brand.getId();
-                    mBrandName = brand.getName();
-                    getView().setBrand(brand.getName(), mOvertime);
+                    mBrand = data.getParcelableExtra("brand");
+                    getView().setBrand(mBrand, mOvertime);
                     break;
                 case REQUEST_CODE_PRODUCT:
                     Product product = data.getParcelableExtra("product");
@@ -121,4 +111,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
                 });
     }
 
+    public int getBrandId() {
+        return mBrand.getId();
+    }
 }

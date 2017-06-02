@@ -1,18 +1,14 @@
 package com.miguan.yjy.module.product;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.utils.LUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Copyright (c) 2017/5/23. LiaoPeiKun Inc. All rights reserved.
@@ -20,14 +16,20 @@ import java.util.List;
 
 public class RepositoryListPresenter extends BaseListActivityPresenter<RepositoryListActivity, Product> implements RepositoryViewHolder.OnDeleteListener {
 
-    public static final String EXTRA_REPOSITORY_PRODUCT = "repository_product";
+    public static final String EXTRA_BRAND_ID = "brand_id";
 
     private int mBrandId;
+
+    public static void startForResult(Context context, int requestCode, int brandId) {
+        Intent intent = new Intent(context, RepositoryListActivity.class);
+        intent.putExtra(EXTRA_BRAND_ID, brandId);
+        ((Activity) context).startActivityForResult(intent, requestCode);
+    }
 
     @Override
     protected void onCreate(RepositoryListActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        mBrandId = getView().getIntent().getIntExtra("brand_id", 0);
+        mBrandId = getView().getIntent().getIntExtra(EXTRA_BRAND_ID, 0);
     }
 
     @Override
@@ -54,19 +56,13 @@ public class RepositoryListPresenter extends BaseListActivityPresenter<Repositor
     }
 
     public void insertLocalProduct(Product product) {
-        Gson gson = new Gson();
-        String productsStr = LUtils.getPreferences().getString(EXTRA_REPOSITORY_PRODUCT, "");
-        List<Product> list = new ArrayList<>();
-        if (!TextUtils.isEmpty(productsStr)) {
-            list = gson.fromJson(productsStr, new TypeToken<List<Product>>(){}.getType());
-        }
-        list.add(product);
-        LUtils.getPreferences().edit().putString(EXTRA_REPOSITORY_PRODUCT, gson.toJson(list)).apply();
+        ProductModel.getInstance().insertProduct(product);
     }
 
     @Override
     public void onDelete(Product product) {
-//        ProductModel.getInstance()
+        ProductModel.getInstance().deleteProduct(product);
+        getAdapter().remove(product);
     }
 
 }

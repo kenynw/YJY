@@ -11,6 +11,7 @@ import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.utils.LUtils;
 
 /**
  * Copyright (c) 2017/3/24. LiaoPeiKun Inc. All rights reserved.
@@ -28,6 +29,8 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
 
     private Product mProduct;
 
+    private Brand mBrand = new Brand();
+
     @Override
     protected void onCreate(QueryCodeActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
@@ -38,7 +41,10 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     protected void onCreateView(QueryCodeActivity view) {
         super.onCreateView(view);
         if (mProduct != null) {
-            getView().setBrand(mProduct.getBrand_name(), mProduct.getBrand_id());
+            mBrand.setId(mProduct.getBrand_id());
+            mBrand.setName(mProduct.getBrand_name());
+            mBrand.setRule(mProduct.getRule());
+            getView().setBrand(mBrand.getName());
         }
     }
 
@@ -46,17 +52,22 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
-            Brand brand = data.getParcelableExtra("brand");
-            getView().setBrand(brand.getName(), brand.getId());
+            mBrand = data.getParcelableExtra("brand");
+            getView().setBrand(mBrand.getName());
         }
     }
 
-    public void query(Long brandId, String number) {
-        ProductModel.getInstance().queryCode(brandId, number)
+    public void query(String number) {
+        if (mBrand.getId() <= 0) {
+            LUtils.toast("暂不提供该品牌查询哦~");
+            return;
+        }
+
+        ProductModel.getInstance().queryCode(mBrand.getId(), number)
                 .subscribe(new ServicesResponse<UserProduct>() {
                     @Override
                     public void onNext(UserProduct product) {
-                        getView().showQueryDialog(product, brandId);
+                        getView().showQueryDialog(product, mBrand);
                     }
                 });
     }

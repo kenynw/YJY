@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 public class Brand implements Parcelable {
 
-    private Long id;
+    private int id;
 
     private String name;
 
@@ -16,13 +16,15 @@ public class Brand implements Parcelable {
 
     private boolean isLocal;
 
+    private int rule;
+
     private String img;
 
     private int hot;
 
     private String description;
-    private String relevantArticle;
 
+    private String relevantArticle;
 
     public String getDescription() {
         return description;
@@ -32,11 +34,11 @@ public class Brand implements Parcelable {
         this.description = description;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -54,6 +56,14 @@ public class Brand implements Parcelable {
 
     public void setLetter(String letter) {
         this.letter = letter;
+    }
+
+    public int getRule() {
+        return rule;
+    }
+
+    public void setRule(int rule) {
+        this.rule = rule;
     }
 
     public boolean isLocal() {
@@ -91,7 +101,7 @@ public class Brand implements Parcelable {
     public Brand() {
     }
 
-    public Brand(Long id, String name, String letter, boolean isLocal, String img,
+    public Brand(int id, String name, String letter, boolean isLocal, String img,
             int hot, String description, String relevantArticle) {
         this.id = id;
         this.name = name;
@@ -103,23 +113,6 @@ public class Brand implements Parcelable {
         this.relevantArticle = relevantArticle;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeString(this.name);
-        dest.writeString(this.letter);
-        dest.writeByte(this.isLocal ? (byte) 1 : (byte) 0);
-        dest.writeString(this.img);
-        dest.writeInt(this.hot);
-        dest.writeString(this.description);
-        dest.writeString(this.relevantArticle);
-    }
-
     public String getRelevantArticle() {
         return this.relevantArticle;
     }
@@ -128,11 +121,30 @@ public class Brand implements Parcelable {
         this.relevantArticle = relevantArticle;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.letter);
+        dest.writeByte(this.isLocal ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.rule);
+        dest.writeString(this.img);
+        dest.writeInt(this.hot);
+        dest.writeString(this.description);
+        dest.writeString(this.relevantArticle);
+    }
+
     protected Brand(Parcel in) {
-        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.id = in.readInt();
         this.name = in.readString();
         this.letter = in.readString();
         this.isLocal = in.readByte() != 0;
+        this.rule = in.readInt();
         this.img = in.readString();
         this.hot = in.readInt();
         this.description = in.readString();

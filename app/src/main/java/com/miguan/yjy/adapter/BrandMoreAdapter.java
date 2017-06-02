@@ -38,6 +38,7 @@ public class BrandMoreAdapter extends RecyclerArrayAdapter<Brand> {
     }
 
     class BrandMoreViewHolder extends BaseViewHolder<Brand> {
+
         @BindView(R.id.brand_more_img)
         SimpleDraweeView mBrandMoreImg;
 
@@ -48,16 +49,10 @@ public class BrandMoreAdapter extends RecyclerArrayAdapter<Brand> {
 
         @Override
         public void setData(Brand data) {
-            super.setData(data);
             mBrandMoreImg.setImageURI(Uri.parse(data.getImg()));
-            mBrandMoreImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    BrandMainPresenter.star(getContext(), data.getId());
-                }
-            });
+            mBrandMoreImg.setOnClickListener(v -> BrandMainPresenter.star(getContext(), data.getId()));
         }
-    }
 
+    }
 
 }

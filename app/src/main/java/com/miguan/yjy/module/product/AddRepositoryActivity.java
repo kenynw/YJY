@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.services.Services;
 import com.miguan.yjy.module.common.WebViewActivity;
@@ -32,6 +33,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.view.View.GONE;
 import static com.miguan.yjy.module.product.AddRepositoryPresenter.REQUEST_CODE_BRAND;
 import static com.miguan.yjy.module.product.AddRepositoryPresenter.REQUEST_CODE_PRODUCT;
 
@@ -95,7 +97,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         mTvQuery.setOnClickListener(v -> startActivity(new Intent(this, QueryCodeActivity.class)));
         mTvIntro.setOnClickListener(v -> WebViewActivity.start(this, "开封保质期说明", Services.BASE_BETA_URL + "site/quality"));
         mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), REQUEST_CODE_BRAND));
-        mTvProduct.setOnClickListener(v -> startActivityForResult(new Intent(this, RepositoryListActivity.class), REQUEST_CODE_PRODUCT));
+        mTvProduct.setOnClickListener(v -> RepositoryListPresenter.startForResult(this, REQUEST_CODE_PRODUCT, getPresenter().getBrandId()));
 
         mTimePickerView = new TimePickerView.Builder(this, (date, v) -> {
             SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
@@ -115,7 +117,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
         mIvIsOpen.setOnClickListener(v -> {
             mIsSeal = mIsSeal == 1 ? 0 : 1;
-            mLlIsSeal.setVisibility(mIsSeal == 1 ? View.VISIBLE : View.GONE);
+            mLlIsSeal.setVisibility(mIsSeal == 1 ? View.VISIBLE : GONE);
             mIvIsOpen.setImageResource(mIsSeal == 1 ? R.mipmap.ic_swc_on : R.mipmap.ic_swc_off);
 
         });
@@ -124,16 +126,13 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         mTvExpTime.setOnClickListener(v -> mTimeDialog.show());
     }
 
-    public void setBrand(String brandName, String overtime) {
-        if (TextUtils.isEmpty(overtime)) {
-            mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
-            mTvQuery.setVisibility(View.VISIBLE);
-        } else {
-            mTvExpiration.setText(overtime);
-            mTvQuery.setVisibility(View.GONE);
-        }
+    public void setBrand(Brand brand, String overtime) {
+        mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
+        mTvExpiration.setText(overtime);
+
+        mTvQuery.setVisibility(brand.getRule() > 0 ? View.VISIBLE : GONE);
         mEtOpenDate.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
-        mTvBrand.setText(brandName);
+        mTvBrand.setText(brand.getName());
     }
 
     public void setProduct(Product product) {
