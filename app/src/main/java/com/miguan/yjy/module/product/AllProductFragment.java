@@ -6,7 +6,6 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
 
@@ -20,11 +19,6 @@ public class AllProductFragment extends BaseListFragment<AllProductPresenter,Pro
     @Override
     public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
         return new SearchReslutViewHolder(parent, false);
-    }
-
-    @Override
-    public int getLayout() {
-        return R.layout.common_recylerview;
     }
 
     @Override

@@ -12,15 +12,13 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BrandMoreAdapter;
 import com.miguan.yjy.adapter.BrandPagerAdapter;
 import com.miguan.yjy.model.ProductModel;
-import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.model.services.ServicesResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * @作者 cjh
@@ -28,51 +26,49 @@ import butterknife.ButterKnife;
  * @描述
  */
 
-public class  StarProductPresenter extends BaseListFragmentPresenter<StarProductFragment, Product> {
-    long brandId;
+public class StarProductPresenter extends BaseListFragmentPresenter<StarProductFragment, Product> {
 
-    private List<Brand> brandList = new ArrayList<>();
+    private long brandId;
 
     @Override
     protected void onCreate(StarProductFragment view, Bundle saveState) {
         super.onCreate(view, saveState);
         brandId = getView().getArguments().getLong(BrandPagerAdapter.EXTRA_BRAND_ID);
-        onRefresh();
     }
 
     @Override
     protected void onCreateView(StarProductFragment view) {
         super.onCreateView(view);
-        ProductModel.getInstance().getBrandInfo(brandId).subscribe(new ServicesResponse<BrandAll>() {
-            @Override
-            public void onNext(BrandAll brandAll) {
-                super.onNext(brandAll);
-                getAdapter().addFooter(new RecyclerArrayAdapter.ItemView() {
-                    @Override
-                    public View onCreateView(ViewGroup parent) {
-                        ButterKnife.bind(this, parent);
-                        View moreBrand = View.inflate(getView().getActivity(), R.layout.foot_more_brand, null);
-                        RecyclerView  recy_brand_more = (RecyclerView) moreBrand.findViewById(R.id.recy_brand_more);
-                        recy_brand_more.setLayoutManager(new LinearLayoutManager(getView().getActivity(), LinearLayoutManager.HORIZONTAL, false));
-                        BrandMoreAdapter brandMoreAdapter = new BrandMoreAdapter(getView().getActivity(), brandAll.getOtherBrand());
-                        recy_brand_more.setAdapter(brandMoreAdapter);
-                        brandMoreAdapter.notifyDataSetChanged();
-                        return moreBrand;
-                    }
-
-                    @Override
-                    public void onBindView(View headerView) {
-
-                    }
-                });
-            }
-        });
+        onRefresh();
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
-        ProductModel.getInstance().getProductList(brandId, 1, 1).unsafeSubscribe(getRefreshSubscriber());
+        ProductModel.getInstance().getBrandInfo(brandId)
+                .flatMap(new Func1<BrandAll, Observable<List<Product>>>() {
+                    @Override
+                    public Observable<List<Product>> call(BrandAll brandAll) {
+                        getAdapter().removeAllFooter();
+                        getAdapter().addFooter(new RecyclerArrayAdapter.ItemView() {
+                            @Override
+                            public View onCreateView(ViewGroup parent) {
+                                View moreBrand = View.inflate(getView().getActivity(), R.layout.foot_more_brand, null);
+                                RecyclerView recy_brand_more = (RecyclerView) moreBrand.findViewById(R.id.recy_brand_more);
+                                recy_brand_more.setLayoutManager(new LinearLayoutManager(getView().getActivity(), LinearLayoutManager.HORIZONTAL, false));
+                                BrandMoreAdapter brandMoreAdapter = new BrandMoreAdapter(getView().getActivity(), brandAll.getOtherBrand());
+                                recy_brand_more.setAdapter(brandMoreAdapter);
+                                brandMoreAdapter.notifyDataSetChanged();
+                                return moreBrand;
+                            }
 
+                            @Override
+                            public void onBindView(View headerView) {
+
+                            }
+                        });
+                        return ProductModel.getInstance().getProductList(brandId, 1, 1);
+                    }
+                }).unsafeSubscribe(getRefreshSubscriber());
     }
 }

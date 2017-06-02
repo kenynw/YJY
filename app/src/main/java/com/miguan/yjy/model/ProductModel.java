@@ -130,9 +130,9 @@ public class ProductModel extends AbsModel {
     public Observable<BrandList> getBrandList() {
         return ServicesClient.getServices().brandList()
                 .map(brandList -> {
-                    List<Brand> brands = queryAll();
+                    List<Brand> brands = queryBrands();
                     if (brands != null && brands.size() > 0) {
-                        brandList.getCosmeticsList().addAll(queryAll());
+                        brandList.getCosmeticsList().addAll(queryBrands());
                     }
                     Collections.sort(brandList.getCosmeticsList(),
                             (brandFirst, brandSecond) -> brandFirst.getLetter().compareTo(brandSecond.getLetter()));
@@ -146,7 +146,7 @@ public class ProductModel extends AbsModel {
      * @param brand
      */
     public void insertBrand(Brand brand) {
-        List<Brand> brands = queryAll();
+        List<Brand> brands = queryBrands();
         if (brands == null) brands = new ArrayList<>();
         brands.add(brand);
         LUtils.getPreferences().edit().putString(EXTRA_BRAND_LIST, new Gson().toJson(brands)).apply();
@@ -157,12 +157,20 @@ public class ProductModel extends AbsModel {
      *
      * @return
      */
-    private List<Brand> queryAll() {
+    private List<Brand> queryBrands() {
         return new Gson().fromJson(
                 LUtils.getPreferences().getString(EXTRA_BRAND_LIST, ""),
                 new TypeToken<List<Brand>>() {}.getType()
         );
     }
+
+//    public void insertProduct(Product product) {
+//
+//    }
+//
+//    public List<Product> queryProducts() {
+//
+//    }
 
     /**
      * 添加收藏（长草）

@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 @RequiresPresenter(QueryCodePresenter.class)
 public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
 
-    @BindView(R.id.tv_query_code_brand)
+    @BindView(R.id.et_query_code_brand)
     EditText mEtBrand;
 
     @BindView(R.id.et_query_code_product)
@@ -95,7 +95,8 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         tvExpiration.setText(product.getEndDay());
         btnSave.setOnClickListener(v -> {
             dialog.dismiss();
-            AddRepositoryPresenter.start(QueryCodeActivity.this, mEtBrand.getText().toString(), brandId, product.getEndDay());
+            AddRepositoryPresenter.start(QueryCodeActivity.this,
+                    mEtBrand.getText().toString(), brandId, product.getEndDay(), null);
         });
     }
 

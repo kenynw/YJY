@@ -42,7 +42,9 @@ public class RepositoryListActivity extends BaseListActivity<RepositoryListPrese
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new RepositoryViewHolder(parent);
+        RepositoryViewHolder repositoryViewHolder = new RepositoryViewHolder(parent);
+        repositoryViewHolder.setOnDeleteListener(getPresenter());
+        return repositoryViewHolder;
     }
 
     @Override

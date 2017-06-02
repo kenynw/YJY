@@ -18,7 +18,7 @@ import java.util.List;
  * Copyright (c) 2017/5/23. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class RepositoryListPresenter extends BaseListActivityPresenter<RepositoryListActivity, Product> {
+public class RepositoryListPresenter extends BaseListActivityPresenter<RepositoryListActivity, Product> implements RepositoryViewHolder.OnDeleteListener {
 
     public static final String EXTRA_REPOSITORY_PRODUCT = "repository_product";
 
@@ -62,6 +62,11 @@ public class RepositoryListPresenter extends BaseListActivityPresenter<Repositor
         }
         list.add(product);
         LUtils.getPreferences().edit().putString(EXTRA_REPOSITORY_PRODUCT, gson.toJson(list)).apply();
+    }
+
+    @Override
+    public void onDelete(Product product) {
+//        ProductModel.getInstance()
     }
 
 }

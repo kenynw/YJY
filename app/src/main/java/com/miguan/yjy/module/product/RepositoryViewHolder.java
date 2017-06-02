@@ -11,7 +11,6 @@ import com.daimajia.swipe.SwipeLayout;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 
@@ -30,6 +29,8 @@ public class RepositoryViewHolder extends SearchReslutViewHolder {
     @BindView(R.id.swp_product_layout)
     SwipeLayout mSwpLayout;
 
+    private OnDeleteListener mListener;
+
     public RepositoryViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_repository_product_list);
     }
@@ -45,9 +46,17 @@ public class RepositoryViewHolder extends SearchReslutViewHolder {
             ((Activity) getContext()).finish();
         });
         mTvDelete.setOnClickListener(v -> {
-            LUtils.toast("delete");
+            if (mListener != null) mListener.onDelete(data);
         });
         mSwpLayout.setSwipeEnabled(data.isLocal());
+    }
+
+    public void setOnDeleteListener(OnDeleteListener listener) {
+        this.mListener = listener;
+    }
+
+    public interface OnDeleteListener {
+        void onDelete(Product product);
     }
 
 }

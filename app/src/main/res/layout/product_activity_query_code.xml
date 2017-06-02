@@ -18,7 +18,7 @@
         >
 
         <EditText
-            android:id="@+id/tv_query_code_brand"
+            android:id="@+id/et_query_code_brand"
             style="@style/BaseInputLarge"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"

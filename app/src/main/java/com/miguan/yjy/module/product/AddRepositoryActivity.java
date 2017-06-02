@@ -133,11 +133,10 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             mTvQuery.setVisibility(View.GONE);
         }
         mEtOpenDate.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
+        mTvBrand.setText(brandName);
     }
 
     public void setProduct(Product product) {
-        getPresenter().setBrandId(product.getBrand_id());
-        mTvBrand.setText(product.getBrand_name());
         mTvProduct.setText(product.getProduct_name());
         mDvImage.setImageURI(Uri.parse(product.getProduct_img()));
     }

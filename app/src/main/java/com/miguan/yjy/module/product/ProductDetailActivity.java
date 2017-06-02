@@ -26,7 +26,6 @@ import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
@@ -151,14 +150,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
 
-        mTvTemplate.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//            startActivity(intent);
-//            EventBus.getDefault().post(1);
-            Intent intent = new Intent(this, UsedListActivity.class);
-            startActivity(intent);
-        });
     }
 
     @Override
@@ -188,7 +179,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             mTvQueryDate.setVisibility(View.GONE);
         }
 
-        mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, product));
         if (TextUtils.isEmpty(product.getProduct_explain())) {
             mLlRead.setVisibility(View.GONE);
@@ -270,6 +260,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_SKIN);
             }
         });
+
+        mTvTemplate.setOnClickListener(v ->
+                AddRepositoryPresenter.start(this, product.getBrand_name(), product.getBrand_id(), "", product));
     }
 
     // 设置长草图标样式
