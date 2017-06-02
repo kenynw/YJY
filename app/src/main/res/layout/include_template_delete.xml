@@ -14,6 +14,7 @@
         android:id="@+id/fl_template_delete"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_medium"
+        android:visibility="gone"
         >
 
         <TextView

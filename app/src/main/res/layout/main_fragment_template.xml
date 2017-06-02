@@ -9,12 +9,12 @@
     >
 
     <LinearLayout
+        android:id="@+id/container_template"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:id="@+id/container_template"
         >
 
         <ImageView
@@ -62,6 +62,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@mipmap/image_template_guide_home"
+        android:visibility="gone"
         />
 
 </FrameLayout>

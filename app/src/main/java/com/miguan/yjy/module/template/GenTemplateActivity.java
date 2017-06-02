@@ -18,10 +18,10 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.local.TemplatePreferences;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.utils.DateUtils;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.utils.ScreenShot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +51,6 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
 
     private int mCurGuide = 0;
 
-    private List<BaseTemplateViewHolder> mViewHolders;
-
     private View mHeader;
 
     private View mFooter;
@@ -67,23 +65,6 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         ButterKnife.bind(this);
 
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
-        mViewHolders = new ArrayList<>();
-
-        // 设置首次进入导航
-        if (LUtils.getPreferences().getBoolean("first_template", true)) {
-            mIvGuide.setVisibility(View.VISIBLE);
-            mIvGuide.setOnClickListener(v -> {
-                if (mCurGuide >= mImages.length) {
-                    LUtils.getPreferences().edit().putBoolean("first_template", false).apply();
-                    mIvGuide.setVisibility(View.GONE);
-                } else {
-                    mIvGuide.setImageResource(mImages[mCurGuide]);
-                    mCurGuide++;
-                }
-            });
-        } else {
-            mIvGuide.setVisibility(View.GONE);
-        }
     }
 
     public void initTemplate(int index, Template template) {
@@ -122,23 +103,25 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         getExpansionDelegate().showProgressBar("正在生成图片");
-
-        getPresenter().hideCursor();
-
-        for (BaseTemplateViewHolder viewHolder : mViewHolders) {
-            viewHolder.hideOperatingViews();
+        for (TemplateView templateView : mViewList) {
+            templateView.prepareCapture();
         }
-        ScreenShot.getInstance().takeScreenShotOfJustView(mLlGen, (path, uri) -> {
-            getExpansionDelegate().hideProgressBar();
-            SaveTemplatePresenter.start(GenTemplateActivity.this, path, uri);
-            finish();
-        });
-
+        getPresenter().takeShot(mLlGen);
         return super.onOptionsItemSelected(item);
     }
 
-    public List<BaseTemplateViewHolder> getViewHolders() {
-        return mViewHolders;
+    // 首次进入打开引导
+    public void showGuide() {
+        mIvGuide.setVisibility(View.VISIBLE);
+        mIvGuide.setOnClickListener(v -> {
+            if (mCurGuide >= mImages.length) {
+                TemplatePreferences.setFirstDetail(false);
+                mIvGuide.setVisibility(View.GONE);
+            } else {
+                mIvGuide.setImageResource(mImages[mCurGuide]);
+                mCurGuide++;
+            }
+        });
     }
 
     private void addHeader(@LayoutRes int res) {
@@ -164,18 +147,22 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
             return;
         }
 
-        View view = LayoutInflater.from(this).inflate(res, null, false);
-        TemplateView templateView = ButterKnife.findById(view, R.id.template_view_item);
-        templateView.setOnDeleteListener(() -> {
-            mLlGen.removeView(view);
-            mViewList.remove(view);
+        TemplateView templateView = (TemplateView) LayoutInflater.from(this).inflate(res, null, false);
+        FrameLayout layout = (FrameLayout) templateView.findViewById(R.id.fl_template_delete);
+        layout.setOnClickListener(v -> {
+            mLlGen.removeView(templateView);
+            mViewList.remove(templateView);
+            if (mViewList.size() == 1) showDeleteView(false);
         });
+        if (item != null) {
+            templateView.setData(item);
+        }
 
         int index = mLlGen.indexOfChild(mFooter) != -1 ? mLlGen.indexOfChild(mFooter) : mLlGen.getChildCount();
         mLlGen.addView(templateView, index);
         mViewList.add(templateView);
-        if (item != null) {
-            templateView.setData(item);
+        if (mViewList.size() > 1) {
+            showDeleteView(true);
         }
     }
 
@@ -210,13 +197,27 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         mLlGen.addView(mFooter, mLlGen.getChildCount());
     }
 
+    private void showDeleteView(boolean isShow) {
+        if (mViewList.size() > 0) {
+            for (TemplateView templateView : mViewList) {
+                FrameLayout layout = (FrameLayout) templateView.findViewById(R.id.fl_template_delete);
+                if (layout.getVisibility() == (isShow ? View.GONE : View.VISIBLE)) {
+                    layout.setVisibility(isShow ? View.VISIBLE : View.GONE);
+                }
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(GenTemplateActivity.this)
                 .setMessage("确认退出模板")
                 .setNegativeButton("取消", null)
                 .setPositiveButton("退出", (dialog, which) -> {
+                    getPresenter().saveCraft();
                     finish();
-                }).show();
+                })
+                .show();
     }
+
 }

@@ -28,7 +28,6 @@ public class LoginPresenter extends Presenter<LoginActivity> {
             @Override
             public void onNext(User user) {
                 // 调用 JPush 接口来设置别名。
-
                 Set<String> set = new HashSet<>();
                 set.add("login");
                 JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);

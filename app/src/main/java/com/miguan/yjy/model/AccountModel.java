@@ -63,6 +63,7 @@ public class AccountModel extends AbsModel {
 
     public Observable<Integer> register(String mobile, String captcha, String password) {
         return ServicesClient.getServices().register(mobile, captcha, password)
+                .doOnNext(UserPreferences::setUserID)
                 .compose(new DefaultTransform<>());
     }
 
