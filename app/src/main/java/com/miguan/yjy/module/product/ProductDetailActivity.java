@@ -184,6 +184,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         } else {
             mTvTag.setVisibility(View.GONE);
         }
+        if (product.getRule() != 0) {
+            mTvQueryDate.setVisibility(View.VISIBLE);
+        } else {
+            mTvQueryDate.setVisibility(View.GONE);
+        }
+
         mTvQueryDate.setOnClickListener(v -> QueryCodePresenter.start(this, null));
         if (TextUtils.isEmpty(product.getProduct_explain())) {
             mLlRead.setVisibility(View.GONE);

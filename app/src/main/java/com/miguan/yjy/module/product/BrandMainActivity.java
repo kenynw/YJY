@@ -59,6 +59,7 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
     LinearLayout mLlBrandShow;
 
     private int tag = 0;
+    private int isShowArticle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,12 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
         mTvBrandNum.setText(Html.fromHtml(num));
         mTvBrandBrief.setText(brand.getDescription());
         mTvBrandBriefShow.setText(brand.getDescription());
-        mBrandPagerAdapter = new BrandPagerAdapter(getSupportFragmentManager(), 1, brand.getId());
+        if (getPresenter().mArticles.size() != 0) {
+            isShowArticle = 1;
+        } else {
+            isShowArticle = 2;
+        }
+        mBrandPagerAdapter = new BrandPagerAdapter(getSupportFragmentManager(), isShowArticle, brand.getId());
         mVpBrand.setAdapter(mBrandPagerAdapter);
         mTabProductBrand.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

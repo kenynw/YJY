@@ -5,8 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
+import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.ProductModel;
+import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.BrandAll;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * @作者 cjh
@@ -19,6 +28,7 @@ public class BrandMainPresenter extends BaseDataActivityPresenter<BrandMainActiv
     public static final String EXTRA_BRAND_ID = "brandId";
 
     long brandId;
+    List<Article> mArticles = new ArrayList<>();
 
     public static void star(Context context, long brandId) {
         Intent intent = new Intent(context, BrandMainActivity.class);
@@ -35,10 +45,20 @@ public class BrandMainPresenter extends BaseDataActivityPresenter<BrandMainActiv
     }
 
     public void onRefresh() {
-        ProductModel.getInstance().getBrandInfo(brandId).map(brandAll -> {
-            getView().setData(brandAll.getBrandInfo());
-            return brandAll.getBrandInfo();
-        }).unsafeSubscribe(getDataSubscriber());
+        ArticleModel.getInstance().getArticleList(brandId, 1)
+                .flatMap(new Func1<List<Article>, Observable<BrandAll>>() {
+                    @Override
+                    public Observable<BrandAll> call(List<Article> articles) {
+                        mArticles = articles;
+                        return ProductModel.getInstance().getBrandInfo(brandId);
+                    }
+                })
+                .map(brandAll -> {
+                    getView().setData(brandAll.getBrandInfo());
+                    return brandAll.getBrandInfo();
+                }).unsafeSubscribe(getDataSubscriber());
+
+
     }
 
 
