@@ -128,8 +128,8 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             mTvBrandNum.setText(Html.fromHtml(num));
         }
 
-
-        mTvBrandMain.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));
+        mLlIncludeBrand.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));
+//        mTvBrandMain.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
         if (TextUtils.isEmpty(keywords)) {

@@ -15,7 +15,6 @@
         android:layout_width="98dp"
         android:layout_height="98dp"
         android:layout_marginBottom="@dimen/spacing_small"
-        android:layout_marginTop="@dimen/spacing_small"
         app:placeholderImage="@mipmap/def_image_product"
         app:failureImage="@mipmap/def_image_product"
         />
@@ -71,12 +70,11 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="@dimen/text_size_small_13"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/iv_is_top"
         android:background="@color/f3"
-        android:layout_marginTop="@dimen/spacing_small"
         android:layout_width="30dp"
         android:layout_height="30dp"/>
 

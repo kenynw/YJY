@@ -119,19 +119,26 @@
                         android:textStyle="bold"/>
                 </LinearLayout>
 
+                <View
+                    style="@style/ItemLineHeight"
+                    />
+
                 <TextView
                     android:id="@+id/tv_product_detail_read_describe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"/>
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="15dp"/>
 
             </LinearLayout>
 
 
             <View
                 style="@style/ItemLineHeight"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_height="10dp"
+                />
 
             <LinearLayout
                 android:id="@+id/ll_product_detail_info"

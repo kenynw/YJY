@@ -51,6 +51,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/ll_brand_show"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -80,7 +81,6 @@
                 android:visibility="gone"/>
 
             <LinearLayout
-                android:id="@+id/ll_brand_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
