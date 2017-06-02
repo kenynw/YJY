@@ -42,6 +42,16 @@ public class Evaluate implements Parcelable {
 
     private int pageSize;
 
+    private int is_digest;
+
+    public int getIs_digest() {
+        return is_digest;
+    }
+
+    public void setIs_digest(int is_digest) {
+        this.is_digest = is_digest;
+    }
+
     public Evaluate() {
     }
 
@@ -277,6 +287,7 @@ public class Evaluate implements Parcelable {
         dest.writeInt(this.isLike);
         dest.writeInt(this.pageTotal);
         dest.writeInt(this.pageSize);
+        dest.writeInt(this.is_digest);
     }
 
     protected Evaluate(Parcel in) {
@@ -295,6 +306,7 @@ public class Evaluate implements Parcelable {
         this.isLike = in.readInt();
         this.pageTotal = in.readInt();
         this.pageSize = in.readInt();
+        this.is_digest = in.readInt();
     }
 
     public static final Creator<Evaluate> CREATOR = new Creator<Evaluate>() {

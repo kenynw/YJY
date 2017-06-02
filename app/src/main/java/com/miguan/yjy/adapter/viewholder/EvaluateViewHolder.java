@@ -47,8 +47,10 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
     @BindView(R.id.ll_evaluate_user_info)
     LinearLayout mLlUserInfo;
 
-    @BindView(com.miguan.yjy.R.id.tv_evaluate_label)
+    @BindView(R.id.tv_evaluate_label)
     TextView mTvLabel;
+    @BindView(R.id.tv_evaluate_essence)
+    TextView mTvEvaluateEssence;
 
     private int mIsLike;
 
@@ -63,6 +65,7 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
         mTvUserName.setText(data.getUsername());
         mTvUserAge.setText(data.getAge() > 0 ? data.getAge() + "岁" : "");
         mTvLabel.setText(data.getSkin());
+        mTvEvaluateEssence.setVisibility(data.getIs_digest()==1?View.VISIBLE:View.GONE);
         mIvLike.setImageResource(data.getIsLike() == 0 ? R.mipmap.ic_like_normal : R.mipmap.ic_like_pressed);
         mTvLike.setText(data.getLike_num() > 0 ? String.valueOf((data.getLike_num())) : "赞");
         mIsLike = data.getIsLike();

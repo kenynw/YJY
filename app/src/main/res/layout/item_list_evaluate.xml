@@ -42,13 +42,35 @@
 
         <TextView
             android:id="@+id/tv_evaluate_user_age"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_weight="1"
             android:textAppearance="@style/TextCaption"
             tools:text="年龄"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluate_essence"
+            android:layout_width="32dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_shape_main_color"
+            android:gravity="center"
+            android:text="精华"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_micro_11"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+
             />
 
         <LinearLayout
