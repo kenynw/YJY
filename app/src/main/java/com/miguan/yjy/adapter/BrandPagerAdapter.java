@@ -75,4 +75,6 @@ public class BrandPagerAdapter extends FragmentPagerAdapter {
         return super.getPageTitle(position);
 
     }
+
+
 }

@@ -9,6 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
 
+
 /**
  * @作者 cjh
  * @日期 2017/5/19 15:53
@@ -17,6 +18,7 @@ import com.miguan.yjy.model.bean.Product;
 @RequiresPresenter(StarProductPresenter.class)
 public class StarProductFragment extends BaseListFragment<StarProductPresenter, Product> {
 
+
     @Override
     public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
         return new SearchReslutViewHolder(parent, true);
@@ -24,7 +26,8 @@ public class StarProductFragment extends BaseListFragment<StarProductPresenter, 
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(false).setNoMoreAble(false);
+        return super.getListConfig().setContainerEmptyAble(false).setLoadMoreAble(false).setNoMoreAble(false);
     }
+
 
 }

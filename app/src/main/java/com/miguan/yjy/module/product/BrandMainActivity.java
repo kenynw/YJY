@@ -2,7 +2,6 @@ package com.miguan.yjy.module.product;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Gravity;
@@ -18,6 +17,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BrandPagerAdapter;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.widget.NoScrollViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +44,7 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
     @BindView(R.id.tab_product_brand)
     TabLayout mTabProductBrand;
     @BindView(R.id.vp_brand)
-    ViewPager mVpBrand;
+    NoScrollViewPager mVpBrand;
 
     BrandPagerAdapter mBrandPagerAdapter;
     @BindView(R.id.iv_brand_show)
@@ -84,6 +84,7 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
         } else {
             isShowArticle = 2;
         }
+        mVpBrand.setNoScroll(true);
         mBrandPagerAdapter = new BrandPagerAdapter(getSupportFragmentManager(), isShowArticle, brand.getId());
         mVpBrand.setAdapter(mBrandPagerAdapter);
         mTabProductBrand.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

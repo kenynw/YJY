@@ -28,6 +28,7 @@ import rx.Observable;
 
 public class ProductReadPresenter extends BaseListActivityPresenter<ProductReadActivity, Component> implements TabLayout.OnTabSelectedListener {
 
+    public static final String EXTRA_PRODUCT_TITLE_NAME = "title_name";
     public static final String EXTRA_PRODUCT_COMPONENT_LIST = "component_list";
     public static final String EXTRA_PRODUCT_COMPONENT_TAGS = "component_tags";
     public static final String EXTRA_PRODUCT_COMPONENT_POSITION = "component_position";
@@ -40,8 +41,9 @@ public class ProductReadPresenter extends BaseListActivityPresenter<ProductReadA
 
     private ArrayList<Component> mReadLists = new ArrayList<>();
 
-    public static void start(Context context, ArrayList<Component> components, ArrayList<ComponentTag> componentTags, int position) {
+    public static void start(Context context,String titileName, ArrayList<Component> components, ArrayList<ComponentTag> componentTags, int position) {
         Intent intent = new Intent(context, ProductReadActivity.class);
+        intent.putExtra(EXTRA_PRODUCT_TITLE_NAME, titileName);
         intent.putParcelableArrayListExtra(EXTRA_PRODUCT_COMPONENT_LIST, components);
         intent.putParcelableArrayListExtra(EXTRA_PRODUCT_COMPONENT_TAGS, componentTags);
         intent.putExtra(EXTRA_PRODUCT_COMPONENT_POSITION, position);

@@ -101,7 +101,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
         mMenuList.add(createRecyclerView(effects, position -> {
             mTbtnList.get(2).setText(effects[position]);
             if (mListener != null) {
-                mListener.onItemSelected(mEffects.get(position).getEffect_id(), "");
+                mListener.onItemSelected(0, mEffects.get(position).getEffect_id()+"");
             }
         }));
     }

@@ -62,7 +62,6 @@
             android:layout_height="30dp"
             android:background="@drawable/btn_round_evaluate_selector"
             android:button="@null"
-            android:checked="true"
             android:gravity="center"
             android:paddingBottom="4dp"
             android:paddingLeft="15dp"

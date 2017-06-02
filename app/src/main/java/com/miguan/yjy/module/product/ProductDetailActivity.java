@@ -206,7 +206,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         flowtagGrade.setAdapter(componentAdapter);
         componentAdapter.onlyAddAll(product.getSecurity());
         componentAdapter.setSetOnTagClickListener((v, position) ->
-                ProductReadPresenter.start(ProductDetailActivity.this, product.getComponentList(), product.getSecurity(), position)
+                ProductReadPresenter.start(ProductDetailActivity.this,"安全信息", product.getComponentList(), product.getSecurity(), position)
         );
         String effectNum = "主要功效成分:<font color=\"#32DAC3\"> " + product.getEffectNum() + " </font>种";
         tvEffectInfo.setText(Html.fromHtml(effectNum));
@@ -216,7 +216,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         flowtagEffectInfo.setFocusable(false);
         effectAdapter.onlyAddAll(product.getEffect());
         effectAdapter.setSetOnTagClickListener((v, position) ->
-                ProductReadPresenter.start(ProductDetailActivity.this, product.getComponentList(), product.getEffect(), position)
+                ProductReadPresenter.start(ProductDetailActivity.this,"功效信息", product.getComponentList(), product.getEffect(), position)
         );
 
         //去比价

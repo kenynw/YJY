@@ -83,7 +83,7 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     @Override
     protected void onResume() {
         super.onResume();
-        getEvaluateData(SORT_DEFAULT, START_PRAISE);
+        getEvaluateData(SORT_DEFAULT, null);
     }
 
     // 长草

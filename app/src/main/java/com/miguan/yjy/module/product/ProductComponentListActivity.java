@@ -86,6 +86,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
     }
 
     private void waterMark() {
+        mllProductCreateImg.setClickable(false);
         View mRlWaterTop = View.inflate(ProductComponentListActivity.this, R.layout.water_top, null);
 
 
@@ -113,6 +114,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
             @Override
             public void onPictureSaved(String path, Uri uri) {
                 LUtils.toast("图片已生成,请至相册查收!");
+                mllProductCreateImg.setClickable(true);
             }
 
         });

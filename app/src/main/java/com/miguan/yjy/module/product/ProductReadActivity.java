@@ -18,6 +18,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.miguan.yjy.module.product.ProductReadPresenter.EXTRA_PRODUCT_TITLE_NAME;
+
 /**
  * @作者 cjh
  * @日期 2017/3/29 9:57
@@ -32,7 +34,7 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarTitle(R.string.tv_title_read);
+        setToolbarTitle( getIntent().getStringExtra(EXTRA_PRODUCT_TITLE_NAME));
         ButterKnife.bind(this);
 
         mTabProductRead.addOnTabSelectedListener(getPresenter());

@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -48,7 +49,7 @@ public class BrandMoreAdapter extends RecyclerArrayAdapter<Brand> {
         @Override
         public void setData(Brand data) {
             super.setData(data);
-            mBrandMoreImg.setImageURI(data.getImg());
+            mBrandMoreImg.setImageURI(Uri.parse(data.getImg()));
             mBrandMoreImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
