@@ -21,7 +21,9 @@ import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.Services;
+import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.DateUtils;
 import com.miguan.yjy.utils.LUtils;
@@ -153,6 +155,10 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     }
 
     private void checkInput() {
+        if (UserPreferences.getUserID() <= 0 ) {
+            startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
         if (TextUtils.isEmpty(mTvProduct.getText())) {
             LUtils.toast("请输入产品");
             return;

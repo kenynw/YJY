@@ -54,8 +54,8 @@
             style="@style/BaseImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:placeholderImage="@mipmap/def_image_product_used"
             app:failureImage="@mipmap/def_image_product_used"
+            app:placeholderImage="@mipmap/def_image_product_used"
             />
 
         <LinearLayout

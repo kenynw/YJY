@@ -14,7 +14,7 @@ import com.dsk.chain.bijection.ChainFragment;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TemplatePagerAdapter;
-import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.model.local.TemplatePreferences;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.TemplateTransformer;
 
@@ -55,17 +55,15 @@ public class TemplateFragment extends ChainFragment<TemplatePresenter> implement
         mVp.setAdapter(new TemplatePagerAdapter(getActivity()));
         mCpi.setViewPager(mVp);
 
-        if (LUtils.getPreferences().getBoolean("first_template_home", true)) {
-            mIvGuide.setVisibility(View.VISIBLE);
-            mIvGuide.setOnClickListener(v -> {
-                mIvGuide.setVisibility(View.GONE);
-                LUtils.getPreferences().edit().putBoolean("first_template_home", false).apply();
-            });
-        } else {
-            mIvGuide.setVisibility(View.GONE);
-        }
-
         return view;
+    }
+
+    public void showGuide() {
+        mIvGuide.setVisibility(View.VISIBLE);
+        mIvGuide.setOnClickListener(v -> {
+            mIvGuide.setVisibility(View.GONE);
+            TemplatePreferences.setFirstHome(false);
+        });
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.module.main.MainActivity;
+import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -48,7 +49,8 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
         Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE_URI);
         String path = getIntent().getStringExtra(SaveTemplatePresenter.EXTRA_IMAGE_PATH);
 
-        Glide.with(this).load(uri).into(mIvThumb);
+
+        Glide.with(this).load(path).skipMemoryCache(true).into(mIvThumb);
 
         if (uri != null && !TextUtils.isEmpty(path)) {
             getPresenter().addAnalytics();

@@ -11,6 +11,8 @@ import android.view.View;
 
 public class ClearEditText extends AppCompatEditText implements View.OnFocusChangeListener {
 
+    private boolean mIsEdit = false;
+
     public ClearEditText(Context context) {
         super(context);
         setOnFocusChangeListener(this);
@@ -31,7 +33,12 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
     public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus) {
             setText("");
+            mIsEdit = true;
         }
+    }
+
+    public boolean isEdit() {
+        return mIsEdit;
     }
 
 }

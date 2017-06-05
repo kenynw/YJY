@@ -24,6 +24,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
+import com.miguan.yjy.widget.ClearEditText;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,13 +44,11 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
 
     private List<ImageView> mIvFilters = new ArrayList<>();
 
-    private List<EditText> mEditTexts = new ArrayList<>();
+    private List<ClearEditText> mEditTexts = new ArrayList<>();
 
     private SparseArray<String> mUris = new SparseArray<>();
 
     private int mCurPosition;
-
-    private OnDeleteListener mListener;
 
     public TemplateView(@NonNull Context context) {
         this(context, null);
@@ -70,11 +69,6 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         findAllChild(this);
         mFlDelete = (FrameLayout) findViewById(R.id.fl_template_delete);
-        mFlDelete.setOnClickListener(v -> {
-            if (mListener != null) {
-                mListener.onDelete();
-            }
-        });
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -102,7 +96,7 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
             }
 
             if (child instanceof EditText) {
-                mEditTexts.add((EditText) child);
+                mEditTexts.add((ClearEditText) child);
             }
 
             if (viewGroup.getChildAt(i) instanceof ViewGroup) {
@@ -121,6 +115,10 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
             ets.put(editText.getId(), editText.getText().toString().trim());
         }
         return ets;
+    }
+
+    public List<ClearEditText> getEditTexts() {
+        return mEditTexts;
     }
 
     public void setData(Template.Item item) {
@@ -193,6 +191,17 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
         mIvFilters.get(0).setFocusable(true);
     }
 
+    // 完成截图
+    public void completeCapture() {
+        mFlDelete.setVisibility(View.VISIBLE);
+        for (int i = 0; i < mDvImages.size(); i++) {
+            int id = mDvImages.get(i).getId();
+            if (!TextUtils.isEmpty(mUris.get(id, ""))) {
+                mIvFilters.get(i).setVisibility(VISIBLE);
+            }
+        }
+    }
+
     private void setImageFilter(SimpleDraweeView dv, ImageRequest request) {
         if (request != null) {
             PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
@@ -203,14 +212,6 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
 
             dv.setController(controller);
         }
-    }
-
-    public void setOnDeleteListener(OnDeleteListener listener) {
-        mListener = listener;
-    }
-
-    public interface OnDeleteListener {
-        void onDelete();
     }
 
 }

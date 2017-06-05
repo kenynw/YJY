@@ -275,7 +275,7 @@ public class ScreenShot {
                 }
             }
             // Create a media file name
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.CHINA).format(new Date());
+            String timeStamp = new SimpleDateFormat("MMdd_HHmmss", Locale.CHINA).format(new Date());
             File mediaFile;
             String mImageName = filename + timeStamp + ".jpg";
             mediaFile = new File(mediaStorageDirectory.getPath() + File.separator + mImageName);

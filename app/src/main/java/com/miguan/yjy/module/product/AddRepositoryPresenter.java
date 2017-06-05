@@ -6,15 +6,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.LinearLayout;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.module.account.LoginActivity;
+import com.miguan.yjy.module.template.SaveTemplatePresenter;
+import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.utils.ScreenShot;
 
 import java.io.File;
 
@@ -32,7 +34,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     public static final int REQUEST_CODE_PRODUCT = 0x201;
 
     public static void start(Context context, Brand brand, String overtime, Product product) {
-        Intent intent = new Intent(context, UserPreferences.getUserID() > 0 ? AddRepositoryActivity.class : LoginActivity.class);
+        Intent intent = new Intent(context, AddRepositoryActivity.class);
         if (brand != null) intent.putExtra(EXTRA_BRAND, brand);
         if (!TextUtils.isEmpty(overtime)) intent.putExtra(EXTRA_OVERTIME, overtime);
         if (product != null) intent.putExtra(EXTRA_PRODUCT, product);
