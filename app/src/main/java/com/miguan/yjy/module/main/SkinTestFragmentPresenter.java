@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.test;
+package com.miguan.yjy.module.main;
 
 import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
 import com.miguan.yjy.model.TestModel;
@@ -7,11 +7,11 @@ import com.miguan.yjy.model.local.UserPreferences;
 
 /**
  * @作者 cjh
- * @日期 2017/4/1 16:43
+ * @日期 2017/6/5 17:30
  * @描述
  */
 
-public class TestResultPresenter extends BaseDataFragmentPresenter<TestResultFragment, Test> {
+public class SkinTestFragmentPresenter extends BaseDataFragmentPresenter<SkinTestFragment, Test> {
 
 
     @Override

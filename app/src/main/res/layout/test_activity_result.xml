@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/ll_test_ok"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
@@ -321,22 +322,9 @@
                 android:layout_height="@dimen/spacing_small"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
-                android:text="@string/text_test_guide"
-                android:textColor="@color/f3"
-                android:textSize="@dimen/text_size_small_15"
-                android:textStyle="bold"
-                />
-
-            <View
-                style="@style/ItemLineHeight"
-                />
+          <!--<include-->
+              <!--layout="@layout/include_head_article"-->
+              <!--/>-->
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recy_test_article"

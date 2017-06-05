@@ -222,6 +222,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             @Override
             public void onNext(String s) {
                 LUtils.toast("提交成功");
+                finish();
             }
         });
     }

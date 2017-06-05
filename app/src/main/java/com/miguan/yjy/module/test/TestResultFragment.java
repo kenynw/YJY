@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.test;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +13,12 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestSkinAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
+import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.module.common.WebViewActivity;
@@ -88,24 +92,40 @@ public class TestResultFragment extends BaseDataFragment<TestResultPresenter, Te
     @Override
     public void setData(Test test) {
         setSkinResult(test);
+//        mRecyArticle.setAdapter(new RecyclerView.Adapter<ArticleViewHolder>() {
+//
+//            @Override
+//            public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                return new ArticleViewHolder(parent);
+//            }
+//
+//            @Override
+//            public void onBindViewHolder(ArticleViewHolder holder, int position) {
+//                holder.setData(test.getSkinArticle().get(position));
+//            }
+//
+//            @Override
+//            public int getItemCount() {
+//                return test.getSkinArticle().size();
+//            }
+//        });
+        ArticleAdapter articleAdapter = new ArticleAdapter(getActivity(),test.getSkinArticle());
+        if (test.getSkinArticle().size() > 0) {
 
-        mRecyArticle.setAdapter(new RecyclerView.Adapter<ArticleViewHolder>() {
+            articleAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
+                @Override
+                public View onCreateView(ViewGroup parent) {
+                    View headView = View.inflate(getActivity(), R.layout.include_head_article, null);
+                    return headView;
+                }
 
-            @Override
-            public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                return new ArticleViewHolder(parent);
-            }
+                @Override
+                public void onBindView(View headerView) {
 
-            @Override
-            public void onBindViewHolder(ArticleViewHolder holder, int position) {
-                holder.setData(test.getSkinArticle().get(position));
-            }
-
-            @Override
-            public int getItemCount() {
-                return test.getSkinArticle().size();
-            }
-        });
+                }
+            });
+        }
+        mRecyArticle.setAdapter(articleAdapter);
 
         List<Skin> datas = test.getSkinProduct();
         TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
@@ -147,5 +167,20 @@ public class TestResultFragment extends BaseDataFragment<TestResultPresenter, Te
             getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
     }
+
+
+    class ArticleAdapter extends RecyclerArrayAdapter<Article> {
+
+
+        public ArticleAdapter(Context context, List<Article> objects) {
+            super(context, objects);
+        }
+
+        @Override
+        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ArticleViewHolder(parent);
+        }
+    }
+
 
 }
