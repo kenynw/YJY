@@ -28,23 +28,33 @@
 
     </android.support.design.widget.TabLayout>
 
-
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_test_recommend"
+    <LinearLayout
+        android:id="@+id/ll_show_dsc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="20dp"
-        android:text="描述"
-        android:paddingLeft="25dp"
-        android:paddingRight="15dp"
-        android:paddingTop="38dp"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_small_13"/>
+        android:orientation="vertical"
+        >
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_test_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="15dp"
+            android:paddingTop="38dp"
+            android:text="描述"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_small_13"/>
+
+
+    </LinearLayout>
+
 
     <View
         style="@style/ItemLineHeight"
@@ -61,12 +71,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:drawableLeft="@mipmap/ic_test_recommend_change"
         android:drawablePadding="7dp"
         android:paddingTop="15dp"
         android:text="@string/text_test_recommend_change"
         android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_small_14"/>
+        android:textSize="@dimen/text_size_small_14"
+        android:visibility="gone"/>
 
 </LinearLayout>

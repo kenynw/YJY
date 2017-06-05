@@ -2,7 +2,10 @@ package com.miguan.yjy.module.test;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
@@ -34,6 +37,8 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     EasyRecyclerView mRecycle;
     @BindView(R.id.tv_test_recommend_change)
     TextView mTvTestRecommendChange;
+    @BindView(R.id.ll_show_dsc)
+    LinearLayout mLlShowDsc;
     public ArrayList<Skin> categoryList;
     public int position;
     private String name;
@@ -68,6 +73,11 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
                 getPresenter().onRefresh();
 //                TestModel.getInstantce().getSkinRecommendList(categoryList.get(position).getId(), 1).
 //                        unsafeSubscribe(getPresenter().getRefreshSubscriber());
+                if (TextUtils.isEmpty(categoryList.get(position).getCopy())) {
+                    mLlShowDsc.setVisibility(View.GONE);
+                } else {
+                    mLlShowDsc.setVisibility(View.VISIBLE);
+                }
                 mTvTestRecommend.setText(categoryList.get(position).getCopy());
             }
 

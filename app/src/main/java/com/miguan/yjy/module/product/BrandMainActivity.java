@@ -75,7 +75,7 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
         mSdvBrandImg.setImageURI(brand.getImg());
         mTvBrandName.setText(brand.getName());
         setToolbarTitle(brand.getName());
-        String num = "收录产品数 : <font color=\"#32DAC3\">" + brand.getHot() + "</font>";
+        String num = "品牌热度 : <font color=\"#32DAC3\">" + brand.getHot() + "</font>";
         mTvBrandNum.setText(Html.fromHtml(num));
         mTvBrandBrief.setText(brand.getDescription());
         mTvBrandBriefShow.setText(brand.getDescription());

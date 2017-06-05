@@ -119,7 +119,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             mLlIncludeBrand.setVisibility(View.VISIBLE);
             mSdvBrandImg.setImageURI(productList.getBrand().getImg());
             mTvBrandName.setText(productList.getBrand().getName());
-            String num = "收录产品数 : <font color=\"#32DAC3\"> " + productList.getBrand().getHot() + " </font>";
+            String num = "品牌热度 : <font color=\"#32DAC3\"> " + productList.getBrand().getHot() + " </font>";
             mTvBrandNum.setText(Html.fromHtml(num));
         }
 

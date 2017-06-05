@@ -24,6 +24,6 @@ public class ArticleListFragment extends BaseListFragment<ArticleListPresenter, 
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(true);
+        return super.getListConfig().setLoadMoreAble(true).hasItemDecoration(false);
     }
 }
