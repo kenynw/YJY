@@ -3,6 +3,7 @@ package com.miguan.yjy.module.template;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.dsk.chain.bijection.Presenter;
@@ -36,7 +37,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
                 e.printStackTrace();
             }
         }
-    });;
+    });
 
     public static void start(Context context, int index) {
         Intent intent = new Intent(context, GenTemplateActivity.class);
@@ -53,7 +54,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         if (TemplatePreferences.isFirstDetail()) getView().showGuide();
 
         String templateStr;
-        if (!(templateStr = TemplatePreferences.getTemplate()).isEmpty()) {
+        if (!TextUtils.isEmpty(templateStr = TemplatePreferences.getTemplate())) {
             new AlertDialog.Builder(getView())
                     .setCancelable(false)
                     .setTitle("上次的创作还未完成哦~")
@@ -138,4 +139,5 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         super.onDestroy();
         mIsRunning = false;
     }
+
 }

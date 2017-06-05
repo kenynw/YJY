@@ -25,7 +25,14 @@ public class RegisterPresenter extends Presenter<RegisterActivity> {
         AccountModel.getInstance().register(mobile, captcha, password).unsafeSubscribe(new ServicesResponse<Integer>() {
             @Override
             public void onNext(Integer integer) {
+                getView().getExpansionDelegate().hideProgressBar();
                 getView().finish();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                getView().getExpansionDelegate().hideProgressBar();
             }
         });
     }

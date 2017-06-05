@@ -78,6 +78,8 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
             return;
         }
 
+        getExpansionDelegate().showProgressBar();
+
         getPresenter().register(
                 mEtUsername.getText().toString().trim(),
                 mEtCaptcha.getText().toString().trim(),

@@ -203,6 +203,7 @@ public class CropImageView extends AppCompatImageView {
         float transY = mFocusMidPoint.y - (mImageMatrixValues[5] + mImageHeight * mImageMatrixValues[4] / 2); //Y轴方向的位移
         matrix.postTranslate(transX, transY);
         setImageMatrix(matrix);
+        isInited = false;
         invalidate();
     }
 
@@ -360,11 +361,13 @@ public class CropImageView extends AppCompatImageView {
 
     /** 顺时针旋转90度 **/
     public void rotate90() {
-        Bitmap bitmap = ((BitmapDrawable) getDrawable()).getBitmap();
-        matrix.setRotate(90);
-        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        savedMatrix.set(matrix);
+        matrix.set(savedMatrix);
+        matrix.postRotate(90, getWidth() / 2, getHeight() / 2);
         fixScale();
-        super.setImageBitmap(bitmap);
+        fixTranslation();
+        setImageMatrix(matrix);
+        sumRotateLevel += 1;
     }
 
     /** 修正图片的缩放比 */
@@ -476,6 +479,12 @@ public class CropImageView extends AppCompatImageView {
         return bitmap;
     }
 
+    @Override
+    public void setRotation(float rotation) {
+        super.setRotation(rotation);
+        sumRotateLevel += (rotation / 90);
+    }
+
     /**
      * @return 获取当前图片显示的矩形区域
      */
@@ -508,7 +517,7 @@ public class CropImageView extends AppCompatImageView {
         if (left < 0) left = 0;
         if (top < 0) top = 0;
         if (left + width > bitmap.getWidth()) width = bitmap.getWidth() - left;
-        if (top + height > bitmap.getHeight()) height = bitmap.getHeight() - top;
+        if (top + height > bitmap.getHeight()) height = Math.abs(bitmap.getHeight() - top);
 
         try {
             bitmap = Bitmap.createBitmap(bitmap, left, top, width, height);

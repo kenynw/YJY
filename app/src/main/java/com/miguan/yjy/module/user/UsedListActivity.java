@@ -31,7 +31,7 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarTitle(R.string.text_my_product_repository);
+        setToolbarTitle(R.string.btn_me_used);
         ButterKnife.bind(this);
 
         mTabType.addOnTabSelectedListener(getPresenter());

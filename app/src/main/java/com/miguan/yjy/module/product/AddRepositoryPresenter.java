@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.LinearLayout;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.ImageModel;
@@ -14,9 +13,6 @@ import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.module.template.SaveTemplatePresenter;
-import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.utils.ScreenShot;
 
 import java.io.File;
 
@@ -62,7 +58,13 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     protected void onCreateView(AddRepositoryActivity view) {
         super.onCreateView(view);
         if (mBrand != null) getView().setBrand(mBrand, mOvertime);
-        if (mProduct != null) getView().setProduct(mProduct);
+        if (mProduct != null) {
+            getView().setProduct(mProduct);
+            mBrand = new Brand();
+            mBrand.setId(mProduct.getBrand_id());
+            mBrand.setName(mProduct.getBrand_name());
+            getView().setBrand(mBrand, mOvertime);
+        }
     }
 
     @Override
@@ -114,6 +116,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     }
 
     public int getBrandId() {
-        return mBrand.getId();
+        return mBrand == null ? 0 : mBrand.getId();
     }
+
 }

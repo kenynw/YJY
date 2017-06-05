@@ -36,4 +36,5 @@ public class ProductLikeViewHolder extends BaseViewHolder<Product> {
         mTvName.setText(data.getProduct_name());
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
     }
+
 }

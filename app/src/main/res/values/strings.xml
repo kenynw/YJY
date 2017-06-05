@@ -31,7 +31,7 @@
     <string name="text_query_title_4">颜究院提供的过期日期是否准确？</string>
     <string name="text_query_content_4">由于不知道每个用户查询的是什么产品，所以颜究院提供的是一个通用的3年标准（该标准来源于日本药事法规定，以3年不变质为最低限）。\n\n但是每个产品都有一个建议开封使用时间，印刷在瓶身，建议以每个产品为标准哦~\n\n同时，您也可以在颜究院记录开封时间，在使用日期到之前，我们会提醒您哦~</string>
     <string name="text_query_instruction">批号说明</string>
-    <string name="text_my_product_repository">我在用的</string>
+    <string name="text_add_product_repository">我的护肤品库</string>
     <string name="text_empty_article_list">没有文章咯！\n热情好学颜究生，我就服你~</string>
     <string name="text_other_way">其他方式</string>
     <string name="text_forgot_password">忘记密码</string>

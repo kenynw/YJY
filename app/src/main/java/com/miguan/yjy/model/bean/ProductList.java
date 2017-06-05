@@ -12,15 +12,16 @@ import java.util.List;
 
 public class ProductList extends EntityList {
 
+    @SerializedName(value = "data", alternate = {"product"})
     private List<Product> product;
 
-    @SerializedName(value = "categoryList", alternate = {"categroy"})
+    @SerializedName(value = "categroy", alternate = {"categoryList"})
     private List<Category> categoryList;
 
+    @SerializedName(value = "effects", alternate = {"effectList"})
     private List<Effect> effectList;
 
     private Brand brand;
-
 
     public Brand getBrand() {
         return brand;

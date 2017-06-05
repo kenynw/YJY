@@ -84,11 +84,13 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     private int mIsSeal = 1;
 
+    private boolean mShowAll = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_activity_add_repository);
-        setToolbarTitle(R.string.text_my_product_repository);
+        setToolbarTitle(R.string.text_add_product_repository);
         ButterKnife.bind(this);
 
         initViews();
@@ -99,7 +101,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
         mTvQuery.setOnClickListener(v -> startActivity(new Intent(this, QueryCodeActivity.class)));
         mTvIntro.setOnClickListener(v -> WebViewActivity.start(this, "开封保质期说明", Services.BASE_BETA_URL + "site/quality"));
         mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), REQUEST_CODE_BRAND));
-        mTvProduct.setOnClickListener(v -> RepositoryListPresenter.startForResult(this, REQUEST_CODE_PRODUCT, getPresenter().getBrandId()));
+        mTvProduct.setOnClickListener(v -> {
+            RepositoryListPresenter.startForResult(this, REQUEST_CODE_PRODUCT,
+                    mShowAll ? 0 : getPresenter().getBrandId());
+            mShowAll = true;
+        });
 
         mTimePickerView = new TimePickerView.Builder(this, (date, v) -> {
             SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);

@@ -75,7 +75,7 @@ public class DownloadService extends Service {
         //添加这一句表示对目标应用临时授权该Uri所代表的文件
 
         File file = new File(path, name);
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Uri uri = FileProvider.getUriForFile(context, "com.miguan.yjy.fileprovider", file);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setDataAndType(uri, "application/vnd.android.package-archive");

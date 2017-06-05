@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -32,9 +33,14 @@ public class StarViewHolder extends BaseViewHolder<Article> {
 
     @Override
     public void setData(Article data) {
-        mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
-        mTvTitle.setText(data.getTitle());
-        itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
+        if (data.getId() == 0) {
+            mDvThumb.setVisibility(View.GONE);
+            mTvTitle.setText("该文章已被删除~");
+        } else {
+            mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
+            mTvTitle.setText(data.getTitle());
+            itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
+        }
     }
 
 }

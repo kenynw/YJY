@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +42,12 @@ public class ArticleViewHolder extends BaseViewHolder<Article> {
         mDvThumb.setImageURI(Uri.parse(data.getArticle_img()));
         mTvTitle.setText(data.getTitle());
         mTvDate.setText(data.getCreated_at());
-        mTvComment.setText(data.getLike_num() <= 0 ? "" : String.valueOf(data.getComment_num()));
+        if (data.getComment_num() > 0) {
+            mTvComment.setText(String.valueOf(data.getComment_num()));
+            mTvComment.setVisibility(View.VISIBLE);
+        } else {
+            mTvComment.setVisibility(View.GONE);
+        }
         itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
     }
 

@@ -265,9 +265,9 @@ public class ScreenShot {
             if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 return null;
             }
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 
-            File mediaStorageDirectory = new File(path, "YJY/" + filename);
+            File mediaStorageDirectory = new File(path, "Camera/");
             // Create the storage directory if it does not exist
             if (!mediaStorageDirectory.exists()) {
                 if (!mediaStorageDirectory.mkdirs()) {
@@ -278,7 +278,7 @@ public class ScreenShot {
             String timeStamp = new SimpleDateFormat("MMdd_HHmmss", Locale.CHINA).format(new Date());
             File mediaFile;
             String mImageName = filename + timeStamp + ".jpg";
-            mediaFile = new File(mediaStorageDirectory.getPath() + File.separator + mImageName);
+            mediaFile = new File(mediaStorageDirectory.getPath(), mImageName);
             return mediaFile;
         }
 
