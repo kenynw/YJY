@@ -153,10 +153,14 @@ public class ProductModel extends AbsModel {
      */
     public void deleteBrand(Brand brand) {
         List<Brand> list = queryBrands();
+        List<Brand> delList = new ArrayList<>();
         if (list != null) {
             for (Brand item : list) {
-                if (item.getName().equals(brand.getName())) list.remove(item);
+                if (item.getName().equals(brand.getName())){
+                    delList.add(item);
+                }
             }
+            list.remove(delList);
         }
         LUtils.getPreferences().edit().putString(EXTRA_BRAND_LIST, new Gson().toJson(list)).apply();
     }
@@ -190,10 +194,14 @@ public class ProductModel extends AbsModel {
      */
     public void deleteProduct(Product product) {
         List<Product> list = queryProducts();
+        List<Product> delList = new ArrayList<>();
         if (list != null) {
             for (Product item : list) {
-                if (item.getProduct_name().equals(product.getProduct_name())) list.remove(item);
+                if (item.getProduct_name().equals(product.getProduct_name())){
+                    delList.add(item);
+                }
             }
+            list.remove(delList);
         }
         LUtils.getPreferences().edit().putString(EXTRA_PRODUCT_LIST, new Gson().toJson(list)).apply();
     }
