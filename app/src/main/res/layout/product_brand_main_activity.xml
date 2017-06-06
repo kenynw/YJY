@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -33,9 +34,10 @@
                 android:layout_marginLeft="@dimen/text_size_small_15"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/sdv_brand_img"
-                android:text=""
                 android:textColor="@color/f3"
-                android:textSize="@dimen/text_size_large_20"/>
+                android:textSize="@dimen/text_size_large_20"
+                tools:text="这是标题"
+                />
 
             <TextView
                 android:id="@+id/tv_brand_num"
@@ -44,9 +46,9 @@
                 android:layout_alignLeft="@+id/tv_brand_name"
                 android:layout_below="@+id/tv_brand_name"
                 android:layout_marginTop="15dp"
-                android:text=""
                 android:textColor="@color/f3"
-                android:textSize="@dimen/text_size_small_13"/>
+                android:textSize="@dimen/text_size_small_13"
+                tools:text="描述描述描述"/>
 
         </RelativeLayout>
 
@@ -66,9 +68,10 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text=""
                 android:textColor="@color/textHint"
-                android:textSize="@dimen/text_size_micro_12"/>
+                android:textSize="@dimen/text_size_micro_12"
+                tools:text="哈哈哈哈"
+                />
 
             <TextView
                 android:id="@+id/tv_brand_brief_show"
@@ -84,10 +87,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingBottom="3dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingTop="3dp"
-                android:paddingBottom="3dp"
                 >
 
                 <ImageView
@@ -106,20 +109,19 @@
 
     </LinearLayout>
 
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_product_brand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"></android.support.design.widget.TabLayout>
-
+        android:background="@color/white"
+        />
 
     <com.miguan.yjy.widget.NoScrollViewPager
         android:id="@+id/vp_brand"
-        android:paddingTop="15dp"
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="15dp"
+        />
 
 </LinearLayout>

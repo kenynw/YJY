@@ -146,4 +146,10 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         void onFilterSelected(File file, boolean applyAll);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mBitmap.recycle();
+        mBitmap = null;
+    }
 }

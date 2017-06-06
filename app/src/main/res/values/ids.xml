@@ -4,11 +4,8 @@
     <item type="id" name="containerId" />
 
     <item type="id" name="dv_template_avatar" />
-
     <item type="id" name="tv_template_username" />
-
     <item type="id" name="tv_template_time" />
-
     <item type="id" name="template_view_item" />
 
 </resources>
