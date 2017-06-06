@@ -13,6 +13,7 @@ import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.AppCrashHandler;
 import com.miguan.yjy.utils.LUtils;
+import com.squareup.leakcanary.RefWatcher;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -27,6 +28,8 @@ import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
 
+    private RefWatcher mRefWatcher;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -37,6 +40,7 @@ public class App extends Application {
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
         if (!LUtils.isDebug) AppCrashHandler.getInstance(this);
+//        mRefWatcher = LeakCanary.install(this);
 
         JPushInterface.setDebugMode(LUtils.isDebug); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
@@ -47,6 +51,11 @@ public class App extends Application {
             Log.e("是否在后台", "----");
             UserPreferences.setIsShowTest(false);
         }
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        App application = (App) context.getApplicationContext();
+        return application.mRefWatcher;
     }
 
     // 初始化友盟分享

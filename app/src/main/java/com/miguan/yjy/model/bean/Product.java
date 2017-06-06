@@ -3,6 +3,8 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class Product implements Parcelable {
 
     private int brand_id;
 
+    @SerializedName(value = "brand_name", alternate = "brand")
     private String brand_name;
 
     private String en_product_company;

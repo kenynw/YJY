@@ -18,8 +18,10 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
+import com.miguan.yjy.base.App;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CropImageView;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.io.File;
 
@@ -75,6 +77,9 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         super.onCreate(savedInstanceState);
         setContentView(R.layout.template_activity_filter);
         ButterKnife.bind(this);
+
+        RefWatcher refWatcher = App.getRefWatcher(this);
+        refWatcher.watch(this);
 
         Uri uri = getIntent().getParcelableExtra(EXTRA_FILTER_URI);
         boolean isCircle = getIntent().getBooleanExtra(EXTRA_IS_CIRCLE, false);

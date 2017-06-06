@@ -54,6 +54,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
             mBrand = data.getParcelableExtra("brand");
             getView().setBrand(mBrand.getName());
+            getView().setProduct(null);
         }
     }
 

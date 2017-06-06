@@ -16,7 +16,7 @@
         android:id="@+id/dv_article_thumb"
         style="@style/BaseImage"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="172dp"
         android:background="@drawable/bg_radius_white"
         android:scaleType="centerCrop"
         android:src="@mipmap/def_image_loading"

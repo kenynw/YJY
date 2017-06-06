@@ -12,6 +12,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.module.account.UserTextWatcher;
 
@@ -38,12 +39,16 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
 
     private boolean mIsInit = false;
 
+    private Product mProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_activity_query_code);
         setToolbarTitle(R.string.text_query_production_date);
         ButterKnife.bind(this);
+
+        mProduct = getIntent().getParcelableExtra(QueryCodePresenter.EXTRA_PRODUCT);
 
         UserTextWatcher watcher = new UserTextWatcher(mBtnSubmit, mEtBrand, mEtProduct);
         mEtBrand.addTextChangedListener(watcher);
@@ -87,10 +92,13 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         tvExpiration.setText(product.getEndDay());
         btnSave.setOnClickListener(v -> {
             dialog.dismiss();
-            AddRepositoryPresenter.start(QueryCodeActivity.this, brand, product.getEndDay(),
-                    getIntent().getParcelableExtra(QueryCodePresenter.EXTRA_PRODUCT));
+            AddRepositoryPresenter.start(QueryCodeActivity.this, brand, product.getEndDay(), mProduct);
             finish();
         });
+    }
+
+    public void setProduct(Product product) {
+        mProduct = product;
     }
 
 }
