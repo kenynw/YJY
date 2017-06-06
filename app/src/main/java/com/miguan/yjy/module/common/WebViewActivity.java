@@ -93,12 +93,7 @@ public class WebViewActivity extends ChainBaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                view.loadUrl("javascript:$(document).ajaxStart(function (event, request, settings) { " +
-                        "android.ajaxBegin(); " + // Event called when an AJAX call begins
-                        "});");
-                view.loadUrl("javascript:$(document).ajaxComplete(function (event, request, settings) { " +
-                        "android.ajaxDone(); " + // Event called when an AJAX call ends
-                        "});");
+
             }
 
             @Override
