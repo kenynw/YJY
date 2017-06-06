@@ -256,6 +256,9 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                     tag = 0;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
+                    } else if (userInfo.getSex() == 2) {
+                        showTestUserInfoPop();
+                        setUserBirthDay();
                     } else {
                         TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(0), TestGuideActivity.EXTRA_TEST_FOUR_TYPE);
                     }
@@ -268,6 +271,9 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                     tag = 1;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
+                    } else if (userInfo.getSex() == 2) {
+                        showTestUserInfoPop();
+                        setUserBirthDay();
                     } else {
                         TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(1), TestGuideActivity.EXTRA_TEST_FIRST_TYPE);
                     }
@@ -280,6 +286,9 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                     tag = 2;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
+                    } else if (userInfo.getSex() == 2) {
+                        showTestUserInfoPop();
+                        setUserBirthDay();
                     } else {
                         TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(2), TestGuideActivity.EXTRA_TEST_SECOND_TYPE);
                     }
@@ -292,6 +301,9 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                     tag = 3;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
+                    } else if (userInfo.getSex() == 2) {
+                        showTestUserInfoPop();
+                        setUserBirthDay();
                     } else {
                         TestGuideActivity.start(getActivity(), TestModel.getInstantce().setTestData().get(3), TestGuideActivity.EXTRA_TEST_THIRD_TYPE);
                     }
@@ -387,8 +399,6 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         ColorDrawable bg = new ColorDrawable(0x55000000);
         popupWindow.setBackgroundDrawable(bg);
         popupWindow.showAtLocation(mToolbar, Gravity.BOTTOM, 0, 0);
-
-
     }
 
     private void selectDate() {
@@ -539,6 +549,11 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
             return new ArticleViewHolder(parent);
         }
     }
+
+    private void setUserBirthDay() {
+        mTvTestSelectBirthday.setText(String.format("%1$04d-%2$02d-%3$02d",Integer.parseInt(userInfo.getBirth_year()),Integer.parseInt(userInfo.getBirth_month()),Integer.parseInt(userInfo.getBirth_day())));
+    }
+
 
 
 }

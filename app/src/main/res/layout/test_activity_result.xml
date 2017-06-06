@@ -317,10 +317,10 @@
                 android:layout_height="wrap_content"
                 />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_small"
-                />
+            <!--<Space-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/spacing_small"-->
+                <!--/>-->
 
           <!--<include-->
               <!--layout="@layout/include_head_article"-->

@@ -136,7 +136,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
                 showPopupWindow(TYPE_BIND_SUCCESS);
             }
         });
-        mTvBirthday.setText(user.getBirth_year().equals("0") ? "未设置" : String.format("%1$s-%2$s-%3$s", user.getBirth_year(), user.getBirth_month(), user.getBirth_day()));
+        mTvBirthday.setText(user.getBirth_year().equals("0") ? "未设置" : String.format("%1$04d-%2$02d-%3$02d", Integer.parseInt(user.getBirth_year()),  Integer.parseInt(user.getBirth_month()), Integer.parseInt(user.getBirth_day())));
         mTvArea.setText(getString(user.getCity()));
     }
 
