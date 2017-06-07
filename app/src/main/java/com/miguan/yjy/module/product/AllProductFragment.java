@@ -23,6 +23,6 @@ public class AllProductFragment extends BaseListFragment<AllProductPresenter,Pro
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(true);
+        return super.getListConfig().setLoadMoreAble(true).setRefreshAble(false);
     }
 }

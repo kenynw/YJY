@@ -18,7 +18,6 @@ import com.miguan.yjy.model.bean.Product;
 @RequiresPresenter(StarProductPresenter.class)
 public class StarProductFragment extends BaseListFragment<StarProductPresenter, Product> {
 
-
     @Override
     public BaseViewHolder<Product> createViewHolder(ViewGroup parent, int viewType) {
         return new SearchReslutViewHolder(parent, true);
@@ -26,7 +25,10 @@ public class StarProductFragment extends BaseListFragment<StarProductPresenter, 
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setContainerEmptyAble(false).setLoadMoreAble(false).setNoMoreAble(false);
+        return super.getListConfig().setRefreshAble(false)
+                .setContainerEmptyAble(false)
+                .setLoadMoreAble(false)
+                .setNoMoreAble(false);
     }
 
 
