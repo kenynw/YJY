@@ -41,17 +41,22 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
     TextView mTvBrandNum;
     @BindView(R.id.tv_brand_brief)
     TextView mTvBrandBrief;
-    @BindView(R.id.tab_product_brand)
+
+    @BindView(R.id.id_stickynavlayout_tab)
     TabLayout mTabProductBrand;
-    @BindView(R.id.vp_brand)
+
+    @BindView(R.id.id_stickynavlayout_viewpager)
     NoScrollViewPager mVpBrand;
 
     BrandPagerAdapter mBrandPagerAdapter;
     @BindView(R.id.iv_brand_show)
+
     ImageView mIvBrandShow;
     @BindView(R.id.tv_brand_brief_show)
+
     TextView mTvBrandBriefShow;
     @BindView(R.id.toolbar_title)
+
     TextView mToolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -66,6 +71,8 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_brand_main_activity);
         ButterKnife.bind(this);
+
+
     }
 
 

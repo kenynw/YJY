@@ -10,6 +10,7 @@
     android:orientation="vertical"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
+    android:paddingTop="15dp"
     >
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -66,14 +67,14 @@
 
     <TextView
         android:id="@+id/tv_product_sort"
-        android:background="@color/black"
         android:layout_width="30dp"
-        android:textColor="@color/white"
+        android:layout_height="15dp"
+        android:background="@color/black"
         android:gravity="center"
-        android:visibility="gone"
         android:text="No.1"
+        android:textColor="@color/white"
         android:textSize="8dp"
         android:textStyle="bold"
-        android:layout_height="15dp"/>
+        android:visibility="gone"/>
 
 </RelativeLayout>

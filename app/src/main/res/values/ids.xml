@@ -8,4 +8,8 @@
     <item type="id" name="tv_template_time" />
     <item type="id" name="template_view_item" />
 
+    <item name="id_stickynavlayout_topview" type="id" />
+    <item name="id_stickynavlayout_viewpager" type="id" />
+    <item name="id_stickynavlayout_tab" type="id" />
+
 </resources>
