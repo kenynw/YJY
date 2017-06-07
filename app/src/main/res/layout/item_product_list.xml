@@ -1,79 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_product_info"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
     android:orientation="vertical"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+    android:layout_height="wrap_content"
     >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_proudct_thumb"
-        style="@style/BaseImage"
-        android:layout_width="98dp"
-        android:layout_height="98dp"
-        android:layout_marginBottom="15dp"
-        app:failureImage="@mipmap/def_image_product"
-        app:failureImageScaleType="centerCrop"
-        app:placeholderImage="@mipmap/def_image_product"
-        />
-
-    <TextView
-        android:id="@+id/tv_product_name"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rl_product_info"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/iv_proudct_thumb"
-        android:layout_marginLeft="@dimen/spacing_normal"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_toEndOf="@id/iv_proudct_thumb"
-        android:layout_toRightOf="@+id/iv_proudct_thumb"
-        android:maxLines="2"
-        android:textAppearance="@style/TextBody"
-        tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"
-        />
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        >
 
-    <RatingBar
-        android:id="@+id/ratbar_product"
-        style="@style/MySmallRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/tv_product_name"
-        android:layout_below="@id/tv_product_name"
-        android:layout_marginTop="10dp"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:stepSize="1"
-        />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_proudct_thumb"
+            style="@style/BaseImage"
+            android:layout_width="98dp"
+            android:layout_height="98dp"
+            android:layout_marginBottom="15dp"
+            app:failureImage="@mipmap/def_image_product"
+            app:failureImageScaleType="centerCrop"
+            app:placeholderImage="@mipmap/def_image_product"
+            />
 
-    <TextView
-        android:id="@+id/tv_product_money"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/ratbar_product"
-        android:layout_alignStart="@id/ratbar_product"
-        android:layout_below="@id/ratbar_product"
-        android:layout_marginTop="@dimen/spacing_tiny"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_body_material"
-        tools:text="￥320/250ML"
-        />
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_proudct_thumb"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_toEndOf="@id/iv_proudct_thumb"
+            android:layout_toRightOf="@+id/iv_proudct_thumb"
+            android:maxLines="2"
+            android:textAppearance="@style/TextBody"
+            tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"
+            />
 
-    <TextView
-        android:id="@+id/tv_product_sort"
-        android:background="@color/black"
-        android:layout_width="30dp"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:visibility="gone"
-        android:text="No.1"
-        android:textSize="8dp"
-        android:textStyle="bold"
-        android:layout_height="15dp"/>
+        <RatingBar
+            android:id="@+id/ratbar_product"
+            style="@style/MySmallRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_product_name"
+            android:layout_below="@id/tv_product_name"
+            android:layout_marginTop="10dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="1"
+            />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_product_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/ratbar_product"
+            android:layout_alignStart="@id/ratbar_product"
+            android:layout_below="@id/ratbar_product"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="￥320/250ML"
+            />
+
+        <TextView
+            android:id="@+id/tv_product_sort"
+            android:layout_width="30dp"
+            android:layout_height="15dp"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="No.1"
+            android:textColor="@color/white"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</LinearLayout>
