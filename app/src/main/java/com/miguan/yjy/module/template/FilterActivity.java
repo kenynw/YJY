@@ -1,8 +1,8 @@
 package com.miguan.yjy.module.template;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,23 +18,25 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.base.App;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CropImageView;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
-import jp.co.cyberagent.android.gpuimage.GPUImageFilter;
 
 /**
  * Copyright (c) 2017/4/18. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(FilterActivityPresenter.class)
-public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> implements FilterAdapter.OnFilterSelectedListener {
+public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> implements
+        FilterAdapter.OnItemClickListener {
+
+    public static final String EXTRA_PATH = "path";
+
+    public static final String EXTRA_APPLY_ALL = "apply_all";
 
     public static final String EXTRA_FILTER_URI = "filter_uri";
 
@@ -64,10 +66,12 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
     private Bitmap mBitmap;
 
-    public static void start(AppCompatActivity activity, Uri uri, boolean isCircle, OnFilterSelectedListener listener) {
+    private int mCurPosition = 0;
+
+    public static void start(AppCompatActivity activity, String path, boolean isCircle, OnFilterSelectedListener listener) {
         sFilterSelectedListener = listener;
         Intent intent = new Intent(activity, FilterActivity.class);
-        intent.putExtra(EXTRA_FILTER_URI, uri);
+        intent.putExtra(EXTRA_FILTER_URI, path);
         intent.putExtra(EXTRA_IS_CIRCLE, isCircle);
         activity.startActivity(intent);
     }
@@ -78,17 +82,15 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         setContentView(R.layout.template_activity_filter);
         ButterKnife.bind(this);
 
-        RefWatcher refWatcher = App.getRefWatcher(this);
-        refWatcher.watch(this);
-
-        Uri uri = getIntent().getParcelableExtra(EXTRA_FILTER_URI);
+        String uri = getIntent().getStringExtra(EXTRA_FILTER_URI);
         boolean isCircle = getIntent().getBooleanExtra(EXTRA_IS_CIRCLE, false);
 
         Glide.with(this)
                 .load(uri)
                 .asBitmap()
                 .fitCenter()
-                .override(768, 768)
+                .override(200, 200)
+                .skipMemoryCache(true)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -110,6 +112,11 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
                 public void onBitmapSaveSuccess(File file) {
                     if (sFilterSelectedListener != null)
                         sFilterSelectedListener.onFilterSelected(file, mCbApplyAll.isChecked());
+                    Intent intent = new Intent();
+                    intent.putExtra(EXTRA_PATH, file.getAbsolutePath());
+                    intent.putExtra(EXTRA_APPLY_ALL, mCbApplyAll.isChecked());
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
 
                 @Override
@@ -117,7 +124,6 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
                 }
             });
-            finish();
         });
 
         mIvRotation.setOnClickListener(v -> {
@@ -128,7 +134,10 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         mGridFilters.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mGridFilters.setHasFixedSize(true);
         mGridFilters.addItemDecoration(getDecoration());
-        mGridFilters.setAdapter(getPresenter().createAdapter());
+
+        FilterAdapter adapter = new FilterAdapter(this);
+        adapter.setOnFilterSelectedListener(this);
+        mGridFilters.setAdapter(adapter);
     }
 
     private SpaceDecoration getDecoration() {
@@ -139,12 +148,25 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     }
 
     @Override
-    public void onFilterSelected(GPUImageFilter filter) {
-        GPUImage gpuImage = new GPUImage(FilterActivity.this);
-        gpuImage.setImage(mBitmap);
-        gpuImage.setFilter(filter);
-        Bitmap bitmap = gpuImage.getBitmapWithFilterApplied();
-        mIvCropImage.setImageBitmap(bitmap);
+    public void onItemClick(int position) {
+        if (mBitmap != null && mCurPosition != position){
+            Bitmap bitmap = null;
+            try {
+                GPUImage gpuImage = new GPUImage(FilterActivity.this);
+                gpuImage.setFilter(getPresenter().getFilter(position));
+                gpuImage.setImage(mBitmap);
+                bitmap = gpuImage.getBitmapWithFilterApplied();
+                mIvCropImage.setImageBitmap(bitmap);
+                gpuImage.deleteImage();
+            } catch (OutOfMemoryError error) {
+                error.printStackTrace();
+                LUtils.toast("您的内存炸了");
+                if (bitmap != null) {
+                    bitmap.recycle();
+                }
+            }
+            mCurPosition = position;
+        }
     }
 
     public interface OnFilterSelectedListener {
@@ -154,7 +176,16 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mBitmap.recycle();
-        mBitmap = null;
+        if (mBitmap != null) {
+            mBitmap.recycle();
+            mBitmap = null;
+        }
     }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        LUtils.log("level: " + level);
+    }
+
 }

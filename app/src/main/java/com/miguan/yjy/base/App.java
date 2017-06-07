@@ -13,7 +13,6 @@ import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.AppCrashHandler;
 import com.miguan.yjy.utils.LUtils;
-import com.squareup.leakcanary.RefWatcher;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -28,7 +27,7 @@ import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
 
-    private RefWatcher mRefWatcher;
+//    private RefWatcher mRefWatcher;
 
     @Override
     public void onCreate() {
@@ -53,10 +52,10 @@ public class App extends Application {
         }
     }
 
-    public static RefWatcher getRefWatcher(Context context) {
-        App application = (App) context.getApplicationContext();
-        return application.mRefWatcher;
-    }
+//    public static RefWatcher getRefWatcher(Context context) {
+//        App application = (App) context.getApplicationContext();
+//        return application.mRefWatcher;
+//    }
 
     // 初始化友盟分享
     public void initShare() {

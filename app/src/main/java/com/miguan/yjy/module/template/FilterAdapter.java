@@ -1,26 +1,15 @@
 package com.miguan.yjy.module.template;
 
 import android.content.Context;
-import android.graphics.PointF;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.cache.common.CacheKey;
-import com.facebook.cache.common.SimpleCacheKey;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,21 +22,8 @@ import jp.wasabeef.fresco.processors.filter.IFInkwellFilter;
 import jp.wasabeef.fresco.processors.filter.IFNormalFilter;
 import jp.wasabeef.fresco.processors.filter.IFRiseFilter;
 import jp.wasabeef.fresco.processors.filter.IFSierraFilter;
-import jp.wasabeef.fresco.processors.filter.IFSutroFilter;
 import jp.wasabeef.fresco.processors.filter.IFValenciaFilter;
 import jp.wasabeef.fresco.processors.filter.IFXproIIFilter;
-import jp.wasabeef.fresco.processors.gpu.BrightnessFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.ContrastFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.GPUFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.InvertFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.KuawaharaFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.PixelationFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.SepiaFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.SketchFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.SwirlFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.ToonFilterPostprocessor;
-import jp.wasabeef.fresco.processors.gpu.VignetteFilterPostprocessor;
-
 
 /**
  * Copyright (c) 2017/4/18. LiaoPeiKun Inc. All rights reserved.
@@ -55,119 +31,31 @@ import jp.wasabeef.fresco.processors.gpu.VignetteFilterPostprocessor;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterViewHolder> {
 
+    private final int[] RES = new int[] {
+            R.mipmap.image_filter_normal, R.mipmap.image_filter_amaro,
+            R.mipmap.image_filter_brannan, R.mipmap.image_filter_hudson,
+            R.mipmap.image_filter_inkwell, R.mipmap.image_filter_rise,
+            R.mipmap.image_filter_sierra, R.mipmap.image_filter_valencia,
+            R.mipmap.image_filter_xproll
+    };
+
     private Context mContext;
 
-    private List<FilterType> mTypeList;
+    private SparseArray<GPUImageFilter> mFilters;
 
-    private List<GPUFilterPostprocessor> mPostprocessors;
+    private OnItemClickListener mListener;
 
-    private OnFilterSelectedListener mListener;
-
-    enum FilterType {
-        Original,
-        Mask,
-        NinePatchMask,
-        ColorFilter,
-        Grayscale,
-        Blur,
-        Toon,
-        Sepia,
-        Contrast,
-        Invert,
-        Pixel,
-        Sketch,
-        Swirl,
-        Brightness,
-        Kuawahara,
-        Vignette,
-        BlurAndGrayscale,
-        Amaro,
-        Brannan,
-        Hudson,
-        Inkwell,
-        Rise,
-        Sierra,
-        Sutro,
-        Valencia,
-        Xproll,
-        IF1997
+    public FilterAdapter(Context context) {
+        mContext = context;
+        mFilters = new SparseArray<>();
     }
 
-    public FilterAdapter(Context context, List<FilterType> list) {
-        mContext = context;
-        mTypeList = list;
-
-        mPostprocessors = new ArrayList<>();
-        for (FilterType filterType : list) {
-            GPUFilterPostprocessor processor = null;
-
-            switch (filterType) {
-                case Toon:
-                    processor = new ToonFilterPostprocessor(context);
-                    break;
-                case Sepia:
-                    processor = new SepiaFilterPostprocessor(context);
-                    break;
-                case Contrast:
-                    processor = new ContrastFilterPostprocessor(context, 2.0f);
-                    break;
-                case Invert:
-                    processor = new InvertFilterPostprocessor(context);
-                    break;
-                case Pixel:
-                    processor = new PixelationFilterPostprocessor(context, 10f);
-                    break;
-                case Sketch:
-                    processor = new SketchFilterPostprocessor(context);
-                    break;
-                case Swirl:
-                    processor = new SwirlFilterPostprocessor(context, 0.5f, 1.0f, new PointF(0.5f, 0.5f));
-                    break;
-                case Brightness:
-                    processor = new BrightnessFilterPostprocessor(context, 0.5f);
-                    break;
-                case Kuawahara:
-                    processor = new KuawaharaFilterPostprocessor(context, 25);
-                    break;
-                case Vignette:
-                    processor = new VignetteFilterPostprocessor(context, new PointF(0.5f, 0.5f),
-                            new float[]{0.0f, 0.0f, 0.0f}, 0f, 0.75f);
-                    break;
-                case Original:
-                    processor = createPostprocessor(new IFNormalFilter(context), "normal");
-                    break;
-                case Amaro:
-                    processor = createPostprocessor(new IFAmaroFilter(context), "amaro");
-                    break;
-                case Brannan:
-                    processor = createPostprocessor(new IFBrannanFilter(context), "brannan");
-                    break;
-                case Hudson:
-                    processor = createPostprocessor(new IFHudsonFilter(context), "Hudson");
-                    break;
-                case Inkwell:
-                    processor = createPostprocessor(new IFInkwellFilter(context), "Inkwell");
-                    break;
-                case Rise:
-                    processor = createPostprocessor(new IFRiseFilter(context), "Rise");
-                    break;
-                case Sierra:
-                    processor = createPostprocessor(new IFSierraFilter(context), "Sierra");
-                    break;
-                case Sutro:
-                    processor = createPostprocessor(new IFSutroFilter(context), "Sutro");
-                    break;
-                case Valencia:
-                    processor = createPostprocessor(new IFValenciaFilter(context), "Valencia");
-                    break;
-                case Xproll:
-                    processor = createPostprocessor(new IFXproIIFilter(context), "Xproll");
-                    break;
-                case IF1997:
-                    processor = createPostprocessor(new IF1977Filter(context), "IF1997");
-                    break;
+    public void setNull() {
+        for (int i = 0; i<mFilters.size(); i++) {
+            GPUImageFilter filter = mFilters.get(i);
+            if (filter != null) {
+                filter.destroy();
             }
-            mPostprocessors.add(processor);
         }
     }
 
@@ -178,58 +66,83 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
 
     @Override
     public void onBindViewHolder(FilterViewHolder holder, int position) {
-        ImageRequest request = ImageRequestBuilder.newBuilderWithResourceId(R.mipmap.def_image_filter)
-                .setResizeOptions(new ResizeOptions(65, 92))
-                .setLocalThumbnailPreviewsEnabled(true)
-                .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
-                .setProgressiveRenderingEnabled(false)
-                .setPostprocessor(mPostprocessors.get(position))
-                .build();
-
-        PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                .setImageRequest(request)
-                .setOldController(holder.mDvImage.getController())
-                .build();
-
-        holder.mDvImage.setController(controller);
-        holder.mTvName.setText(mTypeList.get(position).name());
+        holder.mIvImage.setImageResource(RES[position]);
         holder.itemView.setOnClickListener(v -> {
-            if (mListener != null) {
-                mListener.onFilterSelected(mPostprocessors.get(position).getFilter());
+//            GPUImageFilter filter = null;
+            if (mListener != null ) {
+                try {
+//                    filter = createFilter(position);
+                    mListener.onItemClick(position);
+                } catch (OutOfMemoryError error) {
+                    setNull();
+                }
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mTypeList.size();
+        return RES.length;
     }
 
-    private GPUFilterPostprocessor createPostprocessor(GPUImageFilter filter, String key) {
-        return new GPUFilterPostprocessor(mContext, filter) {
-            @Nullable
-            @Override
-            public CacheKey getPostprocessorCacheKey() {
-                return new SimpleCacheKey(key);
-            }
-        };
+    private GPUImageFilter createFilter(int type) {
+        if (mFilters.size() > 0 && mFilters.size() > type && mFilters.get(type) != null)
+            return mFilters.get(type);
+        GPUImageFilter filter;
+        switch (type) {
+            case 1:
+                filter = new IFAmaroFilter(mContext);
+                break;
+            case 2:
+                filter = new IFBrannanFilter(mContext);
+                break;
+            case 3:
+                filter = new IFHudsonFilter(mContext);
+                break;
+            case 4:
+                filter = new IFInkwellFilter(mContext);
+                break;
+            case 5:
+                filter = new IFRiseFilter(mContext);
+                break;
+            case 6:
+                filter = new IFSierraFilter(mContext);
+                break;
+//            case 7:
+//                filter = new IFSutroFilter(mContext);
+//                break;
+            case 7:
+                filter = new IFValenciaFilter(mContext);
+                break;
+            case 8:
+                filter = new IFXproIIFilter(mContext);
+                break;
+            case 9:
+                filter = new IF1977Filter(mContext);
+                break;
+            default:
+                filter = new IFNormalFilter(mContext);
+                break;
+        }
+        mFilters.put(type, filter);
+        return filter;
     }
 
-    public void setOnFilterSelectedListener(OnFilterSelectedListener listener) {
+    public void setOnFilterSelectedListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
-    public interface OnFilterSelectedListener {
-        void onFilterSelected(GPUImageFilter filter);
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
-    class FilterViewHolder extends BaseViewHolder<FilterType> {
-
-        @BindView(R.id.dv_filter_image)
-        SimpleDraweeView mDvImage;
+    class FilterViewHolder extends BaseViewHolder {
 
         @BindView(R.id.tv_filter_name)
         TextView mTvName;
+
+        @BindView(R.id.iv_filter_image)
+        ImageView mIvImage;
 
         public FilterViewHolder(ViewGroup parent, @LayoutRes int res) {
             super(parent, res);

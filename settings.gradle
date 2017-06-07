@@ -1,1 +1,1 @@
-include ':app', ':chain', ':umshare', ':processors'
+include ':app', ':chain', ':umshare', ':processors', ':gpuimagelibrary'

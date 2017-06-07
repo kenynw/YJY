@@ -26,7 +26,6 @@ import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
@@ -262,13 +261,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             }
         });
 
-        mTvTemplate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProductDetailActivity.this,UsedListActivity.class);
-                startActivity(intent);
-            }
-        });
+        mTvTemplate.setOnClickListener(v -> AddRepositoryPresenter.start(this, null, "", product));
     }
 
     // 设置长草图标样式

@@ -23,10 +23,10 @@
 
         <ImageView
             android:id="@+id/iv_image_edit_rotation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/widget_medium"
+            android:layout_height="@dimen/widget_medium"
             android:layout_gravity="end|bottom"
-            android:layout_margin="@dimen/spacing_large"
+            android:scaleType="centerInside"
             android:src="@mipmap/ic_image_rotation"
             />
 
@@ -36,7 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="@dimen/spacing_normal"
         android:paddingLeft="@dimen/spacing_normal"
         android:paddingRight="@dimen/spacing_normal"
         android:paddingTop="@dimen/spacing_large"
@@ -64,21 +63,23 @@
 
         <ImageView
             android:id="@+id/iv_filter_cancel"
-            android:layout_width="@dimen/widget_tiny"
-            android:layout_height="@dimen/widget_tiny"
+            android:layout_width="@dimen/widget_medium"
+            android:layout_height="@dimen/widget_medium"
             android:layout_below="@id/grid_filter_filters"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginLeft="-16dp"
+            android:scaleType="centerInside"
             android:src="@mipmap/ic_filter_close"
             />
 
         <ImageView
             android:id="@+id/iv_filter_ok"
-            android:layout_width="@dimen/widget_tiny"
-            android:layout_height="@dimen/widget_tiny"
+            android:layout_width="@dimen/widget_medium"
+            android:layout_height="@dimen/widget_medium"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/grid_filter_filters"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginRight="-16dp"
+            android:scaleType="centerInside"
             android:src="@mipmap/ic_filter_ok"
             />
 

@@ -96,7 +96,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     private void initViews() {
         mLlImage.setOnClickListener(v -> ImageProvider.getInstance(this).getImageFromCameraOrAlbum(this));
-        mTvQuery.setOnClickListener(v -> startActivity(new Intent(this, QueryCodeActivity.class)));
+        mTvQuery.setOnClickListener(v -> {
+            Intent intent = new Intent(this, QueryCodeActivity.class);
+            intent.putExtra("brand", getPresenter().getBrand());
+            startActivity(intent);
+        });
         mTvIntro.setOnClickListener(v -> WebViewActivity.start(this, "开封保质期说明", Services.BASE_BETA_URL + "site/quality"));
         mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), REQUEST_CODE_BRAND));
         mTvProduct.setOnClickListener(v -> RepositoryListPresenter.startForResult(this, REQUEST_CODE_PRODUCT, getPresenter().getBrandId()));
@@ -138,8 +142,8 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     }
 
     public void setProduct(Product product) {
-        mTvProduct.setText(product.getProduct_name());
-        mDvImage.setImageURI(Uri.parse(product.getProduct_img()));
+        mTvProduct.setText(product == null ? "" : product.getProduct_name());
+        mDvImage.setImageURI(Uri.parse(product == null ? "" : product.getProduct_img()));
     }
 
     @Override

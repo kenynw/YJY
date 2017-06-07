@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.template;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.AttrRes;
@@ -17,11 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.widget.ClearEditText;
@@ -38,6 +33,8 @@ import butterknife.ButterKnife;
 
 public class TemplateView extends LinearLayout implements OnImageSelectListener, FilterActivity.OnFilterSelectedListener {
 
+    public static final int REQUEST_CODE_FILTER = 0x234;
+
     private FrameLayout mFlDelete;
 
     protected List<SimpleDraweeView> mDvImages = new ArrayList<>();
@@ -49,6 +46,8 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
     private SparseArray<String> mUris = new SparseArray<>();
 
     private int mCurPosition;
+
+    private OnClickListener mListener;
 
     public TemplateView(@NonNull Context context) {
         this(context, null);
@@ -78,7 +77,8 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
             if (child instanceof SimpleDraweeView) {
                 SimpleDraweeView dv = (SimpleDraweeView) child;
                 dv.setOnClickListener(v -> {
-                    ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(this);
+//                    ImageProvider.getInstance((Activity) getContext()).getImageFromCameraOrAlbum(this);
+                    if (mListener != null) mListener.onClick(v);
                     mCurPosition = mDvImages.indexOf(dv);
                 });
                 mDvImages.add(dv);
@@ -89,7 +89,7 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
                 mIvFilters.add(iv);
                 iv.setOnClickListener(v -> {
                     boolean roundAsCircle = mDvImages.get(mCurPosition).getHierarchy().getRoundingParams() != null;
-                    FilterActivity.start((AppCompatActivity) getContext(), Uri.parse(mUris.get(mDvImages.get(mCurPosition).getId(), "")),
+                    FilterActivity.start((AppCompatActivity) getContext(), mUris.get(mDvImages.get(mCurPosition).getId(), ""),
                             roundAsCircle, TemplateView.this);
                     mCurPosition = mIvFilters.indexOf(iv);
                 });
@@ -102,7 +102,12 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
             if (viewGroup.getChildAt(i) instanceof ViewGroup) {
                 findAllChild((ViewGroup) viewGroup.getChildAt(i));
             }
+
         }
+    }
+
+    public void setOnImageClickListener(OnClickListener listener) {
+        mListener = listener;
     }
 
     public SparseArray<String> getUris() {
@@ -153,9 +158,15 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
 
     @Override
     public void onImageLoaded(Uri uri) {
-        mUris.put(mDvImages.get(mCurPosition).getId(), uri.toString());
-        mDvImages.get(mCurPosition).setImageURI(uri);
-        mIvFilters.get(mCurPosition).setVisibility(View.VISIBLE);
+        int id = mDvImages.get(mCurPosition).getId();
+        if (!TextUtils.isEmpty(mUris.get(id)) && mUris.get(id).equals(uri.toString())) return;
+
+        if (uri != null) {
+            mUris.put(id, uri.toString());
+            mDvImages.get(mCurPosition).setImageURI(uri);
+            ImageView filter = mIvFilters.get(mCurPosition);
+            if (filter.getVisibility() == GONE) filter.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -199,18 +210,6 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
             if (!TextUtils.isEmpty(mUris.get(id, ""))) {
                 mIvFilters.get(i).setVisibility(VISIBLE);
             }
-        }
-    }
-
-    private void setImageFilter(SimpleDraweeView dv, ImageRequest request) {
-        if (request != null) {
-            PipelineDraweeController controller = (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
-                    .setImageRequest(request)
-                    .setTapToRetryEnabled(true)
-                    .setOldController(dv.getController())
-                    .build();
-
-            dv.setController(controller);
         }
     }
 

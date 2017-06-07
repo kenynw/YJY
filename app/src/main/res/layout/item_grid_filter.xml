@@ -9,14 +9,10 @@
     android:paddingTop="9dp"
     >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/dv_filter_image"
+    <ImageView
+        android:id="@+id/iv_filter_image"
         android:layout_width="match_parent"
         android:layout_height="83dp"
-        android:largeHeap="true"
-        app:actualImageScaleType="centerCrop"
-        app:placeholderImage="@mipmap/def_image_loading"
-        app:placeholderImageScaleType="centerCrop"
         />
 
     <TextView

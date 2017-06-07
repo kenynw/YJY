@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jude.library.imageprovider.ImageProvider;
+import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.local.TemplatePreferences;
 import com.miguan.yjy.model.local.UserPreferences;
@@ -148,6 +150,25 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         }
 
         TemplateView templateView = (TemplateView) LayoutInflater.from(this).inflate(res, null, false);
+        templateView.setOnImageClickListener(v -> {
+            ImageProvider.getInstance(GenTemplateActivity.this).getImageFromCameraOrAlbum(new OnImageSelectListener() {
+                @Override
+                public void onImageSelect() {
+
+                }
+
+                @Override
+                public void onImageLoaded(Uri uri) {
+                    ImageProvider.getInstance(GenTemplateActivity.this).corpImage(uri, 400, 400, templateView);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        });
+
         FrameLayout layout = (FrameLayout) templateView.findViewById(R.id.fl_template_delete);
         layout.setOnClickListener(v -> {
             mLlGen.removeView(templateView);

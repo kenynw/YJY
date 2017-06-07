@@ -156,13 +156,12 @@ public class ProductModel extends AbsModel {
         List<Brand> delList = new ArrayList<>();
         if (list != null) {
             for (Brand item : list) {
-                if (item.getName().equals(brand.getName())){
+                if (!item.getName().equals(brand.getName())){
                     delList.add(item);
                 }
             }
-            list.remove(delList);
         }
-        LUtils.getPreferences().edit().putString(EXTRA_BRAND_LIST, new Gson().toJson(list)).apply();
+        LUtils.getPreferences().edit().putString(EXTRA_BRAND_LIST, new Gson().toJson(delList)).apply();
     }
 
     /**
@@ -197,13 +196,12 @@ public class ProductModel extends AbsModel {
         List<Product> delList = new ArrayList<>();
         if (list != null) {
             for (Product item : list) {
-                if (item.getProduct_name().equals(product.getProduct_name())){
+                if (!item.getProduct_name().equals(product.getProduct_name())){
                     delList.add(item);
                 }
             }
-            list.remove(delList);
         }
-        LUtils.getPreferences().edit().putString(EXTRA_PRODUCT_LIST, new Gson().toJson(list)).apply();
+        LUtils.getPreferences().edit().putString(EXTRA_PRODUCT_LIST, new Gson().toJson(delList)).apply();
     }
 
     // 获取本地产品列表

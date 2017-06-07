@@ -16,5 +16,6 @@ android {
 
 dependencies {
     compile rootProject.ext.dependencies["fresco"]
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' //图片处理
+//    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1' //图片处理
+    compile project(':gpuimagelibrary')
 }

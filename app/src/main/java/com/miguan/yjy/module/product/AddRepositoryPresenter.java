@@ -8,13 +8,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.dsk.chain.bijection.Presenter;
-import com.google.gson.Gson;
 import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.utils.LUtils;
 
 import java.io.File;
 
@@ -96,12 +94,12 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
                 case REQUEST_CODE_BRAND:
                     mBrand = data.getParcelableExtra("brand");
                     getView().setBrand(mBrand, mOvertime);
+                    getView().setProduct(null);
                     break;
                 case REQUEST_CODE_PRODUCT:
                     Product product = data.getParcelableExtra("product");
                     mImagePath = product.getProduct_img();
                     getView().setProduct(product);
-                    LUtils.log("product: " + new Gson().toJson(product));
                     mBrand.setId(product.getBrand_id());
                     mBrand.setName(product.getBrand_name());
                     getView().setBrand(mBrand, mOvertime);
@@ -123,6 +121,10 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
 
     public int getBrandId() {
         return mBrand == null ? 0 : mBrand.getId();
+    }
+
+    public Brand getBrand() {
+        return mBrand;
     }
 
 }

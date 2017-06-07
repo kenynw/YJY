@@ -35,6 +35,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     protected void onCreate(QueryCodeActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         mProduct = getView().getIntent().getParcelableExtra(EXTRA_PRODUCT);
+        mBrand = getView().getIntent().getParcelableExtra("brand");
     }
 
     @Override
@@ -44,6 +45,9 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
             mBrand.setId(mProduct.getBrand_id());
             mBrand.setName(mProduct.getBrand_name());
             mBrand.setRule(mProduct.getRule());
+            getView().setBrand(mBrand.getName());
+        }
+        if (mBrand != null) {
             getView().setBrand(mBrand.getName());
         }
     }

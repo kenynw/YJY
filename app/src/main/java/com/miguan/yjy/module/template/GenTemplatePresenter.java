@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.template;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -131,7 +132,20 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
-        ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
+//            if (requestCode == TemplateView.REQUEST_CODE_FILTER && data != null) {
+//                boolean applyAll = data.getBooleanExtra(FilterActivity.EXTRA_APPLY_ALL, false);
+//                String path  = data.getStringExtra(FilterActivity.EXTRA_PATH);
+//                if (applyAll) {
+//                    for (TemplateView templateView : getView().getTemplateList()) {
+////                        templateView.
+//                    }
+//                } else {
+//
+//                }
+//            }
+        }
     }
 
     @Override
