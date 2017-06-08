@@ -130,14 +130,16 @@
                 android:background="@color/textTertiary"
                 />
 
-            <com.miguan.yjy.widget.ClearEditText
+            <com.miguan.yjy.widget.TemplateTextView
                 android:id="@+id/et_template_0_content"
                 style="@style/BaseTemplateInput"
                 android:layout_margin="@dimen/spacing_large"
-                android:background="@mipmap/bg_template_0_text"
                 android:gravity="start|top"
                 android:lineSpacingMultiplier="1.2"
-                android:padding="@dimen/spacing_normal"
+                android:paddingBottom="@dimen/spacing_large"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
+                android:paddingTop="@dimen/spacing_large"
                 android:text="@string/text_template_0_content"
                 android:textColor="@color/textSecondary"
                 android:textSize="@dimen/text_size_subhead_material"

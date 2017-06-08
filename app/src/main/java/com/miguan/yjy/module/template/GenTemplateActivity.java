@@ -105,11 +105,26 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         getExpansionDelegate().showProgressBar("正在生成图片");
+        hideHeaderCursor();
         for (TemplateView templateView : mViewList) {
             templateView.prepareCapture();
         }
         getPresenter().takeShot(mLlGen);
         return super.onOptionsItemSelected(item);
+    }
+
+    // 隐藏光标
+    private void hideHeaderCursor() {
+        if (mHeader != null) {
+            EditText et = (EditText) mHeader.findViewById(R.id.et_template_header);
+            if (et != null) {
+                et.setCursorVisible(false);
+            }
+            EditText et2 = (EditText) mHeader.findViewById(R.id.et_template_header_2);
+            if (et2 != null) {
+                et2.setCursorVisible(false);
+            }
+        }
     }
 
     // 首次进入打开引导

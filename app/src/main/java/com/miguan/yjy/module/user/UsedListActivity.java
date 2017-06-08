@@ -1,14 +1,19 @@
 package com.miguan.yjy.module.user;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
+import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.UsedViewHolder;
@@ -49,6 +54,19 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
     protected int getLayout() {
         return R.layout.user_activity_used;
     }
+
+    @Override
+    public ListConfig getListConfig() {
+        View view = LayoutInflater.from(this).inflate(R.layout.empty_componet_list, null);
+        TextView tv = (TextView) view.findViewById(R.id.tv_empty);
+        tv.setText("还没有添加在用的产品哦~");
+
+        Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_used);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        tv.setCompoundDrawables(null, drawable, null, null);
+
+        return super.getListConfig().setContainerEmptyView(view);
+}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

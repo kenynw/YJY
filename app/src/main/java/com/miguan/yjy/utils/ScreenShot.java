@@ -251,6 +251,11 @@ public class ScreenShot {
                             }
                             // 最后通知图库更新
                             mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+
+                            if (mBitmap != null) {
+                                mBitmap.recycle();
+                                mBitmap = null;
+                            }
                         });
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());

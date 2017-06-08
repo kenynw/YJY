@@ -269,7 +269,6 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
 
     @Override
     public void inputComplete(String captcha) {
-        LUtils.log("captcha: " + captcha);
         getPresenter().bindMobile(captcha);
     }
 

@@ -135,14 +135,29 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
 
     @Override
     public void onImageLoaded(Uri uri) {
-        ImageModel.getInstance().uploadImageAsync(ImageModel.OSS_PATH_REPOSITORY, new File(uri.getPath()).getPath())
-                .flatMap(s -> UserModel.getInstance().modifyProfile(KEY_PROFILE_AVATAR, s))
-                .unsafeSubscribe(new ServicesResponse<String>() {
-                    @Override
-                    public void onNext(String s) {
-                        getView().setAvatar(uri);
-                    }
-                });
+        ImageProvider.getInstance(getView()).corpImage(uri, 200, 200, new OnImageSelectListener() {
+            @Override
+            public void onImageSelect() {
+
+            }
+
+            @Override
+            public void onImageLoaded(Uri uri) {
+                ImageModel.getInstance().uploadImageAsync(ImageModel.OSS_PATH_REPOSITORY, new File(uri.getPath()).getPath())
+                        .flatMap(s -> UserModel.getInstance().modifyProfile(KEY_PROFILE_AVATAR, s))
+                        .unsafeSubscribe(new ServicesResponse<String>() {
+                            @Override
+                            public void onNext(String s) {
+                                getView().setAvatar(uri);
+                            }
+                        });
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override

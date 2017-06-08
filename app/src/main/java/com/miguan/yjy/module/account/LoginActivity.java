@@ -69,6 +69,10 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
             LUtils.toast("密码不能为空");
             return;
         }
+        if (mEtPassword.getText().length() < 6 || mEtPassword.getText().length() > 15) {
+            LUtils.toast("密码长度在6-15位");
+            return;
+        }
 
         getPresenter().login(mEtUsername.getText().toString().trim(), mEtPassword.getText().toString().trim());
     }

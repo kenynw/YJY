@@ -77,6 +77,10 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
             LUtils.toast("密码不能为空");
             return;
         }
+        if (mEtPassword.getText().length() < 6) {
+            LUtils.toast("密码长度在6-15位");
+            return;
+        }
 
         getExpansionDelegate().showProgressBar();
 

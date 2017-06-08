@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     android:divider="@drawable/div_vertical"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -15,7 +14,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,12 +47,12 @@
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/dv_profile_avatar"
+                    style="@style/BaseAvatar"
                     android:layout_width="@dimen/widget_medium"
                     android:layout_height="@dimen/widget_medium"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="@dimen/spacing_normal"
                     android:layout_marginRight="@dimen/spacing_normal"
-                    style="@style/BaseAvatar"
                     />
 
                 <ImageView
@@ -183,18 +184,21 @@
 
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/tv_profile_logout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/widget_medium"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:text="@string/text_logout"
-                android:textAppearance="@style/TextBody"
-                />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_profile_logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_medium"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/text_logout"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_subhead_material"
+        />
 
 </LinearLayout>

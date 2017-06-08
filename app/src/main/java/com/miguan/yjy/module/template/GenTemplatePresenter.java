@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 
 import com.dsk.chain.bijection.Presenter;
 import com.google.gson.Gson;

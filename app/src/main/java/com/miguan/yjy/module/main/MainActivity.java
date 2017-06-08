@@ -94,7 +94,12 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
             UserPreferences.setIsShowTest(false);
             return;
         }
-        super.onBackPressed();
+        moveTaskToBack(true);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LUtils.log("onDestroy");
+    }
 }

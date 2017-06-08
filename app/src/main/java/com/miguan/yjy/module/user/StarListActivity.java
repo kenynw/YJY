@@ -1,7 +1,11 @@
 package com.miguan.yjy.module.user;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
@@ -30,7 +34,16 @@ public class StarListActivity extends BaseListActivity<StarListPresenter> {
 
     @Override
     public ListConfig getListConfig() {
+        View view = LayoutInflater.from(this).inflate(R.layout.empty_componet_list, null);
+        TextView tv = (TextView) view.findViewById(R.id.tv_empty);
+        tv.setText("还没有收藏过任何产品哦~");
+
+        Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_star);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        tv.setCompoundDrawables(null, drawable, null, null);
+
         return super.getListConfig()
+                .setContainerEmptyView(view)
                 .setItemDecoration(new SpaceDecoration((int) getResources().getDimension(R.dimen.spacing_small)))
                 .setContainerLayoutRes(R.layout.common_activity_list);
     }

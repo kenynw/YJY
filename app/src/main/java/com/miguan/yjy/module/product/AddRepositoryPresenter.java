@@ -61,6 +61,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
         else mBrand = new Brand();
         if (mProduct != null) {
             getView().setProduct(mProduct);
+            mImagePath = mProduct.getProduct_img();
             mBrand.setId(mProduct.getBrand_id());
             mBrand.setName(mProduct.getBrand_name());
             getView().setBrand(mBrand, mOvertime);
