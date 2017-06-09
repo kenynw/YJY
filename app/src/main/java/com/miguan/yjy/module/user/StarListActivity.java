@@ -36,7 +36,7 @@ public class StarListActivity extends BaseListActivity<StarListPresenter> {
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_componet_list, null);
         TextView tv = (TextView) view.findViewById(R.id.tv_empty);
-        tv.setText("还没有收藏过任何产品哦~");
+        tv.setText("还没有收藏过任何文章哦~");
 
         Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_star);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());

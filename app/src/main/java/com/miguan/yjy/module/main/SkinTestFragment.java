@@ -179,6 +179,8 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                 public void onNext(User user) {
                     nums.clear();
                     userInfo = user;
+                    birthDay = userInfo.getBirth_day();
+                    sex = userInfo.getSex();
                     if (userInfo.getCompact() != 0) {
                         mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
                         mTvTestWrinkle.setText(Skin.getCompact(userInfo.getCompact()));
@@ -371,9 +373,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                 } else {
                     startToLogin();
                 }
-
                 break;
-
         }
     }
 
@@ -399,7 +399,32 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         ColorDrawable bg = new ColorDrawable(0x55000000);
         popupWindow.setBackgroundDrawable(bg);
         popupWindow.showAtLocation(mToolbar, Gravity.BOTTOM, 0, 0);
+
+        switch (userInfo.getSex()) {
+            case 0://女
+                sex = 0;
+                mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
+                mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
+                mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
+                mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
+            case 1://男
+                sex = 1;
+                mTvTestMan.setBackgroundResource(R.drawable.bg_shape_63c);
+                mTvTestWoman.setBackgroundResource(R.drawable.bg_round_stroke_div);
+                mTvTestMan.setTextColor(getResources().getColor(R.color.white));
+                mTvTestWoman.setTextColor(getResources().getColor(R.color.textSecondary));
+//                mTvTestMan.performClick();
+                break;
+            case 2://未填
+                sex = 0;
+                mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
+                mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
+                mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
+                mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
+                break;
+        }
     }
+
 
     private void selectDate() {
 
@@ -551,9 +576,8 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     }
 
     private void setUserBirthDay() {
-        mTvTestSelectBirthday.setText(String.format("%1$04d-%2$02d-%3$02d",Integer.parseInt(userInfo.getBirth_year()),Integer.parseInt(userInfo.getBirth_month()),Integer.parseInt(userInfo.getBirth_day())));
+        mTvTestSelectBirthday.setText(String.format("%1$04d-%2$02d-%3$02d", Integer.parseInt(userInfo.getBirth_year()), Integer.parseInt(userInfo.getBirth_month()), Integer.parseInt(userInfo.getBirth_day())));
     }
-
 
 
 }
