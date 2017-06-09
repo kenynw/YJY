@@ -23,6 +23,8 @@
         style="@style/BaseTemplateInput"
         android:layout_marginTop="@dimen/spacing_normal"
         android:lineSpacingMultiplier="1.4"
+        android:paddingLeft="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_large"
         android:text="@string/text_template_5_desc"
         android:textColor="#a07b5b"
         android:textSize="15sp"

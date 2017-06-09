@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="65dp"
     android:layout_height="92dp"
@@ -24,6 +23,7 @@
         android:gravity="center"
         android:textColor="@color/textTertiary"
         android:textSize="@dimen/text_size_caption_material"
+        android:visibility="gone"
         tools:text="原图"
         />
 

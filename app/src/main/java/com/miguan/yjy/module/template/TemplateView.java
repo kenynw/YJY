@@ -200,9 +200,6 @@ public class TemplateView extends LinearLayout implements OnImageSelectListener,
         }
         mIvFilters.get(0).setFocusableInTouchMode(true);
         mIvFilters.get(0).setFocusable(true);
-        for (ClearEditText editText : mEditTexts) {
-            editText.setCursorVisible(false);
-        }
     }
 
     // 完成截图

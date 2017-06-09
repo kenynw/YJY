@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 
 import com.dsk.chain.bijection.Presenter;
 import com.google.gson.Gson;
@@ -123,10 +122,10 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
         ScreenShot.getInstance().takeScreenShotOfJustView(layout, (path, uri) -> {
             getView().getExpansionDelegate().hideProgressBar();
             TemplatePreferences.setTemplate("");
-            SaveTemplatePresenter.start(getView(), path, uri);
             for (TemplateView templateView : getView().getTemplateList()) {
                 templateView.completeCapture();
             }
+            SaveTemplatePresenter.start(getView(), path, uri);
         });
     }
 

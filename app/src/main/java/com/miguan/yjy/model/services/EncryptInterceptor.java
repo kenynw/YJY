@@ -33,7 +33,7 @@ public class EncryptInterceptor implements Interceptor {
             request = request.newBuilder().method(methodStr, request.body()).url(requestUrl).build();
         }
 
-        if (LUtils.isDebug) LUtils.log(TAG, request.url().toString());
+        LUtils.log(TAG, request.url().toString());
 
         return chain.proceed(request);
     }

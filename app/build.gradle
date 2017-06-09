@@ -87,6 +87,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    productFlavors {
+        yingyongbao{}
+        qihu360{}
+        xiaomi{}
+        wandoujia{}
+        huawei{}
+        meizu{}
+        vivo{}
+        oppo{}
+        other{}
+    }
+    //应用到每一个flavor
+    productFlavors.all { flavor -> manifestPlaceholders.put("UMENG_CHANNEL",name) }
 }
 
 dependencies {

@@ -17,7 +17,6 @@
 package com.miguan.yjy.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -28,7 +27,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +38,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -199,7 +198,7 @@ public class ScreenShot {
 
         private Context mContext;
 
-        private Bitmap mBitmap;
+        private SoftReference<Bitmap> mBitmap;
 
         private OnSaveListener mListener;
 
@@ -207,55 +206,53 @@ public class ScreenShot {
 
         public SaveTask(Context context, Bitmap bitmap, OnSaveListener listener) {
             mContext = context;
-            mBitmap = bitmap;
+            mBitmap = new SoftReference<Bitmap>(bitmap);
             mListener = listener;
             mHandler = new Handler();
         }
 
         @Override
         protected Void doInBackground(View... params) {
-            saveScreenshotToPicturesFolder(mBitmap, "yjy");
+            saveScreenshotToPicturesFolder();
             return null;
         }
 
         /**
          * Save screenshot to pictures folder.
          *
-         * @param image    the image
-         * @param filename the filename
          */
-        private void saveScreenshotToPicturesFolder(Bitmap image, String filename) {
-            File bitmapFile = getOutputMediaFile(filename);
+        private void saveScreenshotToPicturesFolder() {
+            File bitmapFile = getOutputMediaFile("yjy");
             if (bitmapFile == null) {
                 Log.d(TAG, "Error creating media file, check storage permissions: ");// e.getMessage());
                 return;
             }
             try {
                 FileOutputStream fos = new FileOutputStream(bitmapFile);
-                image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                mBitmap.get().compress(Bitmap.CompressFormat.PNG, 90, fos);
                 fos.flush();
                 fos.close();
+                if (mBitmap != null) {
+                    mBitmap.get().recycle();
+                    mBitmap = null;
+                }
 
                 // Initiate media scanning to make the image available in gallery apps
                 MediaScannerConnection.scanFile(mContext, new String[]{bitmapFile.getPath()},
-                        new String[]{"image/jpeg"}, (path, uri) -> {
+                        new String[]{"image/*"}, (path, uri) -> {
                             if (mListener != null) {
                                 mHandler.post(() -> mListener.onPictureSaved(path, uri));
                             }
-                            // 其次把文件插入到系统图库
-                            try {
-                                MediaStore.Images.Media.insertImage(mContext.getContentResolver(),
-                                        bitmapFile.getAbsolutePath(), filename, null);
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            // 最后通知图库更新
-                            mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+//                            // 其次把文件插入到系统图库
+//                            try {
+//                                MediaStore.Images.Media.insertImage(mContext.getContentResolver(),
+//                                        bitmapFile.getAbsolutePath(), "yjy", null);
+//                            } catch (FileNotFoundException e) {
+//                                e.printStackTrace();
+//                            }
+//                            // 最后通知图库更新
+//                            mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
 
-                            if (mBitmap != null) {
-                                mBitmap.recycle();
-                                mBitmap = null;
-                            }
                         });
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
