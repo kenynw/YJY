@@ -149,7 +149,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
         mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
-
     }
 
     @Override
@@ -324,6 +323,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     public void setEvaluate(List<Evaluate> list) {
         EvaluateAdapter evaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
+        evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
+        evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyEvalutate.setFocusable(false);
         mRecyEvalutate.setEmptyView(R.layout.empty_evaluate_list);

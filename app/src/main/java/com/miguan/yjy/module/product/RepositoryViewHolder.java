@@ -2,7 +2,6 @@ package com.miguan.yjy.module.product;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,7 +37,6 @@ public class RepositoryViewHolder extends SearchReslutViewHolder {
     @Override
     public void setData(Product data) {
         super.setData(data);
-        mRatbar.setVisibility(View.GONE);
         mRlInfo.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("product", data);

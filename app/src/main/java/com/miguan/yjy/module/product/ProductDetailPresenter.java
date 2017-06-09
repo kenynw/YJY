@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
@@ -24,7 +26,8 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  * @描述
  */
 
-public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDetailActivity, Product> {
+public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDetailActivity, Product>
+        implements RecyclerArrayAdapter.OnMoreListener{
 
     public static final String EXTRA_PRODUCT_ID = "product_id";
     public static final String SORT_DEFAULT = "default";
@@ -35,6 +38,8 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
 
     private String userEvluate;
     private String sort;
+
+    private int mCurPage = 1;
 
     public String getSort() {
         return sort;
@@ -109,6 +114,7 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
             @Override
             public void onNext(List<Evaluate> evaluates) {
                 getView().setEvaluate(evaluates);
+                mCurPage = 2;
             }
         });
     }
@@ -127,4 +133,19 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         UMShareAPI.get(getView()).onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onMoreShow() {
+        ProductModel.getInstance().getEvaluate(mProductId, mCurPage, sort, userEvluate).subscribe(new ServicesResponse<List<Evaluate>>() {
+            @Override
+            public void onNext(List<Evaluate> evaluates) {
+                ((EvaluateAdapter) getView().mRecyEvalutate.getAdapter()).addAll(evaluates);
+                mCurPage++;
+            }
+        });
+    }
+
+    @Override
+    public void onMoreClick() {
+
+    }
 }

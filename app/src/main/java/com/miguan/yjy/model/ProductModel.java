@@ -254,7 +254,7 @@ public class ProductModel extends AbsModel {
      */
     public Observable<List<Evaluate>> getEvaluate(int productId, int page, String orderBy, String condition) {
         return ServicesClient.getServices()
-                .evaluateList(productId, page, 10000, UserPreferences.getUserID(), TYPE_PRODUCT, orderBy, condition)
+                .evaluateList(productId, page, 20, UserPreferences.getUserID(), TYPE_PRODUCT, orderBy, condition)
                 .compose(new DefaultTransform<>());
     }
 

@@ -31,6 +31,4 @@ public class EvaluateAdapter extends RecyclerArrayAdapter<Evaluate> {
         super.OnBindViewHolder(holder, position);
     }
 
-
-
 }

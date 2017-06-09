@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.product;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BrandPagerAdapter;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.utils.StringUtils;
 import com.miguan.yjy.widget.NoScrollViewPager;
 
 import butterknife.BindView;
@@ -71,15 +73,11 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_brand_main_activity);
         ButterKnife.bind(this);
-
-
     }
-
 
     @Override
     public void setData(Brand brand) {
-        super.setData(brand);
-        mSdvBrandImg.setImageURI(brand.getImg());
+        mSdvBrandImg.setImageURI(Uri.parse(StringUtils.getEncodeUrl(brand.getImg())));
         mTvBrandName.setText(brand.getName());
         setToolbarTitle(brand.getName());
         String num = "品牌热度 : <font color=\"#32DAC3\">" + brand.getHot() + "</font>";

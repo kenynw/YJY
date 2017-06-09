@@ -29,7 +29,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
 
     private Product mProduct;
 
-    private Brand mBrand = new Brand();
+    private Brand mBrand;
 
     @Override
     protected void onCreate(QueryCodeActivity view, Bundle saveState) {
@@ -42,6 +42,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     protected void onCreateView(QueryCodeActivity view) {
         super.onCreateView(view);
         if (mProduct != null) {
+            if (mBrand == null) mBrand = new Brand();
             mBrand.setId(mProduct.getBrand_id());
             mBrand.setName(mProduct.getBrand_name());
             mBrand.setRule(mProduct.getRule());

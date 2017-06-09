@@ -19,6 +19,7 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
 
@@ -81,6 +82,10 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         public View onCreateView(ViewGroup parent) {
             View view = LayoutInflater.from(getView().getActivity()).inflate(R.layout.header_main_home, parent, false);
             ButterKnife.bind(this, view);
+
+            ViewGroup.LayoutParams lp = mHvBanner.getLayoutParams();
+            lp.height = (int) (LUtils.getScreenWidth() / 1.7);
+            mHvBanner.setLayoutParams(lp);
 
             mBtnQueryBatch.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
             mBtnMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),

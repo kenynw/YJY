@@ -31,7 +31,7 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
     TextView mTvName;
 
     @BindView(R.id.ratbar_product)
-    protected RatingBar mRatbar;
+    RatingBar mRatbar;
 
     @BindView(R.id.tv_product_money)
     TextView mTvSpec;

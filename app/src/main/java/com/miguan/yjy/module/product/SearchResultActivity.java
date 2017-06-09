@@ -28,6 +28,7 @@ import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.utils.StringUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,7 +118,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
             mLlIncludeBrand.setVisibility(View.VISIBLE);
-            mSdvBrandImg.setImageURI(productList.getBrand().getImg());
+            mSdvBrandImg.setImageURI(StringUtils.getEncodeUrl(productList.getBrand().getImg()));
             mTvBrandName.setText(productList.getBrand().getName());
             String num = "品牌热度 : <font color=\"#32DAC3\"> " + productList.getBrand().getHot() + " </font>";
             mTvBrandNum.setText(Html.fromHtml(num));

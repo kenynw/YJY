@@ -13,13 +13,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="wrap_content"
             android:gravity="bottom">
 
             <com.miguan.yjy.widget.HeadViewPager
                 android:id="@+id/hv_home_banner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="256dp"
                 />
 
             <com.miguan.yjy.widget.CirclePageIndicator
