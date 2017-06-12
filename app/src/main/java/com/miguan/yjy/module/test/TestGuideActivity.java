@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.test;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -65,11 +66,13 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
     LinearLayout mLlTestAll;
     int type;
 
+    public static TestGuideActivity testGuideActivity;
+
     public static void start(Context context, Test test, int type) {
         Intent intent = new Intent(context, TestGuideActivity.class);
         intent.putExtra(EXTRA_TEST, test);
         intent.putExtra(EXTRA_TEST_TYPE, type);
-        context.startActivity(intent);
+        ((Activity) context).startActivityForResult(intent, 2);
     }
 
 
@@ -86,7 +89,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
         view = View.inflate(TestGuideActivity.this, R.layout.test_popwindow_guide, null);
         initView();
 //        TestResultActivity.star(TestGuideActivity.this)//测试结果页
-        mTvTestInto.setOnClickListener(v -> WebViewActivity.start(TestGuideActivity.this, getString(test.getTitle()), Constants.testLink + type + "&user_id=" + UserPreferences.getUserID()+"&from=android"));
+        mTvTestInto.setOnClickListener(v -> WebViewActivity.start(TestGuideActivity.this, getString(test.getTitle()), Constants.testLink + type + "&user_id=" + UserPreferences.getUserID() + "&from=android"));
     }
 
 

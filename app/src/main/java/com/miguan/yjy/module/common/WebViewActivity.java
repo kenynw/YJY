@@ -30,6 +30,7 @@ public class WebViewActivity extends ChainBaseActivity {
 
     // 浏览器
     private WebView webView;
+    public static WebViewActivity webViewActivity;
 
     /**
      * 标题名称

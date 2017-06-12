@@ -7,6 +7,7 @@ import android.webkit.JavascriptInterface;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.main.MainActivity;
+import com.miguan.yjy.module.main.SkinTestFragment;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
 
@@ -17,6 +18,7 @@ import com.miguan.yjy.utils.LUtils;
 public class WebViewOB {
 
     private Context mContext;
+    public static String EXTRA_WEBVIEW_TAG = "webViewTag";
 
     public WebViewOB(Context context) {
         mContext = context;
@@ -24,6 +26,7 @@ public class WebViewOB {
 
     /**
      * 显示Toast消息提示
+     *
      * @param message
      */
     @JavascriptInterface
@@ -33,6 +36,7 @@ public class WebViewOB {
 
     /**
      * 获取缓存的用户ID
+     *
      * @return
      */
     @JavascriptInterface
@@ -51,6 +55,7 @@ public class WebViewOB {
 
     /**
      * 打开产品详情
+     *
      * @param productId 产品ID
      */
     @JavascriptInterface
@@ -64,7 +69,11 @@ public class WebViewOB {
     @JavascriptInterface
     public void toHome() {
         Intent intent = new Intent(mContext, MainActivity.class);
+        intent.putExtra(EXTRA_WEBVIEW_TAG, 1);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if (SkinTestFragment.nums.size()== 4) {
+            UserPreferences.setIsShowTest(false);
+        }
         mContext.startActivity(intent);
     }
 

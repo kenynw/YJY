@@ -21,6 +21,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
+import static com.miguan.yjy.module.common.WebViewOB.EXTRA_WEBVIEW_TAG;
+
 
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
@@ -55,6 +57,10 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 //        getView().setCurrentTab(0);
+      int webViewTag=  intent.getIntExtra(EXTRA_WEBVIEW_TAG, -1);
+        if (webViewTag == 1) {
+
+        }
         loadUnread();
     }
 

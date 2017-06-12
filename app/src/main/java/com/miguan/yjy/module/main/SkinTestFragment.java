@@ -107,7 +107,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     private int sex = 0;
     private int tag = 0;
     private User userInfo;
-    private List<Integer> nums = new ArrayList<>();
+    public static List<Integer> nums = new ArrayList<>();
 
 
     //测试结果(我的肤质)
@@ -168,6 +168,15 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         loadMainData();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1) {
+            if (requestCode == 2) {
+                loadMainData();
+            }
+        }
+    }
 
     public void loadFirstData() {
         mLlTestOk.setVisibility(View.GONE);
@@ -579,5 +588,18 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         mTvTestSelectBirthday.setText(String.format("%1$04d-%2$02d-%3$02d", Integer.parseInt(userInfo.getBirth_year()), Integer.parseInt(userInfo.getBirth_month()), Integer.parseInt(userInfo.getBirth_day())));
     }
 
+    private interface OnRefreshData {
+        void onrefresh();
+    }
+
+    public OnRefreshData mOnRefreshData;
+
+    public void setOnRefreshData(OnRefreshData onRefreshData) {
+        mOnRefreshData = onRefreshData;
+    }
+
+    private void setShowView() {
+        UserPreferences.setIsShowTest(false);
+    }
 
 }
