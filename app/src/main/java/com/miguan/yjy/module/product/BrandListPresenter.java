@@ -1,5 +1,7 @@
 package com.miguan.yjy.module.product;
 
+import android.os.Bundle;
+
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.adapter.viewholder.BrandViewHolder;
 import com.miguan.yjy.model.ProductModel;
@@ -13,7 +15,17 @@ import java.util.List;
 
 public class BrandListPresenter extends BaseListActivityPresenter<BrandListActivity, Brand> implements BrandViewHolder.OnBrandDeleteListener {
 
+    public static final String EXTRA_TYPE = "type";
+
     private List<Brand> mBrandList;
+
+    private int mType;
+
+    @Override
+    protected void onCreate(BrandListActivity view, Bundle saveState) {
+        super.onCreate(view, saveState);
+        mType = getView().getIntent().getIntExtra(EXTRA_TYPE, 0);
+    }
 
     @Override
     protected void onCreateView(BrandListActivity view) {
@@ -24,7 +36,7 @@ public class BrandListPresenter extends BaseListActivityPresenter<BrandListActiv
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().getBrandList()
+        ProductModel.getInstance().getBrandList(mType)
                 .map(brandList -> {
                     mBrandList = brandList.getCosmeticsList();
                     return brandList.getCosmeticsList();

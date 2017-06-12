@@ -350,7 +350,9 @@ public interface Services {
      * 品牌列表
      */
     @GET("?action=brandList")
-    Observable<BrandList> brandList();
+    Observable<BrandList> brandList(
+            @Query("model") int type
+    );
 
     /**
      * 批号查询

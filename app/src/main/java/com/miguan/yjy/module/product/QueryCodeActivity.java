@@ -54,14 +54,18 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
         mEtBrand.addTextChangedListener(watcher);
         mEtBrand.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus && mIsInit) {
-                startActivityForResult(new Intent(QueryCodeActivity.this, BrandListActivity.class), 100);
+                Intent intent = new Intent(this, BrandListActivity.class);
+                intent.putExtra(BrandListPresenter.EXTRA_TYPE, 1);
+                startActivityForResult(intent, 100);
                 mIsInit = true;
             }
         });
         mEtProduct.addTextChangedListener(watcher);
 
         mEtBrand.setOnClickListener(v -> {
-            startActivityForResult(new Intent(this, BrandListActivity.class), 100);
+            Intent intent = new Intent(this, BrandListActivity.class);
+            intent.putExtra(BrandListPresenter.EXTRA_TYPE, 1);
+            startActivityForResult(intent, 100);
             mIsInit = true;
         });
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));

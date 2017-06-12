@@ -122,8 +122,8 @@ public class ProductModel extends AbsModel {
      *
      * @return
      */
-    public Observable<BrandList> getBrandList() {
-        return ServicesClient.getServices().brandList()
+    public Observable<BrandList> getBrandList(int type) {
+        return ServicesClient.getServices().brandList(type)
                 .map(brandList -> {
                     List<Brand> brands = queryBrands();
                     if (brands != null && brands.size() > 0) {
