@@ -81,7 +81,7 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setCurrentTab(Integer index) {
+    public void  setCurrentTab(Integer index) {
         if (index < 0 || index > 3) return;
         mTab.getTabAt(index).select();
     }
@@ -97,9 +97,4 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         moveTaskToBack(true);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LUtils.log("onDestroy");
-    }
 }

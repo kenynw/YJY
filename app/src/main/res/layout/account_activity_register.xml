@@ -11,12 +11,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
 
@@ -42,5 +42,31 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="轻触上面“注册”按钮，即表示你同意"
+        android:textAppearance="@style/TextCaption"
+        />
+
+    <TextView
+        android:id="@+id/tv_register_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:text="颜究院软件许可及服务协议"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_caption_material"
+        />
 
 </LinearLayout>

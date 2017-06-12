@@ -48,7 +48,7 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
         Uri uri = getIntent().getParcelableExtra(SaveTemplatePresenter.EXTRA_IMAGE_URI);
         String path = getIntent().getStringExtra(SaveTemplatePresenter.EXTRA_IMAGE_PATH);
 
-        Glide.with(this).load(path).override(200, 720).into(mIvThumb);
+        Glide.with(this).load(path).override(400, 720).into(mIvThumb);
 
         if (uri != null && !TextUtils.isEmpty(path)) {
             getPresenter().addAnalytics();
@@ -89,7 +89,8 @@ public class SaveTemplateActivity extends ChainBaseActivity<SaveTemplatePresente
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("index", 1);
         startActivity(intent);
         return super.onOptionsItemSelected(item);
     }

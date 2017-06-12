@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingLeft="@dimen/spacing_large"
     android:paddingRight="@dimen/spacing_large"
@@ -14,8 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_gray_white_5"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:padding="15dp">
 
@@ -24,7 +24,8 @@
             style="@style/BaseTemplateInput"
             android:text="@string/text_template_4_product"
             android:textColor="@color/textTertiary"
-            android:textSize="@dimen/text_size_small_13"/>
+            android:textSize="@dimen/text_size_small_13"
+            />
 
         <com.miguan.yjy.widget.ClearEditText
             android:id="@+id/et_template_4_price"

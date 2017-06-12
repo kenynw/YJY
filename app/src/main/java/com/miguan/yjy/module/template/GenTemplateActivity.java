@@ -105,7 +105,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         getExpansionDelegate().showProgressBar("正在生成图片");
-        hideHeaderCursor();
+        setHeaderCursor(false);
         for (TemplateView templateView : mViewList) {
             templateView.prepareCapture();
         }
@@ -114,15 +114,15 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     }
 
     // 隐藏光标
-    private void hideHeaderCursor() {
+    public void setHeaderCursor(boolean visible) {
         if (mHeader != null) {
             EditText et = (EditText) mHeader.findViewById(R.id.et_template_header);
             if (et != null) {
-                et.setCursorVisible(false);
+                et.setCursorVisible(visible);
             }
             EditText et2 = (EditText) mHeader.findViewById(R.id.et_template_header_2);
             if (et2 != null) {
-                et2.setCursorVisible(false);
+                et2.setCursorVisible(visible);
             }
         }
     }

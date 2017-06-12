@@ -207,7 +207,22 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     @Override
     public void onImageLoaded(Uri uri) {
-        getPresenter().uploadImage(uri);
+        ImageProvider.getInstance(this).corpImage(uri, 150, 150, new OnImageSelectListener() {
+            @Override
+            public void onImageSelect() {
+
+            }
+
+            @Override
+            public void onImageLoaded(Uri uri) {
+                getPresenter().uploadImage(uri);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     @Override

@@ -32,7 +32,7 @@ public class ImageModel extends AbsModel {
 
     private static final String ENDPOINT = "http://oss-cn-shenzhen.aliyuncs.com";
 
-    private static final String OSS_PATH = (LUtils.isDebug ? "cs" : "") + "/uploads/";
+    private static final String OSS_PATH = (LUtils.isDebug ? "cs/" : "") + "uploads/";
 
     private static final String OSS_BUCKET = "oss-yjyapp-com";
 

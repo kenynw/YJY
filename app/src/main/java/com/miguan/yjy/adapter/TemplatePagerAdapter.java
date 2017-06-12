@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.miguan.yjy.module.template.GenTemplatePresenter;
-import com.miguan.yjy.module.template.TemplateType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +34,7 @@ public class TemplatePagerAdapter extends PagerAdapter {
         iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         iv.setImageResource(res);
-        iv.setOnClickListener(v -> {
-            GenTemplatePresenter.start(mContext, position);
-        });
+        iv.setOnClickListener(v -> GenTemplatePresenter.start(mContext, position));
         mViews.add(iv);
 
         container.addView(iv);
@@ -51,7 +48,7 @@ public class TemplatePagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return TemplateType.values().length;
+        return 6;
     }
 
     @Override

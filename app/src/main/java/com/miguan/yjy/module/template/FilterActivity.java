@@ -3,11 +3,13 @@ package com.miguan.yjy.module.template;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
@@ -32,9 +34,11 @@ import jp.co.cyberagent.android.gpuimage.GPUImage;
  */
 @RequiresPresenter(FilterActivityPresenter.class)
 public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> implements
-        FilterAdapter.OnItemClickListener {
+        FilterAdapter.OnItemClickListener, View.OnClickListener {
 
-    public static final String EXTRA_PATH = "path";
+    public static final String EXTRA_POSITION = "position";
+
+    public static final int REQUEST_CODE_FILTER = 0x234;
 
     public static final String EXTRA_APPLY_ALL = "apply_all";
 
@@ -60,7 +64,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     @BindView(R.id.iv_filter_ok)
     ImageView mIvrOk;
 
-    private static OnFilterSelectedListener sFilterSelectedListener;
+    private static OnFilterSelectedListener sListener;
 
     private int mRotation;
 
@@ -69,7 +73,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
     private int mCurPosition = 0;
 
     public static void start(AppCompatActivity activity, String path, boolean isCircle, OnFilterSelectedListener listener) {
-        sFilterSelectedListener = listener;
+        sListener = listener;
         Intent intent = new Intent(activity, FilterActivity.class);
         intent.putExtra(EXTRA_FILTER_URI, path);
         intent.putExtra(EXTRA_IS_CIRCLE, isCircle);
@@ -85,12 +89,13 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         String uri = getIntent().getStringExtra(EXTRA_FILTER_URI);
         boolean isCircle = getIntent().getBooleanExtra(EXTRA_IS_CIRCLE, false);
 
+        mIvCropImage.setFocusWidth(LUtils.getScreenWidth());
+        mIvCropImage.setFocusStyle(isCircle ? CropImageView.Style.CIRCLE : CropImageView.Style.RECTANGLE);
+
         Glide.with(this)
-                .load(uri)
+                .load(Uri.parse(uri))
                 .asBitmap()
-                .fitCenter()
                 .override(200, 200)
-                .skipMemoryCache(true)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
@@ -99,32 +104,8 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
                     }
                 });
 
-        mIvCropImage.setFocusWidth(LUtils.getScreenWidth());
-        mIvCropImage.setFocusStyle(isCircle ? CropImageView.Style.CIRCLE : CropImageView.Style.RECTANGLE);
-
-        mIvCancel.setOnClickListener(v -> finish());
-        mIvrOk.setOnClickListener(v -> {
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-            File mediaStorageDirectory = new File(path, "YJY/");
-            mIvCropImage.saveBitmapToFile(mediaStorageDirectory, 800, 800, false);
-            mIvCropImage.setOnBitmapSaveCompleteListener(new CropImageView.OnBitmapSaveCompleteListener() {
-                @Override
-                public void onBitmapSaveSuccess(File file) {
-                    if (sFilterSelectedListener != null)
-                        sFilterSelectedListener.onFilterSelected(file, mCbApplyAll.isChecked());
-                    Intent intent = new Intent();
-                    intent.putExtra(EXTRA_PATH, file.getAbsolutePath());
-                    intent.putExtra(EXTRA_APPLY_ALL, mCbApplyAll.isChecked());
-                    setResult(Activity.RESULT_OK);
-                    finish();
-                }
-
-                @Override
-                public void onBitmapSaveError(File file) {
-
-                }
-            });
-        });
+        mIvCancel.setOnClickListener(this);
+        mIvrOk.setOnClickListener(this);
 
         mIvRotation.setOnClickListener(v -> {
             mRotation = mRotation >= 270 ? 0 : mRotation + 90;
@@ -160,7 +141,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
                 gpuImage.deleteImage();
             } catch (OutOfMemoryError error) {
                 error.printStackTrace();
-                LUtils.toast("您的内存炸了");
+                LUtils.toast("内存不够用啦~");
                 if (bitmap != null) {
                     bitmap.recycle();
                 }
@@ -169,17 +150,36 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         }
     }
 
-    public interface OnFilterSelectedListener {
-        void onFilterSelected(File file, boolean applyAll);
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.iv_filter_cancel) {
+            finish();
+        } else {
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File mediaStorageDirectory = new File(path, "YJY/");
+            mIvCropImage.saveBitmapToFile(mediaStorageDirectory, 800, 800, false);
+            mIvCropImage.setOnBitmapSaveCompleteListener(new CropImageView.OnBitmapSaveCompleteListener() {
+                @Override
+                public void onBitmapSaveSuccess(File file) {
+                    if (sListener != null) sListener.onFilterSelected(file, mCbApplyAll.isChecked());
+
+                    Intent intent = new Intent();
+                    intent.putExtra(EXTRA_APPLY_ALL, mCbApplyAll.isChecked());
+                    intent.putExtra(EXTRA_POSITION, mCurPosition);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+
+                @Override
+                public void onBitmapSaveError(File file) {
+
+                }
+            });
+        }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mBitmap != null) {
-            mBitmap.recycle();
-            mBitmap = null;
-        }
+    public interface OnFilterSelectedListener {
+        void onFilterSelected(File file, boolean applyAll);
     }
 
     @Override

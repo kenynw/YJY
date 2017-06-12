@@ -75,7 +75,9 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.MONTH, data.getQuality_time());
-        long overdueTime = Math.min(calendar.getTime().getTime() / 1000, data.getOverdue_time()) + (24*60*60 - 1);
+        long overdueTime = (data.getIs_seal() == 0 ? data.getOverdue_time() :
+                Math.min(calendar.getTime().getTime() / 1000, data.getOverdue_time()))
+                + (24*60*60 - 1);
         int restDay = overdueTime > System.currentTimeMillis() / 1000 ?
                 (int) ((overdueTime - System.currentTimeMillis() / 1000) / 3600 / 24) + 1 : 0;
 

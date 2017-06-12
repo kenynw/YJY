@@ -188,7 +188,7 @@ public class GPUImage {
      */
     public void setImage(final Bitmap bitmap) {
         mCurrentBitmap = bitmap;
-        mRenderer.setImageBitmap(bitmap);
+        mRenderer.setImageBitmap(bitmap, false);
         requestRender();
     }
 

@@ -69,7 +69,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterView
         holder.mIvImage.setImageResource(RES[position]);
         holder.itemView.setOnClickListener(v -> {
 //            GPUImageFilter filter = null;
-            if (mListener != null ) {
+            if (mListener != null) {
                 try {
 //                    filter = createFilter(position);
                     mListener.onItemClick(position);

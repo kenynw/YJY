@@ -31,7 +31,7 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if (hasFocus) {
+        if (hasFocus && !mIsEdit) {
             setText("");
             mIsEdit = true;
         }

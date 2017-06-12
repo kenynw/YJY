@@ -6,10 +6,12 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SendValidateButton;
 
@@ -37,6 +39,9 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
     @BindView(R.id.btn_register_submit)
     Button mBtnSubmit;
 
+    @BindView(R.id.tv_register_protocol)
+    TextView mTvProtocol;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +62,7 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
         mBtnCaptcha.setmEnableString("获取验证码");
         mBtnCaptcha.setOnClickListener(v -> checkCaptcha());
         mBtnSubmit.setOnClickListener(v -> checkInput());
-
+        mTvProtocol.setOnClickListener(v -> WebViewActivity.start(this, "使用条款和隐私政策", "http://m.yjyapp.com/site/user-agreement"));
     }
 
     private void checkCaptcha() {

@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.template;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +16,17 @@ import com.miguan.yjy.widget.ClearEditText;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.fresco.processors.gpu.AmaroFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.BrannanFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.GPUFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.HudsonFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.IF1997FilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.InkwellFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.RiseFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.SierraFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.ValenciaFilterPostprocessor;
+import jp.wasabeef.fresco.processors.gpu.XproIIFilterPostprocessor;
 
 
 /**
@@ -121,6 +131,7 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     public void takeShot(View layout) {
         ScreenShot.getInstance().takeScreenShotOfJustView(layout, (path, uri) -> {
             getView().getExpansionDelegate().hideProgressBar();
+            getView().setHeaderCursor(true);
             TemplatePreferences.setTemplate("");
             for (TemplateView templateView : getView().getTemplateList()) {
                 templateView.completeCapture();
@@ -132,26 +143,58 @@ public class GenTemplatePresenter extends Presenter<GenTemplateActivity> {
     @Override
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
-//            if (requestCode == TemplateView.REQUEST_CODE_FILTER && data != null) {
+        ImageProvider.getInstance(getView()).onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (requestCode == FilterActivity.REQUEST_CODE_FILTER && data != null) {
 //                boolean applyAll = data.getBooleanExtra(FilterActivity.EXTRA_APPLY_ALL, false);
-//                String path  = data.getStringExtra(FilterActivity.EXTRA_PATH);
-//                if (applyAll) {
+//                int position  = data.getIntExtra(FilterActivity.EXTRA_POSITION, 0);
+//                if (applyAll && position > 0) {
 //                    for (TemplateView templateView : getView().getTemplateList()) {
-////                        templateView.
+//                        templateView.setAllFilter(createPostprocessor(position));
 //                    }
-//                } else {
-//
 //                }
 //            }
-        }
+//        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mIsRunning = false;
+    }
+
+    private GPUFilterPostprocessor createPostprocessor(int position) {
+        GPUFilterPostprocessor processor = null;
+        switch (position) {
+            case 1:
+                processor = new AmaroFilterPostprocessor(getView());
+                break;
+            case 2:
+                processor = new BrannanFilterPostprocessor(getView());
+                break;
+            case 3:
+                processor = new HudsonFilterPostprocessor(getView());
+                break;
+            case 4:
+                processor = new InkwellFilterPostprocessor(getView());
+                break;
+            case 5:
+                processor = new RiseFilterPostprocessor(getView());
+                break;
+            case 6:
+                processor = new SierraFilterPostprocessor(getView());
+                break;
+            case 7:
+                processor = new ValenciaFilterPostprocessor(getView());
+                break;
+            case 8:
+                processor = new XproIIFilterPostprocessor(getView());
+                break;
+            case 9:
+                processor = new IF1997FilterPostprocessor(getView());
+                break;
+        }
+        return processor;
     }
 
 }

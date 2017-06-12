@@ -34,7 +34,7 @@ public class UserTextWatcher implements TextWatcher {
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         boolean enabled = true;
         for (TextView editText : mEditTexts) {
-            if (TextUtils.isEmpty(editText.getText())) enabled = false;
+            if (TextUtils.isEmpty(editText.getText().toString().trim())) enabled = false;
         }
 
         mButton.setEnabled(enabled);
@@ -44,4 +44,5 @@ public class UserTextWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
 
     }
+
 }

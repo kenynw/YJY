@@ -10,7 +10,6 @@ import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.main.ArticleDetailPresenter;
-import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
 
@@ -102,7 +101,7 @@ public class MessageReceiver extends BroadcastReceiver {
         } else if (type == 4){ // 产品
             ProductDetailPresenter.start(context, Integer.valueOf(relation));
         } else {
-            Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(context, MsgListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

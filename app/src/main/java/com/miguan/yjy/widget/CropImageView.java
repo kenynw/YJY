@@ -457,6 +457,13 @@ public class CropImageView extends AppCompatImageView {
         return makeCropBitmap(srcBitmap, mFocusRect, getImageMatrixRect(), expectWidth, exceptHeight, isSaveRectangle);
     }
 
+    public Bitmap getBimap() {
+        setDrawingCacheEnabled(true);
+        Bitmap bitmap= getDrawingCache();
+//        setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
     /**
      * @param bitmap  要旋转的图片
      * @param degrees 选择的角度（单位 度）
