@@ -25,6 +25,7 @@ import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
@@ -159,6 +160,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             mIvIsTop.setVisibility(View.GONE);
         }
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
+        mDvThumb.setOnClickListener(v-> LargeImageActivity.start(ProductDetailActivity.this,product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
 
         mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
