@@ -3,8 +3,8 @@
 
     <item android:drawable="@color/white"/>
 
-    <item android:gravity="center">
-        <bitmap  android:src="@mipmap/bg_query" android:gravity="center" />
+    <item>
+        <bitmap android:src="@mipmap/bg_query" />
     </item>
 
 </layer-list>

@@ -15,32 +15,50 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        style="@style/TitleToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
         >
 
-        <FrameLayout
-            android:id="@+id/fl_home_search"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_small"
-            android:layout_marginLeft="@dimen/spacing_large"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:background="@drawable/bg_round_white"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             >
 
-            <TextView
-                android:id="@+id/tv_home_search"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:drawableLeft="@mipmap/ic_home_search"
-                android:drawablePadding="8dp"
-                android:drawableStart="@mipmap/ic_home_search"
-                android:gravity="center"
-                android:hint="@string/hint_brand_name"
-                android:textAppearance="@style/TextCaption"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/status_bar_height"
+                android:background="@color/transparent"
                 />
 
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fl_home_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_small"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:background="@drawable/bg_round_white"
+                >
+
+                <TextView
+                    android:id="@+id/tv_home_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@mipmap/ic_home_search"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@mipmap/ic_home_search"
+                    android:gravity="center"
+                    android:hint="@string/hint_brand_name"
+                    android:textAppearance="@style/TextCaption"
+                    />
+
+            </FrameLayout>
+
+        </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 

@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
+import com.gyf.barlibrary.ImmersionBar;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MainTabPagerAdapter;
 import com.miguan.yjy.model.bean.Version;
@@ -37,6 +38,8 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
+
+        ImmersionBar.with(this).statusBarDarkFont(true);
 
         initTab();
     }

@@ -17,6 +17,11 @@
         android:orientation="vertical"
         >
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/status_bar_height"
+            />
+
         <ImageView
             android:layout_width="@dimen/widget_max"
             android:layout_height="@dimen/widget_max"
