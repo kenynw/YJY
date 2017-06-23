@@ -17,7 +17,6 @@
         style="@style/BaseImage"
         android:layout_width="98dp"
         android:layout_height="98dp"
-
         />
 
     <LinearLayout
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:textAppearance="@style/TextSubhead"
-            tools:text="雷暴虽基材奇才苦蘮索罗斯f雷暴虽基材奇才苦蘮索罗斯f雷暴虽基材奇才苦"
+            tools:text="CeraVeR面部夜间补水保湿乳液"
             />
 
         <RatingBar

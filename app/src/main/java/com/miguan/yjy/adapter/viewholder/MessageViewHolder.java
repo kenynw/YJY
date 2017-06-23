@@ -10,7 +10,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Message;
-import com.miguan.yjy.module.main.ArticleDetailPresenter;
+import com.miguan.yjy.module.article.ArticleDetailPresenter;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.SpanUtils;
 

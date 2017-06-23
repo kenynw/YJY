@@ -3,8 +3,11 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Copyright (c) 2017/3/24. LiaoPeiKun Inc. All rights reserved.
@@ -12,9 +15,10 @@ import java.util.Date;
 
 public class Evaluate implements Parcelable {
 
+    @SerializedName(value = "id", alternate = {"comment_id"})
     private int id;
 
-    private int user_id;
+    private int post_id;
 
     private int type;
 
@@ -22,27 +26,37 @@ public class Evaluate implements Parcelable {
 
     private int like_num;
 
-    private String username;
-
-    private String img;
-
-    private String birth_year;
-
-    private String skin;
-
     private long created_at;
-
-    private Item detail;
-
-    private int age;
 
     private int isLike;
 
-    private int pageTotal;
-
-    private int pageSize;
-
     private int is_digest;
+
+    private String username;
+
+    private String author;
+
+    private String img;
+
+    private String skin;
+
+    private int age;
+
+    private String attachment;
+
+    private int level;
+
+    private User user;
+
+    private Product product;
+
+    private Item detail;
+
+    private Evaluate reply;
+
+    private List<Evaluate> replyList;
+
+    private String replyUserName;
 
     public int getIs_digest() {
         return is_digest;
@@ -57,6 +71,18 @@ public class Evaluate implements Parcelable {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
     }
 
     public int getType() {
@@ -84,18 +110,6 @@ public class Evaluate implements Parcelable {
         this.detail = detail;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -112,12 +126,28 @@ public class Evaluate implements Parcelable {
         this.like_num = like_num;
     }
 
+    public int getIsLike() {
+        return isLike;
+    }
+
+    public void setIsLike(int isLike) {
+        this.isLike = isLike;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getImg() {
@@ -128,30 +158,6 @@ public class Evaluate implements Parcelable {
         this.img = img;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getBirth_year() {
-        return birth_year;
-    }
-
-    public void setBirth_year(String birth_year) {
-        this.birth_year = birth_year;
-    }
-
-    public int getPageTotal() {
-        return pageTotal;
-    }
-
-    public void setPageTotal(int pageTotal) {
-        this.pageTotal = pageTotal;
-    }
-
     public String getSkin() {
         return skin;
     }
@@ -160,23 +166,72 @@ public class Evaluate implements Parcelable {
         this.skin = skin;
     }
 
-    public int getIsLike() {
-        return isLike;
+    public int getAge() {
+        return age;
     }
 
-    public void setIsLike(int isLike) {
-        this.isLike = isLike;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public String getAttachment() {
+        return attachment;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Evaluate getReply() {
+        return reply;
+    }
+
+    public void setReply(Evaluate reply) {
+        this.reply = reply;
+    }
+
+    public List<Evaluate> getReplyList() {
+        return replyList;
+    }
+
+    public void setReplyList(List<Evaluate> replyList) {
+        this.replyList = replyList;
+    }
+
+    public String getReplyUserName() {
+        return replyUserName;
+    }
+
+    public void setReplyUserName(String replyUserName) {
+        this.replyUserName = replyUserName;
     }
 
     public static class Item implements Parcelable {
+
         private int id;
 
         private String name;
@@ -273,40 +328,36 @@ public class Evaluate implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
-        dest.writeInt(this.user_id);
         dest.writeInt(this.type);
         dest.writeString(this.comment);
         dest.writeInt(this.like_num);
+        dest.writeLong(this.created_at);
+        dest.writeInt(this.isLike);
+        dest.writeInt(this.is_digest);
         dest.writeString(this.username);
         dest.writeString(this.img);
-        dest.writeString(this.birth_year);
         dest.writeString(this.skin);
-        dest.writeLong(this.created_at);
-        dest.writeParcelable(this.detail, flags);
         dest.writeInt(this.age);
-        dest.writeInt(this.isLike);
-        dest.writeInt(this.pageTotal);
-        dest.writeInt(this.pageSize);
-        dest.writeInt(this.is_digest);
+        dest.writeParcelable(this.user, flags);
+        dest.writeParcelable(this.product, flags);
+        dest.writeParcelable(this.detail, flags);
     }
 
     protected Evaluate(Parcel in) {
         this.id = in.readInt();
-        this.user_id = in.readInt();
         this.type = in.readInt();
         this.comment = in.readString();
         this.like_num = in.readInt();
+        this.created_at = in.readLong();
+        this.isLike = in.readInt();
+        this.is_digest = in.readInt();
         this.username = in.readString();
         this.img = in.readString();
-        this.birth_year = in.readString();
         this.skin = in.readString();
-        this.created_at = in.readLong();
-        this.detail = in.readParcelable(Item.class.getClassLoader());
         this.age = in.readInt();
-        this.isLike = in.readInt();
-        this.pageTotal = in.readInt();
-        this.pageSize = in.readInt();
-        this.is_digest = in.readInt();
+        this.user = in.readParcelable(User.class.getClassLoader());
+        this.product = in.readParcelable(Product.class.getClassLoader());
+        this.detail = in.readParcelable(Item.class.getClassLoader());
     }
 
     public static final Creator<Evaluate> CREATOR = new Creator<Evaluate>() {

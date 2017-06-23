@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.main;
+package com.miguan.yjy.module.article;
 
 import android.app.Activity;
 import android.content.Context;
@@ -63,7 +63,7 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
 
     @Override
     public void onLoadMore() {
-        ArticleModel.getInstance().getEvaluateList(mArticleId, getCurPage(), "").unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getEvaluateList(mArticleId, "", getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
     @Override

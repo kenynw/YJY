@@ -6,7 +6,7 @@ ext {
             minSdkVersion               : 15,
             targetSdkVersion            : 26,
             versionCode                 : 3,
-            versionName                 : "1.0.4",
+            versionName                 : "1.1",
     ]
 
     version = [
@@ -29,7 +29,7 @@ ext {
             "butterknife-compiler"      : "com.jakewharton:butterknife-compiler:${version["butterknife"]}",
             "pickerview"                : "com.contrarywind:Android-PickerView:3.2.2",
             "swipelayout"               : "com.daimajia.swipelayout:library:1.2.0@aar",
-            "photoview"                 : "com.github.chrisbanes.photoview:library:1.2.3",
+            "photoview"                 : "com.github.chrisbanes:PhotoView:2.0.0",
 
             // rx1
             "rxandroid"                : "io.reactivex:rxandroid:1.2.1",

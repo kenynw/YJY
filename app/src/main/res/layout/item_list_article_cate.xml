@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:maxLength="4"
+            android:text="@string/text_hot_article"
+            android:textColor="#555"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+        <TextView
+            android:id="@+id/tv_article_cate_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="25dp"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:paddingTop="@dimen/spacing_large"
+            android:text="@string/text_to_more"
+            android:textAppearance="@style/TextCaption"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recy_article_cate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_article_cate_more"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/item_list_evaluate_commend"/>
+
+</LinearLayout>

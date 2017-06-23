@@ -1,4 +1,4 @@
-package com.miguan.yjy.adapter.viewholder;
+package com.miguan.yjy.module.article;
 
 import android.net.Uri;
 import android.view.View;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.module.main.ArticleDetailPresenter;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import butterknife.BindView;
@@ -59,6 +58,7 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
         if (data.getDetail() != null) {
             if (data.getType() == 1) {
                 mLlArticle.setVisibility(View.GONE);
+                mLlProduct.setVisibility(View.VISIBLE);
                 mDvProductImg.setImageURI(Uri.parse(data.getDetail().getImg()));
                 mTvProductName.setText(data.getDetail().getName());
                 mTvProductSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getDetail().getPrice(),
@@ -66,6 +66,7 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
                 mLlProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getDetail().getId()));
             } else {
                 mLlProduct.setVisibility(View.GONE);
+                mLlArticle.setVisibility(View.VISIBLE);
                 mDvArticleThumb.setImageURI(Uri.parse(data.getDetail().getImg()));
                 mTvArticleTitle.setText(data.getDetail().getName());
                 mLlArticle.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getDetail().getId()));

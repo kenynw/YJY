@@ -12,8 +12,9 @@ import com.jude.exgridview.ExGridView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BannerPagerAdapter;
 import com.miguan.yjy.adapter.CategoryAdapter;
+import com.miguan.yjy.adapter.viewholder.ArticleCate;
 import com.miguan.yjy.model.ArticleModel;
-import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
@@ -23,6 +24,8 @@ import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -30,7 +33,9 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Article> {
+public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate> {
+
+    private ArrayList<ArticleCate> mArticleCates;
 
     @Override
     protected void onCreateView(HomeFragment view) {
@@ -42,17 +47,22 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     public void onRefresh() {
         ArticleModel.getInstance().getHomeList()
                 .map(home -> {
+                    mArticleCates = home.getArticleGory();
                     getView().setSearchHint(home.getNum());
                     getAdapter().removeAllHeader();
                     getAdapter().addHeader(new HomeHeader(home));
-                    return home.getArticle();
+                    return home.getEvaluateList();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        ArticleModel.getInstance().getArticleList(0,getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getEssenceList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+    }
+
+    public ArrayList<ArticleCate> getArticleCates() {
+        return mArticleCates;
     }
 
     public class HomeHeader implements RecyclerArrayAdapter.ItemView {

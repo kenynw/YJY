@@ -92,6 +92,16 @@ public class UserModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
+    /**
+     * 我回复的列表
+     * @param page 页数
+     * @return 点评列表
+     */
+    public Observable<List<Message>> getReplyList(int page) {
+        return ServicesClient.getServices().userReplyList(UserPreferences.getUserID(), page)
+                .compose(new DefaultTransform<>());
+    }
+
     public Observable<String> modifyPwd(String mobile, String code, String newPwd) {
         return ServicesClient.getServices().modifyPwd(mobile, code, newPwd).compose(new DefaultTransform<>());
     }

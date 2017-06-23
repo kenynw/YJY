@@ -1,9 +1,12 @@
 package com.miguan.yjy.model.bean;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
+import com.miguan.yjy.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 
 public class Product implements Parcelable {
 
+    @SerializedName(value = "id", alternate = {"product_id"})
     private int id;
 
     private String name;
@@ -84,6 +88,11 @@ public class Product implements Parcelable {
     }
 
     private Buy buy;
+
+    public String getSpec(Context context) {
+        return price.equals("0") || TextUtils.isEmpty(price) ? "暂无报价" :
+        String.format(context.getString(R.string.text_product_spec), price, form);
+    }
 
     public int getIs_top() {
         return is_top;

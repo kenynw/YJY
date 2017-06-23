@@ -1,119 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:orientation="vertical"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="@dimen/spacing_large"
     >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/dv_evaluate_avatar"
-        style="@style/BaseAvatar"
-        android:layout_width="@dimen/widget_medium"
-        android:layout_height="@dimen/widget_medium"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        />
-
-    <LinearLayout
-        android:id="@+id/ll_evaluate_user_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/dv_evaluate_avatar"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_toEndOf="@+id/dv_evaluate_avatar"
-        android:layout_toRightOf="@+id/dv_evaluate_avatar"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_evaluate_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15"
-            tools:text="name"/>
-
-        <TextView
-            android:id="@+id/tv_evaluate_user_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:textAppearance="@style/TextCaption"
-            tools:text="年龄"
-            />
-
-        <TextView
-            android:id="@+id/tv_evaluate_essence"
-            android:layout_width="32dp"
-            android:layout_height="16dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_shape_main_color"
-            android:gravity="center"
-            android:text="精华"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_micro_11"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-
-            />
-
-        <LinearLayout
-            android:id="@+id/ll_evaluate_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
-
-            <ImageView
-                android:id="@+id/iv_evaluate_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:src="@mipmap/ic_like_normal"
-                />
-
-            <TextView
-                android:id="@+id/tv_evaluate_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextCaption"
-                tools:text="赞"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_evaluate_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ll_evaluate_user_info"
-        android:layout_alignStart="@id/ll_evaluate_user_info"
-        android:layout_below="@+id/ll_evaluate_user_info"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_body_material"
-        tools:text="清干 | 重敏 | 非色素 | 紧致"
-        />
+    <include layout="@layout/include_evaluate_user"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -126,23 +25,30 @@
         >
 
         <TextView
-            android:id="@+id/tv_evaluate_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lineSpacingMultiplier="1.2"
-            android:textAppearance="@style/TextBody"
-            tools:text="sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰"
+            style="@style/EvaluateContent"
+            android:layout_marginTop="0dp"
+            tools:text="sssss记得哈空间逛哈空间是个哈喽科技股好卡吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰"
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_evaluate_thumb"
+            style="@style/BaseImage"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:roundedCornerRadius="4dp"
             />
 
         <TextView
-            android:id="@+id/tv_evaluate_collapse"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_evaluate_reply"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_body_material"
-            tools:text="查看全文"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="@color/bgWindow"
+            android:lineSpacingExtra="4dp"
+            android:padding="@dimen/spacing_small"
+            android:textAppearance="@style/TextBody"
+            tools:text="回复：海沟买起来毒蛇猛兽方便海沟买起来毒蛇猛兽方便海沟买起来毒蛇猛兽方便海沟买起来毒蛇猛兽方便"
             />
 
         <View

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/item_list_evaluate"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_evaluate_avatar"
+        style="@style/BaseAvatar"
+        android:layout_width="@dimen/widget_medium"
+        android:layout_height="@dimen/widget_medium"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_evaluate_user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/dv_evaluate_avatar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_toEndOf="@id/dv_evaluate_avatar"
+        android:layout_toRightOf="@id/dv_evaluate_avatar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_evaluate_user_name"
+            tools:text="name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_15"/>
+
+        <TextView
+            android:id="@+id/tv_evaluate_user_age"
+            tools:text="年龄"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:textAppearance="@style/TextCaption"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluate_essence"
+            android:layout_width="32dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_shape_main_color"
+            android:gravity="center"
+            android:text="精华"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_micro_11"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_evaluate_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/iv_evaluate_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:src="@mipmap/ic_like_normal"
+                />
+
+            <TextView
+                android:id="@+id/tv_evaluate_like"
+                tools:text="赞"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextCaption"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_evaluate_label"
+        tools:text="清干 | 重敏 | 非色素 | 紧致"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ll_evaluate_user_info"
+        android:layout_alignStart="@id/ll_evaluate_user_info"
+        android:layout_below="@+id/ll_evaluate_user_info"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+</merge>

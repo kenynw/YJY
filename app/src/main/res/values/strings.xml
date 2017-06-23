@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">颜究院</string>
 
+    <string name="text_hot_article">热门文章</string>
+    <string name="text_to_more">查看更多></string>
     <string name="text_add_comment">发评论</string>
     <string name="text_article_detail">文章详情</string>
+    <string name="text_evaluate_detail">回复详情</string>
+    <string name="text_evaluate_reply_from"><![CDATA[<font color="#32DAC3">%1$s</font>：%2$s]]></string>
+    <string name="text_evaluate_reply_to"><![CDATA[回复<font color="#32DAC3">%1$s</font>：%2$s]]></string>
     <string name="text_article_evaluate">回复(%d)</string>
     <string name="text_brand">品牌</string>
     <string name="text_brand_list">品牌列表</string>
@@ -96,6 +101,7 @@
     <string name="btn_me_used">我在用的</string>
     <string name="btn_me_like">我长草的</string>
     <string name="btn_me_evaluate">我点评的</string>
+    <string name="btn_me_reply">我回复的</string>
     <string name="btn_me_star">我收藏的</string>
     <string name="btn_me_message">我的消息</string>
     <string name="btn_query_batch_no">查询护肤品批号</string>

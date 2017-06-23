@@ -2,7 +2,7 @@
 
     <dimen name="spacing_huge">45dp</dimen>
     <dimen name="spacing_large">20dp</dimen>
-    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_normal">15dp</dimen>
     <dimen name="spacing_small">10dp</dimen>
     <dimen name="spacing_tiny">4dp</dimen>
 

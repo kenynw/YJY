@@ -27,8 +27,6 @@ import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
 
-//    private RefWatcher mRefWatcher;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -39,7 +37,6 @@ public class App extends Application {
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
         if (!LUtils.isDebug) AppCrashHandler.getInstance(this);
-//        mRefWatcher = LeakCanary.install(this);
 
         JPushInterface.setDebugMode(LUtils.isDebug); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
@@ -52,15 +49,10 @@ public class App extends Application {
         }
     }
 
-//    public static RefWatcher getRefWatcher(Context context) {
-//        App application = (App) context.getApplicationContext();
-//        return application.mRefWatcher;
-//    }
-
     // 初始化友盟分享
     public void initShare() {
         UMShareAPI.get(this);
-        Config.DEBUG = true;
+        Config.DEBUG = LUtils.isDebug;
         PlatformConfig.setSinaWeibo("1021526955", "834ae396d830ddf5cb4eafab4189e74b", "http://sns.whalecloud.com/sina2/callback");
         PlatformConfig.setWeixin("wxd949cf326bc0972f", "962b92d13242d27ed55e9e44230eb744");
     }

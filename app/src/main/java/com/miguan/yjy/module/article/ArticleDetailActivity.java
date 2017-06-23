@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.main;
+package com.miguan.yjy.module.article;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -20,12 +20,12 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.viewholder.EvaluateViewHolder;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.module.common.WebViewOB;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 
 /**
@@ -103,7 +103,7 @@ public class ArticleDetailActivity extends BaseListActivity<ArticleDetailPresent
         mWebView.loadUrl(article.getLinkUrl());
         mTvEvaluateNum.setText(String.format(getString(R.string.text_article_evaluate), article.getComment_num()));
         setStar(article.getIsGras() == 1);
-        mFlComment.setOnClickListener(v -> ArticleEvaluatePresenter.start(this, article.getId()));
+        mFlComment.setOnClickListener(v -> AddEvaluatePresenter.start(this, article.getId(), 2, 0));
     }
 
     public void setStar(boolean isStar) {

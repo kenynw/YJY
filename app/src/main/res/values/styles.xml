@@ -92,5 +92,12 @@
         <item name="android:textStyle">italic</item>
     </style>
 
+    <style name="TabLayout">
+        <item name="com.miguan.yjy:tabIndicatorColor">@color/colorPrimary</item>
+        <item name="com.miguan.yjy:tabIndicatorHeight">4dp</item>
+        <item name="com.miguan.yjy:tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="com.miguan.yjy:tabTextAppearance">@style/TextBody</item>
+        <item name="com.miguan.yjy:tabTextColor">@color/textPrimary</item>
+    </style>
 
 </resources>

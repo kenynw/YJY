@@ -20,6 +20,10 @@ public class User implements Parcelable {
     @SerializedName(value = "username", alternate = {"user_name"})
     private String username;
 
+    private int age;
+
+    private String skin;
+
     private int sex;
 
     private String status;
@@ -110,6 +114,22 @@ public class User implements Parcelable {
 
     public void setSex(int sex) {
         this.sex = sex;
+    }
+
+    public String getSkin() {
+        return skin;
+    }
+
+    public void setSkin(String skin) {
+        this.skin = skin;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getStatus() {
@@ -250,6 +270,8 @@ public class User implements Parcelable {
         dest.writeInt(this.user_id);
         dest.writeString(this.img);
         dest.writeString(this.username);
+        dest.writeInt(this.age);
+        dest.writeString(this.skin);
         dest.writeInt(this.sex);
         dest.writeString(this.status);
         dest.writeString(this.birth_year);
@@ -275,6 +297,8 @@ public class User implements Parcelable {
         this.user_id = in.readInt();
         this.img = in.readString();
         this.username = in.readString();
+        this.age = in.readInt();
+        this.skin = in.readString();
         this.sex = in.readInt();
         this.status = in.readString();
         this.birth_year = in.readString();

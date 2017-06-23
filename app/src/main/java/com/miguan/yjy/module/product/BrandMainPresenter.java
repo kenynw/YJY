@@ -45,7 +45,7 @@ public class BrandMainPresenter extends BaseDataActivityPresenter<BrandMainActiv
     }
 
     public void onRefresh() {
-        ArticleModel.getInstance().getArticleList(brandId, 1)
+        ArticleModel.getInstance().getArticleList(brandId, 0, 1)
                 .flatMap(new Func1<List<Article>, Observable<BrandAll>>() {
                     @Override
                     public Observable<BrandAll> call(List<Article> articles) {

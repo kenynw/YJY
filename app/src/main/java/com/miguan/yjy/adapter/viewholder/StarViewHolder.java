@@ -9,7 +9,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Article;
-import com.miguan.yjy.module.main.ArticleDetailPresenter;
+import com.miguan.yjy.module.article.ArticleDetailPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

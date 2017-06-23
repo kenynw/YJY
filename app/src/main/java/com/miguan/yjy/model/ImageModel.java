@@ -63,8 +63,8 @@ public class ImageModel extends AbsModel {
      *
      * @return
      */
-    public Observable<String> uploadImageAsync(String path, String filePath) {
-        return Observable.just(createFilePath(path))
+    public Observable<String> uploadImageAsync(String ossPath, String filePath) {
+        return Observable.just(createFilePath(ossPath))
                 .doOnNext(s -> {
                     // 构造上传请求
                     PutObjectRequest put = new PutObjectRequest(OSS_BUCKET, OSS_PATH + s, filePath);
@@ -98,15 +98,15 @@ public class ImageModel extends AbsModel {
      * @param file
      * @return
      */
-    public Observable<String> uploadImageSync(File file) {
-        return Observable.just(createFilePath("photo"))
+    public Observable<String> uploadImageSync(String ossPath, File file) {
+        return Observable.just(createFilePath(ossPath))
                 .flatMap(s -> Observable.create((Observable.OnSubscribe<String>) subscriber -> {
                     // 构造上传请求
                     PutObjectRequest put = new PutObjectRequest(OSS_BUCKET, OSS_PATH + s, file.getPath());
                     try {
                         mOSS.putObject(put);
                         subscriber.onNext(s);
-                        LUtils.toast("图片已上传");
+//                        LUtils.toast("图片已上传");
                     } catch (ClientException e) {
                         e.printStackTrace();
                         subscriber.onError(new Throwable("网络异常"));

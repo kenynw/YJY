@@ -97,7 +97,7 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
             UserPreferences.setIsShowTest(false);
             return;
         }
-        moveTaskToBack(true);
+        finish();
     }
 
 }

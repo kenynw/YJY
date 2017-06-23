@@ -87,22 +87,12 @@
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingBottom="10dp"
-            android:paddingEnd="@dimen/spacing_normal"
-            android:paddingLeft="@dimen/spacing_normal"
-            android:paddingRight="@dimen/spacing_normal"
-            android:paddingStart="@dimen/spacing_normal"
-            android:paddingTop="@dimen/spacing_normal"
-            android:scaleType="fitStart"
-            android:src="@mipmap/ic_article_label_home"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/bg_commend_evaluate"
             />
 
     </LinearLayout>

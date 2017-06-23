@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -16,9 +15,11 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
-import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.module.article.EvaluateArticleViewHolder;
+import com.miguan.yjy.module.article.EvaluateCommendVH;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.product.SearchActivity;
 import com.miguan.yjy.utils.LUtils;
 
@@ -29,30 +30,30 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/17. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(HomeFragmentPresenter.class)
-public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Article> {
+public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evaluate> {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
     @BindView(R.id.fl_home_search)
-    FrameLayout mflSearch;
+    FrameLayout mFlSearch;
 
     @BindView(R.id.tv_home_search)
     TextView mTvSearch;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, view);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ButterKnife.bind(this, getRootView());
 
         getListView().getSwipeToRefresh().setProgressViewOffset(true, 100, 200);
-        getListView().setOnScrollListener(new RecyclerView.OnScrollListener() {
+        getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
             int y = 0;
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 y += dy;
+                if (y < 0) y = 0;
                 float ratio = y * 1.0f / LUtils.dp2px(200) > 1 ? 1 : y * 1.0f / LUtils.dp2px(200);
 
                 int white = changeAlpha(getResources().getColor(R.color.white), ratio);
@@ -62,31 +63,39 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Articl
                 GradientDrawable gd = new GradientDrawable();
                 gd.setColor(Color.argb(255, gray, gray, gray));
                 gd.setCornerRadius(LUtils.dp2px(32));
-                mflSearch.setBackgroundDrawable(gd);
+                mFlSearch.setBackgroundDrawable(gd);
             }
         });
-        return view;
     }
 
     public void setSearchHint(int count) {
         String productNum = String.format(getString(R.string.hint_home_search), count);
         mTvSearch.setText(productNum);
 
-        mflSearch.setOnClickListener(v ->
+        mFlSearch.setOnClickListener(v ->
                 SearchActivity.start(getActivity(), productNum));
     }
 
     @Override
     public ListConfig getListConfig() {
+        SpaceDecoration decoration = new SpaceDecoration(LUtils.dp2px(8));
+        decoration.setPaddingEdgeSide(false);
+        decoration.setPaddingStart(false);
         return super.getListConfig()
-                .hasItemDecoration(false)
+                .setItemDecoration(decoration)
                 .setContainerLayoutRes(R.layout.main_fragment_home)
                 .setFooterNoMoreRes(R.layout.empty_article_list);
     }
 
     @Override
-    public BaseViewHolder<Article> createViewHolder(ViewGroup parent, int viewType) {
-        return new ArticleViewHolder(parent);
+    public BaseViewHolder<Evaluate> createViewHolder(ViewGroup parent, int viewType) {
+        return viewType == 2 ? new EvaluateArticleViewHolder(parent, getPresenter().getArticleCates())
+                : new EvaluateCommendVH(parent);
+    }
+
+    @Override
+    public int getViewType(int position) {
+        return position;
     }
 
     @Override

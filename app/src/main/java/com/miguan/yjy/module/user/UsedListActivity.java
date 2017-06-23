@@ -57,7 +57,7 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
 
     @Override
     public ListConfig getListConfig() {
-        View view = LayoutInflater.from(this).inflate(R.layout.empty_componet_list, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
         TextView tv = (TextView) view.findViewById(R.id.tv_empty);
         tv.setText("还没有添加在用的产品哦~");
 

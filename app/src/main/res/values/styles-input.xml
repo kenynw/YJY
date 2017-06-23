@@ -25,4 +25,12 @@
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
+    <style name="EvaluateContent" parent="TextBody">
+        <item name="android:id">@id/tv_evaluate_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:layout_marginTop">@dimen/spacing_normal</item>
+    </style>
+
 </resources>

@@ -26,12 +26,12 @@ public class ArticleListPresenter extends BaseListFragmentPresenter<ArticleListF
     @Override
     public void onRefresh() {
         super.onRefresh();
-        ArticleModel.getInstance().getArticleList(brandId,1).unsafeSubscribe(getRefreshSubscriber());
+        ArticleModel.getInstance().getArticleList(brandId, 0, 1).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-        ArticleModel.getInstance().getArticleList(brandId,getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getArticleList(brandId, 0, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 }

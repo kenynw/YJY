@@ -1,9 +1,10 @@
-package com.miguan.yjy.adapter.viewholder;
+package com.miguan.yjy.module.article;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.LayoutRes;
+import android.text.Html;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,6 +26,8 @@ import butterknife.BindView;
  */
 
 public class EvaluateViewHolder extends BaseEvaluateViewHolder {
+
+    private int mIsLike;
 
     @BindView(R.id.dv_evaluate_avatar)
     SimpleDraweeView mDvAvatar;
@@ -49,30 +52,51 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
 
     @BindView(R.id.tv_evaluate_label)
     TextView mTvLabel;
+
     @BindView(R.id.tv_evaluate_essence)
     TextView mTvEvaluateEssence;
 
-    private int mIsLike;
+    @BindView(R.id.dv_evaluate_thumb)
+    SimpleDraweeView mDvThumb;
+
+    @BindView(R.id.tv_evaluate_reply)
+    TextView mTvReply;
+
+    private EvaluatePanel mEvaluatePanel;
 
     public EvaluateViewHolder(ViewGroup parent) {
-        super(parent, R.layout.item_list_evaluate);
+        this(parent, R.layout.item_list_evaluate);
+    }
+
+    public EvaluateViewHolder(ViewGroup parent, @LayoutRes int res) {
+        super(parent, res);
+        mEvaluatePanel = new EvaluatePanel(getContext(), itemView);
     }
 
     @Override
     public void setData(Evaluate data) {
         super.setData(data);
-        mDvAvatar.setImageURI(Uri.parse(data.getImg()));
-        mTvUserName.setText(data.getUsername());
-        mTvUserAge.setText(data.getAge() > 0 ? data.getAge() + "岁" : "");
-        mTvLabel.setText(data.getSkin());
-        mTvEvaluateEssence.setVisibility(data.getIs_digest()==1?View.VISIBLE:View.GONE);
+        mEvaluatePanel.setEvaluate(data);
+
+        if (TextUtils.isEmpty(data.getAttachment())) {
+            mDvThumb.setVisibility(View.GONE);
+        } else {
+            mDvThumb.setVisibility(View.VISIBLE);
+            mDvThumb.setImageURI(Uri.parse(data.getAttachment()));
+        }
+
+        if (data.getReply() == null) {
+            mTvReply.setVisibility(View.GONE);
+        } else {
+            mTvReply.setText(Html.fromHtml(String.format(getContext().getString(R.string.text_evaluate_reply_from),
+                    data.getReply().getAuthor(), data.getReply().getComment())));
+        }
+
+    }
+
+    protected void setLike(Evaluate data) {
         mIvLike.setImageResource(data.getIsLike() == 0 ? R.mipmap.ic_like_normal : R.mipmap.ic_like_pressed);
         mTvLike.setText(data.getLike_num() > 0 ? String.valueOf((data.getLike_num())) : "赞");
-        mIsLike = data.getIsLike();
-        if (TextUtils.isEmpty(data.getSkin())) {
-            mTvLabel.setVisibility(View.GONE);
-            mLlUserInfo.setGravity(Gravity.CENTER_VERTICAL);
-        }
         mLlEvaluateLike.setOnClickListener(v -> {
             if (UserPreferences.getUserID() > 0) {
                 ArticleModel.getInstance().addEvaluateLike(data.getId())

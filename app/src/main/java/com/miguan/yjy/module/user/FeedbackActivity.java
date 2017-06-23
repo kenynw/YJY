@@ -28,7 +28,7 @@ public class FeedbackActivity extends ChainBaseActivity<FeedbackPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.common_activity_input);
+        setContentView(R.layout.article_activity_add_evaluate);
         setToolbarTitle(R.string.btn_feedback);
         ButterKnife.bind(this);
 

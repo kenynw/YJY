@@ -12,7 +12,7 @@ import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.Banner;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.module.main.ArticleDetailPresenter;
+import com.miguan.yjy.module.article.ArticleDetailPresenter;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 
 import java.util.ArrayList;

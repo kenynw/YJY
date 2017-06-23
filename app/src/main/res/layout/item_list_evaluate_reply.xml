@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="@dimen/spacing_large"
+    >
+
+    <include layout="@layout/include_evaluate_user"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ll_evaluate_user_info"
+        android:layout_alignStart="@id/ll_evaluate_user_info"
+        android:layout_below="@+id/tv_evaluate_label"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            style="@style/EvaluateContent"
+            android:layout_marginTop="0dp"
+            tools:text="sssss记得哈空间逛哈空间是个哈喽科技股好卡吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰sssss记得哈空间逛哈空间是个哈喽科技股好卡ss吉林森工航空烈士骨灰"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluate_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textAppearance="@style/TextCaption"
+            android:textColor="@color/textHint"
+            tools:text="17-04-00 20：39"
+            />
+
+        <View
+            style="@style/ItemLineHeight"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:background="#EBEBEB"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

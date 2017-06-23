@@ -47,7 +47,7 @@ public class ProductReadActivity extends BaseListActivity<ProductReadPresenter> 
 
     @Override
     public ListConfig getListConfig() {
-        View emptyView = getLayoutInflater().inflate(R.layout.empty_componet_list, getListView());
+        View emptyView = getLayoutInflater().inflate(R.layout.empty_common_list, getListView());
         return super.getListConfig()
                 .setContainerLayoutRes(R.layout.product_activity_read)
                 .setContainerEmptyView(emptyView)

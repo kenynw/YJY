@@ -3,6 +3,9 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.miguan.yjy.adapter.viewholder.ArticleCate;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,13 +14,23 @@ import java.util.List;
 
 public class Home implements Parcelable {
 
+    private int num;
+
     private List<Banner> banner;
 
     private List<Category> category;
 
-    private List<Article> article;
+    private ArrayList<ArticleCate> articleGory;
 
-    private int num;
+    private List<Evaluate> essence;
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
 
     public List<Banner> getBanner() {
         return banner;
@@ -35,20 +48,23 @@ public class Home implements Parcelable {
         this.category = category;
     }
 
-    public List<Article> getArticle() {
-        return article;
+    public ArrayList<ArticleCate> getArticleGory() {
+        return articleGory;
     }
 
-    public void setArticle(List<Article> article) {
-        this.article = article;
+    public void setArticleGory(ArrayList<ArticleCate> articleGory) {
+        this.articleGory = articleGory;
     }
 
-    public int getNum() {
-        return num;
+    public List<Evaluate> getEvaluateList() {
+        return essence;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setEvaluateList(List<Evaluate> recommendComment) {
+        this.essence = recommendComment;
+    }
+
+    public Home() {
     }
 
     @Override
@@ -58,20 +74,19 @@ public class Home implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.num);
         dest.writeTypedList(this.banner);
         dest.writeTypedList(this.category);
-        dest.writeTypedList(this.article);
-        dest.writeInt(this.num);
-    }
-
-    public Home() {
+        dest.writeTypedList(this.articleGory);
+        dest.writeTypedList(this.essence);
     }
 
     protected Home(Parcel in) {
+        this.num = in.readInt();
         this.banner = in.createTypedArrayList(Banner.CREATOR);
         this.category = in.createTypedArrayList(Category.CREATOR);
-        this.article = in.createTypedArrayList(Article.CREATOR);
-        this.num = in.readInt();
+        this.articleGory = in.createTypedArrayList(ArticleCate.CREATOR);
+        this.essence = in.createTypedArrayList(Evaluate.CREATOR);
     }
 
     public static final Creator<Home> CREATOR = new Creator<Home>() {

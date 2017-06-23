@@ -23,6 +23,7 @@ import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.EvaluateListActivity;
 import com.miguan.yjy.module.user.FaceScorePresenter;
@@ -30,6 +31,7 @@ import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.module.user.MsgListActivity;
 import com.miguan.yjy.module.user.ProductLikeListActivity;
 import com.miguan.yjy.module.user.ProfilePresenter;
+import com.miguan.yjy.module.user.ReplyListActivity;
 import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.widget.SharePopupWindow;
@@ -75,6 +77,9 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     @BindView(R.id.btn_me_comment)
     Button mBtnComment;
 
+    @BindView(R.id.btn_me_reply)
+    Button mBtnReply;
+
     @BindView(R.id.btn_me_star)
     Button mBtnStar;
 
@@ -106,6 +111,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mBtnUsed.setOnClickListener(v -> startActivity(new Intent(getActivity(), UsedListActivity.class)));
         mBtnLike.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProductLikeListActivity.class)));
         mBtnComment.setOnClickListener(v -> startActivity(new Intent(getActivity(), EvaluateListActivity.class)));
+        mBtnReply.setOnClickListener(v -> startActivity(new Intent(getActivity(), ReplyListActivity.class)));
         mBtnStar.setOnClickListener(v -> startActivity(new Intent(getActivity(), StarListActivity.class)));
         mBtnMessage.setOnClickListener(v -> startActivity(new Intent(getActivity(), MsgListActivity.class)));
         mBtnQueryNo.setOnClickListener(v -> startActivity(new Intent(getActivity(), QueryCodeActivity.class)));
@@ -132,6 +138,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     @Override
     public void setData(User user) {
         mLlInfo.setOnClickListener(v -> ProfilePresenter.start(getActivity(), user));
+        mDvAvatar.setOnClickListener(v -> LargeImageActivity.start(getActivity(), user.getImg()));
         mDvAvatar.setImageURI(Uri.parse(user.getImg()));
         mTvUsername.setText(user.getUsername());
         mTvSkin.setText(user.getSkin_name());

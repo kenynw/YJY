@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.miguan.yjy.adapter.viewholder.EvaluateViewHolder;
+import com.miguan.yjy.module.article.EvaluateViewHolder;
 import com.miguan.yjy.model.bean.Evaluate;
 
 import java.util.List;

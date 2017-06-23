@@ -100,6 +100,10 @@ public abstract class BaseListFragment<P extends BaseListFragmentPresenter, M> e
         return mListView;
     }
 
+    public View getRootView() {
+        return mRootView;
+    }
+
     public void stopRefresh() {
         if (mListView != null) mListView.setRefreshing(false);
     }

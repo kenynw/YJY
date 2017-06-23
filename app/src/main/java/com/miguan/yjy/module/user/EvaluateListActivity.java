@@ -13,7 +13,7 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.viewholder.EvaluateMeViewHolder;
+import com.miguan.yjy.module.article.EvaluateMeViewHolder;
 import com.miguan.yjy.utils.LUtils;
 
 /**
@@ -36,7 +36,7 @@ public class EvaluateListActivity extends BaseListActivity<EvaluateListPresenter
 
     @Override
     public ListConfig getListConfig() {
-        View view = LayoutInflater.from(this).inflate(R.layout.empty_componet_list, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
         TextView tv = (TextView) view.findViewById(R.id.tv_empty);
         tv.setText("还没有点评过任何产品哦~");
 

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item type="id" name="containerId" />
+    <item name="containerId" type="id"/>
 
-    <item type="id" name="dv_template_avatar" />
-    <item type="id" name="tv_template_username" />
-    <item type="id" name="tv_template_time" />
-    <item type="id" name="template_view_item" />
+    <item name="dv_template_avatar" type="id"/>
+    <item name="tv_template_username" type="id"/>
+    <item name="tv_template_time" type="id"/>
+    <item name="template_view_item" type="id"/>
 
-    <item name="id_stickynavlayout_topview" type="id" />
-    <item name="id_stickynavlayout_viewpager" type="id" />
-    <item name="id_stickynavlayout_tab" type="id" />
+    <item name="id_stickynavlayout_topview" type="id"/>
+    <item name="id_stickynavlayout_viewpager" type="id"/>
+    <item name="id_stickynavlayout_tab" type="id"/>
+
+    <item name="tv_evaluate_content" type="id"/>
 
 </resources>

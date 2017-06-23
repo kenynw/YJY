@@ -213,6 +213,19 @@ public interface Services {
     );
 
     /**
+     * 我回复的列表
+     *
+     * @param userId 用户ID
+     * @param page   当前页数
+     * @return
+     */
+    @GET("?action=userReply")
+    Observable<List<Message>> userReplyList(
+            @Query("user_id") int userId,
+            @Query("page") int page
+    );
+
+    /**
      * 我收藏的列表
      *
      * @param userId 用户ID
@@ -286,6 +299,19 @@ public interface Services {
     ////////////////////产品&&文章//////////////////////
 
     /**
+     * 精华点评列表
+     *
+     * @param userId   用户ID 可空
+     * @param page      当前页数
+     * @return
+     */
+    @GET("?action=essenceList")
+    Observable<List<Evaluate>> essenceList(
+            @Query("user_id") int userId,
+            @Query("page") int page
+    );
+
+    /**
      * 产品或文章评论列表
      *
      * @param id        产品或文章的ID
@@ -299,19 +325,46 @@ public interface Services {
     @GET("?action=commentList")
     Observable<List<Evaluate>> evaluateList(
             @Query("id") int id,
-            @Query("page") int page,
-            @Query("pageSize") int pageSize,
             @Query("user_id") int user_id,
             @Query("type") int type,
             @Query("orderBy") String orderBy,
-            @Query("condition") String condition
+            @Query("condition") String condition,
+            @Query("page") int page
+    );
+
+    /**
+     * 回复评论列表
+     *
+     * @param id        产品或文章的ID
+     * @param page      当前页数
+     * @param user_id   用户ID 可空
+     * @return
+     */
+    @GET("?action=commentReplyList")
+    Observable<List<Evaluate>> replyList(
+            @Query("id") int id,
+            @Query("user_id") int user_id,
+            @Query("page") int page
+    );
+
+    /**
+     * 评论详情
+     *
+     * @param id        评论的ID
+     * @param user_id   用户ID 可空
+     * @return
+     */
+    @GET("?action=commentInfo")
+    Observable<Evaluate> evaluateDetail(
+            @Query("id") int id,
+            @Query("user_id") int user_id
     );
 
     /**
      * 产品或文章添加评论
      *
      * @param id      产品或文章的ID
-     * @param user_id 用户ID 可空
+     * @param userId 用户ID 可空
      * @param type    类型 1-产品，2-文章
      * @param star    星级(文章可不传)
      * @param content 评论内容
@@ -320,9 +373,11 @@ public interface Services {
     @GET("?action=addComment")
     Observable<String> addEvaluate(
             @Query("id") int id,
-            @Query("user_id") int user_id,
+            @Query("user_id") int userId,
             @Query("type") int type,
             @Query("star") int star,
+            @Query("parent_id") int parentId,
+            @Query("attachment") String image,
             @Query("comment") String content
     );
 
@@ -473,6 +528,7 @@ public interface Services {
     Observable<List<Article>> articleList(
             @Query("user_id") int user_id,
             @Query("brand_id") long brand_id,
+            @Query("category_id") long category_id,
             @Query("page") int page
     );
 
