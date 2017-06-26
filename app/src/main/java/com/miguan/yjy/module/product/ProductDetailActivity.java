@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -27,6 +28,7 @@ import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.module.question.AskListActivityPresenter;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
@@ -35,6 +37,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * @作者 cjh
@@ -138,6 +141,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     LinearLayout mLlRead;
     @BindView(R.id.iv_is_top)
     ImageView mIvIsTop;
+
+    @BindView(R.id.btn_product_detail_ask)
+    Button mBtnAsk;
 
     private boolean mIsLike;
 
@@ -263,6 +269,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         });
 
         mTvTemplate.setOnClickListener(v -> AddRepositoryPresenter.start(this, null, "", product));
+        mBtnAsk.setOnClickListener(v -> AskListActivityPresenter.start(this, product.getId()));
     }
 
     // 设置长草图标样式

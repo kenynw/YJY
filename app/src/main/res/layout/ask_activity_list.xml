@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/spacing_small"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_small"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_ask_product_image"
+            style="@style/BaseImage"
+            android:layout_width="40dp"
+            android:layout_height="34dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_ask_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:textColor="@color/textSecondary"
+            android:textSize="15sp"
+            tools:text="关于理肤泉特安舒缓修护乳的问题"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_ask_list_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:text="@string/text_ask_list_empty"
+        />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <com.miguan.yjy.widget.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_max"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/text_to_ask_used"
+        android:textColor="@color/white"
+        app:isShowState="true"
+        app:solid="@color/colorPrimary"
+        app:state_drawable="@mipmap/ic_to_ask"
+        app:state_drawable_height="18dp"
+        app:state_drawable_mode="left"
+        app:state_drawable_padding_left="@dimen/spacing_tiny"
+        app:state_drawable_width="18dp"
+        />
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">颜究院</string>
 
+    <string name="text_null">无</string>
     <string name="text_hot_article">热门文章</string>
     <string name="text_to_more">查看更多></string>
     <string name="text_add_comment">发评论</string>
@@ -81,6 +82,12 @@
     <string name="text_template_4_content">美宝莲这款产品，号称毛孔橡皮擦~\n啫喱质感，清清爽爽，效果是立竿见影的好！\n两颊毛孔立马消失，而且一天下来也完全不会显油腻。</string>
     <string name="text_template_5_desc">薄涂有点像樱花粉，厚涂是偏玫瑰的水红色\n完全不显唇纹，滋润度很高，除了贵，没其他毛病</string>
     <string name="text_template_5_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>
+    <string name="text_ask_product_name"><![CDATA[关于<font color="#222222">%s</font>的问题]]></string>
+    <string name="text_ask_list_empty">暂无问题，我来提一个吧</string>
+    <string name="text_ask">问</string>
+    <string name="text_answer">答</string>
+    <string name="text_view_more_answer">查看%d个回答</string>
+    <string name="text_to_ask_used">向用过的人提问</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -118,6 +125,7 @@
     <string name="btn_gen">生成</string>
     <string name="btn_from_camera">拍照</string>
     <string name="btn_from_gallery">从相册中上传</string>
+    <string name="btn_to_ask">去提问</string>
 
     <string name="hint_add_comment">写评论…</string>
     <string name="hint_home_search">查询%d种护肤品的成分和功效</string>

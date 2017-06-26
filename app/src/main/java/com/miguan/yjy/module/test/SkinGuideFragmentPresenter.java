@@ -61,13 +61,13 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
     @Override
     public void onRefresh() {
         super.onRefresh();
-        ArticleModel.getInstance().getArticleList(0, 1).unsafeSubscribe(getRefreshSubscriber());
+        ArticleModel.getInstance().getArticleList(0, 0, 1).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-        ArticleModel.getInstance().getArticleList(0, getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        ArticleModel.getInstance().getArticleList(0, 0, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
 }

@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.module.product.EvaluateDetailPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

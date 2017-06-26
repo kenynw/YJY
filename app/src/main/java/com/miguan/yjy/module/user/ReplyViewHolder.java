@@ -7,7 +7,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
-import com.miguan.yjy.module.product.EvaluateDetailPresenter;
+import com.miguan.yjy.module.article.EvaluateDetailPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

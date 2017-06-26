@@ -169,7 +169,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
             mInSearchMode = (keyword.length() > 0);
 
-            if (mInSearchMode) {
+            if (mInSearchMode && getPresenter().getBrandList() != null) {
                 for (Brand brand : getPresenter().getBrandList()) {
                     boolean isPinyin = brand.getLetter().contains(keyword);
                     boolean isChinese = brand.getName().contains(keyword);

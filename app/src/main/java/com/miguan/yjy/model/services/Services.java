@@ -2,6 +2,7 @@ package com.miguan.yjy.model.services;
 
 
 import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.EntityRoot;
@@ -557,6 +558,21 @@ public interface Services {
             @Query("user_id") int user_id,
             @Query("type") int type
     );
+
+    ////////////////////提问//////////////////////
+
+    /**
+     * 提问列表
+     *
+     * @param productId      产品或文章ID
+     * @return
+     */
+    @GET("?action=askList")
+    Observable<Ask> askList(
+            @Query("product_id") int productId,
+            @Query("page") int page
+    );
+
 
     ////////////////////测试//////////////////////
 

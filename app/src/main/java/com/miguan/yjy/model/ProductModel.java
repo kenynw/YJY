@@ -3,6 +3,7 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
@@ -277,6 +278,13 @@ public class ProductModel extends AbsModel {
      */
     public Observable<List<Product>> getProductList(long brandId, int isTop, int page) {
         return ServicesClient.getServices().productList(brandId, isTop, page, 20).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 提问列表
+     */
+    public Observable<Ask> getAskList(int productId, int page) {
+        return ServicesClient.getServices().askList(productId, page).compose(new DefaultTransform<>());
     }
 
 }

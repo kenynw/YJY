@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_normal"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_large"
+        >
+
+        <TextView
+            android:id="@+id/tv_question_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            tools:text="适合敏感皮吗？"
+            />
+
+        <com.miguan.yjy.widget.SuperTextView
+            android:id="@+id/btn_question_to_ask"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:gravity="center"
+            android:text="@string/btn_to_ask"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_body_material"
+            app:corner="@dimen/widget_medium"
+            app:stroke_color="@color/colorPrimary"
+            app:stroke_width="1dp"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
