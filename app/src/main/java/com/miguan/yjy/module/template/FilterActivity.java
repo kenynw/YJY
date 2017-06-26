@@ -38,8 +38,6 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
     public static final String EXTRA_POSITION = "position";
 
-    public static final int REQUEST_CODE_FILTER = 0x234;
-
     public static final String EXTRA_APPLY_ALL = "apply_all";
 
     public static final String EXTRA_FILTER_URI = "filter_uri";
@@ -90,6 +88,7 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
         boolean isCircle = getIntent().getBooleanExtra(EXTRA_IS_CIRCLE, false);
 
         mIvCropImage.setFocusWidth(LUtils.getScreenWidth());
+        mIvCropImage.setFocusHeight(LUtils.getScreenWidth());
         mIvCropImage.setFocusStyle(isCircle ? CropImageView.Style.CIRCLE : CropImageView.Style.RECTANGLE);
 
         Glide.with(this)
@@ -180,12 +179,6 @@ public class FilterActivity extends ChainBaseActivity<FilterActivityPresenter> i
 
     public interface OnFilterSelectedListener {
         void onFilterSelected(File file, boolean applyAll);
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        LUtils.log("level: " + level);
     }
 
 }

@@ -23,7 +23,9 @@ android {
 }
 
 dependencies {
+    // view
     compile 'com.jude:easyrecyclerview:4.4.0'
+    compile 'com.gyf.barlibrary:barlibrary:2.2.3'
 
     // support
     compile rootProject.ext.dependencies["appcompat-v7"]

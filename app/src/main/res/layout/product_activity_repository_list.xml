@@ -5,8 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_search_header" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/white"
+        />
 
-    <include layout="@layout/include_product_list" />
+    <include layout="@layout/include_search_header"/>
+
+    <include layout="@layout/include_product_list"/>
 
 </LinearLayout>

@@ -3,17 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/ll_test_ok"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/white"
+        />
+
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"
         style="@style/TitleToolbar"
-        android:background="@color/white"
         android:layout_marginBottom="1dp"
+        android:background="@color/white"
         >
 
         <TextView
@@ -318,13 +324,13 @@
                 />
 
             <!--<Space-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/spacing_small"-->
-                <!--/>-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/spacing_small"-->
+            <!--/>-->
 
-          <!--<include-->
-              <!--layout="@layout/include_head_article"-->
-              <!--/>-->
+            <!--<include-->
+            <!--layout="@layout/include_head_article"-->
+            <!--/>-->
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recy_test_article"

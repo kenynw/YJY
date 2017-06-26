@@ -8,11 +8,16 @@
     android:orientation="vertical"
     >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/colorPrimary"
+        />
+
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"
         style="@style/TitleToolbar"
         android:background="@color/colorPrimary"
-        android:fitsSystemWindows="true"
         app:navigationIcon="@mipmap/ic_back_white"
         >
 
