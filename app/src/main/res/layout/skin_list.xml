@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingTop="35dp"
+
+        >
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="7dp"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/tv_skin_test_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/f3"
+            android:textSize="@dimen/text_size_small_14"
+            android:layout_gravity="center_vertical"
+            tools:text="干性/油性"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_skin_valute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/ic_skin_low"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="2dp"
+        android:textColor="@color/skin_low"
+        tools:text="混干：22分"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_skin_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="35dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/skin_low"
+            android:textSize="@dimen/text_size_small_14"
+            tools:text="干性"/>
+
+        <com.miguan.yjy.widget.SpringProgressView
+            android:id="@+id/progress_skin"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_skin_high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="35dp"
+            android:textColor="@color/skin_high"
+            android:textSize="@dimen/text_size_small_14"
+            tools:text="油性"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_skin_dec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/f6"
+        android:textSize="@dimen/text_size_small_14"
+        tools:text="您属于混干肤质，在夏天可以更"/>
+
+</LinearLayout>

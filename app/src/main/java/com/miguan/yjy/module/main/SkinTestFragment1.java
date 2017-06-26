@@ -1,17 +1,19 @@
 package com.miguan.yjy.module.main;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,26 +25,22 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.TestSkinAdapter;
-import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
+import com.miguan.yjy.adapter.SkinTestViewPager;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.UserModel;
-import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
-import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.test.TestGuideActivity;
-import com.miguan.yjy.module.test.TestRecomendPresenter;
 import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.utils.DateUtils;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,7 +48,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import rx.Observable;
@@ -62,7 +59,7 @@ import rx.functions.Func1;
  * @描述
  */
 @RequiresPresenter(SkinTestFragmentPresenter.class)
-public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter, Test> implements View.OnClickListener {
+public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresenter, Test> implements View.OnClickListener {
     int type = 0;
 
     //未测试页面(测试主页)
@@ -96,6 +93,8 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     ScrollView mScrMainTest;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mToolbarTitle;
 
     private TextView mTvTestSelectBirthday;
     private TextView mTvTestMan;
@@ -113,39 +112,26 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     //测试结果(我的肤质)
     public static final String H5_SCORE = "http://m.yjyapp.com/site/score-tip";
     private Unbinder mBind;
-
-    @BindView(R.id.tv_test_result_descirbe)
-    TextView mTvResultDescirbe;
-
-    @BindView(R.id.tv_test_result_descirbe_second)
-    TextView mTvResultDescirbeSecond;
-
-    @BindView(R.id.rect_test_my_skin)
-    RecyclerView mRectTestMySkin;
-
-    @BindView(R.id.ll_test_grade)
-    LinearLayout mLlTestGrade;
-
-    @BindView(R.id.ll_test_again)
-    LinearLayout mLlTestAgain;
-
-    @BindViews({R.id.tv_test_first_letter, R.id.tv_test_second_letter, R.id.tv_test_third_letter, R.id.tv_test_four_letter})
-    List<TextView> mSkinLetters;
-
-    @BindViews({R.id.tv_test_first_name, R.id.tv_test_second_name, R.id.tv_test_third_name, R.id.tv_test_four_name})
-    List<TextView> mSkinNames;
-
-    @BindView(R.id.toolbar_title)
-    TextView mToolbarTitle;
-
-    @BindView(R.id.recy_test_article)
-    RecyclerView mRecyArticle;
+    @BindView(R.id.img_skin_test)
+    SimpleDraweeView mImgSkinTest;
+    @BindView(R.id.tv_skin_username)
+    TextView mTvSkinUsername;
+    @BindView(R.id.tv_skin_time)
+    TextView mTvSkinTime;
+    @BindView(R.id.tv_skin_again)
+    TextView mTvSkinAgain;
+    @BindView(R.id.tab_skin_test)
+    TabLayout mTabSkinTest;
+    @BindView(R.id.viewpager_skin_test)
+    NoScrollViewPager mViewpagerSkinTest;
 
 
     @BindView(R.id.ll_test_no)
     LinearLayout mLlTestNo;
     @BindView(R.id.ll_test_ok)
     LinearLayout mLlTestOk;
+
+    private SkinTestViewPager mSkinTestViewPager;
 
 
     @Override
@@ -159,6 +145,15 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.skin_test_main_fragment, null);
         mBind = ButterKnife.bind(this, view);
+        mToolbar.inflateMenu(R.menu.menu_share);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                getPresenter().share();
+                return false;
+            }
+        });
+
         return view;
     }
 
@@ -181,8 +176,11 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     public void loadFirstData() {
         mLlTestOk.setVisibility(View.GONE);
         mLlTestNo.setVisibility(View.VISIBLE);
+
         initListener();
         if (UserPreferences.getUserID() > 0) {
+            mToolbarTitle.setText("肤质测试");
+
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
@@ -504,84 +502,43 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         }
     }
 
+    Test mTest;
 
     private void setSencondData() {
-        mLlTestOk.setVisibility(View.VISIBLE);
-        mLlTestNo.setVisibility(View.GONE);
-        if (UserPreferences.getUserID() > 0) {
-            TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>() {
-                @Override
-                public void onNext(Test test) {
-                    super.onNext(test);
 
-                    mToolbarTitle.setText("我的肤质");
-                    mLlTestGrade.setOnClickListener(v -> WebViewActivity.start(getActivity(), getString(R.string.text_test_grade), H5_SCORE));
-                    mLlTestAgain.setOnClickListener(v -> {
-                        //显示肤质测试主页
-                        loadFirstData();
-                        UserPreferences.setIsShowTest(true);
+        TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
+            @Override
+            public void onNext(Test test) {
+                mTest = test;
+                mLlTestOk.setVisibility(View.VISIBLE);
+                mLlTestNo.setVisibility(View.GONE);
+                mToolbarTitle.setText("我的肤质");
+                if (UserPreferences.getUserID() > 0) {
+                    mSkinTestViewPager = new SkinTestViewPager(getActivity().getSupportFragmentManager(), mTest);
+                    mViewpagerSkinTest.setNoScroll(true);
+                    mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
+                    mTabSkinTest.setupWithViewPager(mViewpagerSkinTest);
+                    mTvSkinUsername.setText(userInfo.getUsername());
+                    mTvSkinTime.setText(userInfo.getAdd_time());
+                    mImgSkinTest.setImageURI(Uri.parse(userInfo.getImg()));
+                    mTvSkinAgain.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //显示肤质测试主页
+                            loadFirstData();
+                            UserPreferences.setIsShowTest(true);
+                        }
                     });
-                    mRectTestMySkin.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-                    mRecyArticle.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-
-                    setSkinResult(test);
-                    ArticleAdapter articleAdapter = new ArticleAdapter(getActivity(), test.getSkinArticle());
-                    if (test.getSkinArticle().size() > 0) {
-
-                        articleAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
-                            @Override
-                            public View onCreateView(ViewGroup parent) {
-                                View headView = View.inflate(getActivity(), R.layout.include_head_article, null);
-                                return headView;
-                            }
-
-                            @Override
-                            public void onBindView(View headerView) {
-
-                            }
-                        });
-                    }
-                    mRecyArticle.setAdapter(articleAdapter);
-
-                    List<Skin> datas = test.getSkinProduct();
-                    TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
-                    testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), test, position, datas.get(position).getCategory_name()));
-                    mRectTestMySkin.setAdapter(testSkinAdapter);
                 }
-            });
-        }
-
+            }
+        });
     }
 
-    // 设置肤质
-    private void setSkinResult(Test test) {
-        List<Skin> skinList = test.getDesc();
-        for (int i = 0; i < skinList.size(); i++) {
-            mSkinLetters.get(i).setText(skinList.get(i).getLetter());
-            mSkinNames.get(i).setText(skinList.get(i).getName());
-        }
-        mTvResultDescirbe.setText(test.getFeatures());
-        mTvResultDescirbeSecond.setText(test.getElements());
-    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mBind.unbind();
-    }
-
-    class ArticleAdapter extends RecyclerArrayAdapter<Article> {
-
-
-        public ArticleAdapter(Context context, List<Article> objects) {
-            super(context, objects);
-        }
-
-        @Override
-        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ArticleViewHolder(parent);
-        }
     }
 
     private void setUserBirthDay() {
@@ -602,4 +559,16 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         UserPreferences.setIsShowTest(false);
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        getPresenter().share();
+        return super.onOptionsItemSelected(item);
+    }
 }

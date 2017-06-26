@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:focusable="false"
-            android:paddingLeft="10dp"/>
+            />
 
         <LinearLayout
             android:id="@+id/ll_test_more"

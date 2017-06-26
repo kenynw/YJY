@@ -39,31 +39,57 @@
         tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"
         />
 
-    <RatingBar
-        android:id="@+id/ratbar_product"
-        style="@style/MySmallRatingBar"
+
+    <LinearLayout
+        android:id="@+id/ll_no_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/tv_product_name"
         android:layout_below="@id/tv_product_name"
         android:layout_marginTop="10dp"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:stepSize="1"
-        />
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RatingBar
+            android:id="@+id/ratbar_product"
+            style="@style/MySmallRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="1"
+            />
+
+        <TextView
+            android:id="@+id/tv_product_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/ratbar_product"
+            android:layout_alignStart="@id/ratbar_product"
+            android:layout_below="@id/ratbar_product"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="￥320/250ML"
+            />
+
+    </LinearLayout>
+
 
     <TextView
-        android:id="@+id/tv_product_money"
+        android:id="@+id/tv_product_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/ratbar_product"
-        android:layout_alignStart="@id/ratbar_product"
-        android:layout_below="@id/ratbar_product"
-        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_alignLeft="@id/tv_product_name"
+        android:layout_below="@id/tv_product_name"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_body_material"
         tools:text="￥320/250ML"
         />
+
 
     <TextView
         android:id="@+id/tv_product_sort"

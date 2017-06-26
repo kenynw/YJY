@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="我的肤质"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_16"/>
+
+        <ImageView
+            android:id="@+id/iv_skin_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:background="@mipmap/ic_skin_grade"/>
+
+    </LinearLayout>
+
+
+    <GridView
+        android:id="@+id/recy_my_skin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingTop="25dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"></GridView>
+</LinearLayout>

@@ -129,7 +129,7 @@ public class TestResultFragment extends BaseDataFragment<TestResultPresenter, Te
 
         List<Skin> datas = test.getSkinProduct();
         TestSkinAdapter testSkinAdapter = new TestSkinAdapter(getActivity(), datas);
-        testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), test.getCategoryList(), position, datas.get(position).getCategory_name()));
+        testSkinAdapter.setOnItemClickListener(position -> TestRecomendPresenter.star(getActivity(), test, position, datas.get(position).getCategory_name()));
         mRectTestMySkin.setAdapter(testSkinAdapter);
     }
 

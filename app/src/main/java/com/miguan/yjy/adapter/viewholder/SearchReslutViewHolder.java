@@ -2,10 +2,13 @@ package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
 import android.support.annotation.LayoutRes;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -38,6 +41,12 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
 
     @BindView(R.id.tv_product_sort)
     TextView mTvProductSort;
+    @BindView(R.id.ll_no_read)
+    LinearLayout mLlNoRead;
+    @BindView(R.id.tv_product_read)
+    TextView mTvProductRead;
+    @BindView(R.id.rl_product_info)
+    RelativeLayout mRlProductInfo;
 
     private boolean mShowRank;
 
@@ -58,7 +67,7 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
     @Override
     public void setData(Product data) {
         if (mShowRank) {
-            mTvProductSort.setText("No."+(getAdapterPosition()+1));
+            mTvProductSort.setText("No." + (getAdapterPosition() + 1));
             mTvProductSort.setVisibility(View.VISIBLE);
         } else {
             mTvProductSort.setVisibility(View.GONE);
@@ -68,6 +77,13 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
         mRatbar.setRating(data.getStar());
         mTvSpec.setText(data.getPrice().equals("0") ? "暂无报价" : getSpec(data));
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
+        if (TextUtils.isEmpty(data.getProduct_explain())) {
+            mLlNoRead.setVisibility(View.GONE);
+            mTvProductRead.setVisibility(View.VISIBLE);
+        } else {
+            mLlNoRead.setVisibility(View.VISIBLE);
+            mTvProductRead.setVisibility(View.GONE);
+        }
     }
 
     protected String getSpec(Product data) {

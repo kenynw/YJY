@@ -17,11 +17,11 @@
         <item name="android:listDivider">@drawable/div_vertical</item>
     </style>
 
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <style name="AppTheme" parent="AppTheme.Base"/>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="LaunchTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_launch</item>
@@ -42,13 +42,13 @@
         <item name="com.miguan.yjy:theme">@style/ToolbarTheme</item>
     </style>
 
-    <style name="TextTitle" parent="TextAppearance.AppCompat.Title" />
+    <style name="TextTitle" parent="TextAppearance.AppCompat.Title"/>
 
-    <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead" />
+    <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead"/>
 
-    <style name="TextBody" parent="TextAppearance.AppCompat.Body1" />
+    <style name="TextBody" parent="TextAppearance.AppCompat.Body1"/>
 
-    <style name="TextCaption" parent="TextAppearance.AppCompat.Caption" />
+    <style name="TextCaption" parent="TextAppearance.AppCompat.Caption"/>
 
     <style name="ItemLineHeight">
         <item name="android:layout_width">match_parent</item>
@@ -67,7 +67,14 @@
         <item name="android:minWidth">20dip</item>
     </style>
 
-    <style name="text_editStyle" >
+    <style name="MyMaxRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable" >@drawable/my_skin_ratingbar_color</item>
+        <item name="android:minHeight">25dip</item>
+        <item name="android:maxHeight">25dip</item>
+        <item name="android:minWidth">25dip</item>
+    </style>
+
+    <style name="text_editStyle">
         <item name="android:layout_height">47dp</item>
         <item name="android:layout_width">47dp</item>
         <item name="android:gravity">center</item>

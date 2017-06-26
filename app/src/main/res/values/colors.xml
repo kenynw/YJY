@@ -43,7 +43,15 @@
     <color name="f63c">#63cbfc</color>
     <color name="fb7">#fb7c94</color>
     <color name="f85">#85d8f3</color>
-    
+    <color name="skin_low">#fccb08</color>
+    <color name="skin_middle">#8fcd0e</color>
+    <color name="skin_midlle_up">#4ee88b</color>
+    <color name="skin_high">#50f3de</color>
+    <color name="first_skin">#fff158</color>
+    <color name="sencond_skin">#d4f98c</color>
+    <color name="third_skin">#50f3de</color>
+    <color name="fB3">#B3B3B3</color>
+
     <!--模块-->
     <color name="f5a6">#5A6970</color>
     <!--我的-->

@@ -17,9 +17,60 @@ public class Skin implements Parcelable {
     private String category_id;
     private String category_name;
     private List<Product> data;
+    private List<SelectPrice> condition;
     private String id;
     private String copy;
     private String description;
+    private float valuate;
+    private float score;
+    private float maximum;
+
+    public String[] leftSkin = {"干性","敏感","色素","皱纹"};
+    public String[] rightSkin = {"油性","耐受","非色素","紧致"};
+    public String[] skinDesc = {"干性/油性","敏感程度","是否容易色素沉着","是否皱纹性肤质"};
+
+    private String unscramble;
+
+
+    public List<SelectPrice> getCondition() {
+        return condition;
+    }
+
+    public void setCondition(List<SelectPrice> condition) {
+        this.condition = condition;
+    }
+
+    public String getUnscramble() {
+        return unscramble;
+    }
+
+    public void setUnscramble(String unscramble) {
+        this.unscramble = unscramble;
+    }
+
+    public float getMaximum() {
+        return maximum;
+    }
+
+    public void setMaximum(float maximum) {
+        this.maximum = maximum;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
+    }
+
+    public float getValuate() {
+        return valuate;
+    }
+
+    public void setValuate(float valuate) {
+        this.valuate = valuate;
+    }
 
     public String getDescription() {
         return description;
@@ -168,9 +219,17 @@ public class Skin implements Parcelable {
         dest.writeString(this.category_id);
         dest.writeString(this.category_name);
         dest.writeTypedList(this.data);
+        dest.writeTypedList(this.condition);
         dest.writeString(this.id);
         dest.writeString(this.copy);
         dest.writeString(this.description);
+        dest.writeFloat(this.valuate);
+        dest.writeFloat(this.score);
+        dest.writeFloat(this.maximum);
+        dest.writeStringArray(this.leftSkin);
+        dest.writeStringArray(this.rightSkin);
+        dest.writeStringArray(this.skinDesc);
+        dest.writeString(this.unscramble);
     }
 
     protected Skin(Parcel in) {
@@ -179,9 +238,17 @@ public class Skin implements Parcelable {
         this.category_id = in.readString();
         this.category_name = in.readString();
         this.data = in.createTypedArrayList(Product.CREATOR);
+        this.condition = in.createTypedArrayList(SelectPrice.CREATOR);
         this.id = in.readString();
         this.copy = in.readString();
         this.description = in.readString();
+        this.valuate = in.readFloat();
+        this.score = in.readFloat();
+        this.maximum = in.readFloat();
+        this.leftSkin = in.createStringArray();
+        this.rightSkin = in.createStringArray();
+        this.skinDesc = in.createStringArray();
+        this.unscramble = in.readString();
     }
 
     public static final Creator<Skin> CREATOR = new Creator<Skin>() {

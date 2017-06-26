@@ -53,10 +53,10 @@ public class ProductReadViewHolder extends BaseViewHolder<Component> {
                 mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_f8b);
             }
             if (grade.contains("3") || grade.contains("4") || grade.contains("5") || grade.contains("6")) {
-                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_fb74);
+                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_ffc3);
             }
             if (grade.contains("7") || grade.contains("8") || grade.contains("9")) {
-                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_ffc3);
+                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_fb74);
             }
         }
 
