@@ -450,9 +450,9 @@ public interface Services {
      * 搜索结果接口
      *
      * @param keywords(string) － 搜索内容
-     * @param brandId(int) － 品牌ID
-     * @param isTop(int) － 明星产品,1为是,0为不传为所有
-     * @param page(int) － 当前页数
+     * @param brandId(int)     － 品牌ID
+     * @param isTop(int)       － 明星产品,1为是,0为不传为所有
+     * @param page(int)        － 当前页数
      * @return
      */
     @GET("?action=productList")
@@ -533,11 +533,16 @@ public interface Services {
      * cate_id(string) － 栏目ID
      * page(int) － 当前页数
      * pageSize(int) － 每页多少条
+     * user_id(int) － 用户ID
+     * min(float) － 最小价格
+     * max(float) － 最大价格
      */
     @GET("?action=getSkinRecommendList")
     Observable<List<Product>> getSkinRecommendList(
             @Query("user_id") int userId,
             @Query("cate_id") String cateId,
+            @Query("min") float min,
+            @Query("max") float max,
             @Query("page") int page,
             @Query("pageSize") int pageSize
     );

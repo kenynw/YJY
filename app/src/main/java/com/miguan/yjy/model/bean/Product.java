@@ -85,6 +85,7 @@ public class Product implements Parcelable {
 
     private Buy buy;
 
+
     public int getIs_top() {
         return is_top;
     }
@@ -406,6 +407,7 @@ public class Product implements Parcelable {
         dest.writeStringList(this.notRecommend);
         dest.writeTypedList(this.security);
         dest.writeParcelable(this.buy, flags);
+        dest.writeString(this.product_explain);
         dest.writeByte(this.isLocal ? (byte) 1 : (byte) 0);
     }
 
@@ -445,6 +447,7 @@ public class Product implements Parcelable {
         this.notRecommend = in.createStringArrayList();
         this.security = in.createTypedArrayList(ComponentTag.CREATOR);
         this.buy = in.readParcelable(Buy.class.getClassLoader());
+        this.product_explain = in.readString();
         this.isLocal = in.readByte() != 0;
     }
 

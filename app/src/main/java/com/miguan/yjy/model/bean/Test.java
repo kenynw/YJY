@@ -25,6 +25,15 @@ public class Test implements Parcelable {
     private List<Skin> skinProduct;
     private List<Article> skinArticle;
     private ArrayList<Skin> categoryList;
+    private int star;
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
 
     public String getElements() {
         return elements;
@@ -136,6 +145,7 @@ public class Test implements Parcelable {
         dest.writeTypedList(this.skinProduct);
         dest.writeTypedList(this.skinArticle);
         dest.writeTypedList(this.categoryList);
+        dest.writeInt(this.star);
     }
 
     protected Test(Parcel in) {
@@ -150,6 +160,7 @@ public class Test implements Parcelable {
         this.skinProduct = in.createTypedArrayList(Skin.CREATOR);
         this.skinArticle = in.createTypedArrayList(Article.CREATOR);
         this.categoryList = in.createTypedArrayList(Skin.CREATOR);
+        this.star = in.readInt();
     }
 
     public static final Creator<Test> CREATOR = new Creator<Test>() {

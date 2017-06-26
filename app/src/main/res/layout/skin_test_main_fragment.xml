@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include
-        layout="@layout/main_fragment_test"
-        />
-    <include
-        layout="@layout/test_activity_result"
-        />
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-</FrameLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@id/toolbar"
+        style="@style/TitleToolbar"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        >
+
+        <TextView
+            android:id="@id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="@string/text_test"
+            android:textAppearance="@style/TextSubhead"
+            />
+
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/main_fragment_test"
+            />
+
+        <include
+            layout="@layout/skin_test_result"
+            />
+        <!--<include-->
+        <!--layout="@layout/test_activity_result"-->
+        <!--/>-->
+
+    </FrameLayout>
 </LinearLayout>

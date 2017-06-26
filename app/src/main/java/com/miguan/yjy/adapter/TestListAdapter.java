@@ -2,7 +2,10 @@ package com.miguan.yjy.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -36,6 +39,11 @@ public class TestListAdapter extends RecyclerArrayAdapter<Product> {
     }
 
     @Override
+    public int getCount() {
+        return mObjects.size()+1;
+    }
+
+    @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyViewHolder(parent);
     }
@@ -47,6 +55,8 @@ public class TestListAdapter extends RecyclerArrayAdapter<Product> {
         SimpleDraweeView mIvTestList;
         @BindView(R.id.tv_test_list_name)
         TextView mTvTestListName;
+        @BindView(R.id.ll_test_more)
+        LinearLayout mLlTestMore;
 
         public MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_test_list);
@@ -56,12 +66,26 @@ public class TestListAdapter extends RecyclerArrayAdapter<Product> {
 
         @Override
         public void setData(Product data) {
+            Log.e("getDataPosition() ", getDataPosition() + "====");
+            Log.e("mObjects.size()", mObjects.size() + "====");
+
+            if ((getDataPosition() +1)== mObjects.size()) {
+                mIvTestList.setVisibility(View.GONE);
+                mTvTestListName.setText("");
+                mLlTestMore.setVisibility(View.VISIBLE);
+//                itemView.setOnClickListener(v -> TestRecomendPresenter.star(getContext(), test.getCategoryList(), position, datas.get(position).getCategory_name()));
+
+            } else {
+                mIvTestList.setVisibility(View.VISIBLE);
+                mLlTestMore.setVisibility(View.GONE);
+                mTvTestListName.setText(data.getProduct_name());
+                mIvTestList.setImageURI(Uri.parse(data.getProduct_img()));
+                itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
+            }
 //            .placeholder(R.mipmap.def_image_product).error(R.mipmap.def_image_product)
 //            Glide.with(getContext()).load(data.getProduct_img()).into(mIvTestList);
 //            mIvTestList.setBackgroundResource(data.getImg());
-            mIvTestList.setImageURI(Uri.parse(data.getProduct_img()));
-            mTvTestListName.setText(data.getProduct_name());
-            itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(),data.getId()));
+
         }
     }
 

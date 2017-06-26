@@ -48,6 +48,7 @@ public class User implements Parcelable {
     private int tolerance;
     private int pigment;
     private int compact;
+    private String add_time;//用户测试时间
 
     /**
      * 过期产品数
@@ -60,6 +61,14 @@ public class User implements Parcelable {
     private int unReadNum;
 
     private int isComplete;
+
+    public String getAdd_time() {
+        return add_time;
+    }
+
+    public void setAdd_time(String add_time) {
+        this.add_time = add_time;
+    }
 
     public int getDry() {
         return dry;
@@ -266,6 +275,7 @@ public class User implements Parcelable {
         dest.writeInt(this.tolerance);
         dest.writeInt(this.pigment);
         dest.writeInt(this.compact);
+        dest.writeString(this.add_time);
         dest.writeInt(this.overdueNum);
         dest.writeInt(this.unReadNum);
         dest.writeInt(this.isComplete);
@@ -291,6 +301,7 @@ public class User implements Parcelable {
         this.tolerance = in.readInt();
         this.pigment = in.readInt();
         this.compact = in.readInt();
+        this.add_time = in.readString();
         this.overdueNum = in.readInt();
         this.unReadNum = in.readInt();
         this.isComplete = in.readInt();

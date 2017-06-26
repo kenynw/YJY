@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
+import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestTabPagerAdapter;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Skin;
+import com.miguan.yjy.model.bean.Test;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,7 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     @BindView(R.id.ll_show_dsc)
     LinearLayout mLlShowDsc;
     public ArrayList<Skin> categoryList;
+    public Test mTest;
     public int position;
     private String name;
 
@@ -47,7 +50,8 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.text_test_recommend_product);
-        categoryList = getIntent().getParcelableArrayListExtra(TestRecomendPresenter.EXTRA_CATEGORY_LIST);
+        mTest = getIntent().getParcelableExtra(TestRecomendPresenter.EXTRA_TEST);
+        categoryList = mTest.getCategoryList();
         position = getIntent().getIntExtra(TestRecomendPresenter.EXTRA_CATEGORY_position, 0);
         name = getIntent().getStringExtra(TestRecomendPresenter.EXTRA_CATEGORY_NAME);
         ButterKnife.bind(this);
@@ -104,4 +108,8 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
     }
 
+    @Override
+    public ListConfig getListConfig() {
+        return super.getListConfig().setContainerEmptyAble(false);
+    }
 }

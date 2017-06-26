@@ -25,6 +25,7 @@ public class Evaluate implements Parcelable {
     private String username;
 
     private String img;
+    private String user_img;
 
     private String birth_year;
 
@@ -43,6 +44,15 @@ public class Evaluate implements Parcelable {
     private int pageSize;
 
     private int is_digest;
+
+
+    public String getUser_img() {
+        return user_img;
+    }
+
+    public void setUser_img(String user_img) {
+        this.user_img = user_img;
+    }
 
     public int getIs_digest() {
         return is_digest;
@@ -279,6 +289,7 @@ public class Evaluate implements Parcelable {
         dest.writeInt(this.like_num);
         dest.writeString(this.username);
         dest.writeString(this.img);
+        dest.writeString(this.user_img);
         dest.writeString(this.birth_year);
         dest.writeString(this.skin);
         dest.writeLong(this.created_at);
@@ -298,6 +309,7 @@ public class Evaluate implements Parcelable {
         this.like_num = in.readInt();
         this.username = in.readString();
         this.img = in.readString();
+        this.user_img = in.readString();
         this.birth_year = in.readString();
         this.skin = in.readString();
         this.created_at = in.readLong();
