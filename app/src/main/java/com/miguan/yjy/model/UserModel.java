@@ -1,6 +1,8 @@
 package com.miguan.yjy.model;
 
 
+import android.os.Build;
+
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
@@ -11,6 +13,7 @@ import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
+import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
 
@@ -119,9 +122,14 @@ public class UserModel extends AbsModel {
      * @param content 反馈内容
      * @return
      */
-    public Observable<String> addFeedback(String content) {
+    public Observable<String> addFeedback(String content, String thumb) {
         return ServicesClient.getServices()
-                .feedback(UserPreferences.getUserID(), UserPreferences.getUsername(), content)
+                .feedback(UserPreferences.getUserID(), UserPreferences.getUsername(), content,
+                        "API " + Build.VERSION.SDK_INT + " " + Build.VERSION.RELEASE,
+                        Build.BRAND + " " + Build.MODEL,
+                        LUtils.getAppVersionName(),
+                        thumb
+                )
                 .compose(new DefaultTransform<>());
     }
 

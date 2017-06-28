@@ -38,7 +38,8 @@
     <string name="text_query_content_4">由于不知道每个用户查询的是什么产品，所以颜究院提供的是一个通用的3年标准（该标准来源于日本药事法规定，以3年不变质为最低限）。\n\n但是每个产品都有一个建议开封使用时间，印刷在瓶身，建议以每个产品为标准哦~\n\n同时，您也可以在颜究院记录开封时间，在使用日期到之前，我们会提醒您哦~</string>
     <string name="text_query_instruction">批号说明</string>
     <string name="text_add_product_repository">我的护肤品库</string>
-    <string name="text_empty_article_list">没有文章咯！\n热情好学颜究生，我就服你~</string>
+    <string name="text_empty_article_list">没有内容咯！\n热情好学颜究生，我就服你~</string>
+    <string name="text_empty_ask_list">用过的人正赶来回答~</string>
     <string name="text_other_way">其他方式</string>
     <string name="text_forgot_password">忘记密码</string>
     <string name="text_taobao">淘宝网</string>
@@ -83,11 +84,15 @@
     <string name="text_template_5_desc">薄涂有点像樱花粉，厚涂是偏玫瑰的水红色\n完全不显唇纹，滋润度很高，除了贵，没其他毛病</string>
     <string name="text_template_5_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>
     <string name="text_ask_product_name"><![CDATA[关于<font color="#222222">%s</font>的问题]]></string>
+    <string name="text_ask_detail">问题详情</string>
     <string name="text_ask_list_empty">暂无问题，我来提一个吧</string>
     <string name="text_ask">问</string>
     <string name="text_answer">答</string>
     <string name="text_view_more_answer">查看%d个回答</string>
     <string name="text_to_ask_used">向用过的人提问</string>
+    <string name="text_to_answer">去回答</string>
+    <string name="text_no_answer">暂无回答</string>
+    <string name="text_message_ask">有问题向您求助哦~</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -227,6 +232,7 @@
     <string name="btn_user_sure">确定</string>
     <string name="btn_user_bined_content">如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。</string>
     <string name="btn_update_pwd">修改密码</string>
+    <string name="btn_send">发送</string>
 
     <string name="tv_cancel">取消</string>
     <string name="tv_share_content">分享内容到</string>

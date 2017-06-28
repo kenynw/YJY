@@ -32,7 +32,7 @@
     </style>
 
     <style name="ToolbarTheme">
-        <item name="actionMenuTextColor">@color/toolbar_right_selector</item>
+        <item name="actionMenuTextColor">@color/primary2secondary</item>
     </style>
 
     <style name="TitleToolbar" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">

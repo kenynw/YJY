@@ -68,8 +68,15 @@ public class ListConfig implements Cloneable {
         return this;
     }
 
-    public ListConfig setErrorView(View mErrorView) {
+    public ListConfig setFooterErrorView(View mErrorView) {
         this.mFooterErrorView = mErrorView;
+        return this;
+    }
+
+    public ListConfig setFooterView(View footerView) {
+        this.mFooterErrorView = footerView;
+        this.mFooterMoreView = footerView;
+        this.mFooterNoMoreView = footerView;
         return this;
     }
 

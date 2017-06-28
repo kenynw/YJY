@@ -13,6 +13,8 @@ public class Version implements Parcelable {
 
     private int type;
 
+    private int isMust;
+
     private String content[];
 
     private String number;
@@ -36,6 +38,14 @@ public class Version implements Parcelable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getIsMust() {
+        return isMust;
+    }
+
+    public void setIsMust(int isMust) {
+        this.isMust = isMust;
     }
 
     public String[] getContent() {
@@ -71,6 +81,7 @@ public class Version implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeInt(this.type);
+        dest.writeInt(this.isMust);
         dest.writeStringArray(this.content);
         dest.writeString(this.number);
         dest.writeString(this.downloadUrl);
@@ -79,6 +90,7 @@ public class Version implements Parcelable {
     protected Version(Parcel in) {
         this.id = in.readInt();
         this.type = in.readInt();
+        this.isMust = in.readInt();
         this.content = in.createStringArray();
         this.number = in.readString();
         this.downloadUrl = in.readString();
@@ -95,4 +107,5 @@ public class Version implements Parcelable {
             return new Version[size];
         }
     };
+
 }

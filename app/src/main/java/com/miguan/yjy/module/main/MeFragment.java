@@ -149,13 +149,13 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mTvFaceScore.setOnClickListener(v -> FaceScorePresenter.start(getActivity(), user.getRank_points()));
 
         if (user.getOverdueNum() > 0) {
-            mBadgeOverdue.setBadgeText("");
+            mBadgeOverdue.setBadgeNumber(user.getOverdueNum());
         } else {
             mBadgeOverdue.hide(false);
         }
 
         if (user.getUnReadNUM() > 0) {
-            mBadgeMsg.setBadgeText("");
+            mBadgeMsg.setBadgeNumber(user.getUnReadNUM());
         } else {
             mBadgeMsg.hide(false);
         }

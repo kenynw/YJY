@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="56dp"
+    android:layout_marginTop="@dimen/spacing_small"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_large"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <com.miguan.yjy.widget.SuperTextView
+            style="@style/SuperTextAskAnswer"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tiny"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:text="@string/text_no_answer"
+            android:textAppearance="@style/TextBody"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="30dp"
+        android:drawableTop="@mipmap/ic_empty_ask"
+        android:text="@string/text_empty_ask_list"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_subhead_material"
+        />
+
+</FrameLayout>

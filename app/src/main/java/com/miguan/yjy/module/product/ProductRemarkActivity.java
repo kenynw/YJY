@@ -133,7 +133,6 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
             getToolbar().getMenu().getItem(0).setEnabled(rating > 0 && mEtRemark.getText().length() > 20);
         });
 
-
     }
 
 }

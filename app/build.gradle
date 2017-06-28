@@ -89,18 +89,18 @@ android {
     }
 
     productFlavors {
-        yingyongbao{}
-        qihu360{}
-        xiaomi{}
-        wandoujia{}
-        huawei{}
-        meizu{}
+        应用宝{}
+        _360{}
+        小米{}
+        豌豆荚{}
+        华为{}
+        魅族{}
         vivo{}
         oppo{}
-        other{}
+        其他{}
     }
     //应用到每一个flavor
-    productFlavors.all { flavor -> manifestPlaceholders.put("UMENG_CHANNEL",name) }
+    productFlavors.all { flavor -> manifestPlaceholders.put("UMENG_CHANNEL", name) }
 }
 
 dependencies {

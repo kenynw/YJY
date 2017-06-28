@@ -307,8 +307,7 @@ public class SuperTextView extends TextView {
         drawableHeight = (drawableHeight == 0 ? height / 2f : drawableHeight);
         switch (DrawableMode.valueOf(stateDrawableMode)) {
             case LEFT: // left
-                float textWidth = getPaint().measureText(getText().toString());
-                drawableBounds[0] = width / 2f - textWidth / 2f - drawableWidth - drawablePaddingLeft;
+                drawableBounds[0] = 0 + drawablePaddingLeft;
                 drawableBounds[1] = height / 2f - drawableHeight / 2f + drawablePaddingTop;
                 drawableBounds[2] = drawableBounds[0] + drawableWidth;
                 drawableBounds[3] = drawableBounds[1] + drawableHeight;

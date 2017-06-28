@@ -294,7 +294,11 @@ public interface Services {
     Observable<String> feedback(
             @Query("user_id") int userId,
             @Query("username") String username,
-            @Query("content") String content
+            @Query("content") String content,
+            @Query("system") String system,
+            @Query("model") String device,
+            @Query("number") String versionName,
+            @Query("attachment") String thumb
     );
 
     ////////////////////产品&&文章//////////////////////
@@ -564,13 +568,48 @@ public interface Services {
     /**
      * 提问列表
      *
-     * @param productId      产品或文章ID
+     * @param productId      产品ID
      * @return
      */
     @GET("?action=askList")
     Observable<Ask> askList(
             @Query("product_id") int productId,
             @Query("page") int page
+    );
+
+    /**
+     * 提问详情
+     *
+     * @param productId      产品ID
+     * @return
+     */
+    @GET("?action=questionList")
+    Observable<Ask> askDetail(
+            @Query("product_id") int productId,
+            @Query("askid") int askId,
+            @Query("page") int page
+    );
+
+    /**
+     * 添加提问
+     *
+     * @param userId 用户ID
+     * @param username 用户名
+     * @param type 类型  1 发布问题 2 提交问题回复
+     * @param productId 产品ID
+     * @param product_name 产品名
+     * @param askId 问题ID（type为2必需传）
+     * @param content 提交内容
+     */
+    @GET("?action=subAsk")
+    Observable<String> addAsk(
+            @Query("user_id") int userId,
+            @Query("username") String username,
+            @Query("product_id") int productId,
+            @Query("product_name") String product_name,
+            @Query("type") int type,
+            @Query("askid") int askId,
+            @Query("content") String content
     );
 
 

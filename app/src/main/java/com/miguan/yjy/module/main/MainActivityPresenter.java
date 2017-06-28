@@ -78,7 +78,8 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
                 public void onNext(User user) {
                     int count = user.getOverdueNum() + user.getUnReadNUM();
                     if (count <= 0) mBadge.hide(true);
-                    else mBadge.setBadgeNumber(count);
+                    else mBadge.setBadgeText("");
+
                     if (user.getIsComplete() == 1) mBadgeTest.hide(false);
                     else mBadgeTest.setBadgeText("");
                 }

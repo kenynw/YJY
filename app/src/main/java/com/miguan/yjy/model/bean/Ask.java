@@ -32,6 +32,8 @@ public class Ask implements Parcelable {
 
     private long add_time;
 
+    private User user_info;
+
     private List<Ask> question_list;
 
     public int getProduct_id() {
@@ -115,6 +117,17 @@ public class Ask implements Parcelable {
         this.question_list = question_list;
     }
 
+    public User getUser_info() {
+        return user_info;
+    }
+
+    public void setUser_info(User user_info) {
+        this.user_info = user_info;
+    }
+
+    public Ask() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -131,10 +144,8 @@ public class Ask implements Parcelable {
         dest.writeString(this.reply);
         dest.writeInt(this.num);
         dest.writeLong(this.add_time);
+        dest.writeParcelable(this.user_info, flags);
         dest.writeTypedList(this.question_list);
-    }
-
-    public Ask() {
     }
 
     protected Ask(Parcel in) {
@@ -147,6 +158,7 @@ public class Ask implements Parcelable {
         this.reply = in.readString();
         this.num = in.readInt();
         this.add_time = in.readLong();
+        this.user_info = in.readParcelable(User.class.getClassLoader());
         this.question_list = in.createTypedArrayList(Ask.CREATOR);
     }
 

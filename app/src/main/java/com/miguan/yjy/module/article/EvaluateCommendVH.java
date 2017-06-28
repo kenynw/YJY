@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.article;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -21,6 +20,7 @@ import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
+import com.miguan.yjy.module.product.ProductRemarkPresenter;
 
 import butterknife.BindView;
 
@@ -103,8 +103,7 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
             mTvProductRating.setRating(data.getProduct().getStar());
             mTvProductSpec.setText(data.getProduct().getSpec(getContext()));
             mLlEvaluateProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getProduct().getId()));
-            mTvEvaluateComment.setOnClickListener(v -> AddEvaluatePresenter.start((Activity) getContext(),
-                            data.getProduct().getId(), 1, data.getId()));
+            mTvEvaluateComment.setOnClickListener(v -> ProductRemarkPresenter.start(getContext(), data.getProduct()));
         } else {
             mLlEvaluateProduct.setVisibility(View.GONE);
             mTvEvaluateComment.setVisibility(View.GONE);

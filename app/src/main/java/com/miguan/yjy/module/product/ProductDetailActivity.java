@@ -28,7 +28,7 @@ import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.module.question.AskListActivityPresenter;
+import com.miguan.yjy.module.ask.AskListActivityPresenter;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;

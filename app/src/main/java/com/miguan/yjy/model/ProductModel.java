@@ -287,4 +287,21 @@ public class ProductModel extends AbsModel {
         return ServicesClient.getServices().askList(productId, page).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 提问详情
+     */
+    public Observable<Ask> getAskDetail(int productId, int askId, int page) {
+        return ServicesClient.getServices().askDetail(productId, askId, page).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 提问详情
+     */
+    public Observable<String> addAsk(int productId, String productName, int askType, int askId, String content) {
+        return ServicesClient.getServices()
+                .addAsk(UserPreferences.getUserID(), UserPreferences.getUsername(),
+                        productId, productName, askType, askId, content)
+                .compose(new DefaultTransform<>());
+    }
+
 }

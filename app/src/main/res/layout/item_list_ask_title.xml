@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_normal"
+    android:layout_marginLeft="11dp"
+    android:layout_marginRight="11dp"
+    android:layout_marginTop="@dimen/spacing_normal"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
+    app:cardElevation="3dp"
     >
 
     <LinearLayout
@@ -44,5 +46,12 @@
             />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_ask_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/bg_ask_item_1"
+        />
 
 </android.support.v7.widget.CardView>

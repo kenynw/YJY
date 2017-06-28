@@ -16,6 +16,8 @@ public class Message implements Parcelable {
 
     private int relation_id;
 
+    private int askid;
+
     private String user_name;
 
     private String content;
@@ -41,6 +43,14 @@ public class Message implements Parcelable {
 
     public void setRelation_id(int relation_id) {
         this.relation_id = relation_id;
+    }
+
+    public int getAskid() {
+        return askid;
+    }
+
+    public void setAskid(int askid) {
+        this.askid = askid;
     }
 
     public void setId(int id) {
@@ -105,6 +115,7 @@ public class Message implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeInt(this.relation_id);
+        dest.writeInt(this.askid);
         dest.writeString(this.user_name);
         dest.writeString(this.content);
         dest.writeLong(this.created_at);
@@ -116,6 +127,7 @@ public class Message implements Parcelable {
     protected Message(Parcel in) {
         this.id = in.readInt();
         this.relation_id = in.readInt();
+        this.askid = in.readInt();
         this.user_name = in.readString();
         this.content = in.readString();
         this.created_at = in.readLong();

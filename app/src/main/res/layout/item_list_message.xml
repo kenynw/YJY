@@ -29,8 +29,8 @@
         android:visibility="invisible"
         />
 
-    <TextView
-        android:id="@+id/tv_message_name"
+    <LinearLayout
+        android:id="@+id/ll_message_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_normal"
@@ -39,15 +39,34 @@
         android:layout_toLeftOf="@id/iv_message_more"
         android:layout_toRightOf="@id/dv_message_avatar"
         android:layout_toStartOf="@id/iv_message_more"
-        android:textAppearance="@style/TextSubhead"
-        tools:text="Felton"
-        />
+        >
+
+        <TextView
+            android:id="@+id/tv_message_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextSubhead"
+            tools:text="Felton"
+            />
+
+        <TextView
+            android:id="@+id/tv_message_ask_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tiny"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:text="@string/text_message_ask"
+            android:textAppearance="@style/TextCaption"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_message_name"
+        android:layout_below="@id/ll_message_name"
         android:layout_marginLeft="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_small"
@@ -57,18 +76,34 @@
         tools:text="下午 2：00"
         />
 
-    <TextView
-        android:id="@+id/tv_message_content"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_message_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/tv_message_name"
-        android:layout_alignLeft="@id/tv_message_name"
-        android:layout_alignRight="@id/tv_message_name"
-        android:layout_alignStart="@id/tv_message_name"
+        android:layout_alignEnd="@id/ll_message_name"
+        android:layout_alignLeft="@id/ll_message_name"
+        android:layout_alignRight="@id/ll_message_name"
+        android:layout_alignStart="@id/ll_message_name"
         android:layout_below="@id/tv_message_time"
         android:layout_marginTop="@dimen/spacing_large"
-        android:textAppearance="@style/TextBody"
-        tools:text="换季皮肤怎么防止过敏，这里有你想知道的哦"
-        />
+        android:orientation="horizontal"
+        >
+
+        <com.miguan.yjy.widget.SuperTextView
+            android:id="@+id/tv_message_ask"
+            style="@style/SuperTextAsk"
+            android:layout_marginEnd="@dimen/spacing_tiny"
+            android:layout_marginRight="@dimen/spacing_tiny"
+            />
+
+        <TextView
+            android:id="@+id/tv_message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextBody"
+            tools:text="换季皮肤怎么防止过敏，这里有你想知道的哦"
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>

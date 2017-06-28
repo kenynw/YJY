@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/spacing_small"
+    android:paddingLeft="@dimen/spacing_normal"
+    android:paddingRight="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_small"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_ask_product_image"
+        style="@style/BaseImage"
+        android:layout_width="40dp"
+        android:layout_height="34dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_ask_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:textColor="@color/textSecondary"
+        android:textSize="15sp"
+        tools:text="关于理肤泉特安舒缓修护乳的问题"
+        />
+
+</LinearLayout>

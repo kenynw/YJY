@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.question;
+package com.miguan.yjy.module.ask;
 
 import android.graphics.Paint;
 import android.text.TextUtils;
@@ -20,6 +20,8 @@ import butterknife.ButterKnife;
 
 public class AskViewHolder extends BaseViewHolder<Ask> {
 
+    private int mProductId;
+
     @BindView(R.id.tv_ask_title)
     TextView mTvTitle;
 
@@ -38,8 +40,9 @@ public class AskViewHolder extends BaseViewHolder<Ask> {
     @BindView(R.id.ll_ask_null)
     LinearLayout mLlAskNull;
 
-    public AskViewHolder(ViewGroup parent) {
+    public AskViewHolder(ViewGroup parent, int productId) {
         super(parent, R.layout.item_list_ask);
+        mProductId = productId;
         ButterKnife.bind(this, itemView);
         mTvViewMore.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         mTvViewMore.getPaint().setAntiAlias(true);
@@ -47,6 +50,7 @@ public class AskViewHolder extends BaseViewHolder<Ask> {
 
     @Override
     public void setData(Ask data) {
+        mTvTitle.setText(data.getSubject());
         if (TextUtils.isEmpty(data.getReply())) {
             mLlAskContent.setVisibility(View.GONE);
             mLlAskNull.setVisibility(View.VISIBLE);
@@ -54,10 +58,10 @@ public class AskViewHolder extends BaseViewHolder<Ask> {
             mLlAskContent.setVisibility(View.VISIBLE);
             mLlAskNull.setVisibility(View.GONE);
             mTvContent.setText(data.getReply());
+            mTvDate.setText(data.getAdd_time());
+            mTvViewMore.setText(String.format(getContext().getString(R.string.text_view_more_answer), data.getNum()));
         }
-        mTvTitle.setText(data.getSubject());
-        mTvDate.setText(data.getAdd_time());
-        mTvViewMore.setText(String.format(getContext().getString(R.string.text_view_more_answer), data.getNum()));
+        itemView.setOnClickListener(v -> AskDetailActivityPresenter.start(getContext(), mProductId, data.getAskid()));
     }
 
 }

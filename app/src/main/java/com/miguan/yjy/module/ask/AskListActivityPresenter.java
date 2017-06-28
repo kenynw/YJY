@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.question;
+package com.miguan.yjy.module.ask;
 
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +51,12 @@ public class AskListActivityPresenter extends BaseListActivityPresenter<AskListA
         ProductModel.getInstance().getAskList(mProductId, getCurPage())
                 .map(Ask::getQuestion_list)
                 .unsafeSubscribe(getMoreSubscriber());
+    }
+
+    @Override
+    protected void onResult(int requestCode, int resultCode, Intent data) {
+        super.onResult(requestCode, resultCode, data);
+        onRefresh();
     }
 
 }

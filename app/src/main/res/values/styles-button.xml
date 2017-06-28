@@ -26,4 +26,25 @@
         <item name="android:drawableEnd">@mipmap/ic_more</item>
     </style>
 
+    <style name="SuperTextAsk">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/text_ask</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_caption_material</item>
+        <item name="com.miguan.yjy:corner">2dp</item>
+        <item name="com.miguan.yjy:solid">#ff7d6f</item>
+    </style>
+
+    <style name="SuperTextAskAnswer" parent="SuperTextAsk">
+        <item name="android:text">@string/text_answer</item>
+        <item name="com.miguan.yjy:solid">#5ce1cf</item>
+    </style>
+
+    <style name="SuperTextAskNoAnswer" parent="SuperTextAsk">
+        <item name="android:text">@string/text_answer</item>
+        <item name="com.miguan.yjy:solid">#b8b8b8</item>
+    </style>
+
 </resources>

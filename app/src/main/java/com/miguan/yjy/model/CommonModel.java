@@ -44,7 +44,7 @@ public class CommonModel extends AbsModel {
 
                     @Override
                     public void onNext(Version version) {
-                        if (!version.getNumber().equals(LUtils.getAppVersionName()))
+                        if (version.getIsMust() == 1 && !version.getNumber().equals(LUtils.getAppVersionName()))
                             showUpdateDialog(context, version);
                     }
                 });

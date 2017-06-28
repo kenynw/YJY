@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include layout="@layout/include_toolbar"/>
 
@@ -62,8 +63,11 @@
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:background="@color/white"
-        android:paddingLeft="15dp"
-        android:paddingRight="20dp">
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_large"
+        android:paddingStart="@dimen/spacing_normal"
+        >
 
         <TextView
             android:id="@+id/tv_product_remark_lack_num"
@@ -88,10 +92,11 @@
             android:paddingTop="20dp"
             android:textColor="@color/f6"
             android:textColorHint="@color/fcd"
-            android:textSize="@dimen/text_size_small_15"/>
-
+            android:textSize="@dimen/text_size_small_15"
+            />
 
     </RelativeLayout>
+
 
 
 </LinearLayout>
