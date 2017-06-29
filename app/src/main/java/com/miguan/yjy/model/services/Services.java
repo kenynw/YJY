@@ -5,6 +5,7 @@ import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
+import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
@@ -466,6 +467,26 @@ public interface Services {
     Observable<Product> productDetail(
             @Query("id") int id,
             @Query("user_id") int user_id
+    );
+    /**
+     * 成份详情接口
+     *
+     * @return
+     */
+    @GET("?action=componentInfo")
+    Observable<Component> componentInfo(
+            @Query("id") int id
+    );
+    /**
+     * 成份产品接口
+     *componentProductIist
+     * @return
+     */
+    @GET("?action=componentProductIist")
+    Observable<EntityRoot<List<Product>>> componentProductList(
+            @Query("id") int id,
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
     );
 
     /**

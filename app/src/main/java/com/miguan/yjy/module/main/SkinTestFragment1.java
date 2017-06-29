@@ -519,8 +519,24 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
                     mTabSkinTest.setupWithViewPager(mViewpagerSkinTest);
                     mTvSkinUsername.setText(userInfo.getUsername());
-                    mTvSkinTime.setText(userInfo.getAdd_time());
+                    mTvSkinTime.setText(DateUtils.getStrTime(userInfo.getAdd_time()));
                     mImgSkinTest.setImageURI(Uri.parse(userInfo.getImg()));
+                    mTabSkinTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                        @Override
+                        public void onTabSelected(TabLayout.Tab tab) {
+
+                        }
+
+                        @Override
+                        public void onTabUnselected(TabLayout.Tab tab) {
+
+                        }
+
+                        @Override
+                        public void onTabReselected(TabLayout.Tab tab) {
+
+                        }
+                    });
                     mTvSkinAgain.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

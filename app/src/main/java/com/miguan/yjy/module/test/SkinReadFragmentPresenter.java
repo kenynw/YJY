@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import com.miguan.yjy.adapter.SkinTestViewPager;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.module.user.FeedbackActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
     @Override
     protected void onCreate(SkinReadFragment view, Bundle saveState) {
         super.onCreate(view, saveState);
-        mTest= getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
+        mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
 
     }
 
@@ -58,9 +59,9 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
 
                 mEasyRecyclerView = (GridView) headerView.findViewById(R.id.recy_my_skin);
 
-                mSkinList=mTest.getDesc();
+                mSkinList = mTest.getDesc();
                 mTest.getDescribe();
-                MySkinAdapter mySkinAdapter = new MySkinAdapter(getView().getActivity(),mSkinList);
+                MySkinAdapter mySkinAdapter = new MySkinAdapter(getView().getActivity(), mSkinList);
                 mEasyRecyclerView.setAdapter(mySkinAdapter);
             }
         });
@@ -78,7 +79,8 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
                 headerView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LUtils.toast("点我反馈");
+                        Intent intent = new Intent(getView().getActivity(), FeedbackActivity.class);
+                        getView().getActivity().startActivity(intent);
                     }
                 });
             }

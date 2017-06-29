@@ -57,14 +57,10 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
         mProgressSkin.setCurrentCount(((data.getScore() / data.getMaximum()) * 100));
         Log.e("setCurrentCount", ((data.getScore() / 44f) * 100) + "-=======");
 
-        final ViewTreeObserver observer = mTvSkinValute.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mTvSkinValute.post(new Runnable() {
             @Override
-            public void onGlobalLayout() {
-                //此处不能写 observer.removeOnGlobalLayoutListener(this); 否则会报错
-                removeOnGlobalLayoutListener(mTvSkinValute,this);
-
-                skinWith = mTvSkinValute.getMeasuredWidth();
+            public void run() {
+                skinWith = mTvSkinValute.getWidth();
                 int tW =skinWith / 2;
                 int left = mTvSkinLow.getWidth();
                 int right =mTvSkinHigh.getWidth();
@@ -82,8 +78,36 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
                 mTvSkinValute.setLayoutParams(params);
                 Log.e("skinWith", skinWith + "==-----");
             }
-
         });
+
+//
+//        final ViewTreeObserver observer = mTvSkinValute.getViewTreeObserver();
+//        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                //此处不能写 observer.removeOnGlobalLayoutListener(this); 否则会报错
+//                removeOnGlobalLayoutListener(mTvSkinValute,this);
+//
+//                skinWith = mTvSkinValute.getMeasuredWidth();
+//                int tW =skinWith / 2;
+//                int left = mTvSkinLow.getWidth();
+//                int right =mTvSkinHigh.getWidth();
+//                Log.e("left ", left + "=======");
+//                Log.e("right ", right + "=======");
+//                Log.e("tW ", tW + "=======");
+//                int w = LUtils.getScreenWidth() - left - right;
+//                Log.e("w=====", "" + w);
+//
+//                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
+//                float pro = mProgressSkin.getCurrentCount();
+//
+//                params.leftMargin = (int) (pro * w / 100) + left - tW;
+//                Log.e("leftMargin=====", "" + params.leftMargin);
+//                mTvSkinValute.setLayoutParams(params);
+//                Log.e("skinWith", skinWith + "==-----");
+//            }
+//
+//        });
     }
 
     public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener listener){

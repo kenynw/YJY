@@ -20,9 +20,11 @@ public class ProductReadAdapter extends RecyclerArrayAdapter<Component> {
 
     private int type = 1;
 
+    Context mContext;
+
     public ProductReadAdapter(Context context, List<Component> datas) {
         super(context, datas);
-
+        mContext = context;
     }
 
 
@@ -47,8 +49,5 @@ public class ProductReadAdapter extends RecyclerArrayAdapter<Component> {
         }
         return type;
     }
-
-
-
 
 }

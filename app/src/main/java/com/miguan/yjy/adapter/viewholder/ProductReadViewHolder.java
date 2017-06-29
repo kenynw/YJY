@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.module.product.ComponentReadPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,23 +43,30 @@ public class ProductReadViewHolder extends BaseViewHolder<Component> {
     @Override
     public void setData(Component data) {
         super.setData(data);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ComponentReadPresenter.start(getContext(), Integer.parseInt(data.getId()));
+            }
+        });
         mTvComponentName.setText(data.getName());
 //            0-2 绿色
 //            3-6 橙色
 //            7-9 红色
 
         String grade = data.getRisk_grade();
-        if (!TextUtils.isEmpty(grade)) {
-            mTvComponentSafe.setText(grade);
-            if (grade.contains("0") || grade.contains("1") || grade.contains("2")) {
-                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_f8b);
-            }
-            if (grade.contains("3") || grade.contains("4") || grade.contains("5") || grade.contains("6")) {
-                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_ffc3);
-            }
-            if (grade.contains("7") || grade.contains("8") || grade.contains("9")) {
-                mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_fb74);
-            }
+        if (TextUtils.isEmpty(grade)) {
+            grade = "0";
+        }
+        mTvComponentSafe.setText(grade);
+        if (grade.contains("0") || grade.contains("1") || grade.contains("2")) {
+            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_f8b);
+        }
+        if (grade.contains("3") || grade.contains("4") || grade.contains("5") || grade.contains("6")) {
+            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_ffc3);
+        }
+        if (grade.contains("7") || grade.contains("8") || grade.contains("9")) {
+            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_fb74);
         }
 
         if (data.getIs_active() == 1) {

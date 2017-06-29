@@ -186,6 +186,7 @@
     <string name="tv_product_effect_num">主要功效成分:%d种</string>
     <string name="tv_product_brand_main">品牌主页 > </string>
     <string name="tv_product_brand_num">收录产品数 : %d</string>
+    <string name="tv_component_num">含有该成分的产品(%d)</string>
 
     <!--测试相关-->
     <string name="tv_test_wrinkele">皱纹/紧致测试</string>

@@ -78,11 +78,11 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
         mTvSpec.setText(data.getPrice().equals("0") ? "暂无报价" : getSpec(data));
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
         if (TextUtils.isEmpty(data.getProduct_explain())) {
-            mLlNoRead.setVisibility(View.GONE);
-            mTvProductRead.setVisibility(View.VISIBLE);
-        } else {
             mLlNoRead.setVisibility(View.VISIBLE);
             mTvProductRead.setVisibility(View.GONE);
+        } else {
+            mLlNoRead.setVisibility(View.GONE);
+            mTvProductRead.setVisibility(View.VISIBLE);
         }
     }
 

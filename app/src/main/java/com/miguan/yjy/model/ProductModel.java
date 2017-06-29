@@ -286,5 +286,17 @@ public class ProductModel extends AbsModel {
     public Observable<Ask> getAskList(int productId, int page) {
         return ServicesClient.getServices().askList(productId, page).compose(new DefaultTransform<>());
     }
+    /**
+     * 成份详情接口
+     */
+    public Observable<Component> componentInfo(int componentId) {
+        return ServicesClient.getServices().componentInfo(componentId).compose(new DefaultTransform<>());
+    }
+    /**
+     * 成份产品接口
+     */
+    public Observable<EntityRoot<List<Product>>> componentProductList(int productId, int page) {
+        return ServicesClient.getServices().componentProductList(productId, page,10).compose(new DefaultTransform<>());
+    }
 
 }
