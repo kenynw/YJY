@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +35,7 @@ import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.ask.AskListActivityPresenter;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.CustomNestedScrollView;
 import com.miguan.yjy.widget.FlowTagLayout;
 import com.miguan.yjy.widget.SharePopupWindow;
 
@@ -58,12 +64,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.tv_product_date_detail)
     TextView mTvQueryDate;
-
-//    @BindView(R.id.tv_product_suit_num)
-//    TextView tvSuitNum;
-//
-//    @BindView(R.id.tv_product_unsuit_num)
-//    TextView tvUnsuitNum;
 
     @BindView(R.id.tv_product_detail_record_inf0)
     TextView tvRecordInf0;
@@ -144,8 +144,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.btn_product_detail_ask)
     Button mBtnAsk;
+    @BindView(R.id.custSrcoll_product_detail)
+    CustomNestedScrollView mCustSrcoll;
 
     private boolean mIsLike;
+
+    private boolean mIsShowAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,13 +164,36 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @Override
     public void setData(Product product) {
+
+        mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (mIsShowAnim) {
+
+                } else {
+                    showInAnim();
+                }
+            }
+        });
+        showInAnim();
+        mBtnAsk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mIsShowAnim) {
+                    showOutAnim();
+                } else {
+                    AskListActivityPresenter.start(ProductDetailActivity.this, product.getId());
+                }
+            }
+        });
         if (product.getIs_top() > 0) {
             mIvIsTop.setVisibility(View.GONE);
         } else {
             mIvIsTop.setVisibility(View.GONE);
         }
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
-        mDvThumb.setOnClickListener(v-> LargeImageActivity.start(ProductDetailActivity.this,product.getProduct_img()));
+        mDvThumb.setOnClickListener(v -> LargeImageActivity.start(ProductDetailActivity.this, product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
 
         mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
@@ -194,13 +221,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             mTvReadDescribe.setText(product.getProduct_explain());
         }
 
-//        if (UserPreferences.getUserID() <= 0) {
-//            tvSuitNum.setVisibility(View.GONE);
-//            tvUnsuitNum.setVisibility(View.GONE);
-//        } else {
-//            tvSuitNum.setText(String.format(getString(R.string.tv_product_fit_skin), mProduct.getRecommend().size()));
-//            tvUnsuitNum.setText(String.format(getString(R.string.tv_product_no_fit_skin), mProduct.getNotRecommend().size()));
-//        }
         // 备案
         mTvProvisionNo.setText(product.getStandard_number());
         mTvCountry.setText(product.getProduct_country());
@@ -213,7 +233,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         flowtagGrade.setAdapter(componentAdapter);
         componentAdapter.onlyAddAll(product.getSecurity());
         componentAdapter.setSetOnTagClickListener((v, position) ->
-                ProductReadPresenter.start(ProductDetailActivity.this,"安全信息", product.getComponentList(), product.getSecurity(), position)
+                ProductReadPresenter.start(ProductDetailActivity.this, "安全信息", product.getComponentList(), product.getSecurity(), position)
         );
         String effectNum = "主要功效成分:<font color=\"#32DAC3\"> " + product.getEffectNum() + " </font>种";
         tvEffectInfo.setText(Html.fromHtml(effectNum));
@@ -223,13 +243,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         flowtagEffectInfo.setFocusable(false);
         effectAdapter.onlyAddAll(product.getEffect());
         effectAdapter.setSetOnTagClickListener((v, position) ->
-                ProductReadPresenter.start(ProductDetailActivity.this,"功效信息", product.getComponentList(), product.getEffect(), position)
+                ProductReadPresenter.start(ProductDetailActivity.this, "功效信息", product.getComponentList(), product.getEffect(), position)
         );
 
         //去比价
-        String ss = "https://ai.taobao.com/search/index.htm?key=CeraVeR%E9%9D%A2%E9%83%A8%E5%A4%9C%E9%97%B4%E8%A1%A5%E6%B0%B4%E4%BF%9D%E6%B9%BF%E4%B9%B3%E6%B6%B2&pid=mm_124287267_25890794_99532920";
-//        mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao()));
-//        mTvTaobao.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), ss));
+
         mTvTaobao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,7 +256,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                     intent.setAction("android.intent.action.VIEW");
                     Uri content_url = Uri.parse(product.getBuy().getTaobao()); // 淘宝商品的地址
                     intent.setData(content_url);
-//                intent.setClassName("com.taobao.taobao", "com.taobao.tao.detail.activity.DetailActivity");
                     startActivity(intent);
                 } else {
                     WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao());
@@ -255,9 +272,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         tvRemark.setOnClickListener(v -> ProductRemarkPresenter.start(this, product));
         tvLockAllComponent.setOnClickListener(v -> ProductComponentListPresenter.start(this, product));
         ll_info.setOnClickListener(this);
-//
-//        tvSuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, mProduct));
-//        tvUnsuitNum.setOnClickListener(v -> ProductReadPresenter.start(ProductDetailActivity.this, mProduct));
+
         mTvSkinSort.setOnClickListener(v -> {
             if (mTvSkinSort.getText().equals("肤质排序")) {
                 mTvSkinSort.setText(R.string.tv_product_detail_sort_total);
@@ -269,7 +284,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         });
 
         mTvTemplate.setOnClickListener(v -> AddRepositoryPresenter.start(this, null, "", product));
-        mBtnAsk.setOnClickListener(v -> AskListActivityPresenter.start(this, product.getId()));
     }
 
     // 设置长草图标样式
@@ -341,5 +355,30 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         evaluateAdapter.notifyDataSetChanged();
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));
     }
+
+    private void showInAnim() {
+        RotateAnimation rotateAnimation = new RotateAnimation(0, -60, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        TranslateAnimation translateAnimation = new TranslateAnimation(Animation.ABSOLUTE, 0, Animation.ABSOLUTE, mBtnAsk.getWidth() / 2 + mBtnAsk.getPaddingRight(), Animation.ABSOLUTE, 0, Animation.ABSOLUTE, mBtnAsk.getWidth() / 2 + mBtnAsk.getPaddingRight());
+        AnimationSet set = new AnimationSet(false);
+        set.addAnimation(rotateAnimation);
+        set.addAnimation(translateAnimation);
+        set.setDuration(500);
+        set.setFillAfter(true);
+        mBtnAsk.startAnimation(set);
+        mIsShowAnim = true;
+    }
+
+    private void showOutAnim() {
+        RotateAnimation rotateAnimation = new RotateAnimation(-60, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        TranslateAnimation translateAnimation = new TranslateAnimation(Animation.ABSOLUTE, mBtnAsk.getWidth() / 2 + mBtnAsk.getPaddingRight(), Animation.ABSOLUTE, 0, Animation.ABSOLUTE, mBtnAsk.getWidth() / 2 + mBtnAsk.getPaddingRight(), Animation.ABSOLUTE, 0);
+        AnimationSet set = new AnimationSet(false);
+        set.addAnimation(rotateAnimation);
+        set.addAnimation(translateAnimation);
+        set.setDuration(500);
+        set.setFillAfter(true);
+        mBtnAsk.startAnimation(set);
+        mIsShowAnim = false;
+    }
+
 
 }

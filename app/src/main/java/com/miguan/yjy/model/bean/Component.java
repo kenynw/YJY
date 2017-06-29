@@ -9,22 +9,26 @@ import android.os.Parcelable;
  * @描述 产品成分
  */
 
-public class Component  implements Parcelable {
+public class Component implements Parcelable {
 
 //    id(int) － ID
 //    name(string) － 成分名
+//    ename(string) － 成份英文名
+//    alias(string) － 成份别名
 //    risk_grade(int) － 风险等级
 //    is_active(int) － 活性成分 1-是，0-否
 //    is_pox(int) － 致痘 1-是，0-否
-//    component_action(string) － 使用目的
-//    description(string) － 简介
-
-    private String  id;
+//    component_action(string) － 使用目的(成份功效)
+//    description(string) － 简介(用户说明)
+    private String id;
     private String name;
+    private String ename;
+    private String alias;
     private String risk_grade;
     private int is_active;
     private int is_pox;
     private String component_action;
+
 
     public String getId() {
         return id;
@@ -33,6 +37,7 @@ public class Component  implements Parcelable {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getRisk_grade() {
         return risk_grade;
     }
@@ -83,6 +88,22 @@ public class Component  implements Parcelable {
         this.name = name;
     }
 
+    public String getEname() {
+        return ename;
+    }
+
+    public void setEname(String ename) {
+        this.ename = ename;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
     public Component() {
 
     }
@@ -96,6 +117,8 @@ public class Component  implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.name);
+        dest.writeString(this.ename);
+        dest.writeString(this.alias);
         dest.writeString(this.risk_grade);
         dest.writeInt(this.is_active);
         dest.writeInt(this.is_pox);
@@ -106,6 +129,8 @@ public class Component  implements Parcelable {
     protected Component(Parcel in) {
         this.id = in.readString();
         this.name = in.readString();
+        this.ename = in.readString();
+        this.alias = in.readString();
         this.risk_grade = in.readString();
         this.is_active = in.readInt();
         this.is_pox = in.readInt();
