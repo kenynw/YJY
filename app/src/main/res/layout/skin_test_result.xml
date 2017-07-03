@@ -1,79 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
               android:id="@+id/ll_test_ok"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <RelativeLayout
+
+    <com.miguan.yjy.widget.StickyNavLayout
+        android:id="@+id/sticky_brand_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="15dp"
-        android:paddingTop="20dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/img_skin_test"
-            android:layout_width="55dp"
-            android:layout_height="55dp"/>
-
-        <TextView
-            android:id="@+id/tv_skin_username"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@id/id_stickynavlayout_topview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/img_skin_test"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="7dp"
-            android:layout_toRightOf="@+id/img_skin_test"
-            android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_16"
-            tools:text="我是用户名"/>
+            android:background="@color/white"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_skin_time"
-            android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="15dp"
+                android:paddingTop="20dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/img_skin_test"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"/>
+
+                <TextView
+                    android:id="@+id/tv_skin_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/img_skin_test"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@+id/img_skin_test"
+                    android:textColor="@color/color_sencond_title"
+                    android:textSize="@dimen/text_size_small_16"
+                    tools:text="我是用户名"/>
+
+                <TextView
+                    android:id="@+id/tv_skin_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tv_skin_username"
+                    android:layout_below="@+id/tv_skin_username"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_size_micro_12"
+                    tools:text="时间"/>
+
+                <TextView
+                    android:id="@+id/tv_skin_again"
+                    android:layout_width="90dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_shape_main_color_white_5"
+                    android:gravity="center"
+                    android:text="再次测试"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_small_14"
+                    tools:text="再次测试"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <android.support.design.widget.TabLayout
+            android:id="@id/id_stickynavlayout_tab"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_skin_username"
-            android:layout_below="@+id/tv_skin_username"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_micro_12"
-            tools:text="时间"/>
+            android:background="@color/white"
+            />
 
-        <TextView
-            android:id="@+id/tv_skin_again"
-            android:layout_width="90dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/bg_shape_main_color_white_5"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:text="再次测试"
-            android:textSize="@dimen/text_size_small_14"
-            tools:text="再次测试"/>
-
-    </RelativeLayout>
-
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_skin_test"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <com.miguan.yjy.widget.NoScrollViewPager
+            android:id="@id/id_stickynavlayout_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            />
 
 
-    </android.support.design.widget.TabLayout>
+        <!--<android.support.design.widget.TabLayout-->
+        <!--android:id="@+id/tab_skin_test"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white">-->
 
-    <com.miguan.yjy.widget.NoScrollViewPager
-        android:id="@+id/viewpager_skin_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.miguan.yjy.widget.NoScrollViewPager>
+
+        <!--</android.support.design.widget.TabLayout>-->
+
+        <!--<com.miguan.yjy.widget.NoScrollViewPager-->
+        <!--android:id="@+id/viewpager_skin_test"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></com.miguan.yjy.widget.NoScrollViewPager>-->
+
+
+    </com.miguan.yjy.widget.StickyNavLayout>
 
 </LinearLayout>

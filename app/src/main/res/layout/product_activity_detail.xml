@@ -251,15 +251,15 @@
 
         </com.miguan.yjy.widget.CustomNestedScrollView>
 
-        <Button
+        <ImageView
             android:id="@+id/btn_product_detail_ask"
             android:layout_width="69dp"
             android:layout_height="115dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/ic_product_ask_start"
             android:padding="15dp"
+            android:src="@mipmap/ic_product_ask_start"
             />
 
     </RelativeLayout>

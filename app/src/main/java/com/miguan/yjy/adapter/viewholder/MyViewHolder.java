@@ -11,6 +11,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.SkinListAdapter;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.module.test.TestRecomendPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,10 +67,8 @@ public  class MyViewHolder extends BaseViewHolder<Skin> {
         mRectCategory.setAdapter(testListAdapter);
 
 //            mLlTestMore.setOnClickListener(v -> TestRecomendPresenter.star(getContext(),));
-//        itemView.setOnClickListener(v -> {
-//            if (mItemClickListener != null) {
-//                mItemClickListener.onItemClick(getAdapterPosition());
-//            }
-//        });
+        itemView.setOnClickListener(v -> {
+        TestRecomendPresenter.star(getContext(), mTest,getAdapterPosition(), data.getCategory_name());
+        });
     }
 }

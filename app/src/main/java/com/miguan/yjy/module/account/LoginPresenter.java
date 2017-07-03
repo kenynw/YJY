@@ -4,12 +4,15 @@ import android.content.Intent;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
+import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -31,6 +34,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                 Set<String> set = new HashSet<>();
                 set.add("login");
                 JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);
+                EventBus.getDefault().post(new TestStart());
                 getView().finish();
             }
         });
@@ -59,6 +63,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                 AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
                     @Override
                     public void onNext(User user) {
+                        EventBus.getDefault().post(new TestStart());
                         getView().finish();
 
                     }

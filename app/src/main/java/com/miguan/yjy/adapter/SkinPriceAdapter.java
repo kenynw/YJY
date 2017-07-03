@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.SelectPrice;
-import com.miguan.yjy.utils.LUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,12 +57,14 @@ public class SkinPriceAdapter extends BaseAdapter {
             if (position == 0) {
                 textView.setText("不限");
             } else {
+              BigDecimal maxValue=  new BigDecimal(mdatas.get(position).getMax());
+              BigDecimal minValue=  new BigDecimal(mdatas.get(position).getMin());
                 if (mdatas.get(position).getMin() == 0) {//说明有最大值 100以下 最小值为0
-                    textView.setText(mdatas.get(position).getMax() + "以下");
+                    textView.setText( maxValue+ "以下");
                 } else if (mdatas.get(position).getMax() == 0) {
-                    textView.setText(mdatas.get(position).getMin() + "以上");
+                    textView.setText(minValue + "以上");
                 } else {
-                    textView.setText(mdatas.get(position).getMin() + "-" + mdatas.get(position).getMax());
+                    textView.setText(minValue+ "-" +maxValue);
                 }
             }
 
@@ -75,7 +77,6 @@ public class SkinPriceAdapter extends BaseAdapter {
             textView.setOnClickListener(v -> {
                 if (mSetOnTagClickListener != null) {
                     for (int i = 0; i < mdatas.size(); i++) {
-                        LUtils.toast("i===" + i + "datas==" + mdatas.size() + "position" + position);
                         mdatas.get(i).setSelect(false);
                         mdatas.get(position).setSelect(true);
                     }

@@ -11,6 +11,7 @@ import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.UserModel;
+import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
@@ -60,6 +61,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     }
 
     public void logout() {
+        UserPreferences.setTestPosition(0);
         UserPreferences.setUserID(0);
         UserPreferences.setIsShowTest(false);
         if (UserPreferences.getUserID() <= 0) {
@@ -67,7 +69,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getView().startActivity(intent);
             UMShareAPI.get(getView()).deleteOauth(getView(), SHARE_MEDIA.WEIXIN, null);
-            EventBus.getDefault().post(true);
+            EventBus.getDefault().post(new TestStart());
             EventBus.getDefault().post(0);
 
             Set<String> set = new HashSet<>();

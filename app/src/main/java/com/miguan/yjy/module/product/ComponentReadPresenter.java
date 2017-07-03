@@ -3,6 +3,7 @@ package com.miguan.yjy.module.product;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -62,7 +63,9 @@ public class ComponentReadPresenter extends BaseListActivityPresenter<ComponentR
                 .map(new Func1<EntityRoot<List<Product>>, List<Product>>() {
                     @Override
                     public List<Product> call(EntityRoot<List<Product>> listEntityList) {
-                        ((HeadComponent) getAdapter().getHeader(0)).setNum(listEntityList.getPageTotal());
+                        Log.e("listEntityList", listEntityList.toString());
+                        Log.e("listEntityList.get", listEntityList.getPageTotal() + "=getPageTotal==");
+                        ((HeadComponent) getAdapter().getHeader(0)).setIsSetNum(listEntityList.getPageTotal());
                         return listEntityList.getData();
                     }
                 }).unsafeSubscribe(getRefreshSubscriber());
@@ -105,6 +108,11 @@ public class ComponentReadPresenter extends BaseListActivityPresenter<ComponentR
         TextView mTvComponentPox;
         @BindView(R.id.tv_component_active)
         TextView mTvComponentActive;
+        public int isSetNum;
+
+        public void setIsSetNum(int isSetNum) {
+            this.isSetNum = isSetNum;
+        }
 
         public HeadComponent(Component component) {
             this.component = component;
@@ -149,11 +157,10 @@ public class ComponentReadPresenter extends BaseListActivityPresenter<ComponentR
             } else {
                 mTvComponentPox.setText("—");
             }
-        }
-
-        public void setNum(int num) {
-            String componentNum = String.format(getView().getResources().getString(R.string.tv_component_num), num);
-            mTvComponentNum.setText(componentNum);
+            if (isSetNum >= 0) {
+                String componentNum = String.format(getView().getResources().getString(R.string.tv_component_num), isSetNum);
+                mTvComponentNum.setText(componentNum);
+            }
         }
     }
 

@@ -3,6 +3,8 @@ package com.miguan.yjy.module.product;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,12 +12,12 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -31,9 +33,9 @@ import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.module.ask.AskListActivityPresenter;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.module.ask.AskListActivityPresenter;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CustomNestedScrollView;
 import com.miguan.yjy.widget.FlowTagLayout;
@@ -143,7 +145,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     ImageView mIvIsTop;
 
     @BindView(R.id.btn_product_detail_ask)
-    Button mBtnAsk;
+    ImageView mBtnAsk;
     @BindView(R.id.custSrcoll_product_detail)
     CustomNestedScrollView mCustSrcoll;
 
@@ -162,21 +164,68 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
     }
 
+    int scrollY;
+
     @Override
     public void setData(Product product) {
+
+        mCustSrcoll.setOnTouchListener(new View.OnTouchListener() {
+            private int lastY = 0;
+            private int touchEventId = -9983761;
+            Handler handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    View scroller = (View) msg.obj;
+                    if (msg.what == touchEventId) {
+                        if (lastY == scroller.getScrollY()) {
+                            handleStop(scroller);
+                        } else {
+                            handler.sendMessageDelayed(handler.obtainMessage(touchEventId, scroller), 5);
+                            lastY = scroller.getScrollY();
+                        }
+                    }
+                }
+            };
+
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    handler.sendMessageDelayed(handler.obtainMessage(touchEventId, v), 5);
+                }
+                return false;
+            }
+
+            //处理真正的事件
+            private void handleStop(Object view) {
+                CustomNestedScrollView scroller = (CustomNestedScrollView) view;
+                scrollY = scroller.getScrollY();
+                showOutAnim();
+            }
+        });
+
+
+//        mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                if (scrollX != oldScrollX) {
+//                    showInAnim();
+//                }
+//            }
+//        });
 
         mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
 
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (mIsShowAnim) {
-
                 } else {
                     showInAnim();
                 }
             }
         });
-        showInAnim();
+
+//        showInAnim();
         mBtnAsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

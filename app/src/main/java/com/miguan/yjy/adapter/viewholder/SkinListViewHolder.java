@@ -48,9 +48,7 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
     public void setData(Skin data) {
         super.setData(data);
 
-        mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
-        mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
-        mTvSkinValute.setText(data.getName()+":"+(int)data.getScore()+"分");
+
         mTvSkinTestName.setText(data.skinDesc[getDataPosition()]);
         mTvSkinDec.setText(data.getUnscramble());
         mProgressSkin.setMaxCount(100f);
@@ -108,6 +106,10 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
 //            }
 //
 //        });
+        mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
+        mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
+        mTvSkinValute.setText(data.getName()+":"+(int)data.getScore()+"分");
+
     }
 
     public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener listener){

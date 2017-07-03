@@ -23,6 +23,6 @@ public class SkinRecomFragment extends BaseListFragment<SkinRecomFragmentPresent
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(false);
+        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false);
     }
 }

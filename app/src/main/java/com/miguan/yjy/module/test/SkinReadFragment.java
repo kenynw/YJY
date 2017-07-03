@@ -42,6 +42,6 @@ public class SkinReadFragment extends BaseListFragment<SkinReadFragmentPresenter
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(false);
+        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false);
     }
 }

@@ -2,13 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/white"
+        />
 
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"
         style="@style/TitleToolbar"
-        android:background="@color/white"
         android:layout_marginBottom="1dp"
+        android:background="@color/white"
         >
 
         <TextView
@@ -17,11 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:maxLines="1"
-            android:text="@string/text_test"
             android:textAppearance="@style/TextSubhead"
+            tools:text="这是标题"
             />
 
     </android.support.v7.widget.Toolbar>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -17,6 +17,7 @@ public class UserPreferences {
     private static final String KEY_UNREAD_MSG = "unread_msg"; //未读消息
     private static final String KEY_OVERDUE_NUM = "overdue_num"; //过期产品数
     private static final String KEY_TEST_SHOW = "test_show"; //测试显示结果(未测试页面)
+    private static final String KEY_TEST_POSITION = "test_position";//记录肤质测试选中项
 
     public static int getUserID() {
         return LUtils.getPreferences().getInt(KEY_USER_ID, 0);
@@ -80,6 +81,13 @@ public class UserPreferences {
 
     public static void setOverdueNum(int value) {
         LUtils.getPreferences().edit().putInt(KEY_OVERDUE_NUM, value).apply();
+    }
+    public static int getTestPosition() {
+        return LUtils.getPreferences().getInt(KEY_TEST_POSITION, 0);
+    }
+
+    public static void setTestPosition(int value) {
+        LUtils.getPreferences().edit().putInt(KEY_TEST_POSITION, value).apply();
     }
 
     private static String getString(String key) {
