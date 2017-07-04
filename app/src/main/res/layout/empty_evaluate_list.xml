@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_evaluate_empty"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center"
-    android:paddingTop="50dp"
     android:paddingBottom="50dp"
+    android:paddingTop="50dp"
     android:text="@string/text_empty_evaluate_list"
     />

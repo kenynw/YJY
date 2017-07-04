@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.product;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,12 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jude.library.imageprovider.ImageProvider;
+import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 
@@ -26,7 +30,8 @@ import butterknife.ButterKnife;
  * @描述 写点评
  */
 @RequiresPresenter(ProductRemarkPresenter.class)
-public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresenter> {
+public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresenter> implements
+        View.OnClickListener, OnImageSelectListener {
 
     @BindView(R.id.dv_product_detail)
     SimpleDraweeView mDvThumb;
@@ -52,6 +57,11 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
     @BindView(R.id.et_product_remark)
     EditText mEtRemark;
 
+    @BindView(R.id.iv_remark_image)
+    ImageView mIvRemarkImage;
+
+    private Uri mUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +69,7 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
         ButterKnife.bind(this);
         setToolbarTitle("写点评");
 
+        mIvRemarkImage.setOnClickListener(this);
         initListener();
     }
 
@@ -70,7 +81,12 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        getPresenter().submit((int) mRatbarProduct.getRating(), mEtRemark.getText().toString().trim());
+        getExpansionDelegate().showProgressBar();
+        getPresenter().submit(
+                (int) mRatbarProduct.getRating(),
+                mEtRemark.getText().toString().trim(),
+                mUri
+        );
         return super.onOptionsItemSelected(item);
     }
 
@@ -135,4 +151,32 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
     }
 
+    @Override
+    public void onClick(View view) {
+        ImageProvider.getInstance(this).getImageFromCameraOrAlbum(this);
+    }
+
+    @Override
+    public void onImageSelect() {
+
+    }
+
+    @Override
+    public void onImageLoaded(Uri uri) {
+        if (uri != mUri) {
+            mIvRemarkImage.setImageURI(uri);
+            mUri = uri;
+        }
+    }
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ImageProvider.getInstance(this).onActivityResult(requestCode, resultCode, data);
+    }
 }

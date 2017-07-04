@@ -14,9 +14,7 @@
         android:id="@+id/tv_ask_list_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_normal"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_margin="@dimen/spacing_normal"
         android:text="@string/text_ask_list_empty"
         />
 

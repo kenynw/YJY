@@ -40,8 +40,6 @@ public class AddAskActivity extends ChainBaseActivity<AddAskActivityPresenter> i
         setContentView(R.layout.ask_acitivity_add);
         setToolbarTitle("提问");
         ButterKnife.bind(this);
-
-        mEtAddInput.addTextChangedListener(this);
     }
 
     public void setProduct(String img, String name, String content) {
@@ -52,18 +50,23 @@ public class AddAskActivity extends ChainBaseActivity<AddAskActivityPresenter> i
             }
             mTvName.setText(Html.fromHtml(String.format(getString(R.string.text_ask_product_name), name)));
         }
-        if (!TextUtils.isEmpty(content)) mEtAddInput.setText(content);
+        if (!TextUtils.isEmpty(content)) {
+            mEtAddInput.setText(content);
+            mEtAddInput.setSelection(content.length());
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_publish, menu);
+        menu.getItem(0).setEnabled(mEtAddInput.getText().length() > 0);
+        mEtAddInput.addTextChangedListener(this);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mEtAddInput.getText().length() <= 0) {
+        if (mEtAddInput.getText().length() < 3) {
             LUtils.toast("请输入问题");
             return false;
         }
@@ -79,7 +82,7 @@ public class AddAskActivity extends ChainBaseActivity<AddAskActivityPresenter> i
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        mToolbar.getMenu().getItem(0).setEnabled(mEtAddInput.getText().length() > 0);
+        mToolbar.getMenu().getItem(0).setEnabled(mEtAddInput.getText().length() >= 3);
     }
 
     @Override

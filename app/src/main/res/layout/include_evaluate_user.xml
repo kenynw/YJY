@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/item_list_evaluate"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:showIn="@layout/item_list_evaluate">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_evaluate_avatar"
@@ -29,22 +30,26 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
+        <com.elyeproj.loaderviewlibrary.LoaderTextView
             android:id="@+id/tv_evaluate_user_name"
-            tools:text="name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="40dp"
             android:textColor="@color/color_sencond_title"
-            android:textSize="@dimen/text_size_small_15"/>
+            android:textSize="@dimen/text_size_small_15"
+            app:height_weight="0.6"
+            app:use_gradient="true"
+            tools:text="name"
+            />
 
-        <TextView
+        <com.elyeproj.loaderviewlibrary.LoaderTextView
             android:id="@+id/tv_evaluate_user_age"
-            tools:text="年龄"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:textAppearance="@style/TextCaption"
+            tools:text="年龄"
             />
 
         <TextView
@@ -59,6 +64,7 @@
             android:text="精华"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_micro_11"
+            android:visibility="gone"
             />
 
         <TextView
@@ -76,6 +82,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             >
 
             <ImageView
@@ -89,19 +96,18 @@
 
             <TextView
                 android:id="@+id/tv_evaluate_like"
-                tools:text="赞"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextCaption"
+                tools:text="赞"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
+    <com.elyeproj.loaderviewlibrary.LoaderTextView
         android:id="@+id/tv_evaluate_label"
-        tools:text="清干 | 重敏 | 非色素 | 紧致"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ll_evaluate_user_info"
@@ -110,6 +116,9 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_body_material"
+        app:height_weight="0.6"
+        app:width_weight="0.5"
+        tools:text="清干 | 重敏 | 非色素 | 紧致"
         />
 
 </merge>

@@ -33,21 +33,23 @@ public class DownloadService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String title = intent.getExtras().getString("title");
-        String url = intent.getExtras().getString("url");
-        String filepath = intent.getExtras().getString("path");
-        String filename = intent.getExtras().getString("name");
+        if (intent.getExtras() != null) {
+            String title = intent.getExtras().getString("title");
+            String url = intent.getExtras().getString("url");
+            String filepath = intent.getExtras().getString("path");
+            String filename = intent.getExtras().getString("name");
 
-        mReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                install(context, filepath, filename);
-                stopSelf();
-            }
-        };
-        registerReceiver(mReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            mReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    install(context, filepath, filename);
+                    stopSelf();
+                }
+            };
+            registerReceiver(mReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
-        startDownload(url, filename, title);
+            startDownload(url, filename, title);
+        }
 
         return START_STICKY;
     }

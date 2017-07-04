@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/spacing_normal"
         android:background="@color/white"
         android:gravity="top"
-        android:hint="@string/hint_brand_name"
+        android:hint="@string/hint_add_ask"
         android:inputType="textMultiLine"
         android:paddingBottom="@dimen/spacing_large"
         android:paddingLeft="@dimen/spacing_normal"

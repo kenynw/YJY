@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_small"
     android:layout_marginLeft="11dp"
     android:layout_marginRight="11dp"
-    android:layout_marginTop="@dimen/spacing_normal"
     app:cardCornerRadius="8dp"
     app:cardElevation="3dp"
     >
@@ -19,6 +19,8 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
         android:paddingTop="@dimen/spacing_large"
         >
 
@@ -28,7 +30,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textPrimary"
             android:textSize="18sp"
-            tools:text="适合敏感皮吗？"
+            tools:text="适合敏感皮吗？适合敏感皮吗？适合敏感皮吗？适合敏感皮吗？"
             />
 
         <com.miguan.yjy.widget.SuperTextView

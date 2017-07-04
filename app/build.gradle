@@ -130,6 +130,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     compile 'com.jude:exgridview:1.1.5'
     compile 'q.rorbin:badgeview:1.1.0'
+    compile 'com.elyeproj.libraries:loaderviewlibrary:1.3.0'
 
     // 第三方
     compile 'com.umeng.analytics:analytics:latest.integration'

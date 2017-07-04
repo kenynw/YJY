@@ -8,8 +8,8 @@ import android.text.TextUtils;
 
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
+import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
 
@@ -101,9 +101,14 @@ public class MessageReceiver extends BroadcastReceiver {
         } else if (type == 4){ // 产品
             ProductDetailPresenter.start(context, Integer.valueOf(relation));
         } else {
-            Intent intent = new Intent(context, MsgListActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            CommonModel.getInstance().setMsgRead(id, "pms").unsafeSubscribe(new ServicesResponse<String>() {
+                @Override
+                public void onNext(String s) {
+                    Intent intent = new Intent(context, MsgListActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }

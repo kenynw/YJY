@@ -173,11 +173,6 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             return;
         }
 
-        if (TextUtils.isEmpty(mTvBrand.getText())) {
-            LUtils.toast("请输入品牌");
-            return;
-        }
-
         String format = mTvExpiration.getText().toString().contains("日") ? "yyyy年MM月dd日" : "yyyy年MM月";
 
         getPresenter().submit(

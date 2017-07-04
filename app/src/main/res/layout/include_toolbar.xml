@@ -20,8 +20,21 @@
         style="@style/TitleToolbar"
         android:layout_marginBottom="1dp"
         android:background="@color/white"
-        app:navigationIcon="@mipmap/ic_back"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         >
+
+        <ImageView
+            android:id="@id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_back"
+            />
 
         <TextView
             android:id="@id/toolbar_title"

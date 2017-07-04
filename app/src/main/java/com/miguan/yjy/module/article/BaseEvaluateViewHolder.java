@@ -38,7 +38,10 @@ public class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
     public BaseEvaluateViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         ButterKnife.bind(this, itemView);
+    }
 
+    @Override
+    public void setData(Evaluate data) {
         mTvContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -64,10 +67,6 @@ public class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
                 }
             }
         });
-    }
-
-    @Override
-    public void setData(Evaluate data) {
         mTvContent.setText(data.getComment());
         itemView.setOnClickListener(v -> EvaluateDetailPresenter.start(getContext(), data.getId()));
     }

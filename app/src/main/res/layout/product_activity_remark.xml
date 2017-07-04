@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/include_toolbar"/>
@@ -95,8 +96,20 @@
             android:textSize="@dimen/text_size_small_15"
             />
 
+        <ImageView
+            android:id="@+id/iv_remark_image"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_add_evaluate_def_image"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            />
+
     </RelativeLayout>
-
-
 
 </LinearLayout>

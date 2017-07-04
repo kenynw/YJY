@@ -74,13 +74,14 @@ public class AddEvaluatePresenter extends Presenter<AddEvaluateActivity> {
                     });
 
         } else {
-            ArticleModel.getInstance().addEvaluate(mArticleId, mType, mParentId, "", content).subscribe(new ServicesResponse<String>() {
-                @Override
-                public void onNext(String evaluate) {
-                    getView().setResult(Activity.RESULT_OK);
-                    getView().finish();
-                }
-            });
+            ArticleModel.getInstance().addEvaluate(mArticleId, mType, mParentId, "", content)
+                    .subscribe(new ServicesResponse<String>() {
+                        @Override
+                        public void onNext(String evaluate) {
+                            getView().setResult(Activity.RESULT_OK);
+                            getView().finish();
+                        }
+                    });
         }
     }
 

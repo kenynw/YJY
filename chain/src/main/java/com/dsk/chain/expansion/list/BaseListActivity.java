@@ -80,7 +80,8 @@ public abstract class BaseListActivity<P extends BaseListActivityPresenter> exte
 
     private void initAdapter() {
         final BaseListActivityPresenter.DataAdapter adapter = getPresenter().getAdapter();
-        mListView.setAdapterWithProgress(adapter);
+        if (mListConfig.mContainerProgressAble) mListView.setAdapterWithProgress(adapter);
+        else mListView.setAdapter(adapter);
         if (mListConfig.mFooterErrorAble) {
             if (mListConfig.mFooterErrorView != null) adapter.setError(mListConfig.mFooterErrorView);
             else if (mListConfig.mFooterErrorRes > 0) adapter.setError(mListConfig.mFooterErrorRes);

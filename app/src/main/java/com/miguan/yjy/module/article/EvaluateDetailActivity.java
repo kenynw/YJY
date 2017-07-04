@@ -4,7 +4,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -27,7 +29,7 @@ import butterknife.ButterKnife;
  */
 @RequiresPresenter(EvaluateDetailPresenter.class)
 public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPresenter, Evaluate>
-        implements RecyclerArrayAdapter.OnItemClickListener {
+        implements RecyclerArrayAdapter.OnItemClickListener, TextWatcher {
 
     private EvaluatePanel mEvaluatePanel;
 
@@ -45,8 +47,11 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     @BindView(R.id.recy_evaluate_detail)
     RecyclerView mRecyDetail;
 
-    @BindView(R.id.et_evaluate_add)
+    @BindView(R.id.et_input_input)
     EditText mEtAdd;
+
+    @BindView(R.id.tv_input_send)
+    TextView mTvSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +64,9 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
         mRecyDetail.setLayoutManager(new LinearLayoutManager(this));
         mRecyDetail.setAdapter(getPresenter().getAdapter());
 
+        mEtAdd.addTextChangedListener(this);
         mEtAdd.setOnKeyListener((view, i, keyEvent) -> {
             if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    if (mEtAdd.getText().length() > 0) {
-                        String content = mEtAdd.getText().toString();
-                        if (mEvaluate != null) {
-                            content = content.replace("@" + mEvaluate.getUser().getUsername() + "：", "");
-                        }
-                        getPresenter().addReply(content);
-                        return true;
-                    }
-                }
                 if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_DEL && mEvaluate != null) {
                     if (mEtAdd.getText().toString().equals("@" + mEvaluate.getUser().getUsername() + "：")) {
                         clearInput();
@@ -79,6 +75,13 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
                 }
             }
             return false;
+        });
+        mTvSend.setOnClickListener(v -> {
+            String content = mEtAdd.getText().toString();
+            if (mEvaluate != null) {
+                content = content.replace("@" + mEvaluate.getUser().getUsername() + "：", "");
+            }
+            getPresenter().addReply(content);
         });
     }
 
@@ -119,4 +122,18 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
         return mEvaluate;
     }
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        mTvSend.setEnabled(mEtAdd.getText().length() > 0);
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
 }

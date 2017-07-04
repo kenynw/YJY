@@ -8,6 +8,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
 import com.miguan.yjy.module.article.EvaluateDetailPresenter;
+import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +43,8 @@ public class ReplyViewHolder extends BaseViewHolder<Message> {
                     ArticleDetailPresenter.start(getContext(), data.getId());
                     break;
                 case 3:
+                    if (data.getProduct_id() > 0)
+                        AskDetailActivityPresenter.start(getContext(), data.getProduct_id(), data.getId());
                     break;
             }
         });

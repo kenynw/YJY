@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/spacing_normal"
     android:paddingLeft="@dimen/spacing_normal"
     android:paddingRight="@dimen/spacing_normal"
     android:paddingTop="@dimen/spacing_large"
@@ -22,10 +22,12 @@
 
     <include layout="@layout/include_item_evaluate_product"/>
 
-    <TextView
+    <com.elyeproj.loaderviewlibrary.LoaderTextView
         style="@style/EvaluateContent"
+        android:maxLines="6"
         android:paddingLeft="@dimen/spacing_small"
         android:paddingRight="@dimen/spacing_small"
+        app:height_weight="0.8"
         tools:text="混油皮也可以感受到pm乳的好处的！！这个简直是刷酸皮肤不耐受时期的急救神器啊！！！刷酸是如果脱皮的很厉害或者发现皮肤受损感觉到刺痛，我"
         />
 
@@ -33,13 +35,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="22dp"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
         >
 
-        <TextView
+        <com.elyeproj.loaderviewlibrary.LoaderTextView
             android:id="@+id/tv_evaluate_commend_like"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -47,13 +48,17 @@
             android:drawablePadding="@dimen/spacing_tiny"
             android:drawableStart="@mipmap/ic_like_normal"
             android:gravity="bottom"
+            android:minWidth="30dp"
+            app:width_weight="0.8"
+            android:paddingBottom="@dimen/spacing_normal"
             android:paddingEnd="25dp"
             android:paddingRight="25dp"
+            android:paddingTop="@dimen/spacing_large"
             android:textAppearance="@style/TextCaption"
             tools:text="908"
             />
 
-        <TextView
+        <com.elyeproj.loaderviewlibrary.LoaderTextView
             android:id="@+id/tv_evaluate_commend_comment"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -61,6 +66,8 @@
             android:drawablePadding="6dp"
             android:drawableStart="@mipmap/ic_product_comment"
             android:gravity="bottom"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingTop="@dimen/spacing_large"
             android:text="@string/btn_comment"
             android:textAppearance="@style/TextCaption"
             />

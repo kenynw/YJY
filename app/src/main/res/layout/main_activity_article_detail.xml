@@ -41,14 +41,15 @@
                 tools:text="@string/text_article_evaluate"
                 />
 
-            <com.jude.easyrecyclerview.EasyRecyclerView
+            <android.support.v7.widget.RecyclerView
                 android:id="@id/recycle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                app:layout_empty="@layout/empty_evaluate_list"
                 />
+
+            <include layout="@layout/empty_evaluate_list" />
 
         </LinearLayout>
 

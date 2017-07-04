@@ -36,12 +36,20 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
     public void onSetToolbar(Toolbar toolbar) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 finish();
             }
-        });
+        };
+        View viewBack = mToolbar.findViewById(R.id.toolbar_back);
+        if (viewBack != null) {
+            viewBack.setOnClickListener(onClickListener);
+        } else {
+            mToolbar.setNavigationOnClickListener(onClickListener);
+        }
     }
 
     public void setToolbarTitle(int title) {

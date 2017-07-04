@@ -1,100 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="bottom"
+        >
 
-        <FrameLayout
+        <com.miguan.yjy.widget.HeadViewPager
+            android:id="@+id/hv_home_banner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom">
-
-            <com.miguan.yjy.widget.HeadViewPager
-                android:id="@+id/hv_home_banner"
-                android:layout_width="match_parent"
-                android:layout_height="256dp"
-                />
-
-            <com.miguan.yjy.widget.CirclePageIndicator
-                android:id="@+id/indicator_main_home"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="8dp"
-                />
-
-        </FrameLayout>
-
-        <com.jude.exgridview.ExGridView
-            android:id="@+id/recy_home_category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:paddingLeft="35dp"
-            android:paddingRight="35dp"
-            android:paddingTop="15dp"
-            app:grid_as_square="false"
-            app:grid_divider_horizontal="35dp"
-            app:grid_divider_vertical="15dp"
+            android:layout_height="256dp"
             />
 
-        <LinearLayout
+        <com.miguan.yjy.widget.CirclePageIndicator
+            android:id="@+id/indicator_main_home"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:orientation="horizontal"
-            >
+            android:layout_height="10dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="8dp"
+            />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
+    </FrameLayout>
 
-            <Button
-                android:id="@+id/btn_home_query_batch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/bg_btn_home_query"
-                />
+    <com.jude.exgridview.ExGridView
+        android:id="@+id/recy_home_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingTop="15dp"
+        app:grid_as_square="false"
+        app:grid_divider_horizontal="35dp"
+        app:grid_divider_vertical="15dp"
+        />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
 
-            <Button
-                android:id="@+id/btn_home_my_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/bg_btn_home_my_repository"
-                />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
-
-        </LinearLayout>
-
-        <ImageView
+        <Button
+            android:id="@+id/btn_home_query_batch"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerInside"
-            android:src="@mipmap/bg_commend_evaluate"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_btn_home_query"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/btn_home_my_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_btn_home_my_repository"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             />
 
     </LinearLayout>
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerInside"
+        android:src="@mipmap/bg_commend_evaluate"
+        />
+
+</LinearLayout>

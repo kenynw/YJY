@@ -373,6 +373,7 @@ public interface Services {
      * @param userId 用户ID 可空
      * @param type    类型 1-产品，2-文章
      * @param star    星级(文章可不传)
+     * @param image 图片地址（路径attachment)
      * @param content 评论内容
      * @return
      */

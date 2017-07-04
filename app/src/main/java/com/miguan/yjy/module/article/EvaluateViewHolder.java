@@ -88,6 +88,7 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
         if (data.getReply() == null) {
             mTvReply.setVisibility(View.GONE);
         } else {
+            mTvReply.setVisibility(View.VISIBLE);
             mTvReply.setText(Html.fromHtml(String.format(getContext().getString(R.string.text_evaluate_reply_from),
                     data.getReply().getAuthor(), data.getReply().getComment())));
         }

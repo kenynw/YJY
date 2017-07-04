@@ -352,7 +352,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         Product product = getPresenter().getData();
 
         new SharePopupWindow.Builder(this)
-                .setUrl(product.getLinkUrl())
+                .setUrl(TextUtils.isEmpty(product.getLinkUrl()) ? "http:www.yjyapp.com" : product.getLinkUrl())
                 .setTitle(product.getProduct_name() + "【颜究院】")
                 .setContent("科学分析产品成分，只有我们知道它适不适合你")
                 .setImageUrl(product.getProduct_img())

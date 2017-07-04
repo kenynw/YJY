@@ -30,6 +30,8 @@ public class Message implements Parcelable {
 
     private int otype;
 
+    private int product_id;
+
     public Message() {
     }
 
@@ -106,6 +108,14 @@ public class Message implements Parcelable {
         this.otype = otype;
     }
 
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -122,6 +132,7 @@ public class Message implements Parcelable {
         dest.writeString(this.img);
         dest.writeInt(this.type);
         dest.writeInt(this.otype);
+        dest.writeInt(this.product_id);
     }
 
     protected Message(Parcel in) {
@@ -134,6 +145,7 @@ public class Message implements Parcelable {
         this.img = in.readString();
         this.type = in.readInt();
         this.otype = in.readInt();
+        this.product_id = in.readInt();
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {

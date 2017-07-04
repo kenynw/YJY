@@ -81,7 +81,8 @@ public abstract class BaseListFragment<P extends BaseListFragmentPresenter, M> e
 
     private void initAdapter() {
         final BaseListFragmentPresenter.DataAdapter adapter = getPresenter().getAdapter();
-        mListView.setAdapter(adapter);
+        if (mListConfig.mContainerProgressAble) mListView.setAdapterWithProgress(adapter);
+        else mListView.setAdapter(adapter);
         if (mListConfig.mFooterErrorAble) {
             if (mListConfig.mFooterErrorView != null) adapter.setError(mListConfig.mFooterErrorView);
             else if (mListConfig.mFooterErrorRes > 0) adapter.setError(mListConfig.mFooterErrorRes);

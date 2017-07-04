@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
-import com.dsk.chain.expansion.list.BaseListActivityPresenter;
+import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.miguan.yjy.R;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
@@ -16,15 +20,22 @@ import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SharePopupWindow;
 import com.umeng.socialize.UMShareAPI;
 
+import java.util.List;
+
+import rx.Subscriber;
+
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDetailActivity, Evaluate> {
+public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDetailActivity, Article>
+        implements RecyclerArrayAdapter.OnMoreListener, android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener {
 
     public static final String EXTRA_ARTICLE_ID = "article_id";
+
+    private RecyclerArrayAdapter<Evaluate> mAdapter;
 
     public static void start(Context context, int articleId) {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
@@ -36,6 +47,8 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     private int mArticleId;
 
     private Article mArticle;
+
+    private int mPage;
 
     @Override
     protected void onCreate(ArticleDetailActivity view, Bundle saveState) {
@@ -52,18 +65,46 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
     @Override
     public void onRefresh() {
         ArticleModel.getInstance().getArticleDetail(mArticleId)
-                .map(article -> {
-                    mArticle = article;
-                    getView().setData(article);
-                    return article.getCommentList();
-                })
-                .doOnError(throwable -> getView().getExpansionDelegate().hideProgressBar())
-                .unsafeSubscribe(getRefreshSubscriber());
+//                .map(article -> {
+//                    if (mArticle == null) {
+//                        mArticle = article;
+//                        getView().setData(article);
+//                    }
+//                    return article.getCommentList();
+//                })
+                .doOnCompleted(() -> mPage = 2)
+                .unsafeSubscribe(getDataSubscriber());
+    }
+
+    public void onLoadMore() {
+//        ArticleModel.getInstance().getEvaluateList(mArticleId, "", mPage).unsafeSubscribe();
     }
 
     @Override
-    public void onLoadMore() {
-        ArticleModel.getInstance().getEvaluateList(mArticleId, "", getCurPage()).unsafeSubscribe(getMoreSubscriber());
+    public void onMoreShow() {
+        ArticleModel.getInstance().getEvaluateList(mArticleId, "", mPage)
+                .unsafeSubscribe(new Subscriber<List<Evaluate>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Evaluate> evaluates) {
+                        mAdapter.addAll(evaluates);
+                        mPage++;
+                    }
+                });
+    }
+
+    @Override
+    public void onMoreClick() {
+
     }
 
     @Override
@@ -105,6 +146,20 @@ public class ArticleDetailPresenter extends BaseListActivityPresenter<ArticleDet
                     .setType(2)
                     .show(getView().getToolbar());
         }
+    }
+
+    public RecyclerArrayAdapter<Evaluate> getAdapter() {
+        if (mAdapter == null) {
+            mAdapter = new RecyclerArrayAdapter<Evaluate>(getView()) {
+                @Override
+                public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                    return new EvaluateViewHolder(parent);
+                }
+            };
+            mAdapter.setMore(R.layout.default_footer_load_more, this);
+            mAdapter.setNoMore(R.layout.default_footer_no_more);
+        }
+        return mAdapter;
     }
 
 }

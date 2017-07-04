@@ -40,10 +40,10 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
     @BindView(R.id.tv_ask_detail_title)
     TextView mTvAskTitle;
 
-    @BindView(R.id.et_ask_detail_input)
+    @BindView(R.id.et_input_input)
     EditText mEtInput;
 
-    @BindView(R.id.tv_ask_detail_send)
+    @BindView(R.id.tv_input_send)
     TextView mTvSend;
 
     @Override

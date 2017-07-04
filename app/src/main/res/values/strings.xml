@@ -9,7 +9,7 @@
     <string name="text_evaluate_detail">回复详情</string>
     <string name="text_evaluate_reply_from"><![CDATA[<font color="#32DAC3">%1$s</font>：%2$s]]></string>
     <string name="text_evaluate_reply_to"><![CDATA[回复<font color="#32DAC3">%1$s</font>：%2$s]]></string>
-    <string name="text_article_evaluate">回复(%d)</string>
+    <string name="text_article_evaluate">评论(%d)</string>
     <string name="text_brand">品牌</string>
     <string name="text_brand_list">品牌列表</string>
     <string name="text_product">产品</string>
@@ -133,6 +133,7 @@
     <string name="btn_to_ask">去提问</string>
 
     <string name="hint_add_comment">写评论…</string>
+    <string name="hint_add_reply">回复评论</string>
     <string name="hint_home_search">查询%d种护肤品的成分和功效</string>
     <string name="hint_brand_name">请输入品牌名称</string>
     <string name="hint_product_name">请输入产品名称</string>
@@ -142,6 +143,7 @@
     <string name="hint_username">用户名</string>
     <string name="hint_password">密码</string>
     <string name="hint_captcha">短信验证码</string>
+    <string name="hint_add_ask">还需要输入3个字哦~</string>
 
     <!--产品搜索相关-->
     <string name="tv_product_allsearch">大家都在搜</string>

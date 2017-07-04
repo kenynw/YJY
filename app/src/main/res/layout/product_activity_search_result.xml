@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,8 +22,10 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="@dimen/widget_max"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
             android:scaleType="centerInside"
             android:src="@mipmap/ic_back"
             />
@@ -45,13 +46,13 @@
                 android:drawableLeft="@mipmap/ic_product_search"
                 android:drawablePadding="8dp"
                 android:drawableStart="@mipmap/ic_product_search"
-                android:inputType="text"
-                android:singleLine="true"
                 android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:paddingEnd="@dimen/spacing_normal"
                 android:paddingLeft="@dimen/spacing_normal"
                 android:paddingRight="@dimen/spacing_large"
                 android:paddingStart="@dimen/spacing_normal"
+                android:singleLine="true"
                 android:textColorHint="@color/fcd"
                 android:textSize="@dimen/text_size_small_15"
                 tools:hint="@string/hint_home_search"
@@ -60,11 +61,11 @@
             <ImageView
                 android:id="@+id/iv_product_search_clear"
                 android:layout_width="@dimen/widget_small"
-                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:layout_gravity="end|center_vertical"
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_product_search_del"
+                android:visibility="gone"
                 />
 
         </FrameLayout>
@@ -75,14 +76,14 @@
 
     <include layout="@layout/include_product_filter"/>
 
-    <include layout="@layout/include_product_list" />
+    <include layout="@layout/include_product_list"/>
 
     <LinearLayout
         android:id="@+id/ll_product_result_sencond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/white"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <TextView
