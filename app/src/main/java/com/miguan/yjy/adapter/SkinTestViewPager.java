@@ -3,7 +3,7 @@ package com.miguan.yjy.adapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.module.test.SkinGuideFragment;
@@ -16,7 +16,7 @@ import com.miguan.yjy.module.test.SkinRecomFragment;
  * @描述
  */
 
-public class SkinTestViewPager extends FragmentPagerAdapter {
+public class SkinTestViewPager extends FragmentStatePagerAdapter {
 
     Test mTest;
     public static final String BUNDLE_TEST = "test";

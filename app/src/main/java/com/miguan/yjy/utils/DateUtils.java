@@ -70,7 +70,7 @@ public class DateUtils {
     // 将时间戳转为字符串
     public static String getStrTime(String cc_time) {
         String re_StrTime = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
         long lcc_time = Long.valueOf(cc_time);
         re_StrTime = sdf.format(new Date(lcc_time * 1000L));
         return re_StrTime;

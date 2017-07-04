@@ -8,7 +8,9 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -59,6 +61,12 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
     @BindView(R.id.iv_remark_image)
     ImageView mIvRemarkImage;
+    @BindView(R.id.tv_product_tag_detail)
+    TextView mTvProductTagDetail;
+    @BindView(R.id.iv_is_top)
+    ImageView mIvIsTop;
+    @BindView(R.id.iv_remark_delete)
+    ImageView mIvRemarkDelete;
 
     private Uri mUri;
 
@@ -111,7 +119,7 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() < 20) {
-                    mTvRemarkLackNum.setVisibility(View.VISIBLE);
+                    mTvRemarkLackNum.setVisibility(View.GONE);
                     mTvRemarkLackNum.setText("还需要输入" + (20 - s.length()) + "个字");
                     getToolbar().getMenu().getItem(0).setEnabled(false);
                 } else {
@@ -134,6 +142,9 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
                 mRatbarProduct.setStepSize(ratingBarStepSize);
             }
             switch ((int) rating) {
+                case 0:
+                    mTvRemarkEvaluate.setText("");
+                    break;
                 case 1:
                 case 2:
                     mTvRemarkEvaluate.setText("差评");
@@ -163,10 +174,29 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
     @Override
     public void onImageLoaded(Uri uri) {
-        if (uri != mUri) {
-            mIvRemarkImage.setImageURI(uri);
-            mUri = uri;
-        }
+        mUri = uri;
+
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mIvRemarkImage.getLayoutParams();
+        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        mIvRemarkImage.setImageURI(uri);
+        mIvRemarkImage.setLayoutParams(lp);
+
+        mIvRemarkDelete.setVisibility(View.VISIBLE);
+        mIvRemarkDelete.setOnClickListener(v -> {
+            mUri = null;
+            mIvRemarkImage.setImageResource(R.mipmap.ic_add_evaluate_def_image);
+            lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            mIvRemarkImage.setLayoutParams(lp);
+            mIvRemarkDelete.setVisibility(View.GONE);
+        });
+
+
+//        if (uri != mUri) {
+//            mIvRemarkImage.setImageURI(uri);
+//            mUri = uri;
+//        }
     }
 
     @Override

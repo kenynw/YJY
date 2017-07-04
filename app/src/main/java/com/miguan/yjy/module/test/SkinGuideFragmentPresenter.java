@@ -10,9 +10,10 @@ import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.SkinTestViewPager;
-import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Test;
+
+import rx.Observable;
 
 /**
  * @作者 cjh
@@ -61,13 +62,14 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
     @Override
     public void onRefresh() {
         super.onRefresh();
-        ArticleModel.getInstance().getArticleList(0, 0, 1).unsafeSubscribe(getRefreshSubscriber());
+        Observable.just(mTest.getSkinArticle()).unsafeSubscribe(getRefreshSubscriber());
+//        ArticleModel.getInstance().getArticleList(0, 0, 1).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-        ArticleModel.getInstance().getArticleList(0, 0, getCurPage()).unsafeSubscribe(getMoreSubscriber());
+//        ArticleModel.getInstance().getArticleList(0, 0, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
 }

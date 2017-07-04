@@ -115,7 +115,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     public void clearInput() {
         mEvaluate = null;
         mEtAdd.setText("");
-        mEtAdd.setHint(R.string.hint_add_comment);
+//        mEtAdd.setHint(R.string.hint_add_comment);
     }
 
     public Evaluate getEvaluate() {

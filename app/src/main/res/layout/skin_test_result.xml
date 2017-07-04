@@ -33,6 +33,7 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/img_skin_test"
                     android:layout_width="55dp"
+                    style="@style/BaseAvatar"
                     android:layout_height="55dp"/>
 
                 <TextView

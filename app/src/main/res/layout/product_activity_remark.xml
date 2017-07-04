@@ -1,115 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/include_toolbar"/>
 
-    <include layout="@layout/include_product_info"/>
 
-    <android.support.v4.widget.Space
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="20dp"
-            android:text="@string/tv_product_remark"
-            android:textColor="@color/f6"
-            android:textSize="@dimen/text_size_small_15"/>
-
-        <RatingBar
-            android:id="@+id/ratbar_product"
-            style="@style/MySmallRatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:isIndicator="false"
-            android:numStars="5"
-            android:paddingTop="@dimen/spacing_small"
-            android:stepSize="1"
-            />
-
-        <TextView
-            android:id="@+id/tv_product_remark_evaluate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:paddingRight="15dp"
-            android:text="好评"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_micro_12"/>
-
-    </LinearLayout>
-
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:background="@color/white"
-        android:paddingEnd="@dimen/spacing_large"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_large"
-        android:paddingStart="@dimen/spacing_normal"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none"
         >
 
-        <TextView
-            android:id="@+id/tv_product_remark_lack_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="15dp"
-            android:text="还需要输入20个字~"
-            android:textColor="@color/f6"
-            android:textSize="@dimen/text_size_micro_12"/>
-
-        <EditText
-            android:id="@+id/et_product_remark"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/tv_product_remark_lack_num"
-            android:background="@null"
-            android:gravity="left"
-            android:hint="@string/tv_product_remark_hint"
-            android:paddingTop="20dp"
-            android:textColor="@color/f6"
-            android:textColorHint="@color/fcd"
-            android:textSize="@dimen/text_size_small_15"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-        <ImageView
-            android:id="@+id/iv_remark_image"
-            android:layout_width="32dp"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom"
-            android:layout_marginEnd="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_add_evaluate_def_image"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            />
+            <include layout="@layout/include_product_info"/>
 
-    </RelativeLayout>
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/tv_product_remark"
+                    android:textColor="@color/f6"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+                <RatingBar
+                    android:id="@+id/ratbar_product"
+                    style="@style/MySmallRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:paddingTop="@dimen/spacing_small"
+                    android:stepSize="1"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_product_remark_evaluate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="15dp"
+                    android:text=""
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_size_micro_12"/>
+
+            </LinearLayout>
+
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:background="@color/white"
+                android:paddingEnd="@dimen/spacing_large"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_large"
+                android:paddingStart="@dimen/spacing_normal"
+                >
+
+                <FrameLayout
+                    android:id="@+id/remark_frame"
+                    android:layout_width="94dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentBottom="true"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_product_remark_lack_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="15dp"
+                        android:text="还需要输入20个字~"
+                        android:textColor="@color/f6"
+                        android:textSize="@dimen/text_size_micro_12"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/iv_remark_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_add_evaluate_def_image"
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_remark_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:src="@mipmap/ic_add_evaluate_delete_image"
+                        android:visibility="gone"
+                        />
+                </FrameLayout>
+
+                <EditText
+                    android:id="@+id/et_product_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/remark_frame"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="@string/tv_product_remark_hint"
+                    android:paddingTop="20dp"
+                    android:textColor="@color/f6"
+                    android:textColorHint="@color/fcd"
+                    android:textSize="@dimen/text_size_small_15"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

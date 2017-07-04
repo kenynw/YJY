@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.webkit.JavascriptInterface;
 
+import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.main.MainActivity;
 import com.miguan.yjy.module.main.SkinTestFragment;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -75,6 +78,7 @@ public class WebViewOB {
             UserPreferences.setIsShowTest(false);
         }
         mContext.startActivity(intent);
+        EventBus.getDefault().post(new TestStart());
     }
 
     public void ajaxBegin() {

@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.main;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -182,22 +181,22 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 //        loadMainData();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.e("onActivityResult", requestCode + "==" + resultCode);
-        if (resultCode == 1) {
-            switch (requestCode) {
-                case 2:
-                    loadMainData();
-                    break;
-                case Activity.RESULT_FIRST_USER:
-                    loadMainData();
-                    break;
-            }
-
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.e("onActivityResult", requestCode + "==" + resultCode);
+//        if (resultCode == 1) {
+//            switch (requestCode) {
+//                case 2:
+//                    loadMainData();
+//                    break;
+//                case Activity.RESULT_FIRST_USER:
+//                    loadMainData();
+//                    break;
+//            }
+//
+//        }
+//    }
 
     public void loadFirstData() {
         mToolbarTitle.setText("肤质测试");
@@ -545,15 +544,14 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
     Test mTest;
 
     private void setSencondData() {
+        mLlTestOk.setVisibility(View.VISIBLE);
+        mLlTestNo.setVisibility(View.GONE);
         mToolbarTitle.setText("我的肤质");
-        TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
+        TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>(){
             @Override
             public void onNext(Test test) {
-                mTest = test;
-                mLlTestOk.setVisibility(View.VISIBLE);
-                mLlTestNo.setVisibility(View.GONE);
                 if (UserPreferences.getUserID() > 0) {
-                    mSkinTestViewPager = new SkinTestViewPager(getActivity().getSupportFragmentManager(), mTest);
+                    mSkinTestViewPager = new SkinTestViewPager(getActivity().getSupportFragmentManager(), test);
                     mViewpagerSkinTest.setNoScroll(true);
                     mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
                     mTabSkinTest.setupWithViewPager(mViewpagerSkinTest);
@@ -595,6 +593,53 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                 }
             }
         });
+
+//        TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
+//            @Override
+//            public void onNext(Test test) {
+//                if (UserPreferences.getUserID() > 0) {
+//                    mSkinTestViewPager = new SkinTestViewPager(getActivity().getSupportFragmentManager(), test);
+//                    mViewpagerSkinTest.setNoScroll(true);
+//                    mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
+//                    mTabSkinTest.setupWithViewPager(mViewpagerSkinTest);
+//                    mTvSkinUsername.setText(userInfo.getUsername());
+//                    mTvSkinTime.setText(DateUtils.getStrTime(userInfo.getAdd_time()));
+//                    mImgSkinTest.setImageURI(Uri.parse(userInfo.getImg()));
+//                    Log.e("getTestPosition()", getTestPosition() + "====");
+//                    mTabSkinTest.getTabAt(testPosition).select();
+//                    mTabSkinTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//                        @Override
+//                        public void onTabSelected(TabLayout.Tab tab) {
+//                            Log.e("tab.getPosition()", tab.getPosition() + "====");
+//                            UserPreferences.setTestPosition(tab.getPosition());
+//                        }
+//
+//                        @Override
+//                        public void onTabUnselected(TabLayout.Tab tab) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onTabReselected(TabLayout.Tab tab) {
+//
+//                        }
+//                    });
+//
+////                    for (int i = 0; i < mSkinTestViewPager.getCount(); i++) {
+////                        TabLayout.Tab tab = mTabSkinTest.newTab();
+////                        mTabSkinTest.addTab(tab, i == UserPreferences.getTestPosition());
+////                    }
+//                    mTvSkinAgain.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            //显示肤质测试主页
+//                            loadFirstData();
+//                            UserPreferences.setIsShowTest(true);
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
 
@@ -644,15 +689,17 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         Intent intent = new Intent(context, TestGuideActivity.class);
         intent.putExtra(TestGuideActivity.EXTRA_TEST, test);
         intent.putExtra(TestGuideActivity.EXTRA_TEST_TYPE, type);
-        startActivityForResult(intent, Activity.RESULT_FIRST_USER);
-        EventBus.getDefault().post(new TestStart());
+        startActivity(intent);
+//        startActivityForResult(intent, Activity.RESULT_FIRST_USER);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
 
     public void onRefresh(TestStart testStart) {
         Log.e("==onRefresh=", testStart+"====");
-        loadMainData();
+        if (testStart != null) {
+            loadMainData();
+        }
     }
 
 

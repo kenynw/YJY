@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
@@ -39,8 +40,13 @@ public class SpringProgressView extends View {
      * 画笔
      */
     private Paint mPaint;
+
+    private Paint mTextPaint;//文本画笔
     private int mWidth, mHeight;
     public static  int  LAST_WIDTH;
+
+    private Rect boundRect;
+    float[] POS = new float[2];
 
     public SpringProgressView(Context context, AttributeSet attrs,
                               int defStyleAttr) {
@@ -65,10 +71,14 @@ public class SpringProgressView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPaint = new Paint();
+        mTextPaint = new Paint();////消除锯齿
+        mTextPaint.setAntiAlias(true);
         mPaint.setAntiAlias(true);
         int round = mHeight / 2;
         Log.e(TAG, "max=" + maxCount + "  current=" + currentCount);
+        mTextPaint.setColor(Color.rgb(0, 0, 0));
         mPaint.setColor(Color.rgb(239, 239, 239));
+        boundRect = new Rect();
         RectF rectBg = new RectF(0, 0, mWidth, mHeight);
         canvas.drawRoundRect(rectBg, round, round, mPaint);
         mPaint.setColor(getContext().getResources().getColor(R.color.f5));
@@ -101,6 +111,11 @@ public class SpringProgressView extends View {
             mPaint.setShader(shader);
         }
         canvas.drawRoundRect(rectProgressBg, round, round, mPaint);
+//        String text = "1234";
+//        mTextPaint.setTextSize(60);
+//
+//        mTextPaint.getTextBounds(text,0,text.length(),boundRect);
+//        canvas.drawText(text, -,30 ,mTextPaint);
     }
 
     private int dipToPx(int dip) {

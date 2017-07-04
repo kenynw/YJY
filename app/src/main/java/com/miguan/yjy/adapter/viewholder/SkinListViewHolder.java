@@ -37,8 +37,6 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
     @BindView(R.id.tv_skin_dec)
     TextView mTvSkinDec;
 
-    int skinWith;
-
     public SkinListViewHolder(ViewGroup parent) {
         super(parent, R.layout.skin_list);
         ButterKnife.bind(this, itemView);
@@ -48,20 +46,66 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
     public void setData(Skin data) {
         super.setData(data);
 
-
         mTvSkinTestName.setText(data.skinDesc[getDataPosition()]);
         mTvSkinDec.setText(data.getUnscramble());
         mProgressSkin.setMaxCount(100f);
         mProgressSkin.setCurrentCount(((data.getScore() / data.getMaximum()) * 100));
-        Log.e("setCurrentCount", ((data.getScore() / 44f) * 100) + "-=======");
+        setCurPro(data);
+    }
 
+    public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener listener) {
+        if (Build.VERSION.SDK_INT < 16) {
+            v.getViewTreeObserver().removeGlobalOnLayoutListener(listener);
+        } else {
+            v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
+        }
+    }
+
+    public int[] getXy(View view) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        int x = location[0];
+        int y = location[1];
+        return location;
+    }
+
+
+    private void setCurPro(Skin data) {
+        getXy(mProgressSkin);
+        mTvSkinValute.measure(0,0);
+
+        int skinWith = mTvSkinValute.getMeasuredWidth();
+        int tW = skinWith / 2;
+        mTvSkinLow.measure(0,0);
+        int left = mTvSkinLow.getMeasuredWidth();
+        mTvSkinHigh.measure(0,0);
+        int right = mTvSkinHigh.getMeasuredWidth();
+        Log.e("left ", left + "=======");
+        Log.e("right ", right + "=======");
+        Log.e("tW ", tW + "=======");
+        int w = LUtils.getScreenWidth() - left - right;
+        Log.e("w=====", "" + w);
+
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
+        float pro = mProgressSkin.getCurrentCount();
+
+        params.leftMargin = (int) (pro * w / 100) + left - tW;
+        Log.e("leftMargin=====", "" + params.leftMargin);
+        mTvSkinValute.setLayoutParams(params);
+        Log.e("skinWith", skinWith + "==-----");
+        mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
+        mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
+        mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
+    }
+
+    private void setCurProgress(Skin data) {
         mTvSkinValute.post(new Runnable() {
             @Override
             public void run() {
-                skinWith = mTvSkinValute.getWidth();
-                int tW =skinWith / 2;
+                int skinWith = mTvSkinValute.getWidth();
+                int tW = skinWith / 2;
                 int left = mTvSkinLow.getWidth();
-                int right =mTvSkinHigh.getWidth();
+                int right = mTvSkinHigh.getWidth();
                 Log.e("left ", left + "=======");
                 Log.e("right ", right + "=======");
                 Log.e("tW ", tW + "=======");
@@ -75,10 +119,15 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
                 Log.e("leftMargin=====", "" + params.leftMargin);
                 mTvSkinValute.setLayoutParams(params);
                 Log.e("skinWith", skinWith + "==-----");
+                mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
+                mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
+                mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
             }
         });
+    }
 
-//
+    private void firstTag() {
+
 //        final ViewTreeObserver observer = mTvSkinValute.getViewTreeObserver();
 //        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 //            @Override
@@ -106,18 +155,35 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
 //            }
 //
 //        });
-        mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
-        mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
-        mTvSkinValute.setText(data.getName()+":"+(int)data.getScore()+"分");
-
     }
 
-    public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener listener){
-        if (Build.VERSION.SDK_INT < 16) {
-            v.getViewTreeObserver().removeGlobalOnLayoutListener(listener);
-        } else {
-            v.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
-        }
+    private void SecondTag(Skin data) {
+
+        mTvSkinValute.post(new Runnable() {
+            @Override
+            public void run() {
+                int skinWith = mTvSkinValute.getWidth();
+                int tW = skinWith / 2;
+                int left = mTvSkinLow.getWidth();
+                int right = mTvSkinHigh.getWidth();
+                Log.e("left ", left + "=======");
+                Log.e("right ", right + "=======");
+                Log.e("tW ", tW + "=======");
+                int w = LUtils.getScreenWidth() - left - right;
+                Log.e("w=====", "" + w);
+
+                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
+                float pro = mProgressSkin.getCurrentCount();
+
+                params.leftMargin = (int) (pro * w / 100) + left - tW;
+                Log.e("leftMargin=====", "" + params.leftMargin);
+                mTvSkinValute.setLayoutParams(params);
+                Log.e("skinWith", skinWith + "==-----");
+                mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
+                mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
+                mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
+            }
+        });
     }
 
 

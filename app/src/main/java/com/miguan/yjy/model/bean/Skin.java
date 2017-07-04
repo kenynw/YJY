@@ -189,7 +189,7 @@ public class Skin implements Parcelable {
 
     public static String getPigment(int value) {
         if (matchValue(value, 10, 30)) {
-            return "非色素敏感性皮肤";
+            return "非色素性皮肤";
         }
         if (matchValue(value, 31, 45)) {
             return "色素性皮肤";

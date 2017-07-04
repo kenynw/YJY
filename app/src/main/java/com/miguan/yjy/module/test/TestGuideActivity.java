@@ -18,11 +18,14 @@ import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.constant.Constants;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.LUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -226,6 +229,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             public void onNext(String s) {
                 LUtils.toast("提交成功");
                 finish();
+                EventBus.getDefault().post(new TestStart());
             }
         });
     }

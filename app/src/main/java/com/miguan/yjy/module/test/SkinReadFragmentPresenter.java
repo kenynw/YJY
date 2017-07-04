@@ -10,7 +10,6 @@ import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MySkinAdapter;
-import com.miguan.yjy.adapter.SkinTestViewPager;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.module.common.WebViewActivity;
@@ -38,13 +37,14 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
     @Override
     protected void onCreate(SkinReadFragment view, Bundle saveState) {
         super.onCreate(view, saveState);
-        mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
 
     }
 
     @Override
     protected void onCreateView(SkinReadFragment view) {
         super.onCreateView(view);
+//        mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
+        mTest = getView().mTest;
         getAdapter().removeAllHeader();
         getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
@@ -63,6 +63,7 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
                 mTest.getDescribe();
                 MySkinAdapter mySkinAdapter = new MySkinAdapter(getView().getActivity(), mSkinList);
                 mEasyRecyclerView.setAdapter(mySkinAdapter);
+                mySkinAdapter.notifyDataSetChanged();
             }
         });
 

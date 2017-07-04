@@ -15,14 +15,14 @@
         <!---->
         <!--<include layout="@layout/item_list_evaluate_commend" />-->
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:failureImage="@mipmap/bg_empty_home"
-            app:failureImageScaleType="centerCrop"
-            app:placeholderImage="@mipmap/bg_empty_home"
-            app:placeholderImageScaleType="centerCrop"
-            />
+        <!--<com.facebook.drawee.view.SimpleDraweeView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--app:failureImage="@mipmap/bg_empty_home"-->
+            <!--app:failureImageScaleType="centerCrop"-->
+            <!--app:placeholderImage="@mipmap/bg_empty_home"-->
+            <!--app:placeholderImageScaleType="centerCrop"-->
+            <!--/>-->
 
     </LinearLayout>
 
