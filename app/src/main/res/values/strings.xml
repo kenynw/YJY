@@ -93,6 +93,7 @@
     <string name="text_to_answer">去回答</string>
     <string name="text_no_answer">暂无回答</string>
     <string name="text_message_ask">有问题向您求助哦~</string>
+    <string name="text_message_answer">回答了您的问题哦~</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>

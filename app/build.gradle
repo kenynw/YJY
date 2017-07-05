@@ -90,7 +90,7 @@ android {
 
     productFlavors {
         应用宝{}
-        _360{}
+        qihu360{}
         小米{}
         豌豆荚{}
         华为{}

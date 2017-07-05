@@ -34,12 +34,12 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_size_caption_material</item>
         <item name="com.miguan.yjy:corner">2dp</item>
-        <item name="com.miguan.yjy:solid">#ff7d6f</item>
+        <item name="com.miguan.yjy:solid">@color/bgAsk</item>
     </style>
 
     <style name="SuperTextAskAnswer" parent="SuperTextAsk">
         <item name="android:text">@string/text_answer</item>
-        <item name="com.miguan.yjy:solid">#5ce1cf</item>
+        <item name="com.miguan.yjy:solid">@color/bgAnswer</item>
     </style>
 
     <style name="SuperTextAskNoAnswer" parent="SuperTextAsk">

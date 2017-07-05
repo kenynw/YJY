@@ -13,6 +13,16 @@
     android:paddingTop="@dimen/spacing_large"
     >
 
+    <ImageView
+        android:id="@+id/iv_reply_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_more"
+        />
+
     <TextView
         android:id="@+id/tv_reply_date"
         android:layout_width="wrap_content"
@@ -25,19 +35,18 @@
         android:id="@+id/tv_reply_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_reply_date"
+        android:layout_alignStart="@id/tv_reply_date"
         android:layout_below="@id/tv_reply_date"
+        android:layout_marginEnd="@dimen/spacing_tiny"
+        android:layout_marginRight="@dimen/spacing_tiny"
         android:layout_marginTop="@dimen/spacing_small"
+        android:layout_toLeftOf="@id/iv_reply_more"
+        android:layout_toStartOf="@id/iv_reply_more"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:textAppearance="@style/TextBody"
-        tools:text="回复了文章《xxx》的评论"
-        />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@mipmap/ic_more"
+        tools:text="回复了文章《xxx》的评论回复了文章《xxx》的评论回复了文章《xxx》的评论"
         />
 
 </RelativeLayout>

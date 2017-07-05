@@ -26,6 +26,7 @@ public abstract class ChainAppCompatActivity<PresenterType extends Presenter> ex
         if (mLifeCycleDelegate != null) mLifeCycleDelegate.onCreate(savedInstanceState);
         mHelper.onCreate(savedInstanceState);
         ImmersionBar.with(this)
+                .transparentStatusBar()
                 .statusBarDarkFont(true)
                 .init();
     }

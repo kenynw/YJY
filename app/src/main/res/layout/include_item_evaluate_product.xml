@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_evaluate_product"
     android:layout_width="match_parent"
@@ -26,12 +27,13 @@
         android:orientation="vertical"
         >
 
-        <TextView
+        <com.miguan.yjy.widget.LoadingTextView
             android:id="@+id/tv_evaluate_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:textAppearance="@style/TextSubhead"
+            app:height_weight="0.6"
             tools:text="CeraVeR面部夜间补水保湿乳液"
             />
 
@@ -46,11 +48,13 @@
             android:saveEnabled="false"
             />
 
-        <TextView
+        <com.miguan.yjy.widget.LoadingTextView
             android:id="@+id/tv_evaluate_product_spec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="88dp"
             android:textAppearance="@style/TextCaption"
+            app:height_weight="0.8"
             tools:text="￥320/100ML"
             />
 

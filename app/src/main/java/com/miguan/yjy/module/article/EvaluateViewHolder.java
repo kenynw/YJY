@@ -18,6 +18,8 @@ import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
+import com.miguan.yjy.module.common.LargeImageActivity;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 
@@ -81,8 +83,12 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
         if (TextUtils.isEmpty(data.getAttachment())) {
             mDvThumb.setVisibility(View.GONE);
         } else {
+            String url = data.getAttachment();
+            if (!url.endsWith("@!200x200.jpg")) url = data.getAttachment() + "@!200x200.jpg";
+
             mDvThumb.setVisibility(View.VISIBLE);
-            mDvThumb.setImageURI(Uri.parse(data.getAttachment()));
+            mDvThumb.setImageURI(Uri.parse(url));
+            mDvThumb.setOnClickListener(v -> LargeImageActivity.start(getContext(), data.getAttachment()));
         }
 
         if (data.getReply() == null) {
@@ -93,6 +99,11 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
                     data.getReply().getAuthor(), data.getReply().getComment())));
         }
 
+    }
+
+    @Override
+    public int getContentTextWidth() {
+        return (int) (LUtils.getScreenWidth() - getDimen(R.dimen.widget_medium) - getDimen(R.dimen.spacing_normal) * 3);
     }
 
     protected void setLike(Evaluate data) {

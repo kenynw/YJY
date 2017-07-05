@@ -80,6 +80,10 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
             String content = mEtAdd.getText().toString();
             if (mEvaluate != null) {
                 content = content.replace("@" + mEvaluate.getUser().getUsername() + "：", "");
+                if (TextUtils.isEmpty(content)) {
+                    LUtils.toast("内容不能为空");
+                    return;
+                }
             }
             getPresenter().addReply(content);
         });
@@ -115,7 +119,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     public void clearInput() {
         mEvaluate = null;
         mEtAdd.setText("");
-//        mEtAdd.setHint(R.string.hint_add_comment);
+        LUtils.closeKeyboard(mEtAdd);
     }
 
     public Evaluate getEvaluate() {

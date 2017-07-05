@@ -31,6 +31,8 @@ public abstract class ViewExpansionDelegate {
 
     public void showProgressBar(String msg) {}
 
+    public void showLoadingView(int resId) {}
+
     public void showLoadingView() {}
 
     public void hideLoadingView() {}

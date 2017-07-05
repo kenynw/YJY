@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,26 +22,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/dv_evaluate_avatar"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_toEndOf="@id/dv_evaluate_avatar"
         android:layout_toRightOf="@id/dv_evaluate_avatar"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.elyeproj.loaderviewlibrary.LoaderTextView
+        <TextView
             android:id="@+id/tv_evaluate_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="40dp"
             android:textColor="@color/color_sencond_title"
             android:textSize="@dimen/text_size_small_15"
-            app:height_weight="0.6"
-            app:use_gradient="true"
             tools:text="name"
             />
 
-        <com.elyeproj.loaderviewlibrary.LoaderTextView
+        <TextView
             android:id="@+id/tv_evaluate_user_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,7 +103,7 @@
 
     </LinearLayout>
 
-    <com.elyeproj.loaderviewlibrary.LoaderTextView
+    <TextView
         android:id="@+id/tv_evaluate_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,8 +113,6 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_body_material"
-        app:height_weight="0.6"
-        app:width_weight="0.5"
         tools:text="清干 | 重敏 | 非色素 | 紧致"
         />
 

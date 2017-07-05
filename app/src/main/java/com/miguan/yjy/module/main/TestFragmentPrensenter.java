@@ -2,6 +2,7 @@ package com.miguan.yjy.module.main;
 
 import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
 import com.miguan.yjy.model.bean.Test;
+import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -11,5 +12,15 @@ import com.miguan.yjy.model.bean.Test;
  */
 
 public class TestFragmentPrensenter extends BaseDataFragmentPresenter<TestFragment,Test> {
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("首页");
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("首页");
+    }
 
 }

@@ -53,6 +53,7 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
     @Override
     protected void onCreate(ArticleDetailActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
+        getView().getExpansionDelegate().showProgressBar();
         mArticleId = getView().getIntent().getIntExtra(EXTRA_ARTICLE_ID, 0);
     }
 
@@ -74,10 +75,6 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
 //                })
                 .doOnCompleted(() -> mPage = 2)
                 .unsafeSubscribe(getDataSubscriber());
-    }
-
-    public void onLoadMore() {
-//        ArticleModel.getInstance().getEvaluateList(mArticleId, "", mPage).unsafeSubscribe();
     }
 
     @Override

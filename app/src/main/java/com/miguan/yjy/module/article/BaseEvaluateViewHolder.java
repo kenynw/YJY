@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.text.DynamicLayout;
@@ -14,7 +13,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -28,9 +26,13 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/4/1. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
+public abstract class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
 
-    protected final int MAX_LINE_COUNT = 6;
+    private static final int MAX_LINE_COUNT = 6;
+
+    private static final String EXPAND_PLACEHOLDER = "... im";
+
+    private static final String ELLIPSIS_HINT = "... ";
 
     @BindView(R.id.tv_evaluate_content)
     TextView mTvContent;
@@ -42,32 +44,40 @@ public class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
 
     @Override
     public void setData(Evaluate data) {
-        mTvContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) {
-                    mTvContent.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    mTvContent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-                int width = mTvContent.getMeasuredWidth() - mTvContent.getPaddingLeft() - mTvContent.getPaddingRight();
-                Layout layout = new DynamicLayout(mTvContent.getText(), mTvContent.getPaint(), width,
-                        Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
-                int lineCount = layout.getLineCount();
-                if (lineCount > MAX_LINE_COUNT) {
-                    int indexEnd = layout.getLineEnd(MAX_LINE_COUNT - 1);
+        Layout layout = new DynamicLayout(data.getComment(), mTvContent.getPaint(), getContentTextWidth(),
+                Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
+        int lineCount = layout.getLineCount();
+        if (lineCount > MAX_LINE_COUNT) {
+            int indexEnd = layout.getLineEnd(MAX_LINE_COUNT - 1);
+            int indexEndTrimmed = indexEnd - EXPAND_PLACEHOLDER.replace(ELLIPSIS_HINT, "").length();
 
-                    String fixText = removeEndLineBreak(mTvContent.getText().subSequence(0, indexEnd - 2));
-
-                    VerticalImageSpan span = new VerticalImageSpan(getContext(), R.mipmap.ic_product_detail_record_down);
-                    SpannableStringBuilder stringBuilder = new SpannableStringBuilder(fixText);
-                    stringBuilder.append("... img");
-                    stringBuilder.setSpan(span, (fixText + "... ").length(), stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
-                    mTvContent.setText(stringBuilder);
+            float tailWidth = mTvContent.getPaint().measureText(data.getComment().subSequence(indexEndTrimmed - 1, indexEnd).toString());
+            float widthTailReplaced = mTvContent.getPaint().measureText(EXPAND_PLACEHOLDER);
+            if (tailWidth < widthTailReplaced) {
+                int extraOffset = 0;
+                int extraWidth = 0;
+                while (tailWidth + extraWidth < widthTailReplaced) {
+                    extraOffset--;
+                    if (indexEnd + extraOffset <= data.getComment().length()) {
+                        extraWidth = (int) mTvContent.getPaint().measureText(
+                                data.getComment().subSequence(indexEndTrimmed + extraOffset, indexEndTrimmed).toString());
+                    } else {
+                        break;
+                    }
                 }
+                indexEndTrimmed += extraOffset;
             }
-        });
-        mTvContent.setText(data.getComment());
+
+            String fixText = removeEndLineBreak(data.getComment().subSequence(0, indexEndTrimmed));
+
+            VerticalImageSpan span = new VerticalImageSpan(getContext(), R.mipmap.ic_product_detail_record_down);
+            SpannableStringBuilder stringBuilder = new SpannableStringBuilder(fixText);
+            stringBuilder.append(EXPAND_PLACEHOLDER);
+            stringBuilder.setSpan(span, (fixText + "... ").length(), stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+            mTvContent.setText(stringBuilder);
+        } else {
+            mTvContent.setText(data.getComment());
+        }
         itemView.setOnClickListener(v -> EvaluateDetailPresenter.start(getContext(), data.getId()));
     }
 
@@ -78,6 +88,12 @@ public class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
         }
         return str;
     }
+
+    protected float getDimen(int id) {
+        return getContext().getResources().getDimension(id);
+    }
+
+    public abstract int getContentTextWidth();
 
     private class VerticalImageSpan extends ImageSpan {
 

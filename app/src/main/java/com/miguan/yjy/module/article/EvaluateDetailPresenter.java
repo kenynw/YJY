@@ -29,7 +29,7 @@ public class EvaluateDetailPresenter extends BaseDataActivityPresenter<EvaluateD
     public static void start(Context context, int evaluateId) {
         Intent intent = new Intent(context, EvaluateDetailActivity.class);
         intent.putExtra(EXTRA_EVALUATE_ID, evaluateId);
-        context.startActivity(intent);
+        ((Activity) context).startActivityForResult(intent, 100);
     }
 
     private int mEvaluateId;

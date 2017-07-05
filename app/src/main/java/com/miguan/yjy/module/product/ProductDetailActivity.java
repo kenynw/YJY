@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.IdRes;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -27,7 +28,6 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
@@ -131,7 +131,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     TextView mTvAmazon;
 
     @BindView(R.id.recy_product_evaluate)
-    EasyRecyclerView mRecyEvalutate;
+    RecyclerView mRecyEvalutate;
 
     @BindView(R.id.tv_product_skin_sort)
     TextView mTvSkinSort;
@@ -146,8 +146,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.btn_product_detail_ask)
     ImageView mBtnAsk;
+
     @BindView(R.id.custSrcoll_product_detail)
     CustomNestedScrollView mCustSrcoll;
+
+    @BindView(R.id.tv_evaluate_empty)
+    TextView mTvEvaluateEmpty;
 
     private boolean mIsLike;
 
@@ -394,12 +398,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     }
 
     public void setEvaluate(List<Evaluate> list) {
+        mTvEvaluateEmpty.setVisibility(list != null && list.size() > 0 ? View.GONE : View.VISIBLE);
         EvaluateAdapter evaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
         evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
         evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
-        mRecyEvalutate.setFocusable(false);
-        mRecyEvalutate.setEmptyView(R.layout.empty_evaluate_list);
         mRecyEvalutate.setAdapter(evaluateAdapter);
         evaluateAdapter.notifyDataSetChanged();
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));

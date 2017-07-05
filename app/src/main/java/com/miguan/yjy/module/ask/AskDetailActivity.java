@@ -80,8 +80,8 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
     }
 
     private void checkInput(String productName) {
-        if (mEtInput.getText().length() <= 0) {
-            LUtils.toast("请输入文字");
+        if (mEtInput.getText().toString().trim().length() <= 0) {
+            LUtils.toast("内容不能为空");
             return;
         }
 

@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/spacing_normal"
     android:paddingLeft="@dimen/spacing_normal"
     android:paddingRight="@dimen/spacing_normal"
     android:paddingTop="@dimen/spacing_large"
@@ -16,18 +17,76 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/include_evaluate_user"/>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_evaluate_avatar"
+            style="@style/BaseImage"
+            android:layout_width="@dimen/widget_medium"
+            android:layout_height="@dimen/widget_medium"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:roundAsCircle="true"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_evaluate_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/dv_evaluate_avatar"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_toEndOf="@id/dv_evaluate_avatar"
+            android:layout_toRightOf="@id/dv_evaluate_avatar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.miguan.yjy.widget.LoadingTextView
+                android:id="@+id/tv_evaluate_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="40dp"
+                android:textColor="@color/color_sencond_title"
+                android:textSize="@dimen/text_size_small_15"
+                app:height_weight="0.6"
+                app:use_gradient="true"
+                tools:text="name"
+                />
+
+            <TextView
+                android:id="@+id/tv_evaluate_user_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:textAppearance="@style/TextCaption"
+                tools:text="年龄"
+                />
+
+        </LinearLayout>
+
+        <com.miguan.yjy.widget.LoadingTextView
+            android:id="@+id/tv_evaluate_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ll_evaluate_user_info"
+            android:layout_alignStart="@id/ll_evaluate_user_info"
+            android:layout_below="@+id/ll_evaluate_user_info"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_body_material"
+            app:height_weight="0.6"
+            app:width_weight="0.5"
+            tools:text="清干 | 重敏 | 非色素 | 紧致"
+            />
 
     </RelativeLayout>
 
     <include layout="@layout/include_item_evaluate_product"/>
 
-    <com.elyeproj.loaderviewlibrary.LoaderTextView
+    <com.miguan.yjy.widget.LoadingTextView
         style="@style/EvaluateContent"
-        android:maxLines="6"
         android:paddingLeft="@dimen/spacing_small"
         android:paddingRight="@dimen/spacing_small"
-        app:height_weight="0.8"
         tools:text="混油皮也可以感受到pm乳的好处的！！这个简直是刷酸皮肤不耐受时期的急救神器啊！！！刷酸是如果脱皮的很厉害或者发现皮肤受损感觉到刺痛，我"
         />
 
@@ -40,7 +99,7 @@
         android:orientation="horizontal"
         >
 
-        <com.elyeproj.loaderviewlibrary.LoaderTextView
+        <TextView
             android:id="@+id/tv_evaluate_commend_like"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -48,17 +107,16 @@
             android:drawablePadding="@dimen/spacing_tiny"
             android:drawableStart="@mipmap/ic_like_normal"
             android:gravity="bottom"
-            android:minWidth="30dp"
-            app:width_weight="0.8"
-            android:paddingBottom="@dimen/spacing_normal"
             android:paddingEnd="25dp"
+            android:paddingLeft="25dp"
             android:paddingRight="25dp"
+            android:paddingStart="25dp"
             android:paddingTop="@dimen/spacing_large"
             android:textAppearance="@style/TextCaption"
-            tools:text="908"
+            android:visibility="gone"
             />
 
-        <com.elyeproj.loaderviewlibrary.LoaderTextView
+        <com.miguan.yjy.widget.LoadingTextView
             android:id="@+id/tv_evaluate_commend_comment"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -66,9 +124,8 @@
             android:drawablePadding="6dp"
             android:drawableStart="@mipmap/ic_product_comment"
             android:gravity="bottom"
-            android:paddingBottom="@dimen/spacing_normal"
+            android:minWidth="50dp"
             android:paddingTop="@dimen/spacing_large"
-            android:text="@string/btn_comment"
             android:textAppearance="@style/TextCaption"
             />
 

@@ -62,7 +62,7 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
         mTvName.setText(data.getUser_name());
         mTvTime.setText(data.getCreated_at());
         itemView.setOnClickListener(null);
-        mIvMore.setVisibility(data.getType() == 2 ? View.INVISIBLE : View.VISIBLE);
+        mIvMore.setVisibility(data.getOtype() == 0 ? View.INVISIBLE : View.VISIBLE);
 
         if (data.getType() == 1) {
             mLlContent.setVisibility(View.GONE);
@@ -74,7 +74,7 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
 
         if (data.getRelation_id() > 0) {
             itemView.setOnClickListener(v -> {
-                if (data.getType() == 3) {
+                if (data.getType() == 3 || data.getType() == 4) {
                     AskDetailActivityPresenter.start(getContext(), data.getRelation_id(), data.getAskid());
                 } else if (data.getOtype() == 1) {
                     ProductDetailPresenter.start(getContext(), data.getRelation_id());
@@ -83,8 +83,24 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
                 }
             });
         }
-        mTvAskLabel.setVisibility(data.getType() == 3 ? View.VISIBLE : View.GONE);
-        mTvAsk.setVisibility(data.getType() == 3 ? View.VISIBLE : View.GONE);
+
+        if (data.getType() == 3) {
+            mTvAskLabel.setVisibility(View.VISIBLE);
+            mTvAskLabel.setText(R.string.text_message_ask);
+            mTvAsk.setVisibility(View.VISIBLE);
+            mTvAsk.setSolid(getContext().getResources().getColor(R.color.bgAsk));
+            mTvAsk.setText(R.string.text_ask);
+        } else if (data.getType() == 4) {
+            mTvAskLabel.setVisibility(View.VISIBLE);
+            mTvAskLabel.setText(R.string.text_message_answer);
+            mTvAsk.setVisibility(View.VISIBLE);
+            mTvAsk.setSolid(getContext().getResources().getColor(R.color.bgAnswer));
+            mTvAsk.setText(R.string.text_answer);
+        } else {
+            mTvAskLabel.setVisibility(View.GONE);
+            mTvAsk.setVisibility(View.GONE);
+        }
+
     }
 
 }

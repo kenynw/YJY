@@ -17,9 +17,9 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.article.EvaluateArticleViewHolder;
 import com.miguan.yjy.module.article.EvaluateCommendVH;
-import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.product.SearchActivity;
 import com.miguan.yjy.utils.LUtils;
 
@@ -45,35 +45,13 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getRootView());
-
         getListView().getSwipeToRefresh().setProgressViewOffset(true, 100, 200);
-        getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
-            int y = 0;
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                y += dy;
-                if (y < 0) y = 0;
-                float ratio = y * 1.0f / LUtils.dp2px(200) > 1 ? 1 : y * 1.0f / LUtils.dp2px(200);
-
-                int white = changeAlpha(getResources().getColor(R.color.white), ratio);
-                mToolbar.setBackgroundColor(white);
-
-                int gray = (int) (255 - (10 * ratio));
-                GradientDrawable gd = new GradientDrawable();
-                gd.setColor(Color.argb(255, gray, gray, gray));
-                gd.setCornerRadius(LUtils.dp2px(32));
-                mFlSearch.setBackgroundDrawable(gd);
-            }
-        });
     }
 
     public void setSearchHint(int count) {
         String productNum = String.format(getString(R.string.hint_home_search), count);
         mTvSearch.setText(productNum);
-
-        mFlSearch.setOnClickListener(v ->
-                SearchActivity.start(getActivity(), productNum));
+        mFlSearch.setOnClickListener(v -> SearchActivity.start(getActivity(), productNum));
     }
 
     @Override
@@ -81,8 +59,10 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
         SpaceDecoration decoration = new SpaceDecoration(LUtils.dp2px(8));
         decoration.setPaddingEdgeSide(false);
         decoration.setPaddingStart(false);
+
         return super.getListConfig()
                 .setItemDecoration(decoration)
+                .setContainerErrorAble(false)
                 .setContainerLayoutRes(R.layout.main_fragment_home)
                 .setFooterNoMoreRes(R.layout.empty_article_list);
     }
@@ -104,6 +84,28 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
         if (getView() != null) {
             getView().setVisibility(menuVisible ? View.VISIBLE : View.INVISIBLE);
         }
+    }
+
+    public void setScrollListener() {
+        getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int y = 0;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                y += dy;
+                if (y < 0) y = 0;
+                float ratio = y * 1.0f / LUtils.dp2px(200) > 1 ? 1 : y * 1.0f / LUtils.dp2px(200);
+
+                int white = changeAlpha(getResources().getColor(R.color.white), ratio);
+                mToolbar.setBackgroundColor(white);
+
+                int gray = (int) (255 - (10 * ratio));
+                GradientDrawable gd = new GradientDrawable();
+                gd.setColor(Color.argb(255, gray, gray, gray));
+                gd.setCornerRadius(LUtils.dp2px(32));
+                mFlSearch.setBackgroundDrawable(gd);
+            }
+        });
     }
 
     private int changeAlpha(int color, float fraction) {

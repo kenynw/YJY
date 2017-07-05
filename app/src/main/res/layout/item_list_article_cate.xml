@@ -7,6 +7,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/rl_article_cate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_large"
@@ -43,7 +44,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recy_article_cate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height= "wrap_content"
             android:layout_below="@id/tv_article_cate_more"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:layout_marginLeft="@dimen/spacing_normal"

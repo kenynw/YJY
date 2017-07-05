@@ -42,7 +42,7 @@
                 android:background="@drawable/bg_round_white"
                 >
 
-                <TextView
+                <com.miguan.yjy.widget.LoadingTextView
                     android:id="@+id/tv_home_search"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -51,8 +51,9 @@
                     android:drawablePadding="8dp"
                     android:drawableStart="@mipmap/ic_home_search"
                     android:gravity="center"
-                    android:hint="@string/hint_brand_name"
+                    android:minWidth="75dp"
                     android:textAppearance="@style/TextCaption"
+                    app:height_weight="0.4"
                     />
 
             </FrameLayout>

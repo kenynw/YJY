@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -23,6 +22,7 @@ import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
+import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
 
@@ -35,11 +35,21 @@ import butterknife.ButterKnife;
 
 public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate> {
 
+    private boolean mIsInit = false;
+
     private ArrayList<ArticleCate> mArticleCates;
 
     @Override
     protected void onCreateView(HomeFragment view) {
         super.onCreateView(view);
+        HomeHeader homeHeader = new HomeHeader();
+        getAdapter().addHeader(homeHeader);
+
+        ArrayList<Evaluate> evaluates = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            evaluates.add(new Evaluate());
+        }
+        getAdapter().addAll(evaluates);
         onRefresh();
     }
 
@@ -47,18 +57,21 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     public void onRefresh() {
         ArticleModel.getInstance().getHomeList()
                 .map(home -> {
+                    mIsInit = true;
                     mArticleCates = home.getArticleGory();
                     getView().setSearchHint(home.getNum());
-                    getAdapter().removeAllHeader();
-                    getAdapter().addHeader(new HomeHeader(home));
+                    ((HomeHeader) getAdapter().getHeader(0)).setHome(home);
                     return home.getEvaluateList();
                 })
+                .doOnCompleted(() -> getView().setScrollListener())
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        ArticleModel.getInstance().getEssenceList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        if (mIsInit) {
+            ArticleModel.getInstance().getEssenceList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        }
     }
 
     public ArrayList<ArticleCate> getArticleCates() {
@@ -77,15 +90,20 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         ExGridView mCategory;
 
         @BindView(R.id.btn_home_query_batch)
-        Button mBtnQueryBatch;
+        LoadingImageView mIvQuery;
 
         @BindView(R.id.btn_home_my_product)
-        Button mBtnMyProduct;
+        LoadingImageView mIvMyProduct;
+
+        @BindView(R.id.iv_home_evaluate_label)
+        LoadingImageView mIvEvaluateLabel;
+
+        private CategoryAdapter mCategoryAdapter;
 
         private Home mHome;
 
-        public HomeHeader(Home home) {
-            mHome = home;
+        public HomeHeader() {
+            mCategoryAdapter = new CategoryAdapter(getView().getActivity());
         }
 
         @Override
@@ -97,25 +115,35 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
             lp.height = (int) (LUtils.getScreenWidth() / 1.7);
             mHvBanner.setLayoutParams(lp);
 
-            mBtnQueryBatch.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
-            mBtnMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),
-                    UserPreferences.getUserID() > 0 ? UsedListActivity.class : LoginActivity.class)));
+            mCategory.setAdapter(mCategoryAdapter);
 
             return view;
         }
 
         @Override
         public void onBindView(View headerView) {
-            if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {
-                mHvBanner.setAdapter(new BannerPagerAdapter(getView().getActivity(), mHome.getBanner()));
-                mIndicator.setViewPager(mHvBanner);
+            if (mHome != null) {
+                mIvQuery.setImageResource(R.mipmap.bg_home_query);
+                mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
+                mIvMyProduct.setImageResource(R.mipmap.bg_home_repository);
+                mIvMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),
+                        UserPreferences.getUserID() > 0 ? UsedListActivity.class : LoginActivity.class)));
+                mIvEvaluateLabel.setImageResource(R.mipmap.bg_commend_evaluate);
+
+                if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {
+                    mHvBanner.setAdapter(new BannerPagerAdapter(getView().getActivity(), mHome.getBanner()));
+                    mIndicator.setViewPager(mHvBanner);
+                }
+                if (mHome.getBanner() != null && mHome.getBanner().size() <= 1)
+                    mIndicator.setVisibility(View.GONE);
+                mCategory.removeAllViews();
+                mCategoryAdapter.addAll(mHome.getCategory());
             }
-            if (mHome.getBanner() != null && mHome.getBanner().size() <= 1)
-                mIndicator.setVisibility(View.GONE);
-            mCategory.removeAllViews();
-            mCategory.setAdapter(new CategoryAdapter(getView().getActivity(), mHome.getCategory()));
         }
 
+        public void setHome(Home home) {
+            mHome = home;
+        }
     }
 
 }

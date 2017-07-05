@@ -21,6 +21,7 @@ import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.module.product.ProductRemarkPresenter;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 
@@ -39,17 +40,11 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
     @BindView(R.id.tv_evaluate_user_age)
     TextView mTvUserAge;
 
-    @BindView(R.id.ll_evaluate_like)
-    LinearLayout mLlEvaluateLike;
-
     @BindView(R.id.ll_evaluate_user_info)
     LinearLayout mLlUserInfo;
 
     @BindView(R.id.tv_evaluate_label)
     TextView mTvLabel;
-
-    @BindView(R.id.tv_evaluate_essence)
-    TextView mTvEvaluateEssence;
 
     @BindView(R.id.dv_evaluate_product_img)
     SimpleDraweeView mDvProductImg;
@@ -84,6 +79,7 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
 
     @Override
     public void setData(Evaluate data) {
+        if (data == null || data.getComment() == null) return;
         super.setData(data);
         if (data.getUser() != null && data.getUser().getUser_id() > 0) {
             mDvAvatar.setImageURI(Uri.parse(data.getUser().getImg()));
@@ -98,6 +94,9 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
         }
 
         if (data.getProduct() != null && data.getProduct().getId() > 0) {
+            mLlEvaluateProduct.setVisibility(View.VISIBLE);
+            mTvEvaluateComment.setVisibility(View.VISIBLE);
+            mTvEvaluateComment.setText(R.string.btn_comment);
             mDvProductImg.setImageURI(data.getProduct().getProduct_img());
             mTvProductName.setText(data.getProduct().getProduct_name());
             mTvProductRating.setRating(data.getProduct().getStar());
@@ -109,15 +108,19 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
             mTvEvaluateComment.setVisibility(View.GONE);
         }
 
-        mTvEvaluateEssence.setVisibility(View.GONE);
         mIsLike = data.getIsLike();
         setLike(data);
     }
 
+    @Override
+    public int getContentTextWidth() {
+        return LUtils.getScreenWidth() - LUtils.dp2px(50);
+    }
+
     protected void setLike(Evaluate data) {
         mIsLike = data.getIsLike();
-        mLlEvaluateLike.setVisibility(View.GONE);
-        mTvEvaluateLike.setText(data.getLike_num() > 0 ? data.getLike_num() + "" : "");
+        mTvEvaluateLike.setVisibility(View.VISIBLE);
+        mTvEvaluateLike.setText(data.getLike_num() > 0 ? data.getLike_num() + "" : " ");
         setLikeIcon(data.getIsLike() == 1);
         mTvEvaluateLike.setOnClickListener(v -> {
             if (UserPreferences.getUserID() > 0) {

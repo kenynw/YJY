@@ -57,19 +57,20 @@ public class DefaultViewExpansionDelegate extends ViewExpansionDelegate {
     }
 
     @Override
-    public void showLoadingView() {
+    public void showLoadingView(int resId) {
         if (mLoadingView == null) {
-            mLoadingView = getActivity().getLayoutInflater().inflate(R.layout.default_view_list_progress, getContainer());
+            mLoadingView = getActivity().getLayoutInflater().inflate(resId <= 0 ? R.layout.default_view_list_progress : resId, getContainer());
+            mLoadingView.setVisibility(View.GONE);
             if (mLoadingView.getParent() == null) getContainer().addView(mLoadingView);
         } else {
             mLoadingView.setVisibility(View.VISIBLE);
         }
-        setToolbar(mLoadingView);
+//        setToolbar(mLoadingView);
     }
 
     @Override
     public void hideLoadingView() {
-        if (mLoadingView != null) mLoadingView.setVisibility(View.GONE);
+        if (mLoadingView != null) getContainer().removeView(mLoadingView);
     }
 
     @Override

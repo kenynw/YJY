@@ -33,62 +33,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:paddingLeft="35dp"
-        android:paddingRight="35dp"
-        android:paddingTop="15dp"
+        android:paddingLeft="7.5dp"
+        android:paddingRight="7.5dp"
+        android:paddingTop="25dp"
         app:grid_as_square="false"
-        app:grid_divider_horizontal="35dp"
-        app:grid_divider_vertical="15dp"
+        app:grid_divider_horizontal="0dp"
+        app:grid_divider_vertical="@dimen/spacing_normal"
         />
 
-    <LinearLayout
+    <com.jude.exgridview.ExGridView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
         android:background="@color/white"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:paddingBottom="7dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="@dimen/spacing_small"
+        app:grid_as_square="false"
+        app:grid_column="2"
+        app:grid_divider_horizontal="25dp"
         >
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
-
-        <Button
+        <com.miguan.yjy.widget.LoadingImageView
             android:id="@+id/btn_home_query_batch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_btn_home_query"
+            android:background="@drawable/bg_radius_div"
+            android:minHeight="@dimen/widget_medium"
             />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
-
-        <Button
+        <com.miguan.yjy.widget.LoadingImageView
             android:id="@+id/btn_home_my_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/bg_btn_home_my_repository"
+            android:background="@drawable/bg_radius_div"
+            android:minHeight="@dimen/widget_medium"
             />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            />
+    </com.jude.exgridview.ExGridView>
 
-    </LinearLayout>
-
-    <ImageView
+    <com.miguan.yjy.widget.LoadingImageView
+        android:id="@+id/iv_home_evaluate_label"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:minWidth="70dp"
         android:scaleType="centerInside"
-        android:src="@mipmap/bg_commend_evaluate"
         />
 
 </LinearLayout>

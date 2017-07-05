@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,8 +29,8 @@ import butterknife.ButterKnife;
 
 public class EvaluateArticleViewHolder extends EvaluateCommendVH {
 
-    @BindView(R.id.tv_article_cate_more)
-    TextView mTvArticleMore;
+    @BindView(R.id.rl_article_cate)
+    RelativeLayout mRlArticleCate;
 
     @BindView(R.id.recy_article_cate)
     RecyclerView mRecyArticle;
@@ -64,17 +65,15 @@ public class EvaluateArticleViewHolder extends EvaluateCommendVH {
         super(parent, R.layout.item_list_article_cate);
         ButterKnife.bind(this, itemView);
         mArticleCates = list;
-        mTvArticleMore.setOnClickListener(v ->
-                ArticleListActivityPresenter.start(getContext(), mArticleCates, 0)
-        );
+        mRlArticleCate.setOnClickListener(v -> ArticleListActivityPresenter.start(getContext(), mArticleCates, 0));
         mRecyArticle.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mRecyArticle.addItemDecoration(new DividerDecoration(android.R.color.transparent, LUtils.dp2px(10)));
-        mRecyArticle.setAdapter(new CateAdapter());
     }
 
     @Override
     public void setData(Evaluate data) {
         super.setData(data);
+        mRecyArticle.setAdapter(new CateAdapter());
     }
 
     private class CateAdapter extends RecyclerView.Adapter<ArticleCateViewHolder> {
@@ -84,24 +83,27 @@ public class EvaluateArticleViewHolder extends EvaluateCommendVH {
             ImageView iv = new ImageView(getContext());
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setLayoutParams(new ViewGroup.LayoutParams(LUtils.dp2px(195), LUtils.dp2px(111)));
+            iv.setImageResource(R.drawable.bg_radius_div);
             return new ArticleCateViewHolder(iv);
         }
 
         @Override
         public void onBindViewHolder(ArticleCateViewHolder holder, int position) {
-            Glide.with(getContext())
-                    .load(mArticleCates.get(position).getCate_img())
-                    .placeholder(R.mipmap.def_image_loading)
-                    .error(R.mipmap.def_image_loading)
-                    .into((ImageView) holder.itemView);
-            holder.itemView.setOnClickListener(v ->
-                    ArticleListActivityPresenter.start(getContext(), mArticleCates, position)
-            );
+            if (mArticleCates != null && mArticleCates.size() > 0) {
+                Glide.with(getContext())
+                        .load(mArticleCates.get(position).getCate_img())
+                        .placeholder(R.mipmap.def_image_loading)
+                        .error(R.mipmap.def_image_loading)
+                        .into((ImageView) holder.itemView);
+                holder.itemView.setOnClickListener(v ->
+                        ArticleListActivityPresenter.start(getContext(), mArticleCates, position)
+                );
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mArticleCates.size();
+            return mArticleCates != null && mArticleCates.size() > 0 ? mArticleCates.size() : 5;
         }
 
     }

@@ -43,6 +43,7 @@ public class LargeImageActivity extends ChainBaseActivity {
 
         imgUri = getIntent().getStringExtra(EXTRA_IMGURI);
 
+        if (imgUri.endsWith("@!200x200.jpg")) imgUri = imgUri.replace("@!200x200.jpg", "");
         Glide.with(this).load(imgUri).into(mImgCommonLarge);
 
         mImgCommonLarge.setImageURI(Uri.parse(imgUri));

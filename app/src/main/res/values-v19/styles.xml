@@ -4,7 +4,7 @@
         <!--透明状态栏-->
         <!--<item name="android:windowTranslucentStatus">true</item>-->
         <!--透明导航栏-->
-        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <!--<item name="android:windowTranslucentNavigation">false</item>-->
     </style>
 
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -14,15 +15,20 @@
         android:layout_width="@dimen/widget_medium"
         android:layout_height="@dimen/widget_medium"
         android:src="@mipmap/def_image_loading"
+        app:roundAsCircle="true"
         />
 
-    <TextView
+    <com.miguan.yjy.widget.LoadingTextView
         android:id="@+id/tv_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_tiny"
-        android:textColor="#666"
-        android:textSize="@dimen/text_size_caption_material"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:minWidth="32dp"
+        android:textColor="@color/textPrimary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:height_weight="0.6"
         tools:text="洁面"
         />
 

@@ -13,6 +13,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.module.product.SearchResultPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,19 +29,19 @@ public class CategoryAdapter extends BaseAdapter {
 
     private List<Category> mList;
 
-    public CategoryAdapter(Context context, List<Category> list) {
+    public CategoryAdapter(Context context) {
         mContext = context;
-        mList = list;
+        mList = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return mList.size();
+        return mList.size() > 0 ? mList.size() : 8;
     }
 
     @Override
     public Category getItem(int position) {
-        return mList.get(position);
+        return mList != null && mList.size() > 0 ? mList.get(position) : null;
     }
 
     @Override
@@ -51,8 +52,14 @@ public class CategoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CategoryViewHolder holder = new CategoryViewHolder(parent);
-        holder.setData(getItem(position));
+        if (getItem(position) != null) holder.setData(getItem(position));
         return holder.itemView;
+    }
+
+    public void addAll(List<Category> list) {
+        mList.clear();
+        mList.addAll(list);
+        notifyDataSetChanged();
     }
 
     class CategoryViewHolder extends BaseViewHolder<Category> {

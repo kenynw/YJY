@@ -54,6 +54,9 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
     @BindView(R.id.tv_evaluate_empty)
     TextView mTvEmpty;
 
+    @BindView(R.id.ll_article_detail)
+    LinearLayout mLlArticleDetail;
+
     private boolean mIsStar;
 
     private WebSettings mSettings;
@@ -71,10 +74,9 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
 
         mSettings = mWebView.getSettings();
         mSettings.setJavaScriptEnabled(true);
-        mSettings.setBlockNetworkImage(true);
         mSettings.setDomStorageEnabled(true);
         mSettings.setDefaultTextEncodingName("utf-8");
-        mSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+//        mSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
         //往浏览器标识字符串里添加自定义的字符串，用于服务器判断是否为客户端
         if (!mSettings.getUserAgentString().contains("android")) {
@@ -85,21 +87,6 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
         mWebView.setHorizontalScrollBarEnabled(false);
 
         mWebView.addJavascriptInterface(new WebViewOB(this), "Android");
-        mWebView.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                mSettings.setBlockNetworkImage(false);
-                getExpansionDelegate().hideProgressBar();
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return true;
-            }
-
-        });
     }
 
     @Override
@@ -109,15 +96,32 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
         setStar(article.getIsGras() == 1);
         mFlComment.setOnClickListener(v -> AddEvaluatePresenter.start(this, article.getId(), 2, 0));
 
-        RecyclerArrayAdapter<Evaluate> adapter = getPresenter().getAdapter();
-        mRecycle.setAdapter(adapter);
-        if (article.getCommentList() != null && article.getCommentList().size() > 0) {
-            mTvEmpty.setVisibility(View.GONE);
-            adapter.clear();
-            adapter.addAll(article.getCommentList());
-        } else {
-            mRecycle.setVisibility(View.GONE);
-        }
+        mWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                mLlArticleDetail.setVisibility(View.VISIBLE);
+                RecyclerArrayAdapter<Evaluate> adapter = getPresenter().getAdapter();
+                mRecycle.setAdapter(adapter);
+                if (article.getCommentList() != null && article.getCommentList().size() > 0) {
+                    mTvEmpty.setVisibility(View.GONE);
+                    adapter.clear();
+                    adapter.addAll(article.getCommentList());
+                } else {
+                    mRecycle.setVisibility(View.GONE);
+                }
+
+                getExpansionDelegate().hideProgressBar();
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return true;
+            }
+
+        });
+
     }
 
     public void setStar(boolean isStar) {
