@@ -337,6 +337,26 @@ public interface Services {
             @Query("condition") String condition,
             @Query("page") int page
     );
+    /**
+     * 产品或文章评论列表
+     *
+     * @param id        产品或文章的ID
+     * @param page      当前页数
+     * @param user_id   用户ID 可空
+     * @param type      类型 1-产品，2-文章
+     * @param orderBy   － 排序方式-默认default综合排序，skin 肤质排序
+     * @param condition 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
+     * @return
+     */
+    @GET("?action=commentList")
+    Observable<EntityRoot<List<Evaluate>>> evaluateListSecond(
+            @Query("id") int id,
+            @Query("user_id") int user_id,
+            @Query("type") int type,
+            @Query("orderBy") String orderBy,
+            @Query("condition") String condition,
+            @Query("page") int page
+    );
 
     /**
      * 回复评论列表

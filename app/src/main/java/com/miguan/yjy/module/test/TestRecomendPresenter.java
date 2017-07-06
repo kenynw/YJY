@@ -65,8 +65,12 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
                 skinPriceAdapter.setSetOnTagClickListener(new SkinPriceAdapter.SetOnTagClickListener() {
                     @Override
                     public void itemClick(View v, int position, float min, float max) {
+                        if (min == 0f) {
+                            min=0.1f;
+                        }
                         minPrice = min;
                         maxPrice = max;
+
                         onRefresh();
                     }
 

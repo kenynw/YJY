@@ -56,9 +56,9 @@
             android:id="@+id/tv_skin_low"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:paddingLeft="35dp"
             android:paddingRight="15dp"
+            android:layout_gravity="bottom"
             android:textColor="@color/skin_low"
             android:textSize="@dimen/text_size_small_14"
             tools:text="干性"/>
@@ -74,9 +74,9 @@
             android:id="@+id/tv_skin_high"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:paddingLeft="15dp"
             android:paddingRight="35dp"
+            android:layout_gravity="bottom"
             android:textColor="@color/skin_high"
             android:textSize="@dimen/text_size_small_14"
             tools:text="油性"/>

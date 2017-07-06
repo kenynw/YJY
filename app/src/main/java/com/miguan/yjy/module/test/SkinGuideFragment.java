@@ -23,6 +23,6 @@ public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresent
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setRefreshAble(false).setLoadMoreAble(false);
+        return super.getListConfig().setRefreshAble(false).setLoadMoreAble(false).setContainerEmptyAble(false);
     }
 }

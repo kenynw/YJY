@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.miguan.yjy.module.article.EvaluateViewHolder;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.module.article.EvaluateViewHolder;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
  */
 
 public class EvaluateAdapter extends RecyclerArrayAdapter<Evaluate> {
+
     public EvaluateAdapter(Context context, List<Evaluate> objects) {
         super(context, objects);
     }
@@ -30,5 +31,6 @@ public class EvaluateAdapter extends RecyclerArrayAdapter<Evaluate> {
     public void OnBindViewHolder(BaseViewHolder holder, int position) {
         super.OnBindViewHolder(holder, position);
     }
+
 
 }
