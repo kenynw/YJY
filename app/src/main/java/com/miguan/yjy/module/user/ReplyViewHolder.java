@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.user;
 
+import android.text.Html;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -33,21 +34,25 @@ public class ReplyViewHolder extends BaseViewHolder<Message> {
     @Override
     public void setData(Message data) {
         mTvDate.setText(data.getCreated_at());
-        mTvContent.setText(data.getContent());
-        itemView.setOnClickListener(v -> {
-            switch (data.getType()) {
-                case 1:
-                    EvaluateDetailPresenter.start(getContext(), data.getId());
-                    break;
-                case 2:
-                    ArticleDetailPresenter.start(getContext(), data.getId());
-                    break;
-                case 3:
+        String content = data.getContent();
+        switch (data.getType()) {
+            case 1:
+                content = "回复了产品 <b>" + content + "</b> 的评论";
+                itemView.setOnClickListener(v -> EvaluateDetailPresenter.start(getContext(), data.getId()));
+                break;
+            case 2:
+                content = "回复了文章 <b>《" + content + "</b>》的评论";
+                itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
+                break;
+            case 3:
+                content = "回答了产品 <b> " + content + "</b> 的提问";
+                itemView.setOnClickListener(v -> {
                     if (data.getProduct_id() > 0)
                         AskDetailActivityPresenter.start(getContext(), data.getProduct_id(), data.getId());
-                    break;
-            }
-        });
+                });
+                break;
+        }
+        mTvContent.setText(Html.fromHtml(content));
     }
 
 }

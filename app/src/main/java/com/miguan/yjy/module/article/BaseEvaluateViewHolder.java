@@ -101,6 +101,10 @@ public abstract class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
             super(context, resourceId);
         }
 
+        public VerticalImageSpan(Drawable d, int verticalAlignment) {
+            super(d, verticalAlignment);
+        }
+
         @Override
         public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
             Drawable drawable = getDrawable();

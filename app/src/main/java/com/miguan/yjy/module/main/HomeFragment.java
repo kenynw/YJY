@@ -69,7 +69,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
 
     @Override
     public BaseViewHolder<Evaluate> createViewHolder(ViewGroup parent, int viewType) {
-        return viewType == 2 ? new EvaluateArticleViewHolder(parent, getPresenter().getArticleCates())
+        return viewType == 2 ? new EvaluateArticleViewHolder(parent, getPresenter())
                 : new EvaluateCommendVH(parent);
     }
 

@@ -2,7 +2,6 @@ package com.miguan.yjy.module.common;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -10,6 +9,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,14 +41,13 @@ public class LargeImageActivity extends ChainBaseActivity {
         setContentView(R.layout.common_activity_large_image);
         ButterKnife.bind(this);
 
-        imgUri = getIntent().getStringExtra(EXTRA_IMGURI);
-
-        if (imgUri.endsWith("@!200x200.jpg")) imgUri = imgUri.replace("@!200x200.jpg", "");
-        Glide.with(this).load(imgUri).into(mImgCommonLarge);
-
-        mImgCommonLarge.setImageURI(Uri.parse(imgUri));
         mImgCommonLarge.setOnPhotoTapListener((view1, x, y) -> finish());
         mImgCommonLarge.setOnOutsidePhotoTapListener(imageView -> finish());
+
+        imgUri = getIntent().getStringExtra(EXTRA_IMGURI);
+        Glide.with(this).load(imgUri).into(mImgCommonLarge);
+
+        LUtils.log(imgUri);
     }
 
 }

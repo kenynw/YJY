@@ -71,22 +71,18 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@id/recycle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
         android:layout_weight="1"
-        >
+        android:background="@color/white"
+        app:recyclerClipToPadding="false"
+        app:recyclerPaddingTop="@dimen/spacing_small"
+        />
 
-        <com.jude.easyrecyclerview.EasyRecyclerView
-            android:id="@id/recycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:recyclerClipToPadding="false"
-            app:recyclerPaddingTop="@dimen/spacing_small"
-            />
-
-        <include layout="@layout/include_bottom_input" />
-
-    </FrameLayout>
+    <include layout="@layout/include_bottom_input"/>
 
 </LinearLayout>

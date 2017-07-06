@@ -17,8 +17,10 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.ArticleCate;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,51 +61,69 @@ public class EvaluateArticleViewHolder extends EvaluateCommendVH {
     @BindView(R.id.tv_evaluate_commend_comment)
     TextView mTvCommendComment;
 
-    private ArrayList<ArticleCate> mArticleCates;
+    private OnLoadDataListener mListener;
 
-    public EvaluateArticleViewHolder(ViewGroup parent, ArrayList<ArticleCate> list) {
+    private CateAdapter mCateAdapter;
+
+    public EvaluateArticleViewHolder(ViewGroup parent, OnLoadDataListener listener) {
         super(parent, R.layout.item_list_article_cate);
         ButterKnife.bind(this, itemView);
-        mArticleCates = list;
-        mRlArticleCate.setOnClickListener(v -> ArticleListActivityPresenter.start(getContext(), mArticleCates, 0));
+        mListener = listener;
         mRecyArticle.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mRecyArticle.addItemDecoration(new DividerDecoration(android.R.color.transparent, LUtils.dp2px(10)));
+        mRecyArticle.setAdapter(mCateAdapter = new CateAdapter());
     }
 
     @Override
     public void setData(Evaluate data) {
         super.setData(data);
-        mRecyArticle.setAdapter(new CateAdapter());
+        if (data.getComment() == null) return;
+        mCateAdapter.addAll(mListener.getCates());
+        mRlArticleCate.setOnClickListener(v -> ArticleListActivityPresenter.start(getContext(), mListener.getCates(), 0));
+    }
+
+    public interface OnLoadDataListener {
+        ArrayList<ArticleCate> getCates();
     }
 
     private class CateAdapter extends RecyclerView.Adapter<ArticleCateViewHolder> {
 
+        private ArrayList<ArticleCate> mCates;
+
+        public CateAdapter() {
+            mCates = new ArrayList<>();
+        }
+
         @Override
         public ArticleCateViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            ImageView iv = new ImageView(getContext());
+            LoadingImageView iv = new LoadingImageView(getContext());
             iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setLayoutParams(new ViewGroup.LayoutParams(LUtils.dp2px(195), LUtils.dp2px(111)));
-            iv.setImageResource(R.drawable.bg_radius_div);
             return new ArticleCateViewHolder(iv);
         }
 
         @Override
         public void onBindViewHolder(ArticleCateViewHolder holder, int position) {
-            if (mArticleCates != null && mArticleCates.size() > 0) {
+            if (mCates != null && mCates.size() > 0) {
                 Glide.with(getContext())
-                        .load(mArticleCates.get(position).getCate_img())
+                        .load(mCates.get(position).getCate_img())
                         .placeholder(R.mipmap.def_image_loading)
                         .error(R.mipmap.def_image_loading)
                         .into((ImageView) holder.itemView);
                 holder.itemView.setOnClickListener(v ->
-                        ArticleListActivityPresenter.start(getContext(), mArticleCates, position)
+                        ArticleListActivityPresenter.start(getContext(), mCates, position)
                 );
             }
         }
 
         @Override
         public int getItemCount() {
-            return mArticleCates != null && mArticleCates.size() > 0 ? mArticleCates.size() : 5;
+            return mCates != null && mCates.size() > 0 ? mCates.size() : 5;
+        }
+
+        public void addAll(Collection<ArticleCate> cates) {
+            mCates.addAll(cates);
+            notifyItemRangeChanged(0, cates.size());
         }
 
     }

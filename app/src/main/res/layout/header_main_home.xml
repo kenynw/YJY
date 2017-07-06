@@ -55,19 +55,19 @@
         app:grid_divider_horizontal="25dp"
         >
 
-        <com.miguan.yjy.widget.LoadingImageView
+        <ImageView
             android:id="@+id/btn_home_query_batch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_radius_div"
+            android:src="@drawable/bg_radius_div"
             android:minHeight="@dimen/widget_medium"
             />
 
-        <com.miguan.yjy.widget.LoadingImageView
+        <ImageView
             android:id="@+id/btn_home_my_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_radius_div"
+            android:src="@drawable/bg_radius_div"
             android:minHeight="@dimen/widget_medium"
             />
 

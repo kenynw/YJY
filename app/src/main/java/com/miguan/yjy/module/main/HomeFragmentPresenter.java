@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -17,6 +18,7 @@ import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
+import com.miguan.yjy.module.article.EvaluateArticleViewHolder;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -33,7 +35,8 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate> {
+public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate>
+        implements EvaluateArticleViewHolder.OnLoadDataListener {
 
     private boolean mIsInit = false;
 
@@ -74,7 +77,8 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         }
     }
 
-    public ArrayList<ArticleCate> getArticleCates() {
+    @Override
+    public ArrayList<ArticleCate> getCates() {
         return mArticleCates;
     }
 
@@ -90,10 +94,10 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         ExGridView mCategory;
 
         @BindView(R.id.btn_home_query_batch)
-        LoadingImageView mIvQuery;
+        ImageView mIvQuery;
 
         @BindView(R.id.btn_home_my_product)
-        LoadingImageView mIvMyProduct;
+        ImageView mIvMyProduct;
 
         @BindView(R.id.iv_home_evaluate_label)
         LoadingImageView mIvEvaluateLabel;
