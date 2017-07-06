@@ -108,6 +108,13 @@ public class SpringProgressView extends View {
             mPaint.setShader(shader);
         }
         canvas.drawRoundRect(rectProgressBg, round, round, mPaint);
+        int[] location = new int[2];
+        this.getLocationOnScreen(location);
+        int x = location[0];
+        int y = location[1];
+        if (getLocationOnScreenXy != null) {
+            getLocationOnScreenXy.getXy((int)(x+mWidth*section),y);
+        }
     }
 
     private int dipToPx(int dip) {
@@ -159,5 +166,13 @@ public class SpringProgressView extends View {
         setMeasuredDimension(mWidth, mHeight);
     }
 
+    public interface GetLocationOnScreenXy {
+        void getXy(int x,int y);
+    }
 
+    GetLocationOnScreenXy getLocationOnScreenXy;
+
+    public void setGetLocationOnScreenXy(GetLocationOnScreenXy getLocationOnScreenXy) {
+        this.getLocationOnScreenXy = getLocationOnScreenXy;
+    }
 }
