@@ -393,7 +393,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         }
     }
 
-    public void setEvaluate(List<Evaluate> list) {
+    public void setEvaluate(List<Evaluate> list, int size) {
         EvaluateAdapter evaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
         evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
         evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
@@ -402,7 +402,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRecyEvalutate.setEmptyView(R.layout.empty_evaluate_list);
         mRecyEvalutate.setAdapter(evaluateAdapter);
         evaluateAdapter.notifyDataSetChanged();
-        tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), list.size()));
+        tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), size));
     }
 
     private void showInAnim() {

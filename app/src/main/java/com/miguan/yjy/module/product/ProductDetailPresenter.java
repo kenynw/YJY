@@ -8,6 +8,7 @@ import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.model.ProductModel;
+import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.local.UserPreferences;
@@ -17,6 +18,8 @@ import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
+
+import rx.functions.Func1;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -110,13 +113,14 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     public void getEvaluateData(String orderBy, String condition) {
         setSort(orderBy);
         setUserEvluate(condition);
-        ProductModel.getInstance().getEvaluate(mProductId, 1, orderBy, condition).subscribe(new ServicesResponse<List<Evaluate>>() {
+        ProductModel.getInstance().getEvaluateSecond(mProductId, 1, orderBy, condition).map(new Func1<EntityRoot<List<Evaluate>>, List<Evaluate>>() {
             @Override
-            public void onNext(List<Evaluate> evaluates) {
-                getView().setEvaluate(evaluates);
+            public List<Evaluate> call(EntityRoot<List<Evaluate>> listEntityList) {
+                getView().setEvaluate(listEntityList.getData(),listEntityList.getPageTotal());
                 mCurPage = 2;
+                return listEntityList.getData();
             }
-        });
+        }).subscribe();
     }
 
     private boolean isLogin() {
@@ -138,7 +142,8 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         ProductModel.getInstance().getEvaluate(mProductId, mCurPage, sort, userEvluate).subscribe(new ServicesResponse<List<Evaluate>>() {
             @Override
             public void onNext(List<Evaluate> evaluates) {
-                ((EvaluateAdapter) getView().mRecyEvalutate.getAdapter()).addAll(evaluates);
+                EvaluateAdapter evaluateAdapter= (EvaluateAdapter) getView().mRecyEvalutate.getAdapter();
+                evaluateAdapter.addAll(evaluates);
                 mCurPage++;
             }
         });
@@ -148,4 +153,5 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     public void onMoreClick() {
 
     }
+
 }

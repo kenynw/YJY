@@ -260,6 +260,21 @@ public class ProductModel extends AbsModel {
     }
 
     /**
+     * 获取用户点评列表
+     * id(int) － 对应ID
+     * user_id(int) － 用户ID，未登录可为空
+     * type(int) － 类型 1-产品，2-文章
+     * orderBy(string) － 排序方式-默认default综合排序，skin 肤质排序
+     * condition(string) － 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
+     * page(int) － 当前页数
+     * pageSize(int) － 每页多少条
+     */
+    public Observable<EntityRoot<List<Evaluate>>> getEvaluateSecond(int productId, int page, String orderBy, String condition) {
+        return ServicesClient.getServices()
+                .evaluateListSecond(productId, UserPreferences.getUserID(), TYPE_PRODUCT, orderBy, condition, page)
+                .compose(new DefaultTransform<>());
+    }
+    /**
      * 产品评论列表点赞
      */
     public Observable<String> addEvaluateLike(int evaluateId) {

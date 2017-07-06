@@ -71,60 +71,54 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
 
 
     private void setCurPro(Skin data) {
-        getXy(mProgressSkin);
-        mTvSkinValute.measure(0,0);
+        mTvSkinValute.measure(0, 0);
 
         int skinWith = mTvSkinValute.getMeasuredWidth();
         int tW = skinWith / 2;
-        mTvSkinLow.measure(0,0);
+        mTvSkinLow.measure(0, 0);
         int left = mTvSkinLow.getMeasuredWidth();
-        mTvSkinHigh.measure(0,0);
+        mTvSkinHigh.measure(0, 0);
         int right = mTvSkinHigh.getMeasuredWidth();
-        Log.e("left ", left + "=======");
-        Log.e("right ", right + "=======");
-        Log.e("tW ", tW + "=======");
+
         int w = LUtils.getScreenWidth() - left - right;
-        Log.e("w=====", "" + w);
 
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
         float pro = mProgressSkin.getCurrentCount();
 
         params.leftMargin = (int) (pro * w / 100) + left - tW;
-        Log.e("leftMargin=====", "" + params.leftMargin);
         mTvSkinValute.setLayoutParams(params);
-        Log.e("skinWith", skinWith + "==-----");
         mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
         mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
         mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
     }
 
-    private void setCurProgress(Skin data) {
-        mTvSkinValute.post(new Runnable() {
-            @Override
-            public void run() {
-                int skinWith = mTvSkinValute.getWidth();
-                int tW = skinWith / 2;
-                int left = mTvSkinLow.getWidth();
-                int right = mTvSkinHigh.getWidth();
-                Log.e("left ", left + "=======");
-                Log.e("right ", right + "=======");
-                Log.e("tW ", tW + "=======");
-                int w = LUtils.getScreenWidth() - left - right;
-                Log.e("w=====", "" + w);
-
-                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
-                float pro = mProgressSkin.getCurrentCount();
-
-                params.leftMargin = (int) (pro * w / 100) + left - tW;
-                Log.e("leftMargin=====", "" + params.leftMargin);
-                mTvSkinValute.setLayoutParams(params);
-                Log.e("skinWith", skinWith + "==-----");
-                mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
-                mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
-                mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
-            }
-        });
-    }
+//    private void setCurProgress(Skin data) {
+//        mTvSkinValute.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                int skinWith = mTvSkinValute.getWidth();
+//                int tW = skinWith / 2;
+//                int left = mTvSkinLow.getWidth();
+//                int right = mTvSkinHigh.getWidth();
+//                Log.e("left ", left + "=======");
+//                Log.e("right ", right + "=======");
+//                Log.e("tW ", tW + "=======");
+//                int w = LUtils.getScreenWidth() - left - right;
+//                Log.e("w=====", "" + w);
+//
+//                ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
+//                float pro = mProgressSkin.getCurrentCount();
+//
+//                params.leftMargin = (int) (pro * w / 100) + left - tW;
+//                Log.e("leftMargin=====", "" + params.leftMargin);
+//                mTvSkinValute.setLayoutParams(params);
+//                Log.e("skinWith", skinWith + "==-----");
+//                mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
+//                mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
+//                mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
+//            }
+//        });
+//    }
 
     private void firstTag() {
 
@@ -185,6 +179,19 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
             }
         });
     }
+
+//    private void finalTag(Skin data) {
+//        int w = LUtils.getScreenWidth() - 300;
+//        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mTvSkinValute.getLayoutParams();
+//        float pro = mProgressSkin.getCurrentCount();
+//
+//        params.leftMargin = (int) (pro * w / 100) + 50;
+//        Log.e("leftMargin=====", "" + params.leftMargin);
+//        mTvSkinValute.setLayoutParams(params);
+//        mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
+//        mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
+//        mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
+//    }
 
 
 }

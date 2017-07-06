@@ -38,7 +38,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:focusable="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="33dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rect_test_category"
@@ -56,8 +57,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:visibility="gone"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
