@@ -127,4 +127,33 @@
         tools:text="描述2"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingLeft="15dp"
+        >
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="11dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="相关内容推荐"
+            android:textColor="@color/color_sencond_title"
+            android:textSize="@dimen/text_size_small_14"
+            />
+
+    </LinearLayout>
+
+
 </LinearLayout>

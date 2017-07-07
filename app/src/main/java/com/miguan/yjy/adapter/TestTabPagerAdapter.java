@@ -30,7 +30,14 @@ public class TestTabPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return new TestTabFragment();
+       TestTabFragment testTabFragment= new TestTabFragment();
+        testTabFragment.setGetPosition(new TestTabFragment.GetPosition() {
+            @Override
+            public void getCurPricePostion() {
+
+            }
+        });
+        return testTabFragment;
     }
 
     @Override

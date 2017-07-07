@@ -15,6 +15,7 @@ import com.miguan.yjy.model.bean.SelectPrice;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.widget.FlowTagLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,6 +36,18 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
     public float minPrice;
     public float maxPrice;
 
+    public float mFirstMinPrice;
+    public float mSecondMinPrice;
+    public float mThirdMinPrice;
+    public float mFirstMaxPrice;
+    public float mSecondMaxPrice;
+    public float mThirdMaxPrice;
+    public int mFirstPosition;
+    public int mSecondPosition;
+    public int mThirdPosition;
+    public List<SelectPrice> selectPrices = new ArrayList<>();
+    public SkinPriceAdapter skinPriceAdapter;
+
     public static void star(Context context, Test tests, int position, String name) {
         Intent intent = new Intent(context, TestRecomendActivity.class);
         intent.putExtra(EXTRA_TEST, tests);
@@ -52,24 +65,43 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
                 View skinPrice = View.inflate(getView(), R.layout.include_head_skin_price, null);
                 mFlowtagSkinPrice = (FlowTagLayout) skinPrice.findViewById(R.id.flowtag_skin_price);
                 mFlowtagSkinPrice.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
-                List<SelectPrice> selectPrices = getView().mTest.getCategoryList().get(getView().position).getCondition();
+                selectPrices = getView().mTest.getCategoryList().get(getView().position).getCondition();
                 if (selectPrices.size() != 0) {
                     SelectPrice selectPrice = new SelectPrice();
                     selectPrice.setMin(0);
                     selectPrice.setMax(0);
+                    selectPrice.setSelect(true);
                     selectPrices.add(0, selectPrice);
+
                 }
-                SkinPriceAdapter skinPriceAdapter = new SkinPriceAdapter(getView(), selectPrices);
+                skinPriceAdapter = new SkinPriceAdapter(getView(), selectPrices);
                 mFlowtagSkinPrice.setAdapter(skinPriceAdapter);
                 skinPriceAdapter.onlyAddAll(selectPrices);
                 skinPriceAdapter.setSetOnTagClickListener(new SkinPriceAdapter.SetOnTagClickListener() {
                     @Override
-                    public void itemClick(View v, int position, float min, float max) {
+                    public void itemClick(View v, int position, float min, float max, List<SelectPrice> list) {
                         if (min == 0f) {
-                            min=0.1f;
+                            min = 0.1f;
                         }
-                        minPrice = min;
-                        maxPrice = max;
+                        switch (getView().position) {
+                            case 0:
+                                mFirstMinPrice = min;
+                                mFirstMaxPrice = max;
+                                mFirstPosition = position;
+                                break;
+                            case 1:
+                                mSecondMinPrice = min;
+                                mSecondMaxPrice = max;
+                                mSecondPosition = position;
+                                break;
+                            case 2:
+                                mThirdMinPrice = min;
+                                mThirdMaxPrice = max;
+                                mThirdPosition = position;
+                                break;
+                        }
+//                        minPrice = min;
+//                        maxPrice = max;
 
                         onRefresh();
                     }
@@ -89,6 +121,7 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
 
     @Override
     public void onRefresh() {
+        setMaxMinPrice();
         TestModel.getInstantce().getSkinRecommendList(getView().categoryList.get(getView().position).getId(), minPrice, maxPrice, 1).
                 unsafeSubscribe(getRefreshSubscriber());
 //        TestModel.getInstantce().getTestList().unsafeSubscribe(getRefreshSubscriber());
@@ -96,7 +129,26 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
 
     @Override
     public void onLoadMore() {
+        setMaxMinPrice();
         TestModel.getInstantce().getSkinRecommendList(getView().categoryList.get(getView().position).getId(), minPrice, maxPrice, getCurPage()).
                 unsafeSubscribe(getMoreSubscriber());
     }
+
+    private void setMaxMinPrice() {
+        switch (getView().position) {
+            case 0:
+                minPrice = mFirstMinPrice;
+                maxPrice = mFirstMaxPrice;
+                break;
+            case 1:
+                minPrice = mSecondMinPrice;
+                maxPrice = mSecondMaxPrice;
+                break;
+            case 2:
+                minPrice = mThirdMinPrice;
+                maxPrice = mThirdMaxPrice;
+                break;
+        }
+    }
+
 }

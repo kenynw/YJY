@@ -80,7 +80,7 @@ public class SkinPriceAdapter extends BaseAdapter {
                         mdatas.get(i).setSelect(false);
                         mdatas.get(position).setSelect(true);
                     }
-                    mSetOnTagClickListener.itemClick(v, position, mdatas.get(position).getMin(), mdatas.get(position).getMax());
+                    mSetOnTagClickListener.itemClick(v, position, mdatas.get(position).getMin(), mdatas.get(position).getMax(),mdatas);
                 }
                 notifyDataSetChanged();
             });
@@ -96,7 +96,7 @@ public class SkinPriceAdapter extends BaseAdapter {
     }
 
     public interface SetOnTagClickListener {
-        public void itemClick(View v, int position, float min, float max);
+        public void itemClick(View v, int position, float min, float max,List<SelectPrice>list);
     }
 
     private SetOnTagClickListener mSetOnTagClickListener;

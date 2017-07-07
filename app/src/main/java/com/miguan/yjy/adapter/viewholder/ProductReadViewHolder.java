@@ -55,20 +55,21 @@ public class ProductReadViewHolder extends BaseViewHolder<Component> {
 //            7-9 红色
 
         String grade = data.getRisk_grade();
+
         if (TextUtils.isEmpty(grade)) {
             grade = "0";
         }
         mTvComponentSafe.setText(grade);
-        if (grade.contains("0") || grade.contains("1") || grade.contains("2")) {
-            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_f8b);
+
+        if (grade.contains("7") || grade.contains("8") || grade.contains("9")) {
+            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_fb74);
         }
         if (grade.contains("3") || grade.contains("4") || grade.contains("5") || grade.contains("6")) {
             mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_ffc3);
         }
-        if (grade.contains("7") || grade.contains("8") || grade.contains("9")) {
-            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_fb74);
+        if (grade.contains("0") || grade.contains("1") || grade.contains("2")) {
+            mTvComponentSafe.setBackgroundResource(R.drawable.bg_shape_product_f8b);
         }
-
         if (data.getIs_active() == 1) {
             mIvComponentActive.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.bg_product_active));
         }
