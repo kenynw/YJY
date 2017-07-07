@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
+import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
@@ -85,6 +86,8 @@ public class MessageReceiver extends BroadcastReceiver {
             return;
         }
 
+        LUtils.log("type: " + type);
+
         if (type == 1) { // 过期
             CommonModel.getInstance().setMsgRead(id, "notice").unsafeSubscribe(new ServicesResponse<String>() {
                 @Override
@@ -100,6 +103,8 @@ public class MessageReceiver extends BroadcastReceiver {
             ArticleDetailPresenter.start(context, Integer.valueOf(relation));
         } else if (type == 4){ // 产品
             ProductDetailPresenter.start(context, Integer.valueOf(relation));
+        } else if (type == 5) {
+            AskDetailActivityPresenter.start(context, Integer.valueOf(relation), Integer.valueOf(relation));
         } else {
             CommonModel.getInstance().setMsgRead(id, "pms").unsafeSubscribe(new ServicesResponse<String>() {
                 @Override

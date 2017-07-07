@@ -28,6 +28,7 @@ public abstract class ChainAppCompatActivity<PresenterType extends Presenter> ex
         ImmersionBar.with(this)
                 .transparentStatusBar()
                 .statusBarDarkFont(true)
+                .navigationBarEnable(false)
                 .init();
     }
 

@@ -29,6 +29,7 @@ public class AskDetailActivityPresenter extends BaseListActivityPresenter<AskDet
         Intent intent = new Intent(context, AskDetailActivity.class);
         intent.putExtra(EXTRA_PRODUCT_ID, productId);
         intent.putExtra(EXTRA_ASK_ID, askId);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 

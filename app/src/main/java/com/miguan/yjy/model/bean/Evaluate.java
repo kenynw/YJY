@@ -94,7 +94,7 @@ public class Evaluate implements Parcelable {
     }
 
     public String getCreated_at() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return format.format(new Date(created_at * 1000));
     }
 

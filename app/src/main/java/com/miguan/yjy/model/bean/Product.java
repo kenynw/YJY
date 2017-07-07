@@ -90,7 +90,7 @@ public class Product implements Parcelable {
     private Buy buy;
 
     public String getSpec(Context context) {
-        return price.equals("0") || TextUtils.isEmpty(price) ? "暂无报价" :
+        return price.equals("0") || price.equals("0.00") || TextUtils.isEmpty(price) ? "暂无报价" :
         String.format(context.getString(R.string.text_product_spec), price, form);
     }
 
