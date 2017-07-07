@@ -37,8 +37,8 @@ public class EvaluateListActivity extends BaseListActivity<EvaluateListPresenter
     @Override
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
-        TextView tv = (TextView) view.findViewById(R.id.tv_empty);
-        tv.setText("还没有点评过任何产品哦~");
+        TextView tv = view.findViewById(R.id.tv_empty);
+        tv.setText("还没有点评过任何产品和文章哦~");
 
         Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_comment);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());

@@ -3,7 +3,6 @@ package com.miguan.yjy.module.ask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -62,13 +61,8 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
 
     @Override
     public ListConfig getListConfig() {
-        View footer = new View(this);
-        ViewGroup.LayoutParams layoutParams =
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LUtils.dp2px(56));
-        footer.setLayoutParams(layoutParams);
-
         return super.getListConfig()
-                .setFooterView(footer)
+                .setFooterErrorAble(false)
                 .setRefreshAble(false)
                 .setContainerEmptyRes(R.layout.empty_ask_detail_list)
                 .hasItemDecoration(false);

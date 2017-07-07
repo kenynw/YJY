@@ -1,7 +1,6 @@
 package com.miguan.yjy.model.bean;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Locale;
  * Copyright (c) 2017/6/23. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class Ask implements Parcelable {
+public class Ask extends EntityList<Ask> {
 
     private int product_id;
 
