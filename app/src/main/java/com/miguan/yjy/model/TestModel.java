@@ -102,6 +102,7 @@ public class TestModel extends AbsModel {
         return Observable.zip(getServices().getSkinRecommend(UserPreferences.getUserID()),
                 getServices().userSkin(UserPreferences.getUserID()),
                 (test, test2) -> {
+                    test.setStar(test2.getStar());
                     test.setDesc(test2.getDesc());
                     test.setFeatures(test2.getFeatures());
                     test.setElements(test2.getElements());

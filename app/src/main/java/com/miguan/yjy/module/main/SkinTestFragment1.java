@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -114,7 +115,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
     private TextView mTvTestInto;
     private ImageView mTvTestClose;
     private PopupWindow popupWindow;
-    String birthDay;
+    String birthDay="";
     private int sex = 0;
     private int tag = 0;
     private User userInfo;
@@ -181,22 +182,22 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 //        loadMainData();
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        Log.e("onActivityResult", requestCode + "==" + resultCode);
-//        if (resultCode == 1) {
-//            switch (requestCode) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("onActivityResult", requestCode + "==" + resultCode);
+        if (resultCode == 0) {
+            switch (requestCode) {
 //                case 2:
-//                    loadMainData();
+//                 loadFirstData();
 //                    break;
-//                case Activity.RESULT_FIRST_USER:
-//                    loadMainData();
-//                    break;
-//            }
-//
-//        }
-//    }
+                case Activity.RESULT_FIRST_USER:
+                    loadFirstData();
+                    break;
+            }
+
+        }
+    }
 
     public void loadFirstData() {
         mToolbarTitle.setText("肤质测试");
@@ -290,7 +291,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                         UserPreferences.setIsShowTest(false);
                     }
                     tag = 0;
-                    if (TextUtils.isEmpty(userInfo.getBirth_day())) {
+                    if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
                     } else if (userInfo.getSex() == 2) {
                         showTestUserInfoPop();
@@ -308,7 +309,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                         UserPreferences.setIsShowTest(false);
                     }
                     tag = 1;
-                    if (TextUtils.isEmpty(userInfo.getBirth_day())) {
+                    if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
                     } else if (userInfo.getSex() == 2) {
                         showTestUserInfoPop();
@@ -326,7 +327,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                         UserPreferences.setIsShowTest(false);
                     }
                     tag = 2;
-                    if (TextUtils.isEmpty(userInfo.getBirth_day())) {
+                    if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
                     } else if (userInfo.getSex() == 2) {
                         showTestUserInfoPop();
@@ -345,7 +346,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                         UserPreferences.setIsShowTest(false);
                     }
                     tag = 3;
-                    if (TextUtils.isEmpty(userInfo.getBirth_day())) {
+                    if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
                     } else if (userInfo.getSex() == 2) {
                         showTestUserInfoPop();
@@ -388,16 +389,16 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                                 public void onNext(String s) {
                                     switch (tag) {
                                         case 0:
-                                            start(getActivity(), TestModel.getInstantce().setTestData().get(0), TestGuideActivity.EXTRA_TEST_FIRST_TYPE);
+                                            start(getActivity(), TestModel.getInstantce().setTestData().get(0), TestGuideActivity.EXTRA_TEST_FOUR_TYPE);
                                             break;
                                         case 1:
-                                            start(getActivity(), TestModel.getInstantce().setTestData().get(1), TestGuideActivity.EXTRA_TEST_SECOND_TYPE);
+                                            start(getActivity(), TestModel.getInstantce().setTestData().get(1), TestGuideActivity.EXTRA_TEST_FIRST_TYPE);
                                             break;
                                         case 2:
-                                            start(getActivity(), TestModel.getInstantce().setTestData().get(2), TestGuideActivity.EXTRA_TEST_THIRD_TYPE);
+                                            start(getActivity(), TestModel.getInstantce().setTestData().get(2), TestGuideActivity.EXTRA_TEST_SECOND_TYPE);
                                             break;
                                         case 3:
-                                            start(getActivity(), TestModel.getInstantce().setTestData().get(3), TestGuideActivity.EXTRA_TEST_FOUR_TYPE);
+                                            start(getActivity(), TestModel.getInstantce().setTestData().get(3), TestGuideActivity.EXTRA_TEST_THIRD_TYPE);
                                             break;
                                     }
 
@@ -689,8 +690,8 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         Intent intent = new Intent(context, TestGuideActivity.class);
         intent.putExtra(TestGuideActivity.EXTRA_TEST, test);
         intent.putExtra(TestGuideActivity.EXTRA_TEST_TYPE, type);
-        startActivity(intent);
-//        startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+        startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

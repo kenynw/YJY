@@ -74,15 +74,29 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 position = tab.getPosition();
+                switch (position) {
+                    case 0:
+                        setSelectTag(getPresenter().mFirstPosition);
+                        break;
+                    case 1:
+                        setSelectTag(getPresenter().mSecondPosition);
+                        break;
+                    case 2:
+                        setSelectTag(getPresenter().mThirdPosition);
+                        break;
+                }
+
                 getPresenter().onRefresh();
-//                TestModel.getInstantce().getSkinRecommendList(categoryList.get(position).getId(), 1).
-//                        unsafeSubscribe(getPresenter().getRefreshSubscriber());
+
+
                 if (TextUtils.isEmpty(categoryList.get(position).getCopy())) {
                     mLlShowDsc.setVisibility(View.GONE);
                 } else {
                     mLlShowDsc.setVisibility(View.VISIBLE);
                 }
+
                 mTvTestRecommend.setText(categoryList.get(position).getCopy());
+
             }
 
             @Override
@@ -112,4 +126,17 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     public ListConfig getListConfig() {
         return super.getListConfig().setContainerEmptyAble(false);
     }
+
+    public void setSelectTag(int selectPosition) {
+        if (getPresenter().selectPrices.size() > 0) {
+            for (int i = 0; i < getPresenter().selectPrices.size(); i++) {
+                getPresenter().selectPrices.get(i).setSelect(false);
+                getPresenter().selectPrices.get(selectPosition).setSelect(true);
+                getPresenter().skinPriceAdapter.notifyDataSetChanged();
+            }
+        }
+
+    }
+
+
 }

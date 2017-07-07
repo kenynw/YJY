@@ -21,6 +21,16 @@ import com.miguan.yjy.module.main.TestFragmentPrensenter;
 @RequiresPresenter(TestFragmentPrensenter.class)
 public class TestTabFragment extends BaseListFragment<TestTabFragmentPrensenter,Product> {
 
+    public interface GetPosition {
+        void getCurPricePostion();
+    }
+
+    public GetPosition mGetPosition;
+
+    public void setGetPosition(GetPosition getPosition) {
+        mGetPosition = getPosition;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

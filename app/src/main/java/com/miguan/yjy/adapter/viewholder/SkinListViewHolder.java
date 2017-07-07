@@ -1,6 +1,5 @@
 package com.miguan.yjy.adapter.viewholder;
 
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -11,6 +10,7 @@ import com.miguan.yjy.widget.SpringProgressView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * @作者 cjh
