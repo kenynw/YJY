@@ -3,7 +3,7 @@ package com.miguan.yjy.adapter;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.module.test.TestTabFragment;
@@ -16,7 +16,7 @@ import java.util.List;
  * @描述
  */
 
-public class TestTabPagerAdapter extends FragmentPagerAdapter{
+public class TestTabPagerAdapter extends FragmentStatePagerAdapter{
 
     Context mContext;
     int type;

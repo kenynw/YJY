@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -58,6 +59,23 @@ public class SkinListViewHolder extends BaseViewHolder<Skin> {
                 mTvSkinLow.setText(data.leftSkin[getDataPosition()]);
                 mTvSkinHigh.setText(data.rightSkin[getDataPosition()]);
                 mTvSkinValute.setText(data.getName() + ":" + (int) data.getScore() + "分");
+                mTvSkinValute.setTextColor(y);
+                switch (y) {
+                    case -3752://黄色
+                        mTvSkinValute.setTextColor(getContext().getResources().getColor(R.color.skin_low));
+                        mTvSkinValute.setBackgroundResource(R.mipmap.ic_skin_low);
+                        break;
+                    case -2819700://绿色
+                        mTvSkinValute.setTextColor(getContext().getResources().getColor(R.color.skin_middle));
+                        mTvSkinValute.setBackgroundResource(R.mipmap.ic_skin_middle);
+                        break;
+                    case -11471906:
+                        mTvSkinValute.setTextColor(getContext().getResources().getColor(R.color.skin_high));
+                        mTvSkinValute.setBackgroundResource(R.mipmap.ic_skin_high);
+                        break;
+                }
+                Log.e("---", y+"==========="+data.getName() + ":" + (int) data.getScore() + "分");
+
             }
         });
     }

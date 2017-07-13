@@ -29,7 +29,7 @@ public class SkinTestFragmentPresenter extends BaseDataFragmentPresenter<SkinTes
 
     }
 
-    public final static String SHARE_SKIN_TEST_H5 = "http://m.beta.yjyapp.com/site/skin-share?user_id=";
+    public final static String SHARE_SKIN_TEST_H5 = "http://m.yjyapp.com/site/skin-share?user_id=";
     /**
      * 肤质测试分享
      */

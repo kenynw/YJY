@@ -22,8 +22,11 @@ import java.util.List;
 public class SkinPriceAdapter extends BaseAdapter {
     private Context context;
     private List<SelectPrice> datas;
-    private List<SelectPrice> mdatas;
+    private List<SelectPrice> mdatas=new ArrayList<>();
 
+    public SkinPriceAdapter() {
+
+    }
     public SkinPriceAdapter(Context context, List<SelectPrice> datas) {
         this.context = context;
         this.datas = datas;
@@ -37,7 +40,7 @@ public class SkinPriceAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return datas.get(position);
+        return mdatas.get(position);
     }
 
     @Override
@@ -91,6 +94,7 @@ public class SkinPriceAdapter extends BaseAdapter {
     }
 
     public void onlyAddAll(List<SelectPrice> datas) {
+        mdatas.clear();
         mdatas.addAll(datas);
         notifyDataSetChanged();
     }

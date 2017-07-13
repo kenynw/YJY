@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/ll_test_ok"
               android:layout_width="match_parent"
@@ -32,8 +33,8 @@
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/img_skin_test"
-                    android:layout_width="55dp"
                     style="@style/BaseAvatar"
+                    android:layout_width="55dp"
                     android:layout_height="55dp"/>
 
                 <TextView
@@ -85,7 +86,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            app:tabSelectedTextColor="@color/colorPrimary"
             />
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
         <com.miguan.yjy.widget.NoScrollViewPager
             android:id="@id/id_stickynavlayout_viewpager"

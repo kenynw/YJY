@@ -36,17 +36,8 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
     public float minPrice;
     public float maxPrice;
 
-    public float mFirstMinPrice;
-    public float mSecondMinPrice;
-    public float mThirdMinPrice;
-    public float mFirstMaxPrice;
-    public float mSecondMaxPrice;
-    public float mThirdMaxPrice;
-    public int mFirstPosition;
-    public int mSecondPosition;
-    public int mThirdPosition;
     public List<SelectPrice> selectPrices = new ArrayList<>();
-    public SkinPriceAdapter skinPriceAdapter;
+    public SkinPriceAdapter skinPriceAdapter=new SkinPriceAdapter();
 
     public static void star(Context context, Test tests, int position, String name) {
         Intent intent = new Intent(context, TestRecomendActivity.class);
@@ -72,7 +63,6 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
                     selectPrice.setMax(0);
                     selectPrice.setSelect(true);
                     selectPrices.add(0, selectPrice);
-
                 }
                 skinPriceAdapter = new SkinPriceAdapter(getView(), selectPrices);
                 mFlowtagSkinPrice.setAdapter(skinPriceAdapter);
@@ -83,26 +73,8 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
                         if (min == 0f) {
                             min = 0.1f;
                         }
-                        switch (getView().position) {
-                            case 0:
-                                mFirstMinPrice = min;
-                                mFirstMaxPrice = max;
-                                mFirstPosition = position;
-                                break;
-                            case 1:
-                                mSecondMinPrice = min;
-                                mSecondMaxPrice = max;
-                                mSecondPosition = position;
-                                break;
-                            case 2:
-                                mThirdMinPrice = min;
-                                mThirdMaxPrice = max;
-                                mThirdPosition = position;
-                                break;
-                        }
-//                        minPrice = min;
-//                        maxPrice = max;
-
+                        minPrice = min;
+                        maxPrice = max;
                         onRefresh();
                     }
 
@@ -115,40 +87,18 @@ public class TestRecomendPresenter extends BaseListActivityPresenter<TestRecomen
 
             }
         });
-
         onRefresh();
     }
 
     @Override
     public void onRefresh() {
-        setMaxMinPrice();
-        TestModel.getInstantce().getSkinRecommendList(getView().categoryList.get(getView().position).getId(), minPrice, maxPrice, 1).
+        TestModel.getInstantce().getSkinRecommendList(getView().mTest.getCategoryList().get(getView().position).getId(), minPrice, maxPrice, 1).
                 unsafeSubscribe(getRefreshSubscriber());
-//        TestModel.getInstantce().getTestList().unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        setMaxMinPrice();
-        TestModel.getInstantce().getSkinRecommendList(getView().categoryList.get(getView().position).getId(), minPrice, maxPrice, getCurPage()).
+        TestModel.getInstantce().getSkinRecommendList(getView().mTest.getCategoryList().get(getView().position).getId(), minPrice, maxPrice, getCurPage()).
                 unsafeSubscribe(getMoreSubscriber());
     }
-
-    private void setMaxMinPrice() {
-        switch (getView().position) {
-            case 0:
-                minPrice = mFirstMinPrice;
-                maxPrice = mFirstMaxPrice;
-                break;
-            case 1:
-                minPrice = mSecondMinPrice;
-                maxPrice = mSecondMaxPrice;
-                break;
-            case 2:
-                minPrice = mThirdMinPrice;
-                maxPrice = mThirdMaxPrice;
-                break;
-        }
-    }
-
 }

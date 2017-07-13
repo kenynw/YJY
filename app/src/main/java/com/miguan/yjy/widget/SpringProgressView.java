@@ -21,6 +21,7 @@ import com.miguan.yjy.R;
 public class SpringProgressView extends View {
 
     public final String TAG = SpringProgressView.this.getClass().getName();
+    private int finalColor;
 
     /**
      * 分段颜色
@@ -86,6 +87,7 @@ public class SpringProgressView extends View {
         RectF rectProgressBg = new RectF(2.5f, 2.5f, (mWidth - 2.5f) * section, mHeight - 2.5f);
         if (section <= 1.0f / 3.0f) {
             if (section != 0.0f) {
+                finalColor = SECTION_COLORS[0];
                 mPaint.setColor(SECTION_COLORS[0]);
             } else {
                 mPaint.setColor(Color.TRANSPARENT);
@@ -106,6 +108,7 @@ public class SpringProgressView extends View {
             positions[positions.length - 1] = 1.0f;
             LinearGradient shader = new LinearGradient(2, 2, (mWidth - 2) * section, mHeight - 2, colors, null, Shader.TileMode.MIRROR);
             mPaint.setShader(shader);
+            finalColor = colors[colors.length-1];
         }
         canvas.drawRoundRect(rectProgressBg, round, round, mPaint);
         int[] location = new int[2];
@@ -113,7 +116,7 @@ public class SpringProgressView extends View {
         int x = location[0];
         int y = location[1];
         if (getLocationOnScreenXy != null) {
-            getLocationOnScreenXy.getXy((int)(x+mWidth*section),y);
+            getLocationOnScreenXy.getXy((int)(x+mWidth*section),finalColor);
         }
     }
 
@@ -167,7 +170,7 @@ public class SpringProgressView extends View {
     }
 
     public interface GetLocationOnScreenXy {
-        void getXy(int x,int y);
+        void getXy(int x,int color);
     }
 
     GetLocationOnScreenXy getLocationOnScreenXy;
