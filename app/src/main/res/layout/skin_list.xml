@@ -44,6 +44,8 @@
         android:gravity="center"
         android:paddingBottom="5dp"
         android:paddingTop="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         android:textColor="@color/skin_low"
         tools:text="混干：22分"/>
 

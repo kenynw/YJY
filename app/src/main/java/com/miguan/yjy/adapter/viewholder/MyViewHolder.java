@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * @描述
  */
 
-public  class MyViewHolder extends BaseViewHolder<Skin> {
+public class MyViewHolder extends BaseViewHolder<Skin> {
 
     private Test mTest;
 
@@ -46,7 +46,7 @@ public  class MyViewHolder extends BaseViewHolder<Skin> {
 //            如果要设置第二种产品清单的颜色为f3
         mTvCategoryName.setText(data.getCategory_name());
         mRectCategory.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        SkinListAdapter testListAdapter= new SkinListAdapter(getContext(), data.getData(),getAdapterPosition(),mTest,data.getCategory_name());
+        SkinListAdapter testListAdapter = new SkinListAdapter(getContext(), data.getData(), getAdapterPosition(), mTest, data.getCategory_name());
 //        testListAdapter.addFooter(new RecyclerArrayAdapter.ItemView() {
 //            @Override
 //            public View onCreateView(ViewGroup parent) {
@@ -68,7 +68,7 @@ public  class MyViewHolder extends BaseViewHolder<Skin> {
 
 //            mLlTestMore.setOnClickListener(v -> TestRecomendPresenter.star(getContext(),));
         itemView.setOnClickListener(v -> {
-        TestRecomendPresenter.star(getContext(), mTest,getAdapterPosition(), data.getCategory_name());
+            TestRecomendPresenter.star(getContext(), mTest, getAdapterPosition(), data.getCategory_name());
         });
     }
 }

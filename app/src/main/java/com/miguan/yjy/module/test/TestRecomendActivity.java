@@ -1,8 +1,11 @@
 package com.miguan.yjy.module.test;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.TabLayout;
-import android.text.TextUtils;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -16,6 +19,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestTabPagerAdapter;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
+import com.miguan.yjy.model.bean.SelectPrice;
 import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 
@@ -50,12 +54,28 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.text_test_recommend_product);
-        mTest = getIntent().getParcelableExtra(TestRecomendPresenter.EXTRA_TEST);
+        if (savedInstanceState != null) {
+            mTest = savedInstanceState.getParcelable("test");
+        } else {
+            mTest = getIntent().getParcelableExtra(TestRecomendPresenter.EXTRA_TEST);
+        }
         categoryList = mTest.getCategoryList();
         position = getIntent().getIntExtra(TestRecomendPresenter.EXTRA_CATEGORY_position, 0);
         name = getIntent().getStringExtra(TestRecomendPresenter.EXTRA_CATEGORY_NAME);
         ButterKnife.bind(this);
         setData();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putParcelable("test", mTest);
+    }
+
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
     }
 
     @Override
@@ -69,33 +89,14 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
     }
 
     public void setData() {
-        TestTabPagerAdapter testTabPagerAdapter = new TestTabPagerAdapter(getSupportFragmentManager(), TestRecomendActivity.this, 0, categoryList);
+        TestTabPagerAdapter testTabPagerAdapter = new TestTabPagerAdapter(getSupportFragmentManager(), TestRecomendActivity.this, 0, mTest.getCategoryList());
         mtabTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 position = tab.getPosition();
-                switch (position) {
-                    case 0:
-                        setSelectTag(getPresenter().mFirstPosition);
-                        break;
-                    case 1:
-                        setSelectTag(getPresenter().mSecondPosition);
-                        break;
-                    case 2:
-                        setSelectTag(getPresenter().mThirdPosition);
-                        break;
-                }
-
+                setPriceData(position);
                 getPresenter().onRefresh();
-
-
-                if (TextUtils.isEmpty(categoryList.get(position).getCopy())) {
-                    mLlShowDsc.setVisibility(View.GONE);
-                } else {
-                    mLlShowDsc.setVisibility(View.VISIBLE);
-                }
-
-                mTvTestRecommend.setText(categoryList.get(position).getCopy());
+                mTvTestRecommend.setText(mTest.getCategoryList().get(position).getCopy());
 
             }
 
@@ -109,8 +110,8 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
 
             }
         });
-        for (int i = 0; i < categoryList.size(); i++) {
-            if (name.equals(categoryList.get(i).getName())) {
+        for (int i = 0; i < mTest.getCategoryList().size(); i++) {
+            if (name.equals(mTest.getCategoryList().get(i).getName())) {
                 position = i;
             }
         }
@@ -127,11 +128,47 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
         return super.getListConfig().setContainerEmptyAble(false);
     }
 
+    private void setPriceData(int position) {
+        ArrayList<SelectPrice> list = new ArrayList<>();
+        list.clear();
+        SelectPrice curSelect = mTest.getCategoryList().get(position).getCondition().get(0);
+        if (curSelect.getMin() == 0 && curSelect.getMax() == 0) {
+
+        } else {
+            SelectPrice selectPrice = new SelectPrice();
+            selectPrice.setMin(0);
+            selectPrice.setMax(0);
+            selectPrice.setSelect(true);
+            list.add(0, selectPrice);
+        }
+
+        list.addAll(mTest.getCategoryList().get(position).getCondition());
+        setSelectTag(0, list);
+        getPresenter().maxPrice = 0;
+        getPresenter().maxPrice = 0;
+        getPresenter().skinPriceAdapter.onlyAddAll(list);
+
+    }
+
+    public void setSelectTag(int selectPosition, ArrayList<SelectPrice> list) {
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setSelect(false);
+                list.get(selectPosition).setSelect(true);
+                Log.e("===setSelectTag===", list + "===谁为空==" + getPresenter().skinPriceAdapter);
+                getPresenter().skinPriceAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
     public void setSelectTag(int selectPosition) {
+
         if (getPresenter().selectPrices.size() > 0) {
             for (int i = 0; i < getPresenter().selectPrices.size(); i++) {
                 getPresenter().selectPrices.get(i).setSelect(false);
                 getPresenter().selectPrices.get(selectPosition).setSelect(true);
+                Log.e("===setSelectTag===", getPresenter().selectPrices + "===谁为空==" + getPresenter().skinPriceAdapter);
                 getPresenter().skinPriceAdapter.notifyDataSetChanged();
             }
         }

@@ -29,6 +29,7 @@
     </android.support.design.widget.TabLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_show_dsc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
