@@ -95,13 +95,13 @@ public class CommonModel extends AbsModel {
     }
 
     public Observable<User> getUnreadMsg() {
-        return ServicesClient.getServices().unreadMsg(UserPreferences.getUserID())
+        return ServicesClient.getServices().unreadMsg(UserPreferences.getToken())
                 .doOnNext(this::saveMsg)
                 .compose(new DefaultTransform<>());
     }
 
     public Observable<String> setMsgRead(int msgId, String type) {
-        return ServicesClient.getServices().setMsgRead(UserPreferences.getUserID(), msgId, type).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().setMsgRead(UserPreferences.getToken(), msgId, type).compose(new DefaultTransform<>());
     }
 
     /**
@@ -109,7 +109,7 @@ public class CommonModel extends AbsModel {
      * @return
      */
     public Observable<String> analyticsBanner(int bannerId) {
-        return ServicesClient.getServices().analyticsBanner(UserPreferences.getUserID(), bannerId).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().analyticsBanner(UserPreferences.getToken(), bannerId).compose(new DefaultTransform<>());
     }
 
     /**
@@ -117,7 +117,7 @@ public class CommonModel extends AbsModel {
      * @return
      */
     public Observable<String> analyticsShare(int id, int type) {
-        return ServicesClient.getServices().analyticsShare(UserPreferences.getUserID(), id, type).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().analyticsShare(UserPreferences.getToken(), id, type).compose(new DefaultTransform<>());
     }
 
     /**
@@ -125,7 +125,7 @@ public class CommonModel extends AbsModel {
      * @return
      */
     public Observable<String> analyticsTemplate() {
-        return ServicesClient.getServices().analyticsTemplate(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().analyticsTemplate(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     private String findDownLoadDirectory(){

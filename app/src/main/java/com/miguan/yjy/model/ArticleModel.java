@@ -25,7 +25,7 @@ public class ArticleModel extends AbsModel {
     }
 
     public Observable<Home> getHomeList() {
-        return ServicesClient.getServices().home(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().home(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     /**
@@ -35,7 +35,7 @@ public class ArticleModel extends AbsModel {
      */
     public Observable<List<Article>> getArticleList(long brandId, int cateId, int page) {
         return ServicesClient.getServices()
-                .articleList(UserPreferences.getUserID(), brandId, cateId, page)
+                .articleList(UserPreferences.getToken(), brandId, cateId, page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -45,7 +45,7 @@ public class ArticleModel extends AbsModel {
      * @return
      */
     public Observable<Article> getArticleDetail(int articleId) {
-        return ServicesClient.getServices().articleDetail(articleId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().articleDetail(articleId, UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     /**
@@ -53,7 +53,7 @@ public class ArticleModel extends AbsModel {
      */
     public Observable<List<Evaluate>> getReplyList(int id, int page) {
         return ServicesClient.getServices()
-                .replyList(id, UserPreferences.getUserID(), page)
+                .replyList(id, UserPreferences.getToken(), page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -62,7 +62,7 @@ public class ArticleModel extends AbsModel {
      */
     public Observable<List<Evaluate>> getEvaluateList(int id, String orderBy, int page) {
         return ServicesClient.getServices()
-                .evaluateList(id, UserPreferences.getUserID(), TYPE_ARTICLE, orderBy,"", page)
+                .evaluateList(id, UserPreferences.getToken(), TYPE_ARTICLE, orderBy,"", page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -71,7 +71,7 @@ public class ArticleModel extends AbsModel {
      */
     public Observable<Evaluate> getEvaluateDetail(int id) {
         return ServicesClient.getServices()
-                .evaluateDetail(id, UserPreferences.getUserID())
+                .evaluateDetail(id, UserPreferences.getToken())
                 .compose(new DefaultTransform<>());
     }
 
@@ -80,7 +80,7 @@ public class ArticleModel extends AbsModel {
      */
     public Observable<List<Evaluate>> getEssenceList(int page) {
         return ServicesClient.getServices()
-                .essenceList(UserPreferences.getUserID(), page)
+                .essenceList(UserPreferences.getToken(), page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -89,7 +89,7 @@ public class ArticleModel extends AbsModel {
      */
     public Observable<String> addEvaluate(int articleId, int type, int parentId, String image, String content) {
         return ServicesClient.getServices()
-                .addEvaluate(articleId, UserPreferences.getUserID(), type, 0, parentId, image, content)
+                .addEvaluate(articleId, UserPreferences.getToken(), type, 0, parentId, image, content)
                 .compose(new DefaultTransform<>());
     }
 
@@ -99,7 +99,7 @@ public class ArticleModel extends AbsModel {
      * @return
      */
     public Observable<String> addEvaluateLike(int evaluateId) {
-        return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     /**
@@ -108,7 +108,7 @@ public class ArticleModel extends AbsModel {
      * @return
      */
     public Observable<String> star(int articleId) {
-        return ServicesClient.getServices().addStar(articleId, UserPreferences.getUserID(), TYPE_ARTICLE).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().addStar(articleId, UserPreferences.getToken(), TYPE_ARTICLE).compose(new DefaultTransform<>());
     }
 
     /**
@@ -117,7 +117,7 @@ public class ArticleModel extends AbsModel {
      * @return
      */
     public Observable<List<Article>> getStarList(int page) {
-        return ServicesClient.getServices().starList(UserPreferences.getUserID(), page).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().starList(UserPreferences.getToken(), page).compose(new DefaultTransform<>());
     }
 
 }

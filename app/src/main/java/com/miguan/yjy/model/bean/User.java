@@ -11,6 +11,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class User implements Parcelable {
 
+    private String token;
+
     @SerializedName(value = "user_id", alternate = {"userId", "id"})
     private int user_id;
 
@@ -65,6 +67,14 @@ public class User implements Parcelable {
     private int unReadNum;
 
     private int isComplete;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getAdd_time() {
         return add_time;
@@ -276,6 +286,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.token);
         dest.writeInt(this.user_id);
         dest.writeString(this.img);
         dest.writeString(this.username);
@@ -304,6 +315,7 @@ public class User implements Parcelable {
     }
 
     protected User(Parcel in) {
+        this.token = in.readString();
         this.user_id = in.readInt();
         this.img = in.readString();
         this.username = in.readString();

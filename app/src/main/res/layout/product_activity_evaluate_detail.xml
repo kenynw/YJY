@@ -11,6 +11,7 @@
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/spacing_small"
         android:layout_weight="1"
         >
 
@@ -20,20 +21,20 @@
             android:orientation="vertical"
             >
 
-            <include layout="@layout/item_list_evaluate" />
+            <include layout="@layout/item_list_evaluate"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recy_evaluate_detail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 />
 
         </LinearLayout>
 
     </com.miguan.yjy.widget.CustomNestedScrollView>
 
-    <include layout="@layout/include_bottom_input" />
+    <include layout="@layout/include_bottom_input"/>
 
 </LinearLayout>

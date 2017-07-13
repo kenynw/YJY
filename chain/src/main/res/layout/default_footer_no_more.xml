@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TextAppearance.AppCompat.Caption"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:text="@string/label_no_more"
-    style="@style/TextAppearance.AppCompat.Caption"
+    android:background="?android:attr/windowBackground"
     android:gravity="center"
+    android:text="@string/label_no_more"
     />

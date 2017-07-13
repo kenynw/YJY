@@ -3,6 +3,7 @@ package com.miguan.yjy.module.user;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.widget.PopupWindow;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
@@ -61,10 +62,11 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     }
 
     public void logout() {
+        UserPreferences.setToken("");
         UserPreferences.setTestPosition(0);
         UserPreferences.setUserID(0);
         UserPreferences.setIsShowTest(false);
-        if (UserPreferences.getUserID() <= 0) {
+        if (TextUtils.isEmpty(UserPreferences.getToken())) {
             Intent intent = new Intent(getView(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             getView().startActivity(intent);
@@ -73,7 +75,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
             EventBus.getDefault().post(0);
 
             Set<String> set = new HashSet<>();
-            set.add("logout");
+            set.add("clearToken");
             JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);
         }
     }

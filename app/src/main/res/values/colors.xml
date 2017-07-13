@@ -21,7 +21,8 @@
     <color name="textYellow">#fdff00</color>
 
     <!--分割线颜色，添加div前缀-->
-    <color name="divPrimary">#EEEEEE</color>
+    <color name="divPrimary">#FFEEEEEE</color>
+    <color name="divEvaluate">#FFEBEBEB</color>
 
     <!--查询产品相关-->
     <color name="color_sencond_title">#222222</color>

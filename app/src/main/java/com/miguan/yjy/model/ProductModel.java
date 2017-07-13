@@ -84,7 +84,7 @@ public class ProductModel extends AbsModel {
     }
 
     public Observable<Product> getProductDetail(int productId) {
-        return ServicesClient.getServices().productDetail(productId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().productDetail(productId, UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     public Observable<List<Component>> getReadList() {
@@ -220,7 +220,7 @@ public class ProductModel extends AbsModel {
      * @return
      */
     public Observable<String> addLike(int productId) {
-        return ServicesClient.getServices().addStar(productId, UserPreferences.getUserID(), 1).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().addStar(productId, UserPreferences.getToken(), 1).compose(new DefaultTransform<>());
     }
 
     /**
@@ -230,7 +230,7 @@ public class ProductModel extends AbsModel {
      */
     public Observable<String> addRepository(int brandId, String brandName, String product, String img, int isSeal, String sealTime, int qualityTime, String overdueTime) {
         return ServicesClient.getServices().addRepository(
-                UserPreferences.getUserID(), brandId, brandName, product, img, isSeal, sealTime, qualityTime, overdueTime
+                UserPreferences.getToken(), brandId, brandName, product, img, isSeal, sealTime, qualityTime, overdueTime
         ).compose(new DefaultTransform<>());
     }
 
@@ -239,7 +239,7 @@ public class ProductModel extends AbsModel {
      */
     public Observable<String> addEvaluate(int productId, int star, String image, String content) {
         return ServicesClient.getServices()
-                .addEvaluate(productId, UserPreferences.getUserID(), TYPE_PRODUCT, star, 0, image, content)
+                .addEvaluate(productId, UserPreferences.getToken(), TYPE_PRODUCT, star, 0, image, content)
                 .compose(new DefaultTransform<>());
     }
 
@@ -255,7 +255,7 @@ public class ProductModel extends AbsModel {
      */
     public Observable<List<Evaluate>> getEvaluate(int productId, int page, String orderBy, String condition) {
         return ServicesClient.getServices()
-                .evaluateList(productId, UserPreferences.getUserID(), TYPE_PRODUCT, orderBy, condition, page)
+                .evaluateList(productId, UserPreferences.getToken(), TYPE_PRODUCT, orderBy, condition, page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -271,14 +271,15 @@ public class ProductModel extends AbsModel {
      */
     public Observable<EntityRoot<List<Evaluate>>> getEvaluateSecond(int productId, int page, String orderBy, String condition) {
         return ServicesClient.getServices()
-                .evaluateListSecond(productId, UserPreferences.getUserID(), TYPE_PRODUCT, orderBy, condition, page)
+                .evaluateListSecond(productId, UserPreferences.getToken(), TYPE_PRODUCT, orderBy, condition, page)
                 .compose(new DefaultTransform<>());
     }
+
     /**
      * 产品评论列表点赞
      */
     public Observable<String> addEvaluateLike(int evaluateId) {
-        return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().addEvaluateLike(evaluateId, UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     /**
@@ -326,7 +327,7 @@ public class ProductModel extends AbsModel {
      */
     public Observable<String> addAsk(int productId, String productName, int askType, int askId, String content) {
         return ServicesClient.getServices()
-                .addAsk(UserPreferences.getUserID(), UserPreferences.getUsername(),
+                .addAsk(UserPreferences.getToken(), UserPreferences.getUsername(),
                         productId, productName, askType, askId, content)
                 .compose(new DefaultTransform<>());
     }

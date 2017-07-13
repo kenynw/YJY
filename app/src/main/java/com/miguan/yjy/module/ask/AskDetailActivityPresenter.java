@@ -59,6 +59,7 @@ public class AskDetailActivityPresenter extends BaseListActivityPresenter<AskDet
         ProductModel.getInstance().getAskDetail(mProductId, mAskId, 1)
                 .map(ask -> {
                     getView().setData(ask);
+                    getAdapter().removeAllHeader();
                     getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
                         @Override
                         public View onCreateView(ViewGroup parent) {

@@ -128,7 +128,7 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
                         .subscribe(new ServicesResponse<String>() {
                             @Override
                             public void onNext(String s) {
-                                int curLikeCount = TextUtils.isEmpty(mTvEvaluateLike.getText()) ? 0 :
+                                int curLikeCount = TextUtils.isEmpty(mTvEvaluateLike.getText().toString().trim()) ? 0 :
                                         Integer.valueOf(mTvEvaluateLike.getText().toString());
                                 int likeCount = curLikeCount + (mIsLike == 0 ? 1 : -1);
                                 mTvEvaluateLike.setText(likeCount > 0 ? likeCount + "" : "");

@@ -33,8 +33,8 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<User> getUserInfo() {
-        Observable<User> userObservable = ServicesClient.getServices().userInfo(UserPreferences.getUserID());
-        Observable<User> unreadMsg = ServicesClient.getServices().unreadMsg(UserPreferences.getUserID());
+        Observable<User> userObservable = ServicesClient.getServices().userInfo(UserPreferences.getToken());
+        Observable<User> unreadMsg = ServicesClient.getServices().unreadMsg(UserPreferences.getToken());
 
         return Observable.zip(userObservable, unreadMsg, (user, user2) -> {
             user.setOverdueNum(user2.getOverdueNum());
@@ -50,7 +50,7 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<List<FaceScore>> getFaceScoreList(int page) {
-        return ServicesClient.getServices().faceScores(UserPreferences.getUserID(), page).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().faceScores(UserPreferences.getToken(), page).compose(new DefaultTransform<>());
     }
 
     /**
@@ -58,16 +58,15 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<List<UserProduct>> getUsedProductList(int type, int page) {
-        return ServicesClient.getServices().usedProduct(UserPreferences.getUserID(), type, page, 10).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().usedProduct(UserPreferences.getToken(), type, page, 10).compose(new DefaultTransform<>());
     }
 
     /**
-     /**
      * 删除我在用的
      * @return
      */
     public Observable<String> deleteUsedProduct(int id, int type) {
-        return ServicesClient.getServices().deleteUsedProduct(UserPreferences.getUserID(), id, type).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().deleteUsedProduct(UserPreferences.getToken(), id, type).compose(new DefaultTransform<>());
     }
 
     /**
@@ -75,14 +74,14 @@ public class UserModel extends AbsModel {
      * @return
      */
     public Observable<ProductList> getLikeProductList(int cateId, String effect, int page) {
-        return ServicesClient.getServices().likeList(UserPreferences.getUserID(), cateId, effect, page).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().likeList(UserPreferences.getToken(), cateId, effect, page).compose(new DefaultTransform<>());
     }
 
     /**
      * 消息列表
      */
     public Observable<List<Message>> getMessageList(Integer page) {
-        return ServicesClient.getServices().getMessageList(UserPreferences.getUserID(), page).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().getMessageList(UserPreferences.getToken(), page).compose(new DefaultTransform<>());
     }
 
     /**
@@ -91,7 +90,7 @@ public class UserModel extends AbsModel {
      * @return 点评列表
      */
     public Observable<List<Evaluate>> getEvaluateList(int page) {
-        return ServicesClient.getServices().userEvaluateList(UserPreferences.getUserID(), page)
+        return ServicesClient.getServices().userEvaluateList(UserPreferences.getToken(), page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -101,7 +100,7 @@ public class UserModel extends AbsModel {
      * @return 点评列表
      */
     public Observable<List<Message>> getReplyList(int page) {
-        return ServicesClient.getServices().userReplyList(UserPreferences.getUserID(), page)
+        return ServicesClient.getServices().userReplyList(UserPreferences.getToken(), page)
                 .compose(new DefaultTransform<>());
     }
 
@@ -110,11 +109,11 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<String> modifyProfile(String key, String value) {
-        return ServicesClient.getServices().modifyProfile(UserPreferences.getUserID(), key, value).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().modifyProfile(UserPreferences.getToken(), key, value).compose(new DefaultTransform<>());
     }
 
     public Observable<String> bindMobile(String mobile, String captcha) {
-        return ServicesClient.getServices().bindMobile(UserPreferences.getUserID(), mobile, captcha).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().bindMobile(UserPreferences.getToken(), mobile, captcha).compose(new DefaultTransform<>());
     }
 
     /**
@@ -124,7 +123,7 @@ public class UserModel extends AbsModel {
      */
     public Observable<String> addFeedback(String content, String thumb) {
         return ServicesClient.getServices()
-                .feedback(UserPreferences.getUserID(), UserPreferences.getUsername(), content,
+                .feedback(UserPreferences.getToken(), UserPreferences.getUsername(), content,
                         "API " + Build.VERSION.SDK_INT + " " + Build.VERSION.RELEASE,
                         Build.BRAND + " " + Build.MODEL,
                         LUtils.getAppVersionName(),

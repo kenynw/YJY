@@ -18,6 +18,8 @@
         style="@style/BaseImage"
         android:layout_width="98dp"
         android:layout_height="98dp"
+        app:failureImage="@mipmap/def_image_product"
+        app:placeholderImage="@mipmap/def_image_product"
         />
 
     <LinearLayout

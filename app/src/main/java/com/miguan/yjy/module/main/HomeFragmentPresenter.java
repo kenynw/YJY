@@ -13,10 +13,10 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BannerPagerAdapter;
 import com.miguan.yjy.adapter.CategoryAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleCate;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.article.EvaluateArticleViewHolder;
 import com.miguan.yjy.module.product.QueryCodeActivity;
@@ -131,7 +131,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
                 mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
                 mIvMyProduct.setImageResource(R.mipmap.bg_home_repository);
                 mIvMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),
-                        UserPreferences.getUserID() > 0 ? UsedListActivity.class : LoginActivity.class)));
+                        AccountModel.getInstance().isLogin() ? UsedListActivity.class : LoginActivity.class)));
                 mIvEvaluateLabel.setImageResource(R.mipmap.bg_commend_evaluate);
 
                 if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {

@@ -7,10 +7,10 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.PermissionUtils;
 
@@ -37,7 +37,6 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
         EventBus.getDefault().register(this);
         requestPermission();
         CommonModel.getInstance().update(getView());
-
     }
 
     @Override
@@ -72,7 +71,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     }
 
     private void loadUnread() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             CommonModel.getInstance().getUnreadMsg().unsafeSubscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {

@@ -16,6 +16,7 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.common.LargeImageActivity;
@@ -63,6 +64,9 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
 
         mRecyDetail.setLayoutManager(new LinearLayoutManager(this));
         mRecyDetail.setAdapter(getPresenter().getAdapter());
+        DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
+        decoration.setDrawLastItem(false);
+        mRecyDetail.addItemDecoration(decoration);
 
         mEtAdd.addTextChangedListener(this);
         mEtAdd.setOnKeyListener((view, i, keyEvent) -> {
@@ -87,6 +91,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
             }
             getPresenter().addReply(content);
         });
+
     }
 
     @Override

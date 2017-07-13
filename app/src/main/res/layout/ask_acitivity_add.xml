@@ -12,8 +12,8 @@
     <EditText
         android:id="@+id/et_ask_add_input"
         android:layout_width="match_parent"
-        android:layout_height="227dp"
-        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_small"
         android:background="@color/white"
         android:gravity="top"
         android:hint="@string/hint_add_ask"

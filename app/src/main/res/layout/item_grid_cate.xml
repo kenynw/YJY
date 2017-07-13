@@ -22,12 +22,11 @@
         android:id="@+id/tv_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:minWidth="32dp"
         android:textColor="@color/textPrimary"
         android:textSize="13sp"
-        android:textStyle="bold"
         app:height_weight="0.6"
         tools:text="洁面"
         />

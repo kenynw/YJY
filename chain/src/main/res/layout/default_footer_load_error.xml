@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TextAppearance.AppCompat.Caption"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/toast_network_error"/>
-
-</LinearLayout>
+    android:background="?android:attr/windowBackground"
+    android:gravity="center"
+    android:text="@string/toast_network_error"
+    />

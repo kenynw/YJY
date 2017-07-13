@@ -66,7 +66,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
         setToolbarTitle(R.string.text_title_template);
         ButterKnife.bind(this);
 
-        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        mToolbar.findViewById(R.id.toolbar_back).setOnClickListener(v -> onBackPressed());
     }
 
     public void initTemplate(int index, Template template) {
@@ -184,7 +184,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
             });
         });
 
-        FrameLayout layout = (FrameLayout) templateView.findViewById(R.id.fl_template_delete);
+        FrameLayout layout = templateView.findViewById(R.id.fl_template_delete);
         layout.setOnClickListener(v -> {
             mLlGen.removeView(templateView);
             mViewList.remove(templateView);

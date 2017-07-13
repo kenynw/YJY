@@ -21,8 +21,10 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.User;
-import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.model.services.ServiceException;
+import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.EvaluateListActivity;
@@ -163,8 +165,13 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
 
     @Override
     public void onError(Throwable throwable) {
-        UserPreferences.setUserID(0);
         EventBus.getDefault().post(0);
+        if (throwable instanceof ServiceException) {
+            if (((ServiceException) throwable).getCode() == -6) {
+                AccountModel.getInstance().clearToken();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        }
     }
 
     @Override
@@ -193,5 +200,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
                 .setBadgeGravity(Gravity.CENTER | Gravity.END)
                 .setGravityOffset(30, 0, true);
     }
+
+
 
 }

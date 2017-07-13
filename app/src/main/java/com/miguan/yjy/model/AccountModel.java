@@ -1,5 +1,7 @@
 package com.miguan.yjy.model;
 
+import android.text.TextUtils;
+
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
@@ -61,6 +63,26 @@ public class AccountModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
+    /**
+     * 账号相关本地存储
+     *
+     * @param user
+     */
+    private void saveAccount(User user) {
+        UserPreferences.setToken(user.getToken());
+        UserPreferences.setUserID(user.getUser_id());
+        UserPreferences.setUsername(user.getUsername());
+        UserPreferences.setAvatar(user.getImg());
+    }
+
+    public boolean isLogin() {
+        return !TextUtils.isEmpty(UserPreferences.getToken());
+    }
+
+    public void clearToken() {
+        UserPreferences.setToken("");
+    }
+
     public Observable<Integer> register(String mobile, String captcha, String password) {
         return ServicesClient.getServices().register(mobile, captcha, password)
                 .doOnNext(UserPreferences::setUserID)
@@ -97,24 +119,12 @@ public class AccountModel extends AbsModel {
     }
 
     /**
-     * 账号相关本地存储
-     *
-     * @param user
-     */
-    private void saveAccount(User user) {
-        UserPreferences.setUserID(user.getUser_id());
-        UserPreferences.setUsername(user.getUsername());
-        UserPreferences.setAvatar(user.getImg());
-    }
-
-    /**
      * 用户重置密码
      * action(string) － 固定值resetPassword
      * mobile(string) － 手机号码
      * captcha(int) － 验证码
      * newPassword(string) － 新密码
      */
-
     public Observable<String> resetPassword(String mobile,String captcha,String newPwd) {
         return ServicesClient.getServices().modifyPwd(mobile, captcha, newPwd).compose(new DefaultTransform<>());
     }

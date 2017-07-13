@@ -38,7 +38,8 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
 
     @Override
     public void onRefresh() {
-        UserModel.getInstance().getUsedProductList(mType, 1).unsafeSubscribe(getRefreshSubscriber());
+        UserModel.getInstance().getUsedProductList(mType, 1)
+                .unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
@@ -54,8 +55,10 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        mType = tab.getPosition();
-        onRefresh();
+        if (mType != tab.getPosition()) {
+            mType = tab.getPosition();
+            onRefresh();
+        }
     }
 
     @Override
@@ -67,4 +70,5 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
     public void onTabReselected(TabLayout.Tab tab) {
 
     }
+
 }

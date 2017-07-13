@@ -46,8 +46,6 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
 
     private int mArticleId;
 
-    private Article mArticle;
-
     private int mPage;
 
     @Override
@@ -66,13 +64,6 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
     @Override
     public void onRefresh() {
         ArticleModel.getInstance().getArticleDetail(mArticleId)
-//                .map(article -> {
-//                    if (mArticle == null) {
-//                        mArticle = article;
-//                        getView().setData(article);
-//                    }
-//                    return article.getCommentList();
-//                })
                 .doOnCompleted(() -> mPage = 2)
                 .unsafeSubscribe(getDataSubscriber());
     }
@@ -131,15 +122,15 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
      * 分享
      */
     public void share() {
-        if (mArticle != null) {
+        if (getData() != null) {
             new SharePopupWindow.Builder(getView())
-                    .setTitle(mArticle.getTitle())
-                    .setUrl(mArticle.getLinkUrl())
+                    .setTitle(getData().getTitle())
+                    .setUrl(getData().getLinkUrl())
                     .setContent("护肤不交智商税，颜究院帮你科学高效护肤。")
-                    .setWxCircleTitle(mArticle.getTitle() + "(来自颜究院APP)")
-                    .setWbContent(mArticle.getTitle() + " 分享来自#颜究院APP# " + mArticle.getLinkUrl())
-                    .setImageUrl(mArticle.getArticle_img())
-                    .setId(mArticle.getId())
+                    .setWxCircleTitle(getData().getTitle() + "(来自颜究院APP)")
+                    .setWbContent(getData().getTitle() + " 分享来自#颜究院APP# " + getData().getLinkUrl())
+                    .setImageUrl(getData().getArticle_img())
+                    .setId(getData().getId())
                     .setType(2)
                     .show(getView().getToolbar());
         }

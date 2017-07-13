@@ -86,8 +86,6 @@ public class MessageReceiver extends BroadcastReceiver {
             return;
         }
 
-        LUtils.log("type: " + type);
-
         if (type == 1) { // 过期
             CommonModel.getInstance().setMsgRead(id, "notice").unsafeSubscribe(new ServicesResponse<String>() {
                 @Override
@@ -115,6 +113,6 @@ public class MessageReceiver extends BroadcastReceiver {
                 }
             });
         }
-
     }
+
 }

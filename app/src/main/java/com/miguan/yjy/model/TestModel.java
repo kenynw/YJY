@@ -3,7 +3,6 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
@@ -60,21 +59,6 @@ public class TestModel extends AbsModel {
         return Observable.just(tests);
     }
 
-    public Observable<List<Skin>> getSkinList() {
-        List<Skin> tests = new ArrayList<>();
-        int[] valuate = {11, 22,33,44};
-        int[] resImg = {R.mipmap.ic_test_guide_wrinkle, R.mipmap.ic_test_guide_oily, R.mipmap.ic_test_guide_sensitive, R.mipmap.ic_test_guide_pigment};
-        int[] strTitle = {R.string.tv_test_wrinkele, R.string.tv_test_oily, R.string.tv_test_sensitive, R.string.tv_test_pigment};
-        int[] strDescribe = {R.string.tv_test_wrinkele_describe, R.string.tv_test_oily_describe, R.string.tv_test_sensitive_describe, R.string.tv_test_pigment_describe};
-        String[] strings = {"洗面奶", "测试2", "测试3", "测试4"};
-        for (int i = 0; i < 4; i++) {
-            Skin skin = new Skin();
-            skin.setValuate(valuate[i]);
-            tests.add(skin);
-        }
-        return Observable.just(tests);
-    }
-
     /**
      * 肤质提交接口
      *
@@ -84,7 +68,7 @@ public class TestModel extends AbsModel {
 
     public Observable<String> saveSkin(String type, int value) {
 
-        return getServices().saveSkin(UserPreferences.getUserID(), type, value).compose(new DefaultTransform<>());
+        return getServices().saveSkin(UserPreferences.getToken(), type, value).compose(new DefaultTransform<>());
     }
 
     /**
@@ -92,15 +76,15 @@ public class TestModel extends AbsModel {
      */
 
     public Observable<Test> userSkin() {
-        return getServices().userSkin(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+        return getServices().userSkin(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     /**
      * 肤质推荐接口
      */
     public Observable<Test> getSkinRecommend() {
-        return Observable.zip(getServices().getSkinRecommend(UserPreferences.getUserID()),
-                getServices().userSkin(UserPreferences.getUserID()),
+        return Observable.zip(getServices().getSkinRecommend(UserPreferences.getToken()),
+                getServices().userSkin(UserPreferences.getToken()),
                 (test, test2) -> {
                     test.setStar(test2.getStar());
                     test.setDesc(test2.getDesc());
@@ -117,14 +101,14 @@ public class TestModel extends AbsModel {
      * 肤质推荐列表接口
      */
     public Observable<List<Product>> getSkinRecommendList(String cateId,float min,float max, int page) {
-        return getServices().getSkinRecommendList(UserPreferences.getUserID(), cateId,min,max, page, 10).compose(new DefaultTransform<>());
+        return getServices().getSkinRecommendList(UserPreferences.getToken(), cateId,min,max, page, 10).compose(new DefaultTransform<>());
     }
 
     /**
      * 肤质推荐接口
      */
     public Observable<Test> getSkinRecom() {
-      return ServicesClient.getServices().getSkinRecommend(UserPreferences.getUserID()).compose(new DefaultTransform<>());
+      return ServicesClient.getServices().getSkinRecommend(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
 

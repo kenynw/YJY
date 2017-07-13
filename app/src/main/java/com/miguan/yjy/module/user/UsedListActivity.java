@@ -58,7 +58,7 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
     @Override
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
-        TextView tv = (TextView) view.findViewById(R.id.tv_empty);
+        TextView tv = view.findViewById(R.id.tv_empty);
         tv.setText("还没有添加在用的产品哦~");
 
         Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_used);
@@ -66,7 +66,7 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
         tv.setCompoundDrawables(null, drawable, null, null);
 
         return super.getListConfig().setContainerEmptyView(view);
-}
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -79,4 +79,5 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
         getMenuInflater().inflate(R.menu.menu_add, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 }

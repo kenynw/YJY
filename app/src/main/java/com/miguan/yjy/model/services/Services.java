@@ -46,7 +46,7 @@ public interface Services {
      */
     @GET("?action=index")
     Observable<Home> home(
-            @Query("user_id") int user_id
+            @Query("token") String token
     );
 
     //////////////////用户相关/////////////////////
@@ -147,14 +147,14 @@ public interface Services {
     /**
      * 绑定手机
      *
-     * @param userId
+     * @param token
      * @param mobile
      * @param captcha
      * @return
      */
     @GET("?action=mobileBind")
     Observable<String> bindMobile(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("mobile") String mobile,
             @Query("captcha") String captcha
     );
@@ -166,7 +166,7 @@ public interface Services {
      */
     @GET("?action=userProduct")
     Observable<List<UserProduct>> usedProduct(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("type") int type,
             @Query("page") int page,
             @Query("pageSize") int pageSize
@@ -179,7 +179,7 @@ public interface Services {
      */
     @GET("?action=operateUserproduct")
     Observable<String> deleteUsedProduct(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("id") int id,
             @Query("type") int type
     );
@@ -187,7 +187,7 @@ public interface Services {
     /**
      * 我长草的列表
      *
-     * @param userId 用户ID
+     * @param token 用户ID
      * @param cateId 栏目ID
      * @param effect 功效
      * @param page   当前页数
@@ -195,7 +195,7 @@ public interface Services {
      */
     @GET("?action=userGrass")
     Observable<ProductList> likeList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("cate_id") int cateId,
             @Query("effect") String effect,
             @Query("page") int page
@@ -204,51 +204,51 @@ public interface Services {
     /**
      * 我点评的列表
      *
-     * @param userId 用户ID
+     * @param token 用户ID
      * @param page   当前页数
      * @return
      */
     @GET("?action=userComment")
     Observable<List<Evaluate>> userEvaluateList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("page") int page
     );
 
     /**
      * 我回复的列表
      *
-     * @param userId 用户ID
+     * @param token 用户ID
      * @param page   当前页数
      * @return
      */
     @GET("?action=userReply")
     Observable<List<Message>> userReplyList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("page") int page
     );
 
     /**
      * 我收藏的列表
      *
-     * @param userId 用户ID
+     * @param token 用户ID
      * @param page   当前页数
      * @return
      */
     @GET("?action=userCollect")
     Observable<List<Article>> starList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("page") int page
     );
 
     /**
      * 个人中心/个人资料
      *
-     * @param user_id 用户ID
+     * @param token 用户ID
      * @return
      */
     @GET("?action=userInfo")
     Observable<User> userInfo(
-            @Query("user_id") int user_id
+            @Query("token") String token
     );
 
     /**
@@ -260,7 +260,7 @@ public interface Services {
      */
     @GET("?action=userUpdate")
     Observable<String> modifyProfile(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("attribute") String attribute,
             @Query("content") String content
     );
@@ -270,7 +270,7 @@ public interface Services {
      */
     @GET("?action=faceList")
     Observable<List<FaceScore>> faceScores(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("page") Integer page
     );
 
@@ -279,21 +279,21 @@ public interface Services {
      */
     @GET("?action=userPms")
     Observable<List<Message>> getMessageList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("page") Integer page
     );
 
     /**
      * 吐槽一下
      *
-     * @param userId   用户ID
+     * @param token   用户ID
      * @param username 用户名
      * @param content  吐槽内容
      * @return
      */
     @GET("?action=userFeedback")
     Observable<String> feedback(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("username") String username,
             @Query("content") String content,
             @Query("system") String system,
@@ -307,13 +307,13 @@ public interface Services {
     /**
      * 精华点评列表
      *
-     * @param userId   用户ID 可空
+     * @param token   用户ID 可空
      * @param page      当前页数
      * @return
      */
     @GET("?action=essenceList")
     Observable<List<Evaluate>> essenceList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("page") int page
     );
 
@@ -322,7 +322,7 @@ public interface Services {
      *
      * @param id        产品或文章的ID
      * @param page      当前页数
-     * @param user_id   用户ID 可空
+     * @param token   用户ID 可空
      * @param type      类型 1-产品，2-文章
      * @param orderBy   － 排序方式-默认default综合排序，skin 肤质排序
      * @param condition 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
@@ -331,7 +331,7 @@ public interface Services {
     @GET("?action=commentList")
     Observable<List<Evaluate>> evaluateList(
             @Query("id") int id,
-            @Query("user_id") int user_id,
+            @Query("token") String token,
             @Query("type") int type,
             @Query("orderBy") String orderBy,
             @Query("condition") String condition,
@@ -342,7 +342,7 @@ public interface Services {
      *
      * @param id        产品或文章的ID
      * @param page      当前页数
-     * @param user_id   用户ID 可空
+     * @param token   用户ID 可空
      * @param type      类型 1-产品，2-文章
      * @param orderBy   － 排序方式-默认default综合排序，skin 肤质排序
      * @param condition 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
@@ -351,7 +351,7 @@ public interface Services {
     @GET("?action=commentList")
     Observable<EntityRoot<List<Evaluate>>> evaluateListSecond(
             @Query("id") int id,
-            @Query("user_id") int user_id,
+            @Query("token") String token,
             @Query("type") int type,
             @Query("orderBy") String orderBy,
             @Query("condition") String condition,
@@ -363,13 +363,13 @@ public interface Services {
      *
      * @param id        产品或文章的ID
      * @param page      当前页数
-     * @param user_id   用户ID 可空
+     * @param token   用户ID 可空
      * @return
      */
     @GET("?action=commentReplyList")
     Observable<List<Evaluate>> replyList(
             @Query("id") int id,
-            @Query("user_id") int user_id,
+            @Query("token") String token,
             @Query("page") int page
     );
 
@@ -377,20 +377,20 @@ public interface Services {
      * 评论详情
      *
      * @param id        评论的ID
-     * @param user_id   用户ID 可空
+     * @param token   用户ID 可空
      * @return
      */
     @GET("?action=commentInfo")
     Observable<Evaluate> evaluateDetail(
             @Query("id") int id,
-            @Query("user_id") int user_id
+            @Query("token") String token
     );
 
     /**
      * 产品或文章添加评论
      *
      * @param id      产品或文章的ID
-     * @param userId 用户ID 可空
+     * @param token 用户ID 可空
      * @param type    类型 1-产品，2-文章
      * @param star    星级(文章可不传)
      * @param image 图片地址（路径attachment)
@@ -400,7 +400,7 @@ public interface Services {
     @GET("?action=addComment")
     Observable<String> addEvaluate(
             @Query("id") int id,
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("type") int type,
             @Query("star") int star,
             @Query("parent_id") int parentId,
@@ -412,13 +412,13 @@ public interface Services {
      * 产品或文章添加评论
      *
      * @param evaluateId 产品或文章的ID
-     * @param user_id    用户ID 可空
+     * @param token    用户ID 可空
      * @return
      */
     @GET("?action=addCommentLike")
     Observable<String> addEvaluateLike(
             @Query("commentId") int evaluateId,
-            @Query("user_id") int user_id
+            @Query("token") String token
     );
 
     /**
@@ -426,7 +426,8 @@ public interface Services {
      */
     @GET("?action=brandInfo")
     Observable<BrandAll> brandInfo(
-            @Query("id") long id);
+            @Query("id") long id
+    );
 
     /**
      * 品牌列表
@@ -454,7 +455,7 @@ public interface Services {
      */
     @GET("?action=addRemind")
     Observable<String> addRepository(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("brand_id") int brandId,
             @Query("brand_name") String brand_name,
             @Query("product") String product,
@@ -491,8 +492,9 @@ public interface Services {
     @GET("?action=productInfo")
     Observable<Product> productDetail(
             @Query("id") int id,
-            @Query("user_id") int user_id
+            @Query("token") String token
     );
+
     /**
      * 成份详情接口
      *
@@ -502,6 +504,7 @@ public interface Services {
     Observable<Component> componentInfo(
             @Query("id") int id
     );
+
     /**
      * 成份产品接口
      *componentProductIist
@@ -573,7 +576,7 @@ public interface Services {
      */
     @GET("?action=articleList")
     Observable<List<Article>> articleList(
-            @Query("user_id") int user_id,
+            @Query("token") String token,
             @Query("brand_id") long brand_id,
             @Query("category_id") long category_id,
             @Query("page") int page
@@ -587,21 +590,21 @@ public interface Services {
     @GET("?action=articleInfo")
     Observable<Article> articleDetail(
             @Query("id") int articleId,
-            @Query("user_id") int userId
+            @Query("token") String token
     );
 
     /**
      * 收藏产品或文章
      *
      * @param id      产品或文章ID
-     * @param user_id 用户ID
+     * @param token 用户ID
      * @param type    1产品 2文章
      * @return
      */
     @GET("?action=collect")
     Observable<String> addStar(
             @Query("relation_id") int id,
-            @Query("user_id") int user_id,
+            @Query("token") String token,
             @Query("type") int type
     );
 
@@ -635,7 +638,7 @@ public interface Services {
     /**
      * 添加提问
      *
-     * @param userId 用户ID
+     * @param token 用户ID
      * @param username 用户名
      * @param type 类型  1 发布问题 2 提交问题回复
      * @param productId 产品ID
@@ -645,7 +648,7 @@ public interface Services {
      */
     @GET("?action=subAsk")
     Observable<String> addAsk(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("username") String username,
             @Query("product_id") int productId,
             @Query("product_name") String product_name,
@@ -665,9 +668,10 @@ public interface Services {
      * value(int) － 对应值
      */
     @GET("?action=saveSkin")
-    Observable<String> saveSkin(@Query("user_id") int userId,
-                                @Query("type") String type,
-                                @Query("value") int value
+    Observable<String> saveSkin(
+            @Query("token") String token,
+            @Query("type") String type,
+            @Query("value") int value
     );
 
     /**
@@ -676,7 +680,8 @@ public interface Services {
      * user_id(int) － 用户ID
      */
     @GET("?action=userSkin")
-    Observable<Test> userSkin(@Query("user_id") int userId
+    Observable<Test> userSkin(
+            @Query("token") String token
     );
 
     /**
@@ -692,7 +697,7 @@ public interface Services {
      */
     @GET("?action=getSkinRecommendList")
     Observable<List<Product>> getSkinRecommendList(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("cate_id") String cateId,
             @Query("min") float min,
             @Query("max") float max,
@@ -706,7 +711,8 @@ public interface Services {
      * user_id(int) － 用户ID
      */
     @GET("?action=getSkinRecommend")
-    Observable<Test> getSkinRecommend(@Query("user_id") int userId
+    Observable<Test> getSkinRecommend(
+            @Query("token") String token
     );
 
     ////////////////////其他//////////////////////
@@ -726,7 +732,7 @@ public interface Services {
      */
     @GET("?action=noticeUnread")
     Observable<User> unreadMsg(
-            @Query("user_id") int userId
+            @Query("token") String token
     );
 
     /**
@@ -736,7 +742,7 @@ public interface Services {
      */
     @GET("?action=readNotice")
     Observable<String> setMsgRead(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("id") int msgId,
             @Query("type") String type
     );
@@ -751,7 +757,7 @@ public interface Services {
      */
     @GET("?action=bannerLog")
     Observable<String> analyticsBanner(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("id") int bannerId
     );
 
@@ -765,7 +771,7 @@ public interface Services {
      */
     @GET("?action=addShare")
     Observable<String> analyticsShare(
-            @Query("user_id") int userId,
+            @Query("token") String token,
             @Query("id") int id,
             @Query("type") int type
     );
@@ -780,7 +786,7 @@ public interface Services {
      */
     @GET("?action=addLessons")
     Observable<String> analyticsTemplate(
-            @Query("user_id") int userId
+            @Query("token") String token
     );
 
 }

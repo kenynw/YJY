@@ -34,7 +34,7 @@ public class ImageModel extends AbsModel {
 
     private static final String OSS_PATH = (LUtils.isDebug ? "cs/" : "") + "uploads/";
 
-    private static final String OSS_BUCKET = "oss-yjyapp-com";
+    private static final String OSS_BUCKET = "oss1-yjyapp-com";
 
     private OSS mOSS;
 
@@ -45,7 +45,7 @@ public class ImageModel extends AbsModel {
     @Override
     protected void onAppCreate(Context context) {
         // 明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考后面的`访问控制`章节
-        OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider("LTAIiC2TTjheyE3T", "3aPOHO0MLad4X9BLa2Fc40PhU8piT4");
+        OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider("LTAIdIBG1Bsmgyo7", "bB0G2tXWigjo2hWu1iMKCBPLdmbYOq");
         mOSS = new OSSClient(context, ENDPOINT, credentialProvider);
     }
 

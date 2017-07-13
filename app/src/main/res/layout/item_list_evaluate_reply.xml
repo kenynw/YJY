@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="@dimen/spacing_large"
+    android:paddingBottom="@dimen/spacing_normal"
     >
 
     <include layout="@layout/include_evaluate_user"/>
@@ -37,12 +37,6 @@
             android:textAppearance="@style/TextCaption"
             android:textColor="@color/textHint"
             tools:text="17-04-00 20：39"
-            />
-
-        <View
-            style="@style/ItemLineHeight"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:background="#EBEBEB"
             />
 
     </LinearLayout>

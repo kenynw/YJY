@@ -2,6 +2,7 @@ package com.miguan.yjy.model.services;
 
 import android.content.Intent;
 
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.utils.LUtils;
 
 import rx.Subscriber;
@@ -32,11 +33,12 @@ public class ServicesResponse<T> extends Subscriber<T> {
     }
 
     private void serviceError(ServiceException e) {
-        if (e.getCode() == 3) { // 未登录
-            LUtils.getPreferences().edit().clear().apply();
+        if (e.getCode() == 3 || e.getCode() == -6) { // 未登录
+            AccountModel.getInstance().clearToken();
             Intent intent = new Intent();
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setAction("com.miguan.otk.login");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.setAction("com.miguan.yjy.login");
+            LUtils.toast("登录信息过期");
             LUtils.getAppContext().startActivity(intent);
             return;
         }

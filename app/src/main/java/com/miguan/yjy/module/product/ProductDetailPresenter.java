@@ -19,8 +19,6 @@ import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
 
-import rx.functions.Func1;
-
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
@@ -30,35 +28,23 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  */
 
 public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDetailActivity, Product>
-        implements RecyclerArrayAdapter.OnMoreListener{
+        implements RecyclerArrayAdapter.OnMoreListener {
 
     public static final String EXTRA_PRODUCT_ID = "product_id";
+
     public static final String SORT_DEFAULT = "default";
     public static final String SORT_SKIN = "skin";
     public static final String START_PRAISE = "Praise";
     public static final String START_MIDDLE = "middle";
     public static final String START_BAD = "bad";
 
-    private String userEvluate;
-    private String sort;
+    private String mCondition;
+    private String mSort;
 
     private int mCurPage = 1;
 
-    public String getSort() {
-        return sort;
-    }
+    private int mProductId;
 
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
-    public String getUserEvluate() {
-        return userEvluate;
-    }
-
-    public void setUserEvluate(String userEvluate) {
-        this.userEvluate = userEvluate;
-    }
     //
 //    condition(string) {
 //    } －筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
@@ -69,8 +55,6 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
-
-    private int mProductId;
 
     @Override
     protected void onCreate(ProductDetailActivity view, Bundle saveState) {
@@ -91,7 +75,7 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     @Override
     protected void onResume() {
         super.onResume();
-        getEvaluateData(SORT_DEFAULT, null);
+        getEvaluateData();
     }
 
     // 长草
@@ -106,21 +90,15 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
             });
     }
 
-    public void setOrder(String order) {
-
-    }
-
-    public void getEvaluateData(String orderBy, String condition) {
-        setSort(orderBy);
-        setUserEvluate(condition);
-        ProductModel.getInstance().getEvaluateSecond(mProductId, 1, orderBy, condition).map(new Func1<EntityRoot<List<Evaluate>>, List<Evaluate>>() {
-            @Override
-            public List<Evaluate> call(EntityRoot<List<Evaluate>> listEntityList) {
-                getView().setEvaluate(listEntityList.getData(),listEntityList.getPageTotal());
-                mCurPage = 2;
-                return listEntityList.getData();
-            }
-        }).subscribe();
+    public void getEvaluateData() {
+        ProductModel.getInstance().getEvaluateSecond(mProductId, 1, mSort, mCondition)
+                .subscribe(new ServicesResponse<EntityRoot<List<Evaluate>>>() {
+                    @Override
+                    public void onNext(EntityRoot<List<Evaluate>> listEntityRoot) {
+                        getView().setEvaluate(listEntityRoot.getData(), listEntityRoot.getPageTotal());
+                        mCurPage = 2;
+                    }
+                });
     }
 
     private boolean isLogin() {
@@ -139,19 +117,32 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
 
     @Override
     public void onMoreShow() {
-        ProductModel.getInstance().getEvaluate(mProductId, mCurPage, sort, userEvluate).subscribe(new ServicesResponse<List<Evaluate>>() {
-            @Override
-            public void onNext(List<Evaluate> evaluates) {
-                EvaluateAdapter evaluateAdapter= (EvaluateAdapter) getView().mRecyEvalutate.getAdapter();
-                evaluateAdapter.addAll(evaluates);
-                mCurPage++;
-            }
-        });
+        ProductModel.getInstance().getEvaluate(mProductId, mCurPage, mSort, mCondition)
+                .subscribe(new ServicesResponse<List<Evaluate>>() {
+                    @Override
+                    public void onNext(List<Evaluate> evaluates) {
+                        EvaluateAdapter evaluateAdapter = (EvaluateAdapter) getView().mRecyEvalutate.getAdapter();
+                        evaluateAdapter.addAll(evaluates);
+                        mCurPage++;
+                    }
+                });
     }
 
     @Override
     public void onMoreClick() {
 
+    }
+
+    public String getSort() {
+        return mSort;
+    }
+
+    public void setSort(String sort) {
+        this.mSort = sort;
+    }
+
+    public void setCondition(String condition) {
+        this.mCondition = condition;
     }
 
 }

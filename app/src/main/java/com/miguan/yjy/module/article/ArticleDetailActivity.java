@@ -19,10 +19,12 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.common.WebViewOB;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,6 +73,9 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
         mFlStar.setOnClickListener(v -> getPresenter().star(mIsStar));
 
         mRecycle.setLayoutManager(new LinearLayoutManager(this));
+        DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
+        decoration.setDrawLastItem(false);
+        mRecycle.addItemDecoration(decoration);
 
         mSettings = mWebView.getSettings();
         mSettings.setJavaScriptEnabled(true);

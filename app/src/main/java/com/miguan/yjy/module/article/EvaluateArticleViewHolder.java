@@ -122,6 +122,7 @@ public class EvaluateArticleViewHolder extends EvaluateCommendVH {
         }
 
         public void addAll(Collection<ArticleCate> cates) {
+            mCates.clear();
             mCates.addAll(cates);
             notifyItemRangeChanged(0, cates.size());
         }

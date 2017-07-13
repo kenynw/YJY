@@ -64,7 +64,7 @@ public class QueryCodePresenter extends Presenter<QueryCodeActivity> {
     }
 
     public void query(String number) {
-        if (mBrand.getId() <= 0) {
+        if (mBrand == null || mBrand.getId() <= 0) {
             LUtils.toast("暂不提供该品牌查询哦~");
             return;
         }

@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
@@ -45,6 +46,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.miguan.yjy.module.product.ProductDetailPresenter.SORT_DEFAULT;
+import static com.miguan.yjy.module.product.ProductDetailPresenter.SORT_SKIN;
+import static com.miguan.yjy.module.product.ProductDetailPresenter.START_BAD;
+import static com.miguan.yjy.module.product.ProductDetailPresenter.START_MIDDLE;
+import static com.miguan.yjy.module.product.ProductDetailPresenter.START_PRAISE;
 
 
 /**
@@ -157,6 +164,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     private boolean mIsShowAnim;
 
+    int scrollY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -168,11 +177,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
     }
 
-    int scrollY;
-
     @Override
     public void setData(Product product) {
-
         mCustSrcoll.setOnTouchListener(new View.OnTouchListener() {
             private int lastY = 0;
             private int touchEventId = -9983761;
@@ -206,20 +212,10 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 scrollY = scroller.getScrollY();
                 showOutAnim();
             }
+
         });
 
-
-//        mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-//            @Override
-//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                if (scrollX != oldScrollX) {
-//                    showInAnim();
-//                }
-//            }
-//        });
-
         mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (mIsShowAnim) {
@@ -229,7 +225,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             }
         });
 
-//        showInAnim();
         mBtnAsk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -300,7 +295,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         );
 
         //去比价
-
         mTvTaobao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -329,11 +323,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvSkinSort.setOnClickListener(v -> {
             if (mTvSkinSort.getText().equals("肤质排序")) {
                 mTvSkinSort.setText(R.string.tv_product_detail_sort_total);
-                getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_DEFAULT);
+                getPresenter().setSort(SORT_DEFAULT);
             } else {
                 mTvSkinSort.setText(R.string.tv_product_detail_sort_skin);
-                getPresenter().getEvaluateData(getPresenter().getUserEvluate(), getPresenter().SORT_SKIN);
+                getPresenter().setSort(SORT_SKIN);
             }
+            getPresenter().getEvaluateData();
         });
 
         mTvTemplate.setOnClickListener(v -> AddRepositoryPresenter.start(this, null, "", product));
@@ -383,18 +378,16 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
             case R.id.rbtn_product_high_evaluate:
-                getPresenter().setOrder("praise");
-                getPresenter().getEvaluateData(getPresenter().getSort(), getPresenter().START_PRAISE);
+                getPresenter().setCondition(START_PRAISE);
                 break;
             case R.id.rbtn_product_medium_evaluate:
-                getPresenter().setOrder("middle");
-                getPresenter().getEvaluateData(getPresenter().getSort(), getPresenter().START_MIDDLE);
+                getPresenter().setCondition(START_MIDDLE);
                 break;
             case R.id.rbtn_product_bad_evaluate:
-                getPresenter().setOrder("bad");
-                getPresenter().getEvaluateData(getPresenter().getSort(), getPresenter().START_BAD);
+                getPresenter().setCondition(START_BAD);
                 break;
         }
+        getPresenter().getEvaluateData();
     }
 
     public void setEvaluate(List<Evaluate> list, int size) {
@@ -403,6 +396,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
         evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+        DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
+        decoration.setDrawLastItem(false);
+        mRecyEvalutate.addItemDecoration(decoration);
         mRecyEvalutate.setAdapter(evaluateAdapter);
         evaluateAdapter.notifyDataSetChanged();
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), size));

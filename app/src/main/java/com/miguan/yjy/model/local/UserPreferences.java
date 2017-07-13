@@ -9,6 +9,7 @@ import com.miguan.yjy.utils.LUtils;
 
 public class UserPreferences {
 
+    private static final String KEY_TOKEN = "token";
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_AVATAR = "avatar";
@@ -18,6 +19,14 @@ public class UserPreferences {
     private static final String KEY_OVERDUE_NUM = "overdue_num"; //过期产品数
     private static final String KEY_TEST_SHOW = "test_show"; //测试显示结果(未测试页面)
     private static final String KEY_TEST_POSITION = "test_position";//记录肤质测试选中项
+
+    public static String getToken() {
+        return getString(KEY_TOKEN);
+    }
+
+    public static void setToken(String token) {
+        setString(KEY_TOKEN, token);
+    }
 
     public static int getUserID() {
         return LUtils.getPreferences().getInt(KEY_USER_ID, 0);

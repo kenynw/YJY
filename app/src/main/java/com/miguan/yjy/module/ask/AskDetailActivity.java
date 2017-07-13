@@ -13,6 +13,7 @@ import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
@@ -61,11 +62,14 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
 
     @Override
     public ListConfig getListConfig() {
+        DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
+        decoration.setDrawLastItem(false);
+
         return super.getListConfig()
                 .setFooterErrorAble(false)
                 .setRefreshAble(false)
                 .setContainerEmptyRes(R.layout.empty_ask_detail_list)
-                .hasItemDecoration(false);
+                .setItemDecoration(decoration);
     }
 
     @Override

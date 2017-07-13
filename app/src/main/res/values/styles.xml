@@ -46,7 +46,9 @@
 
     <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead"/>
 
-    <style name="TextBody" parent="TextAppearance.AppCompat.Body1"/>
+    <style name="TextBody" parent="TextAppearance.AppCompat.Body1">
+        <item name="textSize">15sp</item>
+    </style>
 
     <style name="TextCaption" parent="TextAppearance.AppCompat.Caption"/>
 
