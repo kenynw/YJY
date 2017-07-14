@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Ask;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -87,7 +87,7 @@ public class AskDetailActivityPresenter extends BaseListActivityPresenter<AskDet
     }
 
     public void send(String productName, String content) {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             ProductModel.getInstance().addAsk(mProductId, productName, 2, mAskId, content)
                     .subscribe(new ServicesResponse<String>() {
                         @Override

@@ -104,10 +104,6 @@ public class UserModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
-    public Observable<String> modifyPwd(String mobile, String code, String newPwd) {
-        return ServicesClient.getServices().modifyPwd(mobile, code, newPwd).compose(new DefaultTransform<>());
-    }
-
     public Observable<String> modifyProfile(String key, String value) {
         return ServicesClient.getServices().modifyProfile(UserPreferences.getToken(), key, value).compose(new DefaultTransform<>());
     }

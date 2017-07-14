@@ -6,7 +6,6 @@ import android.net.Uri;
 
 import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.CommonModel;
-import com.miguan.yjy.model.services.ServicesResponse;
 
 /**
  * Copyright (c) 2017/4/6. LiaoPeiKun Inc. All rights reserved.
@@ -26,7 +25,7 @@ public class SaveTemplatePresenter extends Presenter<SaveTemplateActivity> {
     }
 
     public void addAnalytics() {
-        CommonModel.getInstance().analyticsTemplate().subscribe(new ServicesResponse<String>());
+        CommonModel.getInstance().analyticsTemplate().subscribe();
     }
 
 }

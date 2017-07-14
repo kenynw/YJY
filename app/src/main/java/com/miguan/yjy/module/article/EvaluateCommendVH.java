@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
@@ -123,7 +123,7 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
         mTvEvaluateLike.setText(data.getLike_num() > 0 ? data.getLike_num() + "" : " ");
         setLikeIcon(data.getIsLike() == 1);
         mTvEvaluateLike.setOnClickListener(v -> {
-            if (UserPreferences.getUserID() > 0) {
+            if (AccountModel.getInstance().isLogin()) {
                 ArticleModel.getInstance().addEvaluateLike(data.getId())
                         .subscribe(new ServicesResponse<String>() {
                             @Override

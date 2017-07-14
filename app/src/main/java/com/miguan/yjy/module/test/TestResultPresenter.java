@@ -1,9 +1,9 @@
 package com.miguan.yjy.module.test;
 
 import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Test;
-import com.miguan.yjy.model.local.UserPreferences;
 
 /**
  * @作者 cjh
@@ -22,7 +22,7 @@ public class TestResultPresenter extends BaseDataFragmentPresenter<TestResultFra
 
 
     public void loadData() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             TestModel.getInstantce().getSkinRecommend().unsafeSubscribe(getSubscriber());
         }
     }

@@ -20,6 +20,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.local.TemplatePreferences;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.utils.DateUtils;
@@ -216,7 +217,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
                 tvTime.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
             }
 
-            if (UserPreferences.getUserID() > 0) {
+            if (AccountModel.getInstance().isLogin()) {
                 SimpleDraweeView dvAvatar = ButterKnife.findById(mFooter, R.id.dv_template_avatar);
                 TextView tvUsername = ButterKnife.findById(mFooter, R.id.tv_template_username);
                 if (dvAvatar != null) {

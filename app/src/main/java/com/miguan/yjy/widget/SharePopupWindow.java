@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.CommonModel;
-import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -134,12 +133,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
     public void onResult(SHARE_MEDIA share_media) {
         if (mBuilder.getId() > 0 && mBuilder.getType() > 0) {
             CommonModel.getInstance().analyticsShare(mBuilder.getId(), mBuilder.getType())
-                    .subscribe(new ServicesResponse<String>() {
-                        @Override
-                        public void onNext(String s) {
-                            LUtils.toast("分享成功");
-                        }
-                    });
+                    .subscribe();
         }
     }
 

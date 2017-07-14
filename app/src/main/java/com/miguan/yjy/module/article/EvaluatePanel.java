@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -94,7 +94,7 @@ public class EvaluatePanel {
         mIvLike.setImageResource(evaluate.getIsLike() == 0 ? R.mipmap.ic_like_normal : R.mipmap.ic_like_pressed);
         mTvLike.setText(evaluate.getLike_num() > 0 ? String.valueOf((evaluate.getLike_num())) : "赞");
         mLlEvaluateLike.setOnClickListener(v -> {
-            if (UserPreferences.getUserID() > 0) {
+            if (AccountModel.getInstance().isLogin()) {
                 ArticleModel.getInstance().addEvaluateLike(evaluate.getId())
                         .subscribe(new ServicesResponse<String>() {
                             @Override

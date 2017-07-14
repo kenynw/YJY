@@ -6,7 +6,6 @@ import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.bean.User;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
@@ -14,11 +13,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
@@ -30,17 +25,14 @@ public class LoginPresenter extends Presenter<LoginActivity> {
         AccountModel.getInstance().login(username, pwd).unsafeSubscribe(new ServicesResponse<User>() {
             @Override
             public void onNext(User user) {
-                // 调用 JPush 接口来设置别名。
-                Set<String> set = new HashSet<>();
-                set.add("login");
-                JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);
                 EventBus.getDefault().post(new TestStart());
                 getView().finish();
             }
         });
     }
 
-    public void wxLogin() {
+    public void  wxLogin() {
+        getView().getExpansionDelegate().showProgressBar("等待微信授权");
         UMShareAPI.get(getView()).getPlatformInfo(getView(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
             @Override
             public void onStart(SHARE_MEDIA share_media) {
@@ -68,16 +60,17 @@ public class LoginPresenter extends Presenter<LoginActivity> {
 
                     }
                 });
+                getView().getExpansionDelegate().hideProgressBar();
             }
 
             @Override
             public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-
+                getView().getExpansionDelegate().hideProgressBar();
             }
 
             @Override
             public void onCancel(SHARE_MEDIA share_media, int i) {
-
+                getView().getExpansionDelegate().hideProgressBar();
             }
         });
     }

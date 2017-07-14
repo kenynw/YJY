@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.local.UserPreferences;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
@@ -56,7 +56,7 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
 
         mBtnSubmit.setOnClickListener(v -> checkInput());
         mTvRegister.setOnClickListener(v -> startActivityForResult(new Intent(this, RegisterActivity.class), 100));
-        mTvForgot.setOnClickListener(v -> startActivity(new Intent(this, ForgotActivity.class)));
+        mTvForgot.setOnClickListener(v -> startActivityForResult(new Intent(this, ForgotActivity.class), 100));
         mIvLoginWeixin.setOnClickListener(v -> getPresenter().wxLogin());
     }
 
@@ -80,7 +80,7 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (UserPreferences.getUserID() > 0) finish();
+        if (AccountModel.getInstance().isLogin()) finish();
     }
 
     @Override
@@ -97,4 +97,5 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
     public void afterTextChanged(Editable s) {
 
     }
+
 }

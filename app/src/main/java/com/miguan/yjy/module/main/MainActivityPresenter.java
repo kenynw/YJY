@@ -11,7 +11,6 @@ import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
-import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.PermissionUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -20,7 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
-
+import rx.Subscriber;
 
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
@@ -72,17 +71,28 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
 
     private void loadUnread() {
         if (AccountModel.getInstance().isLogin()) {
-            CommonModel.getInstance().getUnreadMsg().unsafeSubscribe(new ServicesResponse<User>() {
-                @Override
-                public void onNext(User user) {
-                    int count = user.getOverdueNum() + user.getUnReadNUM();
-                    if (count <= 0) mBadge.hide(true);
-                    else mBadge.setBadgeText("");
+            CommonModel.getInstance().getUnreadMsg()
+                    .unsafeSubscribe(new Subscriber<User>() {
+                        @Override
+                        public void onCompleted() {
 
-                    if (user.getIsComplete() == 1) mBadgeTest.hide(false);
-                    else mBadgeTest.setBadgeText("");
-                }
-            });
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(User user) {
+                            int count = user.getOverdueNum() + user.getUnReadNUM();
+                            if (count <= 0) mBadge.hide(true);
+                            else mBadge.setBadgeText("");
+
+                            if (user.getIsComplete() == 1) mBadgeTest.hide(false);
+                            else mBadgeTest.setBadgeText("");
+                        }
+                    });
         } else {
             mBadgeTest.hide(false);
             mBadge.hide(false);

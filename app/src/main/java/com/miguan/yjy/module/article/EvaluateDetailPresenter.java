@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -101,7 +101,7 @@ public class EvaluateDetailPresenter extends BaseDataActivityPresenter<EvaluateD
     }
 
     public boolean isLogin() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             return true;
         }
         getView().startActivity(new Intent(getView(), LoginActivity.class));

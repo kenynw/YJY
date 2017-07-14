@@ -22,10 +22,6 @@ import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
-/**
- * Created by LPK on 2016/11/21.
- */
-
 public class App extends Application {
 
     @Override

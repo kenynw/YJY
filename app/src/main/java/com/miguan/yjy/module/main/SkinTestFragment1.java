@@ -30,6 +30,7 @@ import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.SkinTestViewPager;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Skin;
@@ -164,7 +165,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (UserPreferences.getUserID() != 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     getPresenter().share();
                 } else {
                     startToLogin();
@@ -205,7 +206,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         mLlTestNo.setVisibility(View.VISIBLE);
 
         initListener();
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
@@ -286,7 +287,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         Intent intent = null;
         switch (v.getId()) {
             case R.id.ll_test_wrinkle:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     if (nums.size() == 4) {
                         UserPreferences.setIsShowTest(false);
                     }
@@ -304,7 +305,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                 }
                 break;
             case R.id.ll_test_oily:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     if (nums.size() == 4) {
                         UserPreferences.setIsShowTest(false);
                     }
@@ -322,7 +323,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                 }
                 break;
             case R.id.ll_test_sensitive:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     if (nums.size() == 4) {
                         UserPreferences.setIsShowTest(false);
                     }
@@ -341,7 +342,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                 }
                 break;
             case R.id.ll_test_pigment:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     if (nums.size() == 4) {
                         UserPreferences.setIsShowTest(false);
                     }
@@ -411,7 +412,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                 popupWindow.dismiss();
                 break;
             case R.id.tv_test_result:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
 //                  setData();显示我的肤质
                     setSencondData();
                     UserPreferences.setIsShowTest(false);
@@ -492,7 +493,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
 
     public void loadMainData() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             testPosition = UserPreferences.getTestPosition();
             Log.e("testPosition", testPosition + "testPosition===");
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
@@ -551,7 +552,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>(){
             @Override
             public void onNext(Test test) {
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     mSkinTestViewPager = new SkinTestViewPager(getActivity().getSupportFragmentManager(), test);
                     mViewpagerSkinTest.setNoScroll(true);
                     mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
@@ -598,7 +599,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 //        TestModel.getInstantce().userSkin().subscribe(new ServicesResponse<Test>() {
 //            @Override
 //            public void onNext(Test test) {
-//                if (UserPreferences.getUserID() > 0) {
+//                if (AccountModel.getInstance().isLogin()) {
 //                    mSkinTestViewPager = new SkinTestViewPager(getActivity().getSupportFragmentManager(), test);
 //                    mViewpagerSkinTest.setNoScroll(true);
 //                    mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
@@ -677,7 +678,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (UserPreferences.getUserID() != 0) {
+        if (AccountModel.getInstance().isLogin()) {
             getPresenter().share();
         } else {
             startToLogin();

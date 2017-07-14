@@ -28,6 +28,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.TestSkinAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Article;
@@ -182,7 +183,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         mLlTestOk.setVisibility(View.GONE);
         mLlTestNo.setVisibility(View.VISIBLE);
         initListener();
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
@@ -263,7 +264,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         Intent intent = null;
         switch (v.getId()) {
             case R.id.ll_test_wrinkle:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 0;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -278,7 +279,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                 }
                 break;
             case R.id.ll_test_oily:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 1;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -293,7 +294,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                 }
                 break;
             case R.id.ll_test_sensitive:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 2;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -308,7 +309,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                 }
                 break;
             case R.id.ll_test_pigment:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 3;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -375,7 +376,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
                 popupWindow.dismiss();
                 break;
             case R.id.tv_test_result:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
 //                  setData();显示我的肤质
                     setSencondData();
                     UserPreferences.setIsShowTest(false);
@@ -456,7 +457,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
 
 
     public void loadMainData() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
@@ -508,7 +509,7 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     private void setSencondData() {
         mLlTestOk.setVisibility(View.VISIBLE);
         mLlTestNo.setVisibility(View.GONE);
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>() {
                 @Override
                 public void onNext(Test test) {

@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsk.chain.bijection.Presenter;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Ask;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -41,7 +41,7 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
      * 提问
      */
     public static void start(Context context, Ask ask, String content) {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             Intent intent = new Intent(context, AddAskActivity.class);
             intent.putExtra(EXTRA_PRODUCT_ID, ask.getProduct_id());
             intent.putExtra(EXTRA_PRODUCT_NAME, ask.getProduct_name());
@@ -56,7 +56,7 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
 
     // 回答问题
     public static void start(Context context, Ask ask, int askId) {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             Intent intent = new Intent(context, AddAskActivity.class);
             intent.putExtra(EXTRA_PRODUCT_ID, ask.getProduct_id());
             intent.putExtra(EXTRA_PRODUCT_NAME, ask.getProduct_name());

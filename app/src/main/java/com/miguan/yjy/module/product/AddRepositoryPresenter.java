@@ -64,6 +64,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
             mImagePath = mProduct.getProduct_img();
             mBrand.setId(mProduct.getBrand_id());
             mBrand.setName(mProduct.getBrand_name());
+            mBrand.setRule(mProduct.getRule());
             getView().setBrand(mBrand, mOvertime);
         }
     }

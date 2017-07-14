@@ -22,6 +22,7 @@ import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -202,6 +203,10 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
     @Override
     public void onError() {
 
+    }
+
+    public void closeKeyboard() {
+        LUtils.closeKeyboard(mEtRemark);
     }
 
     @Override

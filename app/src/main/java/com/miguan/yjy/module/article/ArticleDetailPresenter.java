@@ -10,10 +10,10 @@ import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -105,7 +105,7 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
     }
 
     public void star(boolean isStar) {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             ArticleModel.getInstance().star(mArticleId).unsafeSubscribe(new ServicesResponse<String>() {
                 @Override
                 public void onNext(String result) {

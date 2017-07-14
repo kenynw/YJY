@@ -21,6 +21,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Skin;
@@ -116,7 +117,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
     }
 
     public void loadData() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
@@ -209,7 +210,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
         Intent intent = null;
         switch (v.getId()) {
             case R.id.ll_test_wrinkle:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 0;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -221,7 +222,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 }
                 break;
             case R.id.ll_test_oily:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 1;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -233,7 +234,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 }
                 break;
             case R.id.ll_test_sensitive:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 2;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -245,7 +246,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 }
                 break;
             case R.id.ll_test_pigment:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     tag = 3;
                     if (TextUtils.isEmpty(userInfo.getBirth_day())) {
                         showTestUserInfoPop();
@@ -309,7 +310,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
                 popupWindow.dismiss();
                 break;
             case R.id.tv_test_result:
-                if (UserPreferences.getUserID() > 0) {
+                if (AccountModel.getInstance().isLogin()) {
                     if (mMyOnTabClick != null) {
                         mMyOnTabClick.tabClickStart();
                     }
@@ -395,7 +396,7 @@ public class TestFragment extends BaseDataFragment<TestFragmentPrensenter, Test>
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setShowView(String showViewType) {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             if (mMyOnTabClick != null) {
                 mMyOnTabClick.tabClickStart();
             }

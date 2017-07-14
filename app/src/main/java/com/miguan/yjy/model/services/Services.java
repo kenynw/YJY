@@ -110,7 +110,7 @@ public interface Services {
      * @return 结果
      */
     @GET("?action=register")
-    Observable<Integer> register(
+    Observable<User> register(
             @Query("mobile") CharSequence mobile,
             @Query("captcha") CharSequence captcha,
             @Query("password") CharSequence password
@@ -138,7 +138,7 @@ public interface Services {
      * @return
      */
     @GET("?action=resetPassword")
-    Observable<String> modifyPwd(
+    Observable<User> modifyPwd(
             @Query("mobile") CharSequence mobile,
             @Query("captcha") CharSequence captcha,
             @Query("newPassword") CharSequence newPwd

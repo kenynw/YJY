@@ -7,11 +7,11 @@ import android.os.Bundle;
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.adapter.EvaluateAdapter;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -102,7 +102,7 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     }
 
     private boolean isLogin() {
-        if (UserPreferences.getUserID() <= 0) {
+        if (!AccountModel.getInstance().isLogin()) {
             getView().startActivity(new Intent(getView(), LoginActivity.class));
             return false;
         }

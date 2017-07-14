@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.dsk.chain.bijection.Presenter;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.ImageModel;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -30,7 +30,7 @@ public class AddEvaluatePresenter extends Presenter<AddEvaluateActivity> {
     public static final String EXTRA_PARENT_ID = "parent_id";
 
     public static void start(Activity context, int postId, int type, int parentId) {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             Intent intent = new Intent(context, AddEvaluateActivity.class);
             intent.putExtra(EXTRA_ARTICLE_ID, postId);
             intent.putExtra(EXTRA_TYPE, type);

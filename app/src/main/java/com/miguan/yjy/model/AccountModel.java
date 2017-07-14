@@ -7,9 +7,13 @@ import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
+import com.miguan.yjy.utils.LUtils;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
 import rx.Observable;
 
 /**
@@ -63,18 +67,6 @@ public class AccountModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
-    /**
-     * 账号相关本地存储
-     *
-     * @param user
-     */
-    private void saveAccount(User user) {
-        UserPreferences.setToken(user.getToken());
-        UserPreferences.setUserID(user.getUser_id());
-        UserPreferences.setUsername(user.getUsername());
-        UserPreferences.setAvatar(user.getImg());
-    }
-
     public boolean isLogin() {
         return !TextUtils.isEmpty(UserPreferences.getToken());
     }
@@ -83,9 +75,9 @@ public class AccountModel extends AbsModel {
         UserPreferences.setToken("");
     }
 
-    public Observable<Integer> register(String mobile, String captcha, String password) {
+    public Observable<User> register(String mobile, String captcha, String password) {
         return ServicesClient.getServices().register(mobile, captcha, password)
-                .doOnNext(UserPreferences::setUserID)
+                .doOnNext(this::saveAccount)
                 .compose(new DefaultTransform<>());
     }
 
@@ -125,8 +117,29 @@ public class AccountModel extends AbsModel {
      * captcha(int) － 验证码
      * newPassword(string) － 新密码
      */
-    public Observable<String> resetPassword(String mobile,String captcha,String newPwd) {
-        return ServicesClient.getServices().modifyPwd(mobile, captcha, newPwd).compose(new DefaultTransform<>());
+    public Observable<User> resetPassword(String mobile,String captcha,String newPwd) {
+        return ServicesClient.getServices().modifyPwd(mobile, captcha, newPwd)
+                .doOnNext(this::saveAccount)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 账号相关本地存储
+     *
+     * @param user
+     */
+    private void saveAccount(User user) {
+        if (TextUtils.isEmpty(user.getToken())) return;
+
+        UserPreferences.setToken(user.getToken());
+        UserPreferences.setUserID(user.getUser_id());
+        UserPreferences.setUsername(user.getUsername());
+        UserPreferences.setAvatar(user.getImg());
+
+        // 调用 JPush 接口来设置别名。
+        Set<String> set = new HashSet<>();
+        set.add(LUtils.isDebug ? "Development" : "Production");
+        JPushInterface.setAliasAndTags(LUtils.getAppContext(), user.getToken() + "", set, null);
     }
 
 }

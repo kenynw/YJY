@@ -19,9 +19,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.Services;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
@@ -159,7 +159,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
     }
 
     private void checkInput() {
-        if (UserPreferences.getUserID() <= 0 ) {
+        if (!AccountModel.getInstance().isLogin()) {
             startActivity(new Intent(this, LoginActivity.class));
             return;
         }

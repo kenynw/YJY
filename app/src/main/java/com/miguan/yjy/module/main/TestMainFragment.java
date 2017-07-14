@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
@@ -112,7 +113,7 @@ public class TestMainFragment extends BaseDataFragment<TestMainFragmentPrensente
     }
 
     public void loadData() {
-        if (UserPreferences.getUserID() > 0) {
+        if (AccountModel.getInstance().isLogin()) {
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
