@@ -558,7 +558,11 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     mViewpagerSkinTest.setAdapter(mSkinTestViewPager);
                     mTabSkinTest.setupWithViewPager(mViewpagerSkinTest);
                     mTvSkinUsername.setText(userInfo.getUsername());
-                    mTvSkinTime.setText(DateUtils.getStrTime(userInfo.getAdd_time()));
+                    if (userInfo.getAdd_time().equals("0")) {
+                        mTvSkinTime.setText("");
+                    } else {
+                        mTvSkinTime.setText(DateUtils.getStrTime(userInfo.getAdd_time()));
+                    }
                     mImgSkinTest.setImageURI(Uri.parse(userInfo.getImg()));
                     Log.e("getTestPosition()", getTestPosition() + "====");
                     mTabSkinTest.getTabAt(testPosition).select();
