@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
-import com.gyf.barlibrary.ImmersionBar;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MainTabPagerAdapter;
 import com.miguan.yjy.model.AccountModel;
@@ -26,6 +25,8 @@ import butterknife.ButterKnife;
 @RequiresPresenter(MainActivityPresenter.class)
 public class MainActivity extends BaseDataActivity<MainActivityPresenter, Version> {
 
+    private static final String KEY_CUR_SELECT = "cur_select";
+
     @BindView(R.id.container_main)
     FrameLayout mContainer;
 
@@ -40,7 +41,9 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
 
-        ImmersionBar.with(this).statusBarDarkFont(true);
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY_CUR_SELECT)) {
+
+        }
 
         initTab();
     }

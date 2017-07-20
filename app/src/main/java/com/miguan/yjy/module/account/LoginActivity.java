@@ -98,4 +98,9 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
 
     }
 
+    public void closeKeyboard() {
+        LUtils.closeKeyboard(mEtPassword);
+        LUtils.closeKeyboard(mEtUsername);
+    }
+
 }

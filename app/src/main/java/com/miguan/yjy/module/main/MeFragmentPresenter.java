@@ -37,4 +37,9 @@ public class MeFragmentPresenter extends BaseDataFragmentPresenter<MeFragment, U
         UMShareAPI.get(getView().getActivity()).onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(getView().getActivity()).release();
+    }
 }

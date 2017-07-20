@@ -75,8 +75,8 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
             EventBus.getDefault().post(0);
 
             Set<String> set = new HashSet<>();
-            set.add("clearToken");
-            JPushInterface.setAliasAndTags(getView(), UserPreferences.getUserID() + "", set, null);
+            set.add("logout");
+            JPushInterface.setAliasAndTags(getView(), UserPreferences.getToken() + "", set, null);
         }
     }
 

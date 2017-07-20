@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.miguan.yjy.model.CommonModel;
-import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
 import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
 import com.miguan.yjy.module.common.WebViewActivity;
@@ -20,6 +19,7 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
+import rx.Subscriber;
 
 /**
  * Copyright (c) 2017/4/21. LiaoPeiKun Inc. All rights reserved.
@@ -87,31 +87,52 @@ public class MessageReceiver extends BroadcastReceiver {
         }
 
         if (type == 1) { // 过期
-            CommonModel.getInstance().setMsgRead(id, "notice").unsafeSubscribe(new ServicesResponse<String>() {
+            CommonModel.getInstance().setMsgRead(id, "notice").subscribe(new Subscriber<String>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
                 @Override
                 public void onNext(String s) {
-                    Intent intent = new Intent(context, UsedListActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+
                 }
             });
+            Intent intent = new Intent(context, UsedListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         } else if (type == 2) { // H5
             WebViewActivity.start(context, "", relation);
-        } else if (type == 3) { // 文章
+        } else if (type == 3 && !TextUtils.isEmpty(relation)) { // 文章
             ArticleDetailPresenter.start(context, Integer.valueOf(relation));
-        } else if (type == 4){ // 产品
+        } else if (type == 4 && !TextUtils.isEmpty(relation)){ // 产品
             ProductDetailPresenter.start(context, Integer.valueOf(relation));
-        } else if (type == 5) {
+        } else if (type == 5 && !TextUtils.isEmpty(relation)) {
             AskDetailActivityPresenter.start(context, Integer.valueOf(relation), Integer.valueOf(relation));
         } else {
-            CommonModel.getInstance().setMsgRead(id, "pms").unsafeSubscribe(new ServicesResponse<String>() {
-                @Override
-                public void onNext(String s) {
-                    Intent intent = new Intent(context, MsgListActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                }
-            });
+            CommonModel.getInstance().setMsgRead(id, "pms")
+                    .subscribe(new Subscriber<String>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                        }
+
+                        @Override
+                        public void onNext(String s) {
+                        }
+                    });
+            Intent intent = new Intent(context, MsgListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
     }
 

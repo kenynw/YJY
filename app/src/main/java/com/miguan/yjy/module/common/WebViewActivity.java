@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -16,7 +17,11 @@ import android.webkit.WebViewClient;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.services.EncryptInterceptor;
 import com.miguan.yjy.utils.LUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -29,8 +34,8 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 public class WebViewActivity extends ChainBaseActivity {
 
     // 浏览器
-    private WebView webView;
-    public static WebViewActivity webViewActivity;
+    @BindView(R.id.web_view)
+    WebView mWebView;
 
     /**
      * 标题名称
@@ -40,14 +45,18 @@ public class WebViewActivity extends ChainBaseActivity {
      * url参数名
      */
     public static final String REQUEST_NAME_URL = "url";
-    private String url;
+
+    private String mUrl;
+
+    private String mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view_utils);
+        ButterKnife.bind(this);
+
         initData();
-        initView();
         initWebView();
     }
 
@@ -66,20 +75,15 @@ public class WebViewActivity extends ChainBaseActivity {
             return;
         }
         Bundle bundle = getIntent().getExtras();
-        url = bundle.getString(REQUEST_NAME_URL);
-        setToolbarTitle(bundle.getString(REQUEST_NAME_TITLE));
-    }
-
-    private void initView() {
-        webView = (WebView) findViewById(R.id.web_view);
-
+        mUrl = bundle.getString(REQUEST_NAME_URL);
+        mTitle = bundle.getString(REQUEST_NAME_TITLE);
     }
 
     private void initWebView() {
-        WebSettings settings = webView.getSettings();
+        WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.setWebViewClient(new WebViewClient() {
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -105,28 +109,45 @@ public class WebViewActivity extends ChainBaseActivity {
 
         // 设置允许加载混合内容
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            mWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-        webView.setWebChromeClient(new WebChromeClient() {
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
                 LUtils.toast(message);
                 return super.onJsAlert(view, url, message, result);
             }
 
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                setToolbarTitle(TextUtils.isEmpty(mTitle) ? title : mTitle);
+                super.onReceivedTitle(view, title);
+            }
         });
-        webView.loadUrl(url);
-        webView.addJavascriptInterface(new WebViewOB(this), "android");
+        mWebView.loadUrl(getRequestUrl());
+        mWebView.addJavascriptInterface(new WebViewOB(this), "android");
     }
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
         } else {
             super.onBackPressed();
         }
+    }
+
+    private String getRequestUrl() {
+        StringBuilder builder = new StringBuilder(mUrl);
+        if (!mUrl.contains("&from=android")) {
+            builder.append((mUrl.contains("?") ? "" : "?") + "&from=android");
+        }
+        if (!mUrl.contains("&version=")) {
+            builder.append("&version=" + EncryptInterceptor.API_VERSION);
+        }
+
+        return new String(builder);
     }
 
 }

@@ -73,6 +73,8 @@ public class AccountModel extends AbsModel {
 
     public void clearToken() {
         UserPreferences.setToken("");
+        UserPreferences.setUserID(0);
+        UserPreferences.setUsername("");
     }
 
     public Observable<User> register(String mobile, String captcha, String password) {

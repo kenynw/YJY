@@ -27,7 +27,8 @@ import java.security.NoSuchAlgorithmException;
  * Copyright (c) 2015. LiaoPeiKun Inc. All rights reserved.
  */
 public class LUtils {
-    private static final String TAG = "DSK";
+
+    private static final String TAG = LUtils.class.getSimpleName();
 
     private static final String PREFERENCES_NAME = "prefs";
 

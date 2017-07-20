@@ -23,6 +23,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.common.WebViewOB;
 import com.miguan.yjy.utils.LUtils;
 
@@ -122,6 +123,7 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                WebViewActivity.start(ArticleDetailActivity.this, "", url);
                 return true;
             }
 

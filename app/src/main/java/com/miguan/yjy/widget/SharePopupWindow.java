@@ -23,6 +23,8 @@ import com.umeng.socialize.media.UMWeb;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.text.TextUtils.isEmpty;
+
 /**
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
  */
@@ -66,7 +68,7 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
         ButterKnife.bind(this, view);
 
         mRlShareWindow.setOnClickListener(v -> dismiss());
-        if (!TextUtils.isEmpty(mBuilder.getViewTitle())) mTvShareTitle.setText(mBuilder.getViewTitle());
+        if (!isEmpty(mBuilder.getViewTitle())) mTvShareTitle.setText(mBuilder.getViewTitle());
 
         setContentView(view);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -86,11 +88,13 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        UMImage image = TextUtils.isEmpty(mBuilder.getImage()) ? new UMImage(mActivity, R.mipmap.ic_launcher) : new UMImage(mActivity, mBuilder.getImage());
+
         switch (v.getId()) {
             case R.id.tv_share_wx_friend:
                 UMWeb umWeb = new UMWeb(mBuilder.getUrl());
                 umWeb.setTitle(mBuilder.getTitle());
-                umWeb.setThumb(new UMImage(mActivity, TextUtils.isEmpty(mBuilder.getImage()) ? DEFAULT_IMAGE_URL : mBuilder.getImage()));
+                umWeb.setThumb(image);
                 umWeb.setDescription(mBuilder.getContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
                         .setCallback(this)
@@ -100,21 +104,17 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             case R.id.tv_share_wx_circle:
                 UMWeb umWebCircle = new UMWeb(mBuilder.getUrl());
                 umWebCircle.setTitle(mBuilder.getWxCircleTitle());
-                umWebCircle.setThumb(new UMImage(mActivity, TextUtils.isEmpty(mBuilder.getImage()) ? DEFAULT_IMAGE_URL : mBuilder.getImage()));
+                umWebCircle.setThumb(image);
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
                         .setCallback(this)
                         .withMedia(umWebCircle)
                         .share();
                 break;
             case R.id.tv_share_weibo:
-//                UMWeb umWebWeibo = new UMWeb(mBuilder.getUrl());
-//                umWebWeibo.setThumb(mBuilder.getImage());
-//                umWebWeibo.setTitle(mBuilder.getWbContent());
-//                umWebWeibo.setDescription(mBuilder.getWbContent());
                 new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
                         .setCallback(this)
                         .withText(mBuilder.getWbContent())
-                        .withMedia(new UMImage(mActivity, TextUtils.isEmpty(mBuilder.getImage()) ? DEFAULT_IMAGE_URL : mBuilder.getImage()))
+                        .withMedia(image)
                         .share();
                 break;
             case R.id.tv_share_cancel:

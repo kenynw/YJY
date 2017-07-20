@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
-import android.util.Log;
 
 import com.dsk.chain.Chain;
 import com.dsk.chain.model.ModelManager;
@@ -29,7 +28,7 @@ public class App extends Application {
         super.onCreate();
         LUtils.initialize(this);
         SystemPreferences.initialize(this);
-        LUtils.isDebug = true;
+        LUtils.isDebug = false;
         Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);
@@ -41,7 +40,6 @@ public class App extends Application {
         initUmeng();
 
         if (!isApplicationInBackground(this)) {
-            Log.e("是否在后台", "----");
             UserPreferences.setIsShowTest(false);
         }
     }

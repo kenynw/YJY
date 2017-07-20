@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 
 import java.io.File;
 
@@ -25,6 +26,8 @@ public class DownloadService extends Service {
 
     private DownloadManager mDownloadManager;
 
+    private String mFilepath;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -36,13 +39,17 @@ public class DownloadService extends Service {
         if (intent.getExtras() != null) {
             String title = intent.getExtras().getString("title");
             String url = intent.getExtras().getString("url");
-            String filepath = intent.getExtras().getString("path");
+            mFilepath = intent.getExtras().getString("path");
             String filename = intent.getExtras().getString("name");
+
+            if (TextUtils.isEmpty(mFilepath)) {
+                mFilepath = findDownLoadDirectory();
+            }
 
             mReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    install(context, filepath, filename);
+                    install(context, mFilepath, filename);
                     stopSelf();
                 }
             };
@@ -92,6 +99,14 @@ public class DownloadService extends Service {
     public void onDestroy() {
         unregisterReceiver(mReceiver);
         super.onDestroy();
+    }
+
+    private String findDownLoadDirectory(){
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        }else{
+            return Environment.getRootDirectory() + "/" + "download/";
+        }
     }
 
 }

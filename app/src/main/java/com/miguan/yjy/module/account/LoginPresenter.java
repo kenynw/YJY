@@ -26,6 +26,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
             @Override
             public void onNext(User user) {
                 EventBus.getDefault().post(new TestStart());
+                getView().closeKeyboard();
                 getView().finish();
             }
         });
