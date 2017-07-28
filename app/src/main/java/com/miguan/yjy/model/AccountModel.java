@@ -34,7 +34,7 @@ public class AccountModel extends AbsModel {
      */
     public Observable<User> login(String mobile, String password) {
         return ServicesClient.getServices().login(mobile, password, 1)
-                .doOnNext(user -> saveAccount(user, false))
+                .doOnNext(this::saveAccount)
                 .compose(new DefaultTransform<>());
     }
 
@@ -44,7 +44,7 @@ public class AccountModel extends AbsModel {
      */
     public Observable<User> login(Map<String, String> map) {
         return ServicesClient.getServices().thirdLogin(map, "weixin")
-                .doOnNext(user -> saveAccount(user, true))
+                .doOnNext(this::saveAccount)
                 .compose(new DefaultTransform<>());
     }
 
@@ -60,7 +60,7 @@ public class AccountModel extends AbsModel {
 
     public Observable<User> register(String mobile, String captcha, String password) {
         return ServicesClient.getServices().register(mobile, captcha, password)
-                .doOnNext(user -> saveAccount(user, false))
+                .doOnNext(this::saveAccount)
                 .compose(new DefaultTransform<>());
     }
 
@@ -94,14 +94,6 @@ public class AccountModel extends AbsModel {
     }
 
     /**
-     * 判断是否绑定手机号
-     * @return
-     */
-    public Observable<String> isBindMobile() {
-        return ServicesClient.getServices().isBind(UserPreferences.getToken()).compose(new DefaultTransform<>());
-    }
-
-    /**
      * 绑定手机号
      * @param mobile
      * @param captcha
@@ -120,7 +112,7 @@ public class AccountModel extends AbsModel {
      */
     public Observable<User> resetPassword(String mobile,String captcha,String newPwd) {
         return ServicesClient.getServices().modifyPwd(mobile, captcha, newPwd)
-                .doOnNext(user -> saveAccount(user, false))
+                .doOnNext(this::saveAccount)
                 .compose(new DefaultTransform<>());
     }
 
@@ -129,10 +121,8 @@ public class AccountModel extends AbsModel {
      *
      * @param user
      */
-    private void saveAccount(User user, boolean isWxLogin) {
+    private void saveAccount(User user) {
         if (TextUtils.isEmpty(user.getToken())) return;
-
-        LUtils.getPreferences().edit().putBoolean("wx_login", isWxLogin).apply();
 
         UserPreferences.setToken(user.getToken());
         UserPreferences.setUserID(user.getUser_id());

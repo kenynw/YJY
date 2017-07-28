@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.services.EncryptInterceptor;
+import com.miguan.yjy.model.constant.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,7 +143,7 @@ public class WebViewActivity extends ChainBaseActivity {
             builder.append((mUrl.contains("?") ? "" : "?") + "&from=android");
         }
         if (!mUrl.contains("&version=")) {
-            builder.append("&version=" + EncryptInterceptor.API_VERSION);
+            builder.append("&version=" + Constants.API_VERSION);
         }
 
         return new String(builder);

@@ -24,6 +24,8 @@ public class Home implements Parcelable {
 
     private List<Evaluate> essence;
 
+    private List<Ask> ask;
+
     public int getNum() {
         return num;
     }
@@ -64,6 +66,14 @@ public class Home implements Parcelable {
         this.essence = recommendComment;
     }
 
+    public List<Ask> getAsk() {
+        return ask;
+    }
+
+    public void setAsk(List<Ask> ask) {
+        this.ask = ask;
+    }
+
     public Home() {
     }
 
@@ -79,6 +89,7 @@ public class Home implements Parcelable {
         dest.writeTypedList(this.category);
         dest.writeTypedList(this.articleGory);
         dest.writeTypedList(this.essence);
+        dest.writeTypedList(this.ask);
     }
 
     protected Home(Parcel in) {
@@ -87,6 +98,7 @@ public class Home implements Parcelable {
         this.category = in.createTypedArrayList(Category.CREATOR);
         this.articleGory = in.createTypedArrayList(ArticleCate.CREATOR);
         this.essence = in.createTypedArrayList(Evaluate.CREATOR);
+        this.ask = in.createTypedArrayList(Ask.CREATOR);
     }
 
     public static final Creator<Home> CREATOR = new Creator<Home>() {
@@ -100,4 +112,5 @@ public class Home implements Parcelable {
             return new Home[size];
         }
     };
+
 }

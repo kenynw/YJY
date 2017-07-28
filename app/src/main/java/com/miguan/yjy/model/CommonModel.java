@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.text.format.DateUtils;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.model.AbsModel;
@@ -11,6 +12,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.model.constant.Constants;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -46,21 +48,11 @@ public class CommonModel extends AbsModel {
 
                     @Override
                     public void onNext(Version version) {
-//                        if (version.getIsMust() == 1 && !version.getNumber().equals(LUtils.getAppVersionName())) {
-//                            showUpdateDialog(context, version);
-//                        } else if (!TextUtils.isEmpty(UserPreferences.getToken()) &&
-//                                LUtils.getPreferences().getBoolean("wx_login", false)){
-//                            boolean isToday = DateUtils.isToday(LUtils.getPreferences().getLong("last_show_time", 0));
-//                            if (!isToday) {
-//                                BaseAlertDialog dialog = BaseAlertDialog.newInstance(R.layout.dialog_bind_mobile, context);
-//                                dialog.setCancelable(false);
-//                                dialog.show(((ChainBaseActivity) context).getSupportFragmentManager(), "bindDialog");
-//                            }
-//                            LUtils.getPreferences().edit().putLong("last_show_time", System.currentTimeMillis()).apply();
-//                        }
-                        BaseAlertDialog dialog = BaseAlertDialog.newInstance(R.layout.dialog_bind_mobile, context);
-                        dialog.setCancelable(false);
-                        dialog.show(((ChainBaseActivity) context).getSupportFragmentManager(), "bindDialog");
+                        if (version.getIsMust() == 1 && !version.getNumber().equals(LUtils.getAppVersionName())) {
+                            showUpdateDialog(context, version);
+                        } else {
+                            checkBindMobile(context);
+                        }
                     }
                 });
     }
@@ -106,6 +98,33 @@ public class CommonModel extends AbsModel {
                         context.startService(intent);
                     })
                     .show();
+        }
+    }
+
+    private void checkBindMobile(Context context) {
+        if (AccountModel.getInstance().isLogin() &&
+                !DateUtils.isToday(LUtils.getPreferences().getLong(Constants.KEY_CHECK_IS_BIND_TIME, 0))) {
+            ServicesClient.getServices().isBind(UserPreferences.getToken())
+                    .subscribe(new Subscriber<Integer>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onNext(Integer result) {
+                            if (result == 2) {
+                                BaseAlertDialog dialog = BaseAlertDialog.newInstance(R.layout.dialog_bind_mobile, context);
+                                dialog.setCancelable(false);
+                                dialog.show(((ChainBaseActivity) context).getSupportFragmentManager(), "bindDialog");
+                            }
+                        }
+                    });
         }
     }
 

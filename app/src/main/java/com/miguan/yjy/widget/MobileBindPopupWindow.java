@@ -65,6 +65,8 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
     @BindView(R.id.tv_bind_mobile_captcha)
     SendValidateButton mBtnCaptcha;
 
+    private View mMobileView;
+
     public MobileBindPopupWindow(Context context) {
         super(context);
         this.mContext = context;
@@ -72,11 +74,11 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
     }
 
     private void init() {
-        View view = View.inflate(mContext, R.layout.popwindow_user_bind_mobile, null);
-        ButterKnife.bind(this, view);
+        mMobileView = View.inflate(mContext, R.layout.popwindow_user_bind_mobile, null);
+        ButterKnife.bind(this, mMobileView);
         initView();
 
-        setContentView(view);
+        setContentView(mMobileView);
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         setFocusable(true);
@@ -167,7 +169,7 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
             case R.id.tv_user_dialog_next:
                 dismiss();
                 setContentView(createPasswordView());
-                showAtLocation(((ChainBaseActivity) mContext).getContent(), Gravity.NO_GRAVITY, 0, 0);
+                show();
                 break;
         }
     }
@@ -188,11 +190,19 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
     }
 
     public void bindMobile(String newPwd) {
-        AccountModel.getInstance().resetPassword(mEtContent.getText().toString().trim(), mEtCaptcha.getText().toString().trim(), newPwd)
+        AccountModel.getInstance().resetPassword(mEtContent.getText().toString().trim(),
+                mEtCaptcha.getText().toString().trim(), newPwd)
                 .unsafeSubscribe(new ServicesResponse<User>() {
                     @Override
                     public void onNext(User user) {
                         dismiss();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismiss();
+                        setContentView(mMobileView);
+                        show();
                     }
                 });
     }
@@ -220,6 +230,10 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
         });
 
         return view;
+    }
+
+    private void show() {
+        showAtLocation(((ChainBaseActivity) mContext).getContent(), Gravity.NO_GRAVITY, 0, 0);
     }
 
 }

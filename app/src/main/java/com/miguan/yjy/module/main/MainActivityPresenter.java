@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +11,8 @@ import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.model.constant.Constants;
+import com.miguan.yjy.utils.LUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -97,6 +100,12 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setCurrentTab(Integer index) {
         getView().setCurrentTab(index);
+    }
+
+    public void saveCheckBindTime() {
+        SharedPreferences.Editor edit = LUtils.getPreferences().edit();
+        edit.putLong(Constants.KEY_CHECK_IS_BIND_TIME, System.currentTimeMillis());
+        edit.apply();
     }
 
 }

@@ -1,6 +1,6 @@
 package com.miguan.yjy.model.services;
 
-
+import com.miguan.yjy.model.constant.Constants;
 import com.miguan.yjy.utils.LUtils;
 
 import java.io.IOException;
@@ -18,8 +18,6 @@ public class EncryptInterceptor implements Interceptor {
 
     private static final String TAG = EncryptInterceptor.class.getSimpleName();
 
-    public static final String API_VERSION = "110";
-
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
@@ -29,7 +27,7 @@ public class EncryptInterceptor implements Interceptor {
             HttpUrl requestUrl = request.url().newBuilder()
                     .addQueryParameter("time", String.valueOf(System.currentTimeMillis() / 1000))
                     .addQueryParameter("from","android")
-                    .addQueryParameter("version", API_VERSION)
+                    .addQueryParameter("version", Constants.API_VERSION)
                     .build(); //获取请求url地址
 
             request = request.newBuilder().method(methodStr, request.body()).url(requestUrl).build();

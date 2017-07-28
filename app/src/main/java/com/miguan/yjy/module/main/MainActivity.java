@@ -117,7 +117,7 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
 
     @Override
     public void onNegativeClick(@NonNull View v) {
-        LUtils.toast("取消");
+        getPresenter().saveCheckBindTime();
     }
 
 }

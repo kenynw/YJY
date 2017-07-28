@@ -151,7 +151,7 @@ public interface Services {
      * @return
      */
     @GET("?action=isBind")
-    Observable<String> isBind(
+    Observable<Integer> isBind(
             @Query("token") String token
     );
 

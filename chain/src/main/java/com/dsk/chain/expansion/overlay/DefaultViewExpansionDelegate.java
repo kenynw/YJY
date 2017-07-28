@@ -39,6 +39,7 @@ public class DefaultViewExpansionDelegate extends ViewExpansionDelegate {
         if (mContent != null) mContent.setVisibility(View.INVISIBLE);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("请稍等");
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
 
