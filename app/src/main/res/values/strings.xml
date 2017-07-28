@@ -94,11 +94,18 @@
     <string name="text_no_answer">暂无回答</string>
     <string name="text_message_ask">有问题向您求助哦~</string>
     <string name="text_message_answer">回答了您的问题哦~</string>
+    <string name="text_home_ask_title">有人向你提问</string>
+    <string name="text_home_ask_total"><u>共%d条回答</u></string>
+    <string name="text_set_password">设定密码</string>
+    <string name="text_login_or_register">登录/注册</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
     <string name="label_expiration_date">过期日期：</string>
-    <string name="label_looking_value">颜值：%s&#160;分</string>
+    <string name="label_looking_value"><![CDATA[
+        颜值：<font color="#fdff00">%s&#160;</font>分
+    ]]></string>
+    <string name="label_face_score">您的颜值总分为：</string>
 
     <string name="btn_main_module">功能模板</string>
     <string name="btn_main_test">肤质测试</string>
@@ -117,7 +124,6 @@
     <string name="btn_me_reply">我回复的</string>
     <string name="btn_me_star">我收藏的</string>
     <string name="btn_me_message">我的消息</string>
-    <string name="btn_query_batch_no">查询护肤品批号</string>
     <string name="btn_feedback">意见反馈</string>
     <string name="btn_commend_app">推荐颜究院</string>
     <string name="btn_add_expiration">添加到保质期提醒</string>
@@ -132,6 +138,10 @@
     <string name="btn_from_camera">拍照</string>
     <string name="btn_from_gallery">从相册中上传</string>
     <string name="btn_to_ask">去提问</string>
+    <string name="btn_to_bind">去绑定</string>
+    <string name="btn_next_time">下次再说</string>
+    <string name="btn_i_know">我知道了</string>
+    <string name="btn_done">完成</string>
 
     <string name="hint_add_comment">写评论…</string>
     <string name="hint_add_reply">回复评论</string>
@@ -140,10 +150,10 @@
     <string name="hint_product_name">请输入产品名称</string>
     <string name="hint_product_code">请输入产品批号</string>
     <string name="hint_product_image">点击可更换</string>
-    <string name="hint_mobile">手机号</string>
+    <string name="hint_mobile">请输入手机号</string>
     <string name="hint_username">用户名</string>
-    <string name="hint_password">密码</string>
-    <string name="hint_captcha">短信验证码</string>
+    <string name="hint_password">请输至少6位数的密码</string>
+    <string name="hint_captcha">请输入短信验证码</string>
     <string name="hint_add_ask">还需要输入3个字哦~</string>
 
     <!--产品搜索相关-->
@@ -226,8 +236,11 @@
     <string name="text_test_recommend_change">换一批</string>
     <string name="text_test_search_component">查询护肤品成分</string>
     <string name="text_no_test">未测试</string>
+    <string name="text_other_billboard">其他排行榜</string>
 
     <!--用户相关-->
+    <string name="text_no_bind_mobile">您还没有绑定手机号</string>
+    <string name="text_desc_bind_mobile">绑定手机后，可以用手机号\n登录颜究院</string>
     <string name="text_user_bind_mobile">绑定手机号</string>
     <string name="text_user_get_code">验证码</string>
     <string name="text_user_next">下一步</string>
@@ -237,6 +250,7 @@
     <string name="btn_user_bined_content">如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。</string>
     <string name="btn_update_pwd">修改密码</string>
     <string name="btn_send">发送</string>
+    <string name="text_why_bind_mobile">根据国家网络信息办公室颁布的《移动互联网应用程序信息服务管理规定》，从2016年8月1日起，互联网注册用户应当提供基于移动电话号码等方式的真实身份信息，所以需要你绑定手机号码。</string>
 
     <string name="tv_cancel">取消</string>
     <string name="tv_share_content">分享内容到</string>

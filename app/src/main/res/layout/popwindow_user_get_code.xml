@@ -20,7 +20,7 @@
         android:gravity="center"
         android:paddingTop="25dp"
         android:text="@string/text_user_get_code"
-        android:textColor="@color/color_sencond_title"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_large_20"/>
 
         <com.miguan.yjy.widget.SecurityCodeView
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/text_user_previous"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_16"/>
 
         <View

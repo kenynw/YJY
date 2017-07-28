@@ -32,7 +32,7 @@
         android:layout_toRightOf="@+id/iv_product_detail"
         android:ellipsize="end"
         android:maxLines="2"
-        android:textColor="@color/color_sencond_title"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_small_15"
         tools:text="理肤泉特安舒缓修护乳"
         />

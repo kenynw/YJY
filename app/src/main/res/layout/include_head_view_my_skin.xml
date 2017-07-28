@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="我的肤质"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_16"/>
 
         <ImageView

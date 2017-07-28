@@ -72,7 +72,7 @@ public class SkinPriceAdapter extends BaseAdapter {
             }
 
             if (mdatas.get(position).isSelect()) {
-                textView.setTextColor(context.getResources().getColor(R.color.color_sencond_title));
+                textView.setTextColor(context.getResources().getColor(R.color.textPrimary));
             } else {
                 textView.setTextColor(context.getResources().getColor(R.color.gray));
             }

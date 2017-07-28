@@ -14,4 +14,7 @@
 
     <item name="tv_evaluate_content" type="id"/>
 
+    <item name="btn_dialog_positive" type="id" />
+    <item name="btn_dialog_negative" type="id" />
+
 </resources>

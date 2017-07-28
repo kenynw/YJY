@@ -145,6 +145,17 @@ public interface Services {
     );
 
     /**
+     * 是否绑定手机
+     *
+     * @param token
+     * @return
+     */
+    @GET("?action=isBind")
+    Observable<String> isBind(
+            @Query("token") String token
+    );
+
+    /**
      * 绑定手机
      *
      * @param token

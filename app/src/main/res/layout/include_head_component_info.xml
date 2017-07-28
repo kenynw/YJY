@@ -17,7 +17,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="20dp"
             android:paddingLeft="15dp"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_15"
             tools:text="成分名字"/>
 
@@ -55,7 +55,7 @@
             android:paddingLeft="15dp"
             android:paddingTop="20dp"
             android:text="成分说明"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_15"/>
 
         <TextView
@@ -81,7 +81,7 @@
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
             android:text="11"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_15"
             tools:text="11"/>
 

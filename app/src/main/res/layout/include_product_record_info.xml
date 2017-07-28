@@ -15,7 +15,7 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_marginTop="10dp"-->
         <!--android:text="@string/tv_product_detail_read"-->
-        <!--android:textColor="@color/color_sencond_title"-->
+        <!--android:textColor="@color/textPrimary"-->
         <!--android:textSize="@dimen/text_size_small_14"/>-->
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:text="@string/tv_product_detail_record_inf0"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:text="@string/tv_product_detail_record_document_number"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:text="@string/tv_product_detail_country"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <TextView
@@ -98,7 +98,7 @@
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:text="@string/tv_product_detail_company"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <TextView

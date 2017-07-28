@@ -53,7 +53,6 @@
                 android:paddingRight="@dimen/spacing_large"
                 android:paddingStart="@dimen/spacing_normal"
                 android:singleLine="true"
-                android:textColorHint="@color/fcd"
                 android:textSize="@dimen/text_size_small_15"
                 tools:hint="@string/hint_home_search"
                 />
@@ -75,6 +74,13 @@
     <include layout="@layout/include_head_brand_info"/>
 
     <include layout="@layout/include_product_filter"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="排行榜"
+        android:onClick="toBillboard"
+        />
 
     <include layout="@layout/include_product_list"/>
 

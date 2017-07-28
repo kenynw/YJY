@@ -7,6 +7,7 @@ import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -42,7 +43,12 @@ public class LoginPresenter extends Presenter<LoginActivity> {
 
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                for (String s : map.keySet()) {
+                    LUtils.log(s + ":" + map.get(s));
+                };
+
                 map.put("nickname", map.get("screen_name"));
+                map.put("unionid", map.get("uid"));
                 int sex;
                 if (map.get("gender").equals("女")) {
                     sex = 0;

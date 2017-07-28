@@ -108,10 +108,6 @@ public class UserModel extends AbsModel {
         return ServicesClient.getServices().modifyProfile(UserPreferences.getToken(), key, value).compose(new DefaultTransform<>());
     }
 
-    public Observable<String> bindMobile(String mobile, String captcha) {
-        return ServicesClient.getServices().bindMobile(UserPreferences.getToken(), mobile, captcha).compose(new DefaultTransform<>());
-    }
-
     /**
      * 意见反馈
      * @param content 反馈内容

@@ -2,6 +2,7 @@ package com.miguan.yjy.model.services;
 
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.utils.LUtils;
@@ -28,7 +29,7 @@ public class DefaultTransform<T> implements Observable.Transformer<T, T> {
                         LUtils.toast("登录信息过期");
                         LUtils.getAppContext().startActivity(intent);
                     }
-                    LUtils.log("error");
+                    LUtils.log(Log.getStackTraceString(throwable));
                 })
                 .observeOn(AndroidSchedulers.mainThread());
     }

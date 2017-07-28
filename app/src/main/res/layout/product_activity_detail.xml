@@ -66,7 +66,7 @@
                 <!--android:paddingRight="15dp"-->
                 <!--android:paddingTop="4dp"-->
                 <!--android:text="@string/tv_product_fit_skin"-->
-                <!--android:textColor="@color/color_sencond_title"-->
+                <!--android:textColor="@color/textPrimary"-->
                 <!--android:textSize="@dimen/text_size_small_14"-->
                 <!--/>-->
 
@@ -84,7 +84,7 @@
                 <!--android:paddingRight="15dp"-->
                 <!--android:paddingTop="4dp"-->
                 <!--android:text="@string/tv_product_no_fit_skin"-->
-                <!--android:textColor="@color/color_sencond_title"-->
+                <!--android:textColor="@color/textPrimary"-->
                 <!--android:textSize="@dimen/text_size_small_14"-->
                 <!--/>-->
 
@@ -152,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/tv_product_detail_info"
-                        android:textColor="@color/color_sencond_title"
+                        android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_size_small_15"/>
 
                     <ImageView
@@ -185,7 +185,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:text="@string/tv_product_detail_compare_price"
-                    android:textColor="@color/color_sencond_title"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/text_size_small_15"/>
 
                 <LinearLayout

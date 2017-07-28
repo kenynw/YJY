@@ -17,7 +17,7 @@
     <color name="textPrimary">#222</color>
     <color name="textSecondary">#999</color>
     <color name="textTertiary">#666</color>
-    <color name="textHint">#ccc</color>
+    <color name="textHint">#FFCDCDCD</color>
     <color name="textYellow">#fdff00</color>
 
     <!--分割线颜色，添加div前缀-->
@@ -25,8 +25,6 @@
     <color name="divEvaluate">#FFEBEBEB</color>
 
     <!--查询产品相关-->
-    <color name="color_sencond_title">#222222</color>
-    <color name="fcd">#cdcdcd</color>
     <color name="f5">#f5f5f5</color>
     <color name="f7">#f7f7f7</color>
     <color name="f3">#333333</color>

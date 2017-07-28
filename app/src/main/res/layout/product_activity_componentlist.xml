@@ -38,7 +38,7 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:text="@string/tv_product_component_num"
-                    android:textColor="@color/color_sencond_title"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/text_size_small_16"/>
 
                 <TextView

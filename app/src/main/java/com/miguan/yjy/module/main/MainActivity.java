@@ -1,20 +1,22 @@
 package com.miguan.yjy.module.main;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MainTabPagerAdapter;
-import com.miguan.yjy.model.AccountModel;
+import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.local.UserPreferences;
-import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.MobileBindPopupWindow;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -23,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @RequiresPresenter(MainActivityPresenter.class)
-public class MainActivity extends BaseDataActivity<MainActivityPresenter, Version> {
+public class MainActivity extends BaseDataActivity<MainActivityPresenter, Version> implements BaseAlertDialog.OnButtonClickListener {
 
     private static final String KEY_CUR_SELECT = "cur_select";
 
@@ -41,24 +43,15 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
 
-        if (savedInstanceState != null && savedInstanceState.containsKey(KEY_CUR_SELECT)) {
-
-        }
-
-        initTab();
+        initTab(savedInstanceState);
     }
 
-    private void initTab() {
+    private void initTab(Bundle savedInstanceState) {
         MainTabPagerAdapter adapter = new MainTabPagerAdapter(getSupportFragmentManager(), this);
         mTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                if (tab.getPosition() == 3 && !AccountModel.getInstance().isLogin()) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    mTab.getTabAt(0).select();
-                    position = 0;
-                }
                 Fragment fragment = (Fragment) adapter.instantiateItem(mContainer, position);
                 adapter.setPrimaryItem(mContainer, position, fragment);
                 adapter.finishUpdate(mContainer);
@@ -74,9 +67,15 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
 
             }
         });
+
+        int curPos = 0;
+        if (savedInstanceState != null && savedInstanceState.containsKey(KEY_CUR_SELECT)) {
+            curPos = savedInstanceState.getInt(KEY_CUR_SELECT);
+        }
+
         for (int i = 0; i < adapter.getCount(); i++) {
             TabLayout.Tab tab = mTab.newTab();
-            mTab.addTab(tab);
+            mTab.addTab(tab, i == curPos);
             tab.setCustomView(R.layout.item_tab_main)
                     .setIcon(adapter.getIconRes(i))
                     .setText(adapter.getPageTitle(i));
@@ -94,6 +93,12 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(KEY_CUR_SELECT, mTab.getSelectedTabPosition());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - mPressedTime > 2000) {
             LUtils.toast("再按一次退出颜究院");
@@ -102,6 +107,17 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
             return;
         }
         finish();
+    }
+
+    @Override
+    public void onPositiveClick(@NonNull View v) {
+        MobileBindPopupWindow mobileBindPopupWindow = new MobileBindPopupWindow(this);
+        mobileBindPopupWindow.showAtLocation(getContent(), Gravity.NO_GRAVITY, 0, 0);
+    }
+
+    @Override
+    public void onNegativeClick(@NonNull View v) {
+        LUtils.toast("取消");
     }
 
 }

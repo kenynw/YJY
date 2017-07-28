@@ -17,7 +17,7 @@
         android:layout_marginBottom="10dp"
         android:paddingBottom="4dp"
         android:text="全部"
-        android:textColor="@color/color_sencond_title"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_small_14" >
     </TextView>
 

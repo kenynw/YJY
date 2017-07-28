@@ -36,7 +36,6 @@ public class SkinTestFragmentPresenter extends BaseDataFragmentPresenter<SkinTes
      * 肤质测试分享
      */
     public void share() {
-
         new SharePopupWindow.Builder(getView().getActivity())
                 .setTitle("护肤界的16种肤质，你知道你是哪种吗?")
                 .setUrl(SHARE_SKIN_TEST_H5 + UserPreferences.getUserID())//等待地址替换

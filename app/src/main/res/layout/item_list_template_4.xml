@@ -32,7 +32,7 @@
             style="@style/BaseTemplateInput"
             android:layout_marginTop="10dp"
             android:text="@string/text_template_4_price"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />
 

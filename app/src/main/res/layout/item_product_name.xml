@@ -13,6 +13,6 @@
         android:paddingLeft="35dp"
         android:paddingTop="15dp"
         android:text="sss"
-        android:textColor="@color/color_sencond_title"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_size_small_15"/>
 </LinearLayout>

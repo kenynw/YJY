@@ -100,7 +100,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
     }
 
     public void bindMobile(String captcha) {
-        UserModel.getInstance().bindMobile(mMobile, captcha).unsafeSubscribe(new ServicesResponse<String>() {
+        AccountModel.getInstance().bindMobile(mMobile, captcha).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String s) {
                 getView().showPopupWindow(ProfileActivity.TYPE_BIND_SUCCESS);

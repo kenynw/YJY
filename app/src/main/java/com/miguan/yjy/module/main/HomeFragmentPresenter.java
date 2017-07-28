@@ -15,10 +15,10 @@ import com.miguan.yjy.adapter.CategoryAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleCate;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
+import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.module.account.LoginActivity;
-import com.miguan.yjy.module.article.EvaluateArticleViewHolder;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -35,8 +35,9 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate>
-        implements EvaluateArticleViewHolder.OnLoadDataListener {
+public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate> implements
+        EvaluateArticleViewHolder.OnLoadDataListener,
+        EvaluateAskViewHolder.OnLoadAskListener {
 
     private boolean mIsInit = false;
 
@@ -49,7 +50,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         getAdapter().addHeader(homeHeader);
 
         ArrayList<Evaluate> evaluates = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             evaluates.add(new Evaluate());
         }
         getAdapter().addAll(evaluates);
@@ -80,6 +81,18 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     @Override
     public ArrayList<ArticleCate> getCates() {
         return mArticleCates;
+    }
+
+    @Override
+    public ArrayList<Ask> getAskList() {
+        ArrayList<Ask> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Ask ask = new Ask();
+            ask.setSubject("适不适合敏感皮？");
+            ask.setNum(32);
+            list.add(ask);
+        }
+        return list;
     }
 
     public class HomeHeader implements RecyclerArrayAdapter.ItemView {

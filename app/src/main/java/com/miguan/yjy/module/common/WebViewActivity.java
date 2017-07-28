@@ -18,7 +18,6 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.services.EncryptInterceptor;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -115,12 +114,12 @@ public class WebViewActivity extends ChainBaseActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                LUtils.toast(message);
                 return super.onJsAlert(view, url, message, result);
             }
 
             @Override
             public void onReceivedTitle(WebView view, String title) {
+                if (title.length() > 17) title = title.substring(0, 17) + "...";
                 setToolbarTitle(TextUtils.isEmpty(mTitle) ? title : mTitle);
                 super.onReceivedTitle(view, title);
             }

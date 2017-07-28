@@ -15,30 +15,29 @@ public class PermissionUtils {
 
     private PermissionUtils() {}
 
-    public static void onRequestPermissionsResult(int[] grantResults,
-                                                  RPResultListener RPResultListener) {
+    public static void onRequestPermissionsResult(int[] grantResults, RPResultListener RPResultListener) {
         if (grantResults.length > 0) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    RPResultListener.onPermissionGranted();
-                }
-                else {
-                    RPResultListener.onPermissionDenied();
-                }
+            boolean result = true;
+            for (int grantResult : grantResults) {
+                result = result && (grantResult == PackageManager.PERMISSION_GRANTED);
+                LUtils.log("result: " + result + ", grant; " + grantResult);
+            }
+            if (result) {
+                RPResultListener.onPermissionGranted();
+            } else {
+                RPResultListener.onPermissionDenied();
             }
         }
     }
 
     @TargetApi(value = Build.VERSION_CODES.M)
     public static void requestPermission(Activity activity, String[] permissions, int requestCode) {
-        for (String permission : permissions) {
-            if (!checkPermissionGranted(activity, permission)) ActivityCompat.requestPermissions(activity, new String[] {permission}, requestCode);
-        }
+        ActivityCompat.requestPermissions(activity, permissions, requestCode);
     }
 
     @TargetApi(value = Build.VERSION_CODES.M)
     public static void requestPermission(Activity activity, String permission, int requestCode) {
-        if (!checkPermissionGranted(activity, permission)) ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
+        ActivityCompat.requestPermissions(activity, new String[]{permission}, requestCode);
     }
 
     public static boolean checkPermissionGranted(Context context, String permission) {

@@ -123,12 +123,17 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.contains("article/")) {
+                    String id = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+                    ArticleDetailPresenter.start(ArticleDetailActivity.this, Integer.valueOf(id));
+                    return true;
+                }
+
                 WebViewActivity.start(ArticleDetailActivity.this, "", url);
                 return true;
             }
 
         });
-
     }
 
     public void setStar(boolean isStar) {

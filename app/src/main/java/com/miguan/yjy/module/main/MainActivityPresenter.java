@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.main;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,7 +10,6 @@ import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
-import com.miguan.yjy.utils.PermissionUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,7 +32,6 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     protected void onCreate(MainActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         EventBus.getDefault().register(this);
-        requestPermission();
         CommonModel.getInstance().update(getView());
     }
 
@@ -53,14 +50,6 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         loadUnread();
-    }
-
-    private void requestPermission() {
-        PermissionUtils.requestPermission(getView(), new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA
-        }, 100);
     }
 
     @Override

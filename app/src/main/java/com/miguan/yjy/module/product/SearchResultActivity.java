@@ -112,6 +112,11 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                 .setContainerEmptyView(view);
     }
 
+    public void toBillboard(View view) {
+        Intent intent = new Intent(this, BillboardActivity.class);
+        startActivity(intent);
+    }
+
     public void setData(String keywords, ProductList productList, String cateName) {
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
         if (productList.getBrand() != null && productList.getBrand().getId() <= 0) {

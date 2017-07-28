@@ -40,12 +40,16 @@ public class RepositoryListPresenter extends BaseListActivityPresenter<Repositor
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().getProductList(getView().getInputPanel().getInputText(), mBrandId, 1)
-                .map(listEntityList -> {
-                    getView().setCount(listEntityList.getPageTotal());
-                    return listEntityList.getData();
-                })
-                .unsafeSubscribe(getRefreshSubscriber());
+        if (mBrandId > 0) {
+            ProductModel.getInstance().getProductList(getView().getInputPanel().getInputText(), mBrandId, 1)
+                    .map(listEntityList -> {
+                        getView().setCount(listEntityList.getPageTotal());
+                        return listEntityList.getData();
+                    })
+                    .unsafeSubscribe(getRefreshSubscriber());
+        } else {
+            getView().getListView().showEmpty();
+        }
     }
 
     @Override

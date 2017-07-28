@@ -45,7 +45,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@+id/img_skin_test"
-                    android:textColor="@color/color_sencond_title"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/text_size_small_16"
                     tools:text="我是用户名"/>
 

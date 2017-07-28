@@ -141,7 +141,6 @@
                     android:hint="@string/tv_product_remark_hint"
                     android:paddingTop="20dp"
                     android:textColor="@color/f6"
-                    android:textColorHint="@color/fcd"
                     android:textSize="@dimen/text_size_small_15"
                     />
 

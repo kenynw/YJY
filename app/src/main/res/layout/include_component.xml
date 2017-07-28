@@ -27,7 +27,7 @@
             android:layout_weight="3"
             android:gravity="center"
             android:text="@string/tv_product_component_name"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <View
@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tv_product_component_safe"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <View
@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tv_product_component_active"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <View
@@ -78,7 +78,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tv_product_component_pox"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <View
@@ -95,7 +95,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="@string/tv_product_component_goal"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
     </LinearLayout>
 

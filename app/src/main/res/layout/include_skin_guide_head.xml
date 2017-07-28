@@ -28,7 +28,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:text="肤质护理难度"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />
 
@@ -65,7 +65,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:text="@string/text_test_feature"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />
 
@@ -107,7 +107,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:text="@string/text_test_explain"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />
 
@@ -149,7 +149,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:text="相关内容推荐"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />
 

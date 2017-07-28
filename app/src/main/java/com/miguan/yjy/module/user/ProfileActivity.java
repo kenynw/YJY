@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,9 +129,10 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         mDvAvatar.setImageURI(Uri.parse(user.getImg()));
         mTvUsername.setText(getString(user.getUsername()));
         mTvUsername.setOnClickListener(v -> showPopupWindow(TYPE_USERNAME));
-        mTvMobile.setText(getString(user.getMobile()));
+        boolean isMobile = Patterns.PHONE.matcher(user.getMobile()).find();
+        mTvMobile.setText(getString(isMobile ? user.getMobile() : ""));
         mTvMobile.setOnClickListener(v -> {
-            if (user.getMobile().isEmpty()) {
+            if (isMobile) {
                 showPopupWindow(TYPE_BIND_MOBILE);
             } else {
                 showPopupWindow(TYPE_BIND_SUCCESS);
@@ -195,7 +197,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         EditText etContent = findById(view, R.id.et_user_dialog_content);
         ImageView tvClear = findById(view, R.id.iv_user_dialog_close);
         TextView tvCancel = findById(view, R.id.tv_user_dialog_cancel);
-        TextView tvSure = findById(view, R.id.tv_user_dialog_sure);
+        TextView tvSure = findById(view, R.id.tv_user_dialog_next);
         etContent.setHint(R.string.hint_username);
         etContent.setSelection(0);
         etContent.setInputType(EditorInfo.TYPE_CLASS_TEXT);
@@ -218,7 +220,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         EditText etMobile = findById(view, R.id.et_user_dialog_content);
         LUtils.openKeyboard(etMobile);
 
-        TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_sure);
+        TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_next);
         mTvDialogSure.setText(R.string.text_user_next);
         mTvDialogSure.setOnClickListener(v -> {
             if (etMobile.getText().toString().isEmpty()) LUtils.toast("手机号码不能为空");
@@ -255,7 +257,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         ImageView mIvDialogClose = findById(view, R.id.iv_user_dialog_close);
         TextView mTvDialogCancel = findById(view, R.id.tv_user_dialog_code_cancel);
         TextView mEtDialogContent = findById(view, R.id.et_user_dialog_bind_content);
-        TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_sure);
+        TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_next);
         String mobile = "您已绑定<font color=\"#32DAC3\"> " +mTvMobile.getText() + " </font>";
         mTvDialogTitle.setText(Html.fromHtml(mobile));
         String wx = "tmshuo520";

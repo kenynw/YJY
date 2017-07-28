@@ -18,7 +18,6 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.module.article.EvaluateArticleViewHolder;
 import com.miguan.yjy.module.article.EvaluateCommendVH;
 import com.miguan.yjy.module.product.SearchActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -69,8 +68,13 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
 
     @Override
     public BaseViewHolder<Evaluate> createViewHolder(ViewGroup parent, int viewType) {
-        return viewType == 2 ? new EvaluateArticleViewHolder(parent, getPresenter())
-                : new EvaluateCommendVH(parent);
+        if (viewType == 2) {
+            return new EvaluateArticleViewHolder(parent, getPresenter());
+        } else if (viewType > 0 && viewType % 10 == 0) {
+            return new EvaluateAskViewHolder(parent, getPresenter());
+        } else {
+            return new EvaluateCommendVH(parent);
+        }
     }
 
     @Override

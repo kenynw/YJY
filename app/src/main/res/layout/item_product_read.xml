@@ -20,7 +20,7 @@
             android:layout_margin="5dp"
             android:layout_weight="3"
             android:gravity="center"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             tools:text="dsafdsfasdf"
             />
@@ -64,7 +64,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <View
@@ -80,7 +80,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
 
         <View
@@ -96,7 +96,7 @@
             android:layout_margin="5dp"
             android:layout_weight="2"
             android:gravity="center"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"/>
     </LinearLayout>
 

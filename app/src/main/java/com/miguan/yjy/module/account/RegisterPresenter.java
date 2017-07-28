@@ -29,6 +29,7 @@ public class RegisterPresenter extends Presenter<RegisterActivity> {
             @Override
             public void onNext(User user) {
                 getView().getExpansionDelegate().hideProgressBar();
+                LUtils.toast("颜值增加200分");
                 getView().setResult(Activity.RESULT_OK);
                 getView().finish();
             }

@@ -47,18 +47,37 @@
             android:orientation="vertical"
             >
 
-            <TextView
-                android:id="@id/tv_face_score_value"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingBottom="36dp"
                 android:paddingTop="@dimen/spacing_normal"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_large_material"
-                tools:text="您的颜值部分为：999"
-                />
+                android:baselineAligned="false"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large_material"
+                    android:text="@string/label_face_score"
+                    />
+
+                <TextView
+                    android:id="@id/tv_face_score_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="48sp"
+                    tools:text="999"
+                    />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"

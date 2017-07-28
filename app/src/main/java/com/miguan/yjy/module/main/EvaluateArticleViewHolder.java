@@ -1,21 +1,19 @@
-package com.miguan.yjy.module.article;
+package com.miguan.yjy.module.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.ArticleCate;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.module.article.ArticleListActivityPresenter;
+import com.miguan.yjy.module.article.EvaluateCommendVH;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.LoadingImageView;
 
@@ -37,36 +35,12 @@ public class EvaluateArticleViewHolder extends EvaluateCommendVH {
     @BindView(R.id.recy_article_cate)
     RecyclerView mRecyArticle;
 
-    @BindView(R.id.tv_evaluate_label)
-    TextView mTvLabel;
-
-    @BindView(R.id.dv_evaluate_product_img)
-    SimpleDraweeView mDvProductImg;
-
-    @BindView(R.id.tv_evaluate_product_name)
-    TextView mTvProductName;
-
-    @BindView(R.id.tv_evaluate_product_rating)
-    RatingBar mTvProductRating;
-
-    @BindView(R.id.tv_evaluate_product_spec)
-    TextView mTvProductSpec;
-
-    @BindView(R.id.ll_evaluate_product)
-    LinearLayout mLlProduct;
-
-    @BindView(R.id.tv_evaluate_commend_like)
-    TextView mTvCommendLike;
-
-    @BindView(R.id.tv_evaluate_commend_comment)
-    TextView mTvCommendComment;
-
     private OnLoadDataListener mListener;
 
     private CateAdapter mCateAdapter;
 
     public EvaluateArticleViewHolder(ViewGroup parent, OnLoadDataListener listener) {
-        super(parent, R.layout.item_list_article_cate);
+        super(parent, R.layout.item_list_evaluate_article);
         ButterKnife.bind(this, itemView);
         mListener = listener;
         mRecyArticle.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));

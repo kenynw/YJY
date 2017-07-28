@@ -2,7 +2,6 @@ package com.miguan.yjy.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -30,8 +29,6 @@ import static android.text.TextUtils.isEmpty;
  */
 
 public class SharePopupWindow extends PopupWindow implements View.OnClickListener, UMShareListener {
-
-    public static final String DEFAULT_IMAGE_URL = "http://oss.yjyapp.com/static/h5/images/logo/share.jpg";
 
     @BindView(R.id.rl_share_window)
     RelativeLayout mRlShareWindow;
@@ -76,7 +73,6 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
         setFocusable(true);
         setTouchable(true);
         setOutsideTouchable(true);
-        setBackgroundDrawable(new ColorDrawable(0x55000000));
     }
 
     private void initViews() {

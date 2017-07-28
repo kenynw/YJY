@@ -75,7 +75,7 @@
         <!--android:drawableLeft="@mipmap/ic_clean"-->
         <!--android:drawablePadding="8dp"-->
         <!--android:text="@string/tv_product_clearhistory"-->
-        <!--android:textColor="@color/color_sencond_title"-->
+        <!--android:textColor="@color/textPrimary"-->
         <!--android:textSize="@dimen/text_size_small_13"/>-->
 
 

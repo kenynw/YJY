@@ -86,10 +86,11 @@ public class WebViewOB implements UMShareListener {
     }
 
     /**
-     * 返回首页
+     * 肤质测试完成
      */
     @JavascriptInterface
     public void toHome() {
+        LUtils.toast("颜值增加100分");
         Intent intent = new Intent(mContext, MainActivity.class);
         intent.putExtra(EXTRA_WEBVIEW_TAG, 1);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);

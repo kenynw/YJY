@@ -142,18 +142,11 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
     @BindView(R.id.recy_test_article)
     RecyclerView mRecyArticle;
 
-
     @BindView(R.id.ll_test_no)
     LinearLayout mLlTestNo;
+
     @BindView(R.id.ll_test_ok)
     LinearLayout mLlTestOk;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Nullable
     @Override
@@ -257,7 +250,6 @@ public class SkinTestFragment extends BaseDataFragment<SkinTestFragmentPresenter
         mTvTestResult.setOnClickListener(this);
 
     }
-
 
     @Override
     public void onClick(View v) {

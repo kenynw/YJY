@@ -14,11 +14,6 @@ import com.umeng.socialize.UMShareAPI;
 
 public class MeFragmentPresenter extends BaseDataFragmentPresenter<MeFragment, User> {
 
-    @Override
-    protected void onCreateView(MeFragment view) {
-        super.onCreateView(view);
-    }
-
     public void loadData() {
         if (AccountModel.getInstance().isLogin()) {
             UserModel.getInstance().getUserInfo().unsafeSubscribe(getSubscriber());
@@ -42,4 +37,5 @@ public class MeFragmentPresenter extends BaseDataFragmentPresenter<MeFragment, U
         super.onDestroy();
         UMShareAPI.get(getView().getActivity()).release();
     }
+
 }
