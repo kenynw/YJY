@@ -27,7 +27,7 @@ public class EncryptInterceptor implements Interceptor {
             HttpUrl requestUrl = request.url().newBuilder()
                     .addQueryParameter("time", String.valueOf(System.currentTimeMillis() / 1000))
                     .addQueryParameter("from","android")
-                    .addQueryParameter("version", "110")
+                    .addQueryParameter("version", "111")
                     .build(); //获取请求url地址
 
             request = request.newBuilder().method(methodStr, request.body()).url(requestUrl).build();

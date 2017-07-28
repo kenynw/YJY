@@ -12,6 +12,8 @@
     <color name="bgDisable">#D8D8D8</color>
     <color name="bgAsk">#ffff7d6f</color>
     <color name="bgAnswer">#ff5ce1cf</color>
+    <color name="bgTaobao">#f38f0e</color>
+    <color name="bgJD">#c91523</color>
 
     <!--文本颜色，添加text前缀-->
     <color name="textPrimary">#222</color>
@@ -37,6 +39,7 @@
     <color name="fb74">#fb7474</color>
     <color name="f8b">#8bd67c</color>
     <color name="ffc">#ffc35a</color>
+    <color name="f57">#574800</color>
 
     <!--测试相关-->
     <color name="fa3e">#a3e8d5</color>
@@ -53,7 +56,7 @@
     <color name="first_skin">#fff158</color>
     <color name="sencond_skin">#d4f98c</color>
     <color name="third_skin">#50f3de</color>
-    <color name="fB3">#B3B3B3</color>
+    <color name="fB2">#B2B2B2</color>
 
     <!--模块-->
     <color name="f5a6">#5A6970</color>

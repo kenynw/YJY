@@ -6,8 +6,8 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
-import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.adapter.viewholder.WikiViewHolder;
+import com.miguan.yjy.model.bean.Wiki;
 
 /**
  * @作者 cjh
@@ -15,10 +15,10 @@ import com.miguan.yjy.model.bean.Article;
  * @描述
  */
 @RequiresPresenter(SkinGuideFragmentPresenter.class)
-public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresenter,Article> {
+public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresenter,Wiki> {
     @Override
-    public BaseViewHolder<Article> createViewHolder(ViewGroup parent, int viewType) {
-        return new ArticleViewHolder(parent);
+    public BaseViewHolder<Wiki> createViewHolder(ViewGroup parent, int viewType) {
+        return new WikiViewHolder(parent);
     }
 
     @Override

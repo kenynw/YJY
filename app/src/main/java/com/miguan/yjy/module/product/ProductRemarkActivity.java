@@ -3,6 +3,7 @@ package com.miguan.yjy.module.product;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -42,12 +44,6 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
     @BindView(R.id.tv_product_detail_name)
     TextView mTvName;
 
-    @BindView(R.id.tv_product_detail_spec)
-    TextView mTvSpec;
-
-    @BindView(R.id.tv_product_date_detail)
-    TextView mTvDate;
-
     @BindView(R.id.ratbar_product)
     RatingBar mRatbarProduct;
 
@@ -62,12 +58,19 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
 
     @BindView(R.id.iv_remark_image)
     ImageView mIvRemarkImage;
-    @BindView(R.id.tv_product_tag_detail)
-    TextView mTvProductTagDetail;
-    @BindView(R.id.iv_is_top)
-    ImageView mIvIsTop;
+
     @BindView(R.id.iv_remark_delete)
     ImageView mIvRemarkDelete;
+    @BindView(R.id.toolbar_back)
+    ImageView mToolbarBack;
+    @BindView(R.id.toolbar_title)
+    TextView mToolbarTitle;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.ll_toolbar)
+    LinearLayout mLlToolbar;
+    @BindView(R.id.remark_frame)
+    FrameLayout mRemarkFrame;
 
     private Uri mUri;
 
@@ -102,7 +105,6 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
     public void setProduct(Product product) {
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
-        mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
     }
 
     private void initListener() {
@@ -192,12 +194,6 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
             mIvRemarkImage.setLayoutParams(lp);
             mIvRemarkDelete.setVisibility(View.GONE);
         });
-
-
-//        if (uri != mUri) {
-//            mIvRemarkImage.setImageURI(uri);
-//            mUri = uri;
-//        }
     }
 
     @Override

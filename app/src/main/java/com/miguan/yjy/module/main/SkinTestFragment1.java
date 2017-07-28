@@ -294,7 +294,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     tag = 0;
                     if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
-                    } else if (userInfo.getSex() == 2) {
+                    } else if (sex == 2) {
                         showTestUserInfoPop();
                         setUserBirthDay();
                     } else {
@@ -312,7 +312,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     tag = 1;
                     if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
-                    } else if (userInfo.getSex() == 2) {
+                    } else if (sex == 2) {
                         showTestUserInfoPop();
                         setUserBirthDay();
                     } else {
@@ -330,7 +330,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     tag = 2;
                     if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
-                    } else if (userInfo.getSex() == 2) {
+                    } else if (sex == 2) {
                         showTestUserInfoPop();
                         setUserBirthDay();
                     } else {
@@ -349,7 +349,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     tag = 3;
                     if (TextUtils.isEmpty(birthDay)) {
                         showTestUserInfoPop();
-                    } else if (userInfo.getSex() == 2) {
+                    } else if (sex == 2) {
                         showTestUserInfoPop();
                         setUserBirthDay();
                     } else {

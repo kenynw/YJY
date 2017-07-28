@@ -68,7 +68,7 @@
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="好评"
-            android:textColor="@color/text_primary_to_primary"
+            android:textColor="@color/secondary2primary"
             android:textSize="@dimen/text_size_body_material"
             />
 
@@ -87,7 +87,7 @@
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="中评"
-            android:textColor="@color/text_primary_to_primary"
+            android:textColor="@color/secondary2primary"
             android:textSize="@dimen/text_size_body_material"
             />
 
@@ -104,7 +104,7 @@
             android:paddingRight="15dp"
             android:paddingTop="4dp"
             android:text="差评"
-            android:textColor="@color/text_primary_to_primary"
+            android:textColor="@color/secondary2primary"
             android:textSize="@dimen/text_size_body_material"
             />
 

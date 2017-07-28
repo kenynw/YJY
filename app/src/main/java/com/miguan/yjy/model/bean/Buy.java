@@ -17,35 +17,33 @@ public class Buy implements Parcelable {
     private String jd;
     private String taobao;
     private String amazon;
+    private int type;
+    private String url;
+    private String link_price;
 
-    protected Buy(Parcel in) {
-        jd = in.readString();
-        taobao = in.readString();
-        amazon = in.readString();
+
+    public int getType() {
+        return type;
     }
 
-    public static final Creator<Buy> CREATOR = new Creator<Buy>() {
-        @Override
-        public Buy createFromParcel(Parcel in) {
-            return new Buy(in);
-        }
-
-        @Override
-        public Buy[] newArray(int size) {
-            return new Buy[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setType(int type) {
+        this.type = type;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(jd);
-        dest.writeString(taobao);
-        dest.writeString(amazon);
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getLink_price() {
+        return link_price;
+    }
+
+    public void setLink_price(String link_price) {
+        this.link_price = link_price;
     }
 
     public String getJd() {
@@ -59,4 +57,43 @@ public class Buy implements Parcelable {
     public String getAmazon() {
         return amazon;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.jd);
+        dest.writeString(this.taobao);
+        dest.writeString(this.amazon);
+        dest.writeInt(this.type);
+        dest.writeString(this.url);
+        dest.writeString(this.link_price);
+    }
+
+    public Buy() {
+    }
+
+    protected Buy(Parcel in) {
+        this.jd = in.readString();
+        this.taobao = in.readString();
+        this.amazon = in.readString();
+        this.type = in.readInt();
+        this.url = in.readString();
+        this.link_price = in.readString();
+    }
+
+    public static final Creator<Buy> CREATOR = new Creator<Buy>() {
+        @Override
+        public Buy createFromParcel(Parcel source) {
+            return new Buy(source);
+        }
+
+        @Override
+        public Buy[] newArray(int size) {
+            return new Buy[size];
+        }
+    };
 }
