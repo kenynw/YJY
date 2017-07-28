@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -34,17 +35,34 @@
 
     </LinearLayout>
     <!--style="?android:attr/ratingBarStyle"-->
-    <RatingBar
+    <!--<RatingBar-->
+    <!--android:id="@+id/ratbar_skin"-->
+    <!--style="@style/MyMaxRatingBar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginBottom="35dp"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:isIndicator="true"/>-->
+    <com.miguan.yjy.widget.RatingBar
         android:id="@+id/ratbar_skin"
-        style="@style/MyMaxRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="35dp"
         android:layout_marginTop="20dp"
-        android:isIndicator="true"/>
+        android:layout_toRightOf="@+id/textView"
+        android:isIndicator="true"
+        app:starCount="5"
+        app:starEmpty="@mipmap/ic_start_no_select"
+        app:starFill="@mipmap/ic_start_selected"
+        app:starImageSize="30dp"
+        app:starPadding="5dp"
+        app:starStep="2.5"
+        app:stepSize="Half"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -73,6 +91,7 @@
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_skin_guide_feature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,6 +106,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -115,6 +135,7 @@
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_skin_guide_descirbe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -148,7 +169,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:text="相关内容推荐"
+            android:text="护肤百科"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />

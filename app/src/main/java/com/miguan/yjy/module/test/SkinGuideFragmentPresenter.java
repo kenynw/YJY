@@ -3,17 +3,16 @@ package com.miguan.yjy.module.test;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.SkinTestViewPager;
-import com.miguan.yjy.model.bean.Article;
+import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Test;
-
-import rx.Observable;
+import com.miguan.yjy.model.bean.Wiki;
+import com.miguan.yjy.widget.RatingBar;
 
 /**
  * @作者 cjh
@@ -21,7 +20,7 @@ import rx.Observable;
  * @描述
  */
 
-public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGuideFragment, Article> {
+public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGuideFragment, Wiki> {
     private Test mTest;
     RatingBar ratbarSkin;
     TextView tvSkinGuideFeature;
@@ -37,23 +36,19 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
         super.onCreateView(view);
         mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
         getAdapter().removeAllHeader();
-
-
+        getAdapter().setOnItemClickListener(v -> WikiAskActivityPresenter.start(getView().getActivity()));
         getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View view = View.inflate(getView().getContext(), R.layout.include_skin_guide_head, null);
                 ratbarSkin = (RatingBar) view.findViewById(R.id.ratbar_skin);
-                tvSkinGuideFeature = (TextView) view.findViewById(R.id.tv_skin_guide_feature);
-                tvSkinGuideDescirbe = (TextView) view.findViewById(R.id.tv_skin_guide_descirbe);
                 return view;
             }
 
             @Override
             public void onBindView(View headerView) {
-                ratbarSkin.setRating(mTest.getStar());
-                tvSkinGuideFeature.setText(mTest.getFeatures());
-                tvSkinGuideDescirbe.setText(mTest.getElements());
+                ratbarSkin.setStar(mTest.getStar());
+                ratbarSkin.setClickable(false);
             }
         });
         onRefresh();
@@ -62,14 +57,13 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
     @Override
     public void onRefresh() {
         super.onRefresh();
-        Observable.just(mTest.getSkinArticle()).unsafeSubscribe(getRefreshSubscriber());
-//        ArticleModel.getInstance().getArticleList(0, 0, 1).unsafeSubscribe(getRefreshSubscriber());
+        TestModel.getInstantce().getWikiList().unsafeSubscribe(getRefreshSubscriber());
+//        Observable.just(mTest.getSkinArticle()).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-//        ArticleModel.getInstance().getArticleList(0, 0, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
 }

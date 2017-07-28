@@ -3,9 +3,16 @@ package com.miguan.yjy.module.product;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
@@ -44,6 +51,11 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     private int mCurPage = 1;
 
     private int mProductId;
+    PopupWindow popupWindow;
+    View view;
+    TextView mTvSure;
+    private LinearLayout popPproductExplain;
+    private LinearLayout llProductExplain;
 
     //
 //    condition(string) {
@@ -145,4 +157,21 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         this.mCondition = condition;
     }
 
+
+    /**
+     * 正品保证说明
+     */
+    public void showExplain() {
+        view = View.inflate(getView(), R.layout.popwindow_product_explain, null);
+        mTvSure = (TextView) view.findViewById(R.id.tv_sure);
+        llProductExplain = view.findViewById(R.id.pop_product_explain);
+        popPproductExplain = view.findViewById(R.id.ll_product_explain);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        mTvSure.setOnClickListener(v -> popupWindow.dismiss());
+        llProductExplain.setOnClickListener(v -> popupWindow.dismiss());
+        popPproductExplain.setOnClickListener(v -> {});
+    }
 }

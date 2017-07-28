@@ -3,7 +3,6 @@ package com.miguan.yjy.adapter.viewholder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
@@ -30,8 +29,8 @@ public class MyViewHolder extends BaseViewHolder<Skin> {
     TextView mTvCategoryName;
     @BindView(R.id.rect_test_category)
     RecyclerView mRectCategory;
-    @BindView(R.id.ll_test_more)
-    LinearLayout mLlTestMore;
+//    @BindView(R.id.ll_test_more)
+//    LinearLayout mLlTestMore;
 
 
     public MyViewHolder(ViewGroup parent, Test test) {

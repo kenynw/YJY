@@ -128,7 +128,7 @@ public class SignViewPager extends ViewPager {
 ////        条件3：在instantiateItem()方法中pager.setObjectForPosition(view1,position);setObjectForPosition方法是为了调用存放你的view和他对应的position这样就完美解决了。
 ////        方式二：ViewPager中放Fragment
 ////        条件1：
-////        setObjectForPosition（）方法中是为了调用存放你的view和他对应的position，这个是参考了鸿洋大神的一篇文章，链接：http://blog.csdn.net/lmj623565791/article/details/38026503
+////        setObjectForPosition（）方法中是为了调用存放你的view和他对应的position，这个是参考了鸿洋大神的一篇文章，ic_product_detail_link：http://blog.csdn.net/lmj623565791/article/details/38026503
 ////        ，为了防止预加载导致的高度不匹配，我们加自身的fragment和position对应起来放在linkedmap里。
 ////        好了，剩下的就是调用vp.setObjectForPosition(view,1);
 ////        setObjectForPosition（）这个方法了，请看我的一个SecurityInfoFragment

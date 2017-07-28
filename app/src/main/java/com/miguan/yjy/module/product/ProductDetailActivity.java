@@ -1,16 +1,22 @@
 package com.miguan.yjy.module.product;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
+import android.support.design.widget.TabLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,6 +27,7 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -28,9 +35,11 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
+import com.miguan.yjy.adapter.FlagShipAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
@@ -159,12 +168,41 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.tv_evaluate_empty)
     TextView mTvEvaluateEmpty;
+    @BindView(R.id.tab_product_detail)
+    TabLayout mTabProductDetail;
+    @BindView(R.id.rbtn_product_high_evaluate)
+    RadioButton mRbtnProductHighEvaluate;
+    @BindView(R.id.rbtn_product_medium_evaluate)
+    RadioButton mRbtnProductMediumEvaluate;
+    @BindView(R.id.rbtn_product_bad_evaluate)
+    RadioButton mRbtnProductBadEvaluate;
+    @BindView(R.id.view_remark_show)
+    LinearLayout mViewRemarkShow;
+    @BindView(R.id.view_price_show)
+    LinearLayout mViewPriceShow;
+    @BindView(R.id.view_evaluate_show)
+    LinearLayout mViewEvaluateShow;
+    @BindView(R.id.toolbar_back)
+    ImageView mToolbarBack;
+    @BindView(R.id.toolbar_title)
+    TextView mToolbarTitle;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.ll_toolbar)
+    LinearLayout mLlToolbar;
+    @BindView(R.id.toolbar_title_img)
+    SimpleDraweeView mToolbarTitleImg;
+    @BindView(R.id.img_product_recommend_buy)
+    ImageView mImgRecommendBuy;
+    @BindView(R.id.recy_product_flagship)
+    EasyRecyclerView mRecyProductFlagship;
 
     private boolean mIsLike;
 
     private boolean mIsShowAnim;
 
     int scrollY;
+    private int lastY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +217,53 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @Override
     public void setData(Product product) {
+
+        mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+        FlagShipAdapter flagShipAdapter = new FlagShipAdapter(this, product.getLink_buy(), product);
+        mRecyProductFlagship.setAdapter(flagShipAdapter);
+        flagShipAdapter.notifyDataSetChanged();
+        mRbtnProductHighEvaluate.setText("好评(" + product.getPraise() + ")");
+        mRbtnProductMediumEvaluate.setText("中评(" + product.getMiddle() + ")");
+        mRbtnProductBadEvaluate.setText("差评(" + product.getBad() + ")");
+
+        mImgRecommendBuy.setOnClickListener(v -> getPresenter().showExplain());
+
+        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("产品"));
+        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("成分"));
+        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("比价"));
+        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("评价"));
+        mTabProductDetail.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        mCustSrcoll.setScrollY(0);
+                        break;
+                    case 1:
+                        mCustSrcoll.setScrollY(mViewRemarkShow.getTop());
+                        break;
+                    case 2:
+                        mCustSrcoll.setScrollY(mViewPriceShow.getTop());
+                        break;
+                    case 3:
+                        mCustSrcoll.setScrollY(mViewEvaluateShow.getTop());
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         mCustSrcoll.setOnTouchListener(new View.OnTouchListener() {
-            private int lastY = 0;
+
             private int touchEventId = -9983761;
             Handler handler = new Handler() {
                 @Override
@@ -215,13 +298,69 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
         });
 
+        mCustSrcoll.setNestedScrollingEnabled(false);
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenHeight = displaymetrics.heightPixels;
+
+        int actionBarHeight = 0;
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        }
+
+        mCustSrcoll.setMinimumHeight(screenHeight - actionBarHeight);
         mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY == 0) {
+                    mTabProductDetail.setClickable(true);
+                } else {
+                    mTabProductDetail.setClickable(false);
+                }
                 if (mIsShowAnim) {
                 } else {
                     showInAnim();
                 }
+                if (scrollY <= 0) {   //设置标题的背景颜色
+                    mTabProductDetail.setVisibility(View.GONE);
+                    mToolbarTitle.setVisibility(View.VISIBLE);
+                    mToolbarTitleImg.setVisibility(View.GONE);
+                    mLlToolbar.setBackgroundColor(Color.argb((int) 0, 255, 255, 255));
+
+                } else if (scrollY > 0 && scrollY <= 100) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
+                    mTabProductDetail.setVisibility(View.VISIBLE);
+                    float scale = (float) scrollY / 100;
+                    float alpha = (255 * scale);
+                    mToolbarTitle.setVisibility(View.GONE);
+                    mToolbarTitleImg.setVisibility(View.VISIBLE);
+                    mToolbarTitleImg.setImageURI(Uri.parse(product.getProduct_img()));
+//                    mToolbarTitle.setTextColor(Color.argb((int) alpha, 1, 24, 28));
+                    mLlToolbar.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
+                } else {    //滑动到banner下面设置普通颜色
+                    mTabProductDetail.setVisibility(View.VISIBLE);
+                    mToolbarTitle.setVisibility(View.GONE);
+                    mLlToolbar.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
+                    mToolbarTitleImg.setVisibility(View.VISIBLE);
+                    mToolbarTitleImg.setImageURI(Uri.parse(product.getProduct_img()));
+                }
+
+
+                Log.e("ssss", "===scroller.getScrollY()===" + scrollY);
+//                Log.e("", "===mViewRemarkShow()==="+mViewRemarkShow.getTop());
+//                Log.e("", "===scroller.mViewPriceShow()==="+mViewPriceShow.getTop());
+//                Log.e("", "===scroller.mViewEvaluateShow()==="+mViewEvaluateShow.getTop());
+//                if (lastY >= 0 && lastY < mViewRemarkShow.getTop()) {
+//                    mTabProductDetail.getTabAt(0).select();
+//                } else if (lastY >= mViewRemarkShow.getTop() && lastY < mViewPriceShow.getTop()) {
+//                    mTabProductDetail.getTabAt(1).select();
+//                } else if (lastY >= mViewPriceShow.getTop() && lastY < mViewEvaluateShow.getTop()) {
+//                    mTabProductDetail.getTabAt(2).select();
+//                } else if (lastY >= mViewEvaluateShow.getTop()) {
+//                    mTabProductDetail.getTabAt(3).select();
+//                } else {
+//
+//                }
             }
         });
 
@@ -396,6 +535,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
         evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+        mRecyEvalutate.setNestedScrollingEnabled(false);
         DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
         decoration.setDrawLastItem(false);
         mRecyEvalutate.addItemDecoration(decoration);

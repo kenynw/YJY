@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
@@ -8,7 +10,76 @@
     android:orientation="vertical"
     >
 
-    <include layout="@layout/include_toolbar"/>
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/status_bar_height"
+            android:background="@color/white"
+            />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/toolbar"
+            style="@style/TitleToolbar"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            >
+
+            <ImageView
+                android:id="@id/toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_back"
+                />
+
+            <TextView
+                android:id="@id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:textAppearance="@style/TextSubhead"
+                tools:text="这是标题"
+                />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/toolbar_title_img"
+                style="@style/BaseImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextSubhead"
+                android:visibility="gone"
+                app:failureImage="@mipmap/def_image_product"
+                app:placeholderImage="@mipmap/def_image_product"
+                tools:text=""
+                />
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_product_detail"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            app:tabSelectedTextColor="@color/colorPrimary">
+
+
+        </android.support.design.widget.TabLayout>
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,65 +101,40 @@
 
                 <include layout="@layout/include_product_info"/>
 
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_height="10dp"/>
+                <LinearLayout
+                    android:id="@+id/view_remark_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/f5"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:text="@string/tv_product_detail_match"-->
-                <!--android:textAppearance="@style/TextSubhead"-->
-                <!--/>-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="7dp"
+                        android:background="@color/f6"/>
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:layout_marginRight="15dp"-->
-                <!--android:layout_marginTop="20dp"-->
-                <!--android:orientation="horizontal">-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="成分信息"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_small_15"/>
 
-                <!--<TextView-->
-                <!--android:id="@+id/tv_product_suit_num"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:background="@drawable/shape_round_divider"-->
-                <!--android:gravity="center"-->
-                <!--android:paddingBottom="4dp"-->
-                <!--android:paddingLeft="15dp"-->
-                <!--android:paddingRight="15dp"-->
-                <!--android:paddingTop="4dp"-->
-                <!--android:text="@string/tv_product_fit_skin"-->
-                <!--android:textColor="@color/textPrimary"-->
-                <!--android:textSize="@dimen/text_size_small_14"-->
-                <!--/>-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:background="@color/f6"/>
 
-                <!--<TextView-->
-                <!--android:id="@+id/tv_product_unsuit_num"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:background="@drawable/shape_round_divider"-->
-                <!--android:gravity="center"-->
-                <!--android:paddingBottom="4dp"-->
-                <!--android:paddingLeft="15dp"-->
-                <!--android:paddingRight="15dp"-->
-                <!--android:paddingTop="4dp"-->
-                <!--android:text="@string/tv_product_no_fit_skin"-->
-                <!--android:textColor="@color/textPrimary"-->
-                <!--android:textSize="@dimen/text_size_small_14"-->
-                <!--/>-->
+                </LinearLayout>
 
-                <!--</LinearLayout>-->
                 <LinearLayout
                     android:id="@+id/ll_product_detail_read"
                     android:layout_width="match_parent"
@@ -175,16 +221,77 @@
 
                 <include layout="@layout/include_product_effect_safe"/>
 
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_height="10dp"/>
+                <LinearLayout
+                    android:id="@+id/view_price_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/f5"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="7dp"
+                        android:background="@color/f6"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_product_detail_compare_price"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_small_15"/>
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:background="@color/f6"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:text="推荐官方渠道"
+                        android:textColor="@color/color_sencond_title"
+                        android:textSize="@dimen/text_size_small_15"/>
+
+                    <ImageView
+                        android:id="@+id/img_product_recommend_buy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:src="@mipmap/ic_skin_grade"/>
+
+                </LinearLayout>
+
+                <com.jude.easyrecyclerview.EasyRecyclerView
+                    android:id="@+id/recy_product_flagship"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.jude.easyrecyclerview.EasyRecyclerView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
-                    android:text="@string/tv_product_detail_compare_price"
+                    android:text="其他购买渠道"
                     android:textColor="@color/textPrimary"
                     android:textSize="@dimen/text_size_small_15"/>
 
@@ -235,9 +342,39 @@
 
                 </LinearLayout>
 
-                <View
-                    style="@style/ItemLineHeight"
-                    android:layout_height="10dp"/>
+                <LinearLayout
+                    android:id="@+id/view_evaluate_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/f5"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="7dp"
+                        android:background="@color/f6"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="用户评论"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_small_15"/>
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:background="@color/f6"/>
+
+                </LinearLayout>
 
                 <include layout="@layout/include_evaluate_list"/>
 

@@ -89,9 +89,19 @@ public class Product implements Parcelable {
 
     private Buy buy;
 
+    private ArrayList<Buy> link_buy;
+
+    public ArrayList<Buy> getLink_buy() {
+        return link_buy;
+    }
+
+    public void setLink_buy(ArrayList<Buy> link_buy) {
+        this.link_buy = link_buy;
+    }
+
     public String getSpec(Context context) {
         return price.equals("0") || price.equals("0.00") || TextUtils.isEmpty(price) ? "暂无报价" :
-        String.format(context.getString(R.string.text_product_spec), price, form);
+                String.format(context.getString(R.string.text_product_spec), price, form);
     }
 
     public int getIs_top() {
@@ -125,6 +135,7 @@ public class Product implements Parcelable {
     public void setTagList(List<String> tagList) {
         this.tagList = tagList;
     }
+
     private boolean isLocal;
 
     public int getEffectNum() {
@@ -357,6 +368,7 @@ public class Product implements Parcelable {
     public void setNotRecommend(List<String> notRecommend) {
         this.notRecommend = notRecommend;
     }
+
     public List<String> getRecommend() {
         return recommend;
     }

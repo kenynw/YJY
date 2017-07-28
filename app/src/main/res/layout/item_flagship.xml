@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tool="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/frame_flagship"
+        android:layout_width="62dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="62dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img_flagShip_price"
+            style="@style/BaseImage"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+          />
+
+        <TextView
+            android:id="@+id/tv_flagShip_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/red"
+            android:layout_margin="3dp"
+            android:text="京东"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_tiny"
+            tool:text="@string/text_jingdong"/>
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_flagship_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/frame_flagship"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_small_14"
+        android:layout_marginTop="9dp"
+        tool:text="name"/>
+
+    <TextView
+        android:id="@+id/tv_flagship_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_flagship_product_name"
+        android:layout_below="@+id/tv_flagship_product_name"
+        android:textColor="@color/textTertiary"
+        android:textSize="@dimen/text_size_small_14"
+        tool:text="价格"/>
+
+    <TextView
+        android:id="@+id/tv_flagship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:background="@mipmap/bg_flagship"
+        android:gravity="center"
+        android:text="官方旗舰店  >"
+        android:textColor="@color/f57"
+        android:textSize="@dimen/text_size_small_14"/>
+
+    <View
+        style="@style/ItemLineHeight"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

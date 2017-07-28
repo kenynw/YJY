@@ -4,6 +4,7 @@ import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.Test;
+import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -59,6 +60,17 @@ public class TestModel extends AbsModel {
         return Observable.just(tests);
     }
 
+    public Observable<List<Wiki>> getWikiList() {
+        List<Wiki> wiki = new ArrayList<>();
+        String[] strings = {"洗面奶", "测试2", "测试3", "测试4"};
+        for (int i = 0; i < 4; i++) {
+            Wiki test = new Wiki();
+            test.setName(strings[i]);
+            wiki.add(test);
+        }
+        return Observable.just(wiki);
+    }
+
     /**
      * 肤质提交接口
      *
@@ -100,17 +112,16 @@ public class TestModel extends AbsModel {
     /**
      * 肤质推荐列表接口
      */
-    public Observable<List<Product>> getSkinRecommendList(String cateId,float min,float max, int page) {
-        return getServices().getSkinRecommendList(UserPreferences.getToken(), cateId,min,max, page, 10).compose(new DefaultTransform<>());
+    public Observable<List<Product>> getSkinRecommendList(String cateId, float min, float max, int page) {
+        return getServices().getSkinRecommendList(UserPreferences.getToken(), cateId, min, max, page, 10).compose(new DefaultTransform<>());
     }
 
     /**
      * 肤质推荐接口
      */
     public Observable<Test> getSkinRecom() {
-      return ServicesClient.getServices().getSkinRecommend(UserPreferences.getToken()).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().getSkinRecommend(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
-
 
 
 }
