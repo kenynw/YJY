@@ -268,7 +268,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_weight="1"
                         android:text="推荐官方渠道"
-                        android:textColor="@color/color_sencond_title"
+                        android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_size_small_15"/>
 
                     <ImageView

@@ -61,7 +61,7 @@
             android:gravity="center"
             android:paddingLeft="10dp"
             android:text="相关问题"
-            android:textColor="@color/color_sencond_title"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_small_14"
             />
 
