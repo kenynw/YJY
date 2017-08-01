@@ -2,6 +2,7 @@ package com.miguan.yjy.module.product;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -22,9 +23,11 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -81,6 +84,10 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     TextView mTvBrandMain;
     @BindView(R.id.ll_product_include_brand)
     LinearLayout mLlIncludeBrand;
+    @BindView(R.id.tbtn_product_filter_all)
+    ToggleButton mTbtnProductFilterAll;
+    @BindView(R.id.recy_search_billBoard)
+    EasyRecyclerView mRecySearchBillBoard;
 
     private SearchFilterPanel mFilterPanel;
 
@@ -118,6 +125,15 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
+        mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(this,productList.getRank()) {
+            @Override
+            public BillboardViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                return new BillboardViewHolder(parent);
+            }
+        });
+
+
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
         if (productList.getBrand() != null && productList.getBrand().getId() <= 0) {
             mLlIncludeBrand.setVisibility(View.GONE);
@@ -219,6 +235,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mLlIncludeBrand.setVisibility(visibility);
         mFilterPanel.setVisibility(visibility);
     }
+
     private void clearStr() {
         mEtKeywords.setText("");
     }

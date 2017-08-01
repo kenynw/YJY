@@ -60,12 +60,12 @@ public class TestModel extends AbsModel {
         return Observable.just(tests);
     }
 
-    public Observable<List<Wiki>> getWikiList() {
+    public Observable<List<Wiki>> getWikiListText() {
         List<Wiki> wiki = new ArrayList<>();
         String[] strings = {"洗面奶", "测试2", "测试3", "测试4"};
         for (int i = 0; i < 4; i++) {
             Wiki test = new Wiki();
-            test.setName(strings[i]);
+            test.setQuestion(strings[i]);
             wiki.add(test);
         }
         return Observable.just(wiki);
@@ -117,10 +117,10 @@ public class TestModel extends AbsModel {
     }
 
     /**
-     * 肤质推荐接口
+     * 护肤百科详情页
      */
-    public Observable<Test> getSkinRecom() {
-        return ServicesClient.getServices().getSkinRecommend(UserPreferences.getToken()).compose(new DefaultTransform<>());
+    public Observable<Wiki> getBaikeInfo(String baikeId) {
+        return ServicesClient.getServices().getBaikeInfo(baikeId).compose(new DefaultTransform<>());
     }
 
 

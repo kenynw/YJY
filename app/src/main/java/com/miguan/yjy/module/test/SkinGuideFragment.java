@@ -15,9 +15,9 @@ import com.miguan.yjy.model.bean.Wiki;
  * @描述
  */
 @RequiresPresenter(SkinGuideFragmentPresenter.class)
-public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresenter,Wiki> {
+public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresenter,Wiki.RelationInfo> {
     @Override
-    public BaseViewHolder<Wiki> createViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder<Wiki.RelationInfo> createViewHolder(ViewGroup parent, int viewType) {
         return new WikiViewHolder(parent);
     }
 

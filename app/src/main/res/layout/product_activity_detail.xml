@@ -100,41 +100,6 @@
                 android:orientation="vertical">
 
                 <include layout="@layout/include_product_info"/>
-
-                <LinearLayout
-                    android:id="@+id/view_remark_show"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/f5"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingBottom="15dp"
-                    android:paddingTop="15dp">
-
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="7dp"
-                        android:background="@color/f6"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="成分信息"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/text_size_small_15"/>
-
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="7dp"
-                        android:background="@color/f6"/>
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/ll_product_detail_read"
                     android:layout_width="match_parent"
@@ -181,6 +146,41 @@
                         android:layout_marginTop="15dp"
                         android:paddingLeft="30dp"
                         android:paddingRight="15dp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/view_remark_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/f5"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="7dp"
+                        android:background="@color/f6"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="成分信息"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_small_15"/>
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="7dp"
+                        android:background="@color/f6"/>
 
                 </LinearLayout>
 

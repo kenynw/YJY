@@ -18,7 +18,7 @@ public class EncryptInterceptor implements Interceptor {
 
     private static final String TAG = EncryptInterceptor.class.getSimpleName();
 
-    public static final String API_VERSION = "110";
+    public static final String API_VERSION = "111";
 
     @Override
     public Response intercept(Chain chain) throws IOException {

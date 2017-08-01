@@ -14,18 +14,23 @@ import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.widget.RatingBar;
 
+import java.util.List;
+
+import rx.functions.Func1;
+
 /**
  * @作者 cjh
  * @日期 2017/6/21 14:34
  * @描述
  */
 
-public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGuideFragment, Wiki> {
+public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGuideFragment, Wiki.RelationInfo> {
     private Test mTest;
     RatingBar ratbarSkin;
     TextView tvSkinGuideFeature;
     TextView tvSkinGuideDescirbe;
 
+    private String baikeId;
     @Override
     protected void onCreate(SkinGuideFragment view, Bundle saveState) {
         super.onCreate(view, saveState);
@@ -36,7 +41,7 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
         super.onCreateView(view);
         mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
         getAdapter().removeAllHeader();
-        getAdapter().setOnItemClickListener(v -> WikiAskActivityPresenter.start(getView().getActivity()));
+        getAdapter().setOnItemClickListener(v -> WikiAskActivityPresenter.start(getView().getActivity(),"1"));
         getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
@@ -57,7 +62,13 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
     @Override
     public void onRefresh() {
         super.onRefresh();
-        TestModel.getInstantce().getWikiList().unsafeSubscribe(getRefreshSubscriber());
+        TestModel.getInstantce().getBaikeInfo(baikeId).map(new Func1<Wiki, List<Wiki.RelationInfo>>() {
+
+            @Override
+            public List<Wiki.RelationInfo> call(Wiki wiki) {
+                return wiki.getRelation_info();
+            }
+        }) .unsafeSubscribe(getRefreshSubscriber());
 //        Observable.just(mTest.getSkinArticle()).unsafeSubscribe(getRefreshSubscriber());
     }
 

@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * @描述
  */
 
-public class WikiViewHolder extends BaseViewHolder<Wiki> {
+public class WikiViewHolder extends BaseViewHolder<Wiki.RelationInfo> {
 
 
     @BindView(R.id.tv_wiki_name)
@@ -30,10 +30,10 @@ public class WikiViewHolder extends BaseViewHolder<Wiki> {
     }
 
     @Override
-    public void setData(Wiki data) {
+    public void setData(Wiki.RelationInfo data) {
         super.setData(data);
 
-        String name = data.getName() + " <b><tt><font color='#ff0000'>·NEW</font></tt></b>";
+        String name = data.getQuestion() + " <b><tt><font color='#ff0000'>·NEW</font></tt></b>";
         mTvWikiName.setText(Html.fromHtml(name));
     }
 

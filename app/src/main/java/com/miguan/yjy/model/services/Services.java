@@ -17,6 +17,7 @@ import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.utils.LUtils;
 
 import java.util.List;
@@ -724,6 +725,15 @@ public interface Services {
     @GET("?action=getSkinRecommend")
     Observable<Test> getSkinRecommend(
             @Query("token") String token
+    );
+    /**
+     * 护肤百科详情页
+     * action(string) － 固定值BaikeInfo
+     * user_id(int) － 用户ID
+     */
+    @GET("?action=BaikeInfo")
+    Observable<Wiki> getBaikeInfo(
+            @Query("baike_id") String baikeId
     );
 
     ////////////////////其他//////////////////////

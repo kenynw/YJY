@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class ProductList extends EntityList {
+    private List<Rank> rank;
 
     @SerializedName(value = "data", alternate = {"product"})
     private List<Product> product;
@@ -22,6 +23,14 @@ public class ProductList extends EntityList {
     private List<Effect> effectList;
 
     private Brand brand;
+
+    public List<Rank> getRank() {
+        return rank;
+    }
+
+    public void setRank(List<Rank> rank) {
+        this.rank = rank;
+    }
 
     public Brand getBrand() {
         return brand;
@@ -68,6 +77,7 @@ public class ProductList extends EntityList {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
+        dest.writeTypedList(this.rank);
         dest.writeTypedList(this.product);
         dest.writeTypedList(this.categoryList);
         dest.writeTypedList(this.effectList);
@@ -76,6 +86,7 @@ public class ProductList extends EntityList {
 
     protected ProductList(Parcel in) {
         super(in);
+        this.rank = in.createTypedArrayList(Rank.CREATOR);
         this.product = in.createTypedArrayList(Product.CREATOR);
         this.categoryList = in.createTypedArrayList(Category.CREATOR);
         this.effectList = in.createTypedArrayList(Effect.CREATOR);
