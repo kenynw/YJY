@@ -26,6 +26,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.MobileBindPopupWindow;
 import com.miguan.yjy.widget.SecurityCodeView;
 import com.miguan.yjy.widget.SendValidateButton;
 
@@ -132,7 +133,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         boolean isMobile = Patterns.PHONE.matcher(user.getMobile()).find();
         mTvMobile.setText(getString(isMobile ? user.getMobile() : ""));
         mTvMobile.setOnClickListener(v -> {
-            if (isMobile) {
+            if (!isMobile) {
                 showPopupWindow(TYPE_BIND_MOBILE);
             } else {
                 showPopupWindow(TYPE_BIND_SUCCESS);
@@ -178,9 +179,10 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
                 mPopupWindow.setContentView(createModifyUsernameView());
                 break;
             case TYPE_BIND_MOBILE :
-                mPopupWindow.setContentView(createBindMobileView());
+                new MobileBindPopupWindow(this).showAtLocation(getContent(), Gravity.TOP, 0, 0);
                 break;
             case TYPE_BIND_SUCCESS:
+
                 mPopupWindow.setContentView(createBindSuccessView());
                 break;
             case TYPE_CAPTCHA:

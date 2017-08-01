@@ -15,13 +15,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.AccountModel;
-import com.miguan.yjy.model.bean.User;
+import com.miguan.yjy.model.services.ServiceException;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -35,11 +36,15 @@ import butterknife.ButterKnife;
 
 public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, View.OnClickListener {
 
-    private Context mContext;
 
     private int mCaptchaTextColor = 0xff707070;
 
+    private Context mContext;
+
     private AlertDialog mHelpDialog;
+
+    @BindView(R.id.ll_bind_mobile)
+    LinearLayout mLlBindMobile;
 
     @BindView(R.id.tv_user_dialog_title)
     TextView mTvTitle;
@@ -148,8 +153,7 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
                     Button btnOk = dialogView.findViewById(R.id.btn_bind_mobile_ok);
                     btnOk.setOnClickListener(v -> mHelpDialog.dismiss());
 
-                    mHelpDialog = new AlertDialog.Builder(mContext)
-                            .setView(dialogView).create();
+                    mHelpDialog = new AlertDialog.Builder(mContext).setView(dialogView).create();
                 }
 
                 if (!mHelpDialog.isShowing()) {
@@ -161,15 +165,13 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
                 mEtContent.setText("");
                 break;
             case R.id.tv_user_dialog_cancel:
-                dismiss();
+                hide();
                 break;
             case R.id.tv_bind_mobile_captcha:
                 sendCaptcha();
                 break;
             case R.id.tv_user_dialog_next:
-                dismiss();
-                setContentView(createPasswordView());
-                show();
+                checkMobile();
                 break;
         }
     }
@@ -189,17 +191,52 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
                 });
     }
 
-    public void bindMobile(String newPwd) {
-        AccountModel.getInstance().resetPassword(mEtContent.getText().toString().trim(),
-                mEtCaptcha.getText().toString().trim(), newPwd)
-                .unsafeSubscribe(new ServicesResponse<User>() {
+    private void checkMobile() {
+        if (mEtContent.getText().length() <= 0) {
+            LUtils.toast("手机号不能为空");
+            return;
+        }
+
+        if (mEtCaptcha.getText().length() <= 0) {
+            LUtils.toast("验证码不能为空");
+            return;
+        }
+
+        AccountModel.getInstance()
+                .checkMobile(mEtContent.getText().toString().trim(), mEtCaptcha.getText().toString().trim())
+                .unsafeSubscribe(new ServicesResponse<String>() {
                     @Override
-                    public void onNext(User user) {
+                    public void onNext(String s) {
                         dismiss();
+                        setContentView(createPasswordView());
+                        show();
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        if (e instanceof ServiceException) {
+                            if (((ServiceException) e).getCode() == -22) {
+                                LUtils.toast("该手机号已注册，请退出后用手机登录");
+                            } else {
+                                LUtils.toast(((ServiceException) e).getMsg());
+                            }
+                        }
+                    }
+                });
+    }
+
+    public void bindMobile(String newPwd) {
+        AccountModel.getInstance().setPassword(mEtContent.getText().toString().trim(),
+                mEtCaptcha.getText().toString().trim(), newPwd)
+                .unsafeSubscribe(new ServicesResponse<String>() {
+                    @Override
+                    public void onNext(String result) {
+                        hide();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LUtils.toast("验证码错误");
                         dismiss();
                         setContentView(mMobileView);
                         show();
@@ -211,7 +248,28 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
         View view = View.inflate(mContext, R.layout.popwindow_user_set_password, null);
         EditText input = view.findViewById(R.id.et_set_password);
         TextView done = view.findViewById(R.id.tv_set_password_done);
-        done.setOnClickListener(v -> bindMobile(input.getText().toString().trim()));
+        done.setOnClickListener(v -> {
+            AccountModel.getInstance().setPassword(
+                    mEtContent.getText().toString().trim(),
+                    mEtCaptcha.getText().toString().trim(),
+                    input.getText().toString().trim()
+            )
+                    .unsafeSubscribe(new ServicesResponse<String>() {
+                        @Override
+                        public void onNext(String result) {
+                            LUtils.closeKeyboard(input);
+                            dismiss();
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            LUtils.toast("验证码错误");
+                            dismiss();
+                            setContentView(mMobileView);
+                            show();
+                        }
+                    });
+        });
         input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -234,6 +292,12 @@ public class MobileBindPopupWindow extends PopupWindow implements TextWatcher, V
 
     private void show() {
         showAtLocation(((ChainBaseActivity) mContext).getContent(), Gravity.NO_GRAVITY, 0, 0);
+    }
+
+    private void hide() {
+        LUtils.closeKeyboard(mEtCaptcha);
+        LUtils.closeKeyboard(mEtContent);
+        dismiss();
     }
 
 }

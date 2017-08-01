@@ -78,7 +78,7 @@ public class ArticleModel extends AbsModel {
     /**
      * 精华点评列表
      */
-    public Observable<List<Evaluate>> getEssenceList(int page) {
+    public Observable<Evaluate> getEssenceList(int page) {
         return ServicesClient.getServices()
                 .essenceList(UserPreferences.getToken(), page)
                 .compose(new DefaultTransform<>());

@@ -104,15 +104,37 @@ public class AccountModel extends AbsModel {
     }
 
     /**
+     * 绑定手机号
+     * @param mobile
+     * @param captcha
+     * @return
+     */
+    public Observable<String> checkMobile(String mobile, String captcha) {
+        return ServicesClient.getServices().checkMobile(UserPreferences.getToken(), mobile, captcha).compose(new DefaultTransform<>());
+    }
+
+    /**
      * 用户重置密码
      * action(string) － 固定值resetPassword
      * mobile(string) － 手机号码
      * captcha(int) － 验证码
      * newPassword(string) － 新密码
      */
-    public Observable<User> resetPassword(String mobile,String captcha,String newPwd) {
+    public Observable<User> resetPassword(String mobile, String captcha, String newPwd) {
         return ServicesClient.getServices().modifyPwd(mobile, captcha, newPwd)
                 .doOnNext(this::saveAccount)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 绑定手机设置密码
+     * action(string) － 固定值resetPassword
+     * mobile(string) － 手机号码
+     * captcha(int) － 验证码
+     * newPassword(string) － 新密码
+     */
+    public Observable<String> setPassword(String mobile, String captcha, String newPwd) {
+        return ServicesClient.getServices().setPassword(UserPreferences.getToken(), mobile, captcha, newPwd, 4)
                 .compose(new DefaultTransform<>());
     }
 

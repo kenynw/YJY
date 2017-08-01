@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/half_transparent"
     android:orientation="vertical">
 
@@ -21,19 +21,45 @@
             android:background="@color/white"
             android:gravity="center"
             android:paddingTop="25dp"
-            android:text="@string/text_user_get_code"
+            android:text="@string/text_user_bind_mobile"
             android:textColor="@color/textPrimary"
             android:textSize="@dimen/text_size_large_20"/>
 
-        <com.miguan.yjy.widget.SecurityCodeView
-            android:id="@+id/scv_edt"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"></com.miguan.yjy.widget.SecurityCodeView>
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="50dp">
 
+            <EditText
+                android:id="@+id/et_user_dialog_content"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/widget_medium"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/hint_mobile"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textAlignment="center"
+                >
+
+                <requestFocus/>
+            </EditText>
+
+            <ImageView
+                android:id="@+id/iv_user_dialog_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="36dp"
+                android:src="@mipmap/ic_user_close_mobile"/>
+
+        </LinearLayout>
+
+        <View
+            style="@style/ItemLineHeight"/>
 
         <View
             style="@style/ItemLineHeight"
@@ -52,27 +78,29 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/text_user_previous"
-                android:textColor="@color/textPrimary"
-                android:textSize="@dimen/text_size_small_16"/>
+                android:text="@string/tv_cancel"
+                android:textAppearance="@style/TextSubhead"
+                />
 
             <View
                 style="@style/ItemLineHeight"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"/>
 
-            <com.miguan.yjy.widget.SendValidateButton
-                android:id="@+id/btn_user_dialog_sure"
+            <TextView
+                android:id="@+id/tv_user_dialog_sure"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@color/white"
                 android:gravity="center"
-                android:text="@string/btn_user_again"
+                android:text="@string/btn_save"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_small_16"/>
+                android:textSize="@dimen/text_size_small_16"
+                />
 
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.miguan.yjy.module.main;
 
+import android.text.Html;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -8,8 +10,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.article.EvaluateCommendVH;
-
-import java.util.ArrayList;
+import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
 
 import butterknife.BindView;
 
@@ -28,6 +29,9 @@ public class EvaluateAskViewHolder extends EvaluateCommendVH {
     @BindView(R.id.dv_evaluate_ask_thumb)
     SimpleDraweeView mDvAskThumb;
 
+    @BindView(R.id.ll_evaluate_ask)
+    LinearLayout mLlAsk;
+
     private OnLoadAskListener mDataListener;
 
     public EvaluateAskViewHolder(ViewGroup parent, OnLoadAskListener listener) {
@@ -38,16 +42,18 @@ public class EvaluateAskViewHolder extends EvaluateCommendVH {
     @Override
     public void setData(Evaluate data) {
         super.setData(data);
-        if (getAdapterPosition() % 10 > 0 && getAdapterPosition() % 10 < mDataListener.getAskList().size()) {
-            Ask ask = mDataListener.getAskList().get(getAdapterPosition() % 10);
+        if (mDataListener != null && mDataListener.getAsk() != null) {
+            Ask ask = mDataListener.getAsk();
             mTvAskTitle.setText(ask.getSubject());
-            mTvAskTotal.setText(String.format(getContext().getString(R.string.text_home_ask_total), ask.getNum()));
-//            mDvAskThumb.setImageURI(ask.getProduct_img());
+            String total = String.format(getContext().getString(R.string.text_home_ask_total), ask.getNum());
+            mTvAskTotal.setText(Html.fromHtml(total));
+            mDvAskThumb.setImageURI(ask.getProduct_img());
+            mLlAsk.setOnClickListener(v -> AskDetailActivityPresenter.start(getContext(), ask.getProduct_id(), ask.getAskid()));
         }
     }
 
     public interface OnLoadAskListener {
-        ArrayList<Ask> getAskList();
+        Ask getAsk();
     }
 
 }

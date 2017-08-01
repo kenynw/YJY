@@ -4,10 +4,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Looper;
 
 import com.miguan.yjy.module.main.MainActivity;
-import com.miguan.yjy.utils.LUtils;
 
 /**
  * Copyright (c) 2017/5/11. LiaoPeiKun Inc. All rights reserved.
@@ -41,14 +39,14 @@ public class AppCrashHandler {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread t, Throwable e) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        LUtils.toast("很抱歉,程序出现异常,即将重启");
-                        Looper.loop();
-                    }
-                }.start();
+//                new Thread() {
+//                    @Override
+//                    public void run() {
+//                        Looper.prepare();
+//                        LUtils.toast("很抱歉,程序出现异常,即将重启");
+//                        Looper.loop();
+//                    }
+//                }.start();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ie) {

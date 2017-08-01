@@ -207,7 +207,7 @@ public class WebViewOB implements UMShareListener {
 
     @Override
     public void onStart(SHARE_MEDIA share_media) {
-
+        mContext.getExpansionDelegate().hideProgressBar();
     }
 
     @Override

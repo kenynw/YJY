@@ -58,6 +58,10 @@ public class Evaluate implements Parcelable {
 
     private String replyUserName;
 
+    private List<Evaluate> essence;
+
+    private List<Ask> ask;
+
     public int getIs_digest() {
         return is_digest;
     }
@@ -230,6 +234,22 @@ public class Evaluate implements Parcelable {
         this.replyUserName = replyUserName;
     }
 
+    public List<Evaluate> getEssence() {
+        return essence;
+    }
+
+    public void setEssence(List<Evaluate> essence) {
+        this.essence = essence;
+    }
+
+    public List<Ask> getAsk() {
+        return ask;
+    }
+
+    public void setAsk(List<Ask> ask) {
+        this.ask = ask;
+    }
+
     public static class Item implements Parcelable {
 
         private int id;
@@ -328,6 +348,7 @@ public class Evaluate implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
+        dest.writeInt(this.post_id);
         dest.writeInt(this.type);
         dest.writeString(this.comment);
         dest.writeInt(this.like_num);
@@ -335,16 +356,25 @@ public class Evaluate implements Parcelable {
         dest.writeInt(this.isLike);
         dest.writeInt(this.is_digest);
         dest.writeString(this.username);
+        dest.writeString(this.author);
         dest.writeString(this.img);
         dest.writeString(this.skin);
         dest.writeInt(this.age);
+        dest.writeString(this.attachment);
+        dest.writeInt(this.level);
         dest.writeParcelable(this.user, flags);
         dest.writeParcelable(this.product, flags);
         dest.writeParcelable(this.detail, flags);
+        dest.writeParcelable(this.reply, flags);
+        dest.writeTypedList(this.replyList);
+        dest.writeString(this.replyUserName);
+        dest.writeTypedList(this.essence);
+        dest.writeTypedList(this.ask);
     }
 
     protected Evaluate(Parcel in) {
         this.id = in.readInt();
+        this.post_id = in.readInt();
         this.type = in.readInt();
         this.comment = in.readString();
         this.like_num = in.readInt();
@@ -352,12 +382,20 @@ public class Evaluate implements Parcelable {
         this.isLike = in.readInt();
         this.is_digest = in.readInt();
         this.username = in.readString();
+        this.author = in.readString();
         this.img = in.readString();
         this.skin = in.readString();
         this.age = in.readInt();
+        this.attachment = in.readString();
+        this.level = in.readInt();
         this.user = in.readParcelable(User.class.getClassLoader());
         this.product = in.readParcelable(Product.class.getClassLoader());
         this.detail = in.readParcelable(Item.class.getClassLoader());
+        this.reply = in.readParcelable(Evaluate.class.getClassLoader());
+        this.replyList = in.createTypedArrayList(Evaluate.CREATOR);
+        this.replyUserName = in.readString();
+        this.essence = in.createTypedArrayList(Evaluate.CREATOR);
+        this.ask = in.createTypedArrayList(Ask.CREATOR);
     }
 
     public static final Creator<Evaluate> CREATOR = new Creator<Evaluate>() {

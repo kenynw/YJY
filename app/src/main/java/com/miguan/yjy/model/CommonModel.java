@@ -102,18 +102,18 @@ public class CommonModel extends AbsModel {
     }
 
     private void checkBindMobile(Context context) {
-        if (AccountModel.getInstance().isLogin() &&
-                !DateUtils.isToday(LUtils.getPreferences().getLong(Constants.KEY_CHECK_IS_BIND_TIME, 0))) {
+        if (AccountModel.getInstance().isLogin()
+                && !DateUtils.isToday(LUtils.getPreferences().getLong(Constants.KEY_CHECK_IS_BIND_TIME, 0))
+                ) {
             ServicesClient.getServices().isBind(UserPreferences.getToken())
+                    .compose(new DefaultTransform<>())
                     .subscribe(new Subscriber<Integer>() {
                         @Override
                         public void onCompleted() {
-
                         }
 
                         @Override
                         public void onError(Throwable e) {
-
                         }
 
                         @Override

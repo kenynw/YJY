@@ -13,6 +13,7 @@ import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.UserProduct;
@@ -146,6 +147,23 @@ public interface Services {
     );
 
     /**
+     * 设置密码
+     *
+     * @param token  登录令牌
+     * @param newPwd  新密码
+     * @param type  手机 0注册，1重置密码，2登录，3登录注册,4为绑定
+     * @return
+     */
+    @GET("?action=resetPassword")
+    Observable<String> setPassword(
+            @Query("token") CharSequence token,
+            @Query("mobile") CharSequence mobile,
+            @Query("captcha") CharSequence captcha,
+            @Query("newPassword") CharSequence newPwd,
+            @Query("type") int type
+    );
+
+    /**
      * 是否绑定手机
      *
      * @param token
@@ -154,6 +172,19 @@ public interface Services {
     @GET("?action=isBind")
     Observable<Integer> isBind(
             @Query("token") String token
+    );
+
+    /**
+     * 判断手机是否已经被绑定过
+     *
+     * @param token
+     * @return
+     */
+    @GET("?action=mobileIsBind")
+    Observable<String> checkMobile(
+            @Query("token") String token,
+            @Query("mobile") String mobile,
+            @Query("captcha") String captcha
     );
 
     /**
@@ -324,7 +355,7 @@ public interface Services {
      * @return
      */
     @GET("?action=essenceList")
-    Observable<List<Evaluate>> essenceList(
+    Observable<Evaluate> essenceList(
             @Query("token") String token,
             @Query("page") int page
     );
@@ -669,6 +700,15 @@ public interface Services {
             @Query("content") String content
     );
 
+    /**
+     * 添加提问
+     *
+     * @param billboardId 排行榜ID
+     */
+    @GET("?action=RankingInfo")
+    Observable<Rank> billboardDetail(
+            @Query("rank_id") int billboardId
+    );
 
     ////////////////////测试//////////////////////
 

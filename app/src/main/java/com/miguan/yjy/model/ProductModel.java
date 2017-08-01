@@ -12,6 +12,7 @@ import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
@@ -139,6 +140,7 @@ public class ProductModel extends AbsModel {
 
     /**
      * 添加品牌到本地
+     *
      * @param brand
      */
     public void insertBrand(Brand brand) {
@@ -150,6 +152,7 @@ public class ProductModel extends AbsModel {
 
     /**
      * 添加品牌到本地
+     *
      * @param brand
      */
     public void deleteBrand(Brand brand) {
@@ -157,7 +160,7 @@ public class ProductModel extends AbsModel {
         List<Brand> delList = new ArrayList<>();
         if (list != null) {
             for (Brand item : list) {
-                if (!item.getName().equals(brand.getName())){
+                if (!item.getName().equals(brand.getName())) {
                     delList.add(item);
                 }
             }
@@ -173,12 +176,14 @@ public class ProductModel extends AbsModel {
     private List<Brand> queryBrands() {
         return new Gson().fromJson(
                 LUtils.getPreferences().getString(EXTRA_BRAND_LIST, ""),
-                new TypeToken<List<Brand>>() {}.getType()
+                new TypeToken<List<Brand>>() {
+                }.getType()
         );
     }
 
     /**
      * 插入本地产品
+     *
      * @param product
      */
     public void insertProduct(Product product) {
@@ -190,6 +195,7 @@ public class ProductModel extends AbsModel {
 
     /**
      * 删除本地产品
+     *
      * @param product
      */
     public void deleteProduct(Product product) {
@@ -197,7 +203,7 @@ public class ProductModel extends AbsModel {
         List<Product> delList = new ArrayList<>();
         if (list != null) {
             for (Product item : list) {
-                if (!item.getProduct_name().equals(product.getProduct_name())){
+                if (!item.getProduct_name().equals(product.getProduct_name())) {
                     delList.add(item);
                 }
             }
@@ -209,7 +215,8 @@ public class ProductModel extends AbsModel {
     public List<Product> queryProducts() {
         return new Gson().fromJson(
                 LUtils.getPreferences().getString(EXTRA_PRODUCT_LIST, ""),
-                new TypeToken<List<Product>>() {}.getType()
+                new TypeToken<List<Product>>() {
+                }.getType()
         );
     }
 
@@ -302,17 +309,19 @@ public class ProductModel extends AbsModel {
     public Observable<Ask> getAskList(int productId, int page) {
         return ServicesClient.getServices().askList(productId, page).compose(new DefaultTransform<>());
     }
+
     /**
      * 成份详情接口
      */
     public Observable<Component> componentInfo(int componentId) {
         return ServicesClient.getServices().componentInfo(componentId).compose(new DefaultTransform<>());
     }
+
     /**
      * 成份产品接口
      */
     public Observable<EntityRoot<List<Product>>> componentProductList(int productId, int page) {
-        return ServicesClient.getServices().componentProductList(productId, page,10).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().componentProductList(productId, page, 10).compose(new DefaultTransform<>());
     }
 
     /**
@@ -327,8 +336,21 @@ public class ProductModel extends AbsModel {
      */
     public Observable<String> addAsk(int productId, String productName, int askType, int askId, String content) {
         return ServicesClient.getServices()
-                .addAsk(UserPreferences.getToken(), UserPreferences.getUsername(),
-                        productId, productName, askType, askId, content)
+                .addAsk(UserPreferences.getToken(),
+                        UserPreferences.getUsername(),
+                        productId,
+                        productName,
+                        askType, askId, content)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 排行榜详情
+     * @param billboardId
+     * @return
+     */
+    public Observable<Rank> getBillboardDetail(int billboardId) {
+        return ServicesClient.getServices().billboardDetail(billboardId)
                 .compose(new DefaultTransform<>());
     }
 

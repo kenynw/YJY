@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -19,7 +20,7 @@ import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.module.account.LoginActivity;
-import com.miguan.yjy.module.product.QueryCodeActivity;
+import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
@@ -27,9 +28,11 @@ import com.miguan.yjy.widget.HeadViewPager;
 import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.functions.Func1;
 
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
@@ -42,6 +45,8 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     private boolean mIsInit = false;
 
     private ArrayList<ArticleCate> mArticleCates;
+
+    private Ask mAsk;
 
     @Override
     protected void onCreateView(HomeFragment view) {
@@ -65,6 +70,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
                     mArticleCates = home.getArticleGory();
                     getView().setSearchHint(home.getNum());
                     ((HomeHeader) getAdapter().getHeader(0)).setHome(home);
+                    if (home.getAsk() != null) mAsk = home.getAsk();
                     return home.getEvaluateList();
                 })
                 .doOnCompleted(() -> getView().setScrollListener())
@@ -74,7 +80,15 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     @Override
     public void onLoadMore() {
         if (mIsInit) {
-            ArticleModel.getInstance().getEssenceList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+            ArticleModel.getInstance().getEssenceList(getCurPage())
+                    .map(new Func1<Evaluate, List<Evaluate>>() {
+                        @Override
+                        public List<Evaluate> call(Evaluate evaluate) {
+
+                            return evaluate.getEssence();
+                        }
+                    })
+                    .unsafeSubscribe(getMoreSubscriber());
         }
     }
 
@@ -84,15 +98,8 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     }
 
     @Override
-    public ArrayList<Ask> getAskList() {
-        ArrayList<Ask> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Ask ask = new Ask();
-            ask.setSubject("适不适合敏感皮？");
-            ask.setNum(32);
-            list.add(ask);
-        }
-        return list;
+    public Ask getAsk() {
+        return mAsk;
     }
 
     public class HomeHeader implements RecyclerArrayAdapter.ItemView {
@@ -141,7 +148,8 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         public void onBindView(View headerView) {
             if (mHome != null) {
                 mIvQuery.setImageResource(R.mipmap.bg_home_query);
-                mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
+                mIvQuery.setOnClickListener(v -> WebViewActivity.start(getView().getActivity(), "", "http://m.yjyapp.com/huodong/receive/index"));
+//                mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
                 mIvMyProduct.setImageResource(R.mipmap.bg_home_repository);
                 mIvMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),
                         AccountModel.getInstance().isLogin() ? UsedListActivity.class : LoginActivity.class)));
@@ -161,6 +169,13 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         public void setHome(Home home) {
             mHome = home;
         }
+    }
+
+    private View createFooterView(Ask ask) {
+        View view = LayoutInflater.from(getView().getActivity()).inflate(R.layout.item_list_evaluate_ask, getView().getListView());
+        TextView title = view.findViewById(R.id.tv_evaluate_ask_title);
+        title.setText(ask.getSubject());
+        return view;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.miguan.yjy.model.services;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -15,13 +16,19 @@ import retrofit2.Retrofit;
 
 public class WrapperConverterFactory extends Converter.Factory {
 
-    public static WrapperConverterFactory create() {
-        return new WrapperConverterFactory(new Gson());
-    }
-
     private final Gson gson;
 
-    public WrapperConverterFactory(Gson gson) {
+    public static WrapperConverterFactory create() {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
+        return create(gson);
+    }
+
+    public static WrapperConverterFactory create(Gson gson) {
+        return new WrapperConverterFactory(gson);
+    }
+
+    private WrapperConverterFactory(Gson gson) {
+        if (gson == null) throw new NullPointerException("gson == null");
         this.gson = gson;
     }
 
