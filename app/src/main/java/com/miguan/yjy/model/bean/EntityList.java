@@ -65,15 +65,4 @@ public class EntityList<T> implements Parcelable {
         }
     }
 
-    public static final Creator<EntityList> CREATOR = new Creator<EntityList>() {
-        @Override
-        public EntityList createFromParcel(Parcel source) {
-            return new EntityList(source);
-        }
-
-        @Override
-        public EntityList[] newArray(int size) {
-            return new EntityList[size];
-        }
-    };
 }

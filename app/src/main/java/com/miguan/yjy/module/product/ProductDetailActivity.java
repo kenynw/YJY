@@ -313,11 +313,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY == 0) {
-                    mTabProductDetail.setClickable(true);
-                } else {
-                    mTabProductDetail.setClickable(false);
-                }
                 if (mIsShowAnim) {
                 } else {
                     showInAnim();
