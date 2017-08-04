@@ -15,6 +15,8 @@
         <item name="android:textColorPrimary">@color/textPrimary</item>
         <item name="android:textColorSecondary">@color/textSecondary</item>
         <item name="android:listDivider">@drawable/div_vertical</item>
+        <!--<item name="alertDialogTheme">@style/AppTheme.Dialog</item>-->
+        <!--<item name="android:alertDialogTheme">@style/AppTheme.Dialog</item>-->
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base"/>
@@ -115,28 +117,16 @@
         <item name="android:minHeight">1dip</item>
         <item name="android:maxHeight">10dip</item>
     </style>
-    <declare-styleable name="RatingBar">
-        <!--尺寸值-->
-        <attr name="starImageSize" format="dimension" />
-        <!--星星间距-->
-        <attr name="starPadding" format="dimension" />
-        <!--星星总数-->
-        <attr name="starCount" format="integer" />
-        <!--空白的星星资源文件值-->
-        <attr name="starEmpty" format="reference" />
-        <!--满星资源文件值-->
-        <attr name="starFill" format="reference" />
-        <!--半星资源文件值-->
-        <attr name="starHalf" format="reference" />
-        <!--是否可点击boolean值-->
-        <attr name="clickable" format="boolean" />
-        <!--当前进度float值-->
-        <attr name="starStep" format="float" />
-        <!--每次进度方式的值，整星还是半星-->
-        <attr name="stepSize">
-            <enum name="Half" value="0" />
-            <enum name="Full" value="1" />
-        </attr>
-    </declare-styleable>
+
+    <style name="AppTheme.BindDialog" parent="AlertDialog.AppCompat">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+    
+    <!--顶部弹出Dialog动画-->
+    <style name="TopDialog" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="@android:windowExitAnimation">@anim/push_up_out</item>
+    </style>
 
 </resources>

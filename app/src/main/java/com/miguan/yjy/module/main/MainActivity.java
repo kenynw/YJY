@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -13,10 +12,10 @@ import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.MainTabPagerAdapter;
 import com.miguan.yjy.dialogs.BaseAlertDialog;
+import com.miguan.yjy.dialogs.BindMobileAlertDialog;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.MobileBindPopupWindow;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -111,8 +110,9 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
 
     @Override
     public void onPositiveClick(@NonNull View v) {
-        MobileBindPopupWindow mobileBindPopupWindow = new MobileBindPopupWindow(this);
-        mobileBindPopupWindow.showAtLocation(getContent(), Gravity.NO_GRAVITY, 0, 0);
+//        MobileBindPopupWindow mobileBindPopupWindow = new MobileBindPopupWindow(this);
+//        mobileBindPopupWindow.showAtLocation(getContent(), Gravity.NO_GRAVITY, 0, 0);
+        new BindMobileAlertDialog().show(getSupportFragmentManager(), "bindDialog");
     }
 
     @Override

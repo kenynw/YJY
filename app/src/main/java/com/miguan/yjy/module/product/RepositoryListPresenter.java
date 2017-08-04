@@ -49,6 +49,7 @@ public class RepositoryListPresenter extends BaseListActivityPresenter<Repositor
                     .unsafeSubscribe(getRefreshSubscriber());
         } else {
             getView().getListView().showEmpty();
+            getView().setCount(0);
         }
     }
 

@@ -66,9 +66,8 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     public void onRefresh() {
         ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mType, mCateId, mEffect, 1)
                 .map(product -> {
-
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
-                    getView().setCateLayoutVisibility(product.getProduct().size() > 0 ? VISIBLE : GONE);
+//                    getView().setCountLayoutVisibility(product.getProduct().size() > 0 ? VISIBLE : GONE);
                     return product.getProduct();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());

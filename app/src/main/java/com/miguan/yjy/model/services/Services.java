@@ -330,14 +330,12 @@ public interface Services {
      * 吐槽一下
      *
      * @param token   用户ID
-     * @param username 用户名
      * @param content  吐槽内容
      * @return
      */
     @GET("?action=userFeedback")
     Observable<String> feedback(
             @Query("token") String token,
-            @Query("username") String username,
             @Query("content") String content,
             @Query("system") String system,
             @Query("model") String device,
@@ -705,7 +703,7 @@ public interface Services {
      *
      * @param billboardId 排行榜ID
      */
-    @GET("?action=RankingInfo")
+    @GET("?action=rankingInfo")
     Observable<Rank> billboardDetail(
             @Query("rank_id") int billboardId
     );

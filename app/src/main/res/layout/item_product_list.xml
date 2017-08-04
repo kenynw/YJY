@@ -48,7 +48,8 @@
         android:layout_below="@id/tv_product_name"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <RatingBar
             android:id="@+id/ratbar_product"
@@ -75,7 +76,6 @@
 
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/tv_product_read"
         android:layout_width="wrap_content"
@@ -101,6 +101,7 @@
         android:textColor="@color/white"
         android:textSize="8dp"
         android:textStyle="bold"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

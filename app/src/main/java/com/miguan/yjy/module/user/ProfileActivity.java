@@ -24,9 +24,9 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.dialogs.BindMobileAlertDialog;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.MobileBindPopupWindow;
 import com.miguan.yjy.widget.SecurityCodeView;
 import com.miguan.yjy.widget.SendValidateButton;
 
@@ -134,7 +134,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         mTvMobile.setText(getString(isMobile ? user.getMobile() : ""));
         mTvMobile.setOnClickListener(v -> {
             if (!isMobile) {
-                showPopupWindow(TYPE_BIND_MOBILE);
+                new BindMobileAlertDialog().show(getSupportFragmentManager(), "bind");
             } else {
                 showPopupWindow(TYPE_BIND_SUCCESS);
             }
@@ -178,9 +178,9 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
             case TYPE_USERNAME :
                 mPopupWindow.setContentView(createModifyUsernameView());
                 break;
-            case TYPE_BIND_MOBILE :
-                new MobileBindPopupWindow(this).showAtLocation(getContent(), Gravity.TOP, 0, 0);
-                break;
+//            case TYPE_BIND_MOBILE :
+//                new MobileBindPopupWindow(this).showAtLocation(getContent(), Gravity.TOP, 0, 0);
+//                break;
             case TYPE_BIND_SUCCESS:
 
                 mPopupWindow.setContentView(createBindSuccessView());
@@ -194,12 +194,12 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
 
     // 编辑(修改)用户名
     private View createModifyUsernameView() {
-        View view = View.inflate(this, R.layout.popwindow_user_bind_mobile, null);
+        View view = View.inflate(this, R.layout.popupwindow_user_name_modify, null);
         TextView tvTitle = findById(view, R.id.tv_user_dialog_title);
         EditText etContent = findById(view, R.id.et_user_dialog_content);
         ImageView tvClear = findById(view, R.id.iv_user_dialog_close);
         TextView tvCancel = findById(view, R.id.tv_user_dialog_cancel);
-        TextView tvSure = findById(view, R.id.tv_user_dialog_next);
+        TextView tvSure = findById(view, R.id.tv_user_dialog_ok);
         etContent.setHint(R.string.hint_username);
         etContent.setSelection(0);
         etContent.setInputType(EditorInfo.TYPE_CLASS_TEXT);
@@ -218,7 +218,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
 
     //绑定手机号
     private View createBindMobileView() {
-        View view = View.inflate(this, R.layout.popwindow_user_bind_mobile, null);
+        View view = View.inflate(this, R.layout.dialog_bind_mobile, null);
         EditText etMobile = findById(view, R.id.et_user_dialog_content);
         LUtils.openKeyboard(etMobile);
 

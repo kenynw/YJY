@@ -44,7 +44,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getRootView());
-        getListView().getSwipeToRefresh().setProgressViewOffset(true, 100, 200);
+        getListView().getSwipeToRefresh().setProgressViewOffset(true, 110, 200);
     }
 
     public void setSearchHint(int count) {
@@ -70,7 +70,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
     public BaseViewHolder<Evaluate> createViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 2) {
             return new EvaluateArticleViewHolder(parent, getPresenter());
-        } else if (viewType > 0 && viewType % 10 == 0) {
+        } else if (viewType > 0 && viewType % 9 == 0) {
             return new EvaluateAskViewHolder(parent, getPresenter());
         } else {
             return new EvaluateCommendVH(parent);

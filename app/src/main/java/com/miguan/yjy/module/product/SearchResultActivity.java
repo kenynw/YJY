@@ -70,22 +70,31 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @BindView(R.id.tv_brand_name)
     TextView mTvBrandName;
+
     @BindView(R.id.tv_brand_num)
     TextView mTvBrandNum;
+
     @BindView(R.id.tbtn_product_filter_cate)
     ToggleButton mTbtnProductFilterCate;
+
     @BindView(R.id.tbtn_product_filter_effect)
     ToggleButton mTbtnProductFilterEffect;
+
     @BindView(R.id.ll_product_filter)
     LinearLayout mLlProductFilter;
+
     @BindView(R.id.recycle)
     EasyRecyclerView mRecycle;
+
     @BindView(R.id.tv_brand_main)
     TextView mTvBrandMain;
+
     @BindView(R.id.ll_product_include_brand)
     LinearLayout mLlIncludeBrand;
+
     @BindView(R.id.tbtn_product_filter_all)
     ToggleButton mTbtnProductFilterAll;
+
     @BindView(R.id.recy_search_billBoard)
     EasyRecyclerView mRecySearchBillBoard;
 
@@ -103,6 +112,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
+        mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         mIvBack.setOnClickListener(v -> finish());
         mRecyRecommend.setOnTouchListener((v, event) -> {
             LUtils.closeKeyboard(mEtKeywords);
@@ -117,11 +127,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         tvFeedback.setOnClickListener(v -> startActivity(new Intent(this, FeedbackActivity.class)));
         return super.getListConfig().setContainerLayoutRes(R.layout.product_activity_search_result)
                 .setContainerEmptyView(view);
-    }
-
-    public void toBillboard(View view) {
-        Intent intent = new Intent(this, BillboardActivity.class);
-        startActivity(intent);
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
@@ -139,7 +144,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             mRecySearchBillBoard.setVisibility(View.GONE);
         }
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
-        if (productList.getProduct()==null||productList.getBrand() != null && productList.getBrand().getId() <= 0) {
+        if (productList.getBrand() == null || productList.getBrand() != null && productList.getBrand().getId() <= 0) {
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
             mLlIncludeBrand.setVisibility(View.VISIBLE);
@@ -233,8 +238,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mIsInit = true;
     }
 
-    public void setCateLayoutVisibility(int visibility) {
-//        mFilterPanel.setVisibility(visibility);
+    public void setCountLayoutVisibility(int visibility) {
         mTvCount.setVisibility(visibility);
     }
 
@@ -262,4 +266,5 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     public void onBackPressed() {
         if (mFilterPanel != null && !mFilterPanel.dismissMenu()) super.onBackPressed();
     }
+
 }

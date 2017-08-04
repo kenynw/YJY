@@ -55,11 +55,8 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     View view;
     TextView mTvSure;
     private LinearLayout popPproductExplain;
-    private LinearLayout llProductExplain;
 
-    //
-//    condition(string) {
-//    } －筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
+    private LinearLayout llProductExplain;
 
     public static void start(Context context, int productId) {
         Intent intent = new Intent(context, ProductDetailActivity.class);

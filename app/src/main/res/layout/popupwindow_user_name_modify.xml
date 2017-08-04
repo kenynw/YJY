@@ -43,6 +43,7 @@
                 android:inputType="phone"
                 android:maxLength="11"
                 android:textAlignment="center"
+                android:textAppearance="@style/TextBody"
                 >
 
                 <requestFocus/>
@@ -88,7 +89,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
-                android:id="@+id/tv_user_dialog_sure"
+                android:id="@+id/tv_user_dialog_ok"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

@@ -202,6 +202,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     private boolean mIsShowAnim;
 
     int scrollY;
+
     private int lastY = 0;
 
     @Override

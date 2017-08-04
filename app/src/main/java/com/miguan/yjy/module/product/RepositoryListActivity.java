@@ -66,7 +66,7 @@ public class RepositoryListActivity extends BaseListActivity<RepositoryListPrese
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), count)));
         mInputPanel.tvCancel.setText(count == 0 ? "添加" : "取消");
         mInputPanel.tvCancel.setOnClickListener(v -> {
-            if (count == 0) {
+            if (count == 0 && mInputPanel.getInputText().length() > 0) {
                 Product product = new Product();
                 product.setProduct_name(mInputPanel.getInputText());
                 product.setPrice("0");

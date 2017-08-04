@@ -1,36 +1,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/status_bar_height"
-        android:background="@color/white"
-        />
-
-    <android.support.v7.widget.Toolbar
-        android:id="@id/toolbar"
-        style="@style/TitleToolbar"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
-        app:navigationIcon="@mipmap/ic_back"
-        >
-
-        <TextView
-            android:id="@id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:textAppearance="@style/TextSubhead"
-            tools:text="这是标题"
-            />
-
-    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/include_toolbar"/>
 
     <RelativeLayout
         android:id="@+id/searchBarContainer"
@@ -43,24 +17,27 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="13dp"
             android:layout_marginRight="14dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_gray_f5"
             android:drawableLeft="@mipmap/sousuo"
+            android:drawableStart="@mipmap/sousuo"
             android:focusableInTouchMode="true"
             android:hint="请输入城市名称或拼音"
             android:imeOptions="actionDone"
             android:maxLines="1"
             android:paddingBottom="2dp"
-            android:paddingLeft="20dip"
-            android:paddingRight="25dip"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large"
             android:paddingTop="2dp"
             android:singleLine="true"
             android:text=""
             android:textColor="#8d8d8d"
-            android:textSize="14sp"/>
+            android:textSize="@dimen/text_size_body_material"
+            />
 
         <ImageButton
             android:id="@+id/button_search"
@@ -73,7 +50,9 @@
             android:background="@mipmap/sousuo"
             android:contentDescription="Search..."
             android:scaleType="fitCenter"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 
     <com.miguan.yjy.module.user.widget.ContactListViewImpl

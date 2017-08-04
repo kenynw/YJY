@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.product;
 
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,13 +29,18 @@ public class BillboardProductViewHolder extends SearchReslutViewHolder {
         switch (getAdapterPosition()) {
             case 0:
                 mIvRank.setImageResource(R.mipmap.ic_billboard_top1);
+                ((RelativeLayout) itemView).addView(mIvRank);
+                break;
             case 1:
                 mIvRank.setImageResource(R.mipmap.ic_billboard_top2);
+                ((RelativeLayout) itemView).addView(mIvRank);
+                break;
             case 2:
                 mIvRank.setImageResource(R.mipmap.ic_billboard_top3);
                 ((RelativeLayout) itemView).addView(mIvRank);
                 break;
             default:
+                mIvRank.setVisibility(View.GONE);
                 break;
         }
     }

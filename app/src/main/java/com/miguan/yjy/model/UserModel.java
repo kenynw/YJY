@@ -115,7 +115,7 @@ public class UserModel extends AbsModel {
      */
     public Observable<String> addFeedback(String content, String thumb) {
         return ServicesClient.getServices()
-                .feedback(UserPreferences.getToken(), UserPreferences.getUsername(), content,
+                .feedback(UserPreferences.getToken(), content,
                         "API " + Build.VERSION.SDK_INT + " " + Build.VERSION.RELEASE,
                         Build.BRAND + " " + Build.MODEL,
                         LUtils.getAppVersionName(),

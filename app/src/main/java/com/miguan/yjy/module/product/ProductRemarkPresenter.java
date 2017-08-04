@@ -65,7 +65,7 @@ public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
                     .subscribe(new ServicesResponse<String>() {
                         @Override
                         public void onNext(String s) {
-                            LUtils.toast("颜值增加10分");
+                            LUtils.toast("评论成功，颜值+10分");
                             getView().closeKeyboard();
                             getView().finish();
                         }
@@ -76,7 +76,7 @@ public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
                     .subscribe(new ServicesResponse<String>(){
                         @Override
                         public void onNext(String s) {
-                            LUtils.toast("颜值增加10分");
+                            LUtils.toast("评论成功，颜值+10分");
                             getView().finish();
                         }
                     });

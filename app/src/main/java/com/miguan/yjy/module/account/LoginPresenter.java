@@ -44,7 +44,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
                 for (String s : map.keySet()) {
-                    LUtils.log(s + ":" + map.get(s));
+                    LUtils.log("key: " + s + ":" + map.get(s));
                 };
 
                 map.put("nickname", map.get("screen_name"));

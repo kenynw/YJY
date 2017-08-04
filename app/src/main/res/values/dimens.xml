@@ -13,8 +13,6 @@
 
     <dimen name="text_size_tiny">9sp</dimen>
 
-    <dimen name="status_bar_height">0dp</dimen>
-
     <!-- 超小号 -->
     <dimen name="text_size_micro_11">11sp</dimen>
     <dimen name="text_size_micro_12">12sp</dimen>

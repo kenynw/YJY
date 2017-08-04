@@ -12,6 +12,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
+import com.miguan.yjy.module.article.EvaluateDetailPresenter;
 import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.SpanUtils;
@@ -67,6 +68,9 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
         if (data.getType() == 1) {
             mLlContent.setVisibility(View.GONE);
             mTvTime.append(" 赞了你的评论");
+        } else if (data.getType() == 1) {
+            mLlContent.setVisibility(View.GONE);
+            mTvTime.append(" 回复了你的评论");
         } else {
             mLlContent.setVisibility(View.VISIBLE);
             mTvContent.setText(SpanUtils.getContentSpannable(data.getContent(), mTvContent));
@@ -76,6 +80,8 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
             itemView.setOnClickListener(v -> {
                 if (data.getType() == 3 || data.getType() == 4) {
                     AskDetailActivityPresenter.start(getContext(), data.getRelation_id(), data.getAskid());
+                } else if (data.getType() == 5) {
+                    EvaluateDetailPresenter.start(getContext(), data.getAskid());
                 } else if (data.getOtype() == 1) {
                     ProductDetailPresenter.start(getContext(), data.getRelation_id());
                 } else if (data.getOtype() == 2) {

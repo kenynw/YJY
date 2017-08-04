@@ -95,7 +95,9 @@
     <string name="text_message_ask">有问题向您求助哦~</string>
     <string name="text_message_answer">回答了您的问题哦~</string>
     <string name="text_home_ask_title">有人向你提问</string>
-    <string name="text_home_ask_total"><u>共%d条回答</u></string>
+    <string name="text_home_ask_total"><![CDATA[
+        <u>共%d条回答</u>
+    ]]></string>
     <string name="text_set_password">设定密码</string>
     <string name="text_login_or_register">登录/注册</string>
 

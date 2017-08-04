@@ -60,7 +60,7 @@ public class Evaluate implements Parcelable {
 
     private List<Evaluate> essence;
 
-    private List<Ask> ask;
+    private Ask ask;
 
     public int getIs_digest() {
         return is_digest;
@@ -242,11 +242,11 @@ public class Evaluate implements Parcelable {
         this.essence = essence;
     }
 
-    public List<Ask> getAsk() {
+    public Ask getAsk() {
         return ask;
     }
 
-    public void setAsk(List<Ask> ask) {
+    public void setAsk(Ask ask) {
         this.ask = ask;
     }
 
@@ -369,7 +369,7 @@ public class Evaluate implements Parcelable {
         dest.writeTypedList(this.replyList);
         dest.writeString(this.replyUserName);
         dest.writeTypedList(this.essence);
-        dest.writeTypedList(this.ask);
+        dest.writeParcelable(this.ask, flags);
     }
 
     protected Evaluate(Parcel in) {
@@ -395,7 +395,7 @@ public class Evaluate implements Parcelable {
         this.replyList = in.createTypedArrayList(Evaluate.CREATOR);
         this.replyUserName = in.readString();
         this.essence = in.createTypedArrayList(Evaluate.CREATOR);
-        this.ask = in.createTypedArrayList(Ask.CREATOR);
+        this.ask = in.readParcelable(Ask.class.getClassLoader());
     }
 
     public static final Creator<Evaluate> CREATOR = new Creator<Evaluate>() {

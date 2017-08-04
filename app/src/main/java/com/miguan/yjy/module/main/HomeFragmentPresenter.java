@@ -28,11 +28,9 @@ import com.miguan.yjy.widget.HeadViewPager;
 import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.functions.Func1;
 
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
@@ -81,12 +79,9 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     public void onLoadMore() {
         if (mIsInit) {
             ArticleModel.getInstance().getEssenceList(getCurPage())
-                    .map(new Func1<Evaluate, List<Evaluate>>() {
-                        @Override
-                        public List<Evaluate> call(Evaluate evaluate) {
-
-                            return evaluate.getEssence();
-                        }
+                    .map(evaluate -> {
+                        if (evaluate.getAsk() != null) mAsk = evaluate.getAsk();
+                        return evaluate.getEssence();
                     })
                     .unsafeSubscribe(getMoreSubscriber());
         }

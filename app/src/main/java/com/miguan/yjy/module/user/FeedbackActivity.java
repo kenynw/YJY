@@ -48,6 +48,7 @@ public class FeedbackActivity extends ChainBaseActivity<FeedbackPresenter>
         setToolbarTitle(R.string.btn_feedback);
         ButterKnife.bind(this);
 
+        mEtContent.setHint("请输入要反馈的内容");
         mEtContent.addTextChangedListener(this);
         mIvImage.setOnClickListener(this);
     }

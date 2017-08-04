@@ -233,7 +233,6 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
     }
 
     public void gotoSearchResult(String name) {
-        LUtils.log("dsdsdfs");
         SearchResultPresenter.start(SearchActivity.this, name, 0, "");
         String oldName = SystemPreferences.getSearchName();
         if (!TextUtils.isEmpty(oldName)) {
