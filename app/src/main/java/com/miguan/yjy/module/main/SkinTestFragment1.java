@@ -180,7 +180,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
     @Override
     public void onResume() {
         super.onResume();
-//        loadMainData();
     }
 
     @Override
@@ -189,9 +188,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         Log.e("onActivityResult", requestCode + "==" + resultCode);
         if (resultCode == 0) {
             switch (requestCode) {
-//                case 2:
-//                 loadFirstData();
-//                    break;
                 case Activity.RESULT_FIRST_USER:
                     loadFirstData();
                     break;
@@ -207,47 +203,101 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
         initListener();
         if (AccountModel.getInstance().isLogin()) {
-            UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
+            TestModel.getInstantce().userSkin().flatMap(new Func1<Test, Observable<User>>() {
                 @Override
-                public void onNext(User user) {
+                public Observable<User> call(Test test) {
                     nums.clear();
-                    userInfo = user;
-                    birthDay = userInfo.getBirth_day();
-                    sex = userInfo.getSex();
-                    if (userInfo.getCompact() != 0) {
-                        mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                        mTvTestWrinkle.setText(Skin.getCompact(userInfo.getCompact()));
-                        mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
-                        nums.add(0);
+                    if (test.getDesc().size() != 0) {
+                        for(int i=0;i<test.getDesc().size();i++) {
+                           String skinName= test.getDesc().get(i).getName();
+                            if (test.getDesc().get(i).getType().equals("compact")) {
+                                mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
+                                mTvTestWrinkle.setText(Skin.getCompact(skinName));
+                                mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
+                                nums.add(0);
+                            }
+                            if (test.getDesc().get(i).getType().equals("dry")) {
+                                mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
+                                nums.add(1);
+                                mTvTestOily.setText(Skin.getDryOil(skinName));
+                                mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
+                            }
+                            if (test.getDesc().get(i).getType().equals("tolerance")) {
+                                mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
+                                nums.add(2);
+                                mTvTestSensitive.setText(Skin.getTolerance(skinName));
+                                mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
+                            }
+                            if (test.getDesc().get(i).getType().equals("pigment")) {
+                                mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
+                                nums.add(3);
+                                mTvTestPigment.setText(Skin.getPigment(skinName));
+                                mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
+                            }
+                        }
                     }
-                    if (userInfo.getDry() != 0) {
-                        mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-                        nums.add(1);
-                        mTvTestOily.setText(Skin.getDryOil(userInfo.getDry()));
-                        mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
-                    }
-                    if (userInfo.getTolerance() != 0) {
-                        mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-                        nums.add(2);
-                        mTvTestSensitive.setText(Skin.getTolerance(userInfo.getTolerance()));
-                        mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
-                    }
-                    if (userInfo.getPigment() != 0) {
-                        mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                        nums.add(3);
-                        mTvTestPigment.setText(Skin.getPigment(userInfo.getPigment()));
-                        mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
-                    }
+
                     if (nums.size() == 4) {
                         mTvTestResult.setText("查看结果");
                         mTvTestResult.setClickable(true);
                     } else {
                         mTvTestResult.setText("完成度\n" + nums.size() + "/4");
                         mTvTestResult.setClickable(false);
+
                     }
 
+                    return UserModel.getInstance().getUserInfo();
+                }
+            }).subscribe(new ServicesResponse<User>(){
+                @Override
+                public void onNext(User user) {
+                    userInfo = user;
+                    birthDay = userInfo.getBirth_day();
+                    sex = userInfo.getSex();
                 }
             });
+
+//            UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
+//                @Override
+//                public void onNext(User user) {
+//                    nums.clear();
+//                    userInfo = user;
+//                    birthDay = userInfo.getBirth_day();
+//                    sex = userInfo.getSex();
+//                    if (userInfo.getCompact() != 0) {
+//                        mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
+//                        mTvTestWrinkle.setText(Skin.getCompact(userInfo.getCompact()));
+//                        mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
+//                        nums.add(0);
+//                    }
+//                    if (userInfo.getDry() != 0) {
+//                        mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
+//                        nums.add(1);
+//                        mTvTestOily.setText(Skin.getDryOil(userInfo.getDry()));
+//                        mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
+//                    }
+//                    if (userInfo.getTolerance() != 0) {
+//                        mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
+//                        nums.add(2);
+//                        mTvTestSensitive.setText(Skin.getTolerance(userInfo.getTolerance()));
+//                        mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
+//                    }
+//                    if (userInfo.getPigment() != 0) {
+//                        mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
+//                        nums.add(3);
+//                        mTvTestPigment.setText(Skin.getPigment(userInfo.getPigment()));
+//                        mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
+//                    }
+//                    if (nums.size() == 4) {
+//                        mTvTestResult.setText("查看结果");
+//                        mTvTestResult.setClickable(true);
+//                    } else {
+//                        mTvTestResult.setText("完成度\n" + nums.size() + "/4");
+//                        mTvTestResult.setClickable(false);
+//                    }
+//
+//                }
+//            });
         } else {
             Log.e("userId", UserPreferences.getUserID() + "--=0--");
             mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_white);

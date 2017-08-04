@@ -22,7 +22,8 @@ import rx.functions.Func1;
 
 public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskActivity, Wiki.RelationInfo> {
     public static final String EXTRA_BAIKEID = "extra_baikeId";
-    private String baikeId;
+    public String baikeId;
+    public  String share_url="";
 
     public static void start(Context context, String baikeId) {
         Intent intent = new Intent(context, WikiAskActivity.class);
@@ -39,25 +40,29 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
     @Override
     protected void onCreateView(WikiAskActivity view) {
         super.onCreateView(view);
-        TestModel.getInstantce().getBaikeInfo(baikeId).map(new Func1<Wiki, List<Wiki.RelationInfo>>() {
-
-            @Override
-            public List<Wiki.RelationInfo> call(Wiki wiki) {
-                return wiki.getRelation_info();
-            }
-        })  .compose(new DefaultTransform<>()).unsafeSubscribe(getRefreshSubscriber());
-        getAdapter().setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                getView().mTvWikiAskName.setText("问题1");
-                getView().mTvWikiAskReply.setText("回答1");
-            }
-        });
+        onRefresh();
 
     }
 
     @Override
     public void onRefresh() {
         super.onRefresh();
+        TestModel.getInstantce().getBaikeInfo(baikeId).map(new Func1<Wiki, List<Wiki.RelationInfo>>() {
+
+            @Override
+            public List<Wiki.RelationInfo> call(Wiki wiki) {
+                getView().mTvWikiAskName.setText(wiki.getQuestion());
+                getView().mTvWikiAskReply.setText(wiki.getContent());
+                share_url= wiki.getShare_url();
+                getAdapter().setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        baikeId = wiki.getRelation_info().get(position).getId() + "";
+                        onRefresh();
+                    }
+                });
+                return wiki.getRelation_info();
+            }
+        }).compose(new DefaultTransform<>()).unsafeSubscribe(getRefreshSubscriber());
     }
 }

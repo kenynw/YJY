@@ -24,6 +24,17 @@ public class Skin implements Parcelable {
     private float valuate;
     private float score;
     private float maximum;
+    private String type;
+
+    public static String Drys[] = {"重干", "轻干", "轻油", "重油"};
+    public static String tolerances[] = {"重耐", "轻耐", "轻敏", "重敏"};
+    public static String Pigments[] = {"色素", "非色素"};
+    public static String compacts[] = {"皱纹", "紧致"};
+
+    public static String drySkin[] = {"重度干性皮肤","轻度干性皮肤","轻度油性皮肤","重度油性皮肤"};
+    public static String toleranceSkin[] = {"重度耐受性皮肤","轻度耐受性皮肤","轻度敏感性皮肤","重度敏感性皮肤"};
+    public static String pigmentSkin[] = {"色素性皮肤","非色素性皮肤"};
+    public static String compactSkin[] = {"皱纹性皮肤","紧致性皮肤"};
 
     public String[] leftSkin = {"干性","敏感","色素","皱纹"};
     public String[] rightSkin = {"油性","耐受","非色素","紧致"};
@@ -31,6 +42,14 @@ public class Skin implements Parcelable {
 
     private String unscramble;
 
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public List<SelectPrice> getCondition() {
         return condition;
@@ -207,6 +226,47 @@ public class Skin implements Parcelable {
         return "";
     }
 
+
+    public static String getDryOil(String value) {
+        for (int i=0;i<=4;i++) {
+            if (value.equals(Drys[i])) {
+                return drySkin[i];
+            }
+        }
+        return "";
+    }
+
+
+    public static String getTolerance(String value) {
+        for (int i=0;i<=4;i++) {
+            if (value.equals(tolerances[i])) {
+                return toleranceSkin[i];
+            }
+        }
+        return "";
+    }
+
+
+    public static String getPigment(String value) {
+        for (int i=0;i<=2;i++) {
+            if (value.equals(Pigments[i])) {
+                return pigmentSkin[i];
+            }
+        }
+        return "";
+    }
+
+    public static String getCompact(String value) {
+        for (int i=0;i<=2;i++) {
+            if (value.equals(compacts[i])) {
+                return compactSkin[i];
+            }
+        }
+        return "";
+    }
+
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -226,6 +286,7 @@ public class Skin implements Parcelable {
         dest.writeFloat(this.valuate);
         dest.writeFloat(this.score);
         dest.writeFloat(this.maximum);
+        dest.writeString(this.type);
         dest.writeStringArray(this.leftSkin);
         dest.writeStringArray(this.rightSkin);
         dest.writeStringArray(this.skinDesc);
@@ -245,6 +306,7 @@ public class Skin implements Parcelable {
         this.valuate = in.readFloat();
         this.score = in.readFloat();
         this.maximum = in.readFloat();
+        this.type = in.readString();
         this.leftSkin = in.createStringArray();
         this.rightSkin = in.createStringArray();
         this.skinDesc = in.createStringArray();

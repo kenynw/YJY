@@ -237,16 +237,20 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        mCustSrcoll.setScrollY(0);
+                        mCustSrcoll.smoothScrollTo(0,0);
+//                        mCustSrcoll.setScrollY(0);
                         break;
                     case 1:
-                        mCustSrcoll.setScrollY(mViewRemarkShow.getTop());
+                        mCustSrcoll.smoothScrollTo(0,mViewRemarkShow.getTop());
+//                        mCustSrcoll.setScrollY(mViewRemarkShow.getTop());
                         break;
                     case 2:
-                        mCustSrcoll.setScrollY(mViewPriceShow.getTop());
+                        mCustSrcoll.smoothScrollTo(0,mViewPriceShow.getTop());
+//                        mCustSrcoll.setScrollY(mViewPriceShow.getTop());
                         break;
                     case 3:
-                        mCustSrcoll.setScrollY(mViewEvaluateShow.getTop());
+                        mCustSrcoll.smoothScrollTo(0,mViewEvaluateShow.getTop());
+//                        mCustSrcoll.setScrollY(mViewEvaluateShow.getTop());
                         break;
                 }
             }
@@ -342,16 +346,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
 
                 Log.e("ssss", "===scroller.getScrollY()===" + scrollY);
-//                Log.e("", "===mViewRemarkShow()==="+mViewRemarkShow.getTop());
-//                Log.e("", "===scroller.mViewPriceShow()==="+mViewPriceShow.getTop());
-//                Log.e("", "===scroller.mViewEvaluateShow()==="+mViewEvaluateShow.getTop());
-//                if (lastY >= 0 && lastY < mViewRemarkShow.getTop()) {
+//                if (scrollY >= 0 && scrollY < mViewRemarkShow.getTop()) {
 //                    mTabProductDetail.getTabAt(0).select();
-//                } else if (lastY >= mViewRemarkShow.getTop() && lastY < mViewPriceShow.getTop()) {
+//                } else if (scrollY >= mViewRemarkShow.getTop() && scrollY < mViewPriceShow.getTop()) {
 //                    mTabProductDetail.getTabAt(1).select();
-//                } else if (lastY >= mViewPriceShow.getTop() && lastY < mViewEvaluateShow.getTop()) {
+//                } else if (scrollY >= mViewPriceShow.getTop() && scrollY < mViewEvaluateShow.getTop()) {
 //                    mTabProductDetail.getTabAt(2).select();
-//                } else if (lastY >= mViewEvaluateShow.getTop()) {
+//                } else if (scrollY >= mViewEvaluateShow.getTop()) {
 //                    mTabProductDetail.getTabAt(3).select();
 //                } else {
 //

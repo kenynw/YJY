@@ -30,7 +30,6 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
     TextView tvSkinGuideFeature;
     TextView tvSkinGuideDescirbe;
 
-    private String baikeId;
     @Override
     protected void onCreate(SkinGuideFragment view, Bundle saveState) {
         super.onCreate(view, saveState);
@@ -41,6 +40,7 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
         super.onCreateView(view);
         mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
         getAdapter().removeAllHeader();
+//        getAdapter().setOnItemClickListener(v -> WikiAskActivityPresenter.start(getView().getActivity(),mTest.getBaike().get(v)+""));
         getAdapter().setOnItemClickListener(v -> WikiAskActivityPresenter.start(getView().getActivity(),"1"));
         getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
@@ -62,14 +62,14 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
     @Override
     public void onRefresh() {
         super.onRefresh();
-        TestModel.getInstantce().getBaikeInfo(baikeId).map(new Func1<Wiki, List<Wiki.RelationInfo>>() {
+        TestModel.getInstantce().getBaikeInfo("1").map(new Func1<Wiki, List<Wiki.RelationInfo>>() {
 
             @Override
             public List<Wiki.RelationInfo> call(Wiki wiki) {
                 return wiki.getRelation_info();
             }
         }) .unsafeSubscribe(getRefreshSubscriber());
-//        Observable.just(mTest.getSkinArticle()).unsafeSubscribe(getRefreshSubscriber());
+//        Observable.just(mTest.getBaike()).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override

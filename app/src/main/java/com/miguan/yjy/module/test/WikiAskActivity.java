@@ -18,6 +18,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.WikiViewHolder;
 import com.miguan.yjy.module.user.FeedbackActivity;
+import com.miguan.yjy.widget.SharePopupWindow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +57,7 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setToolbarTitle("帮助");
-        mTvWikiAskRemark.setOnClickListener(v-> startActivity(new Intent(this, FeedbackActivity.class)));
+        mTvWikiAskRemark.setOnClickListener(v -> startActivity(new Intent(this, FeedbackActivity.class)));
     }
 
     @Override
@@ -78,16 +79,14 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        new SharePopupWindow.Builder(this)
-//                .setUrl(TextUtils.isEmpty(wiki.getLinkUrl()) ? "http:www.yjyapp.com" : wiki.getLinkUrl())
-//                .setTitle(wiki.getwiki_name() + "【颜究院】")
-//                .setContent("科学分析产品成分，只有我们知道它适不适合你")
-//                .setImageUrl(wiki.getwiki_img())
-//                .setId(wiki.getId())
-//                .setType(1)
-//                .setWxCircleTitle(wiki.getProduct_name() + "里面都含有些什么成分，查了你就知道")
-//                .setWbContent(wiki.getwiki_name() + "里面都含有些什么成分，查了你就知道，分享来自#颜究院APP# " + wiki.getLinkUrl())
-//                .show(getToolbar());
+
+        new SharePopupWindow.Builder(this)
+                .setUrl(getPresenter().share_url)
+                .setTitle(mTvWikiAskName.getText() + "【颜究院】")
+                .setContent("解决你的护肤难题")
+                .setWxCircleTitle(mTvWikiAskName.getText() + "【颜究院】")
+                .setWbContent(mTvWikiAskName.getText() + "【颜究院】" + getPresenter().share_url)
+                .show(getToolbar());
         return super.onOptionsItemSelected(item);
     }
 }

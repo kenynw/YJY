@@ -16,6 +16,7 @@ public class Wiki implements Parcelable {
     //    id(int) － 百科ID
 //    question(string) － 问题
 //    content(string) － 答案
+//    share_url(string) － 分享链接
 //    relation_info(array) － 关联百科信息
 //    id(int) － 关联百科ID
 //    question(string) － 关联百科问题
@@ -23,6 +24,15 @@ public class Wiki implements Parcelable {
     private String question;
     private String content;
     private ArrayList<RelationInfo> relation_info;
+    private String share_url;
+
+    public String getShare_url() {
+        return share_url;
+    }
+
+    public void setShare_url(String share_url) {
+        this.share_url = share_url;
+    }
 
     public int getId() {
         return id;

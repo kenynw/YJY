@@ -79,16 +79,8 @@
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recy_search_billBoard"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-        />
-
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="toBillboard"
-        android:text="排行榜"
         />
 
     <include layout="@layout/include_product_list"/>

@@ -30,6 +30,11 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.miguan.yjy.model.bean.Skin.Drys;
+import static com.miguan.yjy.model.bean.Skin.Pigments;
+import static com.miguan.yjy.model.bean.Skin.compacts;
+import static com.miguan.yjy.model.bean.Skin.tolerances;
+
 /**
  * @作者 cjh
  * @日期 2017/3/31 15:38
@@ -47,6 +52,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
     public static final int EXTRA_TEST_SECOND_TYPE = 2;
     public static final int EXTRA_TEST_THIRD_TYPE = 3;
     public static final int EXTRA_TEST_FOUR_TYPE = 4;
+
 
     @BindView(R.id.tv_test_my_skin)
     TextView mTvTestMySkin;
@@ -164,16 +170,16 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
 //                type(string) － dry,tolerance,pigment,compact四种类型
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", 11);
+                        submitSkin("dry", Drys[0]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", 17);
+                        submitSkin("tolerance", tolerances[0]);
                         break;
                     case EXTRA_TEST_THIRD_TYPE:
-                        submitSkin("pigment", 31);
+                        submitSkin("pigment", Pigments[0]);
                         break;
                     case EXTRA_TEST_FOUR_TYPE://皱纹/紧致
-                        submitSkin("compact", 41);
+                        submitSkin("compact", compacts[0]);
                         mtvTestWhich.setText("皱纹/紧致皮肤中,您属于哪一种");
                         break;
                 }
@@ -182,16 +188,16 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             case R.id.tv_test_low_dry:
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", 17);
+                        submitSkin("dry", Drys[1]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", 25);
+                        submitSkin("tolerance", tolerances[1]);
                         break;
                     case EXTRA_TEST_THIRD_TYPE:
-                        submitSkin("pigment", 10);
+                        submitSkin("pigment", Pigments[1]);
                         break;
                     case EXTRA_TEST_FOUR_TYPE://皱纹/紧致
-                        submitSkin("compact", 20);
+                        submitSkin("compact", compacts[1]);
                         break;
                 }
                 popupWindow.dismiss();
@@ -199,10 +205,10 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             case R.id.tv_test_low_oily:
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", 27);
+                        submitSkin("dry", Drys[2]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", 30);
+                        submitSkin("tolerance", tolerances[2]);
                         break;
                 }
                 popupWindow.dismiss();
@@ -210,10 +216,10 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             case R.id.tv_test_height_oily:
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", 34);
+                        submitSkin("dry", Drys[3]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", 34);
+                        submitSkin("tolerance", tolerances[3]);
                         break;
                 }
                 popupWindow.dismiss();
@@ -223,7 +229,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
     }
 
 
-    private void submitSkin(String key, int value) {
+    private void submitSkin(String key, String value) {
         TestModel.getInstantce().saveSkin(key, value).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String s) {

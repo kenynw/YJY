@@ -125,17 +125,21 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
-        mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(this,productList.getRank()) {
-            @Override
-            public BillboardViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                return new BillboardViewHolder(parent);
-            }
-        });
 
-
+        if (productList.getRank().size() != 0) {
+            mRecySearchBillBoard.setVisibility(View.VISIBLE);
+            mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(this, productList.getRank()) {
+                @Override
+                public BillboardViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                    return new BillboardViewHolder(parent);
+                }
+            });
+        } else {
+            mRecySearchBillBoard.setVisibility(View.GONE);
+        }
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
-        if (productList.getBrand() != null && productList.getBrand().getId() <= 0) {
+        if (productList.getProduct()==null||productList.getBrand() != null && productList.getBrand().getId() <= 0) {
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
             mLlIncludeBrand.setVisibility(View.VISIBLE);
@@ -173,11 +177,14 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                     imgSearchCancle.setVisibility(View.GONE);
                     mLlResultFirst.setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
+                    mRecySearchBillBoard.setVisibility(View.VISIBLE);
+
                 } else {
                     imgSearchCancle.setVisibility(View.VISIBLE);
                     mLlResultFirst.setVisibility(View.GONE);
                     getPresenter().setRecommendData(s.toString());
                     setBrandLayoutVisibility(View.GONE);
+                    mRecySearchBillBoard.setVisibility(View.GONE);
                 }
             }
         });

@@ -78,7 +78,7 @@ public class TestModel extends AbsModel {
      * @param value
      */
 
-    public Observable<String> saveSkin(String type, int value) {
+    public Observable<String> saveSkin(String type, String value) {
 
         return getServices().saveSkin(UserPreferences.getToken(), type, value).compose(new DefaultTransform<>());
     }
@@ -102,6 +102,7 @@ public class TestModel extends AbsModel {
                     test.setDesc(test2.getDesc());
                     test.setFeatures(test2.getFeatures());
                     test.setElements(test2.getElements());
+                    test.setBaike(test2.getBaike());
                     return test;
                 })
                 .compose(new DefaultTransform<>());

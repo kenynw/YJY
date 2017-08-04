@@ -27,12 +27,12 @@ import com.miguan.yjy.model.services.ServiceException;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
-import com.miguan.yjy.module.test.WikiAskActivityPresenter;
 import com.miguan.yjy.module.user.EvaluateListActivity;
 import com.miguan.yjy.module.user.FaceScorePresenter;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.module.user.MsgListActivity;
 import com.miguan.yjy.module.user.ProductLikeListActivity;
+import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.module.user.ReplyListActivity;
 import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
@@ -132,8 +132,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
 
     @Override
     public void setData(User user) {
-        mLlInfo.setOnClickListener(v -> WikiAskActivityPresenter.start(getActivity(), "1"));
-//        mLlInfo.setOnClickListener(v -> ProfilePresenter.start(getActivity(), user));
+        mLlInfo.setOnClickListener(v -> ProfilePresenter.start(getActivity(), user));
         mDvAvatar.setOnClickListener(v -> LargeImageActivity.start(getActivity(), user.getImg()));
         mDvAvatar.setImageURI(Uri.parse(user.getImg()));
         mTvUsername.setText(user.getUsername());

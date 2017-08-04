@@ -723,7 +723,7 @@ public interface Services {
     Observable<String> saveSkin(
             @Query("token") String token,
             @Query("type") String type,
-            @Query("value") int value
+            @Query("value") String value
     );
 
     /**
