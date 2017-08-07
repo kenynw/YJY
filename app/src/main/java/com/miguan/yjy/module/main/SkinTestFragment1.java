@@ -496,28 +496,30 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         popupWindow.setBackgroundDrawable(bg);
         popupWindow.showAtLocation(mToolbar, Gravity.BOTTOM, 0, 0);
 
-        switch (userInfo.getSex()) {
-            case 0://女
-                sex = 0;
-                mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
-                mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
-                mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
-                mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
-            case 1://男
-                sex = 1;
-                mTvTestMan.setBackgroundResource(R.drawable.bg_shape_63c);
-                mTvTestWoman.setBackgroundResource(R.drawable.bg_round_stroke_div);
-                mTvTestMan.setTextColor(getResources().getColor(R.color.white));
-                mTvTestWoman.setTextColor(getResources().getColor(R.color.textSecondary));
+        if (userInfo != null) {
+            switch (userInfo.getSex()) {
+                case 0://女
+                    sex = 0;
+                    mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
+                    mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
+                    mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
+                    mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
+                case 1://男
+                    sex = 1;
+                    mTvTestMan.setBackgroundResource(R.drawable.bg_shape_63c);
+                    mTvTestWoman.setBackgroundResource(R.drawable.bg_round_stroke_div);
+                    mTvTestMan.setTextColor(getResources().getColor(R.color.white));
+                    mTvTestWoman.setTextColor(getResources().getColor(R.color.textSecondary));
 //                mTvTestMan.performClick();
-                break;
-            case 2://未填
-                sex = 0;
-                mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
-                mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
-                mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
-                mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
-                break;
+                    break;
+                case 2://未填
+                    sex = 0;
+                    mTvTestMan.setBackgroundResource(R.drawable.bg_round_stroke_div);
+                    mTvTestWoman.setBackgroundResource(R.drawable.bg_shape_fb7);
+                    mTvTestMan.setTextColor(getResources().getColor(R.color.textSecondary));
+                    mTvTestWoman.setTextColor(getResources().getColor(R.color.white));
+                    break;
+            }
         }
     }
 

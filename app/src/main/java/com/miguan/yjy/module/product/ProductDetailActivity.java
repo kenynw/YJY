@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -196,14 +195,27 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     ImageView mImgRecommendBuy;
     @BindView(R.id.recy_product_flagship)
     EasyRecyclerView mRecyProductFlagship;
+    @BindView(R.id.radioBtn_product)
+    RadioButton mRadioBtnProduct;
+    @BindView(R.id.radioBtn_component)
+    RadioButton mRadioBtnComponent;
+    @BindView(R.id.radioBtn_price)
+    RadioButton mRadioBtnPrice;
+    @BindView(R.id.radioBtn_evaluate)
+    RadioButton mRadioBtnEvaluate;
 
     private boolean mIsLike;
 
     private boolean mIsShowAnim;
 
     int scrollY;
+    private int curScrollY;
 
     private int lastY = 0;
+    private boolean mIsSelect;
+    private boolean mIsScrollChange;
+    private String mGroups[] = {"产品", "成分", "比价", "评价"};
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,29 +241,46 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
         mImgRecommendBuy.setOnClickListener(v -> getPresenter().showExplain());
 
-        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("产品"));
-        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("成分"));
-        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("比价"));
-        mTabProductDetail.addTab(mTabProductDetail.newTab().setText("评价"));
+        for (int i = 0; i < mGroups.length; i++) {
+            TabLayout.Tab tab = mTabProductDetail.newTab();
+            mTabProductDetail.addTab(tab, position = i);
+            tab.setText(mGroups[i]);
+
+        }
+
         mTabProductDetail.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        mCustSrcoll.smoothScrollTo(0,0);
-//                        mCustSrcoll.setScrollY(0);
+                        if (curScrollY >= 0 && curScrollY < mViewRemarkShow.getTop()) {
+
+                        } else {
+                            mCustSrcoll.smoothScrollTo(0, 0);
+                        }
                         break;
                     case 1:
-                        mCustSrcoll.smoothScrollTo(0,mViewRemarkShow.getTop());
-//                        mCustSrcoll.setScrollY(mViewRemarkShow.getTop());
+                        if (curScrollY >= mViewRemarkShow.getTop() && curScrollY < mViewPriceShow.getTop()) {
+
+                        } else {
+                            mCustSrcoll.smoothScrollTo(0, mViewRemarkShow.getTop());
+
+                        }
                         break;
                     case 2:
-                        mCustSrcoll.smoothScrollTo(0,mViewPriceShow.getTop());
-//                        mCustSrcoll.setScrollY(mViewPriceShow.getTop());
+                        if ((curScrollY >= mViewPriceShow.getTop() && curScrollY < mViewEvaluateShow.getTop())) {
+
+                        } else {
+                            mCustSrcoll.smoothScrollTo(0, mViewPriceShow.getTop());
+                        }
+
                         break;
                     case 3:
-                        mCustSrcoll.smoothScrollTo(0,mViewEvaluateShow.getTop());
-//                        mCustSrcoll.setScrollY(mViewEvaluateShow.getTop());
+                        if ((curScrollY >= mViewEvaluateShow.getTop())) {
+
+                        } else {
+                            mCustSrcoll.smoothScrollTo(0, mViewEvaluateShow.getTop());
+                        }
                         break;
                 }
             }
@@ -278,6 +307,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                     if (msg.what == touchEventId) {
                         if (lastY == scroller.getScrollY()) {
                             handleStop(scroller);
+
                         } else {
                             handler.sendMessageDelayed(handler.obtainMessage(touchEventId, scroller), 5);
                             lastY = scroller.getScrollY();
@@ -285,7 +315,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                     }
                 }
             };
-
 
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -318,6 +347,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mCustSrcoll.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                curScrollY = scrollY;
                 if (mIsShowAnim) {
                 } else {
                     showInAnim();
@@ -335,7 +365,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                     mToolbarTitle.setVisibility(View.GONE);
                     mToolbarTitleImg.setVisibility(View.VISIBLE);
                     mToolbarTitleImg.setImageURI(Uri.parse(product.getProduct_img()));
-//                    mToolbarTitle.setTextColor(Color.argb((int) alpha, 1, 24, 28));
                     mLlToolbar.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
                 } else {    //滑动到banner下面设置普通颜色
                     mTabProductDetail.setVisibility(View.VISIBLE);
@@ -345,19 +374,32 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                     mToolbarTitleImg.setImageURI(Uri.parse(product.getProduct_img()));
                 }
 
+                if (scrollY > oldScrollY) {
+                    // 向下滑动
+                    if (scrollY >= 0 && scrollY < mViewRemarkShow.getTop()) {
+                        mTabProductDetail.getTabAt(0).select();
+                    } else if (scrollY >= mViewRemarkShow.getTop() && scrollY < mViewPriceShow.getTop()) {
+                        mTabProductDetail.getTabAt(1).select();
+                    } else if (scrollY >= mViewPriceShow.getTop() && scrollY < mViewEvaluateShow.getTop()) {
+                        mTabProductDetail.getTabAt(2).select();
+                    } else if (scrollY >= mViewEvaluateShow.getTop()) {
+                        mTabProductDetail.getTabAt(3).select();
+                    } else {
 
-                Log.e("ssss", "===scroller.getScrollY()===" + scrollY);
-//                if (scrollY >= 0 && scrollY < mViewRemarkShow.getTop()) {
-//                    mTabProductDetail.getTabAt(0).select();
-//                } else if (scrollY >= mViewRemarkShow.getTop() && scrollY < mViewPriceShow.getTop()) {
-//                    mTabProductDetail.getTabAt(1).select();
-//                } else if (scrollY >= mViewPriceShow.getTop() && scrollY < mViewEvaluateShow.getTop()) {
-//                    mTabProductDetail.getTabAt(2).select();
-//                } else if (scrollY >= mViewEvaluateShow.getTop()) {
-//                    mTabProductDetail.getTabAt(3).select();
-//                } else {
-//
-//                }
+                    }
+                } else if (scrollY < oldScrollY) {
+                    // 向上滑动
+                    if (scrollY < mViewRemarkShow.getTop()) {
+                        mTabProductDetail.getTabAt(0).select();
+                    } else if (scrollY < mViewPriceShow.getTop()) {
+                        mTabProductDetail.getTabAt(1).select();
+                    } else if (scrollY < mViewEvaluateShow.getTop()) {
+                        mTabProductDetail.getTabAt(2).select();
+                    }
+                } else if (scrollY == oldScrollY) {
+
+                }
+
             }
         });
 
@@ -521,6 +563,18 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 break;
             case R.id.rbtn_product_bad_evaluate:
                 getPresenter().setCondition(START_BAD);
+                break;
+            case R.id.radioBtn_product:
+
+                break;
+            case R.id.radioBtn_component:
+
+                break;
+            case R.id.radioBtn_price:
+
+                break;
+            case R.id.radioBtn_evaluate:
+
                 break;
         }
         getPresenter().getEvaluateData();

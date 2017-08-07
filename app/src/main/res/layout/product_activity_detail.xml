@@ -71,6 +71,31 @@
             app:tabSelectedTextColor="@color/colorPrimary"
             />
 
+        <RadioGroup
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioBtn_product"
+                style="@style/productTab"
+                android:text="11"/>
+            <RadioButton
+                android:id="@+id/radioBtn_component"
+                style="@style/productTab"
+                android:text="22"/>
+            <RadioButton
+                android:id="@+id/radioBtn_price"
+                style="@style/productTab"
+                android:text="33"/>
+            <RadioButton
+                android:id="@+id/radioBtn_evaluate"
+                style="@style/productTab"
+                android:text="44"/>
+
+        </RadioGroup>
+
     </LinearLayout>
 
     <RelativeLayout

@@ -43,5 +43,15 @@
         <item name="android:text">@string/text_answer</item>
         <item name="com.miguan.yjy:solid">#b8b8b8</item>
     </style>
+    <style name="productTab">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:button">@color/transparent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
 
 </resources>
