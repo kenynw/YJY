@@ -55,6 +55,7 @@
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:visibility="gone"
         android:gravity="center_horizontal"
         android:text="品牌名称"
         android:textColor="@color/textTertiary"
@@ -65,7 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
+        android:gravity="center"
         android:text="@string/slide_show"
         android:textColor="@color/textTertiary"
         android:textSize="@dimen/text_size_small_13"/>

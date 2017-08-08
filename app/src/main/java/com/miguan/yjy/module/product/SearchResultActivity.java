@@ -24,6 +24,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.ProductList;
@@ -134,6 +135,10 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         if (productList.getRank().size() != 0) {
             mRecySearchBillBoard.setVisibility(View.VISIBLE);
             mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            int transparent = getResources().getColor(R.color.transparent);
+            mRecySearchBillBoard.addItemDecoration(new DividerDecoration(transparent,
+                    (int) getResources().getDimension(R.dimen.spacing_small)));
+
             mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(this, productList.getRank()) {
                 @Override
                 public BillboardViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {

@@ -75,7 +75,7 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
         mDvThumb.setImageURI(Uri.parse(data.getProduct_img()));
         mTvName.setText(data.getProduct_name());
         mRatbar.setRating(data.getStar());
-        mTvSpec.setText(data.getPrice().equals("0") ? "暂无报价" : getSpec(data));
+        mTvSpec.setText(data.getSpec(getContext()));
         itemView.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getId()));
         if (TextUtils.isEmpty(data.getProduct_explain())) {
             mLlNoRead.setVisibility(View.VISIBLE);
@@ -83,6 +83,7 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
         } else {
             mLlNoRead.setVisibility(View.GONE);
             mTvProductRead.setVisibility(View.VISIBLE);
+            mTvProductRead.setText(data.getProduct_explain());
         }
     }
 

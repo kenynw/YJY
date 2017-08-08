@@ -459,6 +459,8 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                 }
                 break;
             case R.id.iv_test_close:
+                birthDay = "";
+                sex = 2;
                 popupWindow.dismiss();
                 break;
             case R.id.tv_test_result:

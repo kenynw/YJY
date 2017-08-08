@@ -421,8 +421,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         mDvThumb.setOnClickListener(v -> LargeImageActivity.start(ProductDetailActivity.this, product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
-
-        mTvSpec.setText(product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec), product.getPrice(), product.getForm()));
+        String spec = String.format(TextUtils.isEmpty(product.getForm())?getString(R.string.text_product_no_spec) : getString(R.string.text_product_spec) , product.getPrice(), product.getForm());
+        mTvSpec.setText(product.getSpec(ProductDetailActivity.this));
 
         if (product.getTagList().size() >= 2) {
             StringBuilder sb = new StringBuilder();

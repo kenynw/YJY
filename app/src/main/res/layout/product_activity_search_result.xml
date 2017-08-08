@@ -76,6 +76,7 @@
         android:id="@+id/recy_search_billBoard"
         android:layout_width="match_parent"
         android:visibility="gone"
+        android:paddingTop="10dp"
         android:layout_height="wrap_content"
         />
 

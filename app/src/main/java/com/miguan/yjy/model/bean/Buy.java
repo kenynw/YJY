@@ -13,6 +13,12 @@ public class Buy implements Parcelable {
 //    jd(string) － 京东
 //    taobao(string) － 淘宝
 //    amazon(int) － 亚马逊
+//        "type": "3",
+//                "url": "http://www.baidu.com",
+//                "link_price": "0",
+//                "brand_name": "芙丽芳丝",
+//                "brand_img": "http://oss.yjyapp.com/cs/uploads/brand_img/20170609/7009201706099.jpg"
+
 
     private String jd;
     private String taobao;
@@ -20,7 +26,25 @@ public class Buy implements Parcelable {
     private int type;
     private String url;
     private String link_price;
+    private String brand_name;
+    private String brand_img;
 
+
+    public String getBrand_name() {
+        return brand_name;
+    }
+
+    public void setBrand_name(String brand_name) {
+        this.brand_name = brand_name;
+    }
+
+    public String getBrand_img() {
+        return brand_img;
+    }
+
+    public void setBrand_img(String brand_img) {
+        this.brand_img = brand_img;
+    }
 
     public int getType() {
         return type;
@@ -58,6 +82,9 @@ public class Buy implements Parcelable {
         return amazon;
     }
 
+    public Buy() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -71,9 +98,8 @@ public class Buy implements Parcelable {
         dest.writeInt(this.type);
         dest.writeString(this.url);
         dest.writeString(this.link_price);
-    }
-
-    public Buy() {
+        dest.writeString(this.brand_name);
+        dest.writeString(this.brand_img);
     }
 
     protected Buy(Parcel in) {
@@ -83,6 +109,8 @@ public class Buy implements Parcelable {
         this.type = in.readInt();
         this.url = in.readString();
         this.link_price = in.readString();
+        this.brand_name = in.readString();
+        this.brand_img = in.readString();
     }
 
     public static final Creator<Buy> CREATOR = new Creator<Buy>() {

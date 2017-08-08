@@ -1,6 +1,5 @@
 package com.miguan.yjy.adapter.viewholder;
 
-import android.text.Html;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -33,8 +32,8 @@ public class WikiViewHolder extends BaseViewHolder<Wiki.RelationInfo> {
     public void setData(Wiki.RelationInfo data) {
         super.setData(data);
 
-        String name = data.getQuestion() + " <b><tt><font color='#ff0000'>·NEW</font></tt></b>";
-        mTvWikiName.setText(Html.fromHtml(name));
+        String name = data.getQuestion();//+ " <b><tt><font color='#ff0000'>·NEW</font></tt></b>"
+        mTvWikiName.setText(name);
     }
 
 

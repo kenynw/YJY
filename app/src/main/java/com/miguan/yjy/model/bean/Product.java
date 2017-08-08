@@ -100,8 +100,9 @@ public class Product implements Parcelable {
     }
 
     public String getSpec(Context context) {
+        String spec = String.format(TextUtils.isEmpty(form)?context.getString(R.string.text_product_no_spec) : context.getString(R.string.text_product_spec) , price, form);
         return price.equals("0") || price.equals("0.00") || TextUtils.isEmpty(price) ? "暂无报价" :
-                String.format(context.getString(R.string.text_product_spec), price, form);
+                spec;
     }
 
     public int getIs_top() {

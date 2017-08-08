@@ -14,6 +14,7 @@
     <string name="text_brand_list">品牌列表</string>
     <string name="text_product">产品</string>
     <string name="text_product_spec">￥%1$s/%2$s</string>
+    <string name="text_product_no_spec">￥%1$s%2$s</string>
     <string name="text_expiration_date">过期时间</string>
     <string name="text_is_open">是否开封</string>
     <string name="text_open_time">开封日期</string>

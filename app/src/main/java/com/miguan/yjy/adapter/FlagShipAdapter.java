@@ -69,8 +69,8 @@ public class FlagShipAdapter extends RecyclerArrayAdapter<Buy> {
         @Override
         public void setData(Buy data) {
             super.setData(data);
-            mImgFlagShipPrice.setImageURI(mProduct.getProduct_img());
-            mTvFlagshipProductName.setText(mProduct.getBrand_name());
+            mImgFlagShipPrice.setImageURI(data.getBrand_img());
+            mTvFlagshipProductName.setText(data.getBrand_name());
             mTvFlagshipProductPrice.setText(data.getLink_price());
 
             switch (data.getType()) {

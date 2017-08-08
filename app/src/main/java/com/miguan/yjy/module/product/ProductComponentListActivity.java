@@ -98,7 +98,7 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
 
         mIvThumb.setImageURI(Uri.parse(getPresenter().product.getProduct_img()));
         mTvName.setText(getPresenter().product.getProduct_name());
-        mTvSpec.setText(getPresenter().product.getPrice().equals("0") ? "暂无报价" : String.format(getString(R.string.text_product_spec),getPresenter(). product.getPrice(), getPresenter().product.getForm()));
+        mTvSpec.setText(getPresenter().product.getSpec(ProductComponentListActivity.this));
 
         Bitmap waterMiddle = ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle);
         Bitmap waterTop = ScreenShot.getInstance().takeScreenShotOfJustView(mRlWaterTop);
