@@ -72,13 +72,6 @@
     <include layout="@layout/include_product_filter"/>
 
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recy_search_billBoard"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:paddingTop="10dp"
-        android:layout_height="wrap_content"
-        />
 
     <include layout="@layout/include_product_list"/>
 

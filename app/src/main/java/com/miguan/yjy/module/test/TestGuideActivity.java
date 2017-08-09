@@ -21,7 +21,6 @@ import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.constant.Constants;
 import com.miguan.yjy.model.local.UserPreferences;
-import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.LUtils;
 
@@ -29,6 +28,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.functions.Action1;
 
 import static com.miguan.yjy.model.bean.Skin.Drys;
 import static com.miguan.yjy.model.bean.Skin.Pigments;
@@ -230,14 +230,14 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
 
 
     private void submitSkin(String key, String value) {
-        TestModel.getInstantce().saveSkin(key, value).unsafeSubscribe(new ServicesResponse<String>() {
+        TestModel.getInstantce().saveSkin(key, value).doOnNext(new Action1<Object>() {
             @Override
-            public void onNext(String s) {
+            public void call(Object o) {
                 LUtils.toast("提交成功");
                 finish();
                 EventBus.getDefault().post(new TestStart());
             }
-        });
+        }).subscribe();
     }
 
 }

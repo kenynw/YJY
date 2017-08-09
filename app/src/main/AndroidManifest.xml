@@ -158,7 +158,9 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="yjyappscheme" android:host="yjy.app" android:pathPrefix="/openwith"/>
+                <data android:scheme="yjyappscheme"
+                      android:host="yjy.app"
+                      android:pathPrefix="/openwith"/>
             </intent-filter>
 
         </activity>

@@ -15,6 +15,7 @@ import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.PermissionUtils;
 
 public class LauncherActivity extends AppCompatActivity {
+    private static final String TAG = "LauncherActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,17 @@ public class LauncherActivity extends AppCompatActivity {
         }
 
         requestPermission();
+
+//        Intent intent =getIntent();
+//        Log.e(TAG, "scheme:" +intent.getScheme()); Uri uri =intent.getData();
+//        Log.e(TAG, "scheme: "+uri.getScheme());
+//        Log.e(TAG, "host: "+uri.getHost());
+//        Log.e(TAG, "port: "+uri.getPort());
+//        Log.e(TAG, "path: "+uri.getPath());
+//        Log.e(TAG, "queryString: "+uri.getQuery());
+//        Log.e(TAG, "queryParameter: "+uri.getQueryParameter("key"));
+
+
     }
 
     private void requestPermission() {

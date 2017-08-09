@@ -718,7 +718,7 @@ public interface Services {
      * value(int) － 对应值
      */
     @GET("?action=saveSkin")
-    Observable<String> saveSkin(
+    Observable<Object> saveSkin(
             @Query("token") String token,
             @Query("type") String type,
             @Query("value") String value

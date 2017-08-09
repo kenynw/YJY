@@ -4,12 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.ProductRecommentAdapter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
+import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.LUtils;
 
@@ -38,6 +45,8 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
 
     private String mEffect;//功效关键字
     private int mType = 1;//类型 ：不传或者传1为默认搜索产品
+    public EasyRecyclerView mRecySearchBillBoard;
+
 
     public static void start(Context context, String keywords, int cateId, String cateName) {
         Intent intent = new Intent(context, SearchResultActivity.class);
@@ -66,6 +75,36 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     public void onRefresh() {
         ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mType, mCateId, mEffect, 1)
                 .map(product -> {
+                    getAdapter().removeAllHeader();
+                    getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
+
+                        @Override
+                        public View onCreateView(ViewGroup parent) {
+                            View headBillBoard = View.inflate(getView(), R.layout.include_head_billboard, null);
+                            mRecySearchBillBoard = headBillBoard.findViewById(R.id.recy_search_billBoard);
+                            mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(getView(), LinearLayoutManager.VERTICAL, false));
+                            int transparent = getView().getResources().getColor(R.color.transparent);
+                            mRecySearchBillBoard.addItemDecoration(new DividerDecoration(transparent,
+                                    (int) getView().getResources().getDimension(R.dimen.spacing_small)));
+                            return headBillBoard;
+                        }
+
+                        @Override
+                        public void onBindView(View headerView) {
+
+                            if (product.getRank().size() != 0) {
+                                mRecySearchBillBoard.setVisibility(View.VISIBLE);
+                                mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(getView(), product.getRank()) {
+                                    @Override
+                                    public BillboardViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                                        return new BillboardViewHolder(parent);
+                                    }
+                                });
+                            } else {
+                                mRecySearchBillBoard.setVisibility(View.GONE);
+                            }
+                        }
+                    });
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
 //                    getView().setCountLayoutVisibility(product.getProduct().size() > 0 ? VISIBLE : GONE);
                     return product.getProduct();
