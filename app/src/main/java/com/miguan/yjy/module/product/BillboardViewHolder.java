@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.product;
 
+import android.text.Html;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -31,12 +32,12 @@ public class BillboardViewHolder extends BaseViewHolder<Rank> {
 
     @Override
     public void setData(Rank data) {
+        String num = data.getRank_name() + "<font color=\"#32DAC3\">" + "TOP" + data.getImg_list().size() + " </font>";
+        mTvTitle.setText(Html.fromHtml(num));
         int size = data.getImg_list().size() > 3 ? 3 : data.getImg_list().size();
         for (int i = 0; i < size; i++) {
             mDvTops[i].setImageURI(data.getImg_list().get(i));
         }
-
-        mTvTitle.setText(data.getRank_name());
         itemView.setOnClickListener(view -> BillboardActivityPresenter.start(getContext(), data.getRank_id()));
     }
 

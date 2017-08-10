@@ -75,10 +75,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
+            android:gravity="center"
             android:textSize="@dimen/text_size_small_14"
             android:paddingTop="20dp"
             android:textColor="@color/textSecondary"
-            android:text="颜究院已为您筛选出正品旗舰店\n您可以放心选购。"/>
+            android:text="颜究院已为您筛选出正品旗舰店，\n您可以放心选购。"/>
 
         <TextView
             android:id="@+id/tv_sure"
