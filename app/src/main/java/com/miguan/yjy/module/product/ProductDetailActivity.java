@@ -216,6 +216,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     private boolean mIsScrollChange;
     private String mGroups[] = {"产品", "成分", "比价", "评价"};
     private int position;
+    DividerDecoration decoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +224,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         setContentView(R.layout.product_activity_detail);
         setToolbarTitle("产品详情");
         ButterKnife.bind(this);
-
+        decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
+        decoration.setDrawLastItem(false);
+        mRecyEvalutate.addItemDecoration(decoration);
         mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
     }
@@ -421,7 +424,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         mDvThumb.setOnClickListener(v -> LargeImageActivity.start(ProductDetailActivity.this, product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
-        String spec = String.format(TextUtils.isEmpty(product.getForm())?getString(R.string.text_product_no_spec) : getString(R.string.text_product_spec) , product.getPrice(), product.getForm());
+        String spec = String.format(TextUtils.isEmpty(product.getForm()) ? getString(R.string.text_product_no_spec) : getString(R.string.text_product_spec), product.getPrice(), product.getForm());
         mTvSpec.setText(product.getSpec(ProductDetailActivity.this));
 
         if (product.getTagList().size() >= 2) {
@@ -587,9 +590,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyEvalutate.setNestedScrollingEnabled(false);
-        DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
-        decoration.setDrawLastItem(false);
-        mRecyEvalutate.addItemDecoration(decoration);
         mRecyEvalutate.setAdapter(evaluateAdapter);
         evaluateAdapter.notifyDataSetChanged();
         tvUserEvaluteNum.setText(String.format(getString(R.string.tv_product_detail_user_evaluate), size));
