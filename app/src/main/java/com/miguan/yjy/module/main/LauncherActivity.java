@@ -9,11 +9,11 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.miguan.yjy.module.product.ProductDetailActivity;
+import com.miguan.yjy.module.article.ArticleDetailPresenter;
+import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.PermissionUtils;
@@ -24,41 +24,6 @@ public class LauncherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        if (Intent.ACTION_VIEW.equals(action)) {
-            Uri uri = intent.getData();
-            if (uri != null) {
-                String host = uri.getHost();
-                String dataString = intent.getDataString();
-                String id = uri.getQueryParameter("id");
-                String relation = uri.getQueryParameter("unlrelation");
-                String type = uri.getQueryParameter("unltype");
-                String path = uri.getPath();
-                String path1 = uri.getEncodedPath();
-                String queryString = uri.getQuery();
-                Log.d(TAG, "host:" + host);
-                Log.d(TAG, "dataString:" + dataString);
-                Log.d(TAG, "path:" + path);
-                Log.d(TAG, "path:" + path);
-                Log.e(TAG, "scheme:" + intent.getScheme());
-                Log.d(TAG, "queryString:" + queryString);
-                if (dataString.startsWith("yjyappscheme")) {
-
-                    switch (Integer.parseInt(type)) {
-                        case 1:
-                            Intent intent1 = new Intent(LauncherActivity.this, ProductDetailActivity.class);
-                            intent.putExtra(ProductDetailPresenter.EXTRA_PRODUCT_ID, Integer.parseInt(relation));
-                            startActivity(intent1);
-//                            ProductDetailPresenter.start(LauncherActivity.this,Integer.parseInt(relation));
-                            break;
-                    }
-                }
-
-            }
-        }
 
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
@@ -74,7 +39,6 @@ public class LauncherActivity extends AppCompatActivity {
             finish();
             return;
         }
-
         requestPermission();
     }
 
@@ -107,10 +71,39 @@ public class LauncherActivity extends AppCompatActivity {
 
     private void onPermissionGranted() {
         new Handler().postDelayed(() -> {
-            Class target = LUtils.getPreferences().getBoolean("is_first", true) ? GuideActivity.class : MainActivity.class;
-            startActivity(new Intent(LauncherActivity.this, target));
+            if (LUtils.getPreferences().getBoolean("is_first", true)) {
+                startActivity(new Intent(LauncherActivity.this, GuideActivity.class));
+            } else {
+                Intent intent = getIntent();
+                String action = intent.getAction();
+                String dataString = intent.getDataString();
+                if (Intent.ACTION_VIEW.equals(action)) {
+                    Uri uri = intent.getData();
+                    if (uri != null) {
+                        String relation = uri.getQueryParameter("unlrelation");
+                        String type = uri.getQueryParameter("unltype");
+                        String path = uri.getPath();
+                        if (dataString.startsWith("yjyappscheme")) {
+                            switch (Integer.parseInt(type)) {
+                                case 0://活动
+                                    WebViewActivity.start(LauncherActivity.this,"",relation);
+                                    break;
+                                case 1://产品详情
+                                    ProductDetailPresenter.start(LauncherActivity.this,Integer.parseInt(relation));
+                                    break;
+                                case 2://文章
+                                    ArticleDetailPresenter.start(LauncherActivity.this,Integer.parseInt(relation));
+                                    break;
+                            }
+                        }
+                    }
+                }else {
+                    startActivity(new Intent(LauncherActivity.this, MainActivity.class));
+                }
+            }
             finish();
         }, 1000);
     }
+
 
 }
