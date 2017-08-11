@@ -195,14 +195,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     ImageView mImgRecommendBuy;
     @BindView(R.id.recy_product_flagship)
     EasyRecyclerView mRecyProductFlagship;
-    @BindView(R.id.radioBtn_product)
-    RadioButton mRadioBtnProduct;
-    @BindView(R.id.radioBtn_component)
-    RadioButton mRadioBtnComponent;
-    @BindView(R.id.radioBtn_price)
-    RadioButton mRadioBtnPrice;
-    @BindView(R.id.radioBtn_evaluate)
-    RadioButton mRadioBtnEvaluate;
+
+    @BindView(R.id.ll_product_detail_ultimate)
+    LinearLayout mLlUltimate;
 
     private boolean mIsLike;
 
@@ -229,20 +224,22 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mRecyEvalutate.addItemDecoration(decoration);
         mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
+        mImgRecommendBuy.setOnClickListener(v -> getPresenter().showExplain());
+        mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
     public void setData(Product product) {
+        if (product.getLink_buy() != null && product.getLink_buy().size() > 0) {
+            mLlUltimate.setVisibility(View.VISIBLE);
+            FlagShipAdapter flagShipAdapter = new FlagShipAdapter(this, product.getLink_buy(), product);
+            flagShipAdapter.notifyDataSetChanged();
+            mRecyProductFlagship.setAdapter(flagShipAdapter);
+        }
 
-        mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
-        FlagShipAdapter flagShipAdapter = new FlagShipAdapter(this, product.getLink_buy(), product);
-        mRecyProductFlagship.setAdapter(flagShipAdapter);
-        flagShipAdapter.notifyDataSetChanged();
         mRbtnProductHighEvaluate.setText("好评(" + product.getPraise() + ")");
         mRbtnProductMediumEvaluate.setText("中评(" + product.getMiddle() + ")");
         mRbtnProductBadEvaluate.setText("差评(" + product.getBad() + ")");
-
-        mImgRecommendBuy.setOnClickListener(v -> getPresenter().showExplain());
 
         for (int i = 0; i < mGroups.length; i++) {
             TabLayout.Tab tab = mTabProductDetail.newTab();
@@ -566,18 +563,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 break;
             case R.id.rbtn_product_bad_evaluate:
                 getPresenter().setCondition(START_BAD);
-                break;
-            case R.id.radioBtn_product:
-
-                break;
-            case R.id.radioBtn_component:
-
-                break;
-            case R.id.radioBtn_price:
-
-                break;
-            case R.id.radioBtn_evaluate:
-
                 break;
         }
         getPresenter().getEvaluateData();

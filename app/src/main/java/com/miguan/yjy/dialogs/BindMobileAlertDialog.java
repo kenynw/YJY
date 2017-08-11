@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextWatcher;
@@ -126,6 +127,11 @@ public class BindMobileAlertDialog extends BaseTopAlertDialog implements TextWat
                 mEtContent.setText("");
                 break;
             case R.id.tv_user_dialog_cancel:
+                if (getTargetFragment() != null && getTargetFragment() instanceof DialogCallback) {
+                    ((DialogCallback) getTargetFragment()).onNegativeClick(mMobileView);
+                } else if (getActivity() instanceof DialogCallback) {
+                    ((DialogCallback) getActivity()).onNegativeClick(mMobileView);
+                }
                 hide();
                 break;
             case R.id.tv_bind_mobile_captcha:
@@ -175,12 +181,12 @@ public class BindMobileAlertDialog extends BaseTopAlertDialog implements TextWat
     }
 
     private void checkMobile() {
-        if (mEtContent.getText().length() <= 0) {
+        if (mEtContent.getText().toString().trim().length() <= 0) {
             LUtils.toast("手机号不能为空");
             return;
         }
 
-        if (mEtCaptcha.getText().length() <= 0) {
+        if (mEtCaptcha.getText().toString().trim().length() <= 0) {
             LUtils.toast("验证码不能为空");
             return;
         }
@@ -196,28 +202,37 @@ public class BindMobileAlertDialog extends BaseTopAlertDialog implements TextWat
     }
 
     private View createPasswordView() {
-        View view = View.inflate(getActivity(), R.layout.popwindow_user_set_password, null);
+        View view = View.inflate(getActivity(), R.layout.dialog_set_password, null);
         EditText input = view.findViewById(R.id.et_set_password);
         TextView done = view.findViewById(R.id.tv_set_password_done);
-        done.setOnClickListener(v -> {
-            AccountModel.getInstance().setPassword(
-                    mEtContent.getText().toString().trim(),
-                    mEtCaptcha.getText().toString().trim(),
-                    input.getText().toString().trim()
-            )
-                    .unsafeSubscribe(new ServicesResponse<String>() {
-                        @Override
-                        public void onNext(String result) {
-                            LUtils.closeKeyboard(input);
-                            dismiss();
-                        }
+        done.setOnClickListener(v ->
+                AccountModel.getInstance().setPassword(mEtContent.getText().toString().trim(),
+                        mEtCaptcha.getText().toString().trim(), input.getText().toString().trim())
+                        .unsafeSubscribe(new ServicesResponse<String>() {
+                            @Override
+                            public void onNext(String result) {
+                                if (getTargetFragment() != null && getTargetFragment() instanceof DialogCallback) {
+                                    ((DialogCallback) getTargetFragment()).onPositiveClick(view);
+                                } else if (getActivity() instanceof DialogCallback) {
+                                    ((DialogCallback) getActivity()).onPositiveClick(view);
+                                }
+                                LUtils.closeKeyboard(input);
+                                dismiss();
+                            }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            LUtils.toast("验证码错误");
-                            getDialog().setContentView(mMobileView);
-                        }
-                    });
+                            @Override
+                            public void onError(Throwable e) {
+                                LUtils.toast("验证码错误");
+                                dismiss();
+                            }
+                        })
+
+        );
+        input.setFilters(new InputFilter[]{
+                (source, start, end, dest, dstart, dend) -> {
+                    if (source.equals(" ")) return "";
+                    return null;
+                }
         });
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -227,7 +242,7 @@ public class BindMobileAlertDialog extends BaseTopAlertDialog implements TextWat
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                done.setEnabled(input.getText().length() >= 6);
+                done.setEnabled(input.getText().toString().trim().length() >= 6);
             }
 
             @Override

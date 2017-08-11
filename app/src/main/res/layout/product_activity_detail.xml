@@ -71,31 +71,6 @@
             app:tabSelectedTextColor="@color/colorPrimary"
             />
 
-        <RadioGroup
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioBtn_product"
-                style="@style/productTab"
-                android:text="11"/>
-            <RadioButton
-                android:id="@+id/radioBtn_component"
-                style="@style/productTab"
-                android:text="22"/>
-            <RadioButton
-                android:id="@+id/radioBtn_price"
-                style="@style/productTab"
-                android:text="33"/>
-            <RadioButton
-                android:id="@+id/radioBtn_evaluate"
-                style="@style/productTab"
-                android:text="44"/>
-
-        </RadioGroup>
-
     </LinearLayout>
 
     <RelativeLayout
@@ -275,10 +250,13 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_product_detail_ultimate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
 
                     <TextView
                         android:layout_width="0dp"
@@ -287,7 +265,8 @@
                         android:layout_weight="1"
                         android:text="推荐官方渠道"
                         android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/text_size_small_15"/>
+                        android:textSize="@dimen/text_size_small_15"
+                        />
 
                     <ImageView
                         android:id="@+id/img_product_recommend_buy"
@@ -302,7 +281,8 @@
                 <com.jude.easyrecyclerview.EasyRecyclerView
                     android:id="@+id/recy_product_flagship"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.jude.easyrecyclerview.EasyRecyclerView>
+                    android:layout_height="wrap_content"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"

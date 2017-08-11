@@ -206,4 +206,8 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     }
 
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_brand_list_search};
+    }
 }

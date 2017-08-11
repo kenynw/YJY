@@ -16,5 +16,7 @@
 
     <item name="btn_dialog_positive" type="id" />
     <item name="btn_dialog_negative" type="id" />
+    <item name="tv_dialog_title" type="id" />
+    <item name="tv_dialog_message" type="id" />
 
 </resources>

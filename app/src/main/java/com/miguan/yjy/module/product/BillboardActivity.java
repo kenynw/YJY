@@ -72,7 +72,7 @@ public class BillboardActivity extends BaseDataActivity<BillboardActivityPresent
     @Override
     public void setData(Rank rank) {
         Rank rankInfo = rank.getRankingInfo();
-        setToolbarTitle(rankInfo.getRank_name());
+        setToolbarTitle(rankInfo.getRank_name() + "TOP" + rank.getProductList().size());
         mDvImage.setImageURI(rankInfo.getRank_banner());
         mDvImage.setOnClickListener(v -> LargeImageActivity.start(this, rankInfo.getRank_banner()));
         mProductAdapter.addAll(rank.getProductList());

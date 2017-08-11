@@ -87,4 +87,10 @@ public class ForgotActivity extends ChainBaseActivity<ForgotPresenter> implement
     public void onTickStop() {
         mBtnCaptcha.setEnabled(!TextUtils.isEmpty(mEtUsername.getText()));
     }
+
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_account_username, R.id.et_account_password, R.id.et_account_captcha};
+    }
+
 }

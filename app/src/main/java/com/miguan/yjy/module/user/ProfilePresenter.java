@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.widget.PopupWindow;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
-import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.TestStart;
@@ -80,16 +78,6 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
         }
     }
 
-    public void sendCaptcha(String mobile) {
-        AccountModel.getInstance().bindCaptcha(mobile.isEmpty() ? mMobile : mobile).subscribe(new ServicesResponse<Boolean>() {
-            @Override
-            public void onNext(Boolean aBoolean) {
-                if (!mobile.isEmpty()) mMobile = mobile;
-                getView().showPopupWindow(ProfileActivity.TYPE_CAPTCHA);
-            }
-        });
-    }
-
     public void modify(String key, String value) {
         UserModel.getInstance().modifyProfile(key, value).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
@@ -97,22 +85,6 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
                 LUtils.toast(s);
             }
         });
-    }
-
-    public void bindMobile(String captcha) {
-        AccountModel.getInstance().bindMobile(mMobile, captcha).unsafeSubscribe(new ServicesResponse<String>() {
-            @Override
-            public void onNext(String s) {
-                getView().showPopupWindow(ProfileActivity.TYPE_BIND_SUCCESS);
-            }
-        });
-    }
-
-    private void closePopWindow(PopupWindow popupWindow) {
-        if (popupWindow != null) {
-            popupWindow.dismiss();
-        }
-
     }
 
     public void pickImage(int type) {

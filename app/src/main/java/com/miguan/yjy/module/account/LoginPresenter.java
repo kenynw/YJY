@@ -1,8 +1,11 @@
 package com.miguan.yjy.module.account;
 
 import android.content.Intent;
+import android.text.TextUtils;
+import android.util.Patterns;
 
 import com.dsk.chain.bijection.Presenter;
+import com.miguan.yjy.dialogs.BindMobileAlertDialog;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.bean.User;
@@ -62,9 +65,12 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                 AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
                     @Override
                     public void onNext(User user) {
-                        EventBus.getDefault().post(new TestStart());
-                        getView().finish();
-
+                        if (!TextUtils.isEmpty(user.getMobile()) && Patterns.PHONE.matcher(user.getMobile()).matches()) {
+                            loginSuccess();
+                        } else {
+                            BindMobileAlertDialog dialog = new BindMobileAlertDialog();
+                            dialog.show(getView().getSupportFragmentManager(), "bind");
+                        }
                     }
                 });
                 getView().getExpansionDelegate().hideProgressBar();
@@ -86,6 +92,11 @@ public class LoginPresenter extends Presenter<LoginActivity> {
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
         UMShareAPI.get(getView()).onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void loginSuccess() {
+        EventBus.getDefault().post(new TestStart());
+        getView().finish();
     }
 
 }

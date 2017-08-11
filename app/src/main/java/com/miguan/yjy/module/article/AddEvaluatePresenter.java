@@ -9,6 +9,7 @@ import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
 import com.miguan.yjy.model.ImageModel;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -59,15 +60,15 @@ public class AddEvaluatePresenter extends Presenter<AddEvaluateActivity> {
         if (uri != null) {
             getView().getExpansionDelegate().showProgressBar("正在上传图片");
             ImageModel.getInstance().uploadImageSync("attachment", new File(uri.getPath()))
-                    .flatMap(new Func1<String, Observable<String>>() {
+                    .flatMap(new Func1<String, Observable<Evaluate>>() {
                         @Override
-                        public Observable<String> call(String s) {
+                        public Observable<Evaluate> call(String s) {
                             return ArticleModel.getInstance().addEvaluate(mArticleId, mType, mParentId, s, content);
                         }
                     })
-                    .subscribe(new ServicesResponse<String>() {
+                    .subscribe(new ServicesResponse<Evaluate>() {
                         @Override
-                        public void onNext(String s) {
+                        public void onNext(Evaluate s) {
                             getView().setResult(Activity.RESULT_OK);
                             getView().finish();
                         }
@@ -75,9 +76,9 @@ public class AddEvaluatePresenter extends Presenter<AddEvaluateActivity> {
 
         } else {
             ArticleModel.getInstance().addEvaluate(mArticleId, mType, mParentId, "", content)
-                    .subscribe(new ServicesResponse<String>() {
+                    .subscribe(new ServicesResponse<Evaluate>() {
                         @Override
-                        public void onNext(String evaluate) {
+                        public void onNext(Evaluate evaluate) {
                             getView().setResult(Activity.RESULT_OK);
                             getView().finish();
                         }

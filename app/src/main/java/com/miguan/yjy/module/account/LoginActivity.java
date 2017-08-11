@@ -2,9 +2,11 @@ package com.miguan.yjy.module.account;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.dialogs.DialogCallback;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.utils.LUtils;
 
@@ -23,7 +26,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(LoginPresenter.class)
-public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements TextWatcher {
+public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements TextWatcher, DialogCallback {
 
     @BindView(R.id.et_login_username)
     EditText mEtUsername;
@@ -101,6 +104,21 @@ public class LoginActivity extends ChainBaseActivity<LoginPresenter> implements 
     public void closeKeyboard() {
         LUtils.closeKeyboard(mEtPassword);
         LUtils.closeKeyboard(mEtUsername);
+    }
+
+    @Override
+    public void onPositiveClick(@NonNull View view) {
+        getPresenter().loginSuccess();
+    }
+
+    @Override
+    public void onNegativeClick(@NonNull View view) {
+        getPresenter().loginSuccess();
+    }
+
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_login_username, R.id.et_login_password};
     }
 
 }

@@ -86,6 +86,8 @@ public class MessageViewHolder extends BaseViewHolder<Message> {
                     ProductDetailPresenter.start(getContext(), data.getRelation_id());
                 } else if (data.getOtype() == 2) {
                     ArticleDetailPresenter.start(getContext(), data.getRelation_id());
+                } else if (data.getOtype() == 3) {
+                    EvaluateDetailPresenter.start(getContext(), data.getRelation_id());
                 }
             });
         }

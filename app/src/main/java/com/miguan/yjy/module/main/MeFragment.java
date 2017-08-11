@@ -14,16 +14,15 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.User;
-import com.miguan.yjy.model.services.ServiceException;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
@@ -46,6 +45,8 @@ import butterknife.Unbinder;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
+import static android.view.View.GONE;
+
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
@@ -65,7 +66,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     TextView mTvFaceScore;
 
     @BindView(R.id.dv_me_avatar)
-    ImageView mDvAvatar;
+    SimpleDraweeView mDvAvatar;
 
     @BindView(R.id.tv_me_username)
     TextView mTvUsername;
@@ -112,16 +113,17 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         View view = inflater.inflate(R.layout.main_fragment_me, container, false);
         mBind = ButterKnife.bind(this, view);
 
-        mLlInfo.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class )));
+        setUnloginView();
+
         mTvSkinTest.setOnClickListener(v -> EventBus.getDefault().post(2));
-        mBtnUsed.setOnClickListener(v -> startActivity(new Intent(getActivity(), UsedListActivity.class)));
-        mBtnLike.setOnClickListener(v -> startActivity(new Intent(getActivity(), ProductLikeListActivity.class)));
-        mBtnComment.setOnClickListener(v -> startActivity(new Intent(getActivity(), EvaluateListActivity.class)));
-        mBtnReply.setOnClickListener(v -> startActivity(new Intent(getActivity(), ReplyListActivity.class)));
-        mBtnStar.setOnClickListener(v -> startActivity(new Intent(getActivity(), StarListActivity.class)));
-        mBtnMessage.setOnClickListener(v -> startActivity(new Intent(getActivity(), MsgListActivity.class)));
+        mBtnUsed.setOnClickListener(v -> getPresenter().toActivity(UsedListActivity.class));
+        mBtnStar.setOnClickListener(v -> getPresenter().toActivity(StarListActivity.class));
+        mBtnLike.setOnClickListener(v -> getPresenter().toActivity(ProductLikeListActivity.class));
+        mBtnComment.setOnClickListener(v -> getPresenter().toActivity(EvaluateListActivity.class));
+        mBtnReply.setOnClickListener(v -> getPresenter().toActivity(ReplyListActivity.class));
+        mBtnMessage.setOnClickListener(v -> getPresenter().toActivity(MsgListActivity.class));
         mBtnQueryNo.setOnClickListener(v -> startActivity(new Intent(getActivity(), QueryCodeActivity.class)));
-        mBtnFeedback.setOnClickListener(v -> startActivity(new Intent(getActivity(), FeedbackActivity.class)));
+        mBtnFeedback.setOnClickListener(v -> getPresenter().toActivity(FeedbackActivity.class));
         mBtnCommend.setOnClickListener(v -> showSharePopupWindow());
 
         mBadgeMsg = createBadge(mBtnMessage);
@@ -158,15 +160,18 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         }
     }
 
+    public void setUnloginView() {
+        mDvAvatar.setImageURI("");
+        mTvUsername.setText(R.string.text_login_or_register);
+        mTvUsername.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_subhead_material));
+        mLlInfo.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class )));
+        mTvSkin.setVisibility(GONE);
+        mLlMeTest.setVisibility(GONE);
+    }
+
     @Override
     public void onError(Throwable throwable) {
-        EventBus.getDefault().post(0);
-        if (throwable instanceof ServiceException) {
-            if (((ServiceException) throwable).getCode() == -6) {
-                AccountModel.getInstance().clearToken();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-            }
-        }
+        setUnloginView();
     }
 
     @Override
@@ -202,14 +207,18 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     }
 
     private void showSharePopupWindow() {
-        new SharePopupWindow.Builder(getActivity())
-                .setViewTitle("推荐颜究院给")
-                .setTitle("颜究院，一款专业的护肤应用")
-                .setContent("查成分、测肤质，颜究院根据肤质推荐安全有效护肤品")
-                .setUrl("http://m.yjyapp.com/site/download")
-                .setWxCircleTitle("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？")
-                .setWbContent("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？#颜究院APP# http://m.yjyapp.com/site/download")
-                .show(mLlInfo);
+        if (AccountModel.getInstance().isLogin()) {
+            new SharePopupWindow.Builder(getActivity())
+                    .setViewTitle("推荐颜究院给")
+                    .setTitle("颜究院，一款专业的护肤应用")
+                    .setContent("查成分、测肤质，颜究院根据肤质推荐安全有效护肤品")
+                    .setUrl("http://m.yjyapp.com/site/download")
+                    .setWxCircleTitle("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？")
+                    .setWbContent("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？#颜究院APP# http://m.yjyapp.com/site/download")
+                    .show(mLlInfo);
+        } else {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
     }
 
 }

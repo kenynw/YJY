@@ -125,4 +125,10 @@ public class RegisterActivity extends ChainBaseActivity<RegisterPresenter> imple
     public void onTickStop() {
 
     }
+
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_account_username, R.id.et_account_password, R.id.et_account_captcha};
+    }
+
 }

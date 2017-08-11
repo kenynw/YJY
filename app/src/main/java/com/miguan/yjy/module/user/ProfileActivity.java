@@ -1,22 +1,21 @@
 package com.miguan.yjy.module.user;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Patterns;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
@@ -24,11 +23,12 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
+import com.miguan.yjy.dialogs.BaseAlertDialog;
+import com.miguan.yjy.dialogs.BaseTopAlertDialog;
 import com.miguan.yjy.dialogs.BindMobileAlertDialog;
+import com.miguan.yjy.dialogs.DialogCallback;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.SecurityCodeView;
-import com.miguan.yjy.widget.SendValidateButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,15 +42,14 @@ import static butterknife.ButterKnife.findById;
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(ProfilePresenter.class)
-public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> implements SecurityCodeView.InputCompleteListener {
+public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> implements
+        DialogCallback, BaseAlertDialog.OnDialogShowListener {
 
-    public static final int TYPE_USERNAME = 0x001;
+    public static final int REQUEST_CODE_CITY = 0x1233;
 
-    public static final int TYPE_BIND_MOBILE = 0x002;
+    public static final String TAG_MODIFY_USERNAME = "modify_username";
 
-    public static final int TYPE_BIND_SUCCESS = 0x003;
-
-    public static final int TYPE_CAPTCHA = 0x004;
+    public static final String TAG_MOBILE_BOUND = "mobile_bound";
 
     @BindView(R.id.dv_profile_avatar)
     SimpleDraweeView mDvAvatar;
@@ -77,8 +76,6 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
 
     private TimePickerView mTimePickerView;
 
-    private PopupWindow mPopupWindow;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +86,7 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
         mLlAvatar.setOnClickListener(v -> showImagePicker());
         mTvBirthday.setOnClickListener(v -> showTimePicker(mTvBirthday));
         mTvLogout.setOnClickListener(v -> getPresenter().logout());
-        mTvArea.setOnClickListener(v -> CityListActivity.star(ProfileActivity.this));
+        mTvArea.setOnClickListener(v -> startActivityForResult(new Intent(this, CityListActivity.class), REQUEST_CODE_CITY));
     }
 
     private void showImagePicker() {
@@ -129,21 +126,31 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
     public void setData(User user) {
         mDvAvatar.setImageURI(Uri.parse(user.getImg()));
         mTvUsername.setText(getString(user.getUsername()));
-        mTvUsername.setOnClickListener(v -> showPopupWindow(TYPE_USERNAME));
-        boolean isMobile = Patterns.PHONE.matcher(user.getMobile()).find();
+        mTvUsername.setOnClickListener(v -> {
+            BaseTopAlertDialog.newInstance(
+                    R.layout.popupwindow_user_name_modify,
+                    user.getUsername(),
+                    this)
+                    .show(getSupportFragmentManager(), TAG_MODIFY_USERNAME);
+        });
+        boolean isMobile = Patterns.PHONE.matcher(user.getMobile()).matches();
         mTvMobile.setText(getString(isMobile ? user.getMobile() : ""));
         mTvMobile.setOnClickListener(v -> {
             if (!isMobile) {
                 new BindMobileAlertDialog().show(getSupportFragmentManager(), "bind");
             } else {
-                showPopupWindow(TYPE_BIND_SUCCESS);
+                BaseTopAlertDialog.newInstance(
+                        R.layout.dialog_mobile_bound,
+                        "您已绑定<font color=\"#32DAC3\"> " + mTvMobile.getText() + " </font>",
+                        this)
+                        .show(getSupportFragmentManager(), TAG_MOBILE_BOUND);
             }
         });
         mTvBirthday.setText(TextUtils.isEmpty(user.getBirth_year()) ? "未设置" :
                 String.format("%1$04d-%2$02d-%3$02d",
-                Integer.parseInt(user.getBirth_year()),
-                Integer.parseInt(user.getBirth_month()),
-                Integer.parseInt(user.getBirth_day())));
+                        Integer.parseInt(user.getBirth_year()),
+                        Integer.parseInt(user.getBirth_month()),
+                        Integer.parseInt(user.getBirth_day())));
         mTvArea.setText(getString(user.getCity()));
     }
 
@@ -155,134 +162,74 @@ public class ProfileActivity extends BaseDataActivity<ProfilePresenter, User> im
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == CityListActivity.EXTRA_CODE_CITY_NAME) {
-                String cityName = data.getStringExtra("city");
-                mTvArea.setText(cityName);
-                getPresenter().modify(ProfilePresenter.KEY_PROFILE_CITY, cityName);
-            }
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_CITY) {
+            String cityName = data.getStringExtra("city");
+            mTvArea.setText(cityName);
+            getPresenter().modify(ProfilePresenter.KEY_PROFILE_CITY, cityName);
         }
-    }
-
-    public void showPopupWindow(int type) {
-        if (mPopupWindow == null) {
-            mPopupWindow = new PopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            mPopupWindow.setFocusable(true);
-            mPopupWindow.setTouchable(true);
-            mPopupWindow.setOutsideTouchable(true);
-            mPopupWindow.setBackgroundDrawable(new ColorDrawable(0x55000000));
-        } else {
-            mPopupWindow.dismiss();
-        }
-        switch (type) {
-            case TYPE_USERNAME :
-                mPopupWindow.setContentView(createModifyUsernameView());
-                break;
-//            case TYPE_BIND_MOBILE :
-//                new MobileBindPopupWindow(this).showAtLocation(getContent(), Gravity.TOP, 0, 0);
-//                break;
-            case TYPE_BIND_SUCCESS:
-
-                mPopupWindow.setContentView(createBindSuccessView());
-                break;
-            case TYPE_CAPTCHA:
-                mPopupWindow.setContentView(createCodeView());
-                break;
-        }
-        mPopupWindow.showAtLocation(getContent(), Gravity.BOTTOM, 0, 0);
-    }
-
-    // 编辑(修改)用户名
-    private View createModifyUsernameView() {
-        View view = View.inflate(this, R.layout.popupwindow_user_name_modify, null);
-        TextView tvTitle = findById(view, R.id.tv_user_dialog_title);
-        EditText etContent = findById(view, R.id.et_user_dialog_content);
-        ImageView tvClear = findById(view, R.id.iv_user_dialog_close);
-        TextView tvCancel = findById(view, R.id.tv_user_dialog_cancel);
-        TextView tvSure = findById(view, R.id.tv_user_dialog_ok);
-        etContent.setHint(R.string.hint_username);
-        etContent.setSelection(0);
-        etContent.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-        tvSure.setText(R.string.btn_save);
-        tvTitle.setText(mTvUsername.getText());
-        tvCancel.setOnClickListener(v -> mPopupWindow.dismiss());
-        tvClear.setOnClickListener(v -> etContent.setText(""));
-        tvSure.setOnClickListener(v -> {
-            mPopupWindow.dismiss();
-            mTvUsername.setText(etContent.getText());
-            getPresenter().modify(ProfilePresenter.KEY_PROFILE_USERNAME, etContent.getText().toString().trim());
-        });
-        LUtils.openKeyboard(etContent);
-        return view;
-    }
-
-    //绑定手机号
-    private View createBindMobileView() {
-        View view = View.inflate(this, R.layout.dialog_bind_mobile, null);
-        EditText etMobile = findById(view, R.id.et_user_dialog_content);
-        LUtils.openKeyboard(etMobile);
-
-        TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_next);
-        mTvDialogSure.setText(R.string.text_user_next);
-        mTvDialogSure.setOnClickListener(v -> {
-            if (etMobile.getText().toString().isEmpty()) LUtils.toast("手机号码不能为空");
-            else getPresenter().sendCaptcha(etMobile.getText().toString());
-        });
-
-        findById(view, R.id.tv_user_dialog_cancel).setOnClickListener(v -> mPopupWindow.dismiss());
-        findById(view, R.id.iv_user_dialog_close).setOnClickListener(v -> etMobile.setText(""));
-
-        return view;
-    }
-
-    //获取验证码
-    private View createCodeView() {
-        View view = View.inflate(this, R.layout.popwindow_user_get_code, null);
-        SecurityCodeView scvEdt = findById(view, R.id.scv_edt);
-        EditText etCaptcha = findById(scvEdt, R.id.item_edittext);
-        SendValidateButton btnResend = findById(view, R.id.btn_user_dialog_sure);
-
-        findById(view, R.id.tv_user_dialog_cancel).setOnClickListener(v -> showPopupWindow(TYPE_BIND_MOBILE));
-
-        scvEdt.setInputCompleteListener(this);
-        btnResend.setOnClickListener(v -> getPresenter().sendCaptcha(""));
-        btnResend.startTickWork();
-
-        LUtils.openKeyboard(etCaptcha);
-        return view;
-    }
-
-    //绑定成功
-    public View createBindSuccessView() {
-        View view = View.inflate(this, R.layout.popwindow_user_binded_mobile, null);
-        TextView mTvDialogTitle = findById(view, R.id.tv_user_dialog_title);
-        ImageView mIvDialogClose = findById(view, R.id.iv_user_dialog_close);
-        TextView mTvDialogCancel = findById(view, R.id.tv_user_dialog_code_cancel);
-        TextView mEtDialogContent = findById(view, R.id.et_user_dialog_bind_content);
-        TextView mTvDialogSure = findById(view, R.id.tv_user_dialog_next);
-        String mobile = "您已绑定<font color=\"#32DAC3\"> " +mTvMobile.getText() + " </font>";
-        mTvDialogTitle.setText(Html.fromHtml(mobile));
-        String wx = "tmshuo520";
-//        如您需要更换绑定手机号，请微信关注\n颜究院(微信号:tmshuo520)，\n联系客服进行更改。
-        String content = "如您需要更换绑定手机号，请微信关注<br/>颜究院(微信号:<font color=\"#222222\"> " +wx+"</font> )，<br/>联系客服进行更改。";
-        mEtDialogContent.setText(Html.fromHtml(content));
-        mTvDialogCancel.setOnClickListener(v -> mPopupWindow.dismiss());
-        mTvDialogSure.setOnClickListener(v -> mPopupWindow.dismiss());
-        return view;
-    }
-
-    @Override
-    public void inputComplete(String captcha) {
-        getPresenter().bindMobile(captcha);
-    }
-
-    @Override
-    public void deleteContent(boolean isDelete) {
-
     }
 
     private String getString(String str) {
         return TextUtils.isEmpty(str) ? "未设置" : str;
+    }
+
+    @Override
+    public void onShow(@NonNull AlertDialog dialog) {
+        if (getSupportFragmentManager().findFragmentByTag(TAG_MODIFY_USERNAME) != null) {
+            dialog.setCancelable(false);
+            EditText et = (EditText) dialog.findViewById(R.id.et_user_dialog_content);
+            ImageView ivClose = (ImageView) dialog.findViewById(R.id.iv_user_dialog_close);
+            if (et != null && ivClose != null) {
+                et.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        ivClose.setVisibility(s.length() > 0 ? View.VISIBLE : View.GONE);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                ivClose.setOnClickListener(v -> et.setText(""));
+                LUtils.openKeyboard(et);
+            }
+        }
+        if (getSupportFragmentManager().findFragmentByTag(TAG_MOBILE_BOUND) != null) {
+            TextView tvMessage = (TextView) dialog.findViewById(R.id.tv_dialog_message);
+            if (tvMessage != null)
+                tvMessage.setText(Html.fromHtml(getString(R.string.btn_user_bined_content)));
+        }
+    }
+
+    @Override
+    public void onPositiveClick(@NonNull View view) {
+        if (getSupportFragmentManager().findFragmentByTag(TAG_MODIFY_USERNAME) != null) {
+            EditText et = view.findViewById(R.id.et_user_dialog_content);
+
+            if (et != null && !TextUtils.isEmpty(et.getText().toString().trim())) {
+                mTvUsername.setText(et.getText());
+                getPresenter().modify(ProfilePresenter.KEY_PROFILE_USERNAME, et.getText().toString().trim());
+            }
+
+        }
+    }
+
+    @Override
+    public void onNegativeClick(@NonNull View view) {
+        if (getSupportFragmentManager().findFragmentByTag(TAG_MODIFY_USERNAME) != null) {
+            EditText et = view.findViewById(R.id.et_user_dialog_content);
+
+            if (et != null) {
+                LUtils.closeKeyboard(et);
+            }
+
+        }
     }
 
 }

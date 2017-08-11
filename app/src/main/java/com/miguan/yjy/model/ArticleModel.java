@@ -87,7 +87,7 @@ public class ArticleModel extends AbsModel {
     /**
      * 添加评论
      */
-    public Observable<String> addEvaluate(int articleId, int type, int parentId, String image, String content) {
+    public Observable<Evaluate> addEvaluate(int articleId, int type, int parentId, String image, String content) {
         return ServicesClient.getServices()
                 .addEvaluate(articleId, UserPreferences.getToken(), type, 0, parentId, image, content)
                 .compose(new DefaultTransform<>());

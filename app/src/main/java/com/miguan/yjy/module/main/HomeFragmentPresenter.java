@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -20,7 +19,7 @@ import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.module.account.LoginActivity;
-import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
@@ -28,6 +27,7 @@ import com.miguan.yjy.widget.HeadViewPager;
 import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,13 +42,16 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
 
     private boolean mIsInit = false;
 
+    private boolean mIsLogin;
+
     private ArrayList<ArticleCate> mArticleCates;
 
-    private Ask mAsk;
+    private List<Ask> mAskList;
 
     @Override
     protected void onCreateView(HomeFragment view) {
         super.onCreateView(view);
+        mAskList = new ArrayList<>();
         HomeHeader homeHeader = new HomeHeader();
         getAdapter().addHeader(homeHeader);
 
@@ -65,10 +68,15 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         ArticleModel.getInstance().getHomeList()
                 .map(home -> {
                     mIsInit = true;
+                    mIsLogin = AccountModel.getInstance().isLogin();
+
                     mArticleCates = home.getArticleGory();
                     getView().setSearchHint(home.getNum());
                     ((HomeHeader) getAdapter().getHeader(0)).setHome(home);
-                    if (home.getAsk() != null) mAsk = home.getAsk();
+                    mAskList.clear();
+                    if (home.getAsk() != null) {
+                        mAskList.add(home.getAsk());
+                    }
                     return home.getEvaluateList();
                 })
                 .doOnCompleted(() -> getView().setScrollListener())
@@ -80,10 +88,21 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         if (mIsInit) {
             ArticleModel.getInstance().getEssenceList(getCurPage())
                     .map(evaluate -> {
-                        if (evaluate.getAsk() != null) mAsk = evaluate.getAsk();
+                        if (evaluate.getAsk() != null) {
+                            mAskList.add(evaluate.getAsk());
+                        }
                         return evaluate.getEssence();
                     })
                     .unsafeSubscribe(getMoreSubscriber());
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mIsLogin && !AccountModel.getInstance().isLogin()) {
+            mAskList = null;
+            onRefresh();
         }
     }
 
@@ -93,8 +112,8 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     }
 
     @Override
-    public Ask getAsk() {
-        return mAsk;
+    public List<Ask> getAsks() {
+        return mAskList;
     }
 
     public class HomeHeader implements RecyclerArrayAdapter.ItemView {
@@ -143,8 +162,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         public void onBindView(View headerView) {
             if (mHome != null) {
                 mIvQuery.setImageResource(R.mipmap.bg_home_query);
-                mIvQuery.setOnClickListener(v -> WebViewActivity.start(getView().getActivity(), "", "http://m.yjyapp.com/huodong/receive/index"));
-//                mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
+                mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
                 mIvMyProduct.setImageResource(R.mipmap.bg_home_repository);
                 mIvMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),
                         AccountModel.getInstance().isLogin() ? UsedListActivity.class : LoginActivity.class)));
@@ -164,13 +182,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         public void setHome(Home home) {
             mHome = home;
         }
-    }
-
-    private View createFooterView(Ask ask) {
-        View view = LayoutInflater.from(getView().getActivity()).inflate(R.layout.item_list_evaluate_ask, getView().getListView());
-        TextView title = view.findViewById(R.id.tv_evaluate_ask_title);
-        title.setText(ask.getSubject());
-        return view;
     }
 
 }

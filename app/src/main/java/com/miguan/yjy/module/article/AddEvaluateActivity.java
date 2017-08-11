@@ -124,4 +124,9 @@ public class AddEvaluateActivity extends ChainBaseActivity<AddEvaluatePresenter>
 
     }
 
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_input_content};
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.dsk.chain.bijection;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -18,10 +21,11 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
 
     private FrameLayout mContentParent;
 
+    protected ImmersionBar mImmersionBar;
+
     protected Toolbar mToolbar;
 
     private ViewExpansionDelegate mDelegate;
-    private ImmersionBar mImmersionBar;
 
     @Override
     public void preCreatePresenter() {
@@ -57,7 +61,7 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
         mImmersionBar.destroy();
     }
 
-    public void onSetToolbar(Toolbar toolbar) {
+    public void onSetToolbar(final Toolbar toolbar) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -65,7 +69,7 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                toBack();
             }
         };
         View viewBack = mToolbar.findViewById(R.id.toolbar_back);
@@ -100,6 +104,14 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
         return null;
     }
 
+    protected void toBack() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
+        finish();
+    }
+
     public FrameLayout getContent() {
         return mContentParent;
     }
@@ -111,6 +123,25 @@ public class ChainBaseActivity<P extends Presenter> extends ChainAppCompatActivi
     public ViewExpansionDelegate getExpansionDelegate() {
         if (mDelegate == null) mDelegate = new DefaultViewExpansionDelegate(this);
         return mDelegate;
+    }
+
+    public int[] getHideSoftViewIds() {
+        return null;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            if (getHideSoftViewIds() == null || getHideSoftViewIds().length <= 0)
+                return super.dispatchTouchEvent(ev);
+            for (int id : getHideSoftViewIds()) {
+                if (getCurrentFocus() != null && id == getCurrentFocus().getId()) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 }

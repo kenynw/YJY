@@ -20,6 +20,7 @@ public class DefaultTransform<T> implements Observable.Transformer<T, T> {
     public Observable<T> call(Observable<T> tObservable) {
         return tObservable
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> {
                     if (throwable instanceof ServiceException && ((ServiceException) throwable).getCode() == -6) {
                         AccountModel.getInstance().clearToken();
@@ -30,8 +31,7 @@ public class DefaultTransform<T> implements Observable.Transformer<T, T> {
                         LUtils.getAppContext().startActivity(intent);
                     }
                     LUtils.log(Log.getStackTraceString(throwable));
-                })
-                .observeOn(AndroidSchedulers.mainThread());
+                });
     }
 
 }

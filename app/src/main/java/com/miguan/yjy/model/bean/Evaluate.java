@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Copyright (c) 2017/3/24. LiaoPeiKun Inc. All rights reserved.
  */
-
 public class Evaluate implements Parcelable {
 
     @SerializedName(value = "id", alternate = {"comment_id"})
@@ -61,6 +60,8 @@ public class Evaluate implements Parcelable {
     private List<Evaluate> essence;
 
     private Ask ask;
+
+    private int addMoney;
 
     public int getIs_digest() {
         return is_digest;
@@ -250,6 +251,14 @@ public class Evaluate implements Parcelable {
         this.ask = ask;
     }
 
+    public int getAddMoney() {
+        return addMoney;
+    }
+
+    public void setAddMoney(int addMoney) {
+        this.addMoney = addMoney;
+    }
+
     public static class Item implements Parcelable {
 
         private int id;
@@ -370,6 +379,7 @@ public class Evaluate implements Parcelable {
         dest.writeString(this.replyUserName);
         dest.writeTypedList(this.essence);
         dest.writeParcelable(this.ask, flags);
+        dest.writeInt(this.addMoney);
     }
 
     protected Evaluate(Parcel in) {
@@ -396,6 +406,7 @@ public class Evaluate implements Parcelable {
         this.replyUserName = in.readString();
         this.essence = in.createTypedArrayList(Evaluate.CREATOR);
         this.ask = in.readParcelable(Ask.class.getClassLoader());
+        this.addMoney = in.readInt();
     }
 
     public static final Creator<Evaluate> CREATOR = new Creator<Evaluate>() {

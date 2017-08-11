@@ -85,4 +85,8 @@ public class RepositoryListActivity extends BaseListActivity<RepositoryListPrese
         return mInputPanel;
     }
 
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.edt_product_search};
+    }
 }

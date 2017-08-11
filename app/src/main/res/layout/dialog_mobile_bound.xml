@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical">
-
-    <include layout="@layout/include_status_bar" />
 
     <TextView
         android:id="@id/tv_dialog_title"
@@ -17,53 +16,22 @@
         android:gravity="center"
         android:paddingBottom="@dimen/spacing_large"
         android:paddingTop="@dimen/spacing_large"
-        android:text="@string/text_user_bind_mobile"
         android:textColor="@color/textPrimary"
-        android:textSize="@dimen/text_size_large_material"
+        android:textSize="@dimen/text_size_large_20"
+        tools:text="您已绑定"
         />
 
-    <RelativeLayout
+    <TextView
+        android:id="@id/tv_dialog_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        >
-
-        <EditText
-            android:id="@+id/et_user_dialog_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:gravity="start"
-            android:hint="@string/hint_username"
-            android:inputType="textMultiLine"
-            android:maxLength="20"
-            android:paddingBottom="@dimen/spacing_normal"
-            android:paddingTop="@dimen/spacing_normal"
-            android:textAppearance="@style/TextBody"
-            >
-
-            <requestFocus/>
-        </EditText>
-
-        <ImageView
-            android:id="@+id/iv_user_dialog_close"
-            android:layout_width="@dimen/widget_medium"
-            android:layout_height="@dimen/widget_medium"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center"
-            android:scaleType="centerInside"
-            android:src="@mipmap/ic_user_close_mobile"
-            android:visibility="gone"
-            />
-
-    </RelativeLayout>
-
-    <View
-        style="@style/ItemLineHeight"/>
+        android:layout_marginTop="@dimen/spacing_large"
+        android:background="@null"
+        android:gravity="center"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        tools:text="@string/btn_user_bined_content"
+        />
 
     <View
         style="@style/ItemLineHeight"
@@ -76,7 +44,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@id/btn_dialog_negative"
+            android:id="@+id/btn_dialog_negative"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -89,18 +57,20 @@
         <View
             style="@style/ItemLineHeight"
             android:layout_width="1dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
 
         <TextView
-            android:id="@id/btn_dialog_positive"
+            android:id="@+id/btn_dialog_positive"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:background="@color/white"
             android:gravity="center"
-            android:text="@string/btn_save"
+            android:text="@string/btn_user_sure"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_small_16"
+            android:textSize="@dimen/text_size_subhead_material"
             />
 
     </LinearLayout>

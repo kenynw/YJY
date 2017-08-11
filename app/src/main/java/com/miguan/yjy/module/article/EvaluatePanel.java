@@ -79,7 +79,7 @@ public class EvaluatePanel {
                 mTvLabel.setText(evaluate.getUser().getSkin());
             }
         } else {
-            mDvAvatar.setImageURI(Uri.parse(evaluate.getImg()));
+            mDvAvatar.setImageURI(evaluate.getImg());
             mTvUserName.setText(evaluate.getUsername());
             mTvUserAge.setText(evaluate.getAge() > 0 ? evaluate.getAge() + "岁" : "");
             if (TextUtils.isEmpty(evaluate.getSkin())) {

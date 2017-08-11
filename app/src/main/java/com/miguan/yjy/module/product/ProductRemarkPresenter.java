@@ -9,6 +9,7 @@ import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.ProductModel;
+import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
@@ -54,32 +55,32 @@ public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
     }
 
     public void submit(int star, String content, Uri uri) {
+        ServicesResponse<Evaluate> response = new ServicesResponse<Evaluate>() {
+            @Override
+            public void onNext(Evaluate evaluate) {
+                getView().getExpansionDelegate().hideProgressBar();
+                if (evaluate.getAddMoney() == 1) LUtils.toast("评论成功，颜值+10分");
+                getView().finish();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        };
         if (uri != null) {
             ImageModel.getInstance().uploadImageSync("attachment", new File(uri.getPath()))
-                    .flatMap(new Func1<String, Observable<String>>() {
+                    .flatMap(new Func1<String, Observable<Evaluate>>() {
                         @Override
-                        public Observable<String> call(String s) {
+                        public Observable<Evaluate> call(String s) {
                             return ProductModel.getInstance().addEvaluate(mProduct.getId(), star, s, content);
                         }
                     })
-                    .subscribe(new ServicesResponse<String>() {
-                        @Override
-                        public void onNext(String s) {
-                            LUtils.toast("评论成功，颜值+10分");
-                            getView().closeKeyboard();
-                            getView().finish();
-                        }
-                    });
+                    .unsafeSubscribe(response);
 
         } else {
             ProductModel.getInstance().addEvaluate(mProduct.getId(), star, "", content)
-                    .subscribe(new ServicesResponse<String>(){
-                        @Override
-                        public void onNext(String s) {
-                            LUtils.toast("评论成功，颜值+10分");
-                            getView().finish();
-                        }
-                    });
+                    .subscribe(response);
         }
     }
 

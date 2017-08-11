@@ -8,19 +8,22 @@
     android:orientation="vertical"
     >
 
-    <View
-        android:id="@id/status_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        />
-
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"
         style="@style/TitleToolbar"
         android:background="@color/colorPrimary"
-        app:navigationIcon="@mipmap/ic_back_white"
         >
+
+        <ImageView
+            android:id="@id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_back_white"
+            />
 
         <TextView
             android:id="@id/toolbar_title"

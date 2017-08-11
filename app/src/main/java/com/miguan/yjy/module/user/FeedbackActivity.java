@@ -118,4 +118,9 @@ public class FeedbackActivity extends ChainBaseActivity<FeedbackPresenter>
 
     }
 
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_input_content};
+    }
+
 }

@@ -89,9 +89,9 @@ public class EvaluateDetailPresenter extends BaseDataActivityPresenter<EvaluateD
         if (isLogin()) {
             ArticleModel.getInstance().addEvaluate(getData().getPost_id(), getData().getType(),
                     getView().getEvaluate() != null ? getView().getEvaluate().getId() : mEvaluateId, "", content)
-                    .unsafeSubscribe(new ServicesResponse<String>() {
+                    .unsafeSubscribe(new ServicesResponse<Evaluate>() {
                         @Override
-                        public void onNext(String s) {
+                        public void onNext(Evaluate s) {
                             getView().clearInput();
                             getView().setResult(Activity.RESULT_OK);
                             onRefresh();

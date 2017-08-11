@@ -14,8 +14,6 @@ import com.miguan.yjy.adapter.MainTabPagerAdapter;
 import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.dialogs.BindMobileAlertDialog;
 import com.miguan.yjy.model.bean.Version;
-import com.miguan.yjy.model.local.UserPreferences;
-import com.miguan.yjy.utils.LUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -33,8 +31,6 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
 
     @BindView(R.id.tab_main)
     TabLayout mTab;
-
-    private long mPressedTime = 0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,19 +95,11 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
 
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() - mPressedTime > 2000) {
-            LUtils.toast("再按一次退出颜究院");
-            mPressedTime = System.currentTimeMillis();
-            UserPreferences.setIsShowTest(false);
-            return;
-        }
-        finish();
+        moveTaskToBack(true);
     }
 
     @Override
     public void onPositiveClick(@NonNull View v) {
-//        MobileBindPopupWindow mobileBindPopupWindow = new MobileBindPopupWindow(this);
-//        mobileBindPopupWindow.showAtLocation(getContent(), Gravity.NO_GRAVITY, 0, 0);
         new BindMobileAlertDialog().show(getSupportFragmentManager(), "bindDialog");
     }
 

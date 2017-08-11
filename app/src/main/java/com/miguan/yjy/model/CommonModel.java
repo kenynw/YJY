@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.text.format.DateUtils;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.model.AbsModel;
@@ -11,6 +12,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
+import com.miguan.yjy.model.constant.Constants;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -101,8 +103,7 @@ public class CommonModel extends AbsModel {
 
     private void checkBindMobile(Context context) {
         if (AccountModel.getInstance().isLogin()
-//                && !DateUtils.isToday(LUtils.getPreferences().getLong(Constants.KEY_CHECK_IS_BIND_TIME, 0))
-                ) {
+                && !DateUtils.isToday(LUtils.getPreferences().getLong(Constants.KEY_CHECK_IS_BIND_TIME, 0))) {
             ServicesClient.getServices().isBind(UserPreferences.getToken())
                     .compose(new DefaultTransform<>())
                     .subscribe(new Subscriber<Integer>() {
@@ -138,6 +139,7 @@ public class CommonModel extends AbsModel {
 
     /**
      * 统计BANNER点击数
+     *
      * @return
      */
     public Observable<String> analyticsBanner(int bannerId) {
@@ -146,6 +148,7 @@ public class CommonModel extends AbsModel {
 
     /**
      * 统计分享数
+     *
      * @return
      */
     public Observable<String> analyticsShare(int id, int type) {
@@ -154,16 +157,17 @@ public class CommonModel extends AbsModel {
 
     /**
      * 统计模板生成
+     *
      * @return
      */
     public Observable<String> analyticsTemplate() {
         return ServicesClient.getServices().analyticsTemplate(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
-    private String findDownLoadDirectory(){
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+    private String findDownLoadDirectory() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        }else{
+        } else {
             return Environment.getRootDirectory() + "/" + "download/";
         }
     }

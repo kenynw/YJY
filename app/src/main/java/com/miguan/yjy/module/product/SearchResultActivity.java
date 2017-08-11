@@ -250,4 +250,8 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         if (mFilterPanel != null && !mFilterPanel.dismissMenu()) super.onBackPressed();
     }
 
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_product_keywords};
+    }
 }

@@ -237,7 +237,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
     private void showDeleteView(boolean isShow) {
         if (mViewList.size() > 0) {
             for (TemplateView templateView : mViewList) {
-                FrameLayout layout = (FrameLayout) templateView.findViewById(R.id.fl_template_delete);
+                FrameLayout layout = templateView.findViewById(R.id.fl_template_delete);
                 if (layout.getVisibility() == (isShow ? View.GONE : View.VISIBLE)) {
                     layout.setVisibility(isShow ? View.VISIBLE : View.GONE);
                 }
@@ -252,7 +252,7 @@ public class GenTemplateActivity extends ChainBaseActivity<GenTemplatePresenter>
                 .setNegativeButton("取消", null)
                 .setPositiveButton("退出", (dialog, which) -> {
                     getPresenter().saveCraft();
-                    finish();
+                    toBack();
                 })
                 .show();
     }

@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.main;
+ package com.miguan.yjy.module.main;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -44,7 +44,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getRootView());
-        getListView().getSwipeToRefresh().setProgressViewOffset(true, 110, 200);
+        getListView().getSwipeToRefresh().setProgressViewOffset(true, 120, 220);
     }
 
     public void setSearchHint(int count) {

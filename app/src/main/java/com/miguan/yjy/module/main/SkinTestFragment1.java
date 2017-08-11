@@ -13,8 +13,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,12 +114,11 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
     private TextView mTvTestInto;
     private ImageView mTvTestClose;
     private PopupWindow popupWindow;
-    String birthDay="";
+    String birthDay = "";
     private int sex = 0;
     private int tag = 0;
     private User userInfo;
     public static List<Integer> nums = new ArrayList<>();
-    private int testPosition;
 
 
     //测试结果(我的肤质)
@@ -178,11 +175,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("onActivityResult", requestCode + "==" + resultCode);
@@ -203,123 +195,86 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
         initListener();
         if (AccountModel.getInstance().isLogin()) {
-            TestModel.getInstantce().userSkin().flatMap(new Func1<Test, Observable<User>>() {
-                @Override
-                public Observable<User> call(Test test) {
-                    nums.clear();
-                    if (test.getDesc().size() != 0) {
-                        for(int i=0;i<test.getDesc().size();i++) {
-                           String skinName= test.getDesc().get(i).getName();
-                            if (test.getDesc().get(i).getType().equals("compact")) {
-                                mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                                mTvTestWrinkle.setText(Skin.getCompact(skinName));
-                                mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
-                                nums.add(0);
+            TestModel.getInstantce().userSkin()
+                    .flatMap(new Func1<Test, Observable<User>>() {
+                        @Override
+                        public Observable<User> call(Test test) {
+                            nums.clear();
+                            if (test.getDesc().size() != 0) {
+                                for (int i = 0; i < test.getDesc().size(); i++) {
+                                    String skinName = test.getDesc().get(i).getName();
+                                    if (test.getDesc().get(i).getType().equals("compact")) {
+                                        mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
+                                        mTvTestWrinkle.setText(Skin.getCompact(skinName));
+                                        mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
+                                        nums.add(0);
+                                    }
+                                    if (test.getDesc().get(i).getType().equals("dry")) {
+                                        mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
+                                        nums.add(1);
+                                        mTvTestOily.setText(Skin.getDryOil(skinName));
+                                        mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
+                                    }
+                                    if (test.getDesc().get(i).getType().equals("tolerance")) {
+                                        mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
+                                        nums.add(2);
+                                        mTvTestSensitive.setText(Skin.getTolerance(skinName));
+                                        mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
+                                    }
+                                    if (test.getDesc().get(i).getType().equals("pigment")) {
+                                        mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
+                                        nums.add(3);
+                                        mTvTestPigment.setText(Skin.getPigment(skinName));
+                                        mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
+                                    }
+                                }
                             }
-                            if (test.getDesc().get(i).getType().equals("dry")) {
-                                mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-                                nums.add(1);
-                                mTvTestOily.setText(Skin.getDryOil(skinName));
-                                mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
+
+                            if (nums.size() == 4) {
+                                mTvTestResult.setText("查看结果");
+                                mTvTestResult.setClickable(true);
+                            } else {
+                                mTvTestResult.setText("完成度\n" + nums.size() + "/4");
+                                mTvTestResult.setClickable(false);
+
                             }
-                            if (test.getDesc().get(i).getType().equals("tolerance")) {
-                                mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-                                nums.add(2);
-                                mTvTestSensitive.setText(Skin.getTolerance(skinName));
-                                mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
-                            }
-                            if (test.getDesc().get(i).getType().equals("pigment")) {
-                                mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-                                nums.add(3);
-                                mTvTestPigment.setText(Skin.getPigment(skinName));
-                                mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
-                            }
+
+                            return UserModel.getInstance().getUserInfo();
                         }
-                    }
-
-                    if (nums.size() == 4) {
-                        mTvTestResult.setText("查看结果");
-                        mTvTestResult.setClickable(true);
-                    } else {
-                        mTvTestResult.setText("完成度\n" + nums.size() + "/4");
-                        mTvTestResult.setClickable(false);
-
-                    }
-
-                    return UserModel.getInstance().getUserInfo();
-                }
-            }).subscribe(new ServicesResponse<User>(){
-                @Override
-                public void onNext(User user) {
-                    userInfo = user;
-                    birthDay = userInfo.getBirth_day();
-                    sex = userInfo.getSex();
-                }
-            });
-
-//            UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
-//                @Override
-//                public void onNext(User user) {
-//                    nums.clear();
-//                    userInfo = user;
-//                    birthDay = userInfo.getBirth_day();
-//                    sex = userInfo.getSex();
-//                    if (userInfo.getCompact() != 0) {
-//                        mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-//                        mTvTestWrinkle.setText(Skin.getCompact(userInfo.getCompact()));
-//                        mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle_reslut);
-//                        nums.add(0);
-//                    }
-//                    if (userInfo.getDry() != 0) {
-//                        mLlTestOily.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-//                        nums.add(1);
-//                        mTvTestOily.setText(Skin.getDryOil(userInfo.getDry()));
-//                        mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily_reslut);
-//                    }
-//                    if (userInfo.getTolerance() != 0) {
-//                        mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_test_a9d);
-//                        nums.add(2);
-//                        mTvTestSensitive.setText(Skin.getTolerance(userInfo.getTolerance()));
-//                        mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive_reslut);
-//                    }
-//                    if (userInfo.getPigment() != 0) {
-//                        mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_test_a3e);
-//                        nums.add(3);
-//                        mTvTestPigment.setText(Skin.getPigment(userInfo.getPigment()));
-//                        mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment_reslut);
-//                    }
-//                    if (nums.size() == 4) {
-//                        mTvTestResult.setText("查看结果");
-//                        mTvTestResult.setClickable(true);
-//                    } else {
-//                        mTvTestResult.setText("完成度\n" + nums.size() + "/4");
-//                        mTvTestResult.setClickable(false);
-//                    }
-//
-//                }
-//            });
+                    })
+                    .subscribe(new ServicesResponse<User>() {
+                        @Override
+                        public void onNext(User user) {
+                            userInfo = user;
+                            birthDay = userInfo.getBirth_day();
+                            sex = userInfo.getSex();
+                        }
+                    });
         } else {
-            Log.e("userId", UserPreferences.getUserID() + "--=0--");
-            mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_white);
-            mTvTestWrinkle.setText(R.string.text_no_test);
-            mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle);
-
-            mLlTestOily.setBackgroundResource(R.drawable.bg_shape_white);
-            mTvTestOily.setText(R.string.text_no_test);
-            mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily);
-
-            mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_white);
-            mTvTestSensitive.setText(R.string.text_no_test);
-            mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive);
-
-            mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_white);
-            mTvTestPigment.setText(R.string.text_no_test);
-            mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment);
-
-            mTvTestResult.setText("完成度\n" + "0/4");
-            mTvTestResult.setClickable(true);
+            setUnloginView();
         }
 
+    }
+
+    private void setUnloginView() {
+        mLlTestWrinkle.setBackgroundResource(R.drawable.bg_shape_white);
+        mTvTestWrinkle.setText(R.string.text_no_test);
+        mIvTestWrinkle.setBackgroundResource(R.mipmap.ic_test_wrinkle);
+
+        mLlTestOily.setBackgroundResource(R.drawable.bg_shape_white);
+        mTvTestOily.setText(R.string.text_no_test);
+        mIvTestOily.setBackgroundResource(R.mipmap.ic_test_oily);
+
+        mLlTestSensitive.setBackgroundResource(R.drawable.bg_shape_white);
+        mTvTestSensitive.setText(R.string.text_no_test);
+        mIvTestSensitive.setBackgroundResource(R.mipmap.ic_test_sensitive);
+
+        mLlTestPigment.setBackgroundResource(R.drawable.bg_shape_white);
+        mTvTestPigment.setText(R.string.text_no_test);
+        mIvTestPigment.setBackgroundResource(R.mipmap.ic_test_pigment);
+
+        mTvTestResult.setText("完成度\n" + "0/4");
+        mTvTestResult.setClickable(true);
     }
 
     private void initListener() {
@@ -330,7 +285,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         mTvTestResult.setOnClickListener(this);
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -527,7 +481,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
 
     private void selectDate() {
-
         //时间选择器
         TimePickerView pvTime = new TimePickerView.Builder(getActivity(), new TimePickerView.OnTimeSelectListener() {
             @Override
@@ -545,11 +498,8 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         startActivity(intent);
     }
 
-
     public void loadMainData() {
         if (AccountModel.getInstance().isLogin()) {
-            testPosition = UserPreferences.getTestPosition();
-            Log.e("testPosition", testPosition + "testPosition===");
             UserModel.getInstance().getUserInfo().subscribe(new ServicesResponse<User>() {
                 @Override
                 public void onNext(User user) {
@@ -578,7 +528,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     } else {
                         //显示未测试页面
                         loadFirstData();
-
                     }
                 }
             });
@@ -599,11 +548,11 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
     Test mTest;
 
-    private void setSencondData() {
+    public void setSencondData() {
         mLlTestOk.setVisibility(View.VISIBLE);
         mLlTestNo.setVisibility(View.GONE);
         mToolbarTitle.setText("我的肤质");
-        TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>(){
+        TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>() {
             @Override
             public void onNext(Test test) {
                 if (AccountModel.getInstance().isLogin()) {
@@ -619,7 +568,7 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
                     }
                     mImgSkinTest.setImageURI(Uri.parse(userInfo.getImg()));
                     Log.e("getTestPosition()", getTestPosition() + "====");
-                    mTabSkinTest.getTabAt(testPosition).select();
+                    mTabSkinTest.getTabAt(getTestPosition()).select();
                     mTabSkinTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
                         public void onTabSelected(TabLayout.Tab tab) {
@@ -709,6 +658,19 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
         mBind.unbind();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!AccountModel.getInstance().isLogin()) {
+            mToolbarTitle.setText("肤质测试");
+            mLlTestOk.setVisibility(View.GONE);
+            mLlTestNo.setVisibility(View.VISIBLE);
+
+            initListener();
+            setUnloginView();
+        }
+    }
+
     private void setUserBirthDay() {
         mTvTestSelectBirthday.setText(String.format("%1$04d-%2$02d-%3$02d", Integer.parseInt(userInfo.getBirth_year()), Integer.parseInt(userInfo.getBirth_month()), Integer.parseInt(userInfo.getBirth_day())));
     }
@@ -725,13 +687,6 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
 
     private void setShowView() {
         UserPreferences.setIsShowTest(false);
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -754,13 +709,11 @@ public class SkinTestFragment1 extends BaseDataFragment<SkinTestFragmentPresente
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-
     public void onRefresh(TestStart testStart) {
-        Log.e("==onRefresh=", testStart+"====");
+        Log.e("==onRefresh=", testStart + "====");
         if (testStart != null) {
             loadMainData();
         }
     }
-
 
 }

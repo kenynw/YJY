@@ -210,4 +210,10 @@ public class ProductRemarkActivity extends ChainBaseActivity<ProductRemarkPresen
         super.onActivityResult(requestCode, resultCode, data);
         ImageProvider.getInstance(this).onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_product_remark};
+    }
+
 }

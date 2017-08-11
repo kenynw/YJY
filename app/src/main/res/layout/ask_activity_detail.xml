@@ -46,7 +46,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/spacing_large"
         android:paddingLeft="@dimen/spacing_normal"
@@ -56,12 +55,14 @@
 
         <com.miguan.yjy.widget.SuperTextView
             style="@style/SuperTextAsk"
+            android:layout_marginTop="2dp"
             />
 
         <TextView
             android:id="@+id/tv_ask_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/spacing_tiny"
             android:layout_marginStart="@dimen/spacing_tiny"
             android:textColor="@color/textPrimary"
@@ -81,6 +82,6 @@
         android:background="@color/white"
         />
 
-    <include layout="@layout/include_bottom_input"/>
+    <include layout="@layout/include_bottom_input" />
 
 </LinearLayout>

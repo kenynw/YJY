@@ -12,7 +12,7 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_product_thumb"
-        style="@style/BaseImage"
+        style="@style/BaseImage.Product"
         android:layout_width="70dp"
         android:layout_height="70dp"
         />

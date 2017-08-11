@@ -20,7 +20,7 @@ import java.util.TimerTask;
  */
 
 public class SendValidateButton extends android.support.v7.widget.AppCompatButton {
-    private static final int DISABLE_TIME = 30;
+    private static final int DISABLE_TIME = 60;
     private static final int MSG_TICK = 0;
     private Timer mTimer = null;
     private TimerTask mTask = null;

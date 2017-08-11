@@ -15,4 +15,9 @@
         <item name="com.miguan.yjy:failureImage">@mipmap/def_image_avatar</item>
     </style>
 
+    <style name="BaseImage.Product">
+        <item name="com.miguan.yjy:placeholderImage">@mipmap/def_image_product</item>
+        <item name="com.miguan.yjy:failureImage">@mipmap/def_image_product</item>
+    </style>
+
 </resources>

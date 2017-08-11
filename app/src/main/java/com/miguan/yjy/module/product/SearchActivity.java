@@ -250,4 +250,10 @@ public class SearchActivity extends BaseListActivity<SearchActivityPresenter> {
         super.onResume();
         refreshAdapter();
     }
+
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.edt_product_search};
+    }
+
 }

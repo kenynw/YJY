@@ -134,11 +134,11 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     public void setBrand(Brand brand, String overtime) {
         mTvExpiration.setOnClickListener(v -> mTimePickerView.show(v));
-        mTvExpiration.setText(overtime);
+        if (!TextUtils.isEmpty(overtime)) mTvExpiration.setText(overtime);
 
         mTvQuery.setVisibility(brand.getRule() > 0 ? View.VISIBLE : GONE);
         mEtOpenDate.setText(DateUtils.getCurrentFormatDate("yyyy年MM月dd日"));
-        mTvBrand.setText(brand.getName());
+        if (!TextUtils.isEmpty(brand.getName())) mTvBrand.setText(brand.getName());
     }
 
     public void setProduct(Product product) {

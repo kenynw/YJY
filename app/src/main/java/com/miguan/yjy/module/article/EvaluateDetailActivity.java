@@ -57,6 +57,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mImmersionBar.keyboardEnable(true);
         setContentView(R.layout.product_activity_evaluate_detail);
         setToolbarTitle(R.string.text_evaluate_detail);
         ButterKnife.bind(this);

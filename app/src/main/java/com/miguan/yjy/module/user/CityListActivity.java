@@ -1,6 +1,5 @@
 package com.miguan.yjy.module.user;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -45,7 +44,6 @@ public class CityListActivity extends ChainBaseActivity<CityListPresenter> imple
     boolean inSearchMode = false;
 
     private final static String TAG = "CityListActivity";
-    public final static int EXTRA_CODE_CITY_NAME = 1;
 
     List<ContactItemInterface> contactList;
     List<ContactItemInterface> filterList;
@@ -159,13 +157,6 @@ public class CityListActivity extends ChainBaseActivity<CityListPresenter> imple
 
         }
     }
-
-
-    public static void star(Activity context) {
-        Intent intent = new Intent(context, CityListActivity.class);
-        context.startActivityForResult(intent,EXTRA_CODE_CITY_NAME);
-    }
-
 
     /**
      * 用户资料修改

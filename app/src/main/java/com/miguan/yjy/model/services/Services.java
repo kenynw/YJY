@@ -439,12 +439,53 @@ public interface Services {
      * @return
      */
     @GET("?action=addComment")
-    Observable<String> addEvaluate(
+    Observable<Evaluate> addEvaluate(
             @Query("id") int id,
             @Query("token") String token,
             @Query("type") int type,
             @Query("star") int star,
             @Query("parent_id") int parentId,
+            @Query("attachment") String image,
+            @Query("comment") String content
+    );
+
+    /**
+     * 产品或文章添加评论
+     *
+     * star    星级(文章可不传)
+     * @param id      产品或文章的ID
+     * @param token 用户ID 可空
+     * @param type    类型 1-产品，2-文章
+     * @param image 图片地址（路径attachment)
+     * @param content 评论内容
+     * @return
+     */
+    @GET("?action=addComment")
+    Observable<String> addArticleEvaluate(
+            @Query("id") int id,
+            @Query("token") String token,
+            @Query("type") int type,
+            @Query("parent_id") int parentId,
+            @Query("attachment") String image,
+            @Query("comment") String content
+    );
+
+    /**
+     * 产品或文章添加评论
+     *
+     *  type    类型 1-产品，2-文章
+     * @param id      产品或文章的ID
+     * @param token 用户ID 可空
+     * @param star    星级(文章可不传)
+     * @param image 图片地址（路径attachment)
+     * @param content 评论内容
+     * @return
+     */
+    @GET("?action=addComment&type=1")
+    Observable<Evaluate> addProductEvaluate(
+            @Query("id") int id,
+            @Query("token") String token,
+            @Query("star") int star,
             @Query("attachment") String image,
             @Query("comment") String content
     );
