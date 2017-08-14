@@ -25,7 +25,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/dv_billboard_top1"
-            style="@style/BaseImage"
+            style="@style/BaseImage.Product"
             android:layout_width="40dp"
             android:layout_height="34dp"
             />
@@ -37,7 +37,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/dv_billboard_top2"
-            style="@style/BaseImage"
+            style="@style/BaseImage.Product"
             android:layout_width="40dp"
             android:layout_height="34dp"
             />
@@ -49,7 +49,7 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/dv_billboard_top3"
-            style="@style/BaseImage"
+            style="@style/BaseImage.Product"
             android:layout_width="40dp"
             android:layout_height="34dp"
             />
