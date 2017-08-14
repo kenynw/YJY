@@ -51,8 +51,8 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
 
             @Override
             public List<Wiki.RelationInfo> call(Wiki wiki) {
-                getView().mTvWikiAskName.setText(wiki.getQuestion());
-                getView().mTvWikiAskReply.setText(wiki.getContent());
+                getView().mTvWikiAskName.setText("Q : "+wiki.getQuestion());
+                getView().mTvWikiAskReply.setText("A : "+wiki.getContent());
                 share_url= wiki.getShare_url();
                 getAdapter().setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
                     @Override

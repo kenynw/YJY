@@ -49,7 +49,7 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new WikiViewHolder(parent);
+        return new WikiViewHolder(parent,1);
     }
 
     @Override

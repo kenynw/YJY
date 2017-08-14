@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -11,5 +12,20 @@
         android:paddingTop="10dp"
         android:layout_height="wrap_content"
         />
+
+    <TextView
+        android:id="@+id/tv_product_list_count"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/spacing_normal"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_normal"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_caption_material"
+        tools:text="@string/text_search_count"
+        />
+
 
 </LinearLayout>

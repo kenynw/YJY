@@ -22,6 +22,7 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.ProductList;
@@ -50,8 +51,8 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     @BindView(R.id.iv_product_search_clear)
     ImageView imgSearchCancle;
 
-    @BindView(R.id.tv_product_list_count)
-    TextView mTvCount;
+//    @BindView(R.id.tv_product_list_count)
+//    TextView mTvCount;
 
     @BindView(R.id.ll_product_result_first)
     LinearLayout mLlResultFirst;
@@ -120,13 +121,16 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         View view = getLayoutInflater().inflate(R.layout.empty_search_list, getListView());
         View tvFeedback = ButterKnife.findById(view, R.id.tv_product_feedback);
         tvFeedback.setOnClickListener(v -> startActivity(new Intent(this, FeedbackActivity.class)));
+        SpaceDecoration spaceDecoration = new SpaceDecoration(LUtils.dp2px(1));
+        spaceDecoration.setPaddingEdgeSide(false);
+        spaceDecoration.setPaddingStart(true);
         return super.getListConfig().setContainerLayoutRes(R.layout.product_activity_search_result)
-                .setContainerEmptyView(view);
+                .setContainerEmptyView(view).setItemDecoration(spaceDecoration);
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
 
-        mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
+//        mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
         if (productList.getBrand() == null || productList.getBrand() != null && productList.getBrand().getId() <= 0) {
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
@@ -219,10 +223,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             }
         });
         mIsInit = true;
-    }
-
-    public void setCountLayoutVisibility(int visibility) {
-        mTvCount.setVisibility(visibility);
     }
 
     public void setBrandLayoutVisibility(int visibility) {

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -46,6 +48,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     private String mEffect;//功效关键字
     private int mType = 1;//类型 ：不传或者传1为默认搜索产品
     public EasyRecyclerView mRecySearchBillBoard;
+    TextView mTvCount;
 
 
     public static void start(Context context, String keywords, int cateId, String cateName) {
@@ -82,10 +85,12 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                         public View onCreateView(ViewGroup parent) {
                             View headBillBoard = View.inflate(getView(), R.layout.include_head_billboard, null);
                             mRecySearchBillBoard = headBillBoard.findViewById(R.id.recy_search_billBoard);
+                            mTvCount = headBillBoard.findViewById(R.id.tv_product_list_count);
                             mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(getView(), LinearLayoutManager.VERTICAL, false));
                             int transparent = getView().getResources().getColor(R.color.transparent);
                             mRecySearchBillBoard.addItemDecoration(new DividerDecoration(transparent,
                                     (int) getView().getResources().getDimension(R.dimen.spacing_small)));
+                            mTvCount.setText(Html.fromHtml(String.format(getView().getString(R.string.text_search_count), product.getPageTotal())));
                             return headBillBoard;
                         }
 
@@ -106,7 +111,6 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                         }
                     });
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
-//                    getView().setCountLayoutVisibility(product.getProduct().size() > 0 ? VISIBLE : GONE);
                     return product.getProduct();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());

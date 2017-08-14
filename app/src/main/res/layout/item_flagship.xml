@@ -10,8 +10,10 @@
 
     <FrameLayout
         android:id="@+id/frame_flagship"
+        android:padding="1dp"
         android:layout_width="62dp"
         android:layout_marginBottom="20dp"
+        android:background="@color/fed"
         android:layout_height="62dp">
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_flagShip_price"
@@ -64,8 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
         android:background="@mipmap/bg_flagship"
         android:gravity="center"
         android:text="官方旗舰店  >"

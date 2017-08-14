@@ -9,21 +9,6 @@
     android:orientation="vertical"
     tools:showIn="@layout/product_activity_search_result"
     >
-
-    <TextView
-        android:id="@+id/tv_product_list_count"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center_vertical"
-        android:paddingEnd="@dimen/spacing_normal"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal"
-        android:paddingStart="@dimen/spacing_normal"
-        android:textColor="@color/textSecondary"
-        android:textSize="@dimen/text_size_caption_material"
-        tools:text="@string/text_search_count"
-        />
-
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
