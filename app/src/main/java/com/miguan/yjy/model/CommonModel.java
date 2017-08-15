@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.text.format.DateUtils;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
@@ -86,9 +87,9 @@ public class CommonModel extends AbsModel {
         if (version.getContent().length != 0) {
             new AlertDialog.Builder(context)
                     .setTitle("新版本发布啦~" + version.getNumber())
-                    .setMessage(getContent(version.getContent()))
+                    .setMessage(Html.fromHtml(getContent(version.getContent())))
                     .setNegativeButton("取消", null)
-                    .setPositiveButton("去更新", (dialog, which) -> {
+                    .setPositiveButton("立即更新", (dialog, which) -> {
                         LUtils.log("开始下载");
                         Intent intent = new Intent(context, DownloadService.class);
                         intent.putExtra("title", "正在下载" + context.getString(R.string.app_name));
@@ -174,10 +175,10 @@ public class CommonModel extends AbsModel {
 
     private String getContent(String[] strings) {
         StringBuilder builder = new StringBuilder();
-        for (String string : strings) {
-            builder.append(string + "\n\r");
+        for (int i = 0; i < strings.length; i++) {
+            builder.append(i == strings.length - 1 ? strings[i] : strings[i] + "<br>");
         }
-        return new String(builder);
+        return builder.toString();
     }
 
     private void saveMsg(User user) {

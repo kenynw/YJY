@@ -22,7 +22,7 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.ProductList;
@@ -53,9 +53,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
 //    @BindView(R.id.tv_product_list_count)
 //    TextView mTvCount;
-
-    @BindView(R.id.ll_product_result_first)
-    LinearLayout mLlResultFirst;
 
     @BindView(R.id.recy_product_recommend)
     EasyRecyclerView mRecyRecommend;
@@ -121,11 +118,16 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         View view = getLayoutInflater().inflate(R.layout.empty_search_list, getListView());
         View tvFeedback = ButterKnife.findById(view, R.id.tv_product_feedback);
         tvFeedback.setOnClickListener(v -> startActivity(new Intent(this, FeedbackActivity.class)));
-        SpaceDecoration spaceDecoration = new SpaceDecoration(LUtils.dp2px(1));
-        spaceDecoration.setPaddingEdgeSide(false);
-        spaceDecoration.setPaddingStart(true);
+
+        DividerDecoration decoration = new DividerDecoration(
+                getResources().getColor(R.color.bgWindow),
+                LUtils.dp2px(1),
+                LUtils.dp2px(15),
+                LUtils.dp2px(15)
+        );
+
         return super.getListConfig().setContainerLayoutRes(R.layout.product_activity_search_result)
-                .setContainerEmptyView(view).setItemDecoration(spaceDecoration);
+                .setContainerEmptyView(view).setItemDecoration(decoration);
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
@@ -167,13 +169,13 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
                     imgSearchCancle.setVisibility(View.GONE);
-                    mLlResultFirst.setVisibility(View.VISIBLE);
+                    getListView().setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
                     getPresenter().mRecySearchBillBoard.setVisibility(View.VISIBLE);
 
                 } else {
                     imgSearchCancle.setVisibility(View.VISIBLE);
-                    mLlResultFirst.setVisibility(View.GONE);
+                    getListView().setVisibility(View.GONE);
                     getPresenter().setRecommendData(s.toString());
                     setBrandLayoutVisibility(View.GONE);
                     getPresenter().mRecySearchBillBoard.setVisibility(View.GONE);
@@ -187,7 +189,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     getPresenter().onRefresh();
                     gotoSearchResult(mEtKeywords.getText().toString().trim());
-                    mLlResultFirst.setVisibility(View.VISIBLE);
+                    getListView().setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
                     mFilterPanel.setVisibility(View.VISIBLE);
                     return true;

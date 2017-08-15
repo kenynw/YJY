@@ -14,7 +14,7 @@
         android:id="@+id/ll_evaluate_ask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_marginTop="@dimen/spacing_small"
         android:background="@color/white"
         android:orientation="vertical"
         android:paddingBottom="@dimen/spacing_large"

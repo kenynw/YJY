@@ -32,7 +32,7 @@ public class BillboardViewHolder extends BaseViewHolder<Rank> {
 
     @Override
     public void setData(Rank data) {
-        String num = data.getRank_name() + "<font color=\"#32DAC3\">" + "TOP" + data.getImg_list().size() + " </font>";
+        String num = data.getRank_name() + "<font color=\"#32DAC3\">" + "TOP" + data.getNum() + " </font>";
         mTvTitle.setText(Html.fromHtml(num));
         int size = data.getImg_list().size() > 3 ? 3 : data.getImg_list().size();
         for (int i = 0; i < size; i++) {

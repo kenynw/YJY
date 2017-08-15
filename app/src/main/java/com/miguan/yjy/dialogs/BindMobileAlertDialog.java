@@ -8,10 +8,12 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -106,9 +108,17 @@ public class BindMobileAlertDialog extends BaseTopAlertDialog implements TextWat
                         public void onClick(View widget) {
                             WebViewActivity.start(getActivity(), "", "http://www.cac.gov.cn/2016-06/28/c_1119122192.htm");
                         }
+
+                        @Override
+                        public void updateDrawState(TextPaint ds) {
+                            super.updateDrawState(ds);
+                            ds.setUnderlineText(false);
+                        }
                     };
                     SpannableString spann = new SpannableString(tvWhy.getText());
-                    spann.setSpan(clickableSpan, 14, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    int start = tvWhy.getText().toString().indexOf("《");
+                    int end = start + 19;
+                    spann.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     tvWhy.setText(spann);
                     tvWhy.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -120,6 +130,9 @@ public class BindMobileAlertDialog extends BaseTopAlertDialog implements TextWat
 
                 if (!mHelpDialog.isShowing()) {
                     mHelpDialog.show();
+                    if (mHelpDialog.getWindow() != null) {
+                        mHelpDialog.getWindow().setLayout((int) (LUtils.getScreenWidth() * 0.75), ViewGroup.LayoutParams.WRAP_CONTENT);
+                    }
                 }
 
                 break;

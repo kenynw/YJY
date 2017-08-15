@@ -240,7 +240,8 @@
     <string name="text_test_search_component">查询护肤品成分</string>
     <string name="text_no_test">未测试</string>
     <string name="text_other_billboard">其他排行榜</string>
-    <string name="text_why_bind_mobile">根据国家网络信息办公室颁布的《移动互联网应用程序信息服务管理规定》，从2016年8月1日起，互联网注册用户应当提供基于移动电话号码等方式的真实身份信息，所以需要你绑定手机号码。</string>
+    <string name="text_why_bind_mobile_title">为什么要绑定手机号</string>
+    <string name="text_why_bind_mobile">&#160;&#160;&#160;&#160;根据国家网络信息办公室颁布的《移动互联网应用程序信息服务管理规定》&#160;从2016年8月1日起，互联网注册用户应当提供基于移动电话号码等方式的真实身份信息，所以需要你绑定手机号码。</string>
 
     <!--用户相关-->
     <string name="text_no_bind_mobile">您还没有绑定手机号</string>

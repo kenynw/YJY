@@ -3,12 +3,33 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/include_status_bar" />
 
     <include layout="@layout/include_search_header"/>
 
-    <include layout="@layout/include_product_list"/>
+    <TextView
+        android:id="@+id/tv_product_list_count"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/spacing_normal"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_normal"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_caption_material"
+        tools:text="@string/text_search_count"
+        />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_empty="@layout/empty_search_list"
+        />
 
 </LinearLayout>

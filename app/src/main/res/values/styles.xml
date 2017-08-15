@@ -25,6 +25,7 @@
 
     <style name="LaunchTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_launch</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -32,7 +33,7 @@
     </style>
 
     <style name="ToolbarTheme">
-        <item name="actionMenuTextColor">@color/primary2secondary</item>
+        <item name="actionMenuTextColor">@color/text_toolbar_menu</item>
     </style>
 
     <style name="TitleToolbar" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">

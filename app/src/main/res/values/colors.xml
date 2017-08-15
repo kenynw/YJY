@@ -3,7 +3,7 @@
     <color name="colorPrimary">#32DAC3</color>
     <color name="colorPrimaryDark">#2DC4AF</color>
     <color name="colorPrimaryLight">#78E0D4</color>
-    <color name="colorAccent">#FF5E87</color>
+    <color name="colorAccent">#FFFF5E87</color>
 
     <!--背景颜色，添加bg前缀-->
     <color name="bgWindow">#FFF5F5F5</color>

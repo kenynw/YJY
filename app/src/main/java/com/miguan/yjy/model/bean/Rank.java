@@ -31,6 +31,8 @@ public class Rank implements Parcelable {
     @SerializedName(value = "rank_banner", alternate = {"banner"})
     private String rank_banner;
 
+    private int num;
+
     private ArrayList<String> img_list;
 
     private int category_id;
@@ -69,6 +71,14 @@ public class Rank implements Parcelable {
 
     public void setRank_banner(String rank_banner) {
         this.rank_banner = rank_banner;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public ArrayList<String> getImg_list() {
@@ -148,6 +158,7 @@ public class Rank implements Parcelable {
         dest.writeInt(this.rank_id);
         dest.writeString(this.rank_name);
         dest.writeString(this.rank_banner);
+        dest.writeInt(this.num);
         dest.writeStringList(this.img_list);
         dest.writeInt(this.category_id);
         dest.writeInt(this.brand_id);
@@ -162,6 +173,7 @@ public class Rank implements Parcelable {
         this.rank_id = in.readInt();
         this.rank_name = in.readString();
         this.rank_banner = in.readString();
+        this.num = in.readInt();
         this.img_list = in.createStringArrayList();
         this.category_id = in.readInt();
         this.brand_id = in.readInt();

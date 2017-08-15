@@ -126,8 +126,8 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mBtnFeedback.setOnClickListener(v -> getPresenter().toActivity(FeedbackActivity.class));
         mBtnCommend.setOnClickListener(v -> showSharePopupWindow());
 
-        mBadgeMsg = createBadge(mBtnMessage);
-        mBadgeOverdue = createBadge(mBtnUsed);
+        mBadgeMsg = createBadge(mBtnMessage, Gravity.CENTER);
+        mBadgeOverdue = createBadge(mBtnUsed, Gravity.TOP);
 
         return view;
     }
@@ -199,11 +199,12 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mBind.unbind();
     }
 
-    private Badge createBadge(View view) {
+    private Badge createBadge(View view, int gravity) {
         return new QBadgeView(getActivity())
                 .bindTarget(view)
-                .setBadgeGravity(Gravity.CENTER | Gravity.END)
-                .setGravityOffset(30, 0, true);
+                .setShowShadow(false)
+                .setBadgeGravity(Gravity.END | gravity)
+                .setGravityOffset(40, 10, true);
     }
 
     private void showSharePopupWindow() {

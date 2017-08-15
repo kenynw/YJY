@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/include_toolbar"></include>
+            <include layout="@layout/include_toolbar"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,7 +79,9 @@
             <com.jude.easyrecyclerview.EasyRecyclerView
                 android:id="@id/recycle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                />
 
             <include layout="@layout/foot_wiki_ask"/>
 

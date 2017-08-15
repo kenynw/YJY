@@ -15,9 +15,11 @@ import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.WikiViewHolder;
 import com.miguan.yjy.module.user.FeedbackActivity;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.SharePopupWindow;
 
 import butterknife.BindView;
@@ -49,7 +51,7 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new WikiViewHolder(parent,1);
+        return new WikiViewHolder(parent);
     }
 
     @Override
@@ -67,8 +69,17 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     public ListConfig getListConfig() {
-
-        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false).hasItemDecoration(false).setNoMoreAble(false);
+        DividerDecoration decoration = new DividerDecoration(
+                getResources().getColor(R.color.fed),
+                LUtils.dp2px(1),
+                LUtils.dp2px(28),
+                LUtils.dp2px(28)
+        );
+        return super.getListConfig()
+                .setItemDecoration(decoration)
+                .setLoadMoreAble(false)
+                .setRefreshAble(false)
+                .setNoMoreAble(false);
     }
 
     @Override

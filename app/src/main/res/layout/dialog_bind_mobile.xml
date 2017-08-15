@@ -3,172 +3,167 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_bind_mobile"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:background="@color/half_transparent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_user_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_large"
+            android:text="@string/text_user_bind_mobile"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_size_large_20"
+            />
+
+        <ImageView
+            android:id="@+id/iv_bind_mobile_help"
+            android:layout_width="@dimen/widget_medium"
+            android:layout_height="@dimen/widget_medium"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_skin_grade"
+            />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:background="@color/white"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/et_user_dialog_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="@string/hint_mobile"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingTop="@dimen/spacing_normal"
+            android:textAppearance="@style/TextBody"
             >
 
-            <TextView
-                android:id="@+id/tv_user_dialog_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:gravity="center"
-                android:paddingBottom="@dimen/spacing_large"
-                android:paddingTop="@dimen/spacing_large"
-                android:text="@string/text_user_bind_mobile"
-                android:textColor="@color/textPrimary"
-                android:textSize="@dimen/text_size_large_20"
-                />
+            <requestFocus/>
+        </EditText>
 
-            <ImageView
-                android:id="@+id/iv_bind_mobile_help"
-                android:layout_width="@dimen/widget_medium"
-                android:layout_height="@dimen/widget_medium"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_skin_grade"
-                />
+        <ImageView
+            android:id="@+id/iv_user_dialog_close"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="-15dp"
+            android:layout_marginRight="-15dp"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_user_close_mobile"
+            android:visibility="gone"
+            />
 
-        </RelativeLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <View style="@style/ItemLineHeight"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/et_bind_mobile_captcha"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            >
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="@string/hint_captcha"
+            android:inputType="number"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingTop="@dimen/spacing_normal"
+            android:textAppearance="@style/TextBody"
+            />
 
-            <EditText
-                android:id="@+id/et_user_dialog_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:gravity="start"
-                android:hint="@string/hint_mobile"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:paddingBottom="@dimen/spacing_normal"
-                android:paddingTop="@dimen/spacing_normal"
-                android:textAppearance="@style/TextBody"
-                >
-
-                <requestFocus/>
-            </EditText>
-
-            <ImageView
-                android:id="@+id/iv_user_dialog_close"
-                android:layout_width="@dimen/widget_medium"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="centerInside"
-                android:src="@mipmap/ic_user_close_mobile"
-                android:visibility="gone"
-                />
-
-        </LinearLayout>
-
-        <View style="@style/ItemLineHeight"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.miguan.yjy.widget.SendValidateButton
+            android:id="@+id/tv_bind_mobile_captcha"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            >
+            android:background="@drawable/btn_radius_div2primary_selector"
+            android:enabled="false"
+            android:gravity="center"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small"
+            android:paddingTop="6dp"
+            android:text="@string/btn_get_captcha"
+            />
 
-            <EditText
-                android:id="@+id/et_bind_mobile_captcha"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:gravity="start"
-                android:hint="@string/hint_captcha"
-                android:inputType="number"
-                android:paddingBottom="@dimen/spacing_normal"
-                android:paddingTop="@dimen/spacing_normal"
-                android:textAppearance="@style/TextBody"
-                />
+    </LinearLayout>
 
-            <com.miguan.yjy.widget.SendValidateButton
-                android:id="@+id/tv_bind_mobile_captcha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_radius_div2primary_selector"
-                android:enabled="false"
-                android:gravity="center"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:paddingBottom="6dp"
-                android:paddingLeft="@dimen/spacing_small"
-                android:paddingRight="@dimen/spacing_small"
-                android:paddingTop="6dp"
-                android:text="@string/btn_get_captcha"
-                />
+    <View style="@style/ItemLineHeight"/>
 
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
-        <View style="@style/ItemLineHeight"/>
+        <TextView
+            android:id="@+id/tv_user_dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tv_cancel"
+            android:textAppearance="@style/TextSubhead"
+            />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@color/white"
-            android:orientation="horizontal">
+        <View
+            style="@style/ItemLineHeight"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
 
-            <TextView
-                android:id="@+id/tv_user_dialog_cancel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/tv_cancel"
-                android:textAppearance="@style/TextSubhead"
-                />
-
-            <View
-                style="@style/ItemLineHeight"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"/>
-
-            <TextView
-                android:id="@+id/tv_user_dialog_next"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:enabled="false"
-                android:gravity="center"
-                android:text="@string/text_user_next"
-                android:textColor="@color/primary2secondary"
-                android:textSize="@dimen/text_size_subhead_material"
-                />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_user_dialog_next"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="@string/text_user_next"
+            android:textColor="@color/primary2secondary"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
 
     </LinearLayout>
 
