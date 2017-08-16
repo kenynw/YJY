@@ -42,14 +42,10 @@
     <!--测试相关-->
     <color name="fa3e">#a3e8d5</color>
     <color name="fa9d">#a9d7f1</color>
-    <color name="f589">#5890b1</color>
-    <color name="f4ba">#4ba089</color>
     <color name="f63c">#63cbfc</color>
     <color name="fb7">#fb7c94</color>
-    <color name="f85">#85d8f3</color>
     <color name="skin_low">#fccb08</color>
     <color name="skin_middle">#8fcd0e</color>
-    <color name="skin_midlle_up">#4ee88b</color>
     <color name="skin_high">#50f3de</color>
     <color name="first_skin">#fff158</color>
     <color name="sencond_skin">#d4f98c</color>
@@ -57,7 +53,6 @@
     <color name="fB2">#B2B2B2</color>
 
     <!--模块-->
-    <color name="f5a6">#5A6970</color>
     <!--我的-->
     <color name="ff_8b">#8b8b8b</color>
 
@@ -69,19 +64,15 @@
     <color name="four_transparent">#33000000</color>
 
     <!--蓝色-->
-    <color name="blue">#0000FF</color>
     <!--灰色-->
     <color name="gray">#808080</color>
     <!--红色-->
     <color name="red">#FF0000</color>
     <!--黄色-->
-    <color name="yello">#FFFF00</color>
     <!--橘色-->
     <!--<color name="orange">#f88600</color>-->
     <!--绿色-->
-    <color name="green">#008000</color>
     <!--紫色-->
-    <color name="purple">#B54D70</color>
 
     <!--通用颜色-->
     <color name="white">#ffffffff</color>

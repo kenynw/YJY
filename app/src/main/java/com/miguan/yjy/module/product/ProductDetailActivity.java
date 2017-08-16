@@ -222,8 +222,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
         decoration.setDrawLastItem(false);
         mRecyEvalutate.addItemDecoration(decoration);
-        mRecyEvalutate.setFocusable(false);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
+        mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         mImgRecommendBuy.setOnClickListener(v -> getPresenter().showExplain());
         mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
     }
@@ -573,7 +573,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         EvaluateAdapter evaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
         evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
         evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
-        mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyEvalutate.setNestedScrollingEnabled(false);
         mRecyEvalutate.setAdapter(evaluateAdapter);
         evaluateAdapter.notifyDataSetChanged();

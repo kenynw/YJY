@@ -125,14 +125,15 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
     @Override
     public void onStart(SHARE_MEDIA share_media) {
         dismiss();
-    }
-
-    @Override
-    public void onResult(SHARE_MEDIA share_media) {
         if (mBuilder.getId() > 0 && mBuilder.getType() > 0) {
             CommonModel.getInstance().analyticsShare(mBuilder.getId(), mBuilder.getType())
                     .subscribe();
         }
+    }
+
+    @Override
+    public void onResult(SHARE_MEDIA share_media) {
+
     }
 
     @Override

@@ -22,7 +22,6 @@
     <string name="text_expiration_opened_intro">开封保质期说明</string>
     <string name="text_image">图片</string>
     <string name="text_empty_evaluate_list">快来抢沙发，消灭零回复</string>
-    <string name="text_me">我的</string>
     <string name="text_me_star">我收藏的</string>
     <string name="text_skin_test">肤质测试</string>
     <string name="text_query_production_date">批号查询</string>
@@ -58,8 +57,6 @@
     <string name="text_face_score">颜值</string>
     <string name="text_title_template">功课模板</string>
     <string name="text_search_count"><![CDATA[共为您找到<font color="#32DAC3">%d</font>款产品]]></string>
-    <string name="text_remaining_day">剩余&#160;%d&#160;天</string>
-    <string name="text_tms_weixin">(tmshuo520)</string>
     <string name="text_apply_all_image">将滤镜应用到模板中的所有图片</string>
     <string name="text_commend_star">推荐指数</string>
     <string name="text_template_0_header">眼霜合集</string>
@@ -147,7 +144,6 @@
     <string name="btn_done">完成</string>
 
     <string name="hint_add_comment">写评论…</string>
-    <string name="hint_add_reply">回复评论</string>
     <string name="hint_home_search">查询%d种护肤品的成分和功效</string>
     <string name="hint_brand_name">请输入品牌名称</string>
     <string name="hint_product_name">请输入产品名称</string>
@@ -170,7 +166,6 @@
     <string name="tv_product_no_find">找不到商品哎~\n换个关键字试试?</string>
     <string name="tv_product_no_find_think">找不到想要的？</string>
     <string name="tv_product_feedback">点我反馈</string>
-    <string name="tv_product_detail_match">肤质匹配程度</string>
     <string name="tv_product_detail_info">备案信息</string>
     <string name="tv_product_detail_compare_price">去比价</string>
     <string name="tv_product_detail_user_evaluate">用户评价(%d)</string>
@@ -187,26 +182,17 @@
     <string name="tv_product_remark">商品点评</string>
     <string name="tv_product_remark_hint">说说您使用后的感受吧!不少于20字哦~</string>
     <string name="tv_menu_submit">提交</string>
-    <string name="tv_title_read">颜究院官方解读</string>
     <string name="tv_product_component_name">成分名称</string>
     <string name="tv_product_component_safe">安全\n风险</string>
     <string name="tv_product_component_active">活性\n成分</string>
     <string name="tv_product_component_pox">致痘\n风险</string>
     <string name="tv_product_component_goal">使用\n目的</string>
-    <string name="tv_product_compare">肤质匹配</string>
-    <string name="tv_product_no_compare">肤质不匹配</string>
-    <string name="tv_product_safe">安全信息</string>
-    <string name="tv_product_fuction_info">功效信息</string>
     <string name="tv_product_component_describe">本成分列表数据来自国家食品药品监督管理局</string>
     <string name="tv_menu_read_list">解读表</string>
     <string name="tv_product_component_img">生成成分表图片</string>
     <string name="tv_product_component_num">本产品包含%d种成分</string>
-    <string name="tv_product_fit_skin">适合我的肤质:%d种</string>
-    <string name="tv_product_no_fit_skin">不适合我的肤质:%d种</string>
     <string name="tv_product_num">查询%d种护肤品的安全和功效</string>
-    <string name="tv_product_effect_num">主要功效成分:%d种</string>
     <string name="tv_product_brand_main">品牌主页 > </string>
-    <string name="tv_product_brand_num">收录产品数 : %d</string>
     <string name="tv_component_num">含有该成分的产品(%d)</string>
 
     <!--测试相关-->
@@ -249,8 +235,6 @@
     <string name="text_user_bind_mobile">绑定手机号</string>
     <string name="text_user_get_code">验证码</string>
     <string name="text_user_next">下一步</string>
-    <string name="text_user_previous">上一步</string>
-    <string name="btn_user_again">重发</string>
     <string name="btn_user_sure">确定</string>
     <string name="btn_user_bined_content"><![CDATA[
         如您需要更换绑定手机号，请微信关注</br>颜究院(微信号:<font color="#222222">tmshuo520</font>)，</br>联系客服进行更改。

@@ -24,7 +24,7 @@ android {
 
 dependencies {
     // view
-    compile 'com.jude:easyrecyclerview:4.4.0'
+    compile 'com.jude:easyrecyclerview:4.4.2'
     compile 'com.gyf.barlibrary:barlibrary:2.2.7'
 
     // support
