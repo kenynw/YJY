@@ -12,6 +12,7 @@ import android.view.MotionEvent;
  */
 
 public class NoScrollViewPager extends ViewPager {
+
     private boolean noScroll = false;
 
     public NoScrollViewPager(Context context, AttributeSet attrs) {
@@ -33,18 +34,12 @@ public class NoScrollViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent arg0) {
-        if (noScroll)
-            return false;
-        else
-            return super.onTouchEvent(arg0);
+        return !noScroll && super.onTouchEvent(arg0);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent arg0) {
-        if (noScroll)
-            return false;
-        else
-            return super.onInterceptTouchEvent(arg0);
+        return !noScroll && super.onInterceptTouchEvent(arg0);
     }
 
     @Override
@@ -53,10 +48,8 @@ public class NoScrollViewPager extends ViewPager {
     }
 
     @Override
-
     public void setCurrentItem(int item) {
-
         super.setCurrentItem(item, false);//表示切换的时候，不需要切换时间。
-
     }
+
 }

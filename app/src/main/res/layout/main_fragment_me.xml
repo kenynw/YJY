@@ -261,11 +261,11 @@
             />
 
         <Button
-            android:id="@+id/btn_me_commend"
+            android:id="@+id/btn_me_about"
             style="@style/MoreItem"
             android:drawableLeft="@mipmap/ic_me_commend"
             android:drawableStart="@mipmap/ic_me_commend"
-            android:text="@string/btn_commend_app"
+            android:text="@string/btn_me_about"
             />
 
         <View

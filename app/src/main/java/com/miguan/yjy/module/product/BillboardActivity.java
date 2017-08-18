@@ -18,7 +18,7 @@ import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.SharePopupWindow;
+import com.miguan.yjy.widget.ShareBottomDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,14 +90,14 @@ public class BillboardActivity extends BaseDataActivity<BillboardActivityPresent
         Rank data = getPresenter().getData().getRankingInfo();
         if (data != null) {
             String title = "经典口碑产品，让你摆脱选择恐惧症";
-            new SharePopupWindow.Builder(this)
+            new ShareBottomDialog.Builder(this)
                     .setTitle(data.getRank_name() + "【颜究院】")
                     .setContent(title)
                     .setUrl(data.getShare_url())
                     .setImageUrl(data.getRank_banner())
                     .setWxCircleTitle(data.getRank_name() + title)
                     .setWbContent(data.getRank_name() + title + ", 分享来自#颜究院APP#" + data.getShare_url())
-                    .show(getContent());
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }

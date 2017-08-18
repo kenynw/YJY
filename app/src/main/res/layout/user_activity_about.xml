@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <Button
+        android:id="@+id/btn_about_wx_account"
+        style="@style/MoreItem"
+        android:drawableLeft="@mipmap/ic_me_commend"
+        android:drawableStart="@mipmap/ic_me_commend"
+        android:text="@string/btn_wx_account"
+        />
+
+    <Button
+        android:id="@+id/btn_about_commend"
+        style="@style/MoreItem"
+        android:drawableLeft="@mipmap/ic_me_commend"
+        android:drawableStart="@mipmap/ic_me_commend"
+        android:text="@string/btn_commend_app"
+        />
+
+    <Button
+        android:id="@+id/btn_about_market"
+        style="@style/MoreItem"
+        android:drawableLeft="@mipmap/ic_me_commend"
+        android:drawableStart="@mipmap/ic_me_commend"
+        android:text="@string/btn_to_market"
+        />
+
+</LinearLayout>

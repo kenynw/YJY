@@ -48,7 +48,7 @@ import com.miguan.yjy.module.common.WebViewActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CustomNestedScrollView;
 import com.miguan.yjy.widget.FlowTagLayout;
-import com.miguan.yjy.widget.SharePopupWindow;
+import com.miguan.yjy.widget.ShareBottomDialog;
 
 import java.util.List;
 
@@ -528,7 +528,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     public boolean onOptionsItemSelected(MenuItem item) {
         Product product = getPresenter().getData();
 
-        new SharePopupWindow.Builder(this)
+        new ShareBottomDialog.Builder(this)
                 .setUrl(TextUtils.isEmpty(product.getLinkUrl()) ? "http:www.yjyapp.com" : product.getLinkUrl())
                 .setTitle(product.getProduct_name() + "【颜究院】")
                 .setContent("科学分析产品成分，只有我们知道它适不适合你")
@@ -537,7 +537,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 .setType(1)
                 .setWxCircleTitle(product.getProduct_name() + "里面都含有些什么成分，查了你就知道")
                 .setWbContent(product.getProduct_name() + "里面都含有些什么成分，查了你就知道，分享来自#颜究院APP# " + product.getLinkUrl())
-                .show(getToolbar());
+                .show();
         return super.onOptionsItemSelected(item);
     }
 

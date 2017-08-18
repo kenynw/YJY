@@ -17,7 +17,7 @@ import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.SharePopupWindow;
+import com.miguan.yjy.widget.ShareBottomDialog;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
@@ -123,7 +123,7 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
      */
     public void share() {
         if (getData() != null) {
-            new SharePopupWindow.Builder(getView())
+            new ShareBottomDialog.Builder(getView())
                     .setTitle(getData().getTitle())
                     .setUrl(getData().getLinkUrl())
                     .setContent("护肤不交智商税，颜究院帮你科学高效护肤。")
@@ -132,7 +132,7 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
                     .setImageUrl(getData().getArticle_img())
                     .setId(getData().getId())
                     .setType(2)
-                    .show(getView().getToolbar());
+                    .show();
         }
     }
 

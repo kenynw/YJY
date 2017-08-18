@@ -20,7 +20,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.WikiViewHolder;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.SharePopupWindow;
+import com.miguan.yjy.widget.ShareBottomDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,13 +91,13 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        new SharePopupWindow.Builder(this)
+        new ShareBottomDialog.Builder(this)
                 .setUrl(getPresenter().share_url)
                 .setTitle(mTvWikiAskName.getText() + "【颜究院】")
                 .setContent("解决你的护肤难题")
                 .setWxCircleTitle(mTvWikiAskName.getText() + "【颜究院】")
                 .setWbContent(mTvWikiAskName.getText() + "【颜究院】" + getPresenter().share_url)
-                .show(getToolbar());
+                .show();
         return super.onOptionsItemSelected(item);
     }
 }

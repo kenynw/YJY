@@ -21,11 +21,11 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
+import com.miguan.yjy.module.user.AboutActivity;
 import com.miguan.yjy.module.user.EvaluateListActivity;
 import com.miguan.yjy.module.user.FaceScorePresenter;
 import com.miguan.yjy.module.user.FeedbackActivity;
@@ -35,7 +35,6 @@ import com.miguan.yjy.module.user.ProfilePresenter;
 import com.miguan.yjy.module.user.ReplyListActivity;
 import com.miguan.yjy.module.user.StarListActivity;
 import com.miguan.yjy.module.user.UsedListActivity;
-import com.miguan.yjy.widget.SharePopupWindow;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -98,8 +97,8 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     @BindView(R.id.btn_me_feedback)
     Button mBtnFeedback;
 
-    @BindView(R.id.btn_me_commend)
-    Button mBtnCommend;
+    @BindView(R.id.btn_me_about)
+    Button mBtnAbout;
 
     private Unbinder mBind;
 
@@ -124,7 +123,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mBtnMessage.setOnClickListener(v -> getPresenter().toActivity(MsgListActivity.class));
         mBtnQueryNo.setOnClickListener(v -> startActivity(new Intent(getActivity(), QueryCodeActivity.class)));
         mBtnFeedback.setOnClickListener(v -> getPresenter().toActivity(FeedbackActivity.class));
-        mBtnCommend.setOnClickListener(v -> showSharePopupWindow());
+        mBtnAbout.setOnClickListener(v -> startActivity(new Intent(getActivity(), AboutActivity.class)));
 
         mBadgeMsg = createBadge(mBtnMessage, Gravity.CENTER);
         mBadgeOverdue = createBadge(mBtnUsed, Gravity.TOP);
@@ -205,21 +204,6 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
                 .setShowShadow(false)
                 .setBadgeGravity(Gravity.END | gravity)
                 .setGravityOffset(40, 10, true);
-    }
-
-    private void showSharePopupWindow() {
-        if (AccountModel.getInstance().isLogin()) {
-            new SharePopupWindow.Builder(getActivity())
-                    .setViewTitle("推荐颜究院给")
-                    .setTitle("颜究院，一款专业的护肤应用")
-                    .setContent("查成分、测肤质，颜究院根据肤质推荐安全有效护肤品")
-                    .setUrl("http://m.yjyapp.com/site/download")
-                    .setWxCircleTitle("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？")
-                    .setWbContent("颜究院，帮你查成分、测肤质，根据肤质推荐安全有效护肤品，你还不用吗？#颜究院APP# http://m.yjyapp.com/site/download")
-                    .show(mLlInfo);
-        } else {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-        }
     }
 
 }

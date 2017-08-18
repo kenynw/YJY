@@ -2,13 +2,9 @@ package com.miguan.yjy.widget;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.BottomSheetDialog;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miguan.yjy.R;
@@ -29,10 +25,7 @@ import static android.text.TextUtils.isEmpty;
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class SharePopupWindow extends PopupWindow implements View.OnClickListener, UMShareListener {
-
-    @BindView(R.id.rl_share_window)
-    RelativeLayout mRlShareWindow;
+public class ShareBottomDialog extends BottomSheetDialog implements View.OnClickListener, UMShareListener {
 
     @BindView(R.id.tv_share_wx_friend)
     TextView mTvWxFirend;
@@ -53,28 +46,21 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
 
     private Builder mBuilder;
 
-    protected SharePopupWindow(Context context, Builder builder) {
+    protected ShareBottomDialog(Context context, Builder builder) {
         super(context);
         mActivity = (Activity) context;
         mBuilder = builder;
         init(context);
-        initViews();
     }
 
     private void init(Context context) {
-        View view = View.inflate(context, R.layout.popwindow_share, null);
+        View view = View.inflate(context, R.layout.dialog_bottom_share, null);
         ButterKnife.bind(this, view);
 
-        mRlShareWindow.setOnClickListener(v -> dismiss());
         if (!isEmpty(mBuilder.getViewTitle())) mTvShareTitle.setText(mBuilder.getViewTitle());
 
         setContentView(view);
-        setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        setFocusable(true);
-        setTouchable(true);
-        setOutsideTouchable(true);
-        setBackgroundDrawable(new ColorDrawable(0x55000000));
+        initViews();
     }
 
     private void initViews() {
@@ -257,9 +243,9 @@ public class SharePopupWindow extends PopupWindow implements View.OnClickListene
             return mContent;
         }
 
-        public SharePopupWindow show(View parent) {
-            SharePopupWindow popupWindow = new SharePopupWindow(mContext, this);
-            popupWindow.showAtLocation(parent, Gravity.NO_GRAVITY, 0, 0);
+        public ShareBottomDialog show() {
+            ShareBottomDialog popupWindow = new ShareBottomDialog(mContext, this);
+            popupWindow.show();
             return popupWindow;
         }
 

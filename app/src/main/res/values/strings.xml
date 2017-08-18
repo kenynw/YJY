@@ -125,7 +125,10 @@
     <string name="btn_me_star">我收藏的</string>
     <string name="btn_me_message">我的消息</string>
     <string name="btn_feedback">意见反馈</string>
+    <string name="btn_me_about">关于颜究院</string>
+    <string name="btn_wx_account">官方微信</string>
     <string name="btn_commend_app">推荐颜究院</string>
+    <string name="btn_to_market">给颜究院打分</string>
     <string name="btn_add_expiration">添加到保质期提醒</string>
     <string name="btn_login">登录</string>
     <string name="btn_like">长草</string>
