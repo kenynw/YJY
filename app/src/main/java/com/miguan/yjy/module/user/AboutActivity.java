@@ -46,16 +46,18 @@ public class AboutActivity extends ChainBaseActivity<AboutActivityPresenter> imp
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.btn_about_wx_account:
-
+                intent = new Intent(AboutActivity.this,OfficialWechatActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_about_commend:
                 showSharePopupWindow();
                 break;
             case R.id.btn_about_market:
                 try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("market://details?id=" + getPackageName()));
                     startActivity(intent);
                 } catch (Exception e) {

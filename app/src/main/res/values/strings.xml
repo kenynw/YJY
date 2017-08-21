@@ -250,4 +250,7 @@
     <string name="tv_share_wxfriend">微信好友</string>
     <string name="tv_share_wxcircle">朋友圈</string>
     <string name="tv_share_weibo">微博</string>
+
+
+    <string name="tv_open_weixin">打开微信</string>
 </resources>
