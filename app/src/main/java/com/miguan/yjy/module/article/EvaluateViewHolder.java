@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -29,6 +30,8 @@ import butterknife.BindView;
 
 public class EvaluateViewHolder extends BaseEvaluateViewHolder {
 
+    @BindView(R.id.evaluate_ratbar_product)
+    RatingBar mEvaluateRatbarProduct;
     private int mIsLike;
 
     @BindView(R.id.dv_evaluate_avatar)
@@ -78,6 +81,13 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
     @Override
     public void setData(Evaluate data) {
         super.setData(data);
+        if (data.getStar() != 0) {
+            mEvaluateRatbarProduct.setVisibility(View.VISIBLE);
+            mEvaluateRatbarProduct.setRating(data.getStar());
+        } else {
+            mEvaluateRatbarProduct.setVisibility(View.GONE);
+        }
+
         mEvaluatePanel.setEvaluate(data);
 
         if (TextUtils.isEmpty(data.getAttachment())) {

@@ -419,7 +419,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             mIvIsTop.setVisibility(View.GONE);
         }
         mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
-        mDvThumb.setOnClickListener(v -> LargeImageActivity.start(ProductDetailActivity.this, product.getProduct_img()));
+
+        mDvThumb.setOnClickListener(TextUtils.isEmpty(product.getProduct_img())?v->{}:v -> LargeImageActivity.start(ProductDetailActivity.this, product.getProduct_img()));
         mTvName.setText(product.getProduct_name());
         String spec = String.format(TextUtils.isEmpty(product.getForm()) ? getString(R.string.text_product_no_spec) : getString(R.string.text_product_spec), product.getPrice(), product.getForm());
         mTvSpec.setText(product.getSpec(ProductDetailActivity.this));

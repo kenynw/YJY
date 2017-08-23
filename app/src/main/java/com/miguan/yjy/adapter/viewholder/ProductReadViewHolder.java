@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter.viewholder;
 
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,8 @@ public class ProductReadViewHolder extends BaseViewHolder<Component> {
             }
         });
         mTvComponentName.setText(data.getName());
+        mTvComponentName.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        mTvComponentName.getPaint().setAntiAlias(true);
 //            0-2 绿色
 //            3-6 橙色
 //            7-9 红色
