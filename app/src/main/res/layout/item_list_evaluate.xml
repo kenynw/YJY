@@ -21,9 +21,19 @@
         android:layout_alignLeft="@+id/ll_evaluate_user_info"
         android:layout_alignStart="@id/ll_evaluate_user_info"
         android:layout_below="@+id/tv_evaluate_label"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
         >
+
+        <RatingBar
+            android:id="@+id/evaluate_ratbar_product"
+            style="@style/MySmallRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="1"
+            />
 
         <TextView
             style="@style/EvaluateContent"

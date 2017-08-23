@@ -53,6 +53,8 @@ public class Evaluate implements Parcelable {
 
     private Item detail;
 
+    private int star;
+
     private Evaluate reply;
 
     private List<Evaluate> replyList;
@@ -64,6 +66,15 @@ public class Evaluate implements Parcelable {
     private Ask ask;
 
     private int addMoney;
+
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
 
     public int getIs_digest() {
         return is_digest;
@@ -385,6 +396,7 @@ public class Evaluate implements Parcelable {
         dest.writeParcelable(this.user, flags);
         dest.writeParcelable(this.product, flags);
         dest.writeParcelable(this.detail, flags);
+        dest.writeInt(this.star);
         dest.writeParcelable(this.reply, flags);
         dest.writeTypedList(this.replyList);
         dest.writeString(this.replyUserName);
@@ -413,6 +425,7 @@ public class Evaluate implements Parcelable {
         this.user = in.readParcelable(User.class.getClassLoader());
         this.product = in.readParcelable(Product.class.getClassLoader());
         this.detail = in.readParcelable(Item.class.getClassLoader());
+        this.star = in.readInt();
         this.reply = in.readParcelable(Evaluate.class.getClassLoader());
         this.replyList = in.createTypedArrayList(Evaluate.CREATOR);
         this.replyUserName = in.readString();
