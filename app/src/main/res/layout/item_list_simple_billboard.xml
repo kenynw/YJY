@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="1dp"
+    app:contentPaddingBottom="8dp"
+    app:contentPaddingLeft="8dp"
+    app:contentPaddingRight="@dimen/spacing_small"
+    app:contentPaddingTop="8dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_billboard_top1"
+            style="@style/BaseImage.Product"
+            android:layout_width="40dp"
+            android:layout_height="34dp"
+            />
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_billboard_top2"
+            style="@style/BaseImage.Product"
+            android:layout_width="40dp"
+            android:layout_height="34dp"
+            />
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_billboard_top3"
+            style="@style/BaseImage.Product"
+            android:layout_width="40dp"
+            android:layout_height="34dp"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/tv_billboard_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawableEnd="@mipmap/ic_more"
+            android:drawablePadding="@dimen/spacing_small"
+            android:drawableRight="@mipmap/ic_more"
+            tools:text="最好用的洁面产品TOP10"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

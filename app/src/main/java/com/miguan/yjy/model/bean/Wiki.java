@@ -23,7 +23,7 @@ public class Wiki implements Parcelable {
     private int id;
     private String question;
     private String content;
-    private ArrayList<RelationInfo> relation_info;
+    private ArrayList<Wiki> relation_info;
     private String share_url;
 
     public String getShare_url() {
@@ -58,68 +58,16 @@ public class Wiki implements Parcelable {
         this.content = content;
     }
 
-    public ArrayList<RelationInfo> getRelation_info() {
+    public ArrayList<Wiki> getRelation_info() {
         return relation_info;
     }
 
-    public void setRelation_info(ArrayList<RelationInfo> relation_info) {
+    public void setRelation_info(ArrayList<Wiki> relation_info) {
         this.relation_info = relation_info;
     }
 
     public Wiki() {
-    }
 
-    public static class RelationInfo implements Parcelable {
-
-        private int id;
-        private String question;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getQuestion() {
-            return question;
-        }
-
-        public void setQuestion(String question) {
-            this.question = question;
-        }
-
-        public RelationInfo() {
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(this.id);
-            dest.writeString(this.question);
-        }
-
-        protected RelationInfo(Parcel in) {
-            this.id = in.readInt();
-            this.question = in.readString();
-        }
-
-        public static final Creator<RelationInfo> CREATOR = new Creator<RelationInfo>() {
-            @Override
-            public RelationInfo createFromParcel(Parcel source) {
-                return new RelationInfo(source);
-            }
-
-            @Override
-            public RelationInfo[] newArray(int size) {
-                return new RelationInfo[size];
-            }
-        };
     }
 
     @Override
@@ -133,13 +81,15 @@ public class Wiki implements Parcelable {
         dest.writeString(this.question);
         dest.writeString(this.content);
         dest.writeTypedList(this.relation_info);
+        dest.writeString(this.share_url);
     }
 
     protected Wiki(Parcel in) {
         this.id = in.readInt();
         this.question = in.readString();
         this.content = in.readString();
-        this.relation_info = in.createTypedArrayList(RelationInfo.CREATOR);
+        this.relation_info = in.createTypedArrayList(Wiki.CREATOR);
+        this.share_url = in.readString();
     }
 
     public static final Creator<Wiki> CREATOR = new Creator<Wiki>() {
@@ -153,4 +103,5 @@ public class Wiki implements Parcelable {
             return new Wiki[size];
         }
     };
+
 }

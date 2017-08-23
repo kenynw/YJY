@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.product;
+package com.miguan.yjy.module.billboard;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,7 +48,7 @@ public class BillboardActivity extends BaseDataActivity<BillboardActivityPresent
     private RecyclerArrayAdapter<Rank> mRankAdapter = new RecyclerArrayAdapter<Rank>(this) {
         @Override
         public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-            return new BillboardViewHolder(parent);
+            return new BillboardSimpleViewHolder(parent);
         }
     };
 

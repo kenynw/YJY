@@ -20,6 +20,7 @@ import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.module.billboard.BillboardSimpleViewHolder;
 import com.miguan.yjy.utils.LUtils;
 
 import static android.view.View.GONE;
@@ -101,8 +102,8 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                                 mRecySearchBillBoard.setVisibility(View.VISIBLE);
                                 mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(getView(), product.getRank()) {
                                     @Override
-                                    public BillboardViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                                        return new BillboardViewHolder(parent);
+                                    public BillboardSimpleViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                                        return new BillboardSimpleViewHolder(parent);
                                     }
                                 });
                             } else {

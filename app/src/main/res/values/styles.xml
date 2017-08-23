@@ -15,6 +15,8 @@
         <item name="android:textColorPrimary">@color/textPrimary</item>
         <item name="android:textColorSecondary">@color/textSecondary</item>
         <item name="android:listDivider">@drawable/div_vertical</item>
+        <item name="actionMenuTextColor">@color/text_toolbar_menu</item>
+        <item name="android:actionMenuTextColor">@color/text_toolbar_menu</item>
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base"/>
@@ -23,17 +25,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="SecondaryToolbarTheme" parent="AppTheme">
+        <item name="android:actionMenuTextColor">@color/textSecondary</item>
+        <item name="actionMenuTextColor">@color/textSecondary</item>
+    </style>
+
     <style name="LaunchTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/bg_launch</item>
         <item name="android:windowFullscreen">true</item>
-    </style>
-
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@color/f5</item>
-    </style>
-
-    <style name="ToolbarTheme">
-        <item name="actionMenuTextColor">@color/text_toolbar_menu</item>
     </style>
 
     <style name="TitleToolbar" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
@@ -43,7 +42,6 @@
         <item name="com.miguan.yjy:contentInsetStart">0dp</item>
         <item name="com.miguan.yjy:contentInsetStartWithNavigation">0dp</item>
         <item name="com.miguan.yjy:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="com.miguan.yjy:theme">@style/ToolbarTheme</item>
     </style>
 
     <style name="TextTitle" parent="TextAppearance.AppCompat.Title"/>
@@ -55,6 +53,11 @@
     </style>
 
     <style name="TextCaption" parent="TextAppearance.AppCompat.Caption"/>
+
+    <style name="TextTertiary" parent="TextAppearance.AppCompat.Caption">
+        <item name="textSize">@dimen/text_size_caption</item>
+        <item name="textColor">@color/textTertiary</item>
+    </style>
 
     <style name="ItemLineHeight">
         <item name="android:layout_width">match_parent</item>

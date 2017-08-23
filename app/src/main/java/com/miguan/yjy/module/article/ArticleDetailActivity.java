@@ -74,6 +74,7 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
         mFlStar.setOnClickListener(v -> getPresenter().star(mIsStar));
 
         mRecycle.setLayoutManager(new LinearLayoutManager(this));
+        mRecycle.setNestedScrollingEnabled(false);
         DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
         decoration.setDrawLastItem(false);
         mRecycle.addItemDecoration(decoration);

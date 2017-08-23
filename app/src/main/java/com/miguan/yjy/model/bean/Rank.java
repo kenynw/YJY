@@ -45,6 +45,7 @@ public class Rank implements Parcelable {
 
     private Rank rankingInfo;
 
+    @SerializedName(value = "productList", alternate = {"product"})
     private List<Product> productList;
 
     private List<Rank> relation_info;

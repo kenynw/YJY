@@ -10,6 +10,7 @@ import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.model.bean.MainProduct;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Rank;
@@ -41,6 +42,10 @@ public class ProductModel extends AbsModel {
 
     public static ProductModel getInstance() {
         return getInstance(ProductModel.class);
+    }
+
+    public Observable<MainProduct> getMainProduct() {
+        return ServicesClient.getServices().mainProduct().compose(new DefaultTransform<>());
     }
 
     /**
@@ -345,9 +350,18 @@ public class ProductModel extends AbsModel {
     }
 
     /**
+     * 排行榜列表
+     *
+     * @param page 当前页
+     */
+    public Observable<List<Rank>> getBillboardList(int page) {
+        return ServicesClient.getServices().billboardList(page)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
      * 排行榜详情
-     * @param billboardId
-     * @return
+     * @param billboardId 榜单ID
      */
     public Observable<Rank> getBillboardDetail(int billboardId) {
         return ServicesClient.getServices().billboardDetail(billboardId)

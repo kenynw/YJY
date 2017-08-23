@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">颜究院</string>
+    <string name="company_copyright">©厦门爱游米网络科技有限公司 2017</string>
 
     <string name="text_null">无</string>
+    <string name="text_discover">发现</string>
     <string name="text_hot_article">热门文章</string>
     <string name="text_to_more">查看更多></string>
     <string name="text_add_comment">发评论</string>
@@ -98,6 +100,15 @@
     ]]></string>
     <string name="text_set_password">设定密码</string>
     <string name="text_login_or_register">登录/注册</string>
+    <string name="text_tmshuo">tmshuo520</string>
+    <string name="text_not_update">好赞，当前已是最新版本</string>
+    <string name="text_evaluate_good">好评</string>
+    <string name="text_evaluate_middle">中评</string>
+    <string name="text_evaluate_bad">差评</string>
+    <string name="text_my_skin">我的肤质</string>
+    <string name="text_my_skin_detail">查看我的肤质情况 >></string>
+    <string name="text_skin_wiki">护肤科普</string>
+    <string name="text_last_ask">最新回答</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -107,8 +118,7 @@
     ]]></string>
     <string name="label_face_score">您的颜值总分为：</string>
 
-    <string name="btn_main_module">功能模板</string>
-    <string name="btn_main_test">肤质测试</string>
+    <string name="btn_main_product">产品库</string>
     <string name="btn_main_me">我的</string>
     <string name="btn_star">收藏</string>
     <string name="btn_comment">点评</string>
@@ -129,6 +139,7 @@
     <string name="btn_wx_account">官方微信</string>
     <string name="btn_commend_app">推荐颜究院</string>
     <string name="btn_to_market">给颜究院打分</string>
+    <string name="btn_check_update">检测新版本</string>
     <string name="btn_add_expiration">添加到保质期提醒</string>
     <string name="btn_login">登录</string>
     <string name="btn_like">长草</string>
@@ -231,6 +242,7 @@
     <string name="text_other_billboard">其他排行榜</string>
     <string name="text_why_bind_mobile_title">为什么要绑定手机号</string>
     <string name="text_why_bind_mobile">&#160;&#160;&#160;&#160;根据国家网络信息办公室颁布的《移动互联网应用程序信息服务管理规定》&#160;从2016年8月1日起，互联网注册用户应当提供基于移动电话号码等方式的真实身份信息，所以需要你绑定手机号码。</string>
+    <string name="text_billboard">排行榜</string>
 
     <!--用户相关-->
     <string name="text_no_bind_mobile">您还没有绑定手机号</string>

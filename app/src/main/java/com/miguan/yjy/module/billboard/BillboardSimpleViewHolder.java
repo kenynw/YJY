@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.product;
+package com.miguan.yjy.module.billboard;
 
 import android.text.Html;
 import android.view.ViewGroup;
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/7/27. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class BillboardViewHolder extends BaseViewHolder<Rank> {
+public class BillboardSimpleViewHolder extends BaseViewHolder<Rank> {
 
     @BindViews({R.id.dv_billboard_top1, R.id.dv_billboard_top2, R.id.dv_billboard_top3})
     SimpleDraweeView[] mDvTops;
@@ -25,8 +25,8 @@ public class BillboardViewHolder extends BaseViewHolder<Rank> {
     @BindView(R.id.tv_billboard_title)
     TextView mTvTitle;
 
-    public BillboardViewHolder(ViewGroup parent) {
-        super(parent, R.layout.item_list_billboard);
+    public BillboardSimpleViewHolder(ViewGroup parent) {
+        super(parent, R.layout.item_list_simple_billboard);
         ButterKnife.bind(this, itemView);
     }
 

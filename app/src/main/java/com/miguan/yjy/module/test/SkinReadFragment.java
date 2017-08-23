@@ -1,9 +1,6 @@
 package com.miguan.yjy.module.test;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.dsk.chain.bijection.RequiresPresenter;
@@ -28,14 +25,7 @@ public class SkinReadFragment extends BaseListFragment<SkinReadFragmentPresenter
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mTest = getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -49,4 +39,5 @@ public class SkinReadFragment extends BaseListFragment<SkinReadFragmentPresenter
     public ListConfig getListConfig() {
         return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false);
     }
+
 }

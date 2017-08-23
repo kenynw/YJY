@@ -27,6 +27,8 @@ public class Evaluate implements Parcelable {
 
     private long created_at;
 
+    private int star;
+
     private int isLike;
 
     private int is_digest;
@@ -105,6 +107,14 @@ public class Evaluate implements Parcelable {
 
     public void setCreated_at(long created_at) {
         this.created_at = created_at;
+    }
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
     }
 
     public Item getDetail() {
@@ -362,6 +372,7 @@ public class Evaluate implements Parcelable {
         dest.writeString(this.comment);
         dest.writeInt(this.like_num);
         dest.writeLong(this.created_at);
+        dest.writeInt(this.star);
         dest.writeInt(this.isLike);
         dest.writeInt(this.is_digest);
         dest.writeString(this.username);
@@ -389,6 +400,7 @@ public class Evaluate implements Parcelable {
         this.comment = in.readString();
         this.like_num = in.readInt();
         this.created_at = in.readLong();
+        this.star = in.readInt();
         this.isLike = in.readInt();
         this.is_digest = in.readInt();
         this.username = in.readString();

@@ -5,11 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
+import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.AccountModel;
+import com.miguan.yjy.model.CommonModel;
+import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.ShareBottomDialog;
@@ -21,7 +24,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/8/17. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(AboutActivityPresenter.class)
-public class AboutActivity extends ChainBaseActivity<AboutActivityPresenter> implements View.OnClickListener {
+public class AboutActivity extends BaseDataActivity<AboutActivityPresenter, Version> implements View.OnClickListener {
 
     @BindView(R.id.btn_about_wx_account)
     Button mBtnWxAccount;
@@ -32,6 +35,15 @@ public class AboutActivity extends ChainBaseActivity<AboutActivityPresenter> imp
     @BindView(R.id.btn_about_market)
     Button mBtnMarket;
 
+    @BindView(R.id.btn_about_check_update)
+    Button mBtnUpdate;
+
+    @BindView(R.id.tv_about_version)
+    TextView mTvVersion;
+
+    @BindView(R.id.tv_about_is_update)
+    TextView mTvIsUpdate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +51,19 @@ public class AboutActivity extends ChainBaseActivity<AboutActivityPresenter> imp
         setToolbarTitle(R.string.btn_me_about);
         ButterKnife.bind(this);
 
+        mTvVersion.setText(getString(R.string.app_name) + " " + LUtils.getAppVersionName());
+
         mBtnWxAccount.setOnClickListener(this);
         mBtnCommend.setOnClickListener(this);
         mBtnMarket.setOnClickListener(this);
+        mBtnUpdate.setOnClickListener(this);
+    }
+
+    @Override
+    public void setData(Version version) {
+        if (version.getIsMust() == 1 && !version.getNumber().equals(LUtils.getAppVersionName())) {
+            mTvIsUpdate.setText("检测到新版本，点击更新");
+        }
     }
 
     @Override
@@ -63,6 +85,9 @@ public class AboutActivity extends ChainBaseActivity<AboutActivityPresenter> imp
                 } catch (Exception e) {
                     LUtils.toast("您的手机没有安装应用市场");
                 }
+                break;
+            case R.id.btn_about_check_update:
+                CommonModel.getInstance().checkUpdate(this);
                 break;
         }
     }

@@ -48,6 +48,12 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
     @BindView(R.id.tv_evaluate_article_title)
     TextView mTvArticleTitle;
 
+    @BindView(R.id.rating_evaluate_me_stars)
+    com.miguan.yjy.widget.RatingBar mEvaluateRating;
+
+    @BindView(R.id.tv_evaluate_me_desc)
+    TextView mTvEvaluateDesc;
+
     public EvaluateMeViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_list_evaluate_me);
     }
@@ -56,6 +62,8 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
     public void setData(Evaluate data) {
         super.setData(data);
         mTvDate.setText(data.getCreated_at());
+        mTvProductRating.setVisibility(View.GONE);
+        mEvaluateRating.setStar(data.getStar());
         if (data.getDetail() != null) {
             if (data.getType() == 1) {
                 mLlArticle.setVisibility(View.GONE);

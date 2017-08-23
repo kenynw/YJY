@@ -44,5 +44,19 @@
         <item name="com.miguan.yjy:solid">#b8b8b8</item>
     </style>
 
+    <style name="SkinLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:drawableLeft">@drawable/shape_skin_label_indicator</item>
+        <item name="android:drawableStart">@drawable/shape_skin_label_indicator</item>
+        <item name="android:drawablePadding">7dp</item>
+        <item name="android:paddingBottom">30dp</item>
+        <item name="android:paddingLeft">@dimen/spacing_normal</item>
+        <item name="android:paddingRight">@dimen/spacing_normal</item>
+        <item name="android:paddingTop">30dp</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/text_size_body_material</item>
+    </style>
 
 </resources>

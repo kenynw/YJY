@@ -49,13 +49,18 @@ public class CommonModel extends AbsModel {
 
                     @Override
                     public void onNext(Version version) {
-                        if (version.getIsMust() == 1 && !version.getNumber().equals(LUtils.getAppVersionName())) {
+                        if (version.getIsMust() == 1 &&
+                                !version.getNumber().equals(LUtils.getAppVersionName())) {
                             showUpdateDialog(context, version);
                         } else {
                             checkBindMobile(context);
                         }
                     }
                 });
+    }
+
+    public Observable<Version> checkCurVersion(Context context) {
+        return ServicesClient.getServices().checkUpdate().compose(new DefaultTransform<>());
     }
 
     public void checkUpdate(Context context) {
@@ -75,8 +80,9 @@ public class CommonModel extends AbsModel {
                     @Override
                     public void onNext(Version version) {
                         if (version.getType() == 0) {
-                            LUtils.log("已经是最新版本了");
-                        } else if (!version.getNumber().equals(LUtils.getAppVersionName())) {
+                            LUtils.toast("已经是最新版本了");
+                        } else if (version.getIsMust() == 1 &&
+                                !version.getNumber().equals(LUtils.getAppVersionName())) {
                             showUpdateDialog(context, version);
                         }
                     }

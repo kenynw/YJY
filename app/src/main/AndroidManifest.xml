@@ -156,11 +156,14 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="yjyappscheme"
-                      android:host="yjy.app"
-                      android:pathPrefix="/openwith"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="yjy.app"
+                    android:pathPrefix="/openwith"
+                    android:scheme="yjyappscheme"/>
             </intent-filter>
 
         </activity>
@@ -294,10 +297,14 @@
             android:windowSoftInputMode="adjustPan|stateVisible">
         </activity>
         <activity
-            android:name=".module.product.BillboardActivity"
-            android:configChanges="orientation"
+            android:name=".module.billboard.BillboardListActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+            >
+        </activity>
+        <activity
+            android:name=".module.billboard.BillboardActivity"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".module.ask.AskListActivity"
@@ -316,6 +323,10 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
+        </activity>
+        <activity
+            android:name=".module.ask.AnswerListActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".module.user.ProfileActivity"
@@ -382,9 +393,9 @@
         </activity>
         <activity
             android:name=".module.user.OfficialWechatActivity"
-            android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden">
+            android:theme="@style/SecondaryToolbarTheme"
+            >
         </activity>
         <activity
             android:name=".module.account.LoginActivity"

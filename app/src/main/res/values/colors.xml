@@ -9,7 +9,7 @@
     <color name="bgWindow">#FFF5F5F5</color>
     <color name="bgWindowBar">#9e9e9e</color>
     <color name="bgActionBar">#FFFFFF</color>
-    <color name="bgDisable">#D8D8D8</color>
+    <color name="bgDisable">#ccc</color>
     <color name="bgAsk">#ffff7d6f</color>
     <color name="bgAnswer">#ff5ce1cf</color>
     <color name="bgTaobao">#f38f0e</color>

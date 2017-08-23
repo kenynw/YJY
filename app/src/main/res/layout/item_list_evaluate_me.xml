@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/spacing_large"
-    android:paddingLeft="@dimen/spacing_large"
-    android:paddingRight="@dimen/spacing_large"
-    android:paddingTop="@dimen/spacing_normal"
+    android:padding="@dimen/spacing_large"
     >
 
-    <TextView
-        android:id="@+id/tv_evaluate_date"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextCaption"
-        tools:text="2017-03-08 13:20:00"
-        />
+        android:orientation="horizontal"
+        >
+
+        <com.miguan.yjy.widget.RatingBar
+            android:id="@+id/rating_evaluate_me_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:clickable="false"
+            app:starCount="5"
+            app:starEmpty="@mipmap/ic_start_no_select"
+            app:starFill="@mipmap/ic_start_selected"
+            app:starImageSize="17dp"
+            app:starPadding="@dimen/spacing_tiny"
+            app:starStep="0"
+            app:stepSize="Full"
+            />
+
+        <TextView
+            android:id="@+id/tv_evaluate_me_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:textColor="@color/textTertiary"
+            android:textSize="@dimen/text_size_caption"
+            tools:text="中评"
+            />
+
+    </FrameLayout>
 
     <TextView
         style="@style/EvaluateContent"
@@ -32,11 +54,22 @@
         android:layout_marginTop="@dimen/spacing_small"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_body_material"
+        android:visibility="gone"
         tools:text="查看全文"
         />
 
-    <include layout="@layout/include_item_evaluate_product" />
+    <include layout="@layout/include_item_evaluate_product"/>
 
-    <include layout="@layout/include_item_evaluate_article" />
+    <include layout="@layout/include_item_evaluate_article"/>
+
+    <TextView
+        android:id="@+id/tv_evaluate_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:gravity="end"
+        android:textAppearance="@style/TextTertiary"
+        tools:text="2017-03-08 13:20:00"
+        />
 
 </LinearLayout>

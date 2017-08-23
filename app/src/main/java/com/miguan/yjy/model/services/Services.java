@@ -10,6 +10,7 @@ import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
 import com.miguan.yjy.model.bean.Home;
+import com.miguan.yjy.model.bean.MainProduct;
 import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
@@ -344,6 +345,14 @@ public interface Services {
     );
 
     ////////////////////产品&&文章//////////////////////
+
+    /**
+     * 精华点评列表
+     *
+     * @return
+     */
+    @GET("?action=productLibrary")
+    Observable<MainProduct> mainProduct();
 
     /**
      * 精华点评列表
@@ -737,6 +746,18 @@ public interface Services {
             @Query("type") int type,
             @Query("askid") int askId,
             @Query("content") String content
+    );
+
+
+    ////////////////////排行榜//////////////////////
+    /**
+     * 添加提问
+     *
+     * @param page 当前页数
+     */
+    @GET("?action=rankingIndex")
+    Observable<List<Rank>> billboardList(
+            @Query("page") int page
     );
 
     /**

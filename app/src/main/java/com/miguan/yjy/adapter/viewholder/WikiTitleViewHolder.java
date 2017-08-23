@@ -16,18 +16,18 @@ import butterknife.ButterKnife;
  * @日期 2017/7/25 9:41
  * @描述
  */
-public class WikiViewHolder extends BaseViewHolder<Wiki.RelationInfo> {
+public class WikiTitleViewHolder extends BaseViewHolder<Wiki> {
 
     @BindView(R.id.tv_wiki_name)
     TextView mTvWikiName;
 
-    public WikiViewHolder(ViewGroup parent) {
+    public WikiTitleViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_wiki);
         ButterKnife.bind(this, itemView);
     }
 
     @Override
-    public void setData(Wiki.RelationInfo data) {
+    public void setData(Wiki data) {
         String name = data.getQuestion();
         mTvWikiName.setText(name);
     }

@@ -60,7 +60,6 @@ public class SkinListAdapter extends RecyclerView.Adapter<SkinListAdapter.MyView
             holder.mTvTestListName.setText("");
             holder.mLlTestMore.setVisibility(View.VISIBLE);
             holder.itemView.setOnClickListener(v -> TestRecomendPresenter.star(mContext, mTest,mCurPosition, mName));
-
         } else {
             holder.mIvTestList.setVisibility(View.VISIBLE);
             holder.mLlTestMore.setVisibility(View.GONE);
@@ -72,7 +71,7 @@ public class SkinListAdapter extends RecyclerView.Adapter<SkinListAdapter.MyView
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override

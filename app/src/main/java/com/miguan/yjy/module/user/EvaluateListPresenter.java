@@ -25,4 +25,5 @@ public class EvaluateListPresenter extends BaseListActivityPresenter<EvaluateLis
     public void onLoadMore() {
         UserModel.getInstance().getEvaluateList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
+
 }

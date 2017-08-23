@@ -20,7 +20,7 @@ import rx.Observable;
  * @描述
  */
 
-public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGuideFragment, Wiki.RelationInfo> {
+public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGuideFragment, Wiki> {
     private Test mTest;
     RatingBar ratbarSkin;
     @Override

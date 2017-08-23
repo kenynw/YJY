@@ -8,14 +8,11 @@ import android.widget.ImageView;
 
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.exgridview.ExGridView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BannerPagerAdapter;
-import com.miguan.yjy.adapter.CategoryAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleCate;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
-import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.module.account.LoginActivity;
@@ -27,7 +24,6 @@ import com.miguan.yjy.widget.HeadViewPager;
 import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,8 +33,7 @@ import butterknife.ButterKnife;
  */
 
 public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragment, Evaluate> implements
-        EvaluateArticleViewHolder.OnLoadDataListener,
-        EvaluateAskViewHolder.OnLoadAskListener {
+        EvaluateArticleViewHolder.OnLoadDataListener {
 
     private boolean mIsInit = false;
 
@@ -46,14 +41,13 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
 
     private ArrayList<ArticleCate> mArticleCates;
 
-    private List<Ask> mAskList;
-
     @Override
     protected void onCreateView(HomeFragment view) {
         super.onCreateView(view);
-        mAskList = new ArrayList<>();
-        HomeHeader homeHeader = new HomeHeader();
-        getAdapter().addHeader(homeHeader);
+        if (getAdapter().getHeaderCount() == 0 ) {
+            HomeHeader homeHeader = new HomeHeader();
+            getAdapter().addHeader(homeHeader);
+        }
 
         ArrayList<Evaluate> evaluates = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -73,10 +67,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
                     mArticleCates = home.getArticleGory();
                     getView().setSearchHint(home.getNum());
                     ((HomeHeader) getAdapter().getHeader(0)).setHome(home);
-                    mAskList.clear();
-                    if (home.getAsk() != null) {
-                        mAskList.add(home.getAsk());
-                    }
                     return home.getEvaluateList();
                 })
                 .doOnCompleted(() -> getView().setScrollListener())
@@ -87,12 +77,7 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     public void onLoadMore() {
         if (mIsInit) {
             ArticleModel.getInstance().getEssenceList(getCurPage())
-                    .map(evaluate -> {
-                        if (evaluate.getAsk() != null) {
-                            mAskList.add(evaluate.getAsk());
-                        }
-                        return evaluate.getEssence();
-                    })
+                    .map(Evaluate::getEssence)
                     .unsafeSubscribe(getMoreSubscriber());
         }
     }
@@ -101,7 +86,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     protected void onResume() {
         super.onResume();
         if (mIsLogin && !AccountModel.getInstance().isLogin()) {
-            mAskList = null;
             onRefresh();
         }
     }
@@ -109,11 +93,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     @Override
     public ArrayList<ArticleCate> getCates() {
         return mArticleCates;
-    }
-
-    @Override
-    public List<Ask> getAsks() {
-        return mAskList;
     }
 
     public class HomeHeader implements RecyclerArrayAdapter.ItemView {
@@ -124,9 +103,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         @BindView(R.id.indicator_main_home)
         CirclePageIndicator mIndicator;
 
-        @BindView(R.id.recy_home_category)
-        ExGridView mCategory;
-
         @BindView(R.id.btn_home_query_batch)
         ImageView mIvQuery;
 
@@ -136,12 +112,10 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
         @BindView(R.id.iv_home_evaluate_label)
         LoadingImageView mIvEvaluateLabel;
 
-        private CategoryAdapter mCategoryAdapter;
-
         private Home mHome;
 
         public HomeHeader() {
-            mCategoryAdapter = new CategoryAdapter(getView().getActivity());
+
         }
 
         @Override
@@ -152,8 +126,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
             ViewGroup.LayoutParams lp = mHvBanner.getLayoutParams();
             lp.height = (int) (LUtils.getScreenWidth() / 1.7);
             mHvBanner.setLayoutParams(lp);
-
-            mCategory.setAdapter(mCategoryAdapter);
 
             return view;
         }
@@ -174,14 +146,13 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
                 }
                 if (mHome.getBanner() != null && mHome.getBanner().size() <= 1)
                     mIndicator.setVisibility(View.GONE);
-                mCategory.removeAllViews();
-                mCategoryAdapter.addAll(mHome.getCategory());
             }
         }
 
         public void setHome(Home home) {
             mHome = home;
         }
+
     }
 
 }

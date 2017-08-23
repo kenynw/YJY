@@ -26,14 +26,14 @@ public class Test implements Parcelable {
     private List<Article> skinArticle;
     private ArrayList<Skin> categoryList;
     private int star;
-    private List<Wiki.RelationInfo> baike;
+    private List<Wiki> baike;
 
 
-    public List<Wiki.RelationInfo> getBaike() {
+    public List<Wiki> getBaike() {
         return baike;
     }
 
-    public void setBaike(List<Wiki.RelationInfo> baike) {
+    public void setBaike(List<Wiki> baike) {
         this.baike = baike;
     }
 
@@ -172,7 +172,7 @@ public class Test implements Parcelable {
         this.skinArticle = in.createTypedArrayList(Article.CREATOR);
         this.categoryList = in.createTypedArrayList(Skin.CREATOR);
         this.star = in.readInt();
-        this.baike = in.createTypedArrayList(Wiki.RelationInfo.CREATOR);
+        this.baike = in.createTypedArrayList(Wiki.CREATOR);
     }
 
     public static final Creator<Test> CREATOR = new Creator<Test>() {

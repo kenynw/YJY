@@ -52,4 +52,5 @@ public class EvaluateListActivity extends BaseListActivity<EvaluateListPresenter
                 .setItemDecoration(spaceDecoration)
                 .setContainerLayoutRes(R.layout.common_activity_list);
     }
+
 }

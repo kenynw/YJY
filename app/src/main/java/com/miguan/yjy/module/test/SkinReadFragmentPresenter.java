@@ -30,7 +30,6 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
 
     public static final String H5_SCORE = "http://m.yjyapp.com/site/score-tip";
 
-    private GridView mEasyRecyclerView;
     private List<Skin> mSkinList = new ArrayList<>();
     Test mTest;
 
@@ -47,17 +46,19 @@ public class SkinReadFragmentPresenter extends BaseListFragmentPresenter<SkinRea
         mTest = getView().mTest;
         getAdapter().removeAllHeader();
         getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
+
+            private GridView mEasyRecyclerView;
+
             @Override
             public View onCreateView(ViewGroup parent) {
-                View headMySkin = View.inflate(getView().getContext(), R.layout.include_head_view_my_skin, null);
-                return headMySkin;
+                return View.inflate(getView().getContext(), R.layout.include_head_view_my_skin, null);
             }
 
             @Override
             public void onBindView(View headerView) {
                 headerView.findViewById(R.id.iv_skin_rules).setOnClickListener(v -> WebViewActivity.start(getView().getActivity(), getView().getActivity().getString(R.string.text_test_grade), H5_SCORE));
 
-                mEasyRecyclerView = (GridView) headerView.findViewById(R.id.recy_my_skin);
+                mEasyRecyclerView = headerView.findViewById(R.id.recy_my_skin);
 
                 mSkinList = mTest.getDesc();
                 mTest.getDescribe();

@@ -8,7 +8,7 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.viewholder.WikiViewHolder;
+import com.miguan.yjy.adapter.viewholder.WikiTitleViewHolder;
 import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.utils.LUtils;
 
@@ -18,10 +18,10 @@ import com.miguan.yjy.utils.LUtils;
  * @描述
  */
 @RequiresPresenter(SkinGuideFragmentPresenter.class)
-public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresenter,Wiki.RelationInfo> {
+public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresenter,Wiki> {
     @Override
-    public BaseViewHolder<Wiki.RelationInfo> createViewHolder(ViewGroup parent, int viewType) {
-        return new WikiViewHolder(parent);
+    public BaseViewHolder<Wiki> createViewHolder(ViewGroup parent, int viewType) {
+        return new WikiTitleViewHolder(parent);
     }
 
     @Override

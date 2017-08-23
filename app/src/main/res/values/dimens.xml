@@ -11,6 +11,11 @@
     <dimen name="widget_medium">48dp</dimen>
     <dimen name="widget_max">56dp</dimen>
 
+    <dimen name="text_size_large">21sp</dimen>
+    <dimen name="text_size_title">19sp</dimen>
+    <dimen name="text_size_subhead">17sp</dimen>
+    <dimen name="text_size_body">15sp</dimen>
+    <dimen name="text_size_caption">13sp</dimen>
     <dimen name="text_size_tiny">9sp</dimen>
 
     <!-- 超小号 -->

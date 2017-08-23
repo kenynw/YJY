@@ -1,4 +1,4 @@
-package com.miguan.yjy.module.product;
+package com.miguan.yjy.module.billboard;
 
 import android.content.Context;
 import android.content.Intent;

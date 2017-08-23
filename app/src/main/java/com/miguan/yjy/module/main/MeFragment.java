@@ -23,6 +23,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.module.account.LoginActivity;
+import com.miguan.yjy.module.ask.AnswerListActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.AboutActivity;
@@ -91,6 +92,9 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     @BindView(R.id.btn_me_message)
     Button mBtnMessage;
 
+    @BindView(R.id.btn_me_ask)
+    Button mBtnAsk;
+
     @BindView(R.id.btn_me_query_no)
     Button mBtnQueryNo;
 
@@ -121,6 +125,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mBtnComment.setOnClickListener(v -> getPresenter().toActivity(EvaluateListActivity.class));
         mBtnReply.setOnClickListener(v -> getPresenter().toActivity(ReplyListActivity.class));
         mBtnMessage.setOnClickListener(v -> getPresenter().toActivity(MsgListActivity.class));
+        mBtnAsk.setOnClickListener(v -> getPresenter().toActivity(AnswerListActivity.class));
         mBtnQueryNo.setOnClickListener(v -> startActivity(new Intent(getActivity(), QueryCodeActivity.class)));
         mBtnFeedback.setOnClickListener(v -> getPresenter().toActivity(FeedbackActivity.class));
         mBtnAbout.setOnClickListener(v -> startActivity(new Intent(getActivity(), AboutActivity.class)));
@@ -163,7 +168,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mDvAvatar.setImageURI("");
         mTvUsername.setText(R.string.text_login_or_register);
         mTvUsername.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.text_size_subhead_material));
-        mLlInfo.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class )));
+        mLlInfo.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class)));
         mTvSkin.setVisibility(GONE);
         mLlMeTest.setVisibility(GONE);
     }

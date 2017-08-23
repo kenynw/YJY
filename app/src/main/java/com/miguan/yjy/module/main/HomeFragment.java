@@ -70,8 +70,6 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
     public BaseViewHolder<Evaluate> createViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 2) {
             return new EvaluateArticleViewHolder(parent, getPresenter());
-        } else if (viewType > 0 && viewType % 9 == 0) {
-            return new EvaluateAskViewHolder(parent, getPresenter());
         } else {
             return new EvaluateCommendVH(parent);
         }

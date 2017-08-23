@@ -3,6 +3,8 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
  */
@@ -13,6 +15,7 @@ public class Category implements Parcelable {
 
     private String cate_name;
 
+    @SerializedName(value = "cate_img", alternate = {"cate_app_img"})
     private String cate_img;
 
     @Override

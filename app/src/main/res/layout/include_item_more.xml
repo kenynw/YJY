@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_test_more"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+    android:background="@color/bgWindow"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        style="@style/BaseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="查看更多"
+        android:textColor="@color/fB2"
+        android:textSize="@dimen/text_size_micro_12"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:src="@mipmap/ic_skin_test_more"
+        />
+
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/spacing_small"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/spacing_large"
+    android:paddingEnd="@dimen/spacing_large"
+    android:paddingLeft="25dp"
+    android:paddingRight="@dimen/spacing_large"
+    android:paddingStart="25dp"
+    android:paddingTop="@dimen/spacing_large"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_discover_ask_thumb"
+        style="@style/BaseImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:placeholderImage="@mipmap/def_image_product"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            >
+
+            <com.miguan.yjy.widget.SuperTextView
+                android:id="@+id/tv_discover_label"
+                style="@style/SuperTextAsk"
+                />
+
+            <TextView
+                android:id="@+id/tv_discover_ask_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/TextSubhead"
+                tools:text="适不适合敏感皮"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_discover_ask_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:maxLines="1"
+            android:textAppearance="@style/TextTertiary"
+            tools:text="@string/text_home_ask_total"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/ic_more"
+        />
+
+</LinearLayout>

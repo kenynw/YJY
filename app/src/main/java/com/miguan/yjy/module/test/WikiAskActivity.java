@@ -17,7 +17,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.viewholder.WikiViewHolder;
+import com.miguan.yjy.adapter.viewholder.WikiTitleViewHolder;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.ShareBottomDialog;
@@ -51,7 +51,7 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new WikiViewHolder(parent);
+        return new WikiTitleViewHolder(parent);
     }
 
     @Override
