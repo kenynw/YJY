@@ -10,4 +10,7 @@ import com.miguan.yjy.model.bean.Wiki;
  */
 
 public class WikiMainPresenter extends BaseListActivityPresenter<WikiMainActivity,Wiki> {
+
+
+
 }

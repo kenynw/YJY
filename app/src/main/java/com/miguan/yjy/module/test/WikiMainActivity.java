@@ -13,8 +13,10 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
  */
 @RequiresPresenter(WikiMainPresenter.class)
 public class WikiMainActivity extends BaseListActivity<WikiMainPresenter> {
+
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        return new WikiViewHolder(parent);
     }
+
 }

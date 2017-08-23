@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,11 +18,11 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_wiki_thumb"
         style="@style/BaseImage"
-        android:layout_width="100dp"
+        android:layout_width="123.2dp"
         android:layout_height="77dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:visibility="gone"
+        app:roundedCornerRadius="@dimen/spacing_tiny"
         />
 
     <TextView

@@ -5,13 +5,7 @@ import android.os.Bundle;
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
 import com.miguan.yjy.adapter.BrandPagerAdapter;
 import com.miguan.yjy.model.ProductModel;
-import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.Product;
-
-import java.util.List;
-
-import rx.Observable;
-import rx.functions.Func1;
 
 
 /**
@@ -39,30 +33,7 @@ public class StarProductPresenter extends BaseListFragmentPresenter<StarProductF
     @Override
     public void onRefresh() {
         super.onRefresh();
-        ProductModel.getInstance().getBrandInfo(brandId)
-                .flatMap(new Func1<BrandAll, Observable<List<Product>>>() {
-                    @Override
-                    public Observable<List<Product>> call(BrandAll brandAll) {
-//                        getAdapter().removeAllFooter();
-//                        getAdapter().addFooter(new RecyclerArrayAdapter.ItemView() {
-//                            @Override
-//                            public View onCreateView(ViewGroup parent) {
-//                                View moreBrand = View.inflate(getView().getActivity(), R.layout.foot_more_brand, null);
-//                                RecyclerView recy_brand_more = (RecyclerView) moreBrand.findViewById(R.id.recy_brand_more);
-//                                recy_brand_more.setLayoutManager(new LinearLayoutManager(getView().getActivity(), LinearLayoutManager.HORIZONTAL, false));
-//                                BrandMoreAdapter brandMoreAdapter = new BrandMoreAdapter(getView().getActivity(), brandAll.getOtherBrand());
-//                                recy_brand_more.setAdapter(brandMoreAdapter);
-//                                brandMoreAdapter.notifyDataSetChanged();
-//                                return moreBrand;
-//                            }
-//
-//                            @Override
-//                            public void onBindView(View headerView) {
-//
-//                            }
-//                        });
-                        return ProductModel.getInstance().getProductList(brandId, 1, 1);
-                    }
-                }).unsafeSubscribe(getRefreshSubscriber());
+        ProductModel.getInstance().getProductList(brandId, 1, 1).unsafeSubscribe(getRefreshSubscriber());
     }
+
 }

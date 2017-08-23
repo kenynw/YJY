@@ -34,5 +34,4 @@ public class StarProductFragment extends BaseListFragment<StarProductPresenter, 
                 .setNoMoreAble(true).setItemDecoration(div);
     }
 
-
 }
