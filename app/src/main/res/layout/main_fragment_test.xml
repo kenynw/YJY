@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        layout="@layout/include_toolbar"
+        />
+
     <ScrollView
         android:id="@+id/scr_main_test"
         android:layout_width="match_parent"

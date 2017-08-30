@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
@@ -48,6 +49,10 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
     EasyRecyclerView mRecycle;
     @BindView(R.id.tv_wiki_ask_remark)
     TextView mTvWikiAskRemark;
+    @BindView(R.id.sdv_wiki)
+    SimpleDraweeView mSdvWiki;
+    @BindView(R.id.tv_wiki_like_num)
+    TextView mTvWikiLikeNum;
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {

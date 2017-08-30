@@ -1,9 +1,11 @@
 package com.miguan.yjy.module.product;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
@@ -19,9 +21,12 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.adapter.EffectSortAdapter;
+import com.miguan.yjy.adapter.ProductSortAdapter;
 import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.model.bean.Effect;
 import com.miguan.yjy.utils.LUtils;
+import com.miguan.yjy.widget.FlowTagLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +51,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     private List<Category> mCategories;
 
-    private List<Effect>mEffects;
+    private List<Effect> mEffects;
 
     private List<View> mMenuList;
 
@@ -54,7 +59,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     private ToggleButton mCurrentBtn;
 
-    public SearchFilterPanel(ChainBaseActivity activity, List<Category> categories,List<Effect> effects) {
+    public SearchFilterPanel(ChainBaseActivity activity, List<Category> categories, List<Effect> effects) {
         mActivity = activity;
         mCategories = categories;
         mEffects = effects;
@@ -66,10 +71,10 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
     private void init() {
         mMenuList = new ArrayList<>();
 
-        String[] categories = new String[mCategories.size()];
-        for (int i = 0; i < mCategories.size(); i++) {
-            categories[i] = mCategories.get(i).getCate_name();
-        }
+//        String[] categories = new String[mCategories.size()];
+//        for (int i = 0; i < mCategories.size(); i++) {
+//            categories[i] = mCategories.get(i).getCate_name();
+//        }
 
         String[] effects = new String[mEffects.size()];
         for (int i = 0; i < mEffects.size(); i++) {
@@ -92,16 +97,20 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
             }
         });
 
-        mMenuList.add(createRecyclerView(categories, position -> {
-            mTbtnList.get(1).setText(categories[position]);
+        mMenuList.add(createSortRecyclerView(mCategories, position -> {
+//            mTbtnList.get(1).setText(mCategories[position]);
+            for (int i = 0; i < mCategories.size(); i++) {
+                mCategories.get(i).setSelect(false);
+            }
+            mCategories.get(position).setSelect(true);
+            secondSortProductAdapter.notifyDataSetChanged();
             if (mListener != null) {
                 mListener.onItemSelected(mCategories.get(position).getId(), "");
             }
         }));
-        mMenuList.add(createRecyclerView(effects, position -> {
-            mTbtnList.get(2).setText(effects[position]);
+        mMenuList.add(createEffectRecyclerView(mEffects, position -> {
             if (mListener != null) {
-                mListener.onItemSelected(0, mEffects.get(position).getEffect_id()+"");
+                mListener.onItemSelected(0, mEffects.get(position).getEffect_id() + "");
             }
         }));
     }
@@ -122,6 +131,56 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
         return rl;
     }
+
+    SecondSortProductAdapter secondSortProductAdapter;
+
+    private View createSortRecyclerView(List<Category> categories, RecyclerArrayAdapter.OnItemClickListener listener) {
+        RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
+        categories.get(0).setSelect(true);
+        secondSortProductAdapter = new SecondSortProductAdapter(mActivity, categories);
+        secondSortProductAdapter.setOnItemClickListener(listener);
+        recyclerView.setAdapter(secondSortProductAdapter);
+        recyclerView.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
+
+        RelativeLayout rl = new RelativeLayout(mActivity);
+        rl.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        rl.setOnClickListener(v -> dismissMenu());
+        rl.setBackgroundResource(R.color.text_black_secondary);
+        rl.addView(recyclerView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        return rl;
+    }
+
+
+    private View createEffectRecyclerView(List<Effect> effects, RecyclerArrayAdapter.OnItemClickListener listener) {
+        FlowTagLayout recyclerView = new FlowTagLayout(mActivity);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(LUtils.dp2px(15), LUtils.dp2px(10), LUtils.dp2px(15), LUtils.dp2px(10));
+        recyclerView.setLayoutParams(lp);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
+        EffectSortAdapter effectSortProductAdapter = new EffectSortAdapter(mActivity, effects);
+        effectSortProductAdapter.setSetOnTagClickListener(new EffectSortAdapter.SetOnTagClickListener() {
+            @Override
+            public void itemClick(View v, int position) {
+                if (mListener != null)
+                    mTbtnList.get(2).setText(effects.get(position).getEffect_name());
+                mListener.onItemSelected(0, effects.get(position).getEffect_id() + "");
+            }
+        });
+        recyclerView.setAdapter(effectSortProductAdapter);
+        recyclerView.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
+        effectSortProductAdapter.onlyAddAll(effects);
+
+        RelativeLayout rl = new RelativeLayout(mActivity);
+        rl.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        rl.setOnClickListener(v -> dismissMenu());
+        rl.setBackgroundResource(R.color.text_black_secondary);
+        rl.addView(recyclerView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        return rl;
+    }
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -176,7 +235,10 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     public interface OnItemSelectedListener {
         void onItemSelected(int id, String text);
+
         void onMenuCheck();
+
+        void onSencondItemSelected(int id, String text);
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
@@ -206,7 +268,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
             public TextViewHolder(View itemView) {
                 super(itemView);
-                ButterKnife. bind(this, itemView);
+                ButterKnife.bind(this, itemView);
             }
 
             @Override
@@ -220,5 +282,63 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
     public void setVisibility(int visibility) {
         mLlFilter.setVisibility(visibility);
     }
+
+    class SecondSortProductAdapter extends RecyclerArrayAdapter<Category> {
+
+        public SecondSortProductAdapter(Context context, List<Category> objects) {
+            super(context, objects);
+        }
+
+        @Override
+        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+            return new SecondSortViewHolder(parent);
+        }
+
+        class SecondSortViewHolder extends BaseViewHolder<Category> {
+
+            @BindView(R.id.tv_sort_first_name)
+            TextView mTvSortFirstName;
+            @BindView(R.id.flowtag_sencond_sort)
+            FlowTagLayout mFlowtagSencondSort;
+
+            public SecondSortViewHolder(ViewGroup parent) {
+                super(parent, R.layout.search_second_sort);
+                ButterKnife.bind(this, itemView);
+            }
+
+            @Override
+            public void setData(Category data) {
+                super.setData(data);
+                mTvSortFirstName.setText(data.getCate_name());
+                if (data.isSelect()) {
+                    mTvSortFirstName.setCompoundDrawables(null, null, null, null);
+                    ProductSortAdapter mProductSortAdapter = new ProductSortAdapter(mActivity, data.getSub());
+                    mFlowtagSencondSort.setFocusable(false);
+                    mFlowtagSencondSort.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+                    mFlowtagSencondSort.setAdapter(mProductSortAdapter);
+                    mProductSortAdapter.onlyAddAll(data.getSub());
+                    mProductSortAdapter.setSetOnTagClickListener(new ProductSortAdapter.SetOnTagClickListener() {
+                        @Override
+                        public void itemClick(View v, int position) {
+                            mTbtnList.get(1).setText(data.getSub().get(position).getCate_name());
+                            if (mListener != null)
+                                mListener.onSencondItemSelected(data.getSub().get(position).getId(), data.getSub().get(position).getCate_name());
+                        }
+                    });
+                } else {
+                    Drawable drawable = mActivity.getResources().getDrawable(R.mipmap.ic_product_detail_record_down);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                    mTvSortFirstName.setCompoundDrawables(null, null, drawable, null);
+                    ProductSortAdapter mProductSortAdapter = new ProductSortAdapter(mActivity, null);
+                    mFlowtagSencondSort.setFocusable(false);
+                    mFlowtagSencondSort.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+                    mFlowtagSencondSort.setAdapter(mProductSortAdapter);
+                }
+
+            }
+        }
+    }
+
+
 
 }

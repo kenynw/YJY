@@ -124,5 +124,21 @@ public class TestModel extends AbsModel {
         return ServicesClient.getServices().getBaikeInfo(baikeId).compose(new DefaultTransform<>());
     }
 
+    /**
+     * 护肤百科列表主页
+     */
+    public Observable<List<Wiki>> getBaikeList() {
+        return ServicesClient.getServices().getBaikeList().compose(new DefaultTransform<>());
+    }
+
+    /**
+     * action(string) － 固定值addBaikeLike
+     * baikeId(int) － 评论ID
+     * token(string) － token
+     */
+    public Observable<String> addBaikeLike(String baikeId ) {
+        return ServicesClient.getServices().addBaikeLike(UserPreferences.getToken(),baikeId).compose(new DefaultTransform<>());
+    }
+
 
 }

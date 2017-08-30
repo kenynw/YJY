@@ -27,8 +27,6 @@ public class Evaluate implements Parcelable {
 
     private long created_at;
 
-    private int star;
-
     private int isLike;
 
     private int is_digest;
@@ -68,13 +66,6 @@ public class Evaluate implements Parcelable {
     private int addMoney;
 
 
-    public int getStar() {
-        return star;
-    }
-
-    public void setStar(int star) {
-        this.star = star;
-    }
 
     public int getIs_digest() {
         return is_digest;

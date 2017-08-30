@@ -6,7 +6,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
+    <include
+        layout="@layout/include_toolbar"
+        />
 
     <com.miguan.yjy.widget.StickyNavLayout
         android:id="@+id/sticky_brand_detail"

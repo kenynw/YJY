@@ -102,7 +102,9 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             startActivity(intent);
         });
         mTvIntro.setOnClickListener(v -> WebViewActivity.start(this, "开封保质期说明", Services.BASE_BETA_URL + "site/quality"));
-        mTvBrand.setOnClickListener(v -> startActivityForResult(new Intent(this, BrandListActivity.class), REQUEST_CODE_BRAND));
+        Intent intent = new Intent(this, BrandListActivity.class);
+        intent.putExtra(BrandListPresenter.EXTRA_EMPTY_TYPE, 3);
+        mTvBrand.setOnClickListener(v -> startActivityForResult(intent, REQUEST_CODE_BRAND));
         mTvProduct.setOnClickListener(v -> RepositoryListPresenter.startForResult(this, REQUEST_CODE_PRODUCT, getPresenter().getBrandId()));
 
         mTimePickerView = new TimePickerView.Builder(this, (date, v) -> {

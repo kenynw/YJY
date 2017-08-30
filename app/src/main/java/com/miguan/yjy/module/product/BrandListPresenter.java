@@ -16,15 +16,18 @@ import java.util.List;
 public class BrandListPresenter extends BaseListActivityPresenter<BrandListActivity, Brand> implements BrandViewHolder.OnBrandDeleteListener {
 
     public static final String EXTRA_TYPE = "type";
+    public static final String EXTRA_EMPTY_TYPE = "empty_type";
 
     private List<Brand> mBrandList;
 
-    private int mType;
+    public int mType;
+    public int mEmptyType;
 
     @Override
     protected void onCreate(BrandListActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         mType = getView().getIntent().getIntExtra(EXTRA_TYPE, 0);
+        mEmptyType = getView().getIntent().getIntExtra(EXTRA_EMPTY_TYPE, 0);
     }
 
     @Override

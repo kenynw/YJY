@@ -20,11 +20,54 @@ public class Wiki implements Parcelable {
 //    relation_info(array) － 关联百科信息
 //    id(int) － 关联百科ID
 //    question(string) － 关联百科问题
+
+//    shortcontent(string) － 短答案
+//    picture(string) － 图片
+//    is_like(string) － 是否点赞（1已点2未点）
+//     like_num(int) － 点赞数量
+
+
     private int id;
     private String question;
     private String content;
     private ArrayList<Wiki> relation_info;
     private String share_url;
+    private String shortcontent;
+    private String picture;
+    private String is_like;
+    private int like_num;
+
+    public int getLike_num() {
+        return like_num;
+    }
+
+    public void setLike_num(int like_num) {
+        this.like_num = like_num;
+    }
+
+    public String getShortcontent() {
+        return shortcontent;
+    }
+
+    public void setShortcontent(String shortcontent) {
+        this.shortcontent = shortcontent;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getIs_like() {
+        return is_like;
+    }
+
+    public void setIs_like(String is_like) {
+        this.is_like = is_like;
+    }
 
     public String getShare_url() {
         return share_url;
@@ -82,6 +125,10 @@ public class Wiki implements Parcelable {
         dest.writeString(this.content);
         dest.writeTypedList(this.relation_info);
         dest.writeString(this.share_url);
+        dest.writeString(this.shortcontent);
+        dest.writeString(this.picture);
+        dest.writeString(this.is_like);
+        dest.writeInt(this.like_num);
     }
 
     protected Wiki(Parcel in) {
@@ -90,6 +137,10 @@ public class Wiki implements Parcelable {
         this.content = in.readString();
         this.relation_info = in.createTypedArrayList(Wiki.CREATOR);
         this.share_url = in.readString();
+        this.shortcontent = in.readString();
+        this.picture = in.readString();
+        this.is_like = in.readString();
+        this.like_num = in.readInt();
     }
 
     public static final Creator<Wiki> CREATOR = new Creator<Wiki>() {
@@ -103,5 +154,4 @@ public class Wiki implements Parcelable {
             return new Wiki[size];
         }
     };
-
 }

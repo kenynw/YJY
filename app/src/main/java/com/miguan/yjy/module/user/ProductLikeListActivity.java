@@ -77,6 +77,11 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
             @Override
             public void onMenuCheck() {
             }
+
+            @Override
+            public void onSencondItemSelected(int id, String text) {
+
+            }
         });
         mIsInit = true;
     }

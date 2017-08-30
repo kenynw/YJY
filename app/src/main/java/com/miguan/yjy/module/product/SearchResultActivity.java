@@ -204,15 +204,17 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         mFilterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int cateId, String text) {
-                mFilterPanel.dismissMenu();
                 if (cateId > 0) {
                     getPresenter().setCateId(cateId);
                 }
+
                 if (!TextUtils.isEmpty(text)) {
+                    mFilterPanel.dismissMenu();
                     getPresenter().setEffect(text);
                     getPresenter().setType(2);
                 }
                 if (cateId <= 0 && text.isEmpty()) {
+                    mFilterPanel.dismissMenu();
                     getPresenter().setEffect("");
                     getPresenter().setCateId(0);
                 }
@@ -222,6 +224,24 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             @Override
             public void onMenuCheck() {
                 LUtils.closeKeyboard(mEtKeywords);
+            }
+
+            @Override
+            public void onSencondItemSelected(int cateId, String text) {
+                if (cateId > 0) {
+                    getPresenter().setCateId(cateId);
+                }
+
+                if (!TextUtils.isEmpty(text)) {
+                    mFilterPanel.dismissMenu();
+                    getPresenter().setEffect(text);
+                    getPresenter().setType(2);
+                }
+                if (cateId <= 0 && text.isEmpty()) {
+                    getPresenter().setEffect("");
+                    getPresenter().setCateId(0);
+                }
+                getPresenter().onRefresh();
             }
         });
         mIsInit = true;

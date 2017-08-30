@@ -7,6 +7,7 @@ import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
+import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
@@ -223,6 +224,13 @@ public class ProductModel extends AbsModel {
                 new TypeToken<List<Product>>() {
                 }.getType()
         );
+    }
+
+    /**
+     * 产品分类
+     */
+    public Observable<List<Category>> querySortProduct() {
+        return ServicesClient.getServices().productCategory().compose(new DefaultTransform<>());
     }
 
     /**

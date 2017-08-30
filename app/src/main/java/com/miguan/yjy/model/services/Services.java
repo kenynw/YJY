@@ -5,6 +5,7 @@ import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
+import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.model.bean.Component;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
@@ -151,8 +152,8 @@ public interface Services {
      * 设置密码
      *
      * @param token  登录令牌
-     * @param newPwd  新密码
-     * @param type  手机 0注册，1重置密码，2登录，3登录注册,4为绑定
+     * @param newPwd 新密码
+     * @param type   手机 0注册，1重置密码，2登录，3登录注册,4为绑定
      * @return
      */
     @GET("?action=resetPassword")
@@ -231,7 +232,7 @@ public interface Services {
     /**
      * 我长草的列表
      *
-     * @param token 用户ID
+     * @param token  用户ID
      * @param cateId 栏目ID
      * @param effect 功效
      * @param page   当前页数
@@ -249,7 +250,7 @@ public interface Services {
      * 我点评的列表
      *
      * @param token 用户ID
-     * @param page   当前页数
+     * @param page  当前页数
      * @return
      */
     @GET("?action=userComment")
@@ -262,7 +263,7 @@ public interface Services {
      * 我回复的列表
      *
      * @param token 用户ID
-     * @param page   当前页数
+     * @param page  当前页数
      * @return
      */
     @GET("?action=userReply")
@@ -275,7 +276,7 @@ public interface Services {
      * 我收藏的列表
      *
      * @param token 用户ID
-     * @param page   当前页数
+     * @param page  当前页数
      * @return
      */
     @GET("?action=userCollect")
@@ -331,7 +332,7 @@ public interface Services {
      * 吐槽一下
      *
      * @param token   用户ID
-     * @param content  吐槽内容
+     * @param content 吐槽内容
      * @return
      */
     @GET("?action=userFeedback")
@@ -357,8 +358,8 @@ public interface Services {
     /**
      * 精华点评列表
      *
-     * @param token   用户ID 可空
-     * @param page      当前页数
+     * @param token 用户ID 可空
+     * @param page  当前页数
      * @return
      */
     @GET("?action=essenceList")
@@ -372,7 +373,7 @@ public interface Services {
      *
      * @param id        产品或文章的ID
      * @param page      当前页数
-     * @param token   用户ID 可空
+     * @param token     用户ID 可空
      * @param type      类型 1-产品，2-文章
      * @param orderBy   － 排序方式-默认default综合排序，skin 肤质排序
      * @param condition 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
@@ -387,12 +388,13 @@ public interface Services {
             @Query("condition") String condition,
             @Query("page") int page
     );
+
     /**
      * 产品或文章评论列表
      *
      * @param id        产品或文章的ID
      * @param page      当前页数
-     * @param token   用户ID 可空
+     * @param token     用户ID 可空
      * @param type      类型 1-产品，2-文章
      * @param orderBy   － 排序方式-默认default综合排序，skin 肤质排序
      * @param condition 筛选星级,目前有'Praise'好评,'middle'中评,'bad'差评
@@ -411,9 +413,9 @@ public interface Services {
     /**
      * 回复评论列表
      *
-     * @param id        产品或文章的ID
-     * @param page      当前页数
-     * @param token   用户ID 可空
+     * @param id    产品或文章的ID
+     * @param page  当前页数
+     * @param token 用户ID 可空
      * @return
      */
     @GET("?action=commentReplyList")
@@ -426,8 +428,8 @@ public interface Services {
     /**
      * 评论详情
      *
-     * @param id        评论的ID
-     * @param token   用户ID 可空
+     * @param id    评论的ID
+     * @param token 用户ID 可空
      * @return
      */
     @GET("?action=commentInfo")
@@ -440,10 +442,10 @@ public interface Services {
      * 产品或文章添加评论
      *
      * @param id      产品或文章的ID
-     * @param token 用户ID 可空
+     * @param token   用户ID 可空
      * @param type    类型 1-产品，2-文章
      * @param star    星级(文章可不传)
-     * @param image 图片地址（路径attachment)
+     * @param image   图片地址（路径attachment)
      * @param content 评论内容
      * @return
      */
@@ -460,12 +462,13 @@ public interface Services {
 
     /**
      * 产品或文章添加评论
-     *
+     * <p>
      * star    星级(文章可不传)
+     *
      * @param id      产品或文章的ID
-     * @param token 用户ID 可空
+     * @param token   用户ID 可空
      * @param type    类型 1-产品，2-文章
-     * @param image 图片地址（路径attachment)
+     * @param image   图片地址（路径attachment)
      * @param content 评论内容
      * @return
      */
@@ -481,12 +484,13 @@ public interface Services {
 
     /**
      * 产品或文章添加评论
+     * <p>
+     * type    类型 1-产品，2-文章
      *
-     *  type    类型 1-产品，2-文章
      * @param id      产品或文章的ID
-     * @param token 用户ID 可空
+     * @param token   用户ID 可空
      * @param star    星级(文章可不传)
-     * @param image 图片地址（路径attachment)
+     * @param image   图片地址（路径attachment)
      * @param content 评论内容
      * @return
      */
@@ -503,7 +507,7 @@ public interface Services {
      * 产品或文章添加评论
      *
      * @param evaluateId 产品或文章的ID
-     * @param token    用户ID 可空
+     * @param token      用户ID 可空
      * @return
      */
     @GET("?action=addCommentLike")
@@ -586,6 +590,7 @@ public interface Services {
             @Query("token") String token
     );
 
+
     /**
      * 成份详情接口
      *
@@ -598,7 +603,8 @@ public interface Services {
 
     /**
      * 成份产品接口
-     *componentProductIist
+     * componentProductIist
+     *
      * @return
      */
     @GET("?action=componentProductIist")
@@ -687,9 +693,9 @@ public interface Services {
     /**
      * 收藏产品或文章
      *
-     * @param id      产品或文章ID
+     * @param id    产品或文章ID
      * @param token 用户ID
-     * @param type    1产品 2文章
+     * @param type  1产品 2文章
      * @return
      */
     @GET("?action=collect")
@@ -704,7 +710,7 @@ public interface Services {
     /**
      * 提问列表
      *
-     * @param productId      产品ID
+     * @param productId 产品ID
      * @return
      */
     @GET("?action=askList")
@@ -716,7 +722,7 @@ public interface Services {
     /**
      * 提问详情
      *
-     * @param productId      产品ID
+     * @param productId 产品ID
      * @return
      */
     @GET("?action=questionList")
@@ -729,13 +735,13 @@ public interface Services {
     /**
      * 添加提问
      *
-     * @param token 用户ID
-     * @param username 用户名
-     * @param type 类型  1 发布问题 2 提交问题回复
-     * @param productId 产品ID
+     * @param token        用户ID
+     * @param username     用户名
+     * @param type         类型  1 发布问题 2 提交问题回复
+     * @param productId    产品ID
      * @param product_name 产品名
-     * @param askId 问题ID（type为2必需传）
-     * @param content 提交内容
+     * @param askId        问题ID（type为2必需传）
+     * @param content      提交内容
      */
     @GET("?action=subAsk")
     Observable<String> addAsk(
@@ -750,6 +756,7 @@ public interface Services {
 
 
     ////////////////////排行榜//////////////////////
+
     /**
      * 添加提问
      *
@@ -826,6 +833,18 @@ public interface Services {
     Observable<Test> getSkinRecommend(
             @Query("token") String token
     );
+
+    /**
+     * 护肤百科列表页
+     * <p>
+     * action(string) － 固定值BaikeInfo
+     * user_id(int) － 用户ID
+     */
+    @GET("?action=BaikeList")
+    Observable<List<Wiki>> getBaikeList(
+
+    );
+
     /**
      * 护肤百科详情页
      * action(string) － 固定值BaikeInfo
@@ -834,6 +853,26 @@ public interface Services {
     @GET("?action=BaikeInfo")
     Observable<Wiki> getBaikeInfo(
             @Query("baike_id") String baikeId
+    );
+
+    /**
+     * 百科点击有用-取赞接口
+     * action(string) － 固定值addBaikeLike
+     * baikeId(int) － 评论ID
+     * token(string) － token
+     */
+
+    @GET("?action=addBaikeLike")
+    Observable<String> addBaikeLike(
+            @Query("token") String token,
+            @Query("baike_id") String baikeId
+    );
+
+    /**
+     * 产品分类
+     */
+    @GET("?action=productCategory")
+    Observable<List<Category>> productCategory(
     );
 
     ////////////////////其他//////////////////////

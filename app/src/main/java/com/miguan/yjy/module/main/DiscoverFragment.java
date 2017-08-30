@@ -22,7 +22,8 @@ import com.miguan.yjy.model.bean.Discover;
 import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.module.ask.AnswerListActivity;
 import com.miguan.yjy.module.ask.AskDiscoverViewHolder;
-import com.miguan.yjy.module.test.WikiAskActivity;
+import com.miguan.yjy.module.test.WikiAskActivityPresenter;
+import com.miguan.yjy.module.test.WikiMainActivity;
 import com.miguan.yjy.module.test.WikiViewHolder;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
@@ -125,6 +126,12 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
             wikis.add(wiki);
         }
         mWikiAdapter.addAll(wikis);
+        mWikiAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                WikiAskActivityPresenter.start(getActivity(),"1");
+            }
+        });
     }
 
     @Override
@@ -135,7 +142,7 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
                 intent = new Intent(getActivity(), AnswerListActivity.class);
                 break;
             case R.id.tv_discover_wiki_more:
-                intent = new Intent(getActivity(), WikiAskActivity.class);
+                intent = new Intent(getActivity(), WikiMainActivity.class);
                 break;
         }
         startActivity(intent);

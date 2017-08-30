@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.BrandLetterViewHolder;
 import com.miguan.yjy.adapter.viewholder.BrandViewHolder;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.ScrollIndexer;
 
@@ -59,7 +61,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
         setToolbarTitle(R.string.text_brand_list);
         ButterKnife.bind(this);
 
-        mTvClear.setOnClickListener(v->finish());
+        mTvClear.setOnClickListener(v -> finish());
         mEtSearch.addTextChangedListener(this);
         mIndexer.setOnTextSelectedListener(new ScrollIndexer.OnTextSelectedListener() {
             @Override
@@ -91,8 +93,11 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @Override
     public ListConfig getListConfig() {
+        View emptyBrandView = View.inflate(this, R.layout.empty_brand_list, null);
+        View rebackView = View.inflate(this, R.layout.empty_brand_list_reback, null);
+        rebackView.findViewById(R.id.tv_empty_brand_reback).setOnClickListener(v -> startActivity(new Intent(BrandListActivity.this, FeedbackActivity.class)));
         return super.getListConfig().setRefreshAble(false)
-                .setContainerEmptyRes(R.layout.empty_brand_list)
+                .setContainerEmptyView(getPresenter().mEmptyType == 3 ? emptyBrandView : rebackView)
                 .setLoadMoreAble(false)
                 .setNoMoreAble(false)
                 .setContainerLayoutRes(R.layout.product_brand_list_activity);
@@ -184,8 +189,8 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             getPresenter().getAdapter().clear();
             getPresenter().getAdapter().addAll(mInSearchMode ? mFilterList : getPresenter().getBrandList());
             mIndexer.setVisibility(mInSearchMode ? View.GONE : View.VISIBLE);
-
-            mTvClear.setText(mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
+            mTvClear.setText(getPresenter().mEmptyType == 3&&mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
+            Log.e("mEmptyType", getPresenter().mEmptyType+"");
             mTvClear.setOnClickListener(v -> {
                 if (mInSearchMode && mFilterList.size() == 0) {
                     Brand brand = new Brand();
@@ -208,6 +213,6 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @Override
     public int[] getHideSoftViewIds() {
-        return new int[] {R.id.et_brand_list_search};
+        return new int[]{R.id.et_brand_list_search};
     }
 }

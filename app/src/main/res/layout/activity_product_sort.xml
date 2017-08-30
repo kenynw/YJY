@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingTop="30dp"
+        android:paddingLeft="15dp">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            />
+
+        <TextView
+            android:id="@+id/tv_sort_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="@color/f4"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size_small_16"
+            tools:text="面部皮肤"/>
+
+    </LinearLayout>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recy_product_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp"
+        android:background="@color/white"
+        />
+
+
+</LinearLayout>

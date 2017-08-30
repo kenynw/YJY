@@ -40,11 +40,11 @@ public class WikiViewHolder extends BaseViewHolder<Wiki> {
     public void setData(Wiki data) {
         mTvTitle.setText(data.getQuestion());
         mTvDesc.setText(data.getContent());
-        if (TextUtils.isEmpty(data.getShare_url())) {
+        if (TextUtils.isEmpty(data.getPicture())) {
             mDvThumb.setVisibility(View.GONE);
         } else {
             mDvThumb.setVisibility(View.VISIBLE);
-            mDvThumb.setImageURI(data.getShare_url());
+            mDvThumb.setImageURI(data.getPicture());
         }
     }
 
