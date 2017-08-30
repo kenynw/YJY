@@ -39,12 +39,7 @@
                 />
 
             <TextView
-                android:id="@id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:maxLines="1"
-                android:textAppearance="@style/TextSubhead"
+                style="@style/ToolbarTitle"
                 tools:text="这是标题"
                 />
 
@@ -427,7 +422,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/btn_like"
+                android:text="@string/btn_product_like"
                 android:textColor="@color/textSecondary"
                 android:textSize="@dimen/text_size_body_material"
                 />

@@ -17,28 +17,17 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/include_status_bar" />
+        <include layout="@layout/include_toolbar" />
 
-        <ImageView
-            android:layout_width="@dimen/widget_max"
-            android:layout_height="@dimen/widget_max"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:src="@mipmap/ic_logo"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_tiny"
-            android:text="快速生成护肤功课"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_large_material"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bgWindow"
             />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_template"
-            android:layout_width="198dp"
+            android:layout_width="200dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipChildren="false"

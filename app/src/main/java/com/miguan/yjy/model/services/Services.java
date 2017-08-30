@@ -3,10 +3,12 @@ package com.miguan.yjy.model.services;
 
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Ask;
+import com.miguan.yjy.model.bean.Benefit;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.model.bean.Component;
+import com.miguan.yjy.model.bean.Discover;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
@@ -51,6 +53,11 @@ public interface Services {
     @GET("?action=index")
     Observable<Home> home(
             @Query("token") String token
+    );
+
+    @GET("?action=discovery")
+    Observable<Discover> discover(
+            @Query("token") CharSequence token
     );
 
     //////////////////用户相关/////////////////////
@@ -590,7 +597,6 @@ public interface Services {
             @Query("token") String token
     );
 
-
     /**
      * 成份详情接口
      *
@@ -710,11 +716,24 @@ public interface Services {
     /**
      * 提问列表
      *
+     * @param type 类型(1 全部提问【当token有传时查找用户的提问】 2我的回答【token必传】)
+     * @return
+     */
+    @GET("?action=myAskList")
+    Observable<List<Ask>> askList(
+            @Query("token") String token,
+            @Query("type") int type,
+            @Query("page") int page
+    );
+
+    /**
+     * 提问列表
+     *
      * @param productId 产品ID
      * @return
      */
     @GET("?action=askList")
-    Observable<Ask> askList(
+    Observable<Ask> productAskList(
             @Query("product_id") int productId,
             @Query("page") int page
     );
@@ -754,6 +773,16 @@ public interface Services {
             @Query("content") String content
     );
 
+    /**
+     * 答案评论点赞
+     *
+     * @return
+     */
+    @GET("?action=addAskLike")
+    Observable<String> addAskLike(
+            @Query("token") String token,
+            @Query("askReplyId") int replyId
+    );
 
     ////////////////////排行榜//////////////////////
 
@@ -775,6 +804,18 @@ public interface Services {
     @GET("?action=rankingInfo")
     Observable<Rank> billboardDetail(
             @Query("rank_id") int billboardId
+    );
+
+    ////////////////////福利//////////////////////
+
+    /**
+     * 免费福利列表
+     *
+     * @param page 当前页数
+     */
+    @GET("?action=freeBenefits")
+    Observable<List<Benefit>> benefitsList(
+            @Query("page") int page
     );
 
     ////////////////////测试//////////////////////

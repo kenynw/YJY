@@ -13,8 +13,8 @@ import com.miguan.yjy.module.main.MeFragment;
 public enum MainTab {
 
     HOME(0, R.drawable.tab_main_home_selector, R.string.app_name, HomeFragment.class),
-    MODULE(1, R.drawable.tab_main_module_selector, R.string.btn_main_product, MainProductFragment.class),
-    TEST(2, R.drawable.tab_main_test_selector, R.string.text_discover, DiscoverFragment.class),
+    MODULE(1, R.drawable.tab_main_product_selector, R.string.btn_main_product, MainProductFragment.class),
+    TEST(2, R.drawable.tab_main_discover_selector, R.string.text_discover, DiscoverFragment.class),
     ME(3, R.drawable.tab_main_me_selector, R.string.btn_main_me, MeFragment.class);
 
     public final int mTabIndex;

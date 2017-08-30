@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:divider="@drawable/div_vertical"
     android:orientation="vertical"
     android:showDividers="middle"
@@ -13,7 +13,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         >
 
@@ -199,5 +199,13 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_subhead_material"
         />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <include layout="@layout/include_default_footer" />
 
 </LinearLayout>

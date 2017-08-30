@@ -35,7 +35,7 @@ public class StarListActivity extends BaseListActivity<StarListPresenter> {
     @Override
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
-        TextView tv = (TextView) view.findViewById(R.id.tv_empty);
+        TextView tv = view.findViewById(R.id.tv_empty);
         tv.setText("还没有收藏过任何文章哦~");
 
         Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_star);
@@ -45,6 +45,7 @@ public class StarListActivity extends BaseListActivity<StarListPresenter> {
         return super.getListConfig()
                 .setContainerEmptyView(view)
                 .setItemDecoration(new SpaceDecoration((int) getResources().getDimension(R.dimen.spacing_small)))
+                .setFooterNoMoreRes(R.layout.include_default_footer)
                 .setContainerLayoutRes(R.layout.common_activity_list);
     }
 

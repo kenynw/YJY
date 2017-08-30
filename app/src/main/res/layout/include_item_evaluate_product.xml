@@ -6,7 +6,7 @@
     android:id="@+id/ll_evaluate_product"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_normal"
+    android:layout_marginTop="@dimen/spacing_large"
     android:background="@drawable/bg_stroke_product"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/spacing_small"
@@ -16,8 +16,8 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_evaluate_product_img"
         style="@style/BaseImage"
-        android:layout_width="67dp"
-        android:layout_height="67dp"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
         app:failureImage="@mipmap/def_image_product"
         app:placeholderImage="@mipmap/def_image_product"
         />
@@ -26,7 +26,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/spacing_normal"
-        android:layout_marginStart="@dimen/spacing_normal"
         android:orientation="vertical"
         >
 

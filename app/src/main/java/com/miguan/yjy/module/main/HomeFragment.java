@@ -1,6 +1,6 @@
  package com.miguan.yjy.module.main;
 
-import android.graphics.Color;
+ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +15,11 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
+import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.module.article.EvaluateCommendVH;
 import com.miguan.yjy.module.product.SearchActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -40,17 +42,29 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
     @BindView(R.id.tv_home_search)
     TextView mTvSearch;
 
+    private HomeHeader mHeader;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getRootView());
         getListView().getSwipeToRefresh().setProgressViewOffset(true, 120, 220);
+
+        RecyclerArrayAdapter adapter = getPresenter().getAdapter();
+        if (getPresenter().getAdapter().getHeaderCount() == 0) {
+            mHeader = new HomeHeader(getActivity());
+            adapter.addHeader(mHeader);
+        }
     }
 
     public void setSearchHint(int count) {
         String productNum = String.format(getString(R.string.hint_home_search), count);
         mTvSearch.setText(productNum);
         mFlSearch.setOnClickListener(v -> SearchActivity.start(getActivity(), productNum));
+    }
+
+    public void setHeader(Home header) {
+        mHeader.setHome(header);
     }
 
     @Override

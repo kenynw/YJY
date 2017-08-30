@@ -180,12 +180,6 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".module.product.SearchActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateVisible">
-        </activity>
-        <activity
             android:name=".module.article.ArticleListActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
@@ -210,6 +204,12 @@
             android:label="@string/text_evaluate_detail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity
+            android:name=".module.product.SearchActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
         <activity
             android:name=".module.product.SearchResultActivity"
@@ -320,6 +320,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateVisible">
         </activity>
+
+        <activity
+            android:name=".module.product.BenefitListActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
         <activity
             android:name=".module.billboard.BillboardListActivity"
             android:screenOrientation="portrait"
@@ -396,6 +402,11 @@
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
         <activity
+            android:name=".module.user.MyAskActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
             android:name=".module.user.StarListActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
@@ -443,6 +454,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible">
+        </activity>
+        <activity
+            android:name=".module.template.TemplatesActivity"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
             android:name=".module.template.GenTemplateActivity"

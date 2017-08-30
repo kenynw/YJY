@@ -10,26 +10,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataFragment;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
+import com.miguan.yjy.adapter.BannerPagerAdapter;
+import com.miguan.yjy.adapter.MySkinAdapter;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Discover;
 import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.module.ask.AnswerListActivity;
 import com.miguan.yjy.module.ask.AskDiscoverViewHolder;
-import com.miguan.yjy.module.test.WikiAskActivityPresenter;
+import com.miguan.yjy.module.template.TemplatesActivity;
+import com.miguan.yjy.module.test.TestInitActivity;
+import com.miguan.yjy.module.test.TestResultActivity;
 import com.miguan.yjy.module.test.WikiMainActivity;
 import com.miguan.yjy.module.test.WikiViewHolder;
+import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.CirclePageIndicator;
 import com.miguan.yjy.widget.HeadViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +61,9 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
 
     @BindView(R.id.grid_discover_skin)
     GridView mGridSkin;
+
+    @BindView(R.id.iv_discover_template)
+    ImageView mIvTemplate;
 
     @BindView(R.id.tv_discover_ask_more)
     TextView mTvAskMore;
@@ -92,46 +99,42 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
 
         mTvAskMore.setOnClickListener(this);
         mTvWikiMore.setOnClickListener(this);
+        mIvTemplate.setOnClickListener(this);
+
+        int paddingLeft = LUtils.dp2px(25);
+        DividerDecoration decoration = new DividerDecoration(
+                getResources().getColor(R.color.bgWindow), LUtils.dp2px(1), paddingLeft,paddingLeft
+        );
         mRvAsks.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mRvAsks.setNestedScrollingEnabled(false);
         mRvAsks.setAdapter(mAskAdapter);
+        mRvAsks.addItemDecoration(decoration);
+
         mRvWikis.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mRvWikis.setNestedScrollingEnabled(false);
         mRvWikis.setAdapter(mWikiAdapter);
+        mRvWikis.addItemDecoration(decoration);
+
+        mTvSkin.setOnClickListener(v -> startActivity(new Intent(getActivity(), TestInitActivity.class)));
 
         return view;
     }
 
     @Override
     public void setData(Discover discover) {
-        mTvSkin.setText("");
-        mTvSkin.setOnClickListener(v -> {
-
-        });
-        List<Ask> list = new ArrayList<>();
-        for (int i=0; i<3; i++) {
-            Ask ask = new Ask();
-            ask.setSubject("适不适合敏感皮适不适合敏感皮适不适合敏感皮适不适合敏感皮");
-            ask.setNum(3 + i);
-            ask.setProduct_img("http://www.sdfad.asldf");
-            list.add(ask);
+        if (discover.getBanner() == null || discover.getBanner().size() <= 0) {
+            mFlBanner.setVisibility(View.GONE);
+        } else {
+            if (discover.getBanner().size() == 1) mIndicatorBanner.setVisibility(View.GONE);
+            mVpBanner.setAdapter(new BannerPagerAdapter(getActivity(), discover.getBanner()));
+            mIndicatorBanner.setViewPager(mVpBanner);
         }
-        mAskAdapter.addAll(list);
 
-        List<Wiki> wikis = new ArrayList<>();
-        for (int i=0; i<3; i++) {
-            Wiki wiki = new Wiki();
-            wiki.setQuestion("一到下午脸色就发暗是怎么回事？一到下午脸色就发暗是怎么回事");
-            wiki.setContent("轻度缺氧造成的");
-            wikis.add(wiki);
+        mGridSkin.setAdapter(new MySkinAdapter(getActivity(), discover.getUserSkin(), true));
+        if (discover.getUserSkin().size() == 4) {
+            mTvSkin.setText(R.string.text_my_skin_detail);
+            mTvSkin.setOnClickListener(v -> startActivity(new Intent(getActivity(), TestResultActivity.class)));
         }
-        mWikiAdapter.addAll(wikis);
-        mWikiAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                WikiAskActivityPresenter.start(getActivity(),"1");
-            }
-        });
+        mAskAdapter.addAll(discover.getAsk());
+        mWikiAdapter.addAll(discover.getBaike());
     }
 
     @Override
@@ -143,6 +146,9 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
                 break;
             case R.id.tv_discover_wiki_more:
                 intent = new Intent(getActivity(), WikiMainActivity.class);
+                break;
+            case R.id.iv_discover_template:
+                intent = new Intent(getActivity(), TemplatesActivity.class);
                 break;
         }
         startActivity(intent);

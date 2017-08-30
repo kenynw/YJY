@@ -50,6 +50,7 @@ public class EvaluateListActivity extends BaseListActivity<EvaluateListPresenter
         return super.getListConfig()
                 .setContainerEmptyView(view)
                 .setItemDecoration(spaceDecoration)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
                 .setContainerLayoutRes(R.layout.common_activity_list);
     }
 

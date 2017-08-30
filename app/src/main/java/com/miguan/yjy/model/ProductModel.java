@@ -4,6 +4,7 @@ import com.dsk.chain.model.AbsModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.miguan.yjy.model.bean.Ask;
+import com.miguan.yjy.model.bean.Benefit;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
@@ -317,13 +318,6 @@ public class ProductModel extends AbsModel {
     }
 
     /**
-     * 提问列表
-     */
-    public Observable<Ask> getAskList(int productId, int page) {
-        return ServicesClient.getServices().askList(productId, page).compose(new DefaultTransform<>());
-    }
-
-    /**
      * 成份详情接口
      */
     public Observable<Component> componentInfo(int componentId) {
@@ -338,6 +332,22 @@ public class ProductModel extends AbsModel {
     }
 
     /**
+     * 所有问答列表
+     *
+     * type 类型(1 全部提问【当token有传时查找用户的提问】 2我的回答【token必传】)
+     */
+    public Observable<List<Ask>> getAskList(int type, int page) {
+        return ServicesClient.getServices().askList(UserPreferences.getToken(), type, page).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 提问列表
+     */
+    public Observable<Ask> getProductAskList(int productId, int page) {
+        return ServicesClient.getServices().productAskList(productId, page).compose(new DefaultTransform<>());
+    }
+
+    /**
      * 提问详情
      */
     public Observable<Ask> getAskDetail(int productId, int askId, int page) {
@@ -345,7 +355,7 @@ public class ProductModel extends AbsModel {
     }
 
     /**
-     * 提问详情
+     * 添加回答
      */
     public Observable<String> addAsk(int productId, String productName, int askType, int askId, String content) {
         return ServicesClient.getServices()
@@ -356,6 +366,16 @@ public class ProductModel extends AbsModel {
                         askType, askId, content)
                 .compose(new DefaultTransform<>());
     }
+
+
+    /**
+     * 答案点赞
+     */
+    public Observable<String> addAskLike(int replyId) {
+        return ServicesClient.getServices().addAskLike(UserPreferences.getToken(), replyId)
+                .compose(new DefaultTransform<>());
+    }
+
 
     /**
      * 排行榜列表
@@ -373,6 +393,15 @@ public class ProductModel extends AbsModel {
      */
     public Observable<Rank> getBillboardDetail(int billboardId) {
         return ServicesClient.getServices().billboardDetail(billboardId)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 排行榜详情
+     * @param page 当前页数
+     */
+    public Observable<List<Benefit>> getBenefitList(int page) {
+        return ServicesClient.getServices().benefitsList(page)
                 .compose(new DefaultTransform<>());
     }
 

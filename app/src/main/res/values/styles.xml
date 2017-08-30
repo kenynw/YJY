@@ -44,6 +44,17 @@
         <item name="com.miguan.yjy:popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
+    <style name="ToolbarTitle">
+        <item name="android:id">@id/toolbar_title</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">@style/TextSubhead</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextTitle" parent="TextAppearance.AppCompat.Title"/>
 
     <style name="TextSubhead" parent="TextAppearance.AppCompat.Subhead"/>

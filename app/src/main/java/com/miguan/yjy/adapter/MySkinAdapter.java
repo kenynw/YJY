@@ -18,48 +18,66 @@ import java.util.List;
  */
 
 public class MySkinAdapter extends BaseAdapter {
-    private List<Skin> mSkinList;
+
+    private final String[] DEFAULT_NAME = new String[] {"干/油", "敏感度", "色素性", "皱纹性"};
+
     private Context mContext;
 
+    private List<Skin> mSkinList;
+
+    private boolean mShowDefault;
+
     public MySkinAdapter(Context context, List<Skin> objects) {
-        mSkinList = objects;
-        mContext = context;
+        this(context, objects, false);
     }
 
+    public MySkinAdapter(Context context, List<Skin> skinList, boolean showDefault) {
+        mContext = context;
+        mSkinList = skinList;
+        mShowDefault = showDefault;
+    }
 
     @Override
     public int getCount() {
-        return mSkinList.size();
+        return mShowDefault ? 4 : mSkinList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mSkinList;
+        if (mShowDefault && position >= mSkinList.size()) {
+            Skin skin = new Skin();
+            skin.setName(DEFAULT_NAME[position]);
+            skin.setLetter("?");
+            return skin;
+        } else {
+            return mSkinList.get(position);
+        }
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MySkinViewHolder mySkinViewHolder = null;
+        MySkinViewHolder mySkinViewHolder;
         if (convertView == null) {
             mySkinViewHolder = new MySkinViewHolder();
             convertView = View.inflate(mContext, R.layout.item_my_skin, null);
-            mySkinViewHolder.mTvSkinLetter = (TextView) convertView.findViewById(R.id.tv_skin_letter);
-            mySkinViewHolder.mTvSkinName = (TextView) convertView.findViewById(R.id.tv_skin_name);
+            mySkinViewHolder.mTvSkinLetter = convertView.findViewById(R.id.tv_skin_letter);
+            mySkinViewHolder.mTvSkinName = convertView.findViewById(R.id.tv_skin_name);
             convertView.setTag(mySkinViewHolder);
         } else {
             mySkinViewHolder = (MySkinViewHolder) convertView.getTag();
         }
-        mySkinViewHolder.mTvSkinLetter.setText(mSkinList.get(position).getLetter());
-        mySkinViewHolder.mTvSkinName.setText(mSkinList.get(position).getName());
+        Skin skin = (Skin) getItem(position);
+        mySkinViewHolder.mTvSkinLetter.setText(skin.getLetter());
+        mySkinViewHolder.mTvSkinName.setText(skin.getName());
         return convertView;
     }
 
-    class MySkinViewHolder {
+    private class MySkinViewHolder {
         TextView mTvSkinLetter;
         TextView mTvSkinName;
     }

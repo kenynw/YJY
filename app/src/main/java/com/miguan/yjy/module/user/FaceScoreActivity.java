@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListActivity;
+import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 
@@ -36,13 +37,15 @@ public class FaceScoreActivity extends BaseListActivity<FaceScorePresenter> {
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.user_activity_face_score;
+    protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
+        return new FaceScoreViewHolder(parent);
     }
 
     @Override
-    protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new FaceScoreViewHolder(parent);
+    public ListConfig getListConfig() {
+        return super.getListConfig()
+                .setContainerLayoutRes(R.layout.user_activity_face_score)
+                .setFooterNoMoreRes(R.layout.include_default_footer);
     }
 
 }

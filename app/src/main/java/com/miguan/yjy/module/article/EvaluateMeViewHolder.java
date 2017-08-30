@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -33,9 +32,6 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
     @BindView(R.id.tv_evaluate_product_name)
     TextView mTvProductName;
 
-    @BindView(R.id.tv_evaluate_product_rating)
-    RatingBar mTvProductRating;
-
     @BindView(R.id.tv_evaluate_product_spec)
     TextView mTvProductSpec;
 
@@ -62,7 +58,6 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
     public void setData(Evaluate data) {
         super.setData(data);
         mTvDate.setText(data.getCreated_at());
-        mTvProductRating.setVisibility(View.GONE);
         mEvaluateRating.setStar(data.getStar());
         if (data.getDetail() != null) {
             if (data.getType() == 1) {

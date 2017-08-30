@@ -20,6 +20,4 @@ public class MainProductPresenter extends BaseDataFragmentPresenter<MainProductF
         ProductModel.getInstance().getMainProduct().unsafeSubscribe(getSubscriber());
     }
 
-
-
 }

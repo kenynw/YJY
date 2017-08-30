@@ -1,71 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/spacing_normal"
-    android:layout_marginRight="@dimen/spacing_normal"
-    android:layout_marginTop="12dp"
-    android:background="@drawable/bg_radius_white"
-    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/spacing_large"
+    android:paddingLeft="@dimen/spacing_normal"
+    android:paddingRight="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_large"
     >
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_article_thumb"
         style="@style/BaseImage"
-        android:layout_width="match_parent"
-        android:layout_height="172dp"
-        android:scaleType="centerCrop"
-        app:roundedCornerRadius="8dp"
-        app:roundTopLeft="true"
-        app:roundTopRight="true"
-        app:roundBottomLeft="false"
-        app:roundBottomRight="false"
+        android:layout_width="123.2dp"
+        android:layout_height="77dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        app:roundedCornerRadius="4dp"
         />
 
     <TextView
         android:id="@+id/tv_article_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_toLeftOf="@id/dv_article_thumb"
+        android:layout_toStartOf="@id/dv_article_thumb"
         android:textAppearance="@style/TextSubhead"
         tools:text="答疑解惑|面膜到底要不要每天敷"
         />
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_article_date"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="8dp"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal"
-        android:paddingTop="6dp"
-        >
+        android:layout_below="@id/tv_article_title"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:textAppearance="@style/TextCaption"
+        tools:text="2天前"
+        />
 
-        <TextView
-            android:id="@+id/tv_article_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextCaption"
-            tools:text="2天前"
-            />
+    <TextView
+        android:id="@+id/tv_article_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_article_date"
+        android:layout_gravity="end"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_toEndOf="@id/tv_article_date"
+        android:layout_toRightOf="@id/tv_article_date"
+        android:drawableLeft="@mipmap/ic_article_click"
+        android:drawablePadding="4dp"
+        android:drawableStart="@mipmap/ic_article_click"
+        android:textAppearance="@style/TextCaption"
+        tools:text="3"
+        />
 
-        <TextView
-            android:id="@+id/tv_article_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:drawableLeft="@mipmap/ic_article_comment"
-            android:drawablePadding="4dp"
-            android:drawableStart="@mipmap/ic_article_comment"
-            android:textAppearance="@style/TextCaption"
-            tools:text="3"
-            />
-
-    </FrameLayout>
-
-</LinearLayout>
+</RelativeLayout>

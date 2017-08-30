@@ -38,7 +38,7 @@ public class AskListActivityPresenter extends BaseListActivityPresenter<AskListA
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().getAskList(mProductId, 1)
+        ProductModel.getInstance().getProductAskList(mProductId, 1)
                 .map(ask -> {
                     getView().setData(ask);
                     return ask.getQuestion_list();
@@ -48,7 +48,7 @@ public class AskListActivityPresenter extends BaseListActivityPresenter<AskListA
 
     @Override
     public void onLoadMore() {
-        ProductModel.getInstance().getAskList(mProductId, getCurPage())
+        ProductModel.getInstance().getProductAskList(mProductId, getCurPage())
                 .map(Ask::getQuestion_list)
                 .unsafeSubscribe(getMoreSubscriber());
     }

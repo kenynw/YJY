@@ -51,11 +51,6 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.user_activity_used;
-    }
-
-    @Override
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
         TextView tv = view.findViewById(R.id.tv_empty);
@@ -65,7 +60,10 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         tv.setCompoundDrawables(null, drawable, null, null);
 
-        return super.getListConfig().setContainerEmptyView(view);
+        return super.getListConfig()
+                .setContainerLayoutRes(R.layout.user_activity_used)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
+                .setContainerEmptyView(view);
     }
 
     @Override

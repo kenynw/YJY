@@ -16,7 +16,7 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.CityAdapter;
-import com.miguan.yjy.model.CityData;
+import com.miguan.yjy.model.constant.CityData;
 import com.miguan.yjy.model.bean.CityItem;
 import com.miguan.yjy.module.user.widget.ContactItemInterface;
 import com.miguan.yjy.module.user.widget.ContactListViewImpl;

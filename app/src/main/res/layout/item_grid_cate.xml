@@ -9,14 +9,28 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_category_thumb"
-        style="@style/BaseImage"
-        android:layout_width="@dimen/widget_medium"
-        android:layout_height="@dimen/widget_medium"
-        android:src="@mipmap/def_image_loading"
-        app:roundAsCircle="true"
-        />
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_category_thumb"
+            style="@style/BaseImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/def_image_loading"
+            app:roundAsCircle="true"
+            />
+
+        <ViewStub
+            android:id="@+id/vs_cate_more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/item_cate_more"
+            />
+
+    </FrameLayout>
 
     <com.miguan.yjy.widget.LoadingTextView
         android:id="@+id/tv_category_name"
@@ -25,8 +39,8 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:minWidth="32dp"
-        android:textColor="@color/textPrimary"
-        android:textSize="13sp"
+        android:textColor="#444"
+        android:textSize="@dimen/text_size_caption"
         app:height_weight="0.6"
         tools:text="洁面"
         />

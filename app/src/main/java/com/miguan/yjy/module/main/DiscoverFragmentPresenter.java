@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.main;
 
 import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
+import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.Discover;
 
 /**
@@ -16,7 +17,7 @@ public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<Discove
     }
 
     private void loadData() {
-        getView().setData(null);
+        CommonModel.getInstance().getDiscover().unsafeSubscribe(getSubscriber());
     }
 
 }

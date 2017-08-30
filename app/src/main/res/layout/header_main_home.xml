@@ -2,9 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,36 +31,14 @@
     </FrameLayout>
 
     <com.jude.exgridview.ExGridView
+        android:id="@+id/gv_home_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:background="@color/white"
-        android:paddingBottom="7dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:paddingTop="@dimen/spacing_small"
-        app:grid_as_square="false"
+        android:layout_height="match_parent"
         app:grid_column="2"
-        app:grid_divider_horizontal="25dp"
-        >
-
-        <ImageView
-            android:id="@+id/btn_home_query_batch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_radius_div"
-            android:minHeight="@dimen/widget_medium"
-            />
-
-        <ImageView
-            android:id="@+id/btn_home_my_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_radius_div"
-            android:minHeight="@dimen/widget_medium"
-            />
-
-    </com.jude.exgridview.ExGridView>
+        app:grid_as_square="false"
+        app:grid_divider_horizontal="1dp"
+        app:grid_divider_vertical="1dp"
+        />
 
     <com.miguan.yjy.widget.LoadingImageView
         android:id="@+id/iv_home_evaluate_label"

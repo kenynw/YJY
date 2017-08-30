@@ -68,13 +68,9 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
         return super.getListConfig()
                 .setFooterErrorAble(false)
                 .setRefreshAble(false)
+                .setContainerLayoutRes(R.layout.ask_activity_detail)
                 .setContainerEmptyRes(R.layout.empty_ask_detail_list)
                 .setItemDecoration(decoration);
-    }
-
-    @Override
-    protected int getLayout() {
-        return R.layout.ask_activity_detail;
     }
 
     private void checkInput(String productName) {
@@ -112,6 +108,11 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_input_input};
     }
 
 }

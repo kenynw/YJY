@@ -8,39 +8,7 @@
 
     <include layout="@layout/include_toolbar"/>
 
-    <LinearLayout
-        android:id="@+id/ll_ask_detail_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/spacing_small"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal"
-        android:paddingTop="@dimen/spacing_small"
-        >
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_ask_detail_thumb"
-            style="@style/BaseImage"
-            android:layout_width="40dp"
-            android:layout_height="34dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_ask_detail_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_small"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:drawableEnd="@mipmap/ic_more"
-            android:drawableRight="@mipmap/ic_more"
-            android:textAppearance="@style/TextBody"
-            tools:text="理肤泉特安舒缓修护乳"
-            />
-
-    </LinearLayout>
+    <include layout="@layout/include_detail_top_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"

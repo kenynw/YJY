@@ -5,7 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/include_status_bar"/>
 
     <android.support.v7.widget.Toolbar
         android:id="@id/toolbar"
@@ -15,67 +18,104 @@
         >
 
         <TextView
-            android:id="@id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:maxLines="1"
-            android:textAppearance="@style/TextSubhead"
-            tools:text="这是标题"
+            style="@style/ToolbarTitle"
+            android:text="@string/btn_main_product"
             />
 
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/tv_main_product_count"
+    <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        >
 
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-    <com.jude.exgridview.ExGridView
-        android:id="@+id/rv_main_product_cate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingLeft="7.5dp"
-        android:paddingRight="7.5dp"
-        android:paddingTop="20dp"
-        app:grid_as_square="false"
-        app:grid_divider_horizontal="0dp"
-        app:grid_divider_vertical="@dimen/spacing_normal"
-        />
+            <TextView
+                android:id="@+id/tv_main_product_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="23dp"
+                android:textColor="@color/textTertiary"
+                android:textSize="@dimen/text_size_body_material"
+                tools:text="@string/text_product_count"
+                />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_brand_list"
-        />
+            <com.jude.exgridview.ExGridView
+                android:id="@+id/rv_main_product_cate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/spacing_small"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large"
+                android:paddingTop="20dp"
+                app:grid_as_square="false"
+                app:grid_column="4"
+                app:grid_divider_horizontal="0dp"
+                app:grid_divider_vertical="@dimen/spacing_normal"
+                tools:layout_height="128dp"
+                />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_main_product_brand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@color/white"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/text_brand_list"
+                android:textColor="@color/textPrimaryProduct"
+                android:textSize="@dimen/text_size_body_material"
+                />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_other_billboard"
-        />
+            <com.jude.exgridview.ExGridView
+                android:id="@+id/rv_main_product_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:paddingLeft="@dimen/spacing_normal"
+                android:paddingRight="@dimen/spacing_normal"
+                tools:layout_height="128dp"
+                />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_main_product_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="@color/white"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/text_product_billboard"
+                android:textColor="@color/textPrimaryProduct"
+                android:textSize="@dimen/text_size_body_material"
+                />
 
-    <TextView
-        android:id="@+id/tv_main_product_billboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_normal"
-        android:text="查看更多排行榜"
-        />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_main_product_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/tv_main_product_billboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/spacing_large"
+                android:text="@string/text_billboard_more"
+                android:textColor="@color/textSecondary"
+                android:textSize="@dimen/text_size_body"
+                />
+
+        </LinearLayout>
+
+    </com.miguan.yjy.widget.CustomNestedScrollView>
 
 </LinearLayout>

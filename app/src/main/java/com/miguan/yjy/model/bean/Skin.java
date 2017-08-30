@@ -12,19 +12,34 @@ import java.util.List;
  */
 
 public class Skin implements Parcelable {
+
     private String name;
+
     private String letter;
+
     private String category_id;
+
     private String category_name;
+
     private List<Product> data;
+
     private List<SelectPrice> condition;
+
     private String id;
+
     private String copy;
+
     private String description;
+
     private float valuate;
+
     private float score;
+
     private float maximum;
+
     private String type;
+
+    private String unscramble;
 
     public static String Drys[] = {"重干", "轻干", "轻油", "重油"};
     public static String tolerances[] = {"重耐", "轻耐", "轻敏", "重敏"};
@@ -39,9 +54,6 @@ public class Skin implements Parcelable {
     public String[] leftSkin = {"干性","敏感","色素","皱纹"};
     public String[] rightSkin = {"油性","耐受","非色素","紧致"};
     public String[] skinDesc = {"干性/油性","敏感程度","是否容易色素沉着","是否皱纹性肤质"};
-
-    private String unscramble;
-
 
     public String getType() {
         return type;
@@ -324,4 +336,5 @@ public class Skin implements Parcelable {
             return new Skin[size];
         }
     };
+
 }

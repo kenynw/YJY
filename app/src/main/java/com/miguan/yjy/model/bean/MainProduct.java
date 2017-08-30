@@ -11,11 +11,21 @@ import java.util.List;
 
 public class MainProduct implements Parcelable {
 
+    private int sum;
+
     private List<Category> categoryList;
 
     private List<Brand> brandList;
 
     private List<Rank> rankingList;
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
 
     public List<Category> getCategoryList() {
         return categoryList;
@@ -41,6 +51,9 @@ public class MainProduct implements Parcelable {
         this.rankingList = rankingList;
     }
 
+    public MainProduct() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -48,15 +61,14 @@ public class MainProduct implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.sum);
         dest.writeTypedList(this.categoryList);
         dest.writeTypedList(this.brandList);
         dest.writeTypedList(this.rankingList);
     }
 
-    public MainProduct() {
-    }
-
     protected MainProduct(Parcel in) {
+        this.sum = in.readInt();
         this.categoryList = in.createTypedArrayList(Category.CREATOR);
         this.brandList = in.createTypedArrayList(Brand.CREATOR);
         this.rankingList = in.createTypedArrayList(Rank.CREATOR);

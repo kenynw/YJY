@@ -11,6 +11,8 @@ import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.R;
 import com.miguan.yjy.dialogs.BaseAlertDialog;
+import com.miguan.yjy.model.bean.Discover;
+import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.constant.Constants;
@@ -33,6 +35,24 @@ public class CommonModel extends AbsModel {
         return getInstance(CommonModel.class);
     }
 
+    /**
+     * 首页
+     */
+    public Observable<Home> getHomeList() {
+        return ServicesClient.getServices().home(UserPreferences.getToken()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 发现
+     */
+    public Observable<Discover> getDiscover() {
+        return ServicesClient.getServices().discover(UserPreferences.getToken()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 提示更新
+     * @param context
+     */
     public void update(Context context) {
         ServicesClient.getServices().checkUpdate()
                 .compose(new DefaultTransform<>())

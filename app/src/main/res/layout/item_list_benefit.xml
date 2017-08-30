@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        tools:background="@color/bgWindow"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_benefit_thumb"
+            style="@style/BaseImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_benefit_ended"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/half_transparent"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_benefit_end"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        >
+
+        <TextView
+            android:id="@+id/tv_benefit_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/TextBody"
+            tools:text="份数：100份"
+            />
+
+        <TextView
+            android:id="@+id/tv_benefit_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:textAppearance="@style/TextBody"
+            tools:text="距离开始：12:14:10"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

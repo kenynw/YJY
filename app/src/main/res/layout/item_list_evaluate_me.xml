@@ -58,7 +58,59 @@
         tools:text="查看全文"
         />
 
-    <include layout="@layout/include_item_evaluate_product"/>
+    <LinearLayout
+        android:id="@+id/ll_evaluate_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@drawable/bg_stroke_product"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_small"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_evaluate_product_img"
+            style="@style/BaseImage"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            app:failureImage="@mipmap/def_image_product"
+            app:placeholderImage="@mipmap/def_image_product"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:orientation="vertical"
+            >
+
+            <com.miguan.yjy.widget.LoadingTextView
+                android:id="@+id/tv_evaluate_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/TextSubhead"
+                app:height_weight="0.6"
+                tools:text="CeraVeR面部夜间补水保湿乳液CeraVeR面部夜间补水保湿乳液CeraVeR面部夜间补水保湿乳液"
+                />
+
+            <com.miguan.yjy.widget.LoadingTextView
+                android:id="@+id/tv_evaluate_product_spec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:minWidth="88dp"
+                android:textAppearance="@style/TextCaption"
+                app:height_weight="0.8"
+                tools:text="￥320/100ML"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <include layout="@layout/include_item_evaluate_article"/>
 

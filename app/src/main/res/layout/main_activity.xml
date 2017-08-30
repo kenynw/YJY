@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_medium"
         android:background="@color/white"
+        app:tabBackground="@color/white"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
         app:tabPaddingBottom="2dp"

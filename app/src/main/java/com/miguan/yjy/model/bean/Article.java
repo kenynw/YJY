@@ -21,6 +21,8 @@ public class Article implements Parcelable {
 
     private int comment_num;
 
+    private int click_num;
+
     private String created_at;
 
     private String linkUrl;
@@ -71,6 +73,14 @@ public class Article implements Parcelable {
 
     public void setComment_num(int comment_num) {
         this.comment_num = comment_num;
+    }
+
+    public int getClick_num() {
+        return click_num;
+    }
+
+    public void setClick_num(int click_num) {
+        this.click_num = click_num;
     }
 
     public String getCreated_at() {
@@ -152,6 +162,7 @@ public class Article implements Parcelable {
         dest.writeString(this.article_img);
         dest.writeInt(this.like_num);
         dest.writeInt(this.comment_num);
+        dest.writeInt(this.click_num);
         dest.writeString(this.created_at);
         dest.writeString(this.linkUrl);
         dest.writeInt(this.isGras);
@@ -166,6 +177,7 @@ public class Article implements Parcelable {
         this.article_img = in.readString();
         this.like_num = in.readInt();
         this.comment_num = in.readInt();
+        this.click_num = in.readInt();
         this.created_at = in.readString();
         this.linkUrl = in.readString();
         this.isGras = in.readInt();

@@ -250,7 +250,7 @@
             style="@style/MoreItem"
             android:drawableLeft="@mipmap/ic_me_ask"
             android:drawableStart="@mipmap/ic_me_ask"
-            android:text="@string/btn_me_message"
+            android:text="@string/btn_me_ask"
             />
 
         <View

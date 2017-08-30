@@ -3,6 +3,7 @@ package com.miguan.yjy.model.services;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.miguan.yjy.model.bean.EntityList;
 import com.miguan.yjy.utils.LUtils;
@@ -62,7 +63,7 @@ public class WrapperResponseBodyConverter<T> implements Converter<ResponseBody, 
             }
 
             return entity;
-        } catch (JSONException e) {
+        } catch (JSONException | JsonSyntaxException e) {
             LUtils.log(Log.getStackTraceString(e));
             throw new ServiceException(0, "数据解析错误");
         }

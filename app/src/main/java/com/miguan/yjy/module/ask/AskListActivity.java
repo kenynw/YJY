@@ -50,7 +50,7 @@ public class AskListActivity extends BaseListActivity<AskListActivityPresenter> 
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return viewType == 1 ? new AskViewHolder(parent, getIntent().getIntExtra(EXTRA_PRODUCT_ID, 0))
+        return viewType == 1 ? new AskProductViewHolder(parent, getIntent().getIntExtra(EXTRA_PRODUCT_ID, 0))
                 : new AskTitleViewHolder(parent);
     }
 

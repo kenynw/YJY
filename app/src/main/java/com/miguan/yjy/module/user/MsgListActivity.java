@@ -27,11 +27,6 @@ public class MsgListActivity extends BaseListActivity<MsgListPresenter> {
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.common_activity_list;
-    }
-
-    @Override
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
         TextView tv = view.findViewById(R.id.tv_empty);
@@ -41,7 +36,9 @@ public class MsgListActivity extends BaseListActivity<MsgListPresenter> {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         tv.setCompoundDrawables(null, drawable, null, null);
 
-        return super.getListConfig().setContainerEmptyView(view);
+        return super.getListConfig().setContainerEmptyView(view)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
+                .setContainerLayoutRes(R.layout.common_activity_list);
     }
 
     @Override

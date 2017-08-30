@@ -6,6 +6,7 @@
     <string name="text_discover">发现</string>
     <string name="text_hot_article">热门文章</string>
     <string name="text_to_more">查看更多></string>
+    <string name="text_more">更多</string>
     <string name="text_add_comment">发评论</string>
     <string name="text_article_detail">文章详情</string>
     <string name="text_evaluate_detail">回复详情</string>
@@ -44,6 +45,9 @@
     <string name="text_empty_ask_list">用过的人正赶来回答~</string>
     <string name="text_other_way">其他方式</string>
     <string name="text_forgot_password">忘记密码</string>
+    <string name="text_product_count"><![CDATA[
+        收录<font color="#32DAC3">%d</font>种护肤品的成分和功效
+    ]]></string>
     <string name="text_taobao">淘宝网</string>
     <string name="text_jingdong">京东</string>
     <string name="text_amazon">亚马逊</string>
@@ -61,6 +65,7 @@
     <string name="text_search_count"><![CDATA[共为您找到<font color="#32DAC3">%d</font>款产品]]></string>
     <string name="text_apply_all_image">将滤镜应用到模板中的所有图片</string>
     <string name="text_commend_star">推荐指数</string>
+    <string name="text_template_title">快速生成护肤功课</string>
     <string name="text_template_0_header">眼霜合集</string>
     <string name="text_template_0_title">质地偏固态，涂开是他家招牌的滋润+油润感。\n很好涂开，但是对我来说不好吸收，会有点吃不进皮肤一直浮在眼周的感觉。\n使用感很像同为资生堂的百优，但是这个价格跟百优差非常多= =\n值得表扬的是它的鸭嘴系列，很卫生，不容易让产品发生变质。</string>
     <string name="text_template_0_product">美丽芳丝保湿修复柔润化妆水</string>
@@ -83,6 +88,7 @@
     <string name="text_template_4_content">美宝莲这款产品，号称毛孔橡皮擦~\n啫喱质感，清清爽爽，效果是立竿见影的好！\n两颊毛孔立马消失，而且一天下来也完全不会显油腻。</string>
     <string name="text_template_5_desc">薄涂有点像樱花粉，厚涂是偏玫瑰的水红色\n完全不显唇纹，滋润度很高，除了贵，没其他毛病</string>
     <string name="text_template_5_content">最近最迷的奶茶裸橘粉色，再次强调我的深唇，我素唇是灰紫调的，所以歪打正着这只涂我嘴上不算太浅。\n\n相比较香奈儿174这只更明丽一些，灰调少很多（手臂对比我发评论）。我用还挺提气色的，因为有粉调，但又不会过度粉嫩更不会芭比~</string>
+    <string name="text_ask_all">全部问答</string>
     <string name="text_ask_product_name"><![CDATA[关于<font color="#222222">%s</font>的问题]]></string>
     <string name="text_ask_detail">问题详情</string>
     <string name="text_ask_list_empty">暂无问题，我来提一个吧</string>
@@ -90,22 +96,38 @@
     <string name="text_answer">答</string>
     <string name="text_view_more_answer">查看%d个回答</string>
     <string name="text_to_ask_used">向用过的人提问</string>
-    <string name="text_to_answer">去回答</string>
+    <string name="text_to_answer">去回答 ></string>
     <string name="text_no_answer">暂无回答</string>
     <string name="text_message_ask">有问题向您求助哦~</string>
     <string name="text_message_answer">回答了您的问题哦~</string>
+    <string-array name="text_home_buttons">
+        <item>@string/btn_main_product</item>
+        <item>@string/btn_me_used</item>
+        <item>@string/text_query_production_date</item>
+        <item>@string/text_home_benefits</item>
+    </string-array>
+    <string-array name="text_home_buttons_desc">
+        <item>最全的护肤品库</item>
+        <item>记录产品的使用</item>
+        <item>护肤品的生产日期</item>
+        <item>大牌奖品0元送</item>
+    </string-array>
+    <string name="text_home_benefits">免费福利</string>
     <string name="text_home_ask_title">有人向你提问</string>
     <string name="text_home_ask_total"><![CDATA[
         <u>共%d条回答</u>
     ]]></string>
     <string name="text_set_password">设定密码</string>
     <string name="text_login_or_register">登录/注册</string>
+    <string name="text_my_ask">我的提问</string>
+    <string name="text_my_answer">我的回答</string>
     <string name="text_tmshuo">tmshuo520</string>
     <string name="text_not_update">好赞，当前已是最新版本</string>
     <string name="text_evaluate_good">好评</string>
     <string name="text_evaluate_middle">中评</string>
     <string name="text_evaluate_bad">差评</string>
     <string name="text_my_skin">我的肤质</string>
+    <string name="text_skin_test_start">开始肤质测试 >></string>
     <string name="text_my_skin_detail">查看我的肤质情况 >></string>
     <string name="text_skin_wiki">护肤科普</string>
     <string name="text_last_ask">最新回答</string>
@@ -113,10 +135,10 @@
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
     <string name="label_expiration_date">过期日期：</string>
-    <string name="label_looking_value"><![CDATA[
-        颜值：<font color="#fdff00">%s&#160;</font>分
-    ]]></string>
+    <string name="label_looking_value"><![CDATA[颜值：<font color="#fdff00">%s&#160;</font>分]]></string>
     <string name="label_face_score">您的颜值总分为：</string>
+    <string name="label_benefit_sum"><![CDATA[份数：<font color="#FF7069">%s&#160;</font> 份]]></string>
+    <string name="label_benefit_countdown"><![CDATA[距离开始：<font color="#FF7069">%s&#160;</font>]]></string>
 
     <string name="btn_main_product">产品库</string>
     <string name="btn_main_me">我的</string>
@@ -134,6 +156,7 @@
     <string name="btn_me_reply">我回复的</string>
     <string name="btn_me_star">我收藏的</string>
     <string name="btn_me_message">我的消息</string>
+    <string name="btn_me_ask">我的问答</string>
     <string name="btn_feedback">意见反馈</string>
     <string name="btn_me_about">关于颜究院</string>
     <string name="btn_wx_account">官方微信</string>
@@ -142,7 +165,7 @@
     <string name="btn_check_update">检测新版本</string>
     <string name="btn_add_expiration">添加到保质期提醒</string>
     <string name="btn_login">登录</string>
-    <string name="btn_like">长草</string>
+    <string name="btn_product_like">长草</string>
     <string name="btn_register">注册</string>
     <string name="btn_to_register">新用户注册</string>
     <string name="btn_forgot_password">忘记密码？</string>
@@ -156,6 +179,7 @@
     <string name="btn_next_time">下次再说</string>
     <string name="btn_i_know">我知道了</string>
     <string name="btn_done">完成</string>
+    <string name="btn_like">点赞</string>
 
     <string name="hint_add_comment">写评论…</string>
     <string name="hint_home_search">查询%d种护肤品的成分和功效</string>
@@ -243,7 +267,8 @@
     <string name="text_why_bind_mobile_title">为什么要绑定手机号</string>
     <string name="text_why_bind_mobile">&#160;&#160;&#160;&#160;根据国家网络信息办公室颁布的《移动互联网应用程序信息服务管理规定》&#160;从2016年8月1日起，互联网注册用户应当提供基于移动电话号码等方式的真实身份信息，所以需要你绑定手机号码。</string>
     <string name="text_billboard">排行榜</string>
-
+    <string name="text_billboard_more">查看更多排行榜 >></string>
+    <string name="text_product_billboard">产品排行榜</string>
     <!--用户相关-->
     <string name="text_no_bind_mobile">您还没有绑定手机号</string>
     <string name="text_desc_bind_mobile">绑定手机后，可以用手机号\n登录颜究院</string>

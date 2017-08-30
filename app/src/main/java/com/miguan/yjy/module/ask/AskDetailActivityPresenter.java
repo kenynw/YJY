@@ -65,7 +65,7 @@ public class AskDetailActivityPresenter extends BaseListActivityPresenter<AskDet
                             @Override
                             public View onCreateView(ViewGroup parent) {
                                 View view = LayoutInflater.from(getView()).inflate(R.layout.header_ask_detail, null);
-                                TextView tv = ButterKnife.findById(view, R.id.tv_ask_header_num);
+                                TextView tv = view.findViewById(R.id.tv_ask_header_num);
                                 tv.setText("共" + ask.getPageTotal() + "条回答");
                                 return view;
                             }

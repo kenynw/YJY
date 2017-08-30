@@ -24,10 +24,6 @@ public class ArticleModel extends AbsModel {
         return getInstance(ArticleModel.class);
     }
 
-    public Observable<Home> getHomeList() {
-        return ServicesClient.getServices().home(UserPreferences.getToken()).compose(new DefaultTransform<>());
-    }
-
     /**
      * 文章列表
      * @param page

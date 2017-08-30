@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/spacing_normal"
+    android:layout_marginRight="@dimen/spacing_normal"
+    android:background="@drawable/bg_radius_white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/spacing_large"
+    android:paddingLeft="@dimen/spacing_small"
+    android:paddingRight="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_large"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_ask_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_ask_product_image"
+            style="@style/BaseImage.Product"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:background="@color/bgWindow"
+            />
+
+        <com.miguan.yjy.widget.SuperTextView
+            android:id="@+id/tv_ask_label"
+            style="@style/SuperTextAsk"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_toEndOf="@id/dv_ask_product_image"
+            android:layout_toRightOf="@id/dv_ask_product_image"
+            />
+
+        <TextView
+            android:id="@+id/tv_ask_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@id/tv_ask_label"
+            android:layout_toRightOf="@id/tv_ask_label"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextSubhead"
+            tools:text="适不适合敏感皮？"
+            />
+
+        <TextView
+            android:id="@+id/tv_ask_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_ask_label"
+            android:layout_alignStart="@id/tv_ask_label"
+            android:layout_below="@id/tv_ask_title"
+            android:layout_marginBottom="@dimen/spacing_tiny"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/textTertiary"
+            android:textSize="@dimen/text_size_caption"
+            tools:text="暂无回复"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_ask_to_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rl_ask_top"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:gravity="center_vertical"
+        android:text="@string/text_to_answer"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_caption"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_ask_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_ask_to_detail"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginTop="-10dp"
+        android:layout_toLeftOf="@id/tv_ask_to_detail"
+        android:layout_toStartOf="@id/tv_ask_to_detail"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_small"
+        android:paddingRight="@dimen/spacing_large"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_small"
+        >
+
+        <ImageView
+            android:id="@+id/iv_ask_like_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_like_normal"
+            />
+
+        <TextView
+            android:id="@+id/tv_ask_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tiny"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:text="@string/btn_like"
+            android:textAppearance="@style/TextCaption"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

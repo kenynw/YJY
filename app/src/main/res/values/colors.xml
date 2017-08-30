@@ -17,10 +17,13 @@
 
     <!--文本颜色，添加text前缀-->
     <color name="textPrimary">#222</color>
+    <color name="textPrimary2">#333</color>
     <color name="textSecondary">#999</color>
     <color name="textTertiary">#666</color>
+    <color name="textTertiary2">#BBB</color>
     <color name="textHint">#FFCDCDCD</color>
     <color name="textYellow">#fdff00</color>
+    <color name="textPrimaryProduct">#555</color>
 
     <!--分割线颜色，添加div前缀-->
     <color name="divPrimary">#FFEEEEEE</color>

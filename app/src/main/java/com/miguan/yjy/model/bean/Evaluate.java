@@ -65,8 +65,6 @@ public class Evaluate implements Parcelable {
 
     private int addMoney;
 
-
-
     public int getIs_digest() {
         return is_digest;
     }

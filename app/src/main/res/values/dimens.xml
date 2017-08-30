@@ -16,7 +16,7 @@
     <dimen name="text_size_subhead">17sp</dimen>
     <dimen name="text_size_body">15sp</dimen>
     <dimen name="text_size_caption">13sp</dimen>
-    <dimen name="text_size_tiny">9sp</dimen>
+    <dimen name="text_size_tiny">10sp</dimen>
 
     <!-- 超小号 -->
     <dimen name="text_size_micro_11">11sp</dimen>

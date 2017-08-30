@@ -44,14 +44,17 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
     @Override
     public ListConfig getListConfig() {
         View view = LayoutInflater.from(this).inflate(R.layout.empty_common_list, null);
-        TextView tv = (TextView) view.findViewById(R.id.tv_empty);
+        TextView tv = view.findViewById(R.id.tv_empty);
         tv.setText("还没有添加长草的产品哦~");
 
         Drawable drawable = getResources().getDrawable(R.mipmap.ic_empty_like);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         tv.setCompoundDrawables(null, drawable, null, null);
 
-        return super.getListConfig().setContainerEmptyView(view);
+        return super.getListConfig()
+                .setContainerLayoutRes(R.layout.user_activity_like)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
+                .setContainerEmptyView(view);
     }
 
     public void setData(ProductList productList) {
@@ -67,7 +70,7 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
                 if (!TextUtils.isEmpty(text)) {
                     getPresenter().setEffect(text);
                 }
-                if (cateId <= 0 && text.isEmpty()){
+                if (cateId <= 0 && text.isEmpty()) {
                     getPresenter().setEffect("");
                     getPresenter().setCateId(0);
                 }

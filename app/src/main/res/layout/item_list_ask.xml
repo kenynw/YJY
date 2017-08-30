@@ -1,152 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/spacing_small"
-    android:layout_marginRight="@dimen/spacing_small"
-    android:layout_marginTop="@dimen/spacing_small"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="0dp"
-    app:contentPaddingBottom="@dimen/spacing_large"
-    app:contentPaddingLeft="@dimen/spacing_small"
-    app:contentPaddingRight="@dimen/spacing_small"
-    app:contentPaddingTop="@dimen/spacing_large"
+    android:layout_marginLeft="@dimen/spacing_normal"
+    android:layout_marginRight="@dimen/spacing_normal"
+    android:background="@drawable/bg_radius_white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/spacing_large"
+    android:paddingLeft="@dimen/spacing_small"
+    android:paddingRight="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_large"
     >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rl_ask_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="vertical"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_ask_product_image"
+            style="@style/BaseImage.Product"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:background="@color/bgWindow"
+            />
+
+        <com.miguan.yjy.widget.SuperTextView
+            android:id="@+id/tv_ask_label"
+            style="@style/SuperTextAsk"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_toEndOf="@id/dv_ask_product_image"
+            android:layout_toRightOf="@id/dv_ask_product_image"
+            />
+
+        <TextView
+            android:id="@+id/tv_ask_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/spacing_normal"
-            >
+            android:layout_marginLeft="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@id/tv_ask_label"
+            android:layout_toRightOf="@id/tv_ask_label"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextSubhead"
+            tools:text="适不适合敏感皮？"
+            />
 
-            <com.miguan.yjy.widget.SuperTextView
-                style="@style/SuperTextAsk"
-                />
-
-            <TextView
-                android:id="@+id/tv_ask_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_tiny"
-                android:layout_marginStart="@dimen/spacing_tiny"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:textColor="@color/textPrimary"
-                android:textSize="17sp"
-                tools:text="适合敏感皮吗？"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_ask_content"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_ask_desc"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_alignLeft="@id/tv_ask_label"
+            android:layout_alignStart="@id/tv_ask_label"
+            android:layout_below="@id/tv_ask_title"
+            android:layout_marginBottom="@dimen/spacing_tiny"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/textTertiary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="暂无回复"
+            />
 
-            <com.miguan.yjy.widget.SuperTextView
-                style="@style/SuperTextAskAnswer"
-                />
+    </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_tiny"
-                android:layout_marginStart="@dimen/spacing_tiny"
-                android:orientation="vertical"
-                >
+    <TextView
+        android:id="@+id/tv_ask_to_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rl_ask_top"
+        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:gravity="center_vertical"
+        android:text="@string/text_to_answer"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_caption"
+        />
 
-                <TextView
-                    android:id="@+id/tv_ask_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="5"
-                    android:textAppearance="@style/TextBody"
-                    tools:text="成分含有酒精和一些防腐剂，对于极度敏感皮来说，还是有一定的致敏风险的。但是加了一些中和的成分，如角鲨烷，还是可以减掉这些成分带来的刺激性的。建议你先买小样试试吧！"
-                    />
+    <LinearLayout
+        android:id="@+id/ll_ask_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_ask_to_detail"
+        android:layout_marginBottom="-10dp"
+        android:layout_marginTop="-10dp"
+        android:layout_toLeftOf="@id/tv_ask_to_detail"
+        android:layout_toStartOf="@id/tv_ask_to_detail"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_small"
+        android:paddingRight="@dimen/spacing_large"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_small"
+        >
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:id="@+id/tv_ask_view_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="@dimen/text_size_caption_material"
-                        tools:text="@string/text_view_more_answer"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_ask_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:textAppearance="@style/TextCaption"
-                        tools:text="2018-90-33 34:33"
-                        />
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_ask_null"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/iv_ask_like_icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            >
+            android:src="@mipmap/ic_like_normal"
+            />
 
-            <com.miguan.yjy.widget.SuperTextView
-                style="@style/SuperTextAskNoAnswer"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_tiny"
-                android:layout_marginStart="@dimen/spacing_tiny"
-                android:layout_weight="1"
-                android:text="@string/text_null"
-                android:textAppearance="@style/TextBody"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@mipmap/ic_more"
-                android:drawablePadding="7dp"
-                android:drawableRight="@mipmap/ic_more"
-                android:text="@string/text_to_answer"
-                android:textColor="@color/textSecondary"
-                android:textSize="13sp"
-                />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_ask_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tiny"
+            android:layout_marginStart="@dimen/spacing_tiny"
+            android:text="@string/btn_like"
+            android:textAppearance="@style/TextCaption"
+            />
 
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>

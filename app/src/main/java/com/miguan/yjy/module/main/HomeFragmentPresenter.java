@@ -1,32 +1,13 @@
 package com.miguan.yjy.module.main;
 
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import com.dsk.chain.expansion.list.BaseListFragmentPresenter;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.BannerPagerAdapter;
 import com.miguan.yjy.adapter.viewholder.ArticleCate;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ArticleModel;
+import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.model.bean.Home;
-import com.miguan.yjy.module.account.LoginActivity;
-import com.miguan.yjy.module.product.QueryCodeActivity;
-import com.miguan.yjy.module.user.UsedListActivity;
-import com.miguan.yjy.utils.LUtils;
-import com.miguan.yjy.widget.CirclePageIndicator;
-import com.miguan.yjy.widget.HeadViewPager;
-import com.miguan.yjy.widget.LoadingImageView;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Copyright (c) 2017/3/20. LiaoPeiKun Inc. All rights reserved.
@@ -44,10 +25,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     @Override
     protected void onCreateView(HomeFragment view) {
         super.onCreateView(view);
-        if (getAdapter().getHeaderCount() == 0 ) {
-            HomeHeader homeHeader = new HomeHeader();
-            getAdapter().addHeader(homeHeader);
-        }
 
         ArrayList<Evaluate> evaluates = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -59,14 +36,14 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
 
     @Override
     public void onRefresh() {
-        ArticleModel.getInstance().getHomeList()
+        CommonModel.getInstance().getHomeList()
                 .map(home -> {
                     mIsInit = true;
                     mIsLogin = AccountModel.getInstance().isLogin();
 
                     mArticleCates = home.getArticleGory();
                     getView().setSearchHint(home.getNum());
-                    ((HomeHeader) getAdapter().getHeader(0)).setHome(home);
+                    getView().setHeader(home);
                     return home.getEvaluateList();
                 })
                 .doOnCompleted(() -> getView().setScrollListener())
@@ -93,66 +70,6 @@ public class HomeFragmentPresenter extends BaseListFragmentPresenter<HomeFragmen
     @Override
     public ArrayList<ArticleCate> getCates() {
         return mArticleCates;
-    }
-
-    public class HomeHeader implements RecyclerArrayAdapter.ItemView {
-
-        @BindView(R.id.hv_home_banner)
-        HeadViewPager mHvBanner;
-
-        @BindView(R.id.indicator_main_home)
-        CirclePageIndicator mIndicator;
-
-        @BindView(R.id.btn_home_query_batch)
-        ImageView mIvQuery;
-
-        @BindView(R.id.btn_home_my_product)
-        ImageView mIvMyProduct;
-
-        @BindView(R.id.iv_home_evaluate_label)
-        LoadingImageView mIvEvaluateLabel;
-
-        private Home mHome;
-
-        public HomeHeader() {
-
-        }
-
-        @Override
-        public View onCreateView(ViewGroup parent) {
-            View view = LayoutInflater.from(getView().getActivity()).inflate(R.layout.header_main_home, parent, false);
-            ButterKnife.bind(this, view);
-
-            ViewGroup.LayoutParams lp = mHvBanner.getLayoutParams();
-            lp.height = (int) (LUtils.getScreenWidth() / 1.7);
-            mHvBanner.setLayoutParams(lp);
-
-            return view;
-        }
-
-        @Override
-        public void onBindView(View headerView) {
-            if (mHome != null) {
-                mIvQuery.setImageResource(R.mipmap.bg_home_query);
-                mIvQuery.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(), QueryCodeActivity.class)));
-                mIvMyProduct.setImageResource(R.mipmap.bg_home_repository);
-                mIvMyProduct.setOnClickListener(v -> getView().startActivity(new Intent(getView().getActivity(),
-                        AccountModel.getInstance().isLogin() ? UsedListActivity.class : LoginActivity.class)));
-                mIvEvaluateLabel.setImageResource(R.mipmap.bg_commend_evaluate);
-
-                if (mHome.getBanner() != null && mHome.getBanner().size() > 0) {
-                    mHvBanner.setAdapter(new BannerPagerAdapter(getView().getActivity(), mHome.getBanner()));
-                    mIndicator.setViewPager(mHvBanner);
-                }
-                if (mHome.getBanner() != null && mHome.getBanner().size() <= 1)
-                    mIndicator.setVisibility(View.GONE);
-            }
-        }
-
-        public void setHome(Home home) {
-            mHome = home;
-        }
-
     }
 
 }

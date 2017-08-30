@@ -1,66 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     >
 
-    <include layout="@layout/include_toolbar"/>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/bgWindow"
-        />
-
-    <EditText
-        android:id="@+id/et_input_content"
-        android:layout_width="match_parent"
-        android:layout_height="97dp"
-        android:layout_marginBottom="@dimen/spacing_large"
-        android:layout_marginLeft="@dimen/spacing_normal"
-        android:layout_marginRight="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="start"
-        android:hint="@string/hint_add_comment"
-        android:inputType="textMultiLine"
-        android:textColor="@color/textPrimary"
-        android:textColorHint="@color/text_hint"
-        android:textSize="@dimen/text_size_body_material"
-        />
-
-    <FrameLayout
-        android:layout_width="94dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="@dimen/spacing_large"
-        android:layout_marginLeft="@dimen/spacing_normal"
-        android:layout_marginRight="@dimen/spacing_normal"
+        android:orientation="vertical"
         >
 
-        <ImageView
-            android:id="@+id/iv_evaluate_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginEnd="@dimen/spacing_small"
-            android:layout_marginRight="@dimen/spacing_small"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_add_evaluate_def_image"
+        <include layout="@layout/include_toolbar"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bgWindow"
             />
 
-        <ImageView
-            android:id="@+id/iv_evaluate_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@mipmap/ic_add_evaluate_delete_image"
-            android:visibility="gone"
+        <EditText
+            android:id="@+id/et_input_content"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@color/white"
+            android:gravity="start"
+            android:hint="@string/hint_add_comment"
+            android:inputType="textMultiLine"
+            android:textColor="@color/textPrimary"
+            android:textColorHint="@color/text_hint"
+            android:textSize="@dimen/text_size_body_material"
             />
 
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="94dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_normal"
+            android:layout_marginRight="@dimen/spacing_normal"
+            >
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/iv_evaluate_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginRight="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_add_evaluate_def_image"
+                />
+
+            <ImageView
+                android:id="@+id/iv_evaluate_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@mipmap/ic_add_evaluate_delete_image"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/include_default_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        />
+
+</FrameLayout>

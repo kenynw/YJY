@@ -25,9 +25,15 @@ public class Ask extends EntityList<Ask> {
 
     private String subject;
 
+    private int askReplyId;
+
     private String reply;
 
     private int num;
+
+    private int like_num;
+
+    private int is_like;
 
     private long add_time;
 
@@ -83,6 +89,14 @@ public class Ask extends EntityList<Ask> {
         this.subject = subject;
     }
 
+    public int getAskReplyId() {
+        return askReplyId;
+    }
+
+    public void setAskReplyId(int askReplyId) {
+        this.askReplyId = askReplyId;
+    }
+
     public String getReply() {
         return reply;
     }
@@ -97,6 +111,22 @@ public class Ask extends EntityList<Ask> {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public int getLike_num() {
+        return like_num;
+    }
+
+    public void setLike_num(int like_num) {
+        this.like_num = like_num;
+    }
+
+    public int getIs_like() {
+        return is_like;
+    }
+
+    public void setIs_like(int is_like) {
+        this.is_like = is_like;
     }
 
     public String getAdd_time() {
@@ -134,28 +164,36 @@ public class Ask extends EntityList<Ask> {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
         dest.writeInt(this.product_id);
         dest.writeString(this.product_name);
         dest.writeString(this.product_img);
         dest.writeInt(this.type);
         dest.writeInt(this.askid);
         dest.writeString(this.subject);
+        dest.writeInt(this.askReplyId);
         dest.writeString(this.reply);
         dest.writeInt(this.num);
+        dest.writeInt(this.like_num);
+        dest.writeInt(this.is_like);
         dest.writeLong(this.add_time);
         dest.writeParcelable(this.user_info, flags);
         dest.writeTypedList(this.question_list);
     }
 
     protected Ask(Parcel in) {
+        super(in);
         this.product_id = in.readInt();
         this.product_name = in.readString();
         this.product_img = in.readString();
         this.type = in.readInt();
         this.askid = in.readInt();
         this.subject = in.readString();
+        this.askReplyId = in.readInt();
         this.reply = in.readString();
         this.num = in.readInt();
+        this.like_num = in.readInt();
+        this.is_like = in.readInt();
         this.add_time = in.readLong();
         this.user_info = in.readParcelable(User.class.getClassLoader());
         this.question_list = in.createTypedArrayList(Ask.CREATOR);

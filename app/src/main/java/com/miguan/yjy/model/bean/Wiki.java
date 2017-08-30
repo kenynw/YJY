@@ -9,32 +9,36 @@ import java.util.ArrayList;
  * @作者 cjh
  * @日期 2017/7/25 9:42
  * @描述
+ *    id(int) － 百科ID
+ *    question(string) － 问题
+ *    content(string) － 答案
+ *    share_url(string) － 分享链接
+ *    relation_info(array) － 关联百科信息
+ *    id(int) － 关联百科ID
+ *    question(string) － 关联百科问题
+ *    shortcontent(string) － 短答案
+ *    picture(string) － 图片
+ *    is_like(string) － 是否点赞（1已点2未点）
+ *    like_num(int) － 点赞数量
  */
-
 public class Wiki implements Parcelable {
 
-    //    id(int) － 百科ID
-//    question(string) － 问题
-//    content(string) － 答案
-//    share_url(string) － 分享链接
-//    relation_info(array) － 关联百科信息
-//    id(int) － 关联百科ID
-//    question(string) － 关联百科问题
-
-//    shortcontent(string) － 短答案
-//    picture(string) － 图片
-//    is_like(string) － 是否点赞（1已点2未点）
-//     like_num(int) － 点赞数量
-
-
     private int id;
+
     private String question;
+
     private String content;
+
     private ArrayList<Wiki> relation_info;
+
     private String share_url;
+
     private String shortcontent;
+
     private String picture;
+
     private String is_like;
+
     private int like_num;
 
     public int getLike_num() {
@@ -43,14 +47,6 @@ public class Wiki implements Parcelable {
 
     public void setLike_num(int like_num) {
         this.like_num = like_num;
-    }
-
-    public String getShortcontent() {
-        return shortcontent;
-    }
-
-    public void setShortcontent(String shortcontent) {
-        this.shortcontent = shortcontent;
     }
 
     public String getPicture() {
@@ -101,6 +97,14 @@ public class Wiki implements Parcelable {
         this.content = content;
     }
 
+    public String getShortcontent() {
+        return shortcontent;
+    }
+
+    public void setShortcontent(String shortcontent) {
+        this.shortcontent = shortcontent;
+    }
+
     public ArrayList<Wiki> getRelation_info() {
         return relation_info;
     }
@@ -123,6 +127,7 @@ public class Wiki implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.question);
         dest.writeString(this.content);
+        dest.writeString(this.shortcontent);
         dest.writeTypedList(this.relation_info);
         dest.writeString(this.share_url);
         dest.writeString(this.shortcontent);
@@ -135,6 +140,7 @@ public class Wiki implements Parcelable {
         this.id = in.readInt();
         this.question = in.readString();
         this.content = in.readString();
+        this.shortcontent = in.readString();
         this.relation_info = in.createTypedArrayList(Wiki.CREATOR);
         this.share_url = in.readString();
         this.shortcontent = in.readString();
@@ -154,4 +160,5 @@ public class Wiki implements Parcelable {
             return new Wiki[size];
         }
     };
+
 }

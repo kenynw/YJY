@@ -19,13 +19,8 @@
         >
 
         <TextView
-            android:id="@id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:maxLines="1"
+            style="@style/ToolbarTitle"
             android:text="@string/text_test"
-            android:textAppearance="@style/TextSubhead"
             />
 
     </android.support.v7.widget.Toolbar>
