@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,12 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.BannerPagerAdapter;
 import com.miguan.yjy.adapter.MySkinAdapter;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Discover;
+import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.bean.Wiki;
+import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.ask.AnswerListActivity;
 import com.miguan.yjy.module.ask.AskDiscoverViewHolder;
 import com.miguan.yjy.module.template.TemplatesActivity;
@@ -113,7 +117,13 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
         mRvWikis.setAdapter(mWikiAdapter);
         mRvWikis.addItemDecoration(decoration);
 
-        mTvSkin.setOnClickListener(v -> startActivity(new Intent(getActivity(), TestInitActivity.class)));
+        mTvSkin.setOnClickListener(v -> {
+            if (AccountModel.getInstance().isLogin()) {
+                startActivity(new Intent(getActivity(), TestInitActivity.class));
+            } else {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+        });
 
         return view;
     }
@@ -128,8 +138,12 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
             mIndicatorBanner.setViewPager(mVpBanner);
         }
 
-        mGridSkin.setAdapter(new MySkinAdapter(getActivity(), discover.getUserSkin(), true));
-        if (discover.getUserSkin().size() == 4) {
+        mGridSkin.setAdapter(new MySkinAdapter(getActivity(), discover.getUserSkin()));
+        boolean completed = true;
+        for (Skin skin : discover.getUserSkin()) {
+            completed = completed && !TextUtils.isEmpty(skin.getLetter());
+        }
+        if (completed) {
             mTvSkin.setText(R.string.text_my_skin_detail);
             mTvSkin.setOnClickListener(v -> startActivity(new Intent(getActivity(), TestResultActivity.class)));
         }

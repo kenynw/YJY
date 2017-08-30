@@ -13,11 +13,17 @@ public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<Discove
     @Override
     protected void onCreateView(DiscoverFragment view) {
         super.onCreateView(view);
-        loadData();
     }
 
     private void loadData() {
-        CommonModel.getInstance().getDiscover().unsafeSubscribe(getSubscriber());
+        CommonModel.getInstance().getDiscover()
+                .unsafeSubscribe(getSubscriber());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
 
 }

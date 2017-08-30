@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,39 +20,23 @@ import java.util.List;
 
 public class MySkinAdapter extends BaseAdapter {
 
-    private final String[] DEFAULT_NAME = new String[] {"干/油", "敏感度", "色素性", "皱纹性"};
-
     private Context mContext;
 
     private List<Skin> mSkinList;
 
-    private boolean mShowDefault;
-
-    public MySkinAdapter(Context context, List<Skin> objects) {
-        this(context, objects, false);
-    }
-
-    public MySkinAdapter(Context context, List<Skin> skinList, boolean showDefault) {
+    public MySkinAdapter(Context context, List<Skin> skinList) {
         mContext = context;
         mSkinList = skinList;
-        mShowDefault = showDefault;
     }
 
     @Override
     public int getCount() {
-        return mShowDefault ? 4 : mSkinList.size();
+        return mSkinList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        if (mShowDefault && position >= mSkinList.size()) {
-            Skin skin = new Skin();
-            skin.setName(DEFAULT_NAME[position]);
-            skin.setLetter("?");
-            return skin;
-        } else {
-            return mSkinList.get(position);
-        }
+        return mSkinList.get(position);
     }
 
     @Override
@@ -72,7 +57,7 @@ public class MySkinAdapter extends BaseAdapter {
             mySkinViewHolder = (MySkinViewHolder) convertView.getTag();
         }
         Skin skin = (Skin) getItem(position);
-        mySkinViewHolder.mTvSkinLetter.setText(skin.getLetter());
+        mySkinViewHolder.mTvSkinLetter.setText(TextUtils.isEmpty(skin.getLetter()) ? "?" : skin.getLetter());
         mySkinViewHolder.mTvSkinName.setText(skin.getName());
         return convertView;
     }
