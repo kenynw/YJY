@@ -54,12 +54,12 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
                 .map((Func1<Wiki, List<Wiki>>) wiki -> {
                     if (wiki.getIs_like().equals("0")) {
                         wiki.setIs_like("1");
-                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                        getView().mTvWikiLikeNum.setCompoundDrawables(drawable, null, null, null);
-                    } else {
-                        wiki.setIs_like("0");
                         drawableNormal.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                         getView().mTvWikiLikeNum.setCompoundDrawables(drawableNormal, null, null, null);
+                    } else {
+                        wiki.setIs_like("0");
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                        getView().mTvWikiLikeNum.setCompoundDrawables(drawable, null, null, null);
                     }
                     getView().mTvWikiLikeNum.setOnClickListener(v -> addBaikeLike(wiki));
                     if (wiki.getLike_num() <= 0) {
@@ -98,10 +98,14 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
                     wiki.setIs_like("1");
                     drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     getView().mTvWikiLikeNum.setCompoundDrawables(drawable, null, null, null);
+                    getView().mTvWikiLikeNum.setText((wiki.getLike_num()+1)+"");
                 } else {
                     wiki.setIs_like("0");
                     drawableNormal.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     getView().mTvWikiLikeNum.setCompoundDrawables(drawableNormal, null, null, null);
+                    if (wiki.getLike_num() > 0) {
+                        getView().mTvWikiLikeNum.setText((wiki.getLike_num()-1)+"");
+                    }
                 }
             }
         });

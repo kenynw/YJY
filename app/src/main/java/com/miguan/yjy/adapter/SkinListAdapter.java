@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -87,7 +87,7 @@ public class SkinListAdapter extends RecyclerView.Adapter<SkinListAdapter.MyView
         @BindView(R.id.tv_test_list_name)
         TextView mTvTestListName;
         @BindView(R.id.ll_test_more)
-        LinearLayout mLlTestMore;
+        FrameLayout mLlTestMore;
 
         public MyViewHolder(View itemView) {
             super(itemView);

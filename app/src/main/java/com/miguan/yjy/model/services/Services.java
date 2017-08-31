@@ -893,7 +893,8 @@ public interface Services {
      */
     @GET("?action=BaikeInfo")
     Observable<Wiki> getBaikeInfo(
-            @Query("baike_id") String baikeId
+            @Query("baike_id") String baikeId,
+            @Query("token") String token
     );
 
     /**

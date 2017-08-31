@@ -121,7 +121,7 @@ public class TestModel extends AbsModel {
      * 护肤百科详情页
      */
     public Observable<Wiki> getBaikeInfo(String baikeId) {
-        return ServicesClient.getServices().getBaikeInfo(baikeId).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().getBaikeInfo(baikeId,UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     /**

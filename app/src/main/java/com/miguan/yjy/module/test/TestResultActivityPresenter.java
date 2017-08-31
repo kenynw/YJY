@@ -95,6 +95,10 @@ public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestR
                             //显示肤质测试主页
 //                            loadFirstData();
                             UserPreferences.setIsShowTest(true);
+                            Intent intent = new Intent(getView(), TestInitActivity.class);
+                            getView().startActivity(intent);
+                            getView().finish();
+
                         }
                     });
                 }
@@ -115,7 +119,6 @@ public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestR
         }
 
     }
-
 
 
 }

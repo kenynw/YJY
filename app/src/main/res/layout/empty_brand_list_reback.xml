@@ -7,6 +7,12 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:src="@mipmap/ic_product_no_find"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,18 +41,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="进行反馈我们会尽快添加^^"
+            android:text="进行反馈"
             android:textColor="@color/textSecondary"
             android:textSize="@dimen/text_size_body_material"
             />
-
     </LinearLayout>
-
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_huge"
-        android:src="@mipmap/ic_empty_brand_list"
+        android:text="我们会尽快添加^^"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
         />
+
+
 
 </LinearLayout>

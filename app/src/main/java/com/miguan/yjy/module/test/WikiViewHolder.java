@@ -46,6 +46,7 @@ public class WikiViewHolder extends BaseViewHolder<Wiki> {
             mDvThumb.setVisibility(View.VISIBLE);
             mDvThumb.setImageURI(data.getPicture());
         }
+        itemView.setOnClickListener(v->WikiAskActivityPresenter.start(getContext(),data.getId()+"") );
     }
 
 }

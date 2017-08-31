@@ -74,5 +74,4 @@ public class TestResultActivity extends BaseDataActivity<TestResultActivityPrese
         getPresenter().loadMainData();
     }
 
-
 }

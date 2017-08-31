@@ -1,9 +1,11 @@
 package com.miguan.yjy.module.test;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -241,11 +243,30 @@ public class TestInitActivity extends BaseDataActivity<TestInitActivityPresenter
 //                  setData();显示我的肤质
 //                   setSencondData();
                     UserPreferences.setIsShowTest(false);
+                    intent = new Intent(TestInitActivity.this, TestResultActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     getPresenter().startToLogin();
                 }
                 break;
         }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("testInitResult", requestCode + "==" + resultCode);
+        if (resultCode == 0) {
+            switch (requestCode) {
+                case Activity.RESULT_FIRST_USER:
+                    getPresenter().loadFirstData();
+                    break;
+            }
+
+        }
+
     }
 
 
