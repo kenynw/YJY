@@ -21,7 +21,6 @@ import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.module.product.ProductRemarkPresenter;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 
@@ -110,11 +109,6 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
 
         mIsLike = data.getIsLike();
         setLike(data);
-    }
-
-    @Override
-    public int getContentTextWidth() {
-        return LUtils.getScreenWidth() - LUtils.dp2px(50);
     }
 
     protected void setLike(Evaluate data) {

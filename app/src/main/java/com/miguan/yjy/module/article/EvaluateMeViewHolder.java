@@ -10,7 +10,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 
@@ -76,11 +75,6 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
                 mLlArticle.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getDetail().getId()));
             }
         }
-    }
-
-    @Override
-    public int getContentTextWidth() {
-        return (int) (LUtils.getScreenWidth() - getDimen(R.dimen.spacing_large));
     }
 
 }

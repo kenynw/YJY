@@ -20,7 +20,6 @@ import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
-import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 
@@ -109,11 +108,6 @@ public class EvaluateViewHolder extends BaseEvaluateViewHolder {
                     data.getReply().getAuthor(), data.getReply().getComment())));
         }
 
-    }
-
-    @Override
-    public int getContentTextWidth() {
-        return (int) (LUtils.getScreenWidth() - getDimen(R.dimen.widget_medium) - getDimen(R.dimen.spacing_normal) * 3);
     }
 
     protected void setLike(Evaluate data) {

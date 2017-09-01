@@ -49,8 +49,6 @@ import butterknife.Unbinder;
 @RequiresPresenter(DiscoverFragmentPresenter.class)
 public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter, Discover> implements View.OnClickListener {
 
-    private Unbinder mUnbinder;
-
     @BindView(R.id.vp_discover_banner)
     HeadViewPager mVpBanner;
 
@@ -80,6 +78,8 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
 
     @BindView(R.id.rv_discover_wikis)
     RecyclerView mRvWikis;
+
+    private Unbinder mUnbinder;
 
     private RecyclerArrayAdapter<Ask> mAskAdapter = new RecyclerArrayAdapter<Ask>(getActivity()) {
         @Override
