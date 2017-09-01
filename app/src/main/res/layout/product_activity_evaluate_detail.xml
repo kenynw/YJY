@@ -8,10 +8,13 @@
 
     <include layout="@layout/include_toolbar"/>
 
+    <include layout="@layout/include_detail_top_bar"/>
+
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_marginTop="1dp"
         android:layout_weight="1"
         >
 

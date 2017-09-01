@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -55,11 +54,15 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     private SearchListTask mSearchListTask;
 
+    private boolean mCanAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.text_brand_list);
         ButterKnife.bind(this);
+
+        LUtils.log("result: " + mCanAdd);
 
         mTvClear.setOnClickListener(v -> finish());
         mEtSearch.addTextChangedListener(this);
@@ -81,6 +84,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             public void onTouchUp() {
                 mTvIndex.setVisibility(View.GONE);
             }
+
         });
     }
 
@@ -93,13 +97,21 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
 
     @Override
     public ListConfig getListConfig() {
-        View emptyBrandView = View.inflate(this, R.layout.empty_brand_list, null);
-        View rebackView = View.inflate(this, R.layout.empty_brand_list_reback, null);
-        rebackView.findViewById(R.id.tv_empty_brand_reback).setOnClickListener(v -> startActivity(new Intent(BrandListActivity.this, FeedbackActivity.class)));
+        View emptyView;
+
+        mCanAdd = getIntent().getBooleanExtra(BrandListPresenter.EXTRA_EMPTY_TYPE, false);
+        if (mCanAdd) {
+            emptyView = View.inflate(this, R.layout.empty_brand_list, null);
+        } else {
+            emptyView = View.inflate(this, R.layout.empty_brand_list_reback, null);
+            emptyView.findViewById(R.id.tv_empty_brand_reback)
+                    .setOnClickListener(v -> startActivity(new Intent(BrandListActivity.this, FeedbackActivity.class)));
+        }
+
         return super.getListConfig().setRefreshAble(false)
-                .setContainerEmptyView(getPresenter().mEmptyType == 3 ? emptyBrandView : rebackView)
+                .setContainerEmptyView(emptyView)
                 .setLoadMoreAble(false)
-                .setNoMoreAble(false)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
                 .setContainerLayoutRes(R.layout.product_brand_list_activity);
     }
 
@@ -189,8 +201,8 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             getPresenter().getAdapter().clear();
             getPresenter().getAdapter().addAll(mInSearchMode ? mFilterList : getPresenter().getBrandList());
             mIndexer.setVisibility(mInSearchMode ? View.GONE : View.VISIBLE);
-            mTvClear.setText(getPresenter().mEmptyType == 3&&mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
-            Log.e("mEmptyType", getPresenter().mEmptyType+"");
+            mTvClear.setText(mCanAdd && mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
+
             mTvClear.setOnClickListener(v -> {
                 if (mInSearchMode && mFilterList.size() == 0) {
                     Brand brand = new Brand();
@@ -215,4 +227,5 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
     public int[] getHideSoftViewIds() {
         return new int[]{R.id.et_brand_list_search};
     }
+
 }

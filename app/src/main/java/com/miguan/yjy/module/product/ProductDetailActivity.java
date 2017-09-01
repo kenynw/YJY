@@ -403,14 +403,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             }
         });
 
-        mBtnAsk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mIsShowAnim) {
-                    showOutAnim();
-                } else {
-                    AskListActivityPresenter.start(ProductDetailActivity.this, product.getId());
-                }
+        mBtnAsk.setOnClickListener(view -> {
+            if (mIsShowAnim) {
+                showOutAnim();
+            } else {
+                AskListActivityPresenter.start(ProductDetailActivity.this, product.getId());
             }
         });
         if (product.getIs_top() > 0) {
@@ -418,17 +415,23 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         } else {
             mIvIsTop.setVisibility(View.GONE);
         }
-        mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
         if (!TextUtils.isEmpty(product.getProduct_img())) {
-            mDvThumb.setOnClickListener(v -> LargeImageActivity.start(ProductDetailActivity.this, product.getProduct_img()));
+            mDvThumb.setImageURI(Uri.parse(product.getProduct_img()));
+            mDvThumb.setOnClickListener(v -> {
+                String url = product.getProduct_img();
+                if (url.contains("@")) {
+                    url = url.substring(0, url.lastIndexOf("@"));
+                }
+                LargeImageActivity.start(ProductDetailActivity.this, url);
+            });
         }
         mTvName.setText(product.getProduct_name());
-        String spec = String.format(TextUtils.isEmpty(product.getForm()) ? getString(R.string.text_product_no_spec) : getString(R.string.text_product_spec), product.getPrice(), product.getForm());
         mTvSpec.setText(product.getSpec(ProductDetailActivity.this));
 
         if (product.getTagList().size() >= 2) {
             StringBuilder sb = new StringBuilder();
-            sb.append("#").append(product.getTagList().get(0)).append("   #").append(product.getTagList().get(1));
+            sb.append("#").append(product.getTagList().get(0))
+                    .append("   #").append(product.getTagList().get(1));
             mTvTag.setText(sb);
         } else if (product.getTagList().size() == 1) {
             mTvTag.setText("#" + product.getTagList().get(0));
@@ -475,18 +478,15 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         );
 
         //去比价
-        mTvTaobao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (LUtils.checkPackage("com.taobao.taobao")) {
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse(product.getBuy().getTaobao()); // 淘宝商品的地址
-                    intent.setData(content_url);
-                    startActivity(intent);
-                } else {
-                    WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao());
-                }
+        mTvTaobao.setOnClickListener(v -> {
+            if (LUtils.checkPackage("com.taobao.taobao")) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(product.getBuy().getTaobao()); // 淘宝商品的地址
+                intent.setData(content_url);
+                startActivity(intent);
+            } else {
+                WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getTaobao());
             }
         });
         mTvJingdong.setOnClickListener(v -> WebViewActivity.start(ProductDetailActivity.this, product.getProduct_name(), product.getBuy().getJd()));
@@ -574,7 +574,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mTvEvaluateEmpty.setVisibility(list != null && list.size() > 0 ? View.GONE : View.VISIBLE);
         EvaluateAdapter evaluateAdapter = new EvaluateAdapter(ProductDetailActivity.this, list);
         evaluateAdapter.setMore(R.layout.default_footer_load_more, getPresenter());
-        evaluateAdapter.setNoMore(R.layout.default_footer_no_more);
+        evaluateAdapter.setNoMore(R.layout.include_default_footer);
         mRecyEvalutate.setNestedScrollingEnabled(false);
         mRecyEvalutate.setAdapter(evaluateAdapter);
         evaluateAdapter.notifyDataSetChanged();

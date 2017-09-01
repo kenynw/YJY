@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/spacing_small"
+    android:layout_marginRight="@dimen/spacing_small"
+    android:layout_marginTop="@dimen/spacing_small"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/spacing_large"
+    android:paddingLeft="@dimen/spacing_small"
+    android:paddingRight="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_large"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_my_answer_thumb"
+        style="@style/BaseImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:placeholderImage="@mipmap/def_image_product"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            >
+
+            <com.miguan.yjy.widget.SuperTextView
+                style="@style/SuperTextAsk"
+                />
+
+            <TextView
+                android:id="@+id/tv_my_answer_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/TextSubhead"
+                tools:text="适不适合敏感皮"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_my_answer_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/textTertiary"
+            android:textSize="@dimen/text_size_body_material"
+            tools:text="正常情况下是不会搓泥，除非叠加了太多层产品，油皮也要注意，如果夏天用，估计容易致痘容易致痘容..."
+            />
+
+        <TextView
+            android:id="@+id/tv_my_answer_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:textColor="@color/textSecondary"
+            android:textSize="@dimen/text_size_caption"
+            tools:text="14：32"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_my_answer_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/ic_more"
+        />
+
+</LinearLayout>

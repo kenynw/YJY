@@ -1,5 +1,7 @@
 package com.miguan.yjy.module.product;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
@@ -16,18 +18,24 @@ import java.util.List;
 public class BrandListPresenter extends BaseListActivityPresenter<BrandListActivity, Brand> implements BrandViewHolder.OnBrandDeleteListener {
 
     public static final String EXTRA_TYPE = "type";
+
     public static final String EXTRA_EMPTY_TYPE = "empty_type";
 
     private List<Brand> mBrandList;
 
-    public int mType;
-    public int mEmptyType;
+    private int mType;
+
+    public static void start(Activity context, int requestCode, boolean showAll, boolean canAdd) {
+        Intent intent = new Intent(context, BrandListActivity.class);
+        intent.putExtra(EXTRA_TYPE, showAll);
+        intent.putExtra(EXTRA_EMPTY_TYPE, canAdd);
+        context.startActivityForResult(intent, requestCode);
+    }
 
     @Override
     protected void onCreate(BrandListActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        mType = getView().getIntent().getIntExtra(EXTRA_TYPE, 0);
-        mEmptyType = getView().getIntent().getIntExtra(EXTRA_EMPTY_TYPE, 0);
+        mType = getView().getIntent().getBooleanExtra(EXTRA_TYPE, true) ? 1 : 0;
     }
 
     @Override

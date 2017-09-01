@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.ask;
 
 import android.graphics.Paint;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,14 +51,14 @@ public class AskProductViewHolder extends BaseViewHolder<Ask> {
 
     @Override
     public void setData(Ask data) {
-        mTvTitle.setText(data.getSubject());
+        mTvTitle.setText(Html.fromHtml(data.getSubject()));
         if (TextUtils.isEmpty(data.getReply())) {
             mLlAskContent.setVisibility(View.GONE);
             mLlAskNull.setVisibility(View.VISIBLE);
         } else {
             mLlAskContent.setVisibility(View.VISIBLE);
             mLlAskNull.setVisibility(View.GONE);
-            mTvContent.setText(data.getReply());
+            mTvContent.setText(Html.fromHtml(data.getReply()));
             mTvDate.setText(data.getAdd_time());
             mTvViewMore.setText(String.format(getContext().getString(R.string.text_view_more_answer), data.getNum()));
         }

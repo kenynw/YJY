@@ -1,15 +1,18 @@
 package com.miguan.yjy.module.article;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
@@ -20,6 +23,8 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.common.LargeImageActivity;
+import com.miguan.yjy.module.product.ProductDetailActivity;
+import com.miguan.yjy.module.product.ProductDetailPresenter;
 import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
@@ -35,6 +40,15 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     private EvaluatePanel mEvaluatePanel;
 
     private Evaluate mEvaluate;
+
+    @BindView(R.id.ll_detail_top_product)
+    LinearLayout mLlTopProduct;
+
+    @BindView(R.id.dv_detail_top_thumb)
+    SimpleDraweeView mDvTopThumb;
+
+    @BindView(R.id.tv_detail_top_product)
+    TextView mTvTopProduct;
 
     @BindView(R.id.dv_evaluate_thumb)
     SimpleDraweeView mDvThumb;
@@ -97,8 +111,29 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
 
     @Override
     public void setData(Evaluate evaluate) {
+        if (evaluate.getType() == 1) {
+            if (!TextUtils.isEmpty(evaluate.getProduct_img())) {
+                mDvTopThumb.setImageURI(Uri.parse(evaluate.getProduct_img()));
+            } else {
+                mDvTopThumb.setVisibility(View.GONE);
+            }
+            mLlTopProduct.setOnClickListener(v -> {
+                Intent intent = new Intent(this, ProductDetailActivity.class);
+                intent.putExtra(ProductDetailPresenter.EXTRA_PRODUCT_ID, evaluate.getPost_id());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        } else {
+            mLlTopProduct.setOnClickListener(v -> {
+                Intent intent = new Intent(this, ArticleDetailActivity.class);
+                intent.putExtra(ArticleDetailPresenter.EXTRA_ARTICLE_ID, evaluate.getPost_id());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            });
+        }
+        mTvTopProduct.setText(evaluate.getTitle());
         mEvaluatePanel.setEvaluate(evaluate);
-        mTvEvaluateContent.setText(evaluate.getComment());
+        mTvEvaluateContent.setText(Html.fromHtml(evaluate.getComment()));
         mTvReply.setVisibility(View.GONE);
 
         if (TextUtils.isEmpty(evaluate.getAttachment())) {

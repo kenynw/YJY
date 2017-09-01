@@ -55,11 +55,6 @@ public class AskListActivity extends BaseListActivity<AskListActivityPresenter> 
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.ask_activity_list;
-    }
-
-    @Override
     public int getViewType(int position) {
         return mAsk.getType();
     }
@@ -67,7 +62,8 @@ public class AskListActivity extends BaseListActivity<AskListActivityPresenter> 
     public void setData(Ask ask) {
         getPresenter().getAdapter().setOnItemClickListener(position -> {
             Ask item = getPresenter().getItem(position);
-            if (ask.getType() == 2) AddAskActivityPresenter.start(AskListActivity.this, ask, item.getSubject());
+            if (ask.getType() == 2)
+                AddAskActivityPresenter.start(AskListActivity.this, ask, item.getSubject());
         });
         mDvProductImage.setImageURI(Uri.parse(ask.getProduct_img()));
 
@@ -84,9 +80,9 @@ public class AskListActivity extends BaseListActivity<AskListActivityPresenter> 
     @Override
     public ListConfig getListConfig() {
         return super.getListConfig()
-                .setFooterErrorAble(false)
-                .setLoadMoreAble(false)
-                .setNoMoreAble(false);
+                .setContainerLayoutRes(R.layout.ask_activity_list)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
+                .setLoadMoreAble(false);
     }
 
 }

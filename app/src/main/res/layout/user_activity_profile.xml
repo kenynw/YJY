@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:divider="@drawable/div_vertical"
     android:orientation="vertical"
-    android:showDividers="middle"
-    tools:context=".module.user.ProfileActivity">
+    tools:context=".module.user.ProfileActivity"
+    >
 
     <include layout="@layout/include_toolbar"/>
 
@@ -206,6 +206,6 @@
         android:layout_weight="1"
         />
 
-    <include layout="@layout/include_default_footer" />
+    <include layout="@layout/include_default_footer"/>
 
 </LinearLayout>

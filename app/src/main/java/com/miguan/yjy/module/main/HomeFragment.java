@@ -77,7 +77,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
                 .setItemDecoration(decoration)
                 .setContainerErrorAble(false)
                 .setContainerLayoutRes(R.layout.main_fragment_home)
-                .setFooterNoMoreRes(R.layout.empty_article_list);
+                .setFooterNoMoreRes(R.layout.include_default_footer);
     }
 
     @Override

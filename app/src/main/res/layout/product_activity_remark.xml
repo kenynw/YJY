@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"/>
+    <include layout="@layout/include_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -188,6 +188,15 @@
                     />
 
             </RelativeLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <include layout="@layout/include_default_footer" />
+
         </LinearLayout>
 
     </ScrollView>

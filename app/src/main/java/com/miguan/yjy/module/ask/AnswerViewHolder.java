@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.ask;
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class AnswerViewHolder extends BaseViewHolder<Ask> {
             mTvLabel.setVisibility(View.VISIBLE);
             mTvLabel.setText(data.getUser_info().getSkin());
         }
-        mTvContent.setText(data.getReply());
+        mTvContent.setText(Html.fromHtml(data.getReply()));
         mTvDate.setText(data.getAdd_time());
         mLlLike.setOnClickListener(v -> {
             ProductModel.getInstance().addAskLike(data.getAskid()).unsafeSubscribe(new Subscriber<String>() {

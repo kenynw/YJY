@@ -3,7 +3,6 @@ package com.miguan.yjy.model;
 import com.dsk.chain.model.AbsModel;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Evaluate;
-import com.miguan.yjy.model.bean.Home;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
@@ -66,8 +65,7 @@ public class ArticleModel extends AbsModel {
      * 评论详情
      */
     public Observable<Evaluate> getEvaluateDetail(int id) {
-        return ServicesClient.getServices()
-                .evaluateDetail(id, UserPreferences.getToken())
+        return ServicesClient.getServices().evaluateDetail(id, UserPreferences.getToken())
                 .compose(new DefaultTransform<>());
     }
 

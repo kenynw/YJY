@@ -10,6 +10,12 @@ import com.miguan.yjy.model.bean.Ask;
 
 public class MyAskPresenter extends BaseListActivityPresenter<MyAskActivity, Ask> {
 
+    public static final int TYPE_ASK = 2;
+
+    public static final int TYPE_ANSWER = 3;
+
+    private int mType = TYPE_ASK;
+
     @Override
     protected void onCreateView(MyAskActivity view) {
         super.onCreateView(view);
@@ -18,12 +24,16 @@ public class MyAskPresenter extends BaseListActivityPresenter<MyAskActivity, Ask
 
     @Override
     public void onRefresh() {
-        ProductModel.getInstance().getAskList(2, 1).unsafeSubscribe(getRefreshSubscriber());
+        ProductModel.getInstance().getAskList(mType, 1).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        ProductModel.getInstance().getAskList(2, getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        ProductModel.getInstance().getAskList(mType, getCurPage()).unsafeSubscribe(getMoreSubscriber());
+    }
+
+    public void setType(int type) {
+        mType = type;
     }
 
 }

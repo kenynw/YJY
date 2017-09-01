@@ -334,7 +334,7 @@ public class ProductModel extends AbsModel {
     /**
      * 所有问答列表
      *
-     * type 类型(1 全部提问【当token有传时查找用户的提问】 2我的回答【token必传】)
+     * type 类型(1 全部提问 2我的提问 3我的回答)
      */
     public Observable<List<Ask>> getAskList(int type, int page) {
         return ServicesClient.getServices().askList(UserPreferences.getToken(), type, page).compose(new DefaultTransform<>());

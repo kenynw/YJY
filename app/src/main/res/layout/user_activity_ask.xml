@@ -6,9 +6,10 @@
     android:orientation="vertical"
     >
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
 
     <RadioGroup
+        android:id="@+id/rg_my_ask_tab"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
@@ -16,6 +17,7 @@
         >
 
         <RadioButton
+            android:id="@+id/rb_my_ask_question"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -29,6 +31,7 @@
             />
 
         <RadioButton
+            android:id="@+id/rb_my_ask_answer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,9 +47,9 @@
     </RadioGroup>
 
     <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycle"
         />
 
 </LinearLayout>

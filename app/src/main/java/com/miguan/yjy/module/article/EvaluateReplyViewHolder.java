@@ -43,7 +43,7 @@ public class EvaluateReplyViewHolder extends BaseViewHolder<Evaluate> {
             String content = String.format(replyTo, data.getReplyUserName(), data.getComment());
             mTvContent.setText(Html.fromHtml(content));
         } else {
-            mTvContent.setText(data.getComment());
+            mTvContent.setText(Html.fromHtml(data.getComment()));
         }
     }
 
