@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Skin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,11 @@ public class MySkinAdapter extends BaseAdapter {
     private Context mContext;
 
     private List<Skin> mSkinList;
+
+    public MySkinAdapter(Context context) {
+        mContext = context;
+        mSkinList = new ArrayList<>();
+    }
 
     public MySkinAdapter(Context context, List<Skin> skinList) {
         mContext = context;
@@ -67,41 +73,10 @@ public class MySkinAdapter extends BaseAdapter {
         TextView mTvSkinName;
     }
 
+    public void addAll(List<Skin> list) {
+        mSkinList.clear();
+        mSkinList.addAll(list);
+        notifyDataSetChanged();
+    }
+
 }
-
-
-//public class MySkinAdapter extends RecyclerArrayAdapter<Skin> {
-//    public MySkinAdapter(Context context, List<Skin> objects) {
-//        super(context, objects);
-//    }
-//
-//    @Override
-//    public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-//        return new MySkinViewHolder(parent);
-//    }
-//
-//    @Override
-//    public void OnBindViewHolder(BaseViewHolder holder, int position) {
-//        holder.setData(mObjects.get(position));
-//    }
-//
-//    class MySkinViewHolder extends BaseViewHolder<Skin> {
-//        @BindView(R.id.tv_skin_letter)
-//        TextView mTvSkinLetter;
-//        @BindView(R.id.tv_skin_name)
-//        TextView mTvSkinName;
-//
-//        public MySkinViewHolder(ViewGroup parent) {
-//            super(parent, R.layout.item_my_skin);
-//            ButterKnife.bind(this, itemView);
-//        }
-//
-//        @Override
-//        public void setData(Skin data) {
-//            super.setData(data);
-//            mTvSkinLetter.setText(data.getLetter());
-//            mTvSkinName.setText(data.getName());
-//        }
-//    }
-//
-//}

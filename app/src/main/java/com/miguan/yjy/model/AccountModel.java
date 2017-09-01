@@ -9,6 +9,8 @@ import com.miguan.yjy.model.services.DefaultTransform;
 import com.miguan.yjy.model.services.ServicesClient;
 import com.miguan.yjy.utils.LUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -150,6 +152,8 @@ public class AccountModel extends AbsModel {
         UserPreferences.setUserID(user.getUser_id());
         UserPreferences.setUsername(user.getUsername());
         UserPreferences.setAvatar(user.getImg());
+
+        EventBus.getDefault().post(user);
 
         // 调用 JPush 接口来设置别名。
         Set<String> set = new HashSet<>();

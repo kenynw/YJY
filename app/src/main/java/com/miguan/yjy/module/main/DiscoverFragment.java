@@ -81,6 +81,8 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
 
     private Unbinder mUnbinder;
 
+    private MySkinAdapter mSkinAdapter;
+
     private RecyclerArrayAdapter<Ask> mAskAdapter = new RecyclerArrayAdapter<Ask>(getActivity()) {
         @Override
         public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
@@ -94,7 +96,6 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
             return new WikiViewHolder(parent);
         }
     };
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,6 +105,9 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
         mTvAskMore.setOnClickListener(this);
         mTvWikiMore.setOnClickListener(this);
         mIvTemplate.setOnClickListener(this);
+
+        mSkinAdapter = new MySkinAdapter(getActivity());
+        mGridSkin.setAdapter(mSkinAdapter);
 
         int paddingLeft = LUtils.dp2px(25);
         DividerDecoration decoration = new DividerDecoration(
@@ -138,7 +142,8 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
             mIndicatorBanner.setViewPager(mVpBanner);
         }
 
-        mGridSkin.setAdapter(new MySkinAdapter(getActivity(), discover.getUserSkin()));
+        mSkinAdapter.addAll(discover.getUserSkin());
+
         boolean completed = true;
         for (Skin skin : discover.getUserSkin()) {
             completed = completed && !TextUtils.isEmpty(skin.getLetter());
@@ -166,6 +171,10 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
                 break;
         }
         startActivity(intent);
+    }
+
+    public MySkinAdapter getSkinAdapter() {
+        return mSkinAdapter;
     }
 
     @Override
