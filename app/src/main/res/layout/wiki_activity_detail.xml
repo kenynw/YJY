@@ -30,26 +30,53 @@
                 android:paddingBottom="@dimen/spacing_normal"
                 >
 
-                <TextView
-                    android:id="@+id/tv_wiki_ask_name"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="-5dp"
                     android:layout_marginRight="-5dp"
                     android:background="@drawable/ic_wiki_ask_san"
-                    android:gravity="center"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="@dimen/text_size_small_17"
-                    android:textStyle="bold"
-                    tool:text="问题"
-                    />
+                    >
+
+                    <View
+                        android:layout_width="@dimen/spacing_small"
+                        android:layout_height="@dimen/spacing_small"
+                        android:layout_marginLeft="@dimen/spacing_small"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:background="@drawable/layer_wiki_label_left"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_wiki_ask_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:layout_marginLeft="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/text_size_small_17"
+                        android:textStyle="bold"
+                        tool:text="用化妆棉/化妆水做二次清洁真的对吗？用化妆棉/化妆水做二次清洁真的对吗？用化妆棉/化妆水做二次清洁真的对吗？"
+                        />
+
+                    <View
+                        android:layout_width="@dimen/spacing_small"
+                        android:layout_height="@dimen/spacing_small"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:layout_marginRight="@dimen/spacing_small"
+                        android:background="@drawable/layer_wiki_label_right"
+                        />
+
+                </FrameLayout>
 
                 <ImageView
-                    android:layout_width="39dp"
-                    android:layout_height="22dp"
+                    android:layout_width="26dp"
+                    android:layout_height="15dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="-11.5dp"
                     android:src="@mipmap/ic_wiki_ask_triangle"
@@ -61,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_normal"
                     android:layout_marginRight="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_tiny"
                     android:textColor="@color/textTertiary"
                     android:textSize="@dimen/text_size_body_material"
                     tool:text="A：化妆水的溶解作用与化妆棉的摩擦作用相结合，更容易导致皮肤受损。因此，颜究院不建议大家长期这样做哦~"
