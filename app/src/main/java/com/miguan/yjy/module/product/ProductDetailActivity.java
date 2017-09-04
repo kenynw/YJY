@@ -31,6 +31,7 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -605,5 +606,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mIsShowAnim = false;
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AlibcTradeSDK.destory();
+    }
 }

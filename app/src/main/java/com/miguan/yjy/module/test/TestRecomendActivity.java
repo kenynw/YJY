@@ -59,7 +59,9 @@ public class TestRecomendActivity extends BaseListActivity<TestRecomendPresenter
         } else {
             mTest = getIntent().getParcelableExtra(TestRecomendPresenter.EXTRA_TEST);
         }
-        categoryList = mTest.getCategoryList();
+        if (mTest != null) {
+            categoryList = mTest.getCategoryList();
+        }
         position = getIntent().getIntExtra(TestRecomendPresenter.EXTRA_CATEGORY_position, 0);
         name = getIntent().getStringExtra(TestRecomendPresenter.EXTRA_CATEGORY_NAME);
         ButterKnife.bind(this);

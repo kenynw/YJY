@@ -4,7 +4,11 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.util.Log;
 
+import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
+import com.alibaba.baichuan.android.trade.callback.AlibcTradeInitCallback;
 import com.dsk.chain.Chain;
 import com.dsk.chain.model.ModelManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -42,6 +46,44 @@ public class App extends Application {
         if (!isApplicationInBackground(this)) {
             UserPreferences.setIsShowTest(false);
         }
+
+        AlibcTradeSDK.asyncInit(this, new AlibcTradeInitCallback() {
+            @Override
+            public void onSuccess() {
+                //初始化成功，设置相关的全局配置参数
+
+                // ...
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                //初始化失败，可以根据code和msg判断失败原因，详情参见错误说明
+                Log.e("msg","code"+code+"============"+"msg" +msg);
+            }
+        });
+
+//        initAlibc();
+
+
+    }
+
+
+    //初始化阿里百川
+    private void initAlibc() {
+        AlibcTradeSDK.asyncInit(this, new AlibcTradeInitCallback() {
+            @Override
+            public void onSuccess() {
+                //初始化成功，设置相关的全局配置参数
+
+                // ...
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                //初始化失败，可以根据code和msg判断失败原因，详情参见错误说明
+                Log.e("msg","code"+code+"============"+"msg" +msg);
+            }
+        });
     }
 
     // 初始化友盟分享
@@ -63,6 +105,12 @@ public class App extends Application {
             }
         }
         return false;
+    }
+
+    @Override
+    public void attachBaseContext(Context base) {
+        MultiDex.install(base);
+        super.attachBaseContext(base);
     }
 
 }

@@ -15,6 +15,8 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
 
     private String mEffect;//功效关键字
 
+    private int mType = 1;//类型 ：不传或者传1为默认搜索产品
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -45,5 +47,10 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
     public void setEffect(String effect) {
         mEffect = effect;
     }
+
+    public void setType(int type) {
+        mType = type;
+    }
+
 
 }

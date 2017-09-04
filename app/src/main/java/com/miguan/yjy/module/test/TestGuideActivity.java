@@ -44,7 +44,6 @@ import static com.miguan.yjy.model.bean.Skin.tolerances;
 
 public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test> implements View.OnClickListener {
 
-
     public static final String EXTRA_TEST = "test";
     public static final String EXTRA_TEST_TYPE = "type";
     public static final String EXTRA_TEST_TITLE = "title";
@@ -89,6 +88,7 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_activity_guide);
+        testGuideActivity = this;
         ButterKnife.bind(this);
         Test test = getIntent().getParcelableExtra(TestGuideActivity.EXTRA_TEST);
         type = getIntent().getIntExtra(TestGuideActivity.EXTRA_TEST_TYPE, -1);

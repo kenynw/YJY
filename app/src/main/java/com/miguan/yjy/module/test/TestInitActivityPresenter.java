@@ -167,6 +167,10 @@ public class TestInitActivityPresenter extends BaseDataActivityPresenter<TestIni
                     if (getView().nums.size() == 4 && !UserPreferences.getIsShowTest()) {
                         //显示测试结果
 //                        setSencondData();
+                        UserPreferences.setIsShowTest(false);
+                        Intent intent = new Intent(getView(), TestResultActivity.class);
+                        getView().startActivity(intent);
+                        getView().finish();
                     } else {
                         //显示未测试页面
                         loadFirstData();

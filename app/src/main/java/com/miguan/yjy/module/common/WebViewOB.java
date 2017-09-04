@@ -1,17 +1,21 @@
 package com.miguan.yjy.module.common;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.webkit.JavascriptInterface;
 
 import com.dsk.chain.bijection.ChainBaseActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.CommonModel;
-import com.miguan.yjy.model.bean.TestStart;
+import com.miguan.yjy.model.bean.Skin;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.account.LoginActivity;
-import com.miguan.yjy.module.main.MainActivity;
-import com.miguan.yjy.module.main.SkinTestFragment;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
+import com.miguan.yjy.module.test.TestGuideActivity;
+import com.miguan.yjy.module.test.TestInitActivity;
+import com.miguan.yjy.module.test.TestResultActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -21,6 +25,8 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 
 /**
@@ -59,6 +65,7 @@ public class WebViewOB implements UMShareListener {
 
     /**
      * 获取登录令牌
+     *
      * @return
      */
     @JavascriptInterface
@@ -89,19 +96,43 @@ public class WebViewOB implements UMShareListener {
      * 肤质测试完成
      */
     @JavascriptInterface
-    public void toHome() {
-        Intent intent = new Intent(mContext, MainActivity.class);
+    public void toHome(String skins) {
+        LUtils.log("测试", skins);
+        Gson gson = new Gson();
+        Intent intent = null;
+        List<Skin> skin = gson.fromJson(skins, new TypeToken<List<Skin>>() {
+        }.getType());
+        LUtils.log("toHome", skin.get(0).getLetter() + "===");
+        for (int i = 0; i < skin.size(); i++) {
+            if (TextUtils.isEmpty(skin.get(i).getLetter())) {
+                intent = new Intent(mContext, TestInitActivity.class);
+                UserPreferences.setIsShowTest(false);
+            } else {
+                intent = new Intent(mContext, TestResultActivity.class);
+                UserPreferences.setIsShowTest(true);
+            }
+        }
         intent.putExtra(EXTRA_WEBVIEW_TAG, 1);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if (SkinTestFragment.nums.size()== 4) {
+
+
+        if (TestInitActivity.nums.size() == 4) {
             UserPreferences.setIsShowTest(false);
         }
         mContext.startActivity(intent);
-        EventBus.getDefault().post(new TestStart());
+        if (TestInitActivity.testInitActivity!= null) {
+            TestInitActivity.testInitActivity.finish();
+        }
+        if (TestGuideActivity.testGuideActivity != null) {
+            TestGuideActivity.testGuideActivity.finish();
+        }
+        mContext.finish();
+        EventBus.getDefault().post(skin);
     }
 
     /**
      * 分享
+     *
      * @param type
      * @param title
      * @param content
@@ -151,7 +182,8 @@ public class WebViewOB implements UMShareListener {
 
     /**
      * 分享图片
-     * @param type 分享平台 0-微信好友 1-朋友圈 2-新浪
+     *
+     * @param type     分享平台 0-微信好友 1-朋友圈 2-新浪
      * @param imageUrl 图片Url
      */
     @JavascriptInterface
@@ -187,6 +219,7 @@ public class WebViewOB implements UMShareListener {
 
     /**
      * 下载安装包
+     *
      * @param url apk
      */
     @JavascriptInterface
