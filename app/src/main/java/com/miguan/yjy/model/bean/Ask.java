@@ -130,7 +130,11 @@ public class Ask extends EntityList<Ask> {
     }
 
     public String getAdd_time() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        return getFormatTime("yyyy-MM-dd HH:mm");
+    }
+
+    public String getFormatTime(String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.CHINA);
         return format.format(new Date(add_time * 1000));
     }
 

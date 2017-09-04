@@ -16,8 +16,7 @@ public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<Discove
     }
 
     private void loadData() {
-        CommonModel.getInstance().getDiscover()
-                .unsafeSubscribe(getSubscriber());
+        CommonModel.getInstance().getDiscover().unsafeSubscribe(getSubscriber());
     }
 
     @Override

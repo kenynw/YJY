@@ -65,6 +65,10 @@ public class Evaluate implements Parcelable {
 
     private int addMoney;
 
+    private String title;
+
+    private String product_img;
+
     public int getIs_digest() {
         return is_digest;
     }
@@ -269,6 +273,22 @@ public class Evaluate implements Parcelable {
         this.addMoney = addMoney;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getProduct_img() {
+        return product_img;
+    }
+
+    public void setProduct_img(String product_img) {
+        this.product_img = product_img;
+    }
+
     public static class Item implements Parcelable {
 
         private int id;
@@ -372,7 +392,6 @@ public class Evaluate implements Parcelable {
         dest.writeString(this.comment);
         dest.writeInt(this.like_num);
         dest.writeLong(this.created_at);
-        dest.writeInt(this.star);
         dest.writeInt(this.isLike);
         dest.writeInt(this.is_digest);
         dest.writeString(this.username);
@@ -392,6 +411,8 @@ public class Evaluate implements Parcelable {
         dest.writeTypedList(this.essence);
         dest.writeParcelable(this.ask, flags);
         dest.writeInt(this.addMoney);
+        dest.writeString(this.title);
+        dest.writeString(this.product_img);
     }
 
     protected Evaluate(Parcel in) {
@@ -401,7 +422,6 @@ public class Evaluate implements Parcelable {
         this.comment = in.readString();
         this.like_num = in.readInt();
         this.created_at = in.readLong();
-        this.star = in.readInt();
         this.isLike = in.readInt();
         this.is_digest = in.readInt();
         this.username = in.readString();
@@ -421,6 +441,8 @@ public class Evaluate implements Parcelable {
         this.essence = in.createTypedArrayList(Evaluate.CREATOR);
         this.ask = in.readParcelable(Ask.class.getClassLoader());
         this.addMoney = in.readInt();
+        this.title = in.readString();
+        this.product_img = in.readString();
     }
 
     public static final Creator<Evaluate> CREATOR = new Creator<Evaluate>() {

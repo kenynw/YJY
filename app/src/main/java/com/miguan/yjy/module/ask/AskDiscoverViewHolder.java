@@ -40,7 +40,7 @@ public class AskDiscoverViewHolder extends BaseViewHolder<Ask> {
 
     @Override
     public void setData(Ask ask) {
-        mTvTitle.setText(ask.getSubject());
+        mTvTitle.setText(Html.fromHtml(ask.getSubject()));
         String total = String.format(getContext().getString(R.string.text_home_ask_total), ask.getNum());
         mTvTotal.setText(Html.fromHtml(total));
         mDvThumb.setImageURI(ask.getProduct_img());

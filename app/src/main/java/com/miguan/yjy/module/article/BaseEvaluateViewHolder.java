@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.text.DynamicLayout;
+import android.text.Html;
 import android.text.Layout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -76,7 +77,7 @@ public abstract class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
             stringBuilder.setSpan(span, (fixText + "... ").length(), stringBuilder.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
             mTvContent.setText(stringBuilder);
         } else {
-            mTvContent.setText(data.getComment());
+            mTvContent.setText(Html.fromHtml(data.getComment()));
         }
         itemView.setOnClickListener(v -> EvaluateDetailPresenter.start(getContext(), data.getId()));
     }

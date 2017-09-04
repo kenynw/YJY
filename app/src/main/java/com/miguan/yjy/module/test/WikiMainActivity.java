@@ -25,12 +25,14 @@ public class WikiMainActivity extends BaseListActivity<WikiMainPresenter> {
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-
         return new WikiViewHolder(parent);
     }
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setContainerLayoutRes(R.layout.common_activity_list).setFooterNoMoreRes(R.layout.include_default_footer).setLoadMoreAble(false);
+        return super.getListConfig().setContainerLayoutRes(R.layout.common_activity_list)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
+                .setLoadMoreAble(false);
     }
+
 }

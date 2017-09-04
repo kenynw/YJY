@@ -120,7 +120,7 @@ public class TestModel extends AbsModel {
     /**
      * 护肤百科详情页
      */
-    public Observable<Wiki> getBaikeInfo(String baikeId) {
+    public Observable<Wiki> getBaikeInfo(int baikeId) {
         return ServicesClient.getServices().getBaikeInfo(baikeId,UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
@@ -136,7 +136,7 @@ public class TestModel extends AbsModel {
      * baikeId(int) － 评论ID
      * token(string) － token
      */
-    public Observable<String> addBaikeLike(String baikeId ) {
+    public Observable<String> addBaikeLike(int baikeId ) {
         return ServicesClient.getServices().addBaikeLike(UserPreferences.getToken(),baikeId).compose(new DefaultTransform<>());
     }
 

@@ -22,13 +22,18 @@ import rx.functions.Func1;
  */
 
 public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskActivity, Wiki> {
-    public static final String EXTRA_BAIKEID = "extra_baikeId";
-    public String baikeId;
-    public String share_url = "";
-    Drawable drawable;
-    Drawable drawableNormal;
 
-    public static void start(Context context, String baikeId) {
+    public static final String EXTRA_BAIKEID = "extra_baikeId";
+
+    public int baikeId;
+
+    public String share_url = "";
+
+    private Drawable drawable;
+
+    private Drawable drawableNormal;
+
+    public static void start(Context context, int baikeId) {
         Intent intent = new Intent(context, WikiAskActivity.class);
         intent.putExtra(EXTRA_BAIKEID, baikeId);
         context.startActivity(intent);
@@ -37,7 +42,7 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
     @Override
     protected void onCreate(WikiAskActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
-        baikeId = getView().getIntent().getStringExtra(EXTRA_BAIKEID);
+        baikeId = getView().getIntent().getIntExtra(EXTRA_BAIKEID, 0);
         drawable = getView().getResources().getDrawable(R.mipmap.ic_wiki_face_selected);
         drawableNormal = getView().getResources().getDrawable(R.mipmap.ic_wiki_face_normal);
     }
@@ -72,7 +77,7 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
                     share_url = wiki.getShare_url();
 
                     getAdapter().setOnItemClickListener(position -> {
-                        baikeId = wiki.getRelation_info().get(position).getId() + "";
+                        baikeId = wiki.getRelation_info().get(position).getId();
                         onRefresh();
                     });
                     return wiki.getRelation_info();
@@ -80,14 +85,7 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 
-//
-//    action(string) － 固定值addBaikeLike
-//    baikeId(int) － 评论ID
-//    token(string) － token
-
-
     public void addBaikeLike(Wiki wiki) {
-
         TestModel.getInstantce().addBaikeLike(baikeId).subscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String s) {
@@ -110,6 +108,5 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
             }
         });
     }
-
 
 }

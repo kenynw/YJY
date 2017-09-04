@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Message;
-import com.miguan.yjy.module.article.ArticleDetailPresenter;
 import com.miguan.yjy.module.article.EvaluateDetailPresenter;
 import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
 
@@ -42,7 +41,7 @@ public class ReplyViewHolder extends BaseViewHolder<Message> {
                 break;
             case 2:
                 content = "回复了文章 <b>《" + content + "</b>》的评论";
-                itemView.setOnClickListener(v -> ArticleDetailPresenter.start(getContext(), data.getId()));
+                itemView.setOnClickListener(v -> EvaluateDetailPresenter.start(getContext(), data.getId()));
                 break;
             case 3:
                 content = "回答了产品 <b> " + content + "</b> 的提问";

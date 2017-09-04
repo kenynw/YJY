@@ -1,5 +1,6 @@
 package com.miguan.yjy.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Brand;
+import com.miguan.yjy.module.product.BrandListPresenter;
+import com.miguan.yjy.module.product.BrandMainPresenter;
 
 import java.util.List;
 
@@ -59,8 +62,10 @@ public class DiscoverBrandAdapter extends BaseAdapter {
         if (position != mList.size()) {
             Brand brand = (Brand) getItem(position);
             holder.mDvThumb.setImageURI(brand.getImg());
+            holder.itemView.setOnClickListener(v -> BrandMainPresenter.star(mContext, brand.getId()));
         } else {
             holder.mVsMore.inflate();
+            holder.itemView.setOnClickListener(v -> BrandListPresenter.start((Activity) mContext, 0, true, false));
         }
 
         return holder.itemView;

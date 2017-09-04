@@ -3,6 +3,7 @@ package com.miguan.yjy.module.product;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,8 +38,6 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
     @BindView(R.id.btn_query_code_submit)
     Button mBtnSubmit;
 
-    private boolean mIsInit = false;
-
     private Product mProduct;
 
     @Override
@@ -52,22 +51,14 @@ public class QueryCodeActivity extends ChainBaseActivity<QueryCodePresenter> {
 
         UserTextWatcher watcher = new UserTextWatcher(mBtnSubmit, mEtBrand, mEtProduct);
         mEtBrand.addTextChangedListener(watcher);
-        mEtBrand.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus && mIsInit) {
-                Intent intent = new Intent(this, BrandListActivity.class);
-                intent.putExtra(BrandListPresenter.EXTRA_TYPE, 1);
-                startActivityForResult(intent, 100);
-                mIsInit = true;
+        mEtBrand.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                BrandListPresenter.start(this, 100, false, false);
             }
+            return false;
         });
         mEtProduct.addTextChangedListener(watcher);
 
-        mEtBrand.setOnClickListener(v -> {
-            Intent intent = new Intent(this, BrandListActivity.class);
-            intent.putExtra(BrandListPresenter.EXTRA_TYPE, 1);
-            startActivityForResult(intent, 100);
-            mIsInit = true;
-        });
         mTvInstruction.setOnClickListener(v -> startActivity(new Intent(this, InstructionActivity.class)));
         mBtnSubmit.setOnClickListener(v -> getPresenter().query(mEtProduct.getText().toString().trim()));
     }

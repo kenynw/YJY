@@ -90,4 +90,9 @@ public class AddAskActivity extends ChainBaseActivity<AddAskActivityPresenter> i
 
     }
 
+    @Override
+    public int[] getHideSoftViewIds() {
+        return new int[] {R.id.et_ask_add_input};
+    }
+
 }

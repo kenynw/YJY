@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
  */
 @RequiresPresenter(WikiAskActivityPresenter.class)
 public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> {
+
     @BindView(R.id.toolbar_back)
     ImageView mToolbarBack;
     @BindView(R.id.toolbar_title)
@@ -49,7 +50,7 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
     EasyRecyclerView mRecycle;
     @BindView(R.id.tv_wiki_ask_remark)
     TextView mTvWikiAskRemark;
-    @BindView(R.id.sdv_wiki)
+    @BindView(R.id.dv_wiki_detail_thumb)
     SimpleDraweeView mSdvWiki;
     @BindView(R.id.tv_wiki_like_num)
     TextView mTvWikiLikeNum;
@@ -95,7 +96,6 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         new ShareBottomDialog.Builder(this)
                 .setUrl(getPresenter().share_url)
                 .setTitle(mTvWikiAskName.getText() + "【颜究院】")
@@ -105,4 +105,5 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
                 .show();
         return super.onOptionsItemSelected(item);
     }
+
 }

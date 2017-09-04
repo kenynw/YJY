@@ -2,6 +2,7 @@ package com.miguan.yjy.module.ask;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -28,13 +29,13 @@ import butterknife.ButterKnife;
 @RequiresPresenter(AskDetailActivityPresenter.class)
 public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresenter> implements TextWatcher {
 
-    @BindView(R.id.dv_ask_detail_thumb)
+    @BindView(R.id.dv_detail_top_thumb)
     SimpleDraweeView mDvProductThumb;
 
-    @BindView(R.id.tv_ask_detail_product)
+    @BindView(R.id.tv_detail_top_product)
     TextView mTvProductName;
 
-    @BindView(R.id.ll_ask_detail_product)
+    @BindView(R.id.ll_detail_top_product)
     LinearLayout mLlProduct;
 
     @BindView(R.id.tv_ask_detail_title)
@@ -86,7 +87,7 @@ public class AskDetailActivity extends BaseListActivity<AskDetailActivityPresent
         mLlProduct.setOnClickListener(v -> ProductDetailPresenter.start(this, ask.getProduct_id()));
         mDvProductThumb.setImageURI(ask.getProduct_img());
         mTvProductName.setText(ask.getProduct_name());
-        mTvAskTitle.setText(ask.getSubject());
+        mTvAskTitle.setText(Html.fromHtml(ask.getSubject()));
         mTvSend.setOnClickListener(v -> checkInput(ask.getProduct_name()));
     }
 

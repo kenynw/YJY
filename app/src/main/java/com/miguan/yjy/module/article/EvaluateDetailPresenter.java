@@ -43,7 +43,7 @@ public class EvaluateDetailPresenter extends BaseDataActivityPresenter<EvaluateD
         super.onCreate(view, saveState);
         mAdapter = new EvaluateAdapter(getView());
         mAdapter.setMore(R.layout.default_footer_load_more, this);
-        mAdapter.setNoMore(R.layout.default_footer_no_more);
+        mAdapter.setNoMore(R.layout.include_default_footer);
         mAdapter.setOnItemClickListener(getView());
 
         mEvaluateId = getView().getIntent().getIntExtra(EXTRA_EVALUATE_ID, 0);
