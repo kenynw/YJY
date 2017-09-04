@@ -78,6 +78,11 @@ public class FlowTagLayout extends ViewGroup {
      */
     private SparseBooleanArray mCheckedTagArray = new SparseBooleanArray();
 
+    private int paddingLeft;
+    private int paddingRight;
+    private int paddingTop;
+    private int paddingBottom;
+
     public FlowTagLayout(Context context) {
         super(context);
     }
@@ -96,6 +101,11 @@ public class FlowTagLayout extends ViewGroup {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         //获取Padding
+        paddingLeft = getPaddingLeft();
+        paddingTop = getPaddingTop();
+        paddingRight = getPaddingRight();
+        paddingBottom = getPaddingBottom();
+
         // 获得它的父容器为它设置的测量模式和大小
         int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
         int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
@@ -126,8 +136,8 @@ public class FlowTagLayout extends ViewGroup {
 
             //因为子View可能设置margin，这里要加上margin的距离
             MarginLayoutParams mlp = (MarginLayoutParams) childView.getLayoutParams();
-            int realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin;
-            int realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin;
+            int realChildWidth = childWidth + mlp.leftMargin + mlp.rightMargin+paddingLeft+paddingRight;
+            int realChildHeight = childHeight + mlp.topMargin + mlp.bottomMargin+paddingTop+paddingBottom;
             //如果当前一行的宽度加上要加入的子view的宽度大于父容器给的宽度，就换行
             if ((lineWidth + realChildWidth) > sizeWidth) {
                 resultWidth = Math.max(lineWidth, realChildWidth);
@@ -192,10 +202,10 @@ public class FlowTagLayout extends ViewGroup {
                 childLeft = 0;
             }
             //布局
-            int left = childLeft + mlp.leftMargin;
-            int top = childTop + mlp.topMargin;
-            int right = childLeft + mlp.leftMargin + childWidth;
-            int bottom = childTop + mlp.topMargin + childHeight;
+            int left = childLeft + mlp.leftMargin+paddingLeft;
+            int top = childTop + mlp.topMargin+paddingTop;
+            int right = childLeft + mlp.leftMargin + childWidth+paddingLeft;
+            int bottom = childTop + mlp.topMargin + childHeight+paddingTop;
             childView.layout(left, top, right, bottom);
 
             childLeft += (mlp.leftMargin + childWidth + mlp.rightMargin);

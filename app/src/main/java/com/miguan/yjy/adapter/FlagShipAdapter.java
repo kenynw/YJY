@@ -1,13 +1,20 @@
 package com.miguan.yjy.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.alibaba.baichuan.android.trade.AlibcTrade;
+import com.alibaba.baichuan.android.trade.callback.AlibcTradeCallback;
+import com.alibaba.baichuan.android.trade.model.AlibcShowParams;
+import com.alibaba.baichuan.android.trade.model.OpenType;
+import com.alibaba.baichuan.android.trade.page.AlibcBasePage;
+import com.alibaba.baichuan.android.trade.page.AlibcPage;
+import com.alibaba.baichuan.trade.biz.AlibcConstants;
+import com.alibaba.baichuan.trade.biz.context.AlibcTradeResult;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -15,9 +22,10 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Buy;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.utils.LUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,15 +39,18 @@ import butterknife.ButterKnife;
 public class FlagShipAdapter extends RecyclerArrayAdapter<Buy> {
 
     private Product mProduct;
+    private Activity mActivity;
 
-    public FlagShipAdapter(Context context, List<Buy> objects, Product product) {
+    public FlagShipAdapter(Activity context, List<Buy> objects, Product product) {
         super(context, objects);
         mProduct = product;
+        mActivity = context;
     }
 
-    public FlagShipAdapter(Context context, Product product) {
+    public FlagShipAdapter(Activity context, Product product) {
         super(context);
         mProduct = product;
+        mActivity = context;
     }
 
     @Override
@@ -75,15 +86,15 @@ public class FlagShipAdapter extends RecyclerArrayAdapter<Buy> {
 
             switch (data.getType()) {
                 case 1:
-                    mTvFlagShipName.setText(getContext().getString(R.string.text_taobao));
+                    mTvFlagShipName.setText(mActivity.getString(R.string.text_taobao));
                     mTvFlagShipName.setBackgroundResource(R.drawable.bg_radius_f38);
                     break;
                 case 2:
-                    mTvFlagShipName.setText(getContext().getString(R.string.text_jingdong));
+                    mTvFlagShipName.setText(mActivity.getString(R.string.text_jingdong));
                     mTvFlagShipName.setBackgroundResource(R.drawable.bg_radius_c9);
                     break;
                 case 3:
-                    mTvFlagShipName.setText(getContext().getString(R.string.text_amazon));
+                    mTvFlagShipName.setText(mActivity.getString(R.string.text_amazon));
                     mTvFlagShipName.setBackgroundResource(R.drawable.bg_radius_transparent);
                     break;
             }
@@ -93,21 +104,41 @@ public class FlagShipAdapter extends RecyclerArrayAdapter<Buy> {
                 public void onClick(View view) {
                     switch (data.getType()) {
                         case 1:
-                            if (LUtils.checkPackage("com.taobao.taobao")) {
-                                Intent intent = new Intent();
-                                intent.setAction("android.intent.action.VIEW");
-                                Uri content_url = Uri.parse(data.getUrl()); // 淘宝商品的地址
-                                intent.setData(content_url);
-                                getContext().startActivity(intent);
-                            } else {
-                                WebViewActivity.start(getContext(), mProduct.getProduct_name(), data.getUrl());
-                            }
+                            //提供给三方传递配置参数
+                            Map<String, String> exParams = new HashMap<>();
+                            exParams.put(AlibcConstants.ISV_CODE, "appisvcode");
+
+                            //实例化URL打开page
+                            AlibcBasePage page = new AlibcPage(data.getUrl());
+                            //设置页面打开方式
+                            AlibcShowParams showParams = new AlibcShowParams(OpenType.Auto,false);
+
+                            AlibcTrade.show(mActivity, page, showParams, null, exParams, new AlibcTradeCallback() {
+                                @Override
+                                public void onTradeSuccess(AlibcTradeResult alibcTradeResult) {
+                                    Log.e("成功", "onTradeSuccess");
+                                }
+
+                                @Override
+                                public void onFailure(int i, String s) {
+                                    Log.e("失败", "onFailure");
+                                }
+                            });
+//                            if (LUtils.checkPackage("com.taobao.taobao")) {
+//                                Intent intent = new Intent();
+//                                intent.setAction("android.intent.action.VIEW");
+//                                Uri content_url = Uri.parse(data.getUrl()); // 淘宝商品的地址
+//                                intent.setData(content_url);
+//                                getContext().startActivity(intent);
+//                            } else {
+//                                WebViewActivity.start(getContext(), mProduct.getProduct_name(), data.getUrl());
+//                            }
                             break;
                         case 2:
-                            WebViewActivity.start(getContext(), mProduct.getProduct_name(), data.getUrl());
+                            WebViewActivity.start(mActivity, mProduct.getProduct_name(), data.getUrl());
                             break;
                         case 3:
-                            WebViewActivity.start(getContext(), mProduct.getProduct_name(), data.getUrl());
+                            WebViewActivity.start(mActivity, mProduct.getProduct_name(), data.getUrl());
                             break;
                     }
 
@@ -117,6 +148,8 @@ public class FlagShipAdapter extends RecyclerArrayAdapter<Buy> {
 
         }
     }
+
+
 
 
 }

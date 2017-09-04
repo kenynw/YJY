@@ -155,10 +155,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     private View createEffectRecyclerView(List<Effect> effects, RecyclerArrayAdapter.OnItemClickListener listener) {
         FlowTagLayout recyclerView = new FlowTagLayout(mActivity);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(LUtils.dp2px(15), LUtils.dp2px(10), LUtils.dp2px(15), LUtils.dp2px(10));
-        recyclerView.setLayoutParams(lp);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setPadding(LUtils.dp2px(20),LUtils.dp2px(14),LUtils.dp2px(20),LUtils.dp2px(7));
         EffectSortAdapter effectSortProductAdapter = new EffectSortAdapter(mActivity, effects);
         effectSortProductAdapter.setSetOnTagClickListener(new EffectSortAdapter.SetOnTagClickListener() {
             @Override
@@ -177,6 +174,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
         rl.setOnClickListener(v -> dismissMenu());
         rl.setBackgroundResource(R.color.text_black_secondary);
         rl.addView(recyclerView, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        rl.setPadding(LUtils.dp2px(20),LUtils.dp2px(15),LUtils.dp2px(15),LUtils.dp2px(20));
 
         return rl;
     }

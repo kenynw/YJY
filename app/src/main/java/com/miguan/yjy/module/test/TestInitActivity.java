@@ -87,12 +87,14 @@ public class TestInitActivity extends BaseDataActivity<TestInitActivityPresenter
     public int tag = 0;
     public User userInfo;
     public static List<Integer> nums = new ArrayList<>();
+    public static TestInitActivity testInitActivity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_fragment_test);
+        testInitActivity = this;
         ButterKnife.bind(this);
         mToolbarTitle.setText("我的肤质");
         initListener();
@@ -261,7 +263,7 @@ public class TestInitActivity extends BaseDataActivity<TestInitActivityPresenter
         if (resultCode == 0) {
             switch (requestCode) {
                 case Activity.RESULT_FIRST_USER:
-                    getPresenter().loadFirstData();
+                    getPresenter().loadMainData();
                     break;
             }
 

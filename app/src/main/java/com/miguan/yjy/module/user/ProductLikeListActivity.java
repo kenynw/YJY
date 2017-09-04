@@ -63,14 +63,17 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
         filterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int cateId, String text) {
-                filterPanel.dismissMenu();
                 if (cateId > 0) {
                     getPresenter().setCateId(cateId);
                 }
+
                 if (!TextUtils.isEmpty(text)) {
+                    filterPanel.dismissMenu();
                     getPresenter().setEffect(text);
+                    getPresenter().setType(2);
                 }
                 if (cateId <= 0 && text.isEmpty()) {
+                    filterPanel.dismissMenu();
                     getPresenter().setEffect("");
                     getPresenter().setCateId(0);
                 }
@@ -82,7 +85,21 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
             }
 
             @Override
-            public void onSencondItemSelected(int id, String text) {
+            public void onSencondItemSelected(int cateId, String text) {
+                if (cateId > 0) {
+                    getPresenter().setCateId(cateId);
+                }
+
+                if (!TextUtils.isEmpty(text)) {
+                    filterPanel.dismissMenu();
+                    getPresenter().setEffect(text);
+                    getPresenter().setType(2);
+                }
+                if (cateId <= 0 && text.isEmpty()) {
+                    getPresenter().setEffect("");
+                    getPresenter().setCateId(0);
+                }
+                getPresenter().onRefresh();
 
             }
         });
