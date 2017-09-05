@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
@@ -68,6 +69,9 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     @BindView(R.id.tv_input_send)
     TextView mTvSend;
 
+    @BindView(R.id.evaluate_ratbar_product)
+    RatingBar mEvaluateRatbarProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +115,15 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
 
     @Override
     public void setData(Evaluate evaluate) {
+
+
         if (evaluate.getType() == 1) {
+            if (evaluate.getStar() != 0) {
+                mEvaluateRatbarProduct.setVisibility(View.VISIBLE);
+                mEvaluateRatbarProduct.setRating(evaluate.getStar());
+            } else {
+                mEvaluateRatbarProduct.setVisibility(View.GONE);
+            }
             if (!TextUtils.isEmpty(evaluate.getProduct_img())) {
                 mDvTopThumb.setImageURI(Uri.parse(evaluate.getProduct_img()));
             } else {

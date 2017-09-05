@@ -127,8 +127,8 @@ public class TestModel extends AbsModel {
     /**
      * 护肤百科列表主页
      */
-    public Observable<List<Wiki>> getBaikeList() {
-        return ServicesClient.getServices().getBaikeList().compose(new DefaultTransform<>());
+    public Observable<List<Wiki>> getBaikeList(int page) {
+        return ServicesClient.getServices().getBaikeList(page,10).compose(new DefaultTransform<>());
     }
 
     /**

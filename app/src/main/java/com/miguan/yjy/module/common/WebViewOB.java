@@ -26,6 +26,7 @@ import com.umeng.socialize.media.UMWeb;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,33 +98,30 @@ public class WebViewOB implements UMShareListener {
      */
     @JavascriptInterface
     public void toHome(String skins) {
-        LUtils.log("测试", skins);
+        List<Integer> nums = new ArrayList<>();
         Gson gson = new Gson();
         Intent intent = null;
         List<Skin> skin = gson.fromJson(skins, new TypeToken<List<Skin>>() {
         }.getType());
-        LUtils.log("toHome", skin.get(0).getLetter() + "===");
         for (int i = 0; i < skin.size(); i++) {
             if (TextUtils.isEmpty(skin.get(i).getLetter())) {
-                intent = new Intent(mContext, TestInitActivity.class);
-                UserPreferences.setIsShowTest(false);
-                break;
-            } else {
-                intent = new Intent(mContext, TestResultActivity.class);
-                UserPreferences.setIsShowTest(true);
+                nums.add(i);
             }
         }
-        intent.putExtra(EXTRA_WEBVIEW_TAG, 1);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-
-        if (TestInitActivity.nums.size() == 4) {
+        if (nums.size() == 4) {
+            intent = new Intent(mContext, TestResultActivity.class);
+            UserPreferences.setIsShowTest(true);
+        } else {
+            intent = new Intent(mContext, TestInitActivity.class);
             UserPreferences.setIsShowTest(false);
         }
+        intent.putExtra(EXTRA_WEBVIEW_TAG, 1);
         mContext.startActivity(intent);
-        if (TestInitActivity.testInitActivity!= null) {
+        if (TestInitActivity.testInitActivity != null) {
             TestInitActivity.testInitActivity.finish();
         }
+
         if (TestGuideActivity.testGuideActivity != null) {
             TestGuideActivity.testGuideActivity.finish();
         }

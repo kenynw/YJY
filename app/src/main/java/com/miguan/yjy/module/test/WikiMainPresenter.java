@@ -20,7 +20,11 @@ public class WikiMainPresenter extends BaseListActivityPresenter<WikiMainActivit
 
     @Override
     public void onRefresh() {
-        TestModel.getInstantce().getBaikeList().unsafeSubscribe(getRefreshSubscriber());
+        TestModel.getInstantce().getBaikeList(1).unsafeSubscribe(getRefreshSubscriber());
     }
 
+    @Override
+    public void onLoadMore() {
+        TestModel.getInstantce().getBaikeList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
+    }
 }
