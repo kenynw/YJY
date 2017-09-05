@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
@@ -86,7 +87,7 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void  setCurrentTab(Integer index) {
+    public void setCurrentTab(Integer index) {
         if (index < 0 || index > 3) return;
         mTab.getTabAt(index).select();
     }
@@ -106,6 +107,10 @@ public class MainActivity extends BaseDataActivity<MainActivityPresenter, Versio
             return;
         }
         finish();
+        /**
+         * 销毁电商SDK相关资源引用，防止内存泄露
+         */
+        AlibcTradeSDK.destory();
     }
 
     @Override
