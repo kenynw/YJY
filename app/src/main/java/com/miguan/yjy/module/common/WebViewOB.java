@@ -107,6 +107,7 @@ public class WebViewOB implements UMShareListener {
             if (TextUtils.isEmpty(skin.get(i).getLetter())) {
                 intent = new Intent(mContext, TestInitActivity.class);
                 UserPreferences.setIsShowTest(false);
+                break;
             } else {
                 intent = new Intent(mContext, TestResultActivity.class);
                 UserPreferences.setIsShowTest(true);

@@ -7,41 +7,48 @@
               android:paddingLeft="15dp"
               android:paddingRight="15dp">
 
+
     <LinearLayout
+        android:id="@+id/ll_effect_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_product_detail_effect_info"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small_14"/>
-
-        <TextView
-            android:id="@+id/tv_product_detail_effect_info"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="主要功效成分"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_small_14"/>
+            android:layout_marginTop="@dimen/spacing_large"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_product_detail_effect_info"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_size_small_14"/>
+
+            <TextView
+                android:id="@+id/tv_product_detail_effect_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="主要功效成分"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_size_small_14"/>
+        </LinearLayout>
+
+        <com.miguan.yjy.widget.FlowTagLayout
+            android:id="@+id/flowtag_product_detail_effect_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            />
+
+
+        <View
+            style="@style/ItemLineHeight"
+            android:layout_marginTop="10dp"
+            />
     </LinearLayout>
-
-    <com.miguan.yjy.widget.FlowTagLayout
-        android:id="@+id/flowtag_product_detail_effect_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        />
-
-
-    <View
-        style="@style/ItemLineHeight"
-        android:layout_marginTop="10dp"
-        />
-
 
     <LinearLayout
         android:layout_width="match_parent"

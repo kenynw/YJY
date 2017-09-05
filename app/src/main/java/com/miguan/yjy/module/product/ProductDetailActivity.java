@@ -31,7 +31,6 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.alibaba.baichuan.android.trade.AlibcTradeSDK;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -199,6 +198,9 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.ll_product_detail_ultimate)
     LinearLayout mLlUltimate;
+
+    @BindView(R.id.ll_effect_all)
+    LinearLayout mLlEffectAll;
 
     private boolean mIsLike;
 
@@ -469,14 +471,20 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         );
         String effectNum = "主要功效成分:<font color=\"#32DAC3\"> " + product.getEffectNum() + " </font>种";
         tvEffectInfo.setText(Html.fromHtml(effectNum));
-        ProductComponentAdapter effectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
-        flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
-        flowtagEffectInfo.setAdapter(effectAdapter);
-        flowtagEffectInfo.setFocusable(false);
-        effectAdapter.onlyAddAll(product.getEffect());
-        effectAdapter.setSetOnTagClickListener((v, position) ->
-                ProductReadPresenter.start(ProductDetailActivity.this, "功效信息", product.getComponentList(), product.getEffect(), position)
-        );
+
+        if (product.getEffect().size() == 0) {
+            mLlEffectAll.setVisibility(View.GONE);
+        } else {
+            mLlEffectAll.setVisibility(View.VISIBLE);
+            ProductComponentAdapter effectAdapter = new ProductComponentAdapter(ProductDetailActivity.this, product.getEffect());
+            flowtagEffectInfo.setTagCheckedMode(FlowTagLayout.FLOW_TAG_CHECKED_SINGLE);
+            flowtagEffectInfo.setAdapter(effectAdapter);
+            flowtagEffectInfo.setFocusable(false);
+            effectAdapter.onlyAddAll(product.getEffect());
+            effectAdapter.setSetOnTagClickListener((v, position) ->
+                    ProductReadPresenter.start(ProductDetailActivity.this, "功效信息", product.getComponentList(), product.getEffect(), position)
+            );
+        }
 
         //去比价
         mTvTaobao.setOnClickListener(v -> {
@@ -604,11 +612,5 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         set.setFillAfter(true);
         mBtnAsk.startAnimation(set);
         mIsShowAnim = false;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        AlibcTradeSDK.destory();
     }
 }
