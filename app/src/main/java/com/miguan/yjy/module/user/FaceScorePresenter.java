@@ -36,4 +36,5 @@ public class FaceScorePresenter extends BaseListActivityPresenter<FaceScoreActiv
     public void onLoadMore() {
         UserModel.getInstance().getFaceScoreList(getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
+
 }
