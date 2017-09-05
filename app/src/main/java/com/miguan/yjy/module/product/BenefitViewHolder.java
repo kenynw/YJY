@@ -49,7 +49,9 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
         String sum = String.format(getContext().getString(R.string.label_benefit_sum), data.getPrize_num());
         mTvSum.setText(Html.fromHtml(sum));
 
+        final int status;
         if (data.getEndtime() < data.getCurrent_time()) {
+            status = 0;
             mTvCountdown.setText("活动已结束");
             mIvEnded.setVisibility(View.VISIBLE);
             if (mCountDownTimer != null) mCountDownTimer.cancel();
@@ -60,9 +62,11 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
             if (data.getStarttime() > data.getCurrent_time()) {
                 del = data.getStarttime() - data.getCurrent_time();
                 timeStr = "距离开始：";
+                status = 1;
             } else {
                 del = data.getEndtime() - data.getCurrent_time();
                 timeStr = "距离结束：";
+                status = 2;
             }
             mTvCountdown.setText(Html.fromHtml(timeStr + "<font color=\"#FF7069\">" + getFormatDate(del) + "</font>"));
             if (!timeStr.equals("天") && del > 0) {
@@ -83,12 +87,14 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
             }
         }
         itemView.setOnClickListener(v -> {
-            if (data.getType() == 0) {
-                WebViewActivity.start(getContext(), "", data.getRelation());
-            } else if (data.getType() == 1) {
-                ProductDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation()));
-            } else if (data.getType() == 2) {
-                ArticleDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation()));
+            if (status == 2) {
+                if (data.getType() == 0) {
+                    WebViewActivity.start(getContext(), "", data.getRelation());
+                } else if (data.getType() == 1) {
+                    ProductDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation()));
+                } else if (data.getType() == 2) {
+                    ArticleDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation()));
+                }
             }
         });
     }

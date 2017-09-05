@@ -1,27 +1,28 @@
 package com.miguan.yjy.module.user;
 
 import android.os.Bundle;
-import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.dsk.chain.bijection.ChainBaseActivity;
 import com.dsk.chain.bijection.RequiresPresenter;
-import com.dsk.chain.expansion.list.BaseListActivity;
-import com.dsk.chain.expansion.list.ListConfig;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
+import com.miguan.yjy.adapter.BaseFragmentPagerAdapter;
+import com.miguan.yjy.module.ask.MyAskFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.miguan.yjy.module.user.MyAskPresenter.TYPE_ANSWER;
-import static com.miguan.yjy.module.user.MyAskPresenter.TYPE_ASK;
 
 /**
  * Copyright (c) 2017/8/25. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(MyAskPresenter.class)
-public class MyAskActivity extends BaseListActivity<MyAskPresenter> {
+public class MyAskActivity extends ChainBaseActivity<MyAskPresenter> {
 
     @BindView(R.id.rb_my_ask_question)
     RadioButton mRbQuestion;
@@ -32,30 +33,41 @@ public class MyAskActivity extends BaseListActivity<MyAskPresenter> {
     @BindView(R.id.rg_my_ask_tab)
     RadioGroup mRgTab;
 
-    private int mType = 2;
+    @BindView(R.id.vp_my_ask)
+    ViewPager mVpMyAsk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.user_activity_ask);
         setToolbarTitle(R.string.btn_me_ask);
         ButterKnife.bind(this);
-        mRgTab.setOnCheckedChangeListener((group, checkedId) -> {
-            mType = (checkedId == R.id.rb_my_ask_answer ? TYPE_ANSWER : TYPE_ASK);
-            getPresenter().setType(mType);
-            getPresenter().onRefresh();
+
+        List<Fragment> list = new ArrayList<>();
+        list.add(MyAskFragment.get(MyAskFragment.TYPE_QUESTION));
+        list.add(MyAskFragment.get(MyAskFragment.TYPE_ANSWER));
+        mVpMyAsk.setAdapter(new BaseFragmentPagerAdapter(this, list, getSupportFragmentManager()));
+        mVpMyAsk.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                (position == 0 ? mRbQuestion : mRbAnswer).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
         });
-    }
 
-    @Override
-    protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new MyAnswerViewHolder(parent, mType);
-    }
-
-    @Override
-    public ListConfig getListConfig() {
-        return super.getListConfig()
-                .setFooterNoMoreRes(R.layout.include_default_footer)
-                .setContainerLayoutRes(R.layout.user_activity_ask);
+        mRgTab.setOnCheckedChangeListener((group, checkedId) -> {
+            int index = (checkedId == R.id.rb_my_ask_question ? 0 : 1);
+            mVpMyAsk.setCurrentItem(index);
+        });
     }
 
 }

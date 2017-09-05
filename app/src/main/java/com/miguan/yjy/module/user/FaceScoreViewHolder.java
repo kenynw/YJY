@@ -36,4 +36,5 @@ public class FaceScoreViewHolder extends BaseViewHolder<FaceScore> {
         mTvTime.setText(data.getCreated_at());
         mTvValue.setText("+" + data.getMoney());
     }
+
 }

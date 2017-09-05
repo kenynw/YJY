@@ -46,8 +46,8 @@
 
     </RadioGroup>
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recycle"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_my_ask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

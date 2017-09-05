@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@color/white"
     >
 
     <TextView
@@ -16,12 +16,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp"
         android:drawablePadding="@dimen/spacing_large"
-        android:gravity="center"
         android:drawableTop="@mipmap/ic_no_commponet"
+        android:gravity="center"
         android:text="该产品不含有这种成分哦~"
         android:textColor="@color/textSecondary"
         android:textSize="@dimen/text_size_small_15"
         />
 
+    <include
+        layout="@layout/include_default_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
