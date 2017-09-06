@@ -533,7 +533,7 @@ public interface Services {
 
     /**
      * 品牌列表
-     *
+     * <p>
      * 默认为0，全显示；1为只显示有规则品牌
      */
     @GET("?action=brandList")
@@ -879,17 +879,18 @@ public interface Services {
 
     /**
      * 护肤百科列表页
-     * <p>
-     * action(string) － 固定值BaikeInfo
-     * user_id(int) － 用户ID
+     * action(string) － BaikeList
      */
     @GET("?action=BaikeList")
     Observable<List<Wiki>> getBaikeList(
-
+            @Query("page") int page,
+            @Query("pageSize") int pageSize
     );
 
     /**
      * 护肤百科详情页
+     * action(string) － 固定值BaikeInfo
+     * user_id(int) － 用户ID
      */
     @GET("?action=BaikeInfo")
     Observable<Wiki> getBaikeInfo(

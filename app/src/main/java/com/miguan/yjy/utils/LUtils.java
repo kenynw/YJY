@@ -3,6 +3,8 @@ package com.miguan.yjy.utils;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -313,6 +315,13 @@ public class LUtils {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setComponent(cmp);
         context.startActivity(intent);
+    }
+
+    public static void clipText(Context context, String content) {
+        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("lable", content);
+        cm.setPrimaryClip(clipData);
+        LUtils.toast("复制成功");
     }
 
 }

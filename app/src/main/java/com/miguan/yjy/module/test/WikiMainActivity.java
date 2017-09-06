@@ -32,7 +32,7 @@ public class WikiMainActivity extends BaseListActivity<WikiMainPresenter> {
     public ListConfig getListConfig() {
         return super.getListConfig().setContainerLayoutRes(R.layout.common_activity_list)
                 .setFooterNoMoreRes(R.layout.include_default_footer)
-                .setLoadMoreAble(false);
+                .setLoadMoreAble(true);
     }
 
 }
