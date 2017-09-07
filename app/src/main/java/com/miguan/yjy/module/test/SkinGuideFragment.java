@@ -36,7 +36,7 @@ public class SkinGuideFragment extends BaseListFragment<SkinGuideFragmentPresent
                 .setRefreshAble(false)
                 .setLoadMoreAble(false)
                 .setItemDecoration(decoration)
-                .setContainerEmptyAble(false);
+                .setContainerEmptyAble(false).setFooterNoMoreRes(R.layout.include_default_footer);
     }
 
 }
