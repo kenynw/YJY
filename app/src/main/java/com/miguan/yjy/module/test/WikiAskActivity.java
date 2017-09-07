@@ -96,12 +96,14 @@ public class WikiAskActivity extends BaseListActivity<WikiAskActivityPresenter> 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+       String len= "Q : ";
+       String name= mTvWikiAskName.getText().toString().substring(len.length(),mTvWikiAskName.getText().length());
         new ShareBottomDialog.Builder(this)
                 .setUrl(getPresenter().share_url)
-                .setTitle(mTvWikiAskName.getText() + "【颜究院】")
+                .setTitle("["+name+ "]"+"【颜究院】")
                 .setContent("解决你的护肤难题")
-                .setWxCircleTitle(mTvWikiAskName.getText() + "【颜究院】")
-                .setWbContent(mTvWikiAskName.getText() + "【颜究院】" + getPresenter().share_url)
+                .setWxCircleTitle(name + "【颜究院】")
+                .setWbContent(name + "【颜究院】" + getPresenter().share_url)
                 .show();
         return super.onOptionsItemSelected(item);
     }

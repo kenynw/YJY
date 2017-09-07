@@ -10,6 +10,7 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.utils.LUtils;
@@ -40,6 +41,6 @@ public class ArticleListFragment extends BaseListFragment<ArticleListPresenter, 
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setRefreshAble(false).hasItemDecoration(false);
+        return super.getListConfig().setRefreshAble(false).hasItemDecoration(false).setFooterNoMoreRes(R.layout.include_default_footer);
     }
 }

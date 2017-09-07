@@ -67,6 +67,7 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
 
     private int tag = 0;
     private int isShowArticle;
+    private int isShowStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +88,16 @@ public class BrandMainActivity extends BaseDataActivity<BrandMainPresenter, Bran
         if (getPresenter().mArticles.size() != 0) {
             isShowArticle = 1;
         } else {
-            isShowArticle = 2;
+            isShowArticle = 0;
         }
+        if (brand.getIs_top() == 0) {
+            isShowStart = 0;
+        } else {
+            isShowStart = 1;
+        }
+
         mVpBrand.setNoScroll(true);
-        mBrandPagerAdapter = new BrandPagerAdapter(getSupportFragmentManager(), isShowArticle, brand.getId());
+        mBrandPagerAdapter = new BrandPagerAdapter(getSupportFragmentManager(), isShowArticle,isShowStart, brand.getId());
         mVpBrand.setAdapter(mBrandPagerAdapter);
         mTabProductBrand.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

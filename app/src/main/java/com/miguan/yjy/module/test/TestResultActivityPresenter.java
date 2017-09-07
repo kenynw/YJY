@@ -3,7 +3,6 @@ package com.miguan.yjy.module.test;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
-import android.util.Log;
 import android.view.View;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
@@ -69,12 +68,10 @@ public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestR
                         getView().mTvSkinTime.setText(DateUtils.getStrTime(getView().userInfo.getAdd_time()));
                     }
                     getView().mImgSkinTest.setImageURI(Uri.parse(getView().userInfo.getImg()));
-                    Log.e("getTestPosition()", getTestPosition() + "====");
                     getView().mTabSkinTest.getTabAt(getTestPosition()).select();
                     getView().mTabSkinTest.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                         @Override
                         public void onTabSelected(TabLayout.Tab tab) {
-                            Log.e("tab.getPosition()", tab.getPosition() + "====");
                             UserPreferences.setTestPosition(tab.getPosition());
                         }
 
@@ -93,7 +90,6 @@ public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestR
                         @Override
                         public void onClick(View v) {
                             //显示肤质测试主页
-//                            loadFirstData();
                             UserPreferences.setIsShowTest(true);
                             Intent intent = new Intent(getView(), TestInitActivity.class);
                             getView().startActivity(intent);

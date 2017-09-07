@@ -27,6 +27,6 @@ public class AllProductFragment extends BaseListFragment<AllProductPresenter,Pro
     @Override
     public ListConfig getListConfig() {
         DividerDecoration div = new DividerDecoration(getResources().getColor(R.color.bgWindow), LUtils.dp2px(1), LUtils.dp2px(15), LUtils.dp2px(15));
-        return super.getListConfig().setLoadMoreAble(true).setRefreshAble(false).setItemDecoration(div);
+        return super.getListConfig().setLoadMoreAble(true).setRefreshAble(false).setItemDecoration(div).setFooterNoMoreRes(R.layout.include_default_footer);
     }
 }

@@ -31,7 +31,9 @@ public class StarProductFragment extends BaseListFragment<StarProductPresenter, 
         DividerDecoration div = new DividerDecoration(getResources().getColor(R.color.bgWindow), LUtils.dp2px(1), LUtils.dp2px(15), LUtils.dp2px(15));
         return super.getListConfig().setRefreshAble(false)
                 .setLoadMoreAble(false)
-                .setNoMoreAble(true).setItemDecoration(div);
+                .setNoMoreAble(true).setItemDecoration(div)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
+                ;
     }
 
 }

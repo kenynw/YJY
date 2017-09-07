@@ -39,6 +39,6 @@ public class ProductSortActivity extends BaseListActivity<ProductSortPresenter> 
     @Override
     public ListConfig getListConfig() {
         DividerDecoration div = new DividerDecoration(getResources().getColor(R.color.f5),10);
-        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false).setItemDecoration(div);
+        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false).setItemDecoration(div).setFooterNoMoreRes(R.layout.include_default_footer);
     }
 }

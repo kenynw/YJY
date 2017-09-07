@@ -26,6 +26,16 @@ public class Brand implements Parcelable {
 
     private String relevantArticle;
 
+    private int is_top;
+
+    public int getIs_top() {
+        return is_top;
+    }
+
+    public void setIs_top(int is_top) {
+        this.is_top = is_top;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -137,6 +147,7 @@ public class Brand implements Parcelable {
         dest.writeInt(this.hot);
         dest.writeString(this.description);
         dest.writeString(this.relevantArticle);
+        dest.writeInt(this.is_top);
     }
 
     protected Brand(Parcel in) {
@@ -149,6 +160,7 @@ public class Brand implements Parcelable {
         this.hot = in.readInt();
         this.description = in.readString();
         this.relevantArticle = in.readString();
+        this.is_top = in.readInt();
     }
 
     public static final Creator<Brand> CREATOR = new Creator<Brand>() {
