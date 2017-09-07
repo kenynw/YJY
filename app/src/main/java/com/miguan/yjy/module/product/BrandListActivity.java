@@ -17,13 +17,11 @@ import com.dsk.chain.expansion.list.BaseListActivity;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.BrandLetterViewHolder;
 import com.miguan.yjy.adapter.viewholder.BrandViewHolder;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.module.user.FeedbackActivity;
-import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.ScrollIndexer;
 
 import java.util.ArrayList;
@@ -37,8 +35,7 @@ import butterknife.ButterKnife;
  * Copyright (c) 2017/3/28. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(BrandListPresenter.class)
-public class BrandListActivity extends BaseListActivity<BrandListPresenter> implements TextWatcher,
-        RecyclerArrayAdapter.OnItemClickListener {
+public class BrandListActivity extends BaseListActivity<BrandListPresenter> implements TextWatcher {
 
     @BindView(R.id.indexer_brand_list)
     ScrollIndexer mIndexer;
@@ -61,8 +58,6 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
         super.onCreate(savedInstanceState);
         setToolbarTitle(R.string.text_brand_list);
         ButterKnife.bind(this);
-
-        LUtils.log("result: " + mCanAdd);
 
         mTvClear.setOnClickListener(v -> finish());
         mEtSearch.addTextChangedListener(this);
@@ -99,7 +94,7 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
     public ListConfig getListConfig() {
         View emptyView;
 
-        mCanAdd = getIntent().getBooleanExtra(BrandListPresenter.EXTRA_EMPTY_TYPE, false);
+        mCanAdd = getIntent().getBooleanExtra(BrandListPresenter.EXTRA_CAN_ADD, false);
         if (mCanAdd) {
             emptyView = View.inflate(this, R.layout.empty_brand_list, null);
         } else {
@@ -153,16 +148,11 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             try {
                 mSearchListTask.cancel(true);
             } catch (Exception e) {
-                LUtils.log("Fail to cancel running search task");
+
             }
         }
         mSearchListTask = new SearchListTask();
         mSearchListTask.execute(keywords);
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        selectedFinish(getPresenter().getAdapter().getItem(position));
     }
 
     public void selectedFinish(Brand brand) {
@@ -197,23 +187,27 @@ public class BrandListActivity extends BaseListActivity<BrandListPresenter> impl
             return keyword;
         }
 
+        @Override
         protected void onPostExecute(String result) {
             getPresenter().getAdapter().clear();
             getPresenter().getAdapter().addAll(mInSearchMode ? mFilterList : getPresenter().getBrandList());
             mIndexer.setVisibility(mInSearchMode ? View.GONE : View.VISIBLE);
-            mTvClear.setText(mCanAdd && mInSearchMode && mFilterList.size() == 0 ? "添加" : "取消");
 
-            mTvClear.setOnClickListener(v -> {
-                if (mInSearchMode && mFilterList.size() == 0) {
+            if (mCanAdd && mInSearchMode && mFilterList.size() == 0) {
+                mTvClear.setText("添加");
+                mTvClear.setOnClickListener(v -> {
                     Brand brand = new Brand();
                     brand.setName(result);
                     brand.setLetter(getLetter(result));
                     brand.setLocal(true);
                     getPresenter().insertBrand(brand);
                     selectedFinish(brand);
-                }
-                finish();
-            });
+                });
+            } else {
+                mTvClear.setText("取消");
+                mTvClear.setOnClickListener(v -> finish());
+            }
+
         }
 
         private String getLetter(String string) {

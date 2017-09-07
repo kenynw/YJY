@@ -27,7 +27,6 @@ import butterknife.BindView;
 /**
  * Copyright (c) 2017/6/15. LiaoPeiKun Inc. All rights reserved.
  */
-
 public class EvaluateCommendVH extends BaseEvaluateViewHolder {
 
     @BindView(R.id.dv_evaluate_avatar)
@@ -38,6 +37,9 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
 
     @BindView(R.id.tv_evaluate_user_age)
     TextView mTvUserAge;
+
+    @BindView(R.id.rtb_evaluate_rating)
+    RatingBar mRtbRating;
 
     @BindView(R.id.ll_evaluate_user_info)
     LinearLayout mLlUserInfo;
@@ -50,9 +52,6 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
 
     @BindView(R.id.tv_evaluate_product_name)
     TextView mTvProductName;
-
-    @BindView(R.id.tv_evaluate_product_rating)
-    RatingBar mTvProductRating;
 
     @BindView(R.id.tv_evaluate_product_spec)
     TextView mTvProductSpec;
@@ -91,6 +90,7 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
                 mTvLabel.setText(data.getUser().getSkin());
             }
         }
+        mRtbRating.setRating(data.getProduct().getStar());
 
         if (data.getProduct() != null && data.getProduct().getId() > 0) {
             mLlEvaluateProduct.setVisibility(View.VISIBLE);
@@ -98,7 +98,6 @@ public class EvaluateCommendVH extends BaseEvaluateViewHolder {
             mTvEvaluateComment.setText(R.string.btn_comment);
             mDvProductImg.setImageURI(data.getProduct().getProduct_img());
             mTvProductName.setText(data.getProduct().getProduct_name());
-            mTvProductRating.setRating(data.getProduct().getStar());
             mTvProductSpec.setText(data.getProduct().getSpec(getContext()));
             mLlEvaluateProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getProduct().getId()));
             mTvEvaluateComment.setOnClickListener(v -> ProductRemarkPresenter.start(getContext(), data.getProduct()));

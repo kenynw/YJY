@@ -22,155 +22,162 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <com.miguan.yjy.widget.CustomNestedScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_discover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <com.miguan.yjy.widget.CustomNestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             >
 
-            <FrameLayout
-                android:id="@+id/fl_discover_banner"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
-                android:layout_marginBottom="@dimen/spacing_small"
-                android:background="@color/white"
-                android:gravity="bottom"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 >
 
-                <com.miguan.yjy.widget.HeadViewPager
-                    android:id="@+id/vp_discover_banner"
+                <FrameLayout
+                    android:id="@+id/fl_discover_banner"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="125dp"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:background="@color/white"
+                    android:gravity="bottom"
+                    >
 
-                <com.miguan.yjy.widget.CirclePageIndicator
-                    android:id="@+id/indicator_discover_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:layout_gravity="bottom|center_horizontal"
-                    android:layout_marginBottom="8dp"
-                    />
+                    <com.miguan.yjy.widget.HeadViewPager
+                        android:id="@+id/vp_discover_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
 
-            </FrameLayout>
+                    <com.miguan.yjy.widget.CirclePageIndicator
+                        android:id="@+id/indicator_discover_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginBottom="8dp"
+                        />
 
-            <TextView
-                style="@style/SkinLabel"
-                android:text="@string/text_my_skin"
-                />
-
-            <GridView
-                android:id="@+id/grid_discover_skin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:gravity="center"
-                android:numColumns="4"
-                android:paddingBottom="@dimen/spacing_large"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:stretchMode="columnWidth"
-                />
-
-            <TextView
-                android:id="@+id/tv_discover_skin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:paddingBottom="@dimen/spacing_large"
-                android:paddingTop="@dimen/spacing_large"
-                android:text="@string/text_skin_test_start"
-                android:textAppearance="@style/TextBody"
-                />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                >
+                </FrameLayout>
 
                 <TextView
                     style="@style/SkinLabel"
-                    android:paddingBottom="@dimen/spacing_small"
-                    android:text="@string/text_last_ask"
+                    android:text="@string/text_my_skin"
                     />
 
-                <TextView
-                    android:id="@+id/tv_discover_ask_more"
-                    android:layout_width="wrap_content"
+                <GridView
+                    android:id="@+id/grid_discover_skin"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:paddingBottom="12dp"
-                    android:text="@string/text_to_more"
-                    android:textAppearance="@style/TextCaption"
-                    />
-
-            </FrameLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_discover_asks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                />
-
-            <ImageView
-                android:id="@+id/iv_discover_template"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/bg_discover_template"
-                />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                >
-
-                <TextView
-                    style="@style/SkinLabel"
-                    android:paddingBottom="0dp"
-                    android:text="@string/text_skin_wiki"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:numColumns="4"
+                    android:paddingBottom="@dimen/spacing_large"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:stretchMode="columnWidth"
                     />
 
                 <TextView
-                    android:id="@+id/tv_discover_wiki_more"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_discover_skin"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginEnd="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:text="@string/text_to_more"
-                    android:textAppearance="@style/TextCaption"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/spacing_large"
+                    android:paddingTop="@dimen/spacing_large"
+                    android:text="@string/text_skin_test_start"
+                    android:textAppearance="@style/TextBody"
                     />
 
-            </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    >
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_discover_wikis"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                />
+                    <TextView
+                        style="@style/SkinLabel"
+                        android:paddingBottom="@dimen/spacing_small"
+                        android:text="@string/text_last_ask"
+                        />
 
-            <include layout="@layout/include_default_footer"/>
+                    <TextView
+                        android:id="@+id/tv_discover_ask_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:paddingBottom="12dp"
+                        android:text="@string/text_to_more"
+                        android:textAppearance="@style/TextCaption"
+                        />
 
-        </LinearLayout>
+                </FrameLayout>
 
-    </com.miguan.yjy.widget.CustomNestedScrollView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_discover_asks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_discover_template"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/bg_discover_template"
+                    />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    >
+
+                    <TextView
+                        style="@style/SkinLabel"
+                        android:paddingBottom="0dp"
+                        android:text="@string/text_skin_wiki"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_discover_wiki_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginEnd="@dimen/spacing_large"
+                        android:layout_marginRight="@dimen/spacing_large"
+                        android:text="@string/text_to_more"
+                        android:textAppearance="@style/TextCaption"
+                        />
+
+                </FrameLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_discover_wikis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    />
+
+                <include layout="@layout/include_default_footer"/>
+
+            </LinearLayout>
+
+        </com.miguan.yjy.widget.CustomNestedScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

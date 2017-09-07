@@ -10,6 +10,8 @@ import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.umeng.socialize.UMShareAPI;
 
+import rx.Subscriber;
+
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
@@ -18,7 +20,22 @@ public class MeFragmentPresenter extends BaseDataFragmentPresenter<MeFragment, U
 
     public void loadData() {
         if (AccountModel.getInstance().isLogin()) {
-            UserModel.getInstance().getUserInfo().unsafeSubscribe(getSubscriber());
+            UserModel.getInstance().getUserInfo().unsafeSubscribe(new Subscriber<User>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    getView().onError(e);
+                }
+
+                @Override
+                public void onNext(User user) {
+                    getView().setData(user);
+                }
+            });
         } else {
             getView().setUnloginView();
         }

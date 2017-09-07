@@ -75,7 +75,7 @@ public class AnswerViewHolder extends BaseViewHolder<Ask> {
         mTvContent.setText(Html.fromHtml(data.getReply()));
         mTvDate.setText(data.getAdd_time());
         mLlLike.setOnClickListener(v -> {
-            ProductModel.getInstance().addAskLike(data.getAskid()).unsafeSubscribe(new Subscriber<String>() {
+            ProductModel.getInstance().addAskLike(data.getAskReplyId()).unsafeSubscribe(new Subscriber<String>() {
                 @Override
                 public void onCompleted() {
 

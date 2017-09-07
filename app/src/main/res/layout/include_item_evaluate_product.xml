@@ -6,8 +6,8 @@
     android:id="@+id/ll_evaluate_product"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_large"
     android:background="@drawable/bg_stroke_product"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/spacing_small"
     android:paddingTop="@dimen/spacing_small"
@@ -16,16 +16,17 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_evaluate_product_img"
         style="@style/BaseImage"
-        android:layout_width="98dp"
-        android:layout_height="98dp"
+        android:layout_width="67dp"
+        android:layout_height="67dp"
         app:failureImage="@mipmap/def_image_product"
         app:placeholderImage="@mipmap/def_image_product"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
         android:orientation="vertical"
         >
 
@@ -40,21 +41,11 @@
             tools:text="CeraVeR面部夜间补水保湿乳液CeraVeR面部夜间补水保湿乳液CeraVeR面部夜间补水保湿乳液"
             />
 
-        <RatingBar
-            android:id="@+id/tv_evaluate_product_rating"
-            style="@style/MySmallRatingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_tiny"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:isIndicator="true"
-            android:saveEnabled="false"
-            />
-
         <com.miguan.yjy.widget.LoadingTextView
             android:id="@+id/tv_evaluate_product_spec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:minWidth="88dp"
             android:textAppearance="@style/TextCaption"
             app:height_weight="0.8"

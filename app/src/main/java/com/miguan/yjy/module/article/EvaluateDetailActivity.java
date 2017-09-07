@@ -70,7 +70,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     TextView mTvSend;
 
     @BindView(R.id.evaluate_ratbar_product)
-    RatingBar mEvaluateRatbarProduct;
+    RatingBar mRatbarProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
         ButterKnife.bind(this);
         mEvaluatePanel = new EvaluatePanel(this);
 
+        mRatbarProduct.setVisibility(View.GONE);
         mRecyDetail.setLayoutManager(new LinearLayoutManager(this));
         mRecyDetail.setAdapter(getPresenter().getAdapter());
         DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
@@ -115,15 +116,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
 
     @Override
     public void setData(Evaluate evaluate) {
-
-
         if (evaluate.getType() == 1) {
-            if (evaluate.getStar() != 0) {
-                mEvaluateRatbarProduct.setVisibility(View.VISIBLE);
-                mEvaluateRatbarProduct.setRating(evaluate.getStar());
-            } else {
-                mEvaluateRatbarProduct.setVisibility(View.GONE);
-            }
             if (!TextUtils.isEmpty(evaluate.getProduct_img())) {
                 mDvTopThumb.setImageURI(Uri.parse(evaluate.getProduct_img()));
             } else {
@@ -136,6 +129,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
                 startActivity(intent);
             });
         } else {
+            mDvTopThumb.setVisibility(View.GONE);
             mLlTopProduct.setOnClickListener(v -> {
                 Intent intent = new Intent(this, ArticleDetailActivity.class);
                 intent.putExtra(ArticleDetailPresenter.EXTRA_ARTICLE_ID, evaluate.getPost_id());
@@ -193,4 +187,5 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
     public void afterTextChanged(Editable editable) {
 
     }
+
 }

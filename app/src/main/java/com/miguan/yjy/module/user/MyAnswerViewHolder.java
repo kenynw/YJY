@@ -13,11 +13,10 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.module.ask.AskDetailActivityPresenter;
+import com.miguan.yjy.module.ask.MyAskFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.miguan.yjy.module.user.MyAskPresenter.TYPE_ASK;
 
 /**
  * Copyright (c) 2017/9/1. LiaoPeiKun Inc. All rights reserved.
@@ -53,7 +52,7 @@ public class MyAnswerViewHolder extends BaseViewHolder<Ask> {
     public void setData(Ask data) {
         mDvThumb.setImageURI(data.getProduct_img());
         mTvTitle.setText(Html.fromHtml(data.getSubject()));
-        if (mType == TYPE_ASK) {
+        if (mType == MyAskFragment.TYPE_QUESTION) {
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTvTime.getLayoutParams();
             lp.gravity = Gravity.NO_GRAVITY;
             mTvTime.setLayoutParams(lp);

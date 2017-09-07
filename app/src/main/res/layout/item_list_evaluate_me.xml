@@ -7,7 +7,10 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:padding="@dimen/spacing_large"
+    android:paddingBottom="@dimen/spacing_large"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:paddingTop="@dimen/spacing_large"
     >
 
     <FrameLayout
@@ -43,11 +46,6 @@
     </FrameLayout>
 
     <TextView
-        style="@style/EvaluateContent"
-        tools:text="混油皮也可以感受到pm乳的好处的！！这个简直是刷酸皮肤不耐受时期的急救神器啊！！！刷酸是如果脱皮的很厉害或者发现皮肤受损感觉到刺痛，我"
-        />
-
-    <TextView
         android:id="@+id/tv_evaluate_collapse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,59 +56,14 @@
         tools:text="查看全文"
         />
 
-    <LinearLayout
-        android:id="@+id/ll_evaluate_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <TextView
+        style="@style/EvaluateContent"
+        android:layout_marginBottom="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:background="@drawable/bg_stroke_product"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/spacing_small"
-        android:paddingTop="@dimen/spacing_small"
-        >
+        tools:text="混油皮也可以感受到pm乳的好处的！！！！！刷酸是如果脱皮的很厉害或者发现皮肤受损感觉到刺痛，我"
+        />
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/dv_evaluate_product_img"
-            style="@style/BaseImage"
-            android:layout_width="67dp"
-            android:layout_height="67dp"
-            app:failureImage="@mipmap/def_image_product"
-            app:placeholderImage="@mipmap/def_image_product"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/spacing_normal"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:orientation="vertical"
-            >
-
-            <com.miguan.yjy.widget.LoadingTextView
-                android:id="@+id/tv_evaluate_product_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textAppearance="@style/TextSubhead"
-                app:height_weight="0.6"
-                tools:text="CeraVeR面部夜间补水保湿乳液CeraVeR面部夜间补水保湿乳液CeraVeR面部夜间补水保湿乳液"
-                />
-
-            <com.miguan.yjy.widget.LoadingTextView
-                android:id="@+id/tv_evaluate_product_spec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:minWidth="88dp"
-                android:textAppearance="@style/TextCaption"
-                app:height_weight="0.8"
-                tools:text="￥320/100ML"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <include layout="@layout/include_item_evaluate_product"/>
 
     <include layout="@layout/include_item_evaluate_article"/>
 

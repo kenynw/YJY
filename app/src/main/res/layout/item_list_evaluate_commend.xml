@@ -8,14 +8,15 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingBottom="@dimen/spacing_normal"
-    android:paddingLeft="@dimen/spacing_normal"
-    android:paddingRight="@dimen/spacing_normal"
+    android:paddingLeft="@dimen/spacing_large"
+    android:paddingRight="@dimen/spacing_large"
     android:paddingTop="@dimen/spacing_large"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/dv_evaluate_avatar"
@@ -50,7 +51,7 @@
                 android:textSize="@dimen/text_size_small_15"
                 app:height_weight="0.6"
                 app:use_gradient="true"
-                tools:text="name"
+                tools:text="一个很酷"
                 />
 
             <TextView
@@ -61,6 +62,22 @@
                 android:layout_marginStart="5dp"
                 android:textAppearance="@style/TextCaption"
                 tools:text="年龄"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+            <RatingBar
+                android:id="@+id/rtb_evaluate_rating"
+                style="@style/MySmallRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:paddingTop="@dimen/spacing_tiny"
+                android:saveEnabled="false"
                 />
 
         </LinearLayout>
@@ -82,13 +99,21 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/include_item_evaluate_product"/>
-
     <com.miguan.yjy.widget.LoadingTextView
         style="@style/EvaluateContent"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:paddingLeft="@dimen/spacing_small"
         android:paddingRight="@dimen/spacing_small"
         tools:text="混油皮也可以感受到pm乳的好处的！！这个简直是刷酸皮肤不耐受时期的急救神器啊！！！刷酸是如果脱皮的很厉害或者发现皮肤受损感觉到刺痛，我"
+        />
+
+    <include
+        layout="@layout/include_item_evaluate_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_small"
+        android:layout_marginRight="@dimen/spacing_small"
         />
 
     <LinearLayout
@@ -112,7 +137,7 @@
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:paddingStart="25dp"
-            android:paddingTop="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_normal"
             android:textAppearance="@style/TextCaption"
             android:visibility="gone"
             />
@@ -126,7 +151,7 @@
             android:drawableStart="@mipmap/ic_product_comment"
             android:gravity="bottom"
             android:minWidth="50dp"
-            android:paddingTop="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_normal"
             android:textAppearance="@style/TextCaption"
             />
 

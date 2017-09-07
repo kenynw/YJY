@@ -4,6 +4,7 @@
 
     <string name="text_null">无</string>
     <string name="text_discover">发现</string>
+    <string name="text_discover_brand">品牌大全</string>
     <string name="text_hot_article">热门文章</string>
     <string name="text_to_more">查看更多></string>
     <string name="text_more">更多</string>
@@ -130,7 +131,7 @@
     <string name="text_skin_test_start">开始肤质测试 >></string>
     <string name="text_my_skin_detail">查看我的肤质情况 >></string>
     <string name="text_skin_wiki">护肤科普</string>
-    <string name="text_last_ask">最新回答</string>
+    <string name="text_last_ask">最新问答</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>

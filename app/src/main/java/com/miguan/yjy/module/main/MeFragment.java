@@ -171,6 +171,8 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         mLlInfo.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class)));
         mTvSkin.setVisibility(GONE);
         mLlMeTest.setVisibility(GONE);
+        if (mBadgeMsg != null) mBadgeMsg.hide(false);
+        if (mBadgeOverdue != null) mBadgeOverdue.hide(false);
     }
 
     @Override

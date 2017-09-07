@@ -748,6 +748,7 @@ public interface Services {
      */
     @GET("?action=questionList")
     Observable<Ask> askDetail(
+            @Query("token") String token,
             @Query("product_id") int productId,
             @Query("askid") int askId,
             @Query("page") int page
@@ -968,7 +969,7 @@ public interface Services {
      * 统计分享
      * user_id(int) － 用户ID
      * id(int) － 对应ID
-     * type(string) － 1为产品，2为文章
+     * type(string) － 1为产品，2为文章 3分享页面加分
      *
      * @return
      */

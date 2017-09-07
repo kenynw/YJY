@@ -32,7 +32,7 @@ public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<Discove
         loadData();
     }
 
-    private void loadData() {
+    public void loadData() {
         CommonModel.getInstance().getDiscover().unsafeSubscribe(getSubscriber());
     }
 

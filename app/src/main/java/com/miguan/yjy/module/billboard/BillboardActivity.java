@@ -16,7 +16,6 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.Rank;
-import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.ShareBottomDialog;
 
@@ -74,7 +73,6 @@ public class BillboardActivity extends BaseDataActivity<BillboardActivityPresent
         Rank rankInfo = rank.getRankingInfo();
         setToolbarTitle(rankInfo.getRank_name() + "TOP" + rank.getProductList().size());
         mDvImage.setImageURI(rankInfo.getRank_banner());
-        mDvImage.setOnClickListener(v -> LargeImageActivity.start(this, rankInfo.getRank_banner()));
         mProductAdapter.addAll(rank.getProductList());
         mRankAdapter.addAll(rank.getRelation_info());
     }

@@ -3,6 +3,7 @@ package com.miguan.yjy.module.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -47,7 +48,8 @@ import butterknife.Unbinder;
  * Copyright (c) 2017/8/22. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(DiscoverFragmentPresenter.class)
-public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter, Discover> implements View.OnClickListener {
+public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter, Discover>
+        implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.vp_discover_banner)
     HeadViewPager mVpBanner;
@@ -79,6 +81,9 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
     @BindView(R.id.rv_discover_wikis)
     RecyclerView mRvWikis;
 
+    @BindView(R.id.srl_discover)
+    SwipeRefreshLayout mSrlRefresh;
+
     private Unbinder mUnbinder;
 
     private MySkinAdapter mSkinAdapter;
@@ -96,12 +101,14 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
             return new WikiViewHolder(parent);
         }
     };
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment_discover, container, false);
         mUnbinder = ButterKnife.bind(this, view);
 
+        mSrlRefresh.setOnRefreshListener(this);
         mTvAskMore.setOnClickListener(this);
         mTvWikiMore.setOnClickListener(this);
         mIvTemplate.setOnClickListener(this);
@@ -111,7 +118,7 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
 
         int paddingLeft = LUtils.dp2px(25);
         DividerDecoration decoration = new DividerDecoration(
-                getResources().getColor(R.color.bgWindow), LUtils.dp2px(1), paddingLeft,paddingLeft
+                getResources().getColor(R.color.bgWindow), LUtils.dp2px(1), paddingLeft, paddingLeft
         );
         mRvAsks.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRvAsks.setAdapter(mAskAdapter);
@@ -137,6 +144,7 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
         if (discover.getBanner() == null || discover.getBanner().size() <= 0) {
             mFlBanner.setVisibility(View.GONE);
         } else {
+            mFlBanner.setVisibility(View.VISIBLE);
             if (discover.getBanner().size() == 1) mIndicatorBanner.setVisibility(View.GONE);
             mVpBanner.setAdapter(new BannerPagerAdapter(getActivity(), discover.getBanner()));
             mIndicatorBanner.setViewPager(mVpBanner);
@@ -152,8 +160,11 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
             mTvSkin.setText(R.string.text_my_skin_detail);
             mTvSkin.setOnClickListener(v -> startActivity(new Intent(getActivity(), TestResultActivity.class)));
         }
+        mAskAdapter.clear();
         mAskAdapter.addAll(discover.getAsk());
+        mWikiAdapter.clear();
         mWikiAdapter.addAll(discover.getBaike());
+        if (mSrlRefresh.isRefreshing()) mSrlRefresh.setRefreshing(false);
     }
 
     @Override
@@ -189,6 +200,11 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    @Override
+    public void onRefresh() {
+        getPresenter().loadData();
     }
 
 }

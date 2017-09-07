@@ -91,9 +91,9 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
                 if (data.getType() == 0) {
                     WebViewActivity.start(getContext(), "", data.getRelation());
                 } else if (data.getType() == 1) {
-                    ProductDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation()));
+                    ProductDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation().trim()));
                 } else if (data.getType() == 2) {
-                    ArticleDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation()));
+                    ArticleDetailPresenter.start(getContext(), Integer.valueOf(data.getRelation().trim()));
                 }
             }
         });

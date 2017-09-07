@@ -34,7 +34,13 @@ public class FaceScoreViewHolder extends BaseViewHolder<FaceScore> {
     public void setData(FaceScore data) {
         mTvTitle.setText(data.getContent());
         mTvTime.setText(data.getCreated_at());
-        mTvValue.setText("+" + data.getMoney());
+        if (data.getMoney() > 0) {
+            mTvValue.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
+            mTvValue.setText("+" + data.getMoney());
+        } else {
+            mTvValue.setTextColor(0xFFF04040);
+            mTvValue.setText(data.getMoney() + "");
+        }
     }
 
 }

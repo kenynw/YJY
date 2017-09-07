@@ -11,6 +11,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.CommonModel;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -76,36 +77,56 @@ public class ShareBottomDialog extends BottomSheetDialog implements View.OnClick
 
         switch (v.getId()) {
             case R.id.tv_share_wx_friend:
-                UMWeb umWeb = new UMWeb(mBuilder.getUrl());
-                umWeb.setTitle(mBuilder.getTitle());
-                umWeb.setThumb(image);
-                umWeb.setDescription(mBuilder.getContent());
-                new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
-                        .setCallback(this)
-                        .withMedia(umWeb)
-                        .share();
+                if (isInstall(SHARE_MEDIA.WEIXIN)) {
+                    UMWeb umWeb = new UMWeb(mBuilder.getUrl());
+                    umWeb.setTitle(mBuilder.getTitle());
+                    umWeb.setThumb(image);
+                    umWeb.setDescription(mBuilder.getContent());
+                    new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
+                            .setCallback(this)
+                            .withMedia(umWeb)
+                            .share();
+                } else {
+                    LUtils.toast("未安装微信");
+                    dismiss();
+                }
+
                 break;
             case R.id.tv_share_wx_circle:
-                UMWeb umWebCircle = new UMWeb(mBuilder.getUrl());
-                umWebCircle.setTitle(mBuilder.getWxCircleTitle());
-                umWebCircle.setThumb(image);
-                new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                        .setCallback(this)
-                        .withMedia(umWebCircle)
-                        .share();
+                if (isInstall(SHARE_MEDIA.WEIXIN)) {
+                    UMWeb umWebCircle = new UMWeb(mBuilder.getUrl());
+                    umWebCircle.setTitle(mBuilder.getWxCircleTitle());
+                    umWebCircle.setThumb(image);
+                    new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                            .setCallback(this)
+                            .withMedia(umWebCircle)
+                            .share();
+                } else {
+                    LUtils.toast("未安装微信");
+                    dismiss();
+                }
                 break;
             case R.id.tv_share_weibo:
-                new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
-                        .setCallback(this)
-                        .withText(mBuilder.getWbContent())
-                        .withMedia(image)
-                        .share();
+                if (isInstall(SHARE_MEDIA.SINA)) {
+                    new ShareAction(mActivity).setPlatform(SHARE_MEDIA.SINA)
+                            .setCallback(this)
+                            .withText(mBuilder.getWbContent())
+                            .withMedia(image)
+                            .share();
+                } else {
+                    LUtils.toast("未安装微博");
+                    dismiss();
+                }
                 break;
             case R.id.tv_share_cancel:
                 dismiss();
                 break;
 
         }
+    }
+
+    private boolean isInstall(SHARE_MEDIA share_media) {
+        return UMShareAPI.get(mBuilder.getContext()).isInstall((Activity) mBuilder.getContext(), share_media);
     }
 
     @Override
@@ -119,17 +140,17 @@ public class ShareBottomDialog extends BottomSheetDialog implements View.OnClick
 
     @Override
     public void onResult(SHARE_MEDIA share_media) {
-
+        CommonModel.getInstance().analyticsShare(-1, 3).subscribe();
     }
 
     @Override
     public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-        LUtils.toast("分享错误");
+        LUtils.log("分享错误" + throwable.getMessage());
     }
 
     @Override
     public void onCancel(SHARE_MEDIA share_media) {
-        LUtils.toast("取消分享");
+        LUtils.log("取消分享");
     }
 
     public static class Builder {

@@ -131,15 +131,17 @@ public class ProductModel extends AbsModel {
      *
      * @return
      */
-    public Observable<BrandList> getBrandList(int type) {
-        return ServicesClient.getServices().brandList(type)
+    public Observable<BrandList> getBrandList(boolean showALl) {
+        return ServicesClient.getServices().brandList(showALl ? 0 : 1)
                 .map(brandList -> {
-                    List<Brand> brands = queryBrands();
-                    if (brands != null && brands.size() > 0) {
-                        brandList.getCosmeticsList().addAll(queryBrands());
+                    if (showALl) {
+                        List<Brand> brands = queryBrands();
+                        if (brands != null && brands.size() > 0) {
+                            brandList.getCosmeticsList().addAll(queryBrands());
+                        }
                     }
-                    Collections.sort(brandList.getCosmeticsList(),
-                            (brandFirst, brandSecond) -> brandFirst.getLetter().compareTo(brandSecond.getLetter()));
+                    Collections.sort(brandList.getCosmeticsList(), (brandFirst, brandSecond) ->
+                            brandFirst.getLetter().compareTo(brandSecond.getLetter()));
                     return brandList;
                 })
                 .compose(new DefaultTransform<>());
@@ -351,7 +353,8 @@ public class ProductModel extends AbsModel {
      * 提问详情
      */
     public Observable<Ask> getAskDetail(int productId, int askId, int page) {
-        return ServicesClient.getServices().askDetail(productId, askId, page).compose(new DefaultTransform<>());
+        return ServicesClient.getServices().askDetail(UserPreferences.getToken(), productId, askId, page)
+                 .compose(new DefaultTransform<>());
     }
 
     /**
@@ -367,7 +370,6 @@ public class ProductModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
-
     /**
      * 答案点赞
      */
@@ -375,7 +377,6 @@ public class ProductModel extends AbsModel {
         return ServicesClient.getServices().addAskLike(UserPreferences.getToken(), replyId)
                 .compose(new DefaultTransform<>());
     }
-
 
     /**
      * 排行榜列表
