@@ -8,6 +8,7 @@ import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.list.BaseListFragment;
 import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.MyViewHolder;
 import com.miguan.yjy.model.bean.Skin;
 
@@ -33,6 +34,6 @@ public class SkinRecomFragment extends BaseListFragment<SkinRecomFragmentPresent
 
     @Override
     public ListConfig getListConfig() {
-        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false);
+        return super.getListConfig().setLoadMoreAble(false).setRefreshAble(false).setFooterNoMoreRes(R.layout.include_default_footer);
     }
 }
