@@ -127,7 +127,7 @@
         <com.miguan.yjy.widget.NoScrollViewPager
             android:id="@id/id_stickynavlayout_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             />
 

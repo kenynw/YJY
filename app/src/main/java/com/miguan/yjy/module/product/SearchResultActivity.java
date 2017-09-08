@@ -274,6 +274,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
     @Override
     public int[] getHideSoftViewIds() {
-        return new int[] {R.id.et_product_keywords};
+        return new int[]{R.id.et_product_keywords};
     }
 }

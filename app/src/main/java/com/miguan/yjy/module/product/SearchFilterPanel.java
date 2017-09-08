@@ -91,7 +91,8 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
                     view.setOnClickListener(v -> {
                         mTbtnList.get(1).setText("分类");
                         mTbtnList.get(2).setText("功效");
-                        if (mListener != null) mListener.onItemSelected(0, "");
+                        if (mListener != null)
+                            mListener.onItemSelected(0, "");
                     });
                 }
             }
@@ -155,7 +156,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     private View createEffectRecyclerView(List<Effect> effects, RecyclerArrayAdapter.OnItemClickListener listener) {
         FlowTagLayout recyclerView = new FlowTagLayout(mActivity);
-        recyclerView.setPadding(LUtils.dp2px(20),LUtils.dp2px(14),LUtils.dp2px(20),LUtils.dp2px(7));
+        recyclerView.setPadding(LUtils.dp2px(20), LUtils.dp2px(14), LUtils.dp2px(20), LUtils.dp2px(7));
         EffectSortAdapter effectSortProductAdapter = new EffectSortAdapter(mActivity, effects);
         effectSortProductAdapter.setSetOnTagClickListener(new EffectSortAdapter.SetOnTagClickListener() {
             @Override
@@ -319,6 +320,12 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
                         @Override
                         public void itemClick(View v, int position) {
                             mTbtnList.get(1).setText(data.getSub().get(position).getCate_name());
+                            if (data.getCate_name().equals("面部护肤")) {
+                                mTbtnList.get(2).setClickable(true);
+                            } else {
+                                mTbtnList.get(2).setText("功效");
+                                mTbtnList.get(2).setClickable(false);
+                            }
                             if (mListener != null)
                                 mListener.onSencondItemSelected(data.getSub().get(position).getId(), data.getSub().get(position).getCate_name());
                         }
@@ -336,7 +343,6 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
             }
         }
     }
-
 
 
 }
