@@ -13,6 +13,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Benefit;
 import com.miguan.yjy.module.article.ArticleDetailPresenter;
 import com.miguan.yjy.module.common.WebViewActivity;
+import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,12 @@ import butterknife.ButterKnife;
  */
 
 public class BenefitViewHolder extends BaseViewHolder<Benefit> {
+
+    public static final int STATUS_NOT_START = 0;
+
+    public static final int STATUS_ONGOING = 1;
+
+    public static final int STATUS_OVER = 2;
 
     @BindView(R.id.dv_benefit_thumb)
     SimpleDraweeView mDvThumb;
@@ -37,6 +44,8 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
 
     private CountDownTimer mCountDownTimer;
 
+    private int mStatus;
+
     public BenefitViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_list_benefit);
         ButterKnife.bind(this, itemView);
@@ -49,37 +58,38 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
         String sum = String.format(getContext().getString(R.string.label_benefit_sum), data.getPrize_num());
         mTvSum.setText(Html.fromHtml(sum));
 
-        final int status;
+        String statusRes = getContext().getString(R.string.text_benefits_status);
         if (data.getEndtime() < data.getCurrent_time()) {
-            status = 0;
+            mStatus = STATUS_OVER;
             mTvCountdown.setText("活动已结束");
             mIvEnded.setVisibility(View.VISIBLE);
             if (mCountDownTimer != null) mCountDownTimer.cancel();
         } else {
             mIvEnded.setVisibility(View.GONE);
             long del;
-            final String timeStr;
+            String timeText;
             if (data.getStarttime() > data.getCurrent_time()) {
                 del = data.getStarttime() - data.getCurrent_time();
-                timeStr = "距离开始：";
-                status = 1;
+                timeText = "距离开始";
+                mStatus = STATUS_NOT_START;
             } else {
                 del = data.getEndtime() - data.getCurrent_time();
-                timeStr = "距离结束：";
-                status = 2;
+                timeText = "距离结束";
+                mStatus = STATUS_ONGOING;
             }
-            mTvCountdown.setText(Html.fromHtml(timeStr + "<font color=\"#FF7069\">" + getFormatDate(del) + "</font>"));
-            if (!timeStr.equals("天") && del > 0) {
+            String text = String.format(statusRes, timeText, getFormatDate(del));
+            mTvCountdown.setText(Html.fromHtml(text));
+            if (!timeText.equals("天") && del > 0) {
                 if (mCountDownTimer != null) mCountDownTimer.cancel();
                 mCountDownTimer = new CountDownTimer(del * 1000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        mTvCountdown.setText(Html.fromHtml(timeStr + "<font color=\"#FF7069\">" + getFormatDate(millisUntilFinished / 1000) + "</font>"));
+                        mTvCountdown.setText(Html.fromHtml(timeText + "<font color=\"#FF7069\">" + getFormatDate(millisUntilFinished / 1000) + "</font>"));
                     }
 
                     @Override
                     public void onFinish() {
-
+                        changeStatus(data);
                     }
                 }.start();
             } else if (mCountDownTimer != null) {
@@ -87,7 +97,7 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
             }
         }
         itemView.setOnClickListener(v -> {
-            if (status == 2) {
+            if (mStatus == STATUS_ONGOING) {
                 if (data.getType() == 0) {
                     WebViewActivity.start(getContext(), "", data.getRelation());
                 } else if (data.getType() == 1) {
@@ -97,6 +107,36 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
                 }
             }
         });
+    }
+
+    private void changeStatus(Benefit benefit) {
+        long curMillis = System.currentTimeMillis() / 1000;
+        if (benefit.getCurrent_time() > curMillis) {
+            LUtils.toast("系统时间错误");
+            return;
+        }
+        if (mStatus == STATUS_NOT_START) {
+            mIvEnded.setVisibility(View.GONE);
+            long del = benefit.getEndtime() - curMillis;
+            String statusText = getContext().getString(R.string.text_benefits_status);
+            mCountDownTimer = new CountDownTimer(del * 1000, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    mTvCountdown.setText(Html.fromHtml(String.format(statusText, "距离结束", getFormatDate(millisUntilFinished / 1000))));
+                }
+
+                @Override
+                public void onFinish() {
+                    changeStatus(benefit);
+                }
+            }.start();
+            mStatus = STATUS_ONGOING;
+        } else {
+            mIvEnded.setVisibility(View.VISIBLE);
+            mTvCountdown.setText("活动已结束");
+            if (mCountDownTimer != null) mCountDownTimer.cancel();
+            mStatus = STATUS_OVER;
+        }
     }
 
     private String getFormatDate(long time) {

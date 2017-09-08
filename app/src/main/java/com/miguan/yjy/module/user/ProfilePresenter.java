@@ -61,6 +61,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
 
     public void logout() {
         UserPreferences.setToken("");
+        UserPreferences.setUsername("");
         UserPreferences.setTestPosition(0);
         UserPreferences.setUserID(0);
         UserPreferences.setIsShowTest(false);
@@ -82,6 +83,7 @@ public class ProfilePresenter extends BaseDataActivityPresenter<ProfileActivity,
         UserModel.getInstance().modifyProfile(key, value).unsafeSubscribe(new ServicesResponse<String>() {
             @Override
             public void onNext(String s) {
+                if (key.equals(KEY_PROFILE_USERNAME)) UserPreferences.setUsername(value);
                 LUtils.toast(s);
             }
         });

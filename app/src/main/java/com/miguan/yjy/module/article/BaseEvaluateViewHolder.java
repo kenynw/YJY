@@ -25,7 +25,7 @@ public abstract class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
     public BaseEvaluateViewHolder(ViewGroup parent, @LayoutRes int res) {
         super(parent, res);
         ButterKnife.bind(this, itemView);
-        mTvContent.setMaxLines(6);
+        mTvContent.setMaxLines(3);
         mTvContent.setEllipsize(TextUtils.TruncateAt.END);
     }
 

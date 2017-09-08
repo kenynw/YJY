@@ -21,7 +21,6 @@ import com.miguan.yjy.utils.LUtils;
  * @描述
  */
 @RequiresPresenter(ArticleListPresenter.class)
-
 public class ArticleListFragment extends BaseListFragment<ArticleListPresenter, Article> {
 
     @Nullable
@@ -43,4 +42,5 @@ public class ArticleListFragment extends BaseListFragment<ArticleListPresenter, 
     public ListConfig getListConfig() {
         return super.getListConfig().setRefreshAble(false).hasItemDecoration(false).setFooterNoMoreRes(R.layout.include_default_footer);
     }
+
 }
