@@ -9,6 +9,7 @@ import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Ask;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
@@ -21,7 +22,6 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
     private static final String EXTRA_PRODUCT_ID = "product_id";
     private static final String EXTRA_PRODUCT_NAME = "product_name";
     private static final String EXTRA_PRODUCT_IMG = "product_img";
-    private static final String EXTRA_ASK_TYPE = "ask_type";
     private static final String EXTRA_ASK_ID = "ask_id";
     private static final String EXTRA_ASK_CONTENT = "ask_content";
 
@@ -30,8 +30,6 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
     private String mProductName;
 
     private String mProductImg;
-
-    private int mAskType;
 
     private int mAskId;
 
@@ -47,22 +45,6 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
             intent.putExtra(EXTRA_PRODUCT_NAME, ask.getProduct_name());
             intent.putExtra(EXTRA_PRODUCT_IMG, ask.getProduct_img());
             intent.putExtra(EXTRA_ASK_CONTENT, content);
-            intent.putExtra(EXTRA_ASK_TYPE, 1);
-            ((Activity) context).startActivityForResult(intent, 100);
-        } else {
-            context.startActivity(new Intent(context, LoginActivity.class));
-        }
-    }
-
-    // 回答问题
-    public static void start(Context context, Ask ask, int askId) {
-        if (AccountModel.getInstance().isLogin()) {
-            Intent intent = new Intent(context, AddAskActivity.class);
-            intent.putExtra(EXTRA_PRODUCT_ID, ask.getProduct_id());
-            intent.putExtra(EXTRA_PRODUCT_NAME, ask.getProduct_name());
-            intent.putExtra(EXTRA_PRODUCT_IMG, ask.getProduct_img());
-            intent.putExtra(EXTRA_ASK_TYPE, 2);
-            intent.putExtra(EXTRA_ASK_ID, askId);
             ((Activity) context).startActivityForResult(intent, 100);
         } else {
             context.startActivity(new Intent(context, LoginActivity.class));
@@ -75,7 +57,6 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
         mProductId = getView().getIntent().getIntExtra(EXTRA_PRODUCT_ID, 0);
         mProductName = getView().getIntent().getStringExtra(EXTRA_PRODUCT_NAME);
         mProductImg = getView().getIntent().getStringExtra(EXTRA_PRODUCT_IMG);
-        mAskType = getView().getIntent().getIntExtra(EXTRA_ASK_TYPE, 0);
         mAskId = getView().getIntent().getIntExtra(EXTRA_ASK_ID, 0);
         mContent = getView().getIntent().getStringExtra(EXTRA_ASK_CONTENT);
     }
@@ -87,11 +68,11 @@ public class AddAskActivityPresenter extends Presenter<AddAskActivity> {
     }
 
     public void submit(String content) {
-        ProductModel.getInstance().addAsk(mProductId, mProductName, mAskType, mAskId, content)
+        ProductModel.getInstance().addAsk(mProductId, mProductName, 1, mAskId, content)
                 .doOnError(throwable -> getView().getExpansionDelegate().hideProgressBar())
-                .unsafeSubscribe(new ServicesResponse<String>() {
+                .unsafeSubscribe(new ServicesResponse<Result>() {
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(Result result) {
                         getView().getExpansionDelegate().hideProgressBar();
                         getView().setResult(Activity.RESULT_OK);
                         getView().finish();

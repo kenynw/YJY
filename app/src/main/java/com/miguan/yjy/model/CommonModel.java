@@ -13,6 +13,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.model.bean.Discover;
 import com.miguan.yjy.model.bean.Home;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.Version;
 import com.miguan.yjy.model.constant.Constants;
@@ -189,6 +190,15 @@ public class CommonModel extends AbsModel {
      */
     public Observable<String> analyticsTemplate() {
         return ServicesClient.getServices().analyticsTemplate(UserPreferences.getToken()).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 分享加颜值
+     *
+     * @return
+     */
+    public Observable<Result> addScoreForShare() {
+        return ServicesClient.getServices().addScoreForShare(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
 
     private String findDownLoadDirectory() {

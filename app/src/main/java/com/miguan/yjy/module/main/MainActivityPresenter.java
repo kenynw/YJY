@@ -29,7 +29,6 @@ import rx.Subscriber;
 public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivity, Version> {
 
     private Badge mBadge;
-    private Badge mBadgeTest;
 
     @Override
     protected void onCreate(MainActivity view, Bundle saveState) {
@@ -44,9 +43,6 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
 
         View tab = getView().getTab(3).getCustomView();
         mBadge = new QBadgeView(getView()).setBadgeGravity(Gravity.TOP | Gravity.END).bindTarget(tab);
-
-        View tabTest = getView().getTab(2).getCustomView();
-        mBadgeTest = new QBadgeView(getView()).setBadgeGravity(Gravity.TOP | Gravity.END).bindTarget(tabTest);
     }
 
     @Override
@@ -80,13 +76,9 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
                             int count = user.getOverdueNum() + user.getUnReadNUM();
                             if (count <= 0) mBadge.hide(true);
                             else mBadge.setBadgeText("");
-
-                            if (user.getIsComplete() == 1) mBadgeTest.hide(false);
-                            else mBadgeTest.setBadgeText("");
                         }
                     });
         } else {
-            mBadgeTest.hide(false);
             mBadge.hide(false);
         }
     }
@@ -97,6 +89,7 @@ public class MainActivityPresenter extends BaseDataActivityPresenter<MainActivit
         EventBus.getDefault().unregister(this);
     }
 
+    @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setCurrentTab(Integer index) {
         getView().setCurrentTab(index);

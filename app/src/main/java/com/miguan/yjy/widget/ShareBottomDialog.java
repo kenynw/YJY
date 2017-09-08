@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.CommonModel;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -19,6 +20,7 @@ import com.umeng.socialize.media.UMWeb;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Subscriber;
 
 import static android.text.TextUtils.isEmpty;
 
@@ -140,7 +142,22 @@ public class ShareBottomDialog extends BottomSheetDialog implements View.OnClick
 
     @Override
     public void onResult(SHARE_MEDIA share_media) {
-        CommonModel.getInstance().analyticsShare(-1, 3).subscribe();
+        CommonModel.getInstance().addScoreForShare().subscribe(new Subscriber<Result>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Result result) {
+                if (result.getFlag() == 1) LUtils.toast(result.getContent());
+            }
+        });
     }
 
     @Override
