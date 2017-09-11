@@ -18,6 +18,7 @@ import com.miguan.yjy.model.bean.Message;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Rank;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.model.bean.Test;
 import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.UserProduct;
@@ -766,7 +767,7 @@ public interface Services {
      * @param content      提交内容
      */
     @GET("?action=subAsk")
-    Observable<String> addAsk(
+    Observable<Result> addAsk(
             @Query("token") String token,
             @Query("username") String username,
             @Query("product_id") int productId,
@@ -990,6 +991,16 @@ public interface Services {
      */
     @GET("?action=addLessons")
     Observable<String> analyticsTemplate(
+            @Query("token") String token
+    );
+
+    /**
+     * 分享加颜值
+     *
+     * @return
+     */
+    @GET("?action=sharePage")
+    Observable<Result> addScoreForShare(
             @Query("token") String token
     );
 

@@ -16,6 +16,7 @@ import com.miguan.yjy.model.bean.MainProduct;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.bean.Rank;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.model.services.DefaultTransform;
@@ -360,7 +361,7 @@ public class ProductModel extends AbsModel {
     /**
      * 添加回答
      */
-    public Observable<String> addAsk(int productId, String productName, int askType, int askId, String content) {
+    public Observable<Result> addAsk(int productId, String productName, int askType, int askId, String content) {
         return ServicesClient.getServices()
                 .addAsk(UserPreferences.getToken(),
                         UserPreferences.getUsername(),

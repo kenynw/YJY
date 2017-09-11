@@ -13,7 +13,7 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.adapter.viewholder.StarViewHolder;
+import com.miguan.yjy.adapter.viewholder.ArticleViewHolder;
 
 /**
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
@@ -29,7 +29,7 @@ public class StarListActivity extends BaseListActivity<StarListPresenter> {
 
     @Override
     protected BaseViewHolder createViewHolder(ViewGroup parent, int viewType) {
-        return new StarViewHolder(parent);
+        return new ArticleViewHolder(parent);
     }
 
     @Override
@@ -42,9 +42,13 @@ public class StarListActivity extends BaseListActivity<StarListPresenter> {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         tv.setCompoundDrawables(null, drawable, null, null);
 
+        SpaceDecoration decoration = new SpaceDecoration((int) getResources().getDimension(R.dimen.spacing_small));
+        decoration.setPaddingStart(false);
+        decoration.setPaddingEdgeSide(false);
+
         return super.getListConfig()
                 .setContainerEmptyView(view)
-                .setItemDecoration(new SpaceDecoration((int) getResources().getDimension(R.dimen.spacing_small)))
+                .setItemDecoration(decoration)
                 .setFooterNoMoreRes(R.layout.include_default_footer)
                 .setContainerLayoutRes(R.layout.common_activity_list);
     }

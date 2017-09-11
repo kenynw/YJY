@@ -3,6 +3,7 @@
     <string name="company_copyright">©厦门爱游米网络科技有限公司 2017</string>
 
     <string name="text_null">无</string>
+    <string name="text_benefits_status"><![CDATA[%1$s：<font color="#FF7069">%2$s</font>]]></string>
     <string name="text_discover">发现</string>
     <string name="text_discover_brand">品牌大全</string>
     <string name="text_hot_article">热门文章</string>

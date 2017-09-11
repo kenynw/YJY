@@ -45,7 +45,7 @@ public abstract class BaseListFragment<P extends BaseListFragmentPresenter, M> e
         } else {
             EasyRecyclerView listView = new EasyRecyclerView(getActivity());
             listView.setId(R.id.recycle);
-            listView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            listView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             mRootView = listView;
         }
     }

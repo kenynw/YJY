@@ -6,31 +6,33 @@
     android:id="@+id/ll_evaluate_article"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_stroke_article"
-    android:orientation="vertical"
+    android:background="@drawable/bg_radius_window"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/spacing_normal"
+    android:paddingLeft="@dimen/spacing_small"
+    android:paddingRight="@dimen/spacing_small"
+    android:paddingTop="13dp"
     >
+
+    <TextView
+        android:id="@+id/tv_evaluate_article_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="2dp"
+        android:textAppearance="@style/TextBody"
+        tools:text="答疑解惑丨面膜到底该不该每天敷？"
+        />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_evaluate_article_thumb"
         style="@style/BaseImage"
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_width="110dp"
+        android:layout_height="68.75dp"
         android:background="@mipmap/def_image_loading"
         fresco:roundTopLeft="true"
         fresco:roundTopRight="true"
         fresco:roundedCornerRadius="4dp"
-        />
-
-    <TextView
-        android:id="@+id/tv_evaluate_article_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/spacing_small"
-        android:paddingLeft="@dimen/spacing_normal"
-        android:paddingRight="@dimen/spacing_normal"
-        android:paddingTop="@dimen/spacing_normal"
-        android:textAppearance="@style/TextSubhead"
-        tools:text="答疑解惑丨面膜到底该不该每天敷？"
         />
 
 </LinearLayout>

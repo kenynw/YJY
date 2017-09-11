@@ -14,10 +14,10 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Ask;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
-
-import butterknife.ButterKnife;
+import com.miguan.yjy.utils.LUtils;
 
 /**
  * Copyright (c) 2017/6/26. LiaoPeiKun Inc. All rights reserved.
@@ -91,9 +91,10 @@ public class AskDetailActivityPresenter extends BaseListActivityPresenter<AskDet
     public void send(String productName, String content) {
         if (AccountModel.getInstance().isLogin()) {
             ProductModel.getInstance().addAsk(mProductId, productName, 2, mAskId, content)
-                    .subscribe(new ServicesResponse<String>() {
+                    .subscribe(new ServicesResponse<Result>() {
                         @Override
-                        public void onNext(String s) {
+                        public void onNext(Result result) {
+                            if (result.getFlag() == 1) LUtils.toast(result.getContent());
                             getView().clearInput();
                             onRefresh();
                         }

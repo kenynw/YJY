@@ -59,6 +59,7 @@ public class App extends Application {
                 //初始化失败，可以根据code和msg判断失败原因，详情参见错误说明
             }
         });
+
     }
     // 初始化友盟分享
     public void initUmeng() {
