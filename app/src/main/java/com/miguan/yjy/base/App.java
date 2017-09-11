@@ -31,7 +31,7 @@ public class App extends Application {
         super.onCreate();
         LUtils.initialize(this);
         SystemPreferences.initialize(this);
-        LUtils.isDebug = true;
+        LUtils.isDebug = false;
         Fresco.initialize(this);
         ModelManager.init(this);
         Chain.setLifeCycleDelegateProvide(ActivityDelegate::new);

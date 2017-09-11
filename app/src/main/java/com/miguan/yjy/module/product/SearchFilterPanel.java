@@ -25,6 +25,7 @@ import com.miguan.yjy.adapter.EffectSortAdapter;
 import com.miguan.yjy.adapter.ProductSortAdapter;
 import com.miguan.yjy.model.bean.Category;
 import com.miguan.yjy.model.bean.Effect;
+import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.widget.FlowTagLayout;
 
@@ -68,6 +69,22 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
         init();
     }
 
+    public void setCategories(List<Category> categories) {
+        mCategories = categories;
+    }
+
+    public void setEffects(List<Effect> effects) {
+        mEffects = effects;
+    }
+
+    public void updateAllData(ProductList product) {
+        setEffects(product.getEffectList());
+    }
+
+    public List<ToggleButton> getTbtnList() {
+        return mTbtnList;
+    }
+
     private void init() {
         mMenuList = new ArrayList<>();
 
@@ -76,9 +93,18 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 //            categories[i] = mCategories.get(i).getCate_name();
 //        }
 
+
         String[] effects = new String[mEffects.size()];
         for (int i = 0; i < mEffects.size(); i++) {
             effects[i] = mEffects.get(i).getEffect_name();
+        }
+
+
+        if (mEffects.size() == 0) {
+            mTbtnList.get(2).setText("功效");
+            mTbtnList.get(2).setClickable(false);
+        } else {
+            mTbtnList.get(2).setClickable(true);
         }
 
         ButterKnife.apply(mTbtnList, new ButterKnife.Action<ToggleButton>() {
@@ -134,6 +160,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
     }
 
     SecondSortProductAdapter secondSortProductAdapter;
+    EffectSortAdapter effectSortProductAdapter;
 
     private View createSortRecyclerView(List<Category> categories, RecyclerArrayAdapter.OnItemClickListener listener) {
         RecyclerView recyclerView = new RecyclerView(mActivity);
@@ -156,8 +183,9 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     private View createEffectRecyclerView(List<Effect> effects, RecyclerArrayAdapter.OnItemClickListener listener) {
         FlowTagLayout recyclerView = new FlowTagLayout(mActivity);
-        recyclerView.setPadding(LUtils.dp2px(20), LUtils.dp2px(14), LUtils.dp2px(20), LUtils.dp2px(7));
-        EffectSortAdapter effectSortProductAdapter = new EffectSortAdapter(mActivity, effects);
+        recyclerView.MAX_LINE = 3;
+        recyclerView.setPadding(LUtils.dp2px(20), 0, LUtils.dp2px(20), LUtils.dp2px(-10));
+        effectSortProductAdapter = new EffectSortAdapter(mActivity, effects);
         effectSortProductAdapter.setSetOnTagClickListener(new EffectSortAdapter.SetOnTagClickListener() {
             @Override
             public void itemClick(View v, int position) {
@@ -237,7 +265,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
         void onMenuCheck();
 
-        void onSencondItemSelected(int id, String text);
+        void onSencondItemSelected(int id, String text, List<Effect> effectList);
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
@@ -319,15 +347,16 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
                     mProductSortAdapter.setSetOnTagClickListener(new ProductSortAdapter.SetOnTagClickListener() {
                         @Override
                         public void itemClick(View v, int position) {
+                            effectSortProductAdapter.onlyAddAll(mEffects);
+//                            if (mEffects.size() == 0) {
+//                                mTbtnList.get(2).setText("功效");
+//                                mTbtnList.get(2).setClickable(false);
+//                            } else {
+//                                mTbtnList.get(2).setClickable(true);
+//                            }
                             mTbtnList.get(1).setText(data.getSub().get(position).getCate_name());
-                            if (data.getCate_name().equals("面部护肤")) {
-                                mTbtnList.get(2).setClickable(true);
-                            } else {
-                                mTbtnList.get(2).setText("功效");
-                                mTbtnList.get(2).setClickable(false);
-                            }
                             if (mListener != null)
-                                mListener.onSencondItemSelected(data.getSub().get(position).getId(), data.getSub().get(position).getCate_name());
+                                mListener.onSencondItemSelected(data.getSub().get(position).getId(), data.getSub().get(position).getCate_name(), mEffects);
                         }
                     });
                 } else {

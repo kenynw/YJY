@@ -25,11 +25,14 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
+import com.miguan.yjy.model.bean.Effect;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.model.local.SystemPreferences;
 import com.miguan.yjy.module.user.FeedbackActivity;
 import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.StringUtils;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,7 +94,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     ToggleButton mTbtnProductFilterAll;
 
 
-    private SearchFilterPanel mFilterPanel;
+    public SearchFilterPanel mFilterPanel;
 
     private boolean mIsInit = false;
 
@@ -227,11 +230,16 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             }
 
             @Override
-            public void onSencondItemSelected(int cateId, String text) {
+            public void onSencondItemSelected(int cateId, String text, List<Effect>effectList) {
+                if (effectList.size() == 0) {
+                    mFilterPanel.getTbtnList().get(2).setText("功效");
+                    mFilterPanel.getTbtnList().get(2).setClickable(false);
+                } else {
+                    mFilterPanel.getTbtnList().get(2).setClickable(true);
+                }
                 if (cateId > 0) {
                     getPresenter().setCateId(cateId);
                 }
-
                 if (!TextUtils.isEmpty(text)) {
                     mFilterPanel.dismissMenu();
                     getPresenter().setEffect(text);

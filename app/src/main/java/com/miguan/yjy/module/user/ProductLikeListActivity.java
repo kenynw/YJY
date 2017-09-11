@@ -14,8 +14,11 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.viewholder.ProductLikeViewHolder;
+import com.miguan.yjy.model.bean.Effect;
 import com.miguan.yjy.model.bean.ProductList;
 import com.miguan.yjy.module.product.SearchFilterPanel;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2017/3/31. LiaoPeiKun Inc. All rights reserved.
@@ -24,6 +27,7 @@ import com.miguan.yjy.module.product.SearchFilterPanel;
 public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPresenter> {
 
     private boolean mIsInit;
+    SearchFilterPanel filterPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,7 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
 
     public void setData(ProductList productList) {
         if (mIsInit) return;
-        SearchFilterPanel filterPanel = new SearchFilterPanel(this, productList.getCategoryList(), productList.getEffectList());
+         filterPanel = new SearchFilterPanel(this, productList.getCategoryList(), productList.getEffectList());
         filterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int cateId, String text) {
@@ -85,7 +89,15 @@ public class ProductLikeListActivity extends BaseListActivity<ProductLikeListPre
             }
 
             @Override
-            public void onSencondItemSelected(int cateId, String text) {
+            public void onSencondItemSelected(int cateId, String text, List<Effect>effectList) {
+
+                if (effectList.size() == 0) {
+                    filterPanel.getTbtnList().get(2).setText("功效");
+                    filterPanel.getTbtnList().get(2).setClickable(false);
+                } else {
+                    filterPanel.getTbtnList().get(2).setClickable(true);
+                }
+
                 if (cateId > 0) {
                     getPresenter().setCateId(cateId);
                 }

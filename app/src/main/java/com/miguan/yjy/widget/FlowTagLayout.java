@@ -71,7 +71,7 @@ public class FlowTagLayout extends ViewGroup {
      */
     private int mTagCheckMode = FLOW_TAG_CHECKED_NONE;
 
-    private static final int MAX_LINE = 2;
+    public static  int MAX_LINE = 2;
 
     /**
      * 存储选中的tag

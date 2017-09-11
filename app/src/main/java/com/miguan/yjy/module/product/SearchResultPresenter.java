@@ -40,6 +40,8 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
 
     public static final String EXTRA_CATE_NAME = "cate_name";
 
+    public static final String EXTRA_BASE_NAME = "base_name";
+
     private String mKeywords;//关键词
 
     private int mCateId;//分类id
@@ -57,6 +59,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
         intent.putExtra(EXTRA_KEYWORDS, keywords);
         intent.putExtra(EXTRA_CATE_ID, cateId);
         intent.putExtra(EXTRA_CATE_NAME, cateName);
+//        intent.putExtra(EXTRA_BASE_NAME, baseName);
         context.startActivity(intent);
     }
 
@@ -112,6 +115,7 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
                         }
                     });
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
+                    getView().mFilterPanel.setEffects(product.getEffectList());
                     return product.getProduct();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());

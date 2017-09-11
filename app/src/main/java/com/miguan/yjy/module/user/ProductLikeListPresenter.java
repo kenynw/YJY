@@ -28,6 +28,7 @@ public class ProductLikeListPresenter extends BaseListActivityPresenter<ProductL
         UserModel.getInstance().getLikeProductList(mCateId, mEffect, 1)
                 .map(productList -> {
                     getView().setData(productList);
+                    getView().filterPanel.setEffects(productList.getEffectList());
                     return productList.getProduct();
                 })
                 .unsafeSubscribe(getRefreshSubscriber());
