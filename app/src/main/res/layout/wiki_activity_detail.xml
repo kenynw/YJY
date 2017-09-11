@@ -155,7 +155,10 @@
                 android:id="@id/recycle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/bg_radius_white"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 />
 
             <include layout="@layout/foot_wiki_ask"/>
