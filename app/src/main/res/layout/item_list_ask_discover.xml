@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_small"
     android:background="@color/white"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/spacing_large"
@@ -21,6 +20,7 @@
         style="@style/BaseImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
         app:placeholderImage="@mipmap/def_image_product"
         />
 
@@ -53,6 +53,7 @@
                 android:layout_marginStart="6dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:layout_marginTop="-3dp"
                 android:textAppearance="@style/TextSubhead"
                 tools:text="适不适合敏感皮"
                 />

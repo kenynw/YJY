@@ -84,7 +84,7 @@ public class BenefitViewHolder extends BaseViewHolder<Benefit> {
                 mCountDownTimer = new CountDownTimer(del * 1000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        mTvCountdown.setText(Html.fromHtml(timeText + "<font color=\"#FF7069\">" + getFormatDate(millisUntilFinished / 1000) + "</font>"));
+                        mTvCountdown.setText(Html.fromHtml(String.format(statusRes, timeText, getFormatDate(millisUntilFinished / 1000))));
                     }
 
                     @Override

@@ -29,13 +29,14 @@
 
     <TextView
         android:id="@+id/tv_wiki_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_alignTop="@id/dv_wiki_thumb"
         android:layout_toLeftOf="@id/dv_wiki_thumb"
         android:layout_toStartOf="@id/dv_wiki_thumb"
+        android:layout_marginTop="-4dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/TextSubhead"

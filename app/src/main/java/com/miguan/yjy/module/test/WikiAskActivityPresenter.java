@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.R;
@@ -78,6 +80,12 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
                     }
                     getView().mTvWikiAskName.setText("Q : " + wiki.getQuestion());
                     getView().mTvWikiAskReply.setText("A : " + wiki.getContent());
+
+                    if (TextUtils.isEmpty(wiki.getPicture())) {
+                        getView().mSdvWiki.setVisibility(View.GONE);
+                    } else {
+                        getView().mSdvWiki.setImageURI(wiki.getPicture());
+                    }
                     share_url = wiki.getShare_url();
 
                     getAdapter().setOnItemClickListener(position -> {
@@ -90,7 +98,6 @@ public class WikiAskActivityPresenter extends BaseListActivityPresenter<WikiAskA
     }
 
     public void addBaikeLike(Wiki wiki) {
-
         if (AccountModel.getInstance().isLogin()) {
             TestModel.getInstantce().addBaikeLike(baikeId).subscribe(new ServicesResponse<String>() {
                 @Override

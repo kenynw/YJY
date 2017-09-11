@@ -17,6 +17,7 @@
         android:id="@+id/fl_evaluate_me_star"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_normal"
         android:orientation="horizontal"
         >
 
@@ -60,7 +61,7 @@
     <TextView
         style="@style/EvaluateContent"
         android:layout_marginBottom="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginTop="0dp"
         tools:text="混油皮也可以感受到pm乳的好处的！！！！！刷酸是如果脱皮的很厉害或者发现皮肤受损感觉到刺痛，我"
         />
 

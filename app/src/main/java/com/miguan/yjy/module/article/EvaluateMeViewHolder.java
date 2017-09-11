@@ -63,6 +63,10 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
         super.setData(data);
         mTvDate.setText(data.getCreated_at());
         mEvaluateRating.setStar(data.getStar());
+        String ratingText = "中评";
+        if (data.getStar() < 3) ratingText = "差评";
+        else if (data.getStar() > 3) ratingText = "好评";
+        mTvEvaluateDesc.setText(ratingText);
         if (data.getDetail() != null) {
             if (data.getType() == 1) {
                 mLlArticle.setVisibility(View.GONE);
@@ -70,8 +74,7 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
                 mFlStar.setVisibility(View.VISIBLE);
                 mDvProductImg.setImageURI(Uri.parse(data.getDetail().getImg()));
                 mTvProductName.setText(data.getDetail().getName());
-                mTvProductSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getDetail().getPrice(),
-                        data.getDetail().getForm()));
+                mTvProductSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getDetail().getPrice(), data.getDetail().getForm()));
                 mLlProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getDetail().getId()));
             } else {
                 mLlProduct.setVisibility(View.GONE);

@@ -6,7 +6,7 @@
     android:id="@+id/ll_evaluate_product"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_stroke_product"
+    android:background="@drawable/bg_radius_stroke_window"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/spacing_small"
@@ -20,6 +20,7 @@
         android:layout_height="67dp"
         app:failureImage="@mipmap/def_image_product"
         app:placeholderImage="@mipmap/def_image_product"
+        android:layout_marginLeft="1dp"
         />
 
     <LinearLayout
