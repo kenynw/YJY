@@ -503,7 +503,7 @@ public interface Services {
      * @return
      */
     @GET("?action=addComment&type=1")
-    Observable<Evaluate> addProductEvaluate(
+    Observable<Result> addProductEvaluate(
             @Query("id") int id,
             @Query("token") String token,
             @Query("star") int star,

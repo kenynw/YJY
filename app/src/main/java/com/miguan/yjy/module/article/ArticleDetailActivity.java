@@ -113,9 +113,11 @@ public class ArticleDetailActivity extends BaseDataActivity<ArticleDetailPresent
                 mRecycle.setAdapter(adapter);
                 if (article.getCommentList() != null && article.getCommentList().size() > 0) {
                     mTvEmpty.setVisibility(View.GONE);
+                    mRecycle.setVisibility(View.VISIBLE);
                     adapter.clear();
                     adapter.addAll(article.getCommentList());
                 } else {
+                    mTvEmpty.setVisibility(View.VISIBLE);
                     mRecycle.setVisibility(View.GONE);
                 }
 

@@ -261,7 +261,7 @@ public class ProductModel extends AbsModel {
     /**
      * 写点评
      */
-    public Observable<Evaluate> addEvaluate(int productId, int star, String image, String content) {
+    public Observable<Result> addEvaluate(int productId, int star, String image, String content) {
         return ServicesClient.getServices()
                 .addProductEvaluate(productId, UserPreferences.getToken(), star, image, content)
                 .compose(new DefaultTransform<>());

@@ -61,7 +61,9 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
 
     @Override
     public void setData(UserProduct data) {
-        mTvName.setText(data.getBrand_name() + data.getProduct());
+        String title = data.getProduct().contains(data.getBrand_name()) ? data.getProduct()
+                : data.getBrand_name() + data.getProduct();
+        mTvName.setText(title);
         mDvThumb.setImageURI(Uri.parse(data.getImg()));
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);

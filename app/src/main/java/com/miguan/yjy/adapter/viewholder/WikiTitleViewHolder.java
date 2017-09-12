@@ -22,7 +22,7 @@ public class WikiTitleViewHolder extends BaseViewHolder<Wiki> {
     TextView mTvWikiName;
 
     public WikiTitleViewHolder(ViewGroup parent) {
-        super(parent, R.layout.item_wiki);
+        super(parent, R.layout.item_list_wiki_title);
         ButterKnife.bind(this, itemView);
     }
 

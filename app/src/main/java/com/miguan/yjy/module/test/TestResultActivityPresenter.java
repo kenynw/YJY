@@ -29,6 +29,11 @@ import static com.miguan.yjy.model.local.UserPreferences.getTestPosition;
 
 public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestResultActivity, Test> {
 
+    @Override
+    protected void onCreateView(TestResultActivity view) {
+        super.onCreateView(view);
+        loadMainData();
+    }
 
     public void startToLogin() {
         Intent intent = new Intent(getView(), LoginActivity.class);
@@ -50,9 +55,7 @@ public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestR
                 .show();
     }
 
-
     public void setSencondData() {
-
         TestModel.getInstantce().getSkinRecommend().subscribe(new ServicesResponse<Test>() {
             @Override
             public void onNext(Test test) {
@@ -113,8 +116,6 @@ public class TestResultActivityPresenter extends BaseDataActivityPresenter<TestR
                 }
             });
         }
-
     }
-
 
 }

@@ -151,14 +151,14 @@
 
             </LinearLayout>
 
-            <com.jude.easyrecyclerview.EasyRecyclerView
-                android:id="@id/recycle"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_wiki_detail_relation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_normal"
+                android:layout_marginRight="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:background="@drawable/bg_radius_white"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
                 />
 
             <include layout="@layout/foot_wiki_ask"/>

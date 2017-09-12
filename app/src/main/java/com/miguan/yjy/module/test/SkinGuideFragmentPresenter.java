@@ -33,7 +33,7 @@ public class SkinGuideFragmentPresenter extends BaseListFragmentPresenter<SkinGu
         super.onCreateView(view);
         mTest = getView().getArguments().getParcelable(SkinTestViewPager.BUNDLE_TEST);
         getAdapter().removeAllHeader();
-        getAdapter().setOnItemClickListener(v -> WikiAskActivityPresenter.start(getView().getActivity(),mTest.getBaike().get(v).getId()));
+        getAdapter().setOnItemClickListener(v -> WikiDetailActivityPresenter.start(getView().getActivity(),mTest.getBaike().get(v).getId()));
         getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {

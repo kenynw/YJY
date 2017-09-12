@@ -15,7 +15,7 @@
         android:drawableBottom="@mipmap/ic_skin_test_more"
         android:drawablePadding="@dimen/spacing_tiny"
         android:gravity="center"
-        android:text="@string/text_to_more"
+        android:text="@string/text_more"
         android:textColor="@color/fB2"
         android:textSize="@dimen/text_size_micro_12"
         />

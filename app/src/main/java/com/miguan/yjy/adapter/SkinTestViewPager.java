@@ -18,17 +18,16 @@ import com.miguan.yjy.module.test.SkinRecomFragment;
 
 public class SkinTestViewPager extends FragmentStatePagerAdapter {
 
-    Test mTest;
+    private Test mTest;
     public static final String BUNDLE_TEST = "test";
 
-    public SkinTestViewPager(FragmentManager fm, Test mTest) {
+    public SkinTestViewPager(FragmentManager fm, Test test) {
         super(fm);
-        this.mTest = mTest;
+        this.mTest = test;
     }
 
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0:
                 Bundle bundle = new Bundle();

@@ -9,8 +9,8 @@ import com.dsk.chain.bijection.Presenter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.ProductModel;
-import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.Result;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.utils.LUtils;
@@ -25,7 +25,6 @@ import rx.functions.Func1;
  * @日期 2017/3/24 18:20
  * @描述
  */
-
 public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
 
     public static final String EXTRA_PRODUCT = "mProduct";
@@ -55,11 +54,11 @@ public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
     }
 
     public void submit(int star, String content, Uri uri) {
-        ServicesResponse<Evaluate> response = new ServicesResponse<Evaluate>() {
+        ServicesResponse<Result> response = new ServicesResponse<Result>() {
             @Override
-            public void onNext(Evaluate evaluate) {
+            public void onNext(Result result) {
                 getView().getExpansionDelegate().hideProgressBar();
-                if (evaluate.getAddMoney() == 1) LUtils.toast("评论成功，颜值+10分");
+                if (result.getFlag() == 1) LUtils.toast(result.getContent());
                 getView().finish();
             }
 
@@ -70,9 +69,9 @@ public class ProductRemarkPresenter extends Presenter<ProductRemarkActivity> {
         };
         if (uri != null) {
             ImageModel.getInstance().uploadImageSync("attachment", new File(uri.getPath()))
-                    .flatMap(new Func1<String, Observable<Evaluate>>() {
+                    .flatMap(new Func1<String, Observable<Result>>() {
                         @Override
-                        public Observable<Evaluate> call(String s) {
+                        public Observable<Result> call(String s) {
                             return ProductModel.getInstance().addEvaluate(mProduct.getId(), star, s, content);
                         }
                     })

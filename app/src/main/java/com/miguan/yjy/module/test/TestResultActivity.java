@@ -3,6 +3,7 @@ package com.miguan.yjy.module.test;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -59,19 +60,19 @@ public class TestResultActivity extends BaseDataActivity<TestResultActivityPrese
         setContentView(R.layout.skin_test_result);
         ButterKnife.bind(this);
         mToolbarTitle.setText("我的肤质");
-        mToolbar.inflateMenu(R.menu.menu_share);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (AccountModel.getInstance().isLogin()) {
-                    getPresenter().share();
-                } else {
-                    getPresenter().startToLogin();
-                }
-                return false;
-            }
-        });
-        getPresenter().loadMainData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_share, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (AccountModel.getInstance().isLogin()) getPresenter().share();
+        else getPresenter().startToLogin();
+        return super.onOptionsItemSelected(item);
     }
 
 }

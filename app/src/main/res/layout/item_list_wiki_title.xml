@@ -5,7 +5,7 @@
     android:id="@+id/tv_wiki_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/bg_radius_white"
     android:ellipsize="end"
     android:maxLines="2"
     android:paddingBottom="20dp"

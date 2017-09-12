@@ -66,7 +66,7 @@ public class LUtils {
     }
 
     public static void log(String tag, String msg) {
-        if (isDebug)
+//        if (isDebug)
             android.util.Log.i(tag, msg);
     }
 

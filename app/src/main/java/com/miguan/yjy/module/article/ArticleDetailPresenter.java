@@ -25,6 +25,7 @@ import java.util.List;
 import rx.Subscriber;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static com.miguan.yjy.module.article.AddEvaluatePresenter.REQUEST_CODE;
 
 /**
  * Copyright (c) 2017/3/23. LiaoPeiKun Inc. All rights reserved.
@@ -99,7 +100,8 @@ public class ArticleDetailPresenter extends BaseDataActivityPresenter<ArticleDet
     protected void onResult(int requestCode, int resultCode, Intent data) {
         super.onResult(requestCode, resultCode, data);
         UMShareAPI.get(getView()).onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+        LUtils.log("request code: " + requestCode + ", result: " + resultCode);
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             onRefresh();
         }
     }

@@ -24,6 +24,8 @@ import rx.functions.Func1;
 
 public class AddEvaluatePresenter extends Presenter<AddEvaluateActivity> {
 
+    public static final int REQUEST_CODE = 0x104;
+
     public static final String EXTRA_ARTICLE_ID = "article_id";
 
     public static final String EXTRA_TYPE = "type";
@@ -36,7 +38,7 @@ public class AddEvaluatePresenter extends Presenter<AddEvaluateActivity> {
             intent.putExtra(EXTRA_ARTICLE_ID, postId);
             intent.putExtra(EXTRA_TYPE, type);
             intent.putExtra(EXTRA_PARENT_ID, parentId);
-            context.startActivityForResult(intent, 100);
+            context.startActivityForResult(intent, REQUEST_CODE);
         } else {
             context.startActivity(new Intent(context, LoginActivity.class));
         }
