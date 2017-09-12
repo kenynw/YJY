@@ -150,7 +150,7 @@
                 android:layout_marginRight="38dp"
                 android:text="@string/text_not_update"
                 android:textColor="@color/textSecondary"
-                android:textSize="@dimen/text_size_body_material"
+                android:textSize="@dimen/text_size_small_13"
                 />
 
         </FrameLayout>
