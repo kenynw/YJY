@@ -18,6 +18,9 @@
     <string name="text_brand">品牌</string>
     <string name="text_brand_list">品牌列表</string>
     <string name="text_product">产品</string>
+    <string name="text_component">成分</string>
+    <string name="text_compare_price">比价</string>
+    <string name="text_evaluate">评价</string>
     <string name="text_product_spec">￥%1$s/%2$s</string>
     <string name="text_product_no_spec">￥%1$s%2$s</string>
     <string name="text_expiration_date">过期时间</string>

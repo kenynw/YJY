@@ -58,12 +58,9 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_product_detail"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+        <include
+            layout="@layout/include_product_detail_indicator"
             android:visibility="gone"
-            app:tabSelectedTextColor="@color/colorPrimary"
             />
 
     </LinearLayout>
@@ -204,7 +201,7 @@
 
                 <View
                     style="@style/ItemLineHeight"
-               />
+                    />
 
                 <include layout="@layout/include_product_effect_safe"/>
 
@@ -224,7 +221,8 @@
                         android:layout_height="1dp"
                         android:layout_gravity="center"
                         android:layout_marginRight="7dp"
-                        android:background="@color/f6"/>
+                        android:background="@color/f6"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -249,7 +247,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal"
-                    android:visibility="gone"
                     >
 
                     <TextView

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
-import android.support.design.widget.TabLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +52,7 @@ import com.miguan.yjy.widget.ShareBottomDialog;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 import static com.miguan.yjy.module.product.ProductDetailPresenter.SORT_DEFAULT;
@@ -167,16 +167,17 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     @BindView(R.id.tv_evaluate_empty)
     TextView mTvEvaluateEmpty;
-    @BindView(R.id.tab_product_detail)
-    TabLayout mTabProductDetail;
+
     @BindView(R.id.rbtn_product_high_evaluate)
     RadioButton mRbtnProductHighEvaluate;
     @BindView(R.id.rbtn_product_medium_evaluate)
     RadioButton mRbtnProductMediumEvaluate;
     @BindView(R.id.rbtn_product_bad_evaluate)
     RadioButton mRbtnProductBadEvaluate;
+
     @BindView(R.id.view_remark_show)
     LinearLayout mViewRemarkShow;
+
     @BindView(R.id.view_price_show)
     LinearLayout mViewPriceShow;
     @BindView(R.id.view_evaluate_show)
@@ -202,6 +203,13 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @BindView(R.id.ll_effect_all)
     LinearLayout mLlEffectAll;
 
+    @BindView(R.id.rg_product_detail_indicator)
+    RadioGroup mRgIndicator;
+
+    @BindViews({R.id.rb_product_detail_product, R.id.rb_product_detail_component,
+            R.id.rb_product_detail_compare_price,R.id.rb_product_detail_evaluate})
+    RadioButton[] mRbsIndicator;
+
     private boolean mIsLike;
 
     private boolean mIsShowAnim;
@@ -210,11 +218,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     private int curScrollY;
 
     private int lastY = 0;
-    private boolean mIsSelect;
-    private boolean mIsScrollChange;
-    private String mGroups[] = {"产品", "成分", "比价", "评价"};
-    private int position;
-    DividerDecoration decoration;
+
+    private String  mGroups[] = {"产品", "成分", "比价", "评价"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,13 +227,14 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         setContentView(R.layout.product_activity_detail);
         setToolbarTitle("产品详情");
         ButterKnife.bind(this);
-        decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
+        DividerDecoration decoration = new DividerDecoration(0xFFEBEBEB, LUtils.dp2px(1), LUtils.dp2px(78), LUtils.dp2px(15));
         decoration.setDrawLastItem(false);
         mRecyEvalutate.addItemDecoration(decoration);
         mRgrpEvaluateRank.setOnCheckedChangeListener(this);
         mRecyEvalutate.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         mImgRecommendBuy.setOnClickListener(v -> getPresenter().showExplain());
-        mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+
+        mRgIndicator.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -238,66 +244,12 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             FlagShipAdapter flagShipAdapter = new FlagShipAdapter(this, product.getLink_buy(), product);
             flagShipAdapter.notifyDataSetChanged();
             mRecyProductFlagship.setAdapter(flagShipAdapter);
+            mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
         }
 
         mRbtnProductHighEvaluate.setText("好评(" + product.getPraise() + ")");
         mRbtnProductMediumEvaluate.setText("中评(" + product.getMiddle() + ")");
         mRbtnProductBadEvaluate.setText("差评(" + product.getBad() + ")");
-
-        for (int i = 0; i < mGroups.length; i++) {
-            TabLayout.Tab tab = mTabProductDetail.newTab();
-            mTabProductDetail.addTab(tab, position = i);
-            tab.setText(mGroups[i]);
-
-        }
-
-        mTabProductDetail.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-                    case 0:
-                        if (curScrollY >= 0 && curScrollY < mViewRemarkShow.getTop()) {
-
-                        } else {
-                            mCustSrcoll.smoothScrollTo(0, 0);
-                        }
-                        break;
-                    case 1:
-                        if (curScrollY >= mViewRemarkShow.getTop() && curScrollY < mViewPriceShow.getTop()) {
-
-                        } else {
-                            mCustSrcoll.smoothScrollTo(0, mViewRemarkShow.getTop());
-
-                        }
-                        break;
-                    case 2:
-                        if ((curScrollY >= mViewPriceShow.getTop() && curScrollY < mViewEvaluateShow.getTop())) {
-
-                        } else {
-                            mCustSrcoll.smoothScrollTo(0, mViewPriceShow.getTop());
-                        }
-
-                        break;
-                    case 3:
-                        if ((curScrollY >= mViewEvaluateShow.getTop())) {
-
-                        } else {
-                            mCustSrcoll.smoothScrollTo(0, mViewEvaluateShow.getTop());
-                        }
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
 
         mCustSrcoll.setOnTouchListener(new View.OnTouchListener() {
 
@@ -356,13 +308,11 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                 }
 
                 if (scrollY <= 0) {   //设置标题的背景颜色
-                    mTabProductDetail.setVisibility(View.GONE);
+                    mRgIndicator.setVisibility(View.GONE);
                     mToolbarTitle.setVisibility(View.VISIBLE);
                     mToolbarTitleImg.setVisibility(View.GONE);
-                    mLlToolbar.setBackgroundColor(Color.argb(0, 255, 255, 255));
-
                 } else if (scrollY > 0 && scrollY <= 100) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
-                    mTabProductDetail.setVisibility(View.VISIBLE);
+                    mRgIndicator.setVisibility(View.VISIBLE);
                     float scale = (float) scrollY / 100;
                     float alpha = (255 * scale);
                     mToolbarTitle.setVisibility(View.GONE);
@@ -370,37 +320,21 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
                     mToolbarTitleImg.setImageURI(Uri.parse(product.getProduct_img()));
                     mLlToolbar.setBackgroundColor(Color.argb((int) alpha, 255, 255, 255));
                 } else {    //滑动到banner下面设置普通颜色
-                    mTabProductDetail.setVisibility(View.VISIBLE);
+                    mRgIndicator.setVisibility(View.VISIBLE);
                     mToolbarTitle.setVisibility(View.GONE);
                     mLlToolbar.setBackgroundColor(Color.argb((int) 255, 255, 255, 255));
                     mToolbarTitleImg.setVisibility(View.VISIBLE);
                     mToolbarTitleImg.setImageURI(Uri.parse(product.getProduct_img()));
                 }
 
-                if (scrollY > oldScrollY) {
-                    // 向下滑动
-                    if (scrollY >= 0 && scrollY < mViewRemarkShow.getTop()) {
-                        mTabProductDetail.getTabAt(0).select();
-                    } else if (scrollY >= mViewRemarkShow.getTop() && scrollY < mViewPriceShow.getTop()) {
-                        mTabProductDetail.getTabAt(1).select();
-                    } else if (scrollY >= mViewPriceShow.getTop() && scrollY < mViewEvaluateShow.getTop()) {
-                        mTabProductDetail.getTabAt(2).select();
-                    } else if (scrollY >= mViewEvaluateShow.getTop()) {
-                        mTabProductDetail.getTabAt(3).select();
-                    } else {
-
-                    }
-                } else if (scrollY < oldScrollY) {
-                    // 向上滑动
-                    if (scrollY < mViewRemarkShow.getTop()) {
-                        mTabProductDetail.getTabAt(0).select();
-                    } else if (scrollY < mViewPriceShow.getTop()) {
-                        mTabProductDetail.getTabAt(1).select();
-                    } else if (scrollY < mViewEvaluateShow.getTop()) {
-                        mTabProductDetail.getTabAt(2).select();
-                    }
-                } else if (scrollY == oldScrollY) {
-
+                if (scrollY >= 0 && scrollY < mViewRemarkShow.getTop()) {
+                    mRbsIndicator[0].setChecked(true);
+                } else if (scrollY >= mViewRemarkShow.getTop() && scrollY < mViewPriceShow.getTop()) {
+                    mRbsIndicator[1].setChecked(true);
+                } else if (scrollY >= mViewPriceShow.getTop() && scrollY < mViewEvaluateShow.getTop()) {
+                    mRbsIndicator[2].setChecked(true);
+                } else if (scrollY >= mViewEvaluateShow.getTop()) {
+                    mRbsIndicator[3].setChecked(true);
                 }
 
             }
@@ -566,6 +500,31 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @Override
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
+            case R.id.rb_product_detail_product:
+                if (curScrollY >= mViewRemarkShow.getTop()) {
+                    mCustSrcoll.scrollTo(0, 0);
+                    mCustSrcoll.smoothScrollTo(0, 0);
+                    mRgIndicator.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.rb_product_detail_component:
+                if (curScrollY < mViewRemarkShow.getTop() || curScrollY >= mViewPriceShow.getTop()) {
+                    mCustSrcoll.scrollTo(0, mViewRemarkShow.getTop());
+                    mCustSrcoll.smoothScrollTo(0, mViewRemarkShow.getTop());
+                }
+                break;
+            case R.id.rb_product_detail_compare_price:
+                if (curScrollY < mViewPriceShow.getTop() || curScrollY >= mViewEvaluateShow.getTop()) {
+                    mCustSrcoll.scrollTo(0, mViewPriceShow.getTop());
+                    mCustSrcoll.smoothScrollTo(0, mViewPriceShow.getTop());
+                }
+                break;
+            case R.id.rb_product_detail_evaluate:
+                if (curScrollY < mViewEvaluateShow.getTop()) {
+                    mCustSrcoll.scrollTo(0, mViewEvaluateShow.getTop());
+                    mCustSrcoll.smoothScrollTo(0, mViewEvaluateShow.getTop());
+                }
+                break;
             case R.id.rbtn_product_high_evaluate:
                 getPresenter().setCondition(START_PRAISE);
                 break;

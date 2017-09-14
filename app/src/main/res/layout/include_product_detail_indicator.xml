@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rg_product_detail_indicator"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    >
+
+    <RadioButton
+        android:id="@+id/rb_product_detail_product"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:drawableBottom="@drawable/shape_tab_indicator"
+        android:gravity="center"
+        android:text="@string/text_product"
+        android:textColor="@color/text_tab"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+    <RadioButton
+        android:id="@+id/rb_product_detail_component"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableBottom="@drawable/shape_tab_indicator"
+        android:gravity="center"
+        android:text="@string/text_component"
+        android:textColor="@color/text_tab"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+    <RadioButton
+        android:id="@+id/rb_product_detail_compare_price"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableBottom="@drawable/shape_tab_indicator"
+        android:gravity="center"
+        android:text="@string/text_compare_price"
+        android:textColor="@color/text_tab"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+    <RadioButton
+        android:id="@+id/rb_product_detail_evaluate"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:drawableBottom="@drawable/shape_tab_indicator"
+        android:gravity="center"
+        android:text="@string/text_evaluate"
+        android:textColor="@color/text_tab"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+</RadioGroup>

@@ -114,6 +114,9 @@ dependencies {
     compile project(':umshare')
     compile project(':processors')
 
+    // support
+    compile rootProject.ext.dependencies["constraint-layout"];
+
     // network
     compile rootProject.ext.dependencies["retrofit"];
     compile rootProject.ext.dependencies["retrofit-converter-gson"];
