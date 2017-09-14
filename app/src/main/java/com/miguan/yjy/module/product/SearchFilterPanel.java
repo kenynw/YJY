@@ -75,6 +75,8 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 
     public void setEffects(List<Effect> effects) {
         mEffects = effects;
+        mTbtnList.get(2).setEnabled(effects != null && effects.size() > 0);
+        effectSortProductAdapter.onlyAddAll(effects);
     }
 
     public void updateAllData(ProductList product) {
@@ -100,12 +102,12 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
         }
 
 
-        if (mEffects.size() == 0) {
             mTbtnList.get(2).setText("功效");
-            mTbtnList.get(2).setClickable(false);
-        } else {
-            mTbtnList.get(2).setClickable(true);
-        }
+//        if (mEffects == null && mEffects.size() == 0) {
+//            mTbtnList.get(2).setEnabled(false);
+//        } else {
+//            mTbtnList.get(2).setEnabled(true);
+//        }
 
         ButterKnife.apply(mTbtnList, new ButterKnife.Action<ToggleButton>() {
             @Override
@@ -135,7 +137,7 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
                 mListener.onItemSelected(mCategories.get(position).getId(), "");
             }
         }));
-        mMenuList.add(createEffectRecyclerView(mEffects, position -> {
+        mMenuList.add(createEffectRecyclerView(position -> {
             if (mListener != null) {
                 mListener.onItemSelected(0, mEffects.get(position).getEffect_id() + "");
             }
@@ -181,22 +183,22 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
     }
 
 
-    private View createEffectRecyclerView(List<Effect> effects, RecyclerArrayAdapter.OnItemClickListener listener) {
+    private View createEffectRecyclerView(RecyclerArrayAdapter.OnItemClickListener listener) {
         FlowTagLayout recyclerView = new FlowTagLayout(mActivity);
         recyclerView.MAX_LINE = 3;
         recyclerView.setPadding(LUtils.dp2px(20), 0, LUtils.dp2px(20), LUtils.dp2px(-10));
-        effectSortProductAdapter = new EffectSortAdapter(mActivity, effects);
+        effectSortProductAdapter = new EffectSortAdapter(mActivity, mEffects);
         effectSortProductAdapter.setSetOnTagClickListener(new EffectSortAdapter.SetOnTagClickListener() {
             @Override
             public void itemClick(View v, int position) {
                 if (mListener != null)
-                    mTbtnList.get(2).setText(effects.get(position).getEffect_name());
-                mListener.onItemSelected(0, effects.get(position).getEffect_id() + "");
+                    mTbtnList.get(2).setText(mEffects.get(position).getEffect_name());
+                mListener.onItemSelected(0, mEffects.get(position).getEffect_id() + "");
             }
         });
         recyclerView.setAdapter(effectSortProductAdapter);
         recyclerView.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
-        effectSortProductAdapter.onlyAddAll(effects);
+        effectSortProductAdapter.onlyAddAll(mEffects);
 
         RelativeLayout rl = new RelativeLayout(mActivity);
         rl.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -356,7 +358,10 @@ public class SearchFilterPanel implements CompoundButton.OnCheckedChangeListener
 //                            }
                             mTbtnList.get(1).setText(data.getSub().get(position).getCate_name());
                             if (mListener != null)
-                                mListener.onSencondItemSelected(data.getSub().get(position).getId(), data.getSub().get(position).getCate_name(), mEffects);
+                                mListener.onSencondItemSelected(
+                                        data.getSub().get(position).getId(),
+                                        data.getSub().get(position).getCate_name(),
+                                        mEffects);
                         }
                     });
                 } else {

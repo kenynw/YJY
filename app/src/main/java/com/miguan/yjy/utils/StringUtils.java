@@ -1,5 +1,10 @@
 package com.miguan.yjy.utils;
 
+import android.content.Context;
+import android.text.TextUtils;
+
+import com.miguan.yjy.R;
+
 import java.net.URLEncoder;
 
 /**
@@ -7,6 +12,20 @@ import java.net.URLEncoder;
  */
 
 public class StringUtils {
+
+    /**
+     * 格式化报价与规格
+     * @param price
+     * @param form
+     * @return
+     */
+    public static String getFormatSpec(Context context, String price, String form) {
+        String spec = String.format(TextUtils.isEmpty(form)
+                ? context.getString(R.string.text_product_no_spec)
+                : context.getString(R.string.text_product_spec) , price, form);
+        return TextUtils.isEmpty(price) || price.equals("0") || price.equals("0.00") || price.equals("暂无报价")
+                ? "暂无报价" : spec;
+    }
 
     public static String getEncodeUrl(String url) {
         char[] chars = url.toCharArray();

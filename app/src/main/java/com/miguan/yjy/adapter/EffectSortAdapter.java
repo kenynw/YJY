@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Effect;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,13 +20,11 @@ public class EffectSortAdapter extends BaseAdapter {
 
     private Context context;
     private List<Effect> lists;
-    private List<Effect> mdatas;
 
 
     public EffectSortAdapter(Context context, List<Effect> lists) {
         this.context = context;
         this.lists = lists;
-        mdatas = new ArrayList<>();
     }
 
     @Override
@@ -37,7 +34,7 @@ public class EffectSortAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mdatas.get(position);
+        return lists.get(position);
     }
 
     @Override
@@ -60,7 +57,7 @@ public class EffectSortAdapter extends BaseAdapter {
         return convertView;
     }
     public void onlyAddAll(List<Effect> datas) {
-        mdatas.addAll(datas);
+        lists = datas;
         notifyDataSetChanged();
     }
 

@@ -52,10 +52,10 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     EditText mEtKeywords;
 
     @BindView(R.id.iv_product_search_clear)
-    ImageView imgSearchCancle;
+    ImageView mClearInput;
 
-//    @BindView(R.id.tv_product_list_count)
-//    TextView mTvCount;
+    @BindView(R.id.tv_product_list_count)
+    TextView mTvCount;
 
     @BindView(R.id.recy_product_recommend)
     EasyRecyclerView mRecyRecommend;
@@ -93,7 +93,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     @BindView(R.id.tbtn_product_filter_all)
     ToggleButton mTbtnProductFilterAll;
 
-
     public SearchFilterPanel mFilterPanel;
 
     private boolean mIsInit = false;
@@ -107,7 +106,6 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
 
         mIvBack.setOnClickListener(v -> finish());
         mRecyRecommend.setOnTouchListener((v, event) -> {
@@ -129,13 +127,14 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
                 LUtils.dp2px(15)
         );
 
-        return super.getListConfig().setContainerLayoutRes(R.layout.product_activity_search_result)
-                .setContainerEmptyView(view).setItemDecoration(decoration);
+        return super.getListConfig()
+                .setContainerLayoutRes(R.layout.product_activity_search_result)
+                .setContainerEmptyView(view)
+                .setItemDecoration(decoration);
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
-
-//        mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
+        mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
         if (productList.getBrand() == null || productList.getBrand() != null && productList.getBrand().getId() <= 0) {
             mLlIncludeBrand.setVisibility(View.GONE);
         } else {
@@ -147,13 +146,12 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
         }
 
         mLlIncludeBrand.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));
-//        mTvBrandMain.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));
         if (mIsInit) return;
         mEtKeywords.setText(keywords);
         if (TextUtils.isEmpty(keywords)) {
-            imgSearchCancle.setVisibility(View.GONE);
+            mClearInput.setVisibility(View.GONE);
         } else {
-            imgSearchCancle.setVisibility(View.VISIBLE);
+            mClearInput.setVisibility(View.VISIBLE);
         }
         mEtKeywords.setSelection(keywords.length());
         mEtKeywords.requestFocus();
@@ -171,17 +169,14 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             @Override
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
-                    imgSearchCancle.setVisibility(View.GONE);
+                    mClearInput.setVisibility(View.GONE);
                     getListView().setVisibility(View.VISIBLE);
                     mLlResultSencond.setVisibility(View.GONE);
-                    getPresenter().mRecySearchBillBoard.setVisibility(View.VISIBLE);
-
                 } else {
-                    imgSearchCancle.setVisibility(View.VISIBLE);
+                    mClearInput.setVisibility(View.VISIBLE);
                     getListView().setVisibility(View.GONE);
                     getPresenter().setRecommendData(s.toString());
                     setBrandLayoutVisibility(View.GONE);
-                    getPresenter().mRecySearchBillBoard.setVisibility(View.GONE);
                 }
             }
         });
@@ -201,7 +196,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             }
         });
 
-        imgSearchCancle.setOnClickListener(v -> clearStr());
+        mClearInput.setOnClickListener(v -> clearStr());
         mFilterPanel = new SearchFilterPanel(this, productList.getCategoryList(), productList.getEffectList());
         mFilterPanel.setMenuText(1, cateName);
         mFilterPanel.setOnItemSelectedListener(new SearchFilterPanel.OnItemSelectedListener() {
@@ -230,13 +225,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
             }
 
             @Override
-            public void onSencondItemSelected(int cateId, String text, List<Effect>effectList) {
-                if (effectList.size() == 0) {
-                    mFilterPanel.getTbtnList().get(2).setText("功效");
-                    mFilterPanel.getTbtnList().get(2).setClickable(false);
-                } else {
-                    mFilterPanel.getTbtnList().get(2).setClickable(true);
-                }
+            public void onSencondItemSelected(int cateId, String text, List<Effect> effectList) {
                 if (cateId > 0) {
                     getPresenter().setCateId(cateId);
                 }
@@ -284,4 +273,5 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     public int[] getHideSoftViewIds() {
         return new int[]{R.id.et_product_keywords};
     }
+
 }

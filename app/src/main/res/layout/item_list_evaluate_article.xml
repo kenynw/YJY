@@ -10,7 +10,7 @@
         android:id="@+id/rl_article_cate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_small"
         android:background="@color/white"
         android:orientation="horizontal"
         >

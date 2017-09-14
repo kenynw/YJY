@@ -22,6 +22,7 @@
         android:layout_height="70dp"
         android:layout_gravity="center_vertical"
         app:placeholderImage="@mipmap/def_image_product"
+        app:failureImage="@mipmap/def_image_product"
         />
 
     <LinearLayout

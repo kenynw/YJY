@@ -59,10 +59,11 @@ public class WikiDetailActivity extends BaseDataActivity<WikiDetailActivityPrese
 
         DividerDecoration decoration = new DividerDecoration(
                 getResources().getColor(R.color.fed),
-                LUtils.dp2px(1),
+                1,
                 LUtils.dp2px(28),
                 LUtils.dp2px(28)
         );
+        decoration.setDrawLastItem(false);
         mRvRelation.addItemDecoration(decoration);
         mRvRelation.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRvRelation.setAdapter(getPresenter().getWikiAdapter());
@@ -92,6 +93,7 @@ public class WikiDetailActivity extends BaseDataActivity<WikiDetailActivityPrese
             mSdvWiki.setImageURI(wiki.getPicture());
         }
 
+        getPresenter().getWikiAdapter().clear();
         getPresenter().getWikiAdapter().addAll(wiki.getRelation_info());
         getPresenter().getWikiAdapter().setOnItemClickListener(position ->
                 getPresenter().refresh(wiki.getRelation_info().get(position).getId())

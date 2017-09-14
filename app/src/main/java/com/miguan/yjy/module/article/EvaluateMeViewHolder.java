@@ -11,6 +11,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.module.product.ProductDetailPresenter;
+import com.miguan.yjy.utils.StringUtils;
 import com.miguan.yjy.widget.RatingBar;
 
 import butterknife.BindView;
@@ -74,7 +75,7 @@ public class EvaluateMeViewHolder extends BaseEvaluateViewHolder {
                 mFlStar.setVisibility(View.VISIBLE);
                 mDvProductImg.setImageURI(Uri.parse(data.getDetail().getImg()));
                 mTvProductName.setText(data.getDetail().getName());
-                mTvProductSpec.setText(String.format(getContext().getString(R.string.text_product_spec), data.getDetail().getPrice(), data.getDetail().getForm()));
+                mTvProductSpec.setText(StringUtils.getFormatSpec(getContext(), data.getDetail().getPrice(), data.getDetail().getForm()));
                 mLlProduct.setOnClickListener(v -> ProductDetailPresenter.start(getContext(), data.getDetail().getId()));
             } else {
                 mLlProduct.setVisibility(View.GONE);

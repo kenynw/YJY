@@ -1,5 +1,6 @@
 package com.miguan.yjy.module.ask;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Ask;
+import com.miguan.yjy.module.account.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,27 +55,31 @@ public class AskViewHolder extends BaseViewHolder<Ask> {
         if (!TextUtils.isEmpty(data.getReply())) {
             mLlLike.setVisibility(View.VISIBLE);
             mLlLike.setOnClickListener(v -> {
-                ProductModel.getInstance().addAskLike(data.getAskReplyId()).unsafeSubscribe(new Subscriber<String>() {
-                    @Override
-                    public void onCompleted() {
+                if (AccountModel.getInstance().isLogin()) {
+                    ProductModel.getInstance().addAskLike(data.getAskReplyId()).unsafeSubscribe(new Subscriber<String>() {
+                        @Override
+                        public void onCompleted() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onNext(String s) {
-                        int curCount = TextUtils.isDigitsOnly(mTvLike.getText())
-                                ? Integer.valueOf(mTvLike.getText().toString()) : 0;
-                        int result = curCount + (data.getIs_like() == 1 ? -1 : 1);
-                        data.setIs_like(data.getIs_like() == 1 ? 2 : 1);
-                        data.setLike_num(result);
-                        setLike(data);
-                    }
-                });
+                        @Override
+                        public void onNext(String s) {
+                            int curCount = TextUtils.isDigitsOnly(mTvLike.getText())
+                                    ? Integer.valueOf(mTvLike.getText().toString()) : 0;
+                            int result = curCount + (data.getIs_like() == 1 ? -1 : 1);
+                            data.setIs_like(data.getIs_like() == 1 ? 2 : 1);
+                            data.setLike_num(result);
+                            setLike(data);
+                        }
+                    });
+                } else {
+                    getContext().startActivity(new Intent(getContext(), LoginActivity.class));
+                }
             });
 
             mTvDesc.setText(data.getReply());

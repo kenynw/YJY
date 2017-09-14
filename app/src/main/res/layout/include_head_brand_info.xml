@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/ll_product_include_brand"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:visibility="gone">
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_product_include_brand"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="34dp"
-        android:paddingBottom="34dp"
-        android:paddingRight="20dp"
         android:background="@drawable/bg_shape_white"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:paddingBottom="34dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="34dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/sdv_brand_img"
@@ -52,14 +53,13 @@
             android:id="@+id/tv_brand_main"
             android:layout_width="85dp"
             android:layout_height="25dp"
-            android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/tv_brand_name"
             android:background="@drawable/bg_shape_main_color_white"
+            android:gravity="center"
             android:text="@string/tv_product_brand_main"
             android:textColor="@color/colorPrimary"/>
 
     </RelativeLayout>
-
 
 </LinearLayout>

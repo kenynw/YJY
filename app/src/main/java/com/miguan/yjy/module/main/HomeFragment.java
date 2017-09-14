@@ -69,7 +69,7 @@ public class HomeFragment extends BaseListFragment<HomeFragmentPresenter, Evalua
 
     @Override
     public ListConfig getListConfig() {
-        SpaceDecoration decoration = new SpaceDecoration(LUtils.dp2px(8));
+        SpaceDecoration decoration = new SpaceDecoration(LUtils.dp2px(10));
         decoration.setPaddingEdgeSide(false);
         decoration.setPaddingStart(false);
 

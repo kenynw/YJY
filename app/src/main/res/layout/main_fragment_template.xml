@@ -38,7 +38,7 @@
             android:id="@+id/cpi_template"
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:layout_marginBottom="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_huge"
             android:layout_marginTop="@dimen/spacing_normal"
             app:selected_color="@color/colorPrimary"
             app:strokeColor="@color/colorPrimary"

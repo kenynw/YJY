@@ -17,13 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
             >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/bg_radius_white"
                 android:orientation="vertical"
@@ -125,10 +125,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:paddingTop="30dp"
                 >
 
                 <View
@@ -155,13 +154,15 @@
                 android:id="@+id/rv_wiki_detail_relation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_normal"
-                android:layout_marginRight="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
                 android:background="@drawable/bg_radius_white"
                 />
 
-            <include layout="@layout/foot_wiki_ask"/>
+            <include
+                layout="@layout/include_wiki_footer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                />
 
         </LinearLayout>
 

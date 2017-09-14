@@ -59,7 +59,7 @@
                 android:paddingTop="20dp"
                 app:grid_as_square="false"
                 app:grid_column="4"
-                app:grid_divider_horizontal="0dp"
+                app:grid_divider_horizontal="@dimen/spacing_large"
                 app:grid_divider_vertical="@dimen/spacing_normal"
                 tools:layout_height="128dp"
                 />

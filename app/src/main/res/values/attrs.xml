@@ -96,4 +96,12 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="GridView">
+        <attr name="grid_column" format="integer"/>
+        <attr name="grid_as_square" format="boolean"/>
+        <attr name="grid_divider_vertical" format="dimension"/>
+        <attr name="grid_divider_horizontal" format="dimension"/>
+        <attr name="grid_has_header" format="boolean" />
+    </declare-styleable>
+
 </resources>

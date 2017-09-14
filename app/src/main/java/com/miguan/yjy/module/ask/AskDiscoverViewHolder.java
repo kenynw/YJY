@@ -42,7 +42,7 @@ public class AskDiscoverViewHolder extends BaseViewHolder<Ask> {
     public void setData(Ask ask) {
         mTvTitle.setText(Html.fromHtml(ask.getSubject()));
         String total = String.format(getContext().getString(R.string.text_home_ask_total), ask.getNum());
-        mTvTotal.setText(Html.fromHtml(total));
+        mTvTotal.setText(Html.fromHtml(ask.getNum() > 0 ? total : "暂无回答"));
         mDvThumb.setImageURI(ask.getProduct_img());
         itemView.setOnClickListener(v -> AskDetailActivityPresenter.start(getContext(), ask.getProduct_id(), ask.getAskid()));
     }

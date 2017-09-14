@@ -351,15 +351,15 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 curScrollY = scrollY;
-                if (mIsShowAnim) {
-                } else {
+                if (!mIsShowAnim) {
                     showInAnim();
                 }
+
                 if (scrollY <= 0) {   //设置标题的背景颜色
                     mTabProductDetail.setVisibility(View.GONE);
                     mToolbarTitle.setVisibility(View.VISIBLE);
                     mToolbarTitleImg.setVisibility(View.GONE);
-                    mLlToolbar.setBackgroundColor(Color.argb((int) 0, 255, 255, 255));
+                    mLlToolbar.setBackgroundColor(Color.argb(0, 255, 255, 255));
 
                 } else if (scrollY > 0 && scrollY <= 100) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
                     mTabProductDetail.setVisibility(View.VISIBLE);

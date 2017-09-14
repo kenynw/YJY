@@ -1,100 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/include_toolbar"></include>
+    <include layout="@layout/include_toolbar"/>
 
     <ScrollView
-        android:paddingBottom="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/shape_gray_white_5"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            >
 
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:layout_width="173dp"
-                android:layout_height="173dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="20dp"
-                android:background="@mipmap/ic_weixi_code"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="方法一"
-                android:textColor="@color/textSecondary"
-                android:textSize="@dimen/text_size_small_15"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:text="请将页面保存至手机相册\n然后在微信中使用扫一扫添加"
-                android:textColor="@color/textTertiary"
-                android:textSize="@dimen/text_size_small_14"/>
-
-            <View
-                style="@style/ItemLineHeight"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_radius_white"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="173dp"
+                    android:layout_height="173dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="28dp"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_weixi_code"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="方法一"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_size_body"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:gravity="center"
+                    android:text="请将页面保存至手机相册\n然后在微信中使用扫一扫添加"
+                    android:textColor="@color/textTertiary"
+                    android:textSize="@dimen/text_size_body_material"
+                    />
+
+                <View
+                    style="@style/ItemLineHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:text="方法二"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="@dimen/text_size_small_15"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:gravity="center"
+                    android:text="复制微信公众号到微信进行搜索\n微信号:tmshuo520"
+                    android:textColor="@color/textTertiary"
+                    android:textSize="@dimen/text_size_body_material"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_copy_wetchat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/bg_round_primary"
+                    android:gravity="center"
+                    android:paddingLeft="36dp"
+                    android:paddingRight="36dp"
+                    android:text="复制"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_body_material"
+                    />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_medium"
                 />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="方法二"
-                android:textColor="@color/textSecondary"
-                android:textSize="@dimen/text_size_small_15"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:text="复制微信公众号到微信进行搜索\n微信号:tmshuo520"
-                android:textColor="@color/textTertiary"
-                android:textSize="@dimen/text_size_small_14"/>
-
-            <TextView
-                android:id="@+id/tv_copy_wetchat"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:paddingLeft="36dp"
-                android:paddingRight="36dp"
-                android:gravity="center"
-                android:background="@drawable/bg_round_primary_light"
-                android:layout_marginTop="15dp"
-                android:textSize="@dimen/text_size_small_14"
-                android:textColor="@color/white"
-                android:layout_marginBottom="50dp"
-                android:text="复制"/>
 
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
 
 </LinearLayout>

@@ -118,8 +118,9 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
 
         int paddingLeft = LUtils.dp2px(25);
         DividerDecoration decoration = new DividerDecoration(
-                getResources().getColor(R.color.bgWindow), LUtils.dp2px(1), paddingLeft, paddingLeft
+                getResources().getColor(R.color.bgWindow), 1, paddingLeft, paddingLeft
         );
+        decoration.setDrawLastItem(false);
         mRvAsks.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRvAsks.setAdapter(mAskAdapter);
         mRvAsks.addItemDecoration(decoration);

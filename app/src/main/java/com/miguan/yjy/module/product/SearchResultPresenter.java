@@ -4,23 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.Html;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.DividerDecoration;
-import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.ProductRecommentAdapter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.model.bean.ProductList;
-import com.miguan.yjy.model.bean.Rank;
 import com.miguan.yjy.model.services.ServicesResponse;
-import com.miguan.yjy.module.billboard.BillboardSimpleViewHolder;
 import com.miguan.yjy.utils.LUtils;
 
 import static android.view.View.GONE;
@@ -82,38 +74,6 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     public void onRefresh() {
         ProductModel.getInstance().searchQuery(getView().mEtKeywords.getText().toString(), mType, mCateId, mEffect, 1)
                 .map(product -> {
-                    getAdapter().removeAllHeader();
-                    getAdapter().addHeader(new RecyclerArrayAdapter.ItemView() {
-
-                        @Override
-                        public View onCreateView(ViewGroup parent) {
-                            View headBillBoard = View.inflate(getView(), R.layout.include_head_billboard, null);
-                            mRecySearchBillBoard = headBillBoard.findViewById(R.id.recy_search_billBoard);
-                            mTvCount = headBillBoard.findViewById(R.id.tv_product_list_count);
-                            mRecySearchBillBoard.setLayoutManager(new LinearLayoutManager(getView(), LinearLayoutManager.VERTICAL, false));
-                            int transparent = getView().getResources().getColor(R.color.transparent);
-                            mRecySearchBillBoard.addItemDecoration(new DividerDecoration(transparent,
-                                    (int) getView().getResources().getDimension(R.dimen.spacing_small)));
-                            mTvCount.setText(Html.fromHtml(String.format(getView().getString(R.string.text_search_count), product.getPageTotal())));
-                            return headBillBoard;
-                        }
-
-                        @Override
-                        public void onBindView(View headerView) {
-
-                            if (product.getRank().size() != 0) {
-                                mRecySearchBillBoard.setVisibility(View.VISIBLE);
-                                mRecySearchBillBoard.setAdapter(new RecyclerArrayAdapter<Rank>(getView(), product.getRank()) {
-                                    @Override
-                                    public BillboardSimpleViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-                                        return new BillboardSimpleViewHolder(parent);
-                                    }
-                                });
-                            } else {
-                                mRecySearchBillBoard.setVisibility(View.GONE);
-                            }
-                        }
-                    });
                     getView().setData(getView().mEtKeywords.getText().toString(), product, mCateName);
                     getView().mFilterPanel.setEffects(product.getEffectList());
                     return product.getProduct();
