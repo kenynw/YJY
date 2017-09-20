@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/ll_test_ok"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-    <include
-        layout="@layout/include_toolbar"
-        />
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_test_ok"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/include_toolbar"/>
 
     <com.miguan.yjy.widget.StickyNavLayout
         android:id="@+id/sticky_brand_detail"
@@ -31,13 +32,15 @@
                 android:paddingBottom="20dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="15dp"
-                android:paddingTop="20dp">
+                android:paddingTop="20dp"
+                >
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/img_skin_test"
                     style="@style/BaseAvatar"
                     android:layout_width="55dp"
-                    android:layout_height="55dp"/>
+                    android:layout_height="55dp"
+                    />
 
                 <TextView
                     android:id="@+id/tv_skin_username"
@@ -49,7 +52,8 @@
                     android:layout_toRightOf="@+id/img_skin_test"
                     android:textColor="@color/textPrimary"
                     android:textSize="@dimen/text_size_small_16"
-                    tools:text="我是用户名"/>
+                    tools:text="我是用户名"
+                    />
 
                 <TextView
                     android:id="@+id/tv_skin_time"
@@ -60,7 +64,8 @@
                     android:layout_marginTop="15dp"
                     android:textColor="@color/textSecondary"
                     android:textSize="@dimen/text_size_micro_12"
-                    tools:text="时间"/>
+                    tools:text="时间"
+                    />
 
                 <TextView
                     android:id="@+id/tv_skin_again"
@@ -73,20 +78,23 @@
                     android:text="再次测试"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_small_14"
-                    tools:text="再次测试"/>
+                    tools:text="再次测试"
+                    />
 
             </RelativeLayout>
 
-        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_small"
+                android:background="@color/bgWindow"
+                />
 
-        <android.support.v4.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+        </LinearLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@id/id_stickynavlayout_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@color/white"
             app:tabSelectedTextColor="@color/colorPrimary"
             />

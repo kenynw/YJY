@@ -79,14 +79,12 @@ public class TestModel extends AbsModel {
      */
 
     public Observable<Object> saveSkin(String type, String value) {
-
         return getServices().saveSkin(UserPreferences.getToken(), type, value).compose(new DefaultTransform<>());
     }
 
     /**
      * 用户肤质接口
      */
-
     public Observable<Test> userSkin() {
         return getServices().userSkin(UserPreferences.getToken()).compose(new DefaultTransform<>());
     }
@@ -106,8 +104,6 @@ public class TestModel extends AbsModel {
                     return test;
                 })
                 .compose(new DefaultTransform<>());
-
-//        return ServicesClient.getServices().getSkinRecommend(UserPreferences.getUserID()).compose(new DefaultTransform<>());
     }
 
     /**

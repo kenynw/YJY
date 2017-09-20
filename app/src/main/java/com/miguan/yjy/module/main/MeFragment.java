@@ -116,8 +116,6 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
         View view = inflater.inflate(R.layout.main_fragment_me, container, false);
         mBind = ButterKnife.bind(this, view);
 
-        setUnloginView();
-
         mTvSkinTest.setOnClickListener(v -> EventBus.getDefault().post(2));
         mBtnUsed.setOnClickListener(v -> getPresenter().toActivity(UsedListActivity.class));
         mBtnStar.setOnClickListener(v -> getPresenter().toActivity(StarListActivity.class));

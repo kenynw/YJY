@@ -49,7 +49,7 @@ import butterknife.Unbinder;
  */
 @RequiresPresenter(DiscoverFragmentPresenter.class)
 public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter, Discover>
-        implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+        implements View.OnClickListener {
 
     @BindView(R.id.vp_discover_banner)
     HeadViewPager mVpBanner;
@@ -108,7 +108,7 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
         View view = inflater.inflate(R.layout.main_fragment_discover, container, false);
         mUnbinder = ButterKnife.bind(this, view);
 
-        mSrlRefresh.setOnRefreshListener(this);
+        mSrlRefresh.setOnRefreshListener(getPresenter());
         mTvAskMore.setOnClickListener(this);
         mTvWikiMore.setOnClickListener(this);
         mIvTemplate.setOnClickListener(this);
@@ -201,11 +201,6 @@ public class DiscoverFragment extends BaseDataFragment<DiscoverFragmentPresenter
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
-    }
-
-    @Override
-    public void onRefresh() {
-        getPresenter().loadData();
     }
 
 }

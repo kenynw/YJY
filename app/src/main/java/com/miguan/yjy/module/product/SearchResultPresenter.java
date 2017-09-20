@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
-import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.miguan.yjy.adapter.ProductRecommentAdapter;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Product;
@@ -41,10 +39,8 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
     private String mCateName;//分类id
 
     private String mEffect;//功效关键字
-    private int mType = 1;//类型 ：不传或者传1为默认搜索产品
-    public EasyRecyclerView mRecySearchBillBoard;
-    TextView mTvCount;
 
+    private int mType = 1;//类型 ：不传或者传1为默认搜索产品
 
     public static void start(Context context, String keywords, int cateId, String cateName) {
         Intent intent = new Intent(context, SearchResultActivity.class);
@@ -117,4 +113,5 @@ public class SearchResultPresenter extends BaseListActivityPresenter<SearchResul
             }
         });
     }
+
 }

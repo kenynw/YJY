@@ -98,17 +98,16 @@ public class WebViewOB implements UMShareListener {
      */
     @JavascriptInterface
     public void toHome(String skins) {
+        LUtils.log("skins: " + skins);
+        List<Skin> skin = new Gson().fromJson(skins, new TypeToken<List<Skin>>() {}.getType());
         List<Integer> nums = new ArrayList<>();
-        Gson gson = new Gson();
-        Intent intent = null;
-        List<Skin> skin = gson.fromJson(skins, new TypeToken<List<Skin>>() {
-        }.getType());
         for (int i = 0; i < skin.size(); i++) {
-            if (TextUtils.isEmpty(skin.get(i).getLetter())) {
+            if (!TextUtils.isEmpty(skin.get(i).getLetter())) {
                 nums.add(i);
             }
         }
 
+        Intent intent;
         if (nums.size() == 4) {
             intent = new Intent(mContext, TestResultActivity.class);
             UserPreferences.setIsShowTest(true);

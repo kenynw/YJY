@@ -2,6 +2,9 @@
     <string name="app_name">颜究院</string>
     <string name="company_copyright">©厦门爱游米网络科技有限公司 2017</string>
 
+    <string name="text_date">%1$04d-%2$02d-%3$02d</string>
+    <string name="text_male">男</string>
+    <string name="text_female">女</string>
     <string name="text_null">无</string>
     <string name="text_benefits_status"><![CDATA[%1$s：<font color="#FF7069">%2$s</font>]]></string>
     <string name="text_discover">发现</string>
@@ -156,6 +159,7 @@
     <string name="btn_query_batch">查批号</string>
     <string name="btn_query_now">立即查询</string>
     <string name="btn_me_used">我在用的</string>
+    <string name="btn_me_bills">我的清单</string>
     <string name="btn_me_like">我长草的</string>
     <string name="btn_me_evaluate">我点评的</string>
     <string name="btn_me_reply">我回复的</string>

@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
@@ -221,6 +222,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
 
     private String  mGroups[] = {"产品", "成分", "比价", "评价"};
 
+    ViewStub mViewStub;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -244,7 +247,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             FlagShipAdapter flagShipAdapter = new FlagShipAdapter(this, product.getLink_buy(), product);
             flagShipAdapter.notifyDataSetChanged();
             mRecyProductFlagship.setAdapter(flagShipAdapter);
-            mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this, LinearLayoutManager.VERTICAL, false));
+            mRecyProductFlagship.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this,
+                    LinearLayoutManager.VERTICAL, false));
         }
 
         mRbtnProductHighEvaluate.setText("好评(" + product.getPraise() + ")");

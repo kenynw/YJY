@@ -1,6 +1,7 @@
 package com.miguan.yjy.module.main;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.dsk.chain.expansion.data.BaseDataFragmentPresenter;
 import com.miguan.yjy.model.CommonModel;
@@ -18,7 +19,8 @@ import java.util.List;
  * Copyright (c) 2017/8/22. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<DiscoverFragment, Discover> {
+public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<DiscoverFragment, Discover>
+        implements SwipeRefreshLayout.OnRefreshListener {
 
     @Override
     protected void onCreate(DiscoverFragment view, Bundle saveState) {
@@ -29,10 +31,11 @@ public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<Discove
     @Override
     protected void onCreateView(DiscoverFragment view) {
         super.onCreateView(view);
-        loadData();
+        onRefresh();
     }
 
-    public void loadData() {
+    @Override
+    public void onRefresh() {
         CommonModel.getInstance().getDiscover().unsafeSubscribe(getSubscriber());
     }
 
@@ -51,7 +54,7 @@ public class DiscoverFragmentPresenter extends BaseDataFragmentPresenter<Discove
     @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void onLogin(User user) {
-        loadData();
+        onRefresh();
     }
 
     // 接收肤质测试完成通知

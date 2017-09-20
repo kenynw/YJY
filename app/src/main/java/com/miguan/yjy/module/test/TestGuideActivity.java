@@ -1,8 +1,5 @@
 package com.miguan.yjy.module.test;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,19 +13,13 @@ import android.widget.TextView;
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.miguan.yjy.R;
-import com.miguan.yjy.model.TestModel;
 import com.miguan.yjy.model.bean.Test;
-import com.miguan.yjy.model.bean.TestStart;
 import com.miguan.yjy.model.constant.Constants;
 import com.miguan.yjy.model.local.UserPreferences;
 import com.miguan.yjy.module.common.WebViewActivity;
-import com.miguan.yjy.utils.LUtils;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 import static com.miguan.yjy.model.bean.Skin.Drys;
 import static com.miguan.yjy.model.bean.Skin.Pigments;
@@ -44,14 +35,10 @@ import static com.miguan.yjy.model.bean.Skin.tolerances;
 
 public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test> implements View.OnClickListener {
 
-    public static final String EXTRA_TEST = "test";
-    public static final String EXTRA_TEST_TYPE = "type";
-    public static final String EXTRA_TEST_TITLE = "title";
     public static final int EXTRA_TEST_FIRST_TYPE = 1;
     public static final int EXTRA_TEST_SECOND_TYPE = 2;
     public static final int EXTRA_TEST_THIRD_TYPE = 3;
     public static final int EXTRA_TEST_FOUR_TYPE = 4;
-
 
     @BindView(R.id.tv_test_my_skin)
     TextView mTvTestMySkin;
@@ -76,22 +63,14 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
 
     public static TestGuideActivity testGuideActivity;
 
-    public static void start(Context context, Test test, int type) {
-        Intent intent = new Intent(context, TestGuideActivity.class);
-        intent.putExtra(EXTRA_TEST, test);
-        intent.putExtra(EXTRA_TEST_TYPE, type);
-        ((Activity) context).startActivityForResult(intent, 2);
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_activity_guide);
         testGuideActivity = this;
         ButterKnife.bind(this);
-        Test test = getIntent().getParcelableExtra(TestGuideActivity.EXTRA_TEST);
-        type = getIntent().getIntExtra(TestGuideActivity.EXTRA_TEST_TYPE, -1);
+        type = getIntent().getIntExtra(TestGuidePresenter.EXTRA_TEST_TYPE, -1);
+        Test test = getIntent().getParcelableExtra(TestGuidePresenter.EXTRA_TEST);
         setToolbarTitle(test.getTitle());
         initData(test);
         mTvTestMySkin.setOnClickListener(v -> showSkinPopWindow(type));
@@ -167,19 +146,18 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_test_height_dry:
-//                type(string) － dry,tolerance,pigment,compact四种类型
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", Drys[0]);
+                        getPresenter().submitSkin("dry", Drys[0]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", tolerances[0]);
+                        getPresenter().submitSkin("tolerance", tolerances[0]);
                         break;
                     case EXTRA_TEST_THIRD_TYPE:
-                        submitSkin("pigment", Pigments[0]);
+                        getPresenter().submitSkin("pigment", Pigments[0]);
                         break;
                     case EXTRA_TEST_FOUR_TYPE://皱纹/紧致
-                        submitSkin("compact", compacts[0]);
+                        getPresenter().submitSkin("compact", compacts[0]);
                         mtvTestWhich.setText("皱纹/紧致皮肤中,您属于哪一种");
                         break;
                 }
@@ -188,16 +166,16 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             case R.id.tv_test_low_dry:
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", Drys[1]);
+                        getPresenter().submitSkin("dry", Drys[1]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", tolerances[1]);
+                        getPresenter().submitSkin("tolerance", tolerances[1]);
                         break;
                     case EXTRA_TEST_THIRD_TYPE:
-                        submitSkin("pigment", Pigments[1]);
+                        getPresenter().submitSkin("pigment", Pigments[1]);
                         break;
                     case EXTRA_TEST_FOUR_TYPE://皱纹/紧致
-                        submitSkin("compact", compacts[1]);
+                        getPresenter().submitSkin("compact", compacts[1]);
                         break;
                 }
                 popupWindow.dismiss();
@@ -205,10 +183,10 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             case R.id.tv_test_low_oily:
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", Drys[2]);
+                        getPresenter().submitSkin("dry", Drys[2]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", tolerances[2]);
+                        getPresenter().submitSkin("tolerance", tolerances[2]);
                         break;
                 }
                 popupWindow.dismiss();
@@ -216,10 +194,10 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
             case R.id.tv_test_height_oily:
                 switch (type) {
                     case EXTRA_TEST_FIRST_TYPE:
-                        submitSkin("dry", Drys[3]);
+                        getPresenter().submitSkin("dry", Drys[3]);
                         break;
                     case EXTRA_TEST_SECOND_TYPE:
-                        submitSkin("tolerance", tolerances[3]);
+                        getPresenter().submitSkin("tolerance", tolerances[3]);
                         break;
                 }
                 popupWindow.dismiss();
@@ -228,16 +206,5 @@ public class TestGuideActivity extends BaseDataActivity<TestGuidePresenter, Test
         }
     }
 
-
-    private void submitSkin(String key, String value) {
-        TestModel.getInstantce().saveSkin(key, value).doOnNext(new Action1<Object>() {
-            @Override
-            public void call(Object o) {
-                LUtils.toast("提交成功");
-                finish();
-                EventBus.getDefault().post(new TestStart());
-            }
-        }).subscribe();
-    }
 
 }

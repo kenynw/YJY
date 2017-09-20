@@ -31,7 +31,7 @@ public abstract class BaseEvaluateViewHolder extends BaseViewHolder<Evaluate> {
 
     @Override
     public void setData(Evaluate data) {
-        mTvContent.setText(Html.fromHtml(data.getComment()));
+        mTvContent.setText(Html.fromHtml(data.getComment().replaceAll("(?:\n|\n\r)", "<br>")));
         itemView.setOnClickListener(v -> EvaluateDetailPresenter.start(getContext(), data.getId()));
     }
 

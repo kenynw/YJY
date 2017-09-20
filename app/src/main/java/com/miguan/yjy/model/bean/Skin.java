@@ -29,8 +29,6 @@ public class Skin implements Parcelable {
 
     private String copy;
 
-    private String description;
-
     private float valuate;
 
     private float score;
@@ -102,18 +100,6 @@ public class Skin implements Parcelable {
     public void setValuate(float valuate) {
         this.valuate = valuate;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    //      "category_id": "7",
-//              "category_name": "化妆水",
-//              "data":
-
 
     public String getId() {
         return id;
@@ -294,7 +280,6 @@ public class Skin implements Parcelable {
         dest.writeTypedList(this.condition);
         dest.writeString(this.id);
         dest.writeString(this.copy);
-        dest.writeString(this.description);
         dest.writeFloat(this.valuate);
         dest.writeFloat(this.score);
         dest.writeFloat(this.maximum);
@@ -314,7 +299,6 @@ public class Skin implements Parcelable {
         this.condition = in.createTypedArrayList(SelectPrice.CREATOR);
         this.id = in.readString();
         this.copy = in.readString();
-        this.description = in.readString();
         this.valuate = in.readFloat();
         this.score = in.readFloat();
         this.maximum = in.readFloat();

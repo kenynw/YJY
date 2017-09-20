@@ -46,6 +46,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
 
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                getView().getExpansionDelegate().hideProgressBar();
                 for (String s : map.keySet()) {
                     LUtils.log("key: " + s + ":" + map.get(s));
                 };
@@ -73,7 +74,6 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                         }
                     }
                 });
-                getView().getExpansionDelegate().hideProgressBar();
             }
 
             @Override

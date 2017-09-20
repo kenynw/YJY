@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/include_toolbar"
-        />
+    <include layout="@layout/include_toolbar"/>
 
     <ScrollView
         android:id="@+id/scr_main_test"
@@ -33,7 +31,8 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                >
 
                 <LinearLayout
                     android:id="@+id/ll_no_test_top"
@@ -53,6 +52,7 @@
                         android:background="@drawable/bg_shape_white"
                         android:gravity="center"
                         android:orientation="vertical"
+                        android:tag="0"
                         >
 
                         <ImageView
@@ -60,7 +60,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
-                            android:background="@mipmap/ic_test_wrinkle"/>
+                            android:background="@mipmap/ic_test_wrinkle"
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -94,6 +95,7 @@
                         android:background="@drawable/bg_shape_white"
                         android:gravity="center"
                         android:orientation="vertical"
+                        android:tag="1"
                         >
 
                         <ImageView
@@ -146,6 +148,7 @@
                         android:background="@drawable/bg_shape_white"
                         android:gravity="center"
                         android:orientation="vertical"
+                        android:tag="2"
                         >
 
                         <ImageView
@@ -187,6 +190,7 @@
                         android:background="@drawable/bg_shape_white"
                         android:gravity="center"
                         android:orientation="vertical"
+                        android:tag="3"
                         >
 
                         <ImageView

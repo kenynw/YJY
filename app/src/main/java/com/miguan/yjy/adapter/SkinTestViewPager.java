@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.miguan.yjy.model.bean.Test;
-import com.miguan.yjy.module.test.SkinGuideFragment;
 import com.miguan.yjy.module.test.SkinReadFragment;
 import com.miguan.yjy.module.test.SkinRecomFragment;
 
@@ -41,12 +40,6 @@ public class SkinTestViewPager extends FragmentStatePagerAdapter {
                 bundle1.putParcelable(BUNDLE_TEST, mTest);
                 skinRecomFragment.setArguments(bundle1);
                 return skinRecomFragment;
-            case 2:
-                Bundle bundle2 = new Bundle();
-                SkinGuideFragment skinGuideFragment = new SkinGuideFragment();
-                bundle2.putParcelable(BUNDLE_TEST, mTest);
-                skinGuideFragment.setArguments(bundle2);
-                return skinGuideFragment;
         }
         return null;
     }
@@ -63,9 +56,6 @@ public class SkinTestViewPager extends FragmentStatePagerAdapter {
                 return "肤质解读";
             case 1:
                 return "推荐产品";
-            case 2:
-                return "护肤指南";
-
         }
         return super.getPageTitle(position);
     }

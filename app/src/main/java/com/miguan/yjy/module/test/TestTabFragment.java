@@ -11,14 +11,13 @@ import com.dsk.chain.expansion.list.BaseListFragment;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.adapter.viewholder.SearchReslutViewHolder;
 import com.miguan.yjy.model.bean.Product;
-import com.miguan.yjy.module.main.TestFragmentPrensenter;
 
 /**
  * @作者 cjh
  * @日期 2017/4/6 14:30
  * @描述
  */
-@RequiresPresenter(TestFragmentPrensenter.class)
+@RequiresPresenter(TestTabFragmentPrensenter.class)
 public class TestTabFragment extends BaseListFragment<TestTabFragmentPrensenter,Product> {
 
     public interface GetPosition {

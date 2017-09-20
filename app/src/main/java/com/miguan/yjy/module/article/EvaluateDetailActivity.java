@@ -139,7 +139,7 @@ public class EvaluateDetailActivity extends BaseDataActivity<EvaluateDetailPrese
         }
         mTvTopProduct.setText(evaluate.getTitle());
         mEvaluatePanel.setEvaluate(evaluate);
-        mTvEvaluateContent.setText(Html.fromHtml(evaluate.getComment()));
+        mTvEvaluateContent.setText(Html.fromHtml(evaluate.getComment().replaceAll("(?:\n|\n\r)", "<br>")));
         mTvReply.setVisibility(View.GONE);
 
         if (TextUtils.isEmpty(evaluate.getAttachment())) {

@@ -179,7 +179,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/tv_product_detail_info"
@@ -193,7 +193,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/spacing_normal"
                         android:layout_marginRight="@dimen/spacing_normal"
-                        android:background="@mipmap/ic_product_detail_record_down"/>
+                        android:src="@mipmap/ic_product_detail_record_down"/>
 
                 </LinearLayout>
 
@@ -365,7 +365,7 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/include_evaluate_list"/>
+                <include layout="@layout/include_evaluate_list" />
 
             </LinearLayout>
 
