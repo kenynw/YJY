@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class SearchReslutViewHolder extends BaseViewHolder<Product> {
 
-    @BindView(R.id.iv_proudct_thumb)
+    @BindView(R.id.iv_prouduct_thumb)
     ImageView mDvThumb;
 
     @BindView(R.id.tv_product_name)
@@ -85,10 +85,6 @@ public class SearchReslutViewHolder extends BaseViewHolder<Product> {
             mTvProductRead.setVisibility(View.VISIBLE);
             mTvProductRead.setText(data.getProduct_explain());
         }
-    }
-
-    protected String getSpec(Product data) {
-        return String.format(getContext().getString(R.string.text_product_spec), data.getPrice(), data.getForm());
     }
 
 }

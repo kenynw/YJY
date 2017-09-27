@@ -4,6 +4,8 @@ package com.miguan.yjy.model;
 import android.os.Build;
 
 import com.dsk.chain.model.AbsModel;
+import com.miguan.yjy.model.bean.Bill;
+import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.FaceScore;
 import com.miguan.yjy.model.bean.Message;
@@ -104,8 +106,48 @@ public class UserModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
+    /**
+     * 修改资料
+     * @param key
+     * @param value
+     * @return
+     */
     public Observable<String> modifyProfile(String key, String value) {
         return ServicesClient.getServices().modifyProfile(UserPreferences.getToken(), key, value).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 我的清单列表
+     * @param page
+     * @return
+     */
+    public Observable<List<Bill>> getBillList(int page) {
+        return ServicesClient.getServices().billList(UserPreferences.getToken(), page).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 创建清单
+     * @param name
+     * @return
+     */
+    public Observable<String> addBill(String name, int productId) {
+        return ServicesClient.getServices().addBill(UserPreferences.getToken(), name, productId).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 添加产品到清单
+     * @return
+     */
+    public Observable<String> addProductToBill(int billId, int productId) {
+        return ServicesClient.getServices().addProductToBill(UserPreferences.getToken(), billId, productId).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 添加产品到清单
+     * @return
+     */
+    public Observable<EntityRoot<List<Bill>>> getBillDetail(int billId, int page) {
+        return ServicesClient.getServices().billDetail(billId, page).compose(new DefaultTransform<>());
     }
 
     /**

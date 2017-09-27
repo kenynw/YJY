@@ -50,6 +50,9 @@ public class WikiDetailActivity extends BaseDataActivity<WikiDetailActivityPrese
     @BindView(R.id.rv_wiki_detail_relation)
     RecyclerView mRvRelation;
 
+    @BindView(R.id.tv_wiki_detail_close)
+    TextView mTvClose;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,7 @@ public class WikiDetailActivity extends BaseDataActivity<WikiDetailActivityPrese
         mRvRelation.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRvRelation.setAdapter(getPresenter().getWikiAdapter());
         mTvWikiAskRemark.setOnClickListener(v -> startActivity(new Intent(this, FeedbackActivity.class)));
+        mTvClose.setOnClickListener(v -> getPresenter().postFinishEvent());
     }
 
     @Override
@@ -95,9 +99,6 @@ public class WikiDetailActivity extends BaseDataActivity<WikiDetailActivityPrese
 
         getPresenter().getWikiAdapter().clear();
         getPresenter().getWikiAdapter().addAll(wiki.getRelation_info());
-        getPresenter().getWikiAdapter().setOnItemClickListener(position ->
-                getPresenter().refresh(wiki.getRelation_info().get(position).getId())
-        );
     }
 
     public void setLike(Wiki wiki) {

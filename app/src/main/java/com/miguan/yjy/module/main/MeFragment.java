@@ -26,6 +26,7 @@ import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.LargeImageActivity;
 import com.miguan.yjy.module.product.QueryCodeActivity;
 import com.miguan.yjy.module.user.AboutActivity;
+import com.miguan.yjy.module.user.BillListActivity;
 import com.miguan.yjy.module.user.EvaluateListActivity;
 import com.miguan.yjy.module.user.FaceScorePresenter;
 import com.miguan.yjy.module.user.FeedbackActivity;
@@ -80,6 +81,9 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
     @BindView(R.id.btn_me_like)
     Button mBtnLike;
 
+    @BindView(R.id.btn_me_bills)
+    Button mBtnBills;
+
     @BindView(R.id.btn_me_comment)
     Button mBtnComment;
 
@@ -118,6 +122,7 @@ public class MeFragment extends BaseDataFragment<MeFragmentPresenter, User> {
 
         mTvSkinTest.setOnClickListener(v -> EventBus.getDefault().post(2));
         mBtnUsed.setOnClickListener(v -> getPresenter().toActivity(UsedListActivity.class));
+        mBtnBills.setOnClickListener(v -> getPresenter().toActivity(BillListActivity.class));
         mBtnStar.setOnClickListener(v -> getPresenter().toActivity(StarListActivity.class));
         mBtnLike.setOnClickListener(v -> getPresenter().toActivity(ProductLikeListActivity.class));
         mBtnComment.setOnClickListener(v -> getPresenter().toActivity(EvaluateListActivity.class));

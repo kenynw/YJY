@@ -72,8 +72,8 @@ public class ScreenShot {
      * @param v the v
      * @return the bitmap
      */
-    public Bitmap takeScreenShotOfView(View v) {
-        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.RGB_565);
+    public Bitmap takeScreenShotOfView(View v, Bitmap.Config config) {
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), config);
         Canvas canvas = new Canvas(bitmap);
         v.draw(canvas);
         return bitmap;
@@ -87,7 +87,7 @@ public class ScreenShot {
      */
     public Bitmap takeScreenShotOfRootView(View v) {
         v = v.getRootView();
-        return takeScreenShotOfView(v);
+        return takeScreenShotOfView(v, Bitmap.Config.RGB_565);
     }
 
     /**
@@ -100,7 +100,20 @@ public class ScreenShot {
         v.measure(MeasureSpec.makeMeasureSpec(LUtils.getScreenWidth(), MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        return takeScreenShotOfView(v);
+        return takeScreenShotOfView(v, Bitmap.Config.RGB_565);
+    }
+
+    /**
+     * Take screen shot of just the View without any constraints
+     *
+     * @param v the v
+     * @return the bitmap
+     */
+    public Bitmap takeScreenShotOfJustView(View v, Bitmap.Config config) {
+        v.measure(MeasureSpec.makeMeasureSpec(LUtils.getScreenWidth(), MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+        return takeScreenShotOfView(v, config);
     }
 
     /**
@@ -110,7 +123,18 @@ public class ScreenShot {
      * @return the bitmap
      */
     public void takeScreenShotOfJustView(View v, OnSaveListener listener) {
-        Bitmap bitmap = takeScreenShotOfJustView(v);
+        Bitmap bitmap = takeScreenShotOfJustView(v, Bitmap.Config.RGB_565);
+        new SaveTask(v.getContext(), bitmap, listener).execute();
+    }
+
+    /**
+     * 自定义图片质量
+     *
+     * @param v the v
+     * @return the bitmap
+     */
+    public void takeScreenShotOfJustView(View v, Bitmap.Config config, OnSaveListener listener) {
+        Bitmap bitmap = takeScreenShotOfJustView(v, config);
         new SaveTask(v.getContext(), bitmap, listener).execute();
     }
 

@@ -365,7 +365,7 @@
 
                 </LinearLayout>
 
-                <include layout="@layout/include_evaluate_list" />
+                <include layout="@layout/include_evaluate_list"/>
 
             </LinearLayout>
 
@@ -431,50 +431,54 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             >
 
             <TextView
-                android:id="@+id/tv_product_detail_homework"
+                android:id="@+id/tv_product_detail_bills"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:drawableLeft="@mipmap/ic_add_product"
+                android:drawableStart="@mipmap/ic_add_product"
                 android:drawablePadding="7dp"
                 android:gravity="center"
-                android:text="@string/btn_me_used"
+                android:text="@string/btn_product_add_bills"
                 android:textColor="@color/textSecondary"
-                android:textSize="@dimen/text_size_small_15"
+                android:textSize="@dimen/text_size_body"
                 />
 
-        </RelativeLayout>
+        </FrameLayout>
 
-        <View
+        <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            />
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="125dp"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            >
 
             <TextView
                 android:id="@+id/tv_product_detail_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:drawableLeft="@mipmap/ic_write_evaluate"
                 android:drawablePadding="7dp"
+                android:drawableStart="@mipmap/ic_write_evaluate"
                 android:gravity="center"
-                android:text="点评"
+                android:text="@string/btn_comment"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small_15"/>
+                android:textSize="@dimen/text_size_body"
+                />
 
-        </RelativeLayout>
+        </FrameLayout>
 
     </LinearLayout>
 

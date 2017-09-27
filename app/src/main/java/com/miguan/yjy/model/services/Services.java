@@ -4,6 +4,7 @@ package com.miguan.yjy.model.services;
 import com.miguan.yjy.model.bean.Article;
 import com.miguan.yjy.model.bean.Ask;
 import com.miguan.yjy.model.bean.Benefit;
+import com.miguan.yjy.model.bean.Bill;
 import com.miguan.yjy.model.bean.BrandAll;
 import com.miguan.yjy.model.bean.BrandList;
 import com.miguan.yjy.model.bean.Category;
@@ -337,6 +338,61 @@ public interface Services {
     );
 
     /**
+     * 我的清单列表
+     *
+     * @param token   用户ID
+     * @param page  页数
+     * @return
+     */
+    @GET("?action=userInventoryList")
+    Observable<List<Bill>> billList(
+            @Query("token") String token,
+            @Query("page") int page
+    );
+
+    /**
+     * 创建清单
+     *
+     * @param token   用户ID
+     * @param title  标题
+     * @param productId  创建并添加产品-选填
+     * @return
+     */
+    @GET("?action=addInventory")
+    Observable<String> addBill(
+            @Query("token") String token,
+            @Query("title") String title,
+            @Query("productId") int productId
+    );
+
+    /**
+     * 添加产品到清单
+     *
+     * @param billId   清单ID
+     * @param productId  产品ID
+     * @return
+     */
+    @GET("?action=addInventoryProduct")
+    Observable<String> addProductToBill(
+            @Query("token") String token,
+            @Query("inventoryId") int billId,
+            @Query("productId") int productId
+    );
+
+    /**
+     * 添加产品到清单
+     *
+     * @param billId   清单ID
+     * @param page  页数
+     * @return
+     */
+    @GET("?action=userInventoryDetail")
+    Observable<EntityRoot<List<Bill>>> billDetail(
+            @Query("invent_id") int billId,
+            @Query("page") int page
+    );
+
+    /**
      * 吐槽一下
      *
      * @param token   用户ID
@@ -352,6 +408,7 @@ public interface Services {
             @Query("number") String versionName,
             @Query("attachment") String thumb
     );
+
 
     ////////////////////产品&&文章//////////////////////
 

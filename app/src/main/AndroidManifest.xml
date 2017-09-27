@@ -381,6 +381,18 @@
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
         <activity
+            android:name=".module.user.BillListActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name=".module.user.BillDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
             android:name=".module.user.ProductLikeListActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"

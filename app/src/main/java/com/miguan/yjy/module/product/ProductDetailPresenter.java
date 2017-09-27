@@ -3,6 +3,7 @@ package com.miguan.yjy.module.product;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.dsk.chain.expansion.data.BaseDataActivityPresenter;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.ProductModel;
+import com.miguan.yjy.model.UserModel;
+import com.miguan.yjy.model.bean.Bill;
 import com.miguan.yjy.model.bean.EntityRoot;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
@@ -25,6 +29,8 @@ import com.miguan.yjy.utils.LUtils;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
+
+import rx.Subscriber;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -50,6 +56,8 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
 
     private int mCurPage = 1;
 
+    private int mBillPage = 1;
+
     private int mProductId;
     PopupWindow popupWindow;
     View view;
@@ -57,6 +65,8 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
     private LinearLayout popPproductExplain;
 
     private LinearLayout llProductExplain;
+
+    private RecyclerArrayAdapter<Bill> mBillAdapter;
 
     public static void start(Context context, int productId) {
         Intent intent = new Intent(context, ProductDetailActivity.class);
@@ -142,10 +152,6 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
 
     }
 
-    public String getSort() {
-        return mSort;
-    }
-
     public void setSort(String sort) {
         this.mSort = sort;
     }
@@ -154,6 +160,73 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         this.mCondition = condition;
     }
 
+    public RecyclerArrayAdapter<Bill> getBillAdapter() {
+        if (mBillAdapter == null) {
+            mBillAdapter = new RecyclerArrayAdapter<Bill>(getView()) {
+                @Override
+                public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+                    return new BillSimpleViewHolder(parent);
+                }
+            };
+            mBillAdapter.setMore(null, new RecyclerArrayAdapter.OnMoreListener() {
+                @Override
+                public void onMoreShow() {
+                    loadBillList(mBillPage, null);
+                }
+
+                @Override
+                public void onMoreClick() {
+
+                }
+            });
+        }
+        return mBillAdapter;
+    }
+
+    public void loadBillList(int page, RecyclerView rv) {
+        mBillPage = page;
+        UserModel.getInstance().getBillList(page).unsafeSubscribe(new Subscriber<List<Bill>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(List<Bill> bills) {
+                if (page == 1) mBillAdapter.clear();
+                mBillAdapter.addAll(bills);
+                mBillPage++;
+                if (rv != null && bills.size() > 4) {
+                    LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) rv.getLayoutParams();
+                    lp.height = LUtils.dp2px(194);
+                    rv.setLayoutParams(lp);
+                }
+            }
+        });
+    }
+
+    public void newBill(String name) {
+        UserModel.getInstance().addBill(name, mProductId).subscribe(new ServicesResponse<String>() {
+            @Override
+            public void onNext(String s) {
+                LUtils.toast("创建并添加成功");
+            }
+        });
+    }
+
+    public void addToBill(int billId) {
+        UserModel.getInstance().addProductToBill(billId, mProductId).subscribe(new ServicesResponse<String>() {
+            @Override
+            public void onNext(String s) {
+                LUtils.toast("添加成功");
+            }
+        });
+    }
 
     /**
      * 正品保证说明
@@ -171,4 +244,5 @@ public class ProductDetailPresenter extends BaseDataActivityPresenter<ProductDet
         llProductExplain.setOnClickListener(v -> popupWindow.dismiss());
         popPproductExplain.setOnClickListener(v -> {});
     }
+
 }

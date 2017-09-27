@@ -1,65 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_product_include_brand"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:visibility="gone"
+    android:layout_margin="@dimen/spacing_small"
+    android:background="@drawable/bg_radius_white"
+    android:paddingBottom="@dimen/spacing_normal"
+    android:paddingLeft="@dimen/spacing_large"
+    android:paddingRight="@dimen/spacing_large"
+    android:paddingTop="@dimen/spacing_normal"
     >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_brand_main"
+        android:layout_width="85dp"
+        android:layout_height="25dp"
+        android:background="@drawable/bg_shape_main_color_white"
+        android:gravity="center"
+        android:text="@string/tv_product_brand_main"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_brand_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@mipmap/ic_no_commponet"
+        />
+
+    <TextView
+        android:id="@+id/tv_brand_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_shape_white"
-        android:padding="15dp"
-        android:paddingBottom="34dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="34dp">
+        android:layout_marginLeft="@dimen/text_size_small_15"
+        android:layout_marginStart="@dimen/text_size_small_15"
+        android:maxLines="1"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_large_20"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/sdv_brand_img"
+        app:layout_constraintRight_toLeftOf="@id/tv_brand_main"
+        tools:text="namenamenamenamenamenamenamenamenamenamename"
+        />
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/sdv_brand_img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@mipmap/ic_no_commponet"/>
+    <TextView
+        android:id="@+id/tv_brand_num"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:maxLines="1"
+        app:layout_constraintLeft_toLeftOf="@id/tv_brand_name"
+        app:layout_constraintRight_toRightOf="@id/tv_brand_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_brand_name"
+        tools:text="numnumnumnumnumnum"
+        />
 
-        <TextView
-            android:id="@+id/tv_brand_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/sdv_brand_img"
-            android:layout_marginLeft="@dimen/text_size_small_15"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/sdv_brand_img"
-            android:text="name"
-            android:textColor="@color/textPrimary"
-            android:textSize="@dimen/text_size_large_20"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tv_brand_num"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_brand_name"
-            android:layout_below="@+id/tv_brand_name"
-            android:layout_marginTop="15dp"
-            android:text="num"
-            android:textColor="@color/textSecondary"
-            android:textSize="@dimen/text_size_small_13"/>
-
-        <TextView
-            android:id="@+id/tv_brand_main"
-            android:layout_width="85dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/tv_brand_name"
-            android:background="@drawable/bg_shape_main_color_white"
-            android:gravity="center"
-            android:text="@string/tv_product_brand_main"
-            android:textColor="@color/colorPrimary"/>
-
-    </RelativeLayout>
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

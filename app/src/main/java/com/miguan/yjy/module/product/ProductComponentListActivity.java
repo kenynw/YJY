@@ -92,9 +92,9 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
 
         View mLlWaterBottom = View.inflate(ProductComponentListActivity.this, R.layout.water_bottom, null);
 
-        mIvThumb = ButterKnife.findById(mRlWaterTop,R.id.iv_product_detail);
-        mTvName = ButterKnife.findById(mRlWaterTop,R.id.tv_product_detail_name);
-        mTvSpec = ButterKnife.findById(mRlWaterTop,R.id.tv_product_detail_spec);
+        mIvThumb = ButterKnife.findById(mRlWaterTop, R.id.iv_product_detail);
+        mTvName = ButterKnife.findById(mRlWaterTop, R.id.tv_product_detail_name);
+        mTvSpec = ButterKnife.findById(mRlWaterTop, R.id.tv_product_detail_spec);
 
         mIvThumb.setImageURI(Uri.parse(getPresenter().product.getProduct_img()));
         mTvName.setText(getPresenter().product.getProduct_name());
@@ -103,8 +103,8 @@ public class ProductComponentListActivity extends BaseDataActivity<ProductCompon
         Bitmap waterMiddle = ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterMiddle);
         Bitmap waterTop = ScreenShot.getInstance().takeScreenShotOfJustView(mRlWaterTop);
         Bitmap waterBottom = ScreenShot.getInstance().takeScreenShotOfJustView(mLlWaterBottom);
-       Bitmap temp= ScreenShot.addBitmap(waterTop,waterMiddle);
-       Bitmap reslut= ScreenShot.addBitmap(temp,waterBottom);
+        Bitmap temp = ScreenShot.addBitmap(waterTop, waterMiddle);
+        Bitmap reslut = ScreenShot.addBitmap(temp, waterBottom);
         Resources res = getResources();
         Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.screenshot_water_logo2);
 //        Bitmap bmp = BitmapFactory.decodeResource(res, R.mipmap.ic_water);

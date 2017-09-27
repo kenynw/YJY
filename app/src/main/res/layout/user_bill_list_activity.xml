@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <FrameLayout
+        android:id="@+id/fl_bill_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:drawableLeft="@mipmap/ic_add"
+            android:drawablePadding="@dimen/spacing_tiny"
+            android:drawableStart="@mipmap/ic_add"
+            android:gravity="center"
+            android:text="@string/btn_new_bill"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+    </FrameLayout>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:recyclerPaddingTop="@dimen/spacing_small"
+        app:recyclerClipToPadding="false"
+        />
+
+</LinearLayout>

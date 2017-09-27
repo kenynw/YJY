@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_white"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@id/btn_dialog_negative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingBottom="@dimen/spacing_small"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_small"
+        android:drawableLeft="@mipmap/ic_filter_close"
+        android:drawableStart="@mipmap/ic_filter_close"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/text_bills_add"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_body"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/et_new_bills_name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_radius_stroke_window"
+        android:hint="@string/hint_add_bills"
+        android:inputType="text"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_normal"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+    <TextView
+        android:id="@+id/tv_new_bills_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/text_max_word"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bgWindow"
+        />
+
+    <TextView
+        android:id="@id/btn_dialog_positive"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/btn_user_sure"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_subhead_material"
+        />
+
+</LinearLayout>

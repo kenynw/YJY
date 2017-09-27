@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,27 +21,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewStub;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dsk.chain.bijection.RequiresPresenter;
 import com.dsk.chain.expansion.data.BaseDataActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
 import com.miguan.yjy.adapter.EvaluateAdapter;
 import com.miguan.yjy.adapter.FlagShipAdapter;
 import com.miguan.yjy.adapter.ProductComponentAdapter;
+import com.miguan.yjy.dialogs.BaseAlertDialog;
+import com.miguan.yjy.model.bean.Bill;
 import com.miguan.yjy.model.bean.Evaluate;
 import com.miguan.yjy.model.bean.Product;
 import com.miguan.yjy.module.ask.AskListActivityPresenter;
@@ -56,6 +62,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 
+import static com.miguan.yjy.model.constant.Constants.TAG_DIALOG_NEW_BILL;
 import static com.miguan.yjy.module.product.ProductDetailPresenter.SORT_DEFAULT;
 import static com.miguan.yjy.module.product.ProductDetailPresenter.SORT_SKIN;
 import static com.miguan.yjy.module.product.ProductDetailPresenter.START_BAD;
@@ -69,7 +76,11 @@ import static com.miguan.yjy.module.product.ProductDetailPresenter.START_PRAISE;
  * @描述 产品详情页
  */
 @RequiresPresenter(ProductDetailPresenter.class)
-public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresenter, Product> implements
+        View.OnClickListener, RadioGroup.OnCheckedChangeListener,
+        BaseAlertDialog.OnDialogShowListener, BaseAlertDialog.OnButtonClickListener {
+
+    public static final String TAG_DIALOG_BILLS_ADD = "add_bills";
 
     @BindView(R.id.dv_product_detail)
     SimpleDraweeView mDvThumb;
@@ -122,8 +133,8 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     @BindView(R.id.iv_product_detail_like)
     ImageView mIvLike;
 
-    @BindView(R.id.tv_product_detail_homework)
-    TextView mTvTemplate;
+    @BindView(R.id.tv_product_detail_bills)
+    TextView mTvAddBills;
 
     @BindView(R.id.tv_product_detail_remark)
     TextView tvRemark;
@@ -208,7 +219,7 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     RadioGroup mRgIndicator;
 
     @BindViews({R.id.rb_product_detail_product, R.id.rb_product_detail_component,
-            R.id.rb_product_detail_compare_price,R.id.rb_product_detail_evaluate})
+            R.id.rb_product_detail_compare_price, R.id.rb_product_detail_evaluate})
     RadioButton[] mRbsIndicator;
 
     private boolean mIsLike;
@@ -219,10 +230,6 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
     private int curScrollY;
 
     private int lastY = 0;
-
-    private String  mGroups[] = {"产品", "成分", "比价", "评价"};
-
-    ViewStub mViewStub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -458,7 +465,10 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
             getPresenter().getEvaluateData();
         });
 
-        mTvTemplate.setOnClickListener(v -> AddRepositoryPresenter.start(this, null, "", product));
+        mTvAddBills.setOnClickListener(v -> {
+            BaseAlertDialog.newInstance(R.layout.dialog_product_add_bills, this)
+                    .show(getSupportFragmentManager(), TAG_DIALOG_BILLS_ADD);
+        });
     }
 
     // 设置长草图标样式
@@ -576,4 +586,58 @@ public class ProductDetailActivity extends BaseDataActivity<ProductDetailPresent
         mBtnAsk.startAnimation(set);
         mIsShowAnim = false;
     }
+
+    @Override
+    public void onShow(@NonNull AlertDialog dialog) {
+        if (getSupportFragmentManager().findFragmentByTag(TAG_DIALOG_BILLS_ADD) != null) {
+            RelativeLayout rl = (RelativeLayout) dialog.findViewById(R.id.rl_add_bills_new);
+            if (rl != null) {
+                rl.setOnClickListener(v -> {
+                    BaseAlertDialog.newInstance(R.layout.dialog_product_new_bills,
+                            ProductDetailActivity.this)
+                            .show(getSupportFragmentManager(), TAG_DIALOG_NEW_BILL);
+                    dialog.dismiss();
+                });
+            }
+            ImageView ivClose = (ImageView) dialog.findViewById(R.id.iv_add_bills_close);
+            if (ivClose != null) {
+                ivClose.setOnClickListener(v -> dialog.dismiss());
+            }
+            RecyclerView rv = (RecyclerView) dialog.findViewById(R.id.rv_add_bill_list);
+            if (rv != null) {
+                rv.setLayoutManager(new LinearLayoutManager(this));
+                rv.setHasFixedSize(true);
+                rv.setOverScrollMode(View.OVER_SCROLL_NEVER);
+                RecyclerArrayAdapter<Bill> adapter = getPresenter().getBillAdapter();
+                adapter.setOnItemClickListener(position -> {
+                    getPresenter().addToBill(adapter.getItem(position).getId());
+                    dialog.dismiss();
+                });
+                rv.setAdapter(adapter);
+                getPresenter().loadBillList(1, rv);
+            }
+        }
+    }
+
+    @Override
+    public void onPositiveClick(@NonNull View view) {
+        if (getSupportFragmentManager().findFragmentByTag(TAG_DIALOG_NEW_BILL) != null) {
+            EditText etContent = view.getRootView().findViewById(R.id.et_new_bills_name);
+            if (etContent != null) {
+                String content = etContent.getText().toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    LUtils.toast(R.string.error_new_bill);
+                } else {
+                    getPresenter().newBill(content);
+                }
+                LUtils.closeKeyboard(etContent);
+            }
+        }
+    }
+
+    @Override
+    public void onNegativeClick(@NonNull View view) {
+
+    }
+
 }

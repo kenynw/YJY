@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar"/>
+
+    <EditText
+        android:id="@+id/et_add_bill_remark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="top|start"
+        android:hint="@string/hint_add_remark"
+        android:inputType="textMultiLine"
+        android:paddingBottom="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_large"
+        android:textColor="@color/textPrimary"
+        android:textColorHint="@color/text_hint"
+        android:textSize="@dimen/text_size_body_material"
+        />
+
+</LinearLayout>

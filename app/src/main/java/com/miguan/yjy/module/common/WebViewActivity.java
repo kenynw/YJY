@@ -32,7 +32,6 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 @RequiresPresenter(WebViewPresener.class)
 public class WebViewActivity extends ChainBaseActivity {
 
-    // 浏览器
     @BindView(R.id.web_view)
     WebView mWebView;
 
@@ -66,7 +65,6 @@ public class WebViewActivity extends ChainBaseActivity {
         intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
-
 
     private void initData() {
         if (getIntent().getExtras() == null) {

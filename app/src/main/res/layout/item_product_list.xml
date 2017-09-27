@@ -14,7 +14,7 @@
     >
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_proudct_thumb"
+        android:id="@+id/iv_prouduct_thumb"
         style="@style/BaseImage"
         android:layout_width="98dp"
         android:layout_height="98dp"
@@ -28,17 +28,16 @@
         android:id="@+id/tv_product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/iv_proudct_thumb"
+        android:layout_alignTop="@+id/iv_prouduct_thumb"
         android:layout_marginLeft="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_small"
-        android:layout_toEndOf="@id/iv_proudct_thumb"
-        android:layout_toRightOf="@+id/iv_proudct_thumb"
+        android:layout_toEndOf="@id/iv_prouduct_thumb"
+        android:layout_toRightOf="@+id/iv_prouduct_thumb"
         android:maxLines="2"
         android:textAppearance="@style/TextBody"
         tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"
         />
-
 
     <LinearLayout
         android:id="@+id/ll_no_read"
@@ -89,7 +88,6 @@
         android:textSize="@dimen/text_size_body_material"
         tools:text="￥320/250ML"
         />
-
 
     <TextView
         android:id="@+id/tv_product_sort"

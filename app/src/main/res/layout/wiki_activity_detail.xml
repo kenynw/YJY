@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <include layout="@layout/include_toolbar"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@id/toolbar"
+        style="@style/TitleToolbar"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        >
+
+        <ImageView
+            android:id="@id/toolbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:paddingLeft="@dimen/spacing_normal"
+            android:paddingRight="@dimen/spacing_normal"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_back"
+            />
+
+        <TextView
+            android:id="@+id/tv_wiki_detail_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_close"
+            android:textColor="@color/textTertiary"
+            android:textSize="@dimen/text_size_body"
+            />
+
+        <TextView
+            style="@style/ToolbarTitle"
+            tools:text="这是标题"
+            />
+
+    </android.support.v7.widget.Toolbar>
 
     <com.miguan.yjy.widget.CustomNestedScrollView
         android:layout_width="match_parent"
@@ -60,7 +93,7 @@
                         android:textColor="@color/textPrimary"
                         android:textSize="@dimen/text_size_small_17"
                         android:textStyle="bold"
-                        tool:text="用化妆棉/化妆水做二次清洁真的对吗？用化妆棉/化妆水做二次清洁真的对吗？用化妆棉/化妆水做二次清洁真的对吗？"
+                        tools:text="用化妆棉/化妆水做二次清洁真的对吗？用化妆棉/化妆水做二次清洁真的对吗？用化妆棉/化妆水做二次清洁真的对吗？"
                         />
 
                     <View
@@ -91,7 +124,7 @@
                     android:layout_marginTop="@dimen/spacing_tiny"
                     android:textColor="@color/textTertiary"
                     android:textSize="@dimen/text_size_body_material"
-                    tool:text="A：化妆水的溶解作用与化妆棉的摩擦作用相结合，更容易导致皮肤受损。因此，颜究院不建议大家长期这样做哦~"
+                    tools:text="A：化妆水的溶解作用与化妆棉的摩擦作用相结合，更容易导致皮肤受损。因此，颜究院不建议大家长期这样做哦~"
                     />
 
                 <com.facebook.drawee.view.SimpleDraweeView
@@ -117,7 +150,7 @@
                     android:drawableStart="@mipmap/ic_wiki_face_normal"
                     android:textColor="@color/textSecondary"
                     android:textSize="@dimen/text_size_small_13"
-                    tool:text="点赞个数"
+                    tools:text="点赞个数"
                     />
 
             </LinearLayout>

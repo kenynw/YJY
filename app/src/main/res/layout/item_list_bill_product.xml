@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/spacing_normal"
+    android:layout_marginRight="@dimen/spacing_normal"
+    android:background="@drawable/bg_radius_stroke_window"
+    android:orientation="vertical"
+    >
+
+    <com.miguan.yjy.widget.SuperTextView
+        android:id="@+id/tv_bill_product_remark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:maxLines="3"
+        android:padding="13dp"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_body_material"
+        app:corner="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:left_bottom_corner="true"
+        app:right_bottom_corner="true"
+        app:solid="@color/bgWindow"
+        app:stroke_color="@color/bgWindow"
+        app:stroke_width="1dp"
+        tools:text="添加备注"
+        />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_bill_product_thumb"
+        style="@style/BaseImage.Product"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:layout_margin="@dimen/spacing_normal"
+        app:layout_constraintBottom_toTopOf="@id/tv_bill_product_remark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/iv_bill_product_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:src="@mipmap/ic_bill_sort"
+        app:layout_constraintBottom_toBottomOf="@id/dv_bill_product_thumb"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dv_bill_product_thumb"
+        />
+
+    <TextView
+        android:id="@+id/tv_bill_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginRight="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:maxLines="2"
+        android:textAppearance="@style/TextBody"
+        app:layout_constraintLeft_toRightOf="@+id/dv_bill_product_thumb"
+        app:layout_constraintRight_toLeftOf="@id/iv_bill_product_sort"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dv_bill_product_thumb"
+        tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"/>
+
+    <RatingBar
+        android:id="@+id/rtb_bill_product_star"
+        style="@style/MySmallRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="1"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_bill_product_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bill_product_name"
+        />
+
+    <TextView
+        android:id="@+id/tv_bill_product_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:textColor="@color/textSecondary"
+        android:textSize="@dimen/text_size_body_material"
+        app:layout_constraintLeft_toLeftOf="@+id/rtb_bill_product_star"
+        app:layout_constraintTop_toBottomOf="@+id/rtb_bill_product_star"
+        app:layout_goneMarginTop="@dimen/spacing_tiny"
+        tools:text="￥320/250ML"
+        />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/four_transparent"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_clean"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>

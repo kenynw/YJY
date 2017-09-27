@@ -2,6 +2,7 @@ package com.miguan.yjy.module.product;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -88,7 +89,7 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
     TextView mTvBrandMain;
 
     @BindView(R.id.ll_product_include_brand)
-    LinearLayout mLlIncludeBrand;
+    ConstraintLayout mLlIncludeBrand;
 
     @BindView(R.id.tbtn_product_filter_all)
     ToggleButton mTbtnProductFilterAll;

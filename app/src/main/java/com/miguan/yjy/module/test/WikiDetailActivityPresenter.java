@@ -15,6 +15,10 @@ import com.miguan.yjy.model.bean.Wiki;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.module.account.LoginActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 /**
  * @作者 cjh
  * @日期 2017/7/25 11:50
@@ -44,6 +48,7 @@ public class WikiDetailActivityPresenter extends BaseDataActivityPresenter<WikiD
     protected void onCreate(WikiDetailActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         mWikiId = getView().getIntent().getIntExtra(EXTRA_BAIKEID, 0);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -60,11 +65,6 @@ public class WikiDetailActivityPresenter extends BaseDataActivityPresenter<WikiD
         return mWikiAdapter;
     }
 
-    public void refresh(int baikeId) {
-        this.mWikiId = baikeId;
-        loadData();
-    }
-
     public void addBaikeLike(Wiki wiki) {
         if (AccountModel.getInstance().isLogin()) {
             TestModel.getInstantce().addBaikeLike(mWikiId).subscribe(new ServicesResponse<String>() {
@@ -76,6 +76,26 @@ public class WikiDetailActivityPresenter extends BaseDataActivityPresenter<WikiD
         } else {
             getView().startActivity(new Intent(getView(), LoginActivity.class));
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void finish(FinishEvent event) {
+        getView().finish();
+    }
+
+    public void postFinishEvent() {
+        EventBus.getDefault().post(new FinishEvent());
+    }
+
+    public class FinishEvent {
+
     }
 
 }

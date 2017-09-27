@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@mipmap/image_template_0"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="@string/text_share_to"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_subhead_material"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/tv_share_shot_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/spacing_small"
+            android:drawableTop="@mipmap/ic_wx_firend"
+            android:gravity="center_horizontal"
+            android:text="@string/tv_share_wxfriend"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+        <Space
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_share_shot_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/spacing_small"
+            android:drawableTop="@mipmap/ic_wx_circle"
+            android:gravity="center_horizontal"
+            android:text="@string/tv_share_wxcircle"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

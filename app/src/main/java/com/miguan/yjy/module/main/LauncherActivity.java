@@ -16,7 +16,6 @@ import com.miguan.yjy.utils.LUtils;
 import com.miguan.yjy.utils.PermissionUtils;
 
 public class LauncherActivity extends AppCompatActivity {
-    private static final String TAG = "LauncherActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,24 +72,23 @@ public class LauncherActivity extends AppCompatActivity {
                         if (dataString.startsWith("yjyappscheme")) {
                             switch (Integer.parseInt(type)) {
                                 case 0://活动
-                                    WebViewActivity.start(LauncherActivity.this,"",relation);
+                                    WebViewActivity.start(LauncherActivity.this, "", relation);
                                     break;
                                 case 1://产品详情
-                                    ProductDetailPresenter.start(LauncherActivity.this,Integer.parseInt(relation));
+                                    ProductDetailPresenter.start(LauncherActivity.this, Integer.parseInt(relation));
                                     break;
                                 case 2://文章
-                                    ArticleDetailPresenter.start(LauncherActivity.this,Integer.parseInt(relation));
+                                    ArticleDetailPresenter.start(LauncherActivity.this, Integer.parseInt(relation));
                                     break;
                             }
                         }
                     }
-                }else {
+                } else {
                     startActivity(new Intent(LauncherActivity.this, MainActivity.class));
                 }
             }
             finish();
         }, 1000);
     }
-
 
 }

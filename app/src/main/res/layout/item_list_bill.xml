@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    >
+
+    <TextView
+        android:id="@+id/tv_bill_delete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#ff4545"
+        android:gravity="center"
+        android:text="@string/text_delete"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_body"
+        />
+
+    <include layout="@layout/item_list_bill_simple"/>
+
+</com.daimajia.swipe.SwipeLayout>

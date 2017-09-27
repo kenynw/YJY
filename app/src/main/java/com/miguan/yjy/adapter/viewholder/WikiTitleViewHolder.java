@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.Wiki;
+import com.miguan.yjy.module.test.WikiDetailActivityPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +31,7 @@ public class WikiTitleViewHolder extends BaseViewHolder<Wiki> {
     public void setData(Wiki data) {
         String name = data.getQuestion();
         mTvWikiName.setText(name);
+        itemView.setOnClickListener(v -> WikiDetailActivityPresenter.start(getContext(), data.getId()));
     }
 
 }

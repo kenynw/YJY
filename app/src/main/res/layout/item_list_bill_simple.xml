@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_bill_product"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/spacing_normal"
+    android:paddingLeft="@dimen/spacing_large"
+    android:paddingRight="@dimen/spacing_large"
+    android:paddingTop="@dimen/spacing_normal"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/dv_bill_thumb"
+        style="@style/BaseImage.Product"
+        android:layout_width="80dp"
+        android:layout_height="67dp"
+        app:roundingBorderColor="@color/bgWindow"
+        app:roundingBorderWidth="1dp"
+        tools:background="@color/bgWindow"
+        />
+
+    <TextView
+        android:id="@+id/tv_bill_thumb_count"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="7sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dv_bill_thumb"
+        app:layout_constraintRight_toRightOf="@+id/dv_bill_thumb"
+        tools:text="10"
+        />
+
+    <TextView
+        android:id="@+id/tv_bill_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_normal"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_body_material"
+        app:layout_constraintLeft_toRightOf="@+id/dv_bill_thumb"
+        app:layout_constraintTop_toTopOf="@+id/dv_bill_thumb"
+        tools:text="喜欢的口红"
+        />
+
+    <TextView
+        android:id="@+id/tv_bill_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:textAppearance="@style/TextCaption"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_bill_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bill_name"
+        tools:text="10产品"
+        />
+
+</android.support.constraint.ConstraintLayout>
