@@ -1,7 +1,7 @@
 package com.miguan.yjy.module.user;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.widget.CompoundButton;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.UserModel;
@@ -15,9 +15,10 @@ import org.greenrobot.eventbus.ThreadMode;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivity, UserProduct> implements TabLayout.OnTabSelectedListener {
+public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivity, UserProduct>
+        implements CompoundButton.OnCheckedChangeListener {
 
-    private int mType = 0;
+    private int mOrder = 0;
 
     @Override
     protected void onCreate(UsedListActivity view, Bundle saveState) {
@@ -31,6 +32,7 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
         onRefresh();
     }
 
+    @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void refreshEvent(UserProduct product) {
         onRefresh();
@@ -38,13 +40,12 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
 
     @Override
     public void onRefresh() {
-        UserModel.getInstance().getUsedProductList(mType, 1)
-                .unsafeSubscribe(getRefreshSubscriber());
+        UserModel.getInstance().getUsedProductList(mOrder, 1).unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        UserModel.getInstance().getUsedProductList(mType, getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        UserModel.getInstance().getUsedProductList(mOrder, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 
     @Override
@@ -53,22 +54,14 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        if (mType != tab.getPosition()) {
-            mType = tab.getPosition();
-            onRefresh();
-        }
+    private void orderByOvertime(int order) {
+        mOrder = order;
+        onRefresh();
     }
 
     @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        orderByOvertime(isChecked ? 1 : 0);
     }
 
 }

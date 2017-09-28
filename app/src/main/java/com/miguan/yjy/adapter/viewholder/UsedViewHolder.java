@@ -14,6 +14,7 @@ import com.miguan.yjy.R;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.services.ServicesResponse;
+import com.miguan.yjy.module.product.AddRepositoryPresenter;
 import com.miguan.yjy.widget.SuperTextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,8 +34,8 @@ import butterknife.ButterKnife;
 
 public class UsedViewHolder extends BaseViewHolder<UserProduct> {
 
-    @BindView(R.id.tv_product_used_open)
-    TextView mTvOpen;
+    @BindView(R.id.tv_product_used_edit)
+    TextView mTvEdit;
 
     @BindView(R.id.tv_product_used_delete)
     TextView mTvDelete;
@@ -82,6 +83,7 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
                 + (24*60*60 - 1);
         int restDay = overdueTime > System.currentTimeMillis() / 1000 ?
                 (int) ((overdueTime - System.currentTimeMillis() / 1000) / 3600 / 24) + 1 : 0;
+        data.setDays(restDay);
 
         ForegroundColorSpan colorSpan;
         if (restDay <= 60) {
@@ -101,7 +103,6 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
         mTvIsSeal.setTextColor(data.getIs_seal() == 0 ? 0xFFBCBCBC : 0xFFFF5555);
         mTvIsSeal.setStrokeColor(data.getIs_seal() == 0 ? 0xFFBCBCBC : 0xFFFF5555);
 
-        mTvOpen.setVisibility(data.getIs_seal() == 0 ? View.VISIBLE : View.GONE);
         mTvDate.setVisibility(data.getIs_seal() == 0 ? View.GONE : View.VISIBLE);
         mTvDate.setText(data.getSeal_time());
 
@@ -111,7 +112,13 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
                 EventBus.getDefault().post(data);
             }
         };
-        mTvDelete.setOnClickListener(v -> UserModel.getInstance().deleteUsedProduct(data.getId(), 2).unsafeSubscribe(response));
-        mTvOpen.setOnClickListener(v -> UserModel.getInstance().deleteUsedProduct(data.getId(), 1).unsafeSubscribe(response));
+        mTvEdit.setOnClickListener(v -> {
+            AddRepositoryPresenter.start(getContext(), data);
+        });
+        mTvDelete.setOnClickListener(v -> {
+
+            UserModel.getInstance().deleteUsedProduct(data.getId(), 2).unsafeSubscribe(response);
+        });
     }
+
 }

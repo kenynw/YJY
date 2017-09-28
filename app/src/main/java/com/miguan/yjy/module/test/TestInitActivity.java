@@ -80,7 +80,7 @@ public class TestInitActivity extends BaseDataActivity<TestInitActivityPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_fragment_test);
-        setToolbarTitle("我的肤质");
+        setToolbarTitle(R.string.text_test);
         ButterKnife.bind(this);
 
         testInitActivity = this;

@@ -10,8 +10,10 @@
     >
 
     <ImageView
+        android:id="@+id/iv_share_shot_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         tools:src="@mipmap/image_template_0"
         />
 

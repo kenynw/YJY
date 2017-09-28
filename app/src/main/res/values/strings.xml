@@ -67,7 +67,6 @@
     <string name="text_area">地区</string>
     <string name="text_logout">退出登录</string>
     <string name="text_delete">删除</string>
-    <string name="text_open">开封</string>
     <string name="text_close">关闭</string>
     <string name="text_face_score">颜值</string>
     <string name="text_title_template">功课模板</string>
@@ -141,7 +140,16 @@
     <string name="text_skin_wiki">护肤科普</string>
     <string name="text_last_ask">最新问答</string>
     <string name="text_max_word">0/30</string>
+    <string name="text_export">导出</string>
     <string name="text_edit">编辑</string>
+    <string name="text_remain_days">剩余天数</string>
+    <string name="text_title_export_used">我在用什么?</string>
+    <string name="text_month_3">3个月</string>
+    <string name="text_month_6">6个月</string>
+    <string name="text_month_12">12个月</string>
+    <string name="text_month_24">24个月</string>
+    <string name="text_custom_time">自定义时间</string>
+    <string name="text_unit_day">天 ?</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -296,6 +304,9 @@
     <string name="text_bills_new">创建产品清单</string>
     <string name="text_bills_new_desc">例如“想买的口红”“氨基酸洁面”</string>
     <string name="text_share_to">一键分享到</string>
+    <string name="text_sort_overtime">按过期时间排序</string>
+    <string name="text_add_product">新增产品</string>
+    <string name="text_name">名称</string>
 
     <string name="btn_user_sure">确定</string>
     <string name="btn_user_bined_content"><![CDATA[
@@ -313,4 +324,6 @@
     <string name="tv_open_weixin">打开微信</string>
 
     <string name="error_new_bill">清单名不能为空</string>
+
+    <string name="toast_save_image_success">成功保存到相册</string>
 </resources>

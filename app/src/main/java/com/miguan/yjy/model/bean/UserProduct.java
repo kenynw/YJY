@@ -38,6 +38,8 @@ public class UserProduct implements Parcelable {
 
     private String endDay;
 
+    private int days;
+
     public UserProduct() {
     }
 
@@ -146,6 +148,14 @@ public class UserProduct implements Parcelable {
         this.endDay = endDay;
     }
 
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -166,6 +176,7 @@ public class UserProduct implements Parcelable {
         dest.writeLong(this.add_time);
         dest.writeString(this.startDay);
         dest.writeString(this.endDay);
+        dest.writeInt(this.days);
     }
 
     protected UserProduct(Parcel in) {
@@ -182,6 +193,7 @@ public class UserProduct implements Parcelable {
         this.add_time = in.readLong();
         this.startDay = in.readString();
         this.endDay = in.readString();
+        this.days = in.readInt();
     }
 
     public static final Creator<UserProduct> CREATOR = new Creator<UserProduct>() {

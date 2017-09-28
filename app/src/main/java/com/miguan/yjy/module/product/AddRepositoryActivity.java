@@ -3,11 +3,13 @@ package com.miguan.yjy.module.product;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,9 +21,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.miguan.yjy.R;
+import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.model.AccountModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.services.Services;
 import com.miguan.yjy.module.account.LoginActivity;
 import com.miguan.yjy.module.common.WebViewActivity;
@@ -43,7 +47,12 @@ import static com.miguan.yjy.module.product.AddRepositoryPresenter.REQUEST_CODE_
  * Copyright (c) 2017/3/27. LiaoPeiKun Inc. All rights reserved.
  */
 @RequiresPresenter(AddRepositoryPresenter.class)
-public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresenter> implements OnImageSelectListener {
+public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresenter> implements
+        OnImageSelectListener, BaseAlertDialog.OnDialogShowListener, BaseAlertDialog.OnButtonClickListener {
+
+    public static final String TAG_DIALOG_EXP = "dialog_exp";
+
+    private final String SUFFIX_MONTH = "个月";
 
     @BindView(R.id.tv_add_repository_brand)
     TextView mTvBrand;
@@ -125,11 +134,24 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
             mIsSeal = mIsSeal == 1 ? 0 : 1;
             mLlIsSeal.setVisibility(mIsSeal == 1 ? View.VISIBLE : GONE);
             mIvIsOpen.setImageResource(mIsSeal == 1 ? R.mipmap.ic_swc_on : R.mipmap.ic_swc_off);
-
         });
 
         mEtOpenDate.setOnClickListener(v -> mTimePickerView.show(v));
-        mTvExpTime.setOnClickListener(v -> mTimeDialog.show());
+        mTvExpTime.setOnClickListener(v ->
+                BaseAlertDialog.newInstance(R.layout.dialog_exp_selector, this)
+                        .show(getSupportFragmentManager(), TAG_DIALOG_EXP)
+        );
+    }
+
+    public void setUserProduct(UserProduct userProduct) {
+        mTvQuery.setVisibility(GONE);
+        mTvBrand.setText(userProduct.getBrand_name());
+        mTvProduct.setText(userProduct.getProduct());
+        mDvImage.setImageURI(userProduct.getImg());
+        mTvExpiration.setText(DateUtils.getFormatDate(userProduct.getOverdue_time()));
+        if (userProduct.getIs_seal() == 0) mIvIsOpen.setImageResource(R.mipmap.ic_swc_off);
+        mEtOpenDate.setText(userProduct.getSeal_time());
+        mTvExpTime.setText(userProduct.getQuality_time() + "月");
     }
 
     public void setBrand(Brand brand, String overtime) {
@@ -180,7 +202,7 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
                 mTvProduct.getText().toString().trim(),
                 mIsSeal,
                 DateUtils.getTime(mEtOpenDate.getText().toString(), "yyyy年MM月dd日"),
-                Integer.valueOf(mTvExpTime.getText().toString().trim().replace("个月", "")),
+                Integer.valueOf(mTvExpTime.getText().toString().trim().replace(SUFFIX_MONTH, "")),
                 DateUtils.getTime(mTvExpiration.getText().toString(), format)
         );
     }
@@ -222,6 +244,61 @@ public class AddRepositoryActivity extends ChainBaseActivity<AddRepositoryPresen
 
     @Override
     public void onError() {
+
+    }
+
+    @Override
+    public void onShow(@NonNull AlertDialog dialog) {
+        if (getSupportFragmentManager().findFragmentByTag(TAG_DIALOG_EXP) != null) {
+            TextView tvThirdMonth = (TextView) dialog.findViewById(R.id.tv_exp_dialog_3_month);
+            TextView tvSixMonth = (TextView) dialog.findViewById(R.id.tv_exp_dialog_6_month);
+            TextView tvTwelveMonth = (TextView) dialog.findViewById(R.id.tv_exp_dialog_12_month);
+            TextView tvTwentyFour = (TextView) dialog.findViewById(R.id.tv_exp_dialog_24_month);
+            EditText etInput = (EditText) dialog.findViewById(R.id.et_exp_dialog_custom);
+            TextView tvUnit = (TextView) dialog.findViewById(R.id.tv_exp_dialog_unit);
+            TextView tvUnitSelect = (TextView) dialog.findViewById(R.id.tv_exp_dialog_unit_month);
+            View.OnClickListener clickListener = v -> {
+                if (v.getId() == R.id.tv_exp_dialog_unit_month) {
+                    if (tvUnit != null && tvUnitSelect != null) {
+                        if (tvUnit.getText().toString().equals("月")) {
+                            tvUnit.setText("天");
+                            tvUnitSelect.setText("月 ?");
+                        } else {
+                            tvUnit.setText("月");
+                            tvUnitSelect.setText("天 ?");
+                        }
+                    }
+                } else if (etInput != null) {
+                    String content = ((TextView) v).getText().toString().replace(SUFFIX_MONTH, "");
+                    etInput.setText(content);
+                    etInput.setSelection(content.length());
+                    tvUnit.setText("月");
+                    tvUnitSelect.setText("天 ?");
+                }
+            };
+            if (tvUnitSelect != null) tvUnitSelect.setOnClickListener(clickListener);
+            if (tvThirdMonth != null) tvThirdMonth.setOnClickListener(clickListener);
+            if (tvSixMonth != null) tvSixMonth.setOnClickListener(clickListener);
+            if (tvTwelveMonth != null) tvTwelveMonth.setOnClickListener(clickListener);
+            if (tvTwentyFour != null) tvTwentyFour.setOnClickListener(clickListener);
+        }
+    }
+
+    @Override
+    public void onPositiveClick(@NonNull View view) {
+        EditText etInput = view.getRootView().findViewById(R.id.et_exp_dialog_custom);
+        TextView tvUnit = view.getRootView().findViewById(R.id.tv_exp_dialog_unit);
+        if (etInput != null && tvUnit != null) {
+            String content = etInput.getText().toString().trim();
+            if (!TextUtils.isEmpty(content)) {
+                String result = content + (tvUnit.getText().equals("月") ? SUFFIX_MONTH : "天");
+                mTvExpTime.setText(result);
+            }
+        }
+    }
+
+    @Override
+    public void onNegativeClick(@NonNull View view) {
 
     }
 

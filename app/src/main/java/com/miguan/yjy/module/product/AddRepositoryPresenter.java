@@ -12,6 +12,7 @@ import com.miguan.yjy.model.ImageModel;
 import com.miguan.yjy.model.ProductModel;
 import com.miguan.yjy.model.bean.Brand;
 import com.miguan.yjy.model.bean.Product;
+import com.miguan.yjy.model.bean.UserProduct;
 import com.miguan.yjy.model.services.ServicesResponse;
 
 import java.io.File;
@@ -25,6 +26,7 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
     public static final String EXTRA_BRAND = "brand";
     public static final String EXTRA_OVERTIME = "overtime";
     public static final String EXTRA_PRODUCT = "product";
+    public static final String EXTRA_USER_PRODUCT = "user_product";
 
     public static final int REQUEST_CODE_BRAND = 0x200;
     public static final int REQUEST_CODE_PRODUCT = 0x201;
@@ -38,6 +40,12 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
         context.startActivity(intent);
     }
 
+    public static void start(Context context, UserProduct userProduct) {
+        Intent intent = new Intent(context, AddRepositoryActivity.class);
+        intent.putExtra(EXTRA_USER_PRODUCT, userProduct);
+        context.startActivity(intent);
+    }
+
     private Brand mBrand;
 
     private String mImagePath = "";
@@ -46,12 +54,15 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
 
     private Product mProduct;
 
+    private UserProduct mUserProduct;
+
     @Override
     protected void onCreate(AddRepositoryActivity view, Bundle saveState) {
         super.onCreate(view, saveState);
         mBrand = getView().getIntent().getParcelableExtra(EXTRA_BRAND);
         mOvertime = getView().getIntent().getStringExtra(EXTRA_OVERTIME);
         mProduct = getView().getIntent().getParcelableExtra(EXTRA_PRODUCT);
+        mUserProduct = getView().getIntent().getParcelableExtra(EXTRA_USER_PRODUCT);
     }
 
     @Override
@@ -66,6 +77,9 @@ public class AddRepositoryPresenter extends Presenter<AddRepositoryActivity> {
             mBrand.setName(mProduct.getBrand_name());
             mBrand.setRule(mProduct.getRule());
             getView().setBrand(mBrand, mOvertime);
+        }
+        if (mUserProduct != null) {
+            getView().setUserProduct(mUserProduct);
         }
     }
 

@@ -215,13 +215,13 @@ public interface Services {
 
     /**
      * 我在用的列表
-     *
+     * @param order(int) － 排序类型，0为时间，1保质期
      * @return
      */
     @GET("?action=userProduct")
     Observable<List<UserProduct>> usedProduct(
             @Query("token") String token,
-            @Query("type") int type,
+            @Query("order") int order,
             @Query("page") int page,
             @Query("pageSize") int pageSize
     );

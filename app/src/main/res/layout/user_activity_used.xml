@@ -7,19 +7,51 @@
 
     <include layout="@layout/include_toolbar"/>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_used_type"
-        style="@style/TabLayout"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/cb_used_sort"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_gravity="end"
+        android:button="@null"
+        android:drawableEnd="@mipmap/ic_product_detail_sort"
+        android:drawablePadding="@dimen/spacing_tiny"
+        android:drawableRight="@mipmap/ic_product_detail_sort"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:paddingTop="13dp"
+        android:text="@string/text_sort_overtime"
+        android:textColor="@color/tertiary2primary"
+        android:textSize="@dimen/text_size_body_material"
         />
 
     <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@id/recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         />
+
+    <FrameLayout
+        android:id="@+id/fl_used_add"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@mipmap/ic_template_add"
+            android:drawablePadding="8dp"
+            android:drawableStart="@mipmap/ic_template_add"
+            android:text="@string/text_add_product"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_body_material"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

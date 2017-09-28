@@ -16,7 +16,6 @@ import com.dsk.chain.expansion.list.ListConfig;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.miguan.yjy.R;
-import com.miguan.yjy.dialogs.BaseAlertDialog;
 import com.miguan.yjy.utils.LUtils;
 
 import butterknife.BindView;
@@ -43,8 +42,6 @@ public class BillDetailActivity extends BaseListActivity<BillDetailPresenter> {
         getListView().getRecyclerView().setOverScrollMode(OVER_SCROLL_NEVER);
         ButterKnife.bind(this);
         mFlExport.setOnClickListener(v -> getPresenter().exportToImage());
-        BaseAlertDialog.newInstance(R.layout.dialog_share_screenshot, this)
-                .show(getSupportFragmentManager(), "");
     }
 
     @Override

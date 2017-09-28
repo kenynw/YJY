@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.R;
+import com.miguan.yjy.dialogs.ShareImageDialog;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Bill;
 import com.miguan.yjy.model.bean.EntityRoot;
@@ -106,7 +107,8 @@ public class BillDetailPresenter extends BaseListActivityPresenter<BillDetailAct
             tvUsername.setText("by " + UserPreferences.getUsername() + " from 颜究院");
             ScreenShot.getInstance().takeScreenShotOfJustView(view, Bitmap.Config.ARGB_4444, (path, uri) -> {
                 getView().getExpansionDelegate().hideProgressBar();
-                LUtils.toast("成功保存到相册");
+                ShareImageDialog.newInstance(path, getView())
+                        .show(getView().getSupportFragmentManager(), "");
             });
         } else {
             LUtils.toast("还未添加任何产品到清单");

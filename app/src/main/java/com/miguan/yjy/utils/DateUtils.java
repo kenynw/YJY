@@ -76,4 +76,12 @@ public class DateUtils {
         return re_StrTime;
     }
 
+    // 将时间戳转为字符串
+    public static String getFormatDate(long time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
+        re_StrTime = sdf.format(new Date(time * 1000L));
+        return re_StrTime;
+    }
+
 }

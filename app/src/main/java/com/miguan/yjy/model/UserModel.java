@@ -57,10 +57,11 @@ public class UserModel extends AbsModel {
 
     /**
      * 我在用的列表
+     * @param order(int) － 排序类型，0为时间，1保质期
      * @return
      */
-    public Observable<List<UserProduct>> getUsedProductList(int type, int page) {
-        return ServicesClient.getServices().usedProduct(UserPreferences.getToken(), type, page, 10).compose(new DefaultTransform<>());
+    public Observable<List<UserProduct>> getUsedProductList(int order, int page) {
+        return ServicesClient.getServices().usedProduct(UserPreferences.getToken(), order, page, 10).compose(new DefaultTransform<>());
     }
 
     /**

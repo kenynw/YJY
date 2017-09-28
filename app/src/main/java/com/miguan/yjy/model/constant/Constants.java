@@ -24,4 +24,6 @@ public interface Constants {
 
     String EXTRA_BILL_NAME = "bill_name";
 
+    String EXTRA_IMAGE_URI = "image_uri";
+
 }

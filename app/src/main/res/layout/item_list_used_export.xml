@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/spacing_normal"
+    android:paddingTop="@dimen/spacing_normal"
+    >
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        >
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/dv_product_used_thumb"
+            style="@style/BaseImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:failureImage="@mipmap/def_image_product_used"
+            app:placeholderImage="@mipmap/def_image_product_used"
+            />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_product_used_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_weight="5"
+        android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:textAppearance="@style/TextBody"
+        tools:text="理肤泉特缓修护乳理肤泉特安舒缓修护乳"
+        />
+
+    <TextView
+        android:id="@+id/tv_product_used_residue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_weight="3"
+        android:ems="5"
+        android:gravity="center"
+        android:textAppearance="@style/TextBody"
+        tools:text="45天"
+        />
+
+</LinearLayout>
