@@ -98,8 +98,7 @@ public class UsedListActivity extends BaseListActivity<UsedListPresenter> {
             adapter.addAll(allData);
             ScreenShot.getInstance().takeScreenShotOfJustView(view, Bitmap.Config.ARGB_4444, (path, uri) -> {
                 getExpansionDelegate().hideProgressBar();
-                ShareImageDialog.newInstance(path, UsedListActivity.this)
-                        .show(getSupportFragmentManager(), "");
+                ShareImageDialog.newInstance(path, UsedListActivity.this).show(getSupportFragmentManager(), "");
             });
         } else {
             LUtils.toast("列表为空~");

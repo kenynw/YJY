@@ -2,6 +2,7 @@
     <string name="app_name">颜究院</string>
     <string name="company_copyright">©厦门爱游米网络科技有限公司 2017</string>
 
+    <string name="text_add_bill_remark">添加备注</string>
     <string name="text_date">%1$04d-%2$02d-%3$02d</string>
     <string name="text_male">男</string>
     <string name="text_female">女</string>
@@ -150,6 +151,8 @@
     <string name="text_month_24">24个月</string>
     <string name="text_custom_time">自定义时间</string>
     <string name="text_unit_day">天 ?</string>
+    <string name="text_component_num"><![CDATA[含有该成分产品：<font color="#222222">%d</font>]]></string>
+    <string name="text_message_delete">是否确认删除</string>
 
     <string name="label_batch_no">批号：%s</string>
     <string name="label_mfg_date">生产日期：</string>
@@ -255,6 +258,7 @@
     <string name="tv_product_component_num">本产品包含%d种成分</string>
     <string name="tv_product_num">查询%d种护肤品的安全和功效</string>
     <string name="tv_product_brand_main">品牌主页 > </string>
+    <string name="tv_product_component_main">成分主页 > </string>
     <string name="tv_component_num">含有该成分的产品(%d)</string>
 
     <!--测试相关-->
@@ -326,4 +330,5 @@
     <string name="error_new_bill">清单名不能为空</string>
 
     <string name="toast_save_image_success">成功保存到相册</string>
+    <string name="toast_edit_success">编辑成功</string>
 </resources>

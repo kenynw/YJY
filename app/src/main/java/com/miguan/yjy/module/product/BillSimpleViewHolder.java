@@ -51,7 +51,7 @@ public class BillSimpleViewHolder extends BaseViewHolder<Bill> {
             String num = bill.getNum() + "";
             mTvNum.setVisibility(View.VISIBLE);
             mTvThumbCount.setVisibility(View.VISIBLE);
-            mTvNum.setText(num);
+            mTvNum.setText(num + "产品");
             mTvThumbCount.setText(num);
         } else {
             mTvNum.setVisibility(View.GONE);

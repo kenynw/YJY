@@ -1,16 +1,28 @@
 package com.miguan.yjy.module.user;
 
+import android.os.Bundle;
+
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Bill;
 import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.LUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 /**
  * Copyright (c) 2017/9/21. LiaoPeiKun Inc. All rights reserved.
  */
 
 public class BillListPresenter extends BaseListActivityPresenter<BillListActivity, Bill> {
+
+    @Override
+    protected void onCreate(BillListActivity view, Bundle saveState) {
+        super.onCreate(view, saveState);
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     protected void onCreateView(BillListActivity view) {
@@ -36,6 +48,18 @@ public class BillListPresenter extends BaseListActivityPresenter<BillListActivit
                 onRefresh();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void deleteBill(Bill bill) {
+        getAdapter().remove(bill);
     }
 
 }

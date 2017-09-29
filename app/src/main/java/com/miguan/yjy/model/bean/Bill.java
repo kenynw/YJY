@@ -3,16 +3,15 @@ package com.miguan.yjy.model.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Copyright (c) 2017/9/21. LiaoPeiKun Inc. All rights reserved.
  */
 
 public class Bill implements Parcelable {
 
-    @SerializedName(value = "id", alternate = {"invent_id"})
     private int id;
+
+    private int invent_id;
 
     private String title;
 
@@ -44,6 +43,14 @@ public class Bill implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getInvent_id() {
+        return invent_id;
+    }
+
+    public void setInvent_id(int invent_id) {
+        this.invent_id = invent_id;
     }
 
     public String getTitle() {
@@ -142,6 +149,9 @@ public class Bill implements Parcelable {
         this.star = star;
     }
 
+    public Bill() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -150,6 +160,7 @@ public class Bill implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
+        dest.writeInt(this.invent_id);
         dest.writeString(this.title);
         dest.writeString(this.desc);
         dest.writeString(this.picture);
@@ -164,11 +175,9 @@ public class Bill implements Parcelable {
         dest.writeInt(this.star);
     }
 
-    public Bill() {
-    }
-
     protected Bill(Parcel in) {
         this.id = in.readInt();
+        this.invent_id = in.readInt();
         this.title = in.readString();
         this.desc = in.readString();
         this.picture = in.readString();
@@ -194,5 +203,4 @@ public class Bill implements Parcelable {
             return new Bill[size];
         }
     };
-
 }

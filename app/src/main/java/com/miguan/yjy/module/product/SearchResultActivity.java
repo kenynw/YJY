@@ -130,20 +130,30 @@ public class SearchResultActivity extends BaseListActivity<SearchResultPresenter
 
         return super.getListConfig()
                 .setContainerLayoutRes(R.layout.product_activity_search_result)
+                .setFooterNoMoreRes(R.layout.include_default_footer)
                 .setContainerEmptyView(view)
                 .setItemDecoration(decoration);
     }
 
     public void setData(String keywords, ProductList productList, String cateName) {
         mTvCount.setText(Html.fromHtml(String.format(getString(R.string.text_search_count), productList.getPageTotal())));
-        if (productList.getBrand() == null || productList.getBrand() != null && productList.getBrand().getId() <= 0) {
-            mLlIncludeBrand.setVisibility(View.GONE);
-        } else {
+
+        if (productList.getBrand() != null && productList.getBrand().getId() > 0) {
             mLlIncludeBrand.setVisibility(View.VISIBLE);
             mSdvBrandImg.setImageURI(StringUtils.getEncodeUrl(productList.getBrand().getImg()));
             mTvBrandName.setText(productList.getBrand().getName());
             String num = "品牌热度 : <font color=\"#32DAC3\"> " + productList.getBrand().getHot() + " </font>";
             mTvBrandNum.setText(Html.fromHtml(num));
+            mTvBrandMain.setText(R.string.tv_product_brand_main);
+        } else if (productList.getComponent() != null && !TextUtils.isEmpty(productList.getComponent().getId())) {
+            mLlIncludeBrand.setVisibility(View.VISIBLE);
+            mSdvBrandImg.setImageResource(R.mipmap.def_image_component);
+            mTvBrandName.setText(productList.getComponent().getName());
+            String numStr = String.format(getString(R.string.text_component_num), productList.getComponent().getNum());
+            mTvBrandNum.setText(Html.fromHtml(numStr));
+            mTvBrandMain.setText(R.string.tv_product_component_main);
+        } else {
+            mLlIncludeBrand.setVisibility(View.GONE);
         }
 
         mLlIncludeBrand.setOnClickListener(v -> BrandMainPresenter.star(SearchResultActivity.this, productList.getBrand().getId()));

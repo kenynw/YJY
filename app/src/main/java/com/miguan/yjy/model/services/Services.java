@@ -366,6 +366,59 @@ public interface Services {
     );
 
     /**
+     * 删除清单
+     *
+     * @param token   用户ID
+     * @param billId  清单id
+     * @return
+     */
+    @GET("?action=delInventory")
+    Observable<String> deleteBill(
+            @Query("token") String token,
+            @Query("inventoryId") int billId
+    );
+
+    /**
+     * 操作清单产品
+     *
+     * @param token   用户ID
+     * @param billProductId  清单产品id
+     * @return
+     */
+    @GET("?action=operateInDetail&type=2")
+    Observable<String> deleteBillProduct(
+            @Query("token") String token,
+            @Query("uip_id") int billProductId
+    );
+
+    /**
+     * 添加清单产品备注
+     *
+     * @param token   用户ID
+     * @param billProductId  清单产品id
+     * @return
+     */
+    @GET("?action=operateInDetail&type=1")
+    Observable<String> addBillRemark(
+            @Query("token") String token,
+            @Query("uip_id") int billProductId,
+            @Query("desc") String desc
+    );
+
+    /**
+     * 清单产品排序
+     *
+     * @param token   用户ID
+     * @param billProductIds  清单产品id 用逗号分开
+     * @return
+     */
+    @GET("?action=operateInOrder")
+    Observable<String> sortBillProducts(
+            @Query("token") String token,
+            @Query("uip_ids") String billProductIds
+    );
+
+    /**
      * 添加产品到清单
      *
      * @param billId   清单ID

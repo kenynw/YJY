@@ -136,6 +136,34 @@ public class UserModel extends AbsModel {
     }
 
     /**
+     * 删除清单
+     */
+    public Observable<String> deleteBill(int billId) {
+        return ServicesClient.getServices().deleteBill(UserPreferences.getToken(), billId).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 删除清单产品
+     */
+    public Observable<String> deleteBillProduct(int billId) {
+        return ServicesClient.getServices().deleteBillProduct(UserPreferences.getToken(), billId).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 删除清单产品
+     */
+    public Observable<String> addBillRemark(int billId, String remark) {
+        return ServicesClient.getServices().addBillRemark(UserPreferences.getToken(), billId, remark).compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 清单产品排序
+     */
+    public Observable<String> sortBillProducts(String ids) {
+        return ServicesClient.getServices().sortBillProducts(UserPreferences.getToken(), ids).compose(new DefaultTransform<>());
+    }
+
+    /**
      * 添加产品到清单
      * @return
      */
@@ -144,7 +172,7 @@ public class UserModel extends AbsModel {
     }
 
     /**
-     * 添加产品到清单
+     * 清单详情
      * @return
      */
     public Observable<EntityRoot<List<Bill>>> getBillDetail(int billId, int page) {

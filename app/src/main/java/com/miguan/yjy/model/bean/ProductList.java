@@ -22,6 +22,8 @@ public class ProductList extends EntityList {
     @SerializedName(value = "effects", alternate = {"effectList"})
     private List<Effect> effectList;
 
+    private Component component;
+
     private Brand brand;
 
     public List<Rank> getRank() {
@@ -65,6 +67,13 @@ public class ProductList extends EntityList {
         this.product = product;
     }
 
+    public Component getComponent() {
+        return component;
+    }
+
+    public void setComponent(Component component) {
+        this.component = component;
+    }
 
     public ProductList() {
     }
@@ -81,6 +90,7 @@ public class ProductList extends EntityList {
         dest.writeTypedList(this.product);
         dest.writeTypedList(this.categoryList);
         dest.writeTypedList(this.effectList);
+        dest.writeParcelable(this.component, flags);
         dest.writeParcelable(this.brand, flags);
     }
 
@@ -90,6 +100,7 @@ public class ProductList extends EntityList {
         this.product = in.createTypedArrayList(Product.CREATOR);
         this.categoryList = in.createTypedArrayList(Category.CREATOR);
         this.effectList = in.createTypedArrayList(Effect.CREATOR);
+        this.component = in.readParcelable(Component.class.getClassLoader());
         this.brand = in.readParcelable(Brand.class.getClassLoader());
     }
 
@@ -104,4 +115,5 @@ public class ProductList extends EntityList {
             return new ProductList[size];
         }
     };
+
 }

@@ -11,24 +11,25 @@ import android.os.Parcelable;
 
 public class Component implements Parcelable {
 
-//    id(int) － ID
-//    name(string) － 成分名
-//    ename(string) － 成份英文名
-//    alias(string) － 成份别名
-//    risk_grade(int) － 风险等级
-//    is_active(int) － 活性成分 1-是，0-否
-//    is_pox(int) － 致痘 1-是，0-否
-//    component_action(string) － 使用目的(成份功效)
-//    description(string) － 简介(用户说明)
     private String id;
-    private String name;
-    private String ename;
-    private String alias;
-    private String risk_grade;
-    private int is_active;
-    private int is_pox;
-    private String component_action;
 
+    private String name; // 成分名
+
+    private String ename; // 成份英文名
+
+    private String alias; // 成份别名
+
+    private String risk_grade; // 风险等级
+
+    private int is_active; // 活性成分 1-是，0-否
+
+    private int is_pox; // 致痘 1-是，0-否
+
+    private String component_action; // 使用目的(成份功效)
+
+    private String description; // 简介(用户说明)
+
+    private int num; // 含有该成分的产品数量
 
     public String getId() {
         return id;
@@ -78,8 +79,6 @@ public class Component implements Parcelable {
         this.description = description;
     }
 
-    private String description;
-
     public String getName() {
         return name;
     }
@@ -104,6 +103,14 @@ public class Component implements Parcelable {
         this.alias = alias;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     public Component() {
 
     }
@@ -124,6 +131,7 @@ public class Component implements Parcelable {
         dest.writeInt(this.is_pox);
         dest.writeString(this.component_action);
         dest.writeString(this.description);
+        dest.writeInt(this.num);
     }
 
     protected Component(Parcel in) {
@@ -136,6 +144,7 @@ public class Component implements Parcelable {
         this.is_pox = in.readInt();
         this.component_action = in.readString();
         this.description = in.readString();
+        this.num = in.readInt();
     }
 
     public static final Creator<Component> CREATOR = new Creator<Component>() {

@@ -80,6 +80,8 @@ public class BillDetailActivity extends BaseListActivity<BillDetailPresenter> {
         getPresenter().setEditMode(!getPresenter().isEditMode());
         getPresenter().getAdapter().notifyDataSetChanged();
         item.setTitle(getPresenter().isEditMode() ? "完成" : "编辑");
+        mFlExport.setVisibility(getPresenter().isEditMode() ? View.GONE : View.VISIBLE);
+        if (!getPresenter().isEditMode()) getPresenter().updateSort();
         return super.onOptionsItemSelected(item);
     }
 

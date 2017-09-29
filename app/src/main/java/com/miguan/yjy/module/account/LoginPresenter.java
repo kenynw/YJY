@@ -23,7 +23,7 @@ import java.util.Map;
  * Copyright (c) 2017/3/30. LiaoPeiKun Inc. All rights reserved.
  */
 
-public class LoginPresenter extends Presenter<LoginActivity> {
+public class LoginPresenter extends Presenter<LoginActivity> implements UMAuthListener {
 
     public void login(String username, String pwd) {
         AccountModel.getInstance().login(username, pwd).unsafeSubscribe(new ServicesResponse<User>() {
@@ -38,54 +38,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
 
     public void  wxLogin() {
         getView().getExpansionDelegate().showProgressBar("等待微信授权");
-        UMShareAPI.get(getView()).getPlatformInfo(getView(), SHARE_MEDIA.WEIXIN, new UMAuthListener() {
-            @Override
-            public void onStart(SHARE_MEDIA share_media) {
-
-            }
-
-            @Override
-            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                getView().getExpansionDelegate().hideProgressBar();
-                for (String s : map.keySet()) {
-                    LUtils.log("key: " + s + ":" + map.get(s));
-                };
-
-                map.put("nickname", map.get("screen_name"));
-                map.put("unionid", map.get("uid"));
-                int sex;
-                if (map.get("gender").equals("女")) {
-                    sex = 0;
-                } else if (map.get("gender").equals("男")) {
-                    sex = 1;
-                } else {
-                    sex = 2;
-                }
-                map.put("sex", sex + "");
-                map.put("headimgurl", map.get("iconurl"));
-                AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
-                    @Override
-                    public void onNext(User user) {
-                        if (!TextUtils.isEmpty(user.getMobile()) && Patterns.PHONE.matcher(user.getMobile()).matches()) {
-                            loginSuccess();
-                        } else {
-                            BindMobileAlertDialog dialog = new BindMobileAlertDialog();
-                            dialog.show(getView().getSupportFragmentManager(), "bind");
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-                getView().getExpansionDelegate().hideProgressBar();
-            }
-
-            @Override
-            public void onCancel(SHARE_MEDIA share_media, int i) {
-                getView().getExpansionDelegate().hideProgressBar();
-            }
-        });
+        UMShareAPI.get(getView()).getPlatformInfo(getView(), SHARE_MEDIA.WEIXIN, this);
     }
 
     @Override
@@ -97,6 +50,53 @@ public class LoginPresenter extends Presenter<LoginActivity> {
     public void loginSuccess() {
         EventBus.getDefault().post(new TestStart());
         getView().finish();
+    }
+
+    @Override
+    public void onStart(SHARE_MEDIA share_media) {
+        getView().getExpansionDelegate().hideProgressBar();
+    }
+
+    @Override
+    public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+        getView().getExpansionDelegate().hideProgressBar();
+        for (String s : map.keySet()) {
+            LUtils.log("key: " + s + ":" + map.get(s));
+        };
+
+        map.put("nickname", map.get("screen_name"));
+        map.put("unionid", map.get("uid"));
+        int sex;
+        if (map.get("gender").equals("女")) {
+            sex = 0;
+        } else if (map.get("gender").equals("男")) {
+            sex = 1;
+        } else {
+            sex = 2;
+        }
+        map.put("sex", sex + "");
+        map.put("headimgurl", map.get("iconurl"));
+        AccountModel.getInstance().login(map).unsafeSubscribe(new ServicesResponse<User>() {
+            @Override
+            public void onNext(User user) {
+                if (!TextUtils.isEmpty(user.getMobile()) && Patterns.PHONE.matcher(user.getMobile()).matches()) {
+                    loginSuccess();
+                } else {
+                    BindMobileAlertDialog dialog = new BindMobileAlertDialog();
+                    dialog.show(getView().getSupportFragmentManager(), "bind");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+        getView().getExpansionDelegate().hideProgressBar();
+    }
+
+    @Override
+    public void onCancel(SHARE_MEDIA share_media, int i) {
+        getView().getExpansionDelegate().hideProgressBar();
     }
 
 }

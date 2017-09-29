@@ -1,9 +1,11 @@
 package com.miguan.yjy.module.user;
 
+import android.app.Activity;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -11,9 +13,13 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
+import com.miguan.yjy.model.UserModel;
 import com.miguan.yjy.model.bean.Bill;
+import com.miguan.yjy.model.services.ServicesResponse;
 import com.miguan.yjy.utils.StringUtils;
 import com.miguan.yjy.widget.SuperTextView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +29,9 @@ import butterknife.ButterKnife;
  */
 
 public class BillProductViewHolder extends BaseViewHolder<Bill> {
+
+    @BindView(R.id.layout_bill_product)
+    View mLayoutProduct;
 
     @BindView(R.id.dv_bill_product_thumb)
     SimpleDraweeView mDvThumb;
@@ -42,6 +51,12 @@ public class BillProductViewHolder extends BaseViewHolder<Bill> {
     @BindView(R.id.iv_bill_product_sort)
     ImageView mIvSort;
 
+    @BindView(R.id.iv_bill_product_delete)
+    ImageView mIvDelete;
+
+    @BindView(R.id.fl_bill_product_delete)
+    FrameLayout mFlDelete;
+
     private BillDetailPresenter mPresenter;
 
     public BillProductViewHolder(ViewGroup parent, BillDetailPresenter presenter) {
@@ -59,7 +74,7 @@ public class BillProductViewHolder extends BaseViewHolder<Bill> {
         mTvRemark.setSolid(getContext().getResources().getColor(mPresenter.isEditMode() ? R.color.white : R.color.bgWindow));
         if (mPresenter.isEditMode()) {
             mTvRemark.setVisibility(View.VISIBLE);
-            mTvRemark.setText("添加备注");
+            mTvRemark.setText(TextUtils.isEmpty(data.getDesc()) ? "添加备注" : data.getDesc());
             mTvRemark.setTextColor(getContext().getResources().getColor(R.color.textSecondary));
             mTvRemark.setSolid(getContext().getResources().getColor(R.color.white));
         } else {
@@ -73,15 +88,34 @@ public class BillProductViewHolder extends BaseViewHolder<Bill> {
             }
         }
         mIvSort.setVisibility(mPresenter.isEditMode() ? View.VISIBLE : View.GONE);
-        mIvSort.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (mPresenter.isEditMode() && event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mPresenter.getItemTouchHelper().startDrag(BillProductViewHolder.this);
-                }
-                return false;
+        mIvSort.setOnTouchListener((v, event) -> {
+            if (mPresenter.isEditMode() && event.getAction() == MotionEvent.ACTION_DOWN) {
+                mPresenter.getItemTouchHelper().startDrag(BillProductViewHolder.this);
+            }
+            return false;
+        });
+
+        mTvRemark.setOnClickListener(v -> BillAddRemarkPresenter.start((Activity) getContext(),
+                data.getId(), getAdapterPosition()));
+
+        if (!mPresenter.isEditMode()) mFlDelete.setVisibility(View.GONE);
+        mLayoutProduct.setOnClickListener(v -> {
+            if (mPresenter.isEditMode()) {
+                mFlDelete.setVisibility(mFlDelete.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                mIvDelete.setOnClickListener(iv -> {
+                    UserModel.getInstance().deleteBillProduct(data.getId())
+                            .unsafeSubscribe(new ServicesResponse<String>() {
+                                @Override
+                                public void onNext(String s) {
+                                    EventBus.getDefault().post(data);
+                                }
+                            });
+                });
+            } else {
+                mFlDelete.setVisibility(View.GONE);
             }
         });
+
     }
 
 }

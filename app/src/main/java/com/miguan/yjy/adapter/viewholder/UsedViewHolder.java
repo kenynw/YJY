@@ -1,6 +1,7 @@
 package com.miguan.yjy.adapter.viewholder;
 
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -80,7 +81,7 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
         calendar.add(Calendar.MONTH, data.getQuality_time());
         long overdueTime = (data.getIs_seal() == 0 ? data.getOverdue_time() :
                 Math.min(calendar.getTime().getTime() / 1000, data.getOverdue_time()))
-                + (24*60*60 - 1);
+                + (24 * 60 * 60 - 1);
         int restDay = overdueTime > System.currentTimeMillis() / 1000 ?
                 (int) ((overdueTime - System.currentTimeMillis() / 1000) / 3600 / 24) + 1 : 0;
         data.setDays(restDay);
@@ -106,18 +107,20 @@ public class UsedViewHolder extends BaseViewHolder<UserProduct> {
         mTvDate.setVisibility(data.getIs_seal() == 0 ? View.GONE : View.VISIBLE);
         mTvDate.setText(data.getSeal_time());
 
-        ServicesResponse<String> response = new ServicesResponse<String>() {
-            @Override
-            public void onNext(String s) {
-                EventBus.getDefault().post(data);
-            }
-        };
-        mTvEdit.setOnClickListener(v -> {
-            AddRepositoryPresenter.start(getContext(), data);
-        });
+        mTvEdit.setOnClickListener(v -> AddRepositoryPresenter.start(getContext(), data));
         mTvDelete.setOnClickListener(v -> {
-
-            UserModel.getInstance().deleteUsedProduct(data.getId(), 2).unsafeSubscribe(response);
+            new AlertDialog.Builder(getContext())
+                    .setMessage(R.string.text_message_delete)
+                    .setNegativeButton(R.string.tv_cancel, null)
+                    .setPositiveButton(R.string.btn_user_sure, (dialog, which) ->
+                            UserModel.getInstance().deleteUsedProduct(data.getId(), 2)
+                                    .unsafeSubscribe(new ServicesResponse<String>() {
+                                        @Override
+                                        public void onNext(String s) {
+                                            EventBus.getDefault().post(data);
+                                        }
+                                    }))
+                    .show();
         });
     }
 

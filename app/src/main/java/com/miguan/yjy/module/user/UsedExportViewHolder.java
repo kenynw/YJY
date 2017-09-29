@@ -9,6 +9,12 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.miguan.yjy.R;
 import com.miguan.yjy.model.bean.UserProduct;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -38,7 +44,24 @@ public class UsedExportViewHolder extends BaseViewHolder<UserProduct> {
         String title = data.getProduct().contains(data.getBrand_name()) ? data.getProduct()
                 : data.getBrand_name() + data.getProduct();
         mTvName.setText(title);
-        mTvResidue.setText(data.getDays() + "天");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        Date date = null;
+        try {
+            date = format.parse(data.getSeal_time());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.MONTH, data.getQuality_time());
+        long overdueTime = (data.getIs_seal() == 0 ? data.getOverdue_time() :
+                Math.min(calendar.getTime().getTime() / 1000, data.getOverdue_time()))
+                + (24 * 60 * 60 - 1);
+        int restDay = overdueTime > System.currentTimeMillis() / 1000 ?
+                (int) ((overdueTime - System.currentTimeMillis() / 1000) / 3600 / 24) + 1 : 0;
+        mTvResidue.setText(restDay + "天");
     }
 
 }

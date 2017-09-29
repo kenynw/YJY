@@ -393,6 +393,12 @@
             >
         </activity>
         <activity
+            android:name=".module.user.BillAddRemarkActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
             android:name=".module.user.ProductLikeListActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"

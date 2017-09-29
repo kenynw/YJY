@@ -68,7 +68,10 @@
 
     </LinearLayout>
 
-    <include layout="@layout/include_head_brand_info"/>
+    <include
+        layout="@layout/include_head_brand_info"
+        android:visibility="gone"
+        />
 
     <include layout="@layout/include_product_filter"/>
 

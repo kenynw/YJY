@@ -5,6 +5,7 @@ import android.widget.CompoundButton;
 
 import com.dsk.chain.expansion.list.BaseListActivityPresenter;
 import com.miguan.yjy.model.UserModel;
+import com.miguan.yjy.model.bean.User;
 import com.miguan.yjy.model.bean.UserProduct;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,14 +28,20 @@ public class UsedListPresenter extends BaseListActivityPresenter<UsedListActivit
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onCreateView(UsedListActivity view) {
+        super.onCreateView(view);
         onRefresh();
     }
 
     @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.POSTING)
-    public void refreshEvent(UserProduct product) {
+    public void deleteUserProduct(UserProduct product) {
+        getAdapter().remove(product);
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe(threadMode = ThreadMode.POSTING)
+    public void refreshEvent(User user) {
         onRefresh();
     }
 

@@ -32,13 +32,23 @@
         tools:text="添加备注"
         />
 
+    <View
+        android:id="@+id/layout_bill_product"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_bill_product_remark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/dv_bill_product_thumb"
         style="@style/BaseImage.Product"
         android:layout_width="98dp"
         android:layout_height="98dp"
         android:layout_margin="@dimen/spacing_normal"
-        app:layout_constraintBottom_toTopOf="@id/tv_bill_product_remark"
+        app:layout_constraintBottom_toTopOf="@+id/tv_bill_product_remark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -48,13 +58,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_large"
-        android:layout_marginLeft="@dimen/spacing_normal"
         android:layout_marginRight="@dimen/spacing_large"
-        android:layout_marginStart="@dimen/spacing_normal"
         android:src="@mipmap/ic_bill_sort"
-        app:layout_constraintBottom_toBottomOf="@id/dv_bill_product_thumb"
+        app:layout_constraintBottom_toBottomOf="@+id/dv_bill_product_thumb"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dv_bill_product_thumb"
+        app:layout_constraintTop_toTopOf="@+id/dv_bill_product_thumb"
         />
 
     <TextView
@@ -68,7 +76,6 @@
         android:maxLines="2"
         android:textAppearance="@style/TextBody"
         app:layout_constraintLeft_toRightOf="@+id/dv_bill_product_thumb"
-        app:layout_constraintRight_toLeftOf="@id/iv_bill_product_sort"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dv_bill_product_thumb"
         tools:text="这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题"/>
@@ -99,17 +106,28 @@
         tools:text="￥320/250ML"
         />
 
-    <ImageView
+    <FrameLayout
+        android:id="@+id/fl_bill_product_delete"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/four_transparent"
-        android:scaleType="centerInside"
-        android:src="@mipmap/ic_clean"
+        android:background="@drawable/bg_radius_half_transparent"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        >
+
+        <ImageView
+            android:id="@+id/iv_bill_product_delete"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_round_primary"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_delete_white"
+            />
+
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
